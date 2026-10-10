@@ -3,6 +3,17 @@
 Established: 2026-10-10 by the project owner's request to use GitHub as the shared source of truth.
 Applies equally to Claude and ChatGPT. Neither assistant's chat history is inherently authoritative over the other's.
 
+## Operating rules at a glance
+
+1. **GitHub is the only record.** Start every task by reading `main`, open PRs and the task's Issue. If the chat and GitHub disagree, GitHub wins until the owner says otherwise.
+2. **One task, one branch, one owner.** Branches are named `claude/<short-topic>` or `chatgpt/<short-topic>`, and the prefix shows who owns the work. Only the owner pushes to that branch. The other assistant reviews or takes a different task.
+3. **Small PRs against `main`.** One focused change per PR. Open it as a draft until its checks pass. Rebase onto the latest `main` before marking it ready.
+4. **Avoid collisions.** Say in the Issue which files or folders the task will touch. Only one open PR at a time may change `package.json`, `package-lock.json`, `.github/` or `scripts/`. Decision documents change in their own PR, never mixed with code.
+5. **The owner merges.** Assistants never merge, approve their own work or deploy. The other assistant reviews the diff and leaves a comment, not an approval. The repository owner approves and squash-merges. Changes under `.github/`, `scripts/` and the decision documents always need owner review (see `.github/CODEOWNERS`).
+6. **Keep actions to a minimum.** No Issue for a tiny documentation fix that its PR already explains. No comment that only says "done". Batch related edits into one push. Run the full browser tests only when code, dependencies or build settings change, not for documentation changes. The automatic `Privacy guard` check is cheap and always runs.
+7. **Hand over in writing.** When a task changes hands, use the handoff format below in the Issue or PR, so the next assistant needs no chat history.
+8. **Public repository.** Everything written here is public and permanent. Never include learner, family, school, account or infrastructure details, or secrets, in code, commits, PRs, Issues or comments.
+
 ## Shared records
 
 | Record | Use |

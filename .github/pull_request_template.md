@@ -1,5 +1,11 @@
 ## Change
 
+Owner (Claude or ChatGPT) and reviewer (the other):  
+Issue:  
+Touches (files or folders):  
+Depends on (PRs):  
+
+
 Describe the concrete problem and resulting behavior.
 
 ## Validation
