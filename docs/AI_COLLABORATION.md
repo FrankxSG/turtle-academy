@@ -5,16 +5,64 @@ Applies equally to Claude and ChatGPT. Neither assistant's chat history is inher
 
 ## Operating rules at a glance
 
-1. **GitHub is the only record.** Start every task by reading `main`, open PRs and the task's Issue. If the chat and GitHub disagree, GitHub wins until the owner says otherwise.
-2. **One task, one branch, one owner.** Branches are named `claude/<short-topic>` or `chatgpt/<short-topic>`, and the prefix shows who owns the work. Only the owner pushes to that branch. The other assistant reviews or takes a different task.
-3. **Small PRs against `main`.** One focused change per PR. Open it as a draft until its checks pass. Rebase onto the latest `main` before marking it ready.
-4. **Avoid collisions.** Say in the Issue which files or folders the task will touch. Only one open PR at a time may change `package.json`, `package-lock.json`, `.github/` or `scripts/`. Decision documents change in their own PR, never mixed with code.
-5. **The owner merges.** Assistants never merge, approve their own work or deploy. The other assistant reviews the diff and leaves a comment, not an approval. The repository owner approves and squash-merges. Changes under `.github/`, `scripts/` and the decision documents always need owner review (see `.github/CODEOWNERS`).
-6. **Keep actions to a minimum.** No Issue for a tiny documentation fix that its PR already explains. No comment that only says "done". Batch related edits into one push. Run the full browser tests only when code, dependencies or build settings change, not for documentation changes. The automatic `Privacy guard` check is cheap and always runs.
-7. **Hand over in writing.** When a task changes hands, use the handoff format below in the Issue or PR, so the next assistant needs no chat history.
-8. **Public repository.** Everything written here is public and permanent. Never include learner, family, school, account or infrastructure details, or secrets, in code, commits, PRs, Issues or comments.
+1. **GitHub is the shared source of truth.** Approved default-branch decisions define requirements; code and checks define implementation; Issues and PRs define active work. A later explicit owner instruction supersedes an older record: update the affected document before other work relies on it.
+2. **One task, one branch, one implementing assistant.** Use `claude/<short-topic>` or `chatgpt/<short-topic>`. The other assistant reviews or implements an independent feature in a separate checkout. Neither assistant has a permanent planning or coding role.
+3. **Coordinate before editing.** Record task ownership, acceptance criteria, affected paths and dependencies in one Issue for substantive work, or the PR for a small change. Check current open work before claiming a task.
+4. **Use focused PRs against main.** Keep work in draft while incomplete. Update from main when shared changes, conflicts, repository rules or validation require it; do not mechanically rebase every PR or force-push over someone else's work.
+5. **Review and merge are explicit.** The repository owner approves and merges by default. An assistant may execute a merge only with explicit owner authorization for that PR or an explicitly recorded standing policy, after the review and checks below. This protocol grants no standing merge, publication, deployment or spending permission.
+6. **Run checks proportional to the change.** Reuse results for unchanged tested code; rerun affected checks after changes or integration risks. Documentation-only work needs privacy and document checks, not the full browser suite. An automatic privacy check supplements human review.
+7. **Minimize administration.** One tracking record, one focused PR and one concise validation summary. Batch related edits; avoid redundant reads, comments, test matrices, builds and status polling.
+8. **Apply public-data rules now.** Whether private or public, every committed file, branch, PR, Issue and log must be safe to publish. Keep real learner information, personal documents, infrastructure details and credentials outside the repository.
+
+## Parallel feature work and shared files
+
+Claude and ChatGPT can implement separate features concurrently. Each records its intended file ownership before editing and uses a separate branch/check-out. Work on separate lesson content can proceed in parallel when it uses an agreed shared component/content contract.
+
+- Overlapping files or interfaces require a written handoff or an agreed sequence. Reserve the actual shared paths, not whole folders unnecessarily.
+- Keep one active writer for dependency manifests/lockfiles and a shared configuration file. The other assistant requests its needed change in the same tracking record instead of making a competing edit.
+- Agree the minimum shared contract before dependent feature work. A common component, schema or API change has one owner; dependent PRs declare that dependency and integrate after it.
+- Do not mix unrelated architecture or feature-scope decisions into implementation. Update decision documents only for explicitly confirmed changes, with a focused review.
+- A handoff identifies the current branch/head and transfers ownership. Do not delete another assistant's branch, reset its checkout or overwrite uncommitted work.
+
+## Integration and merge checklist
+
+Merge independent ready PRs one at a time. After each merge, the remaining implementer checks the new main for relevant interface, dependency or overlapping-file changes.
+
+1. Confirm the agreed task and acceptance criteria are met; review the diff and publication/privacy exposure.
+2. The other assistant reviews the actual current PR head and records the reviewed SHA, findings and any limitations. If unavailable, the owner can supply review; do not invent cross-assistant review.
+3. Validate at the relevant SHA and link existing check evidence. Resolve conflicts deliberately, then rerun checks affected by the resolution or changed shared code. A passing earlier SHA does not validate changed code.
+4. Refresh PR head, main, review status and required checks immediately before an authorized merge. Stop if unexpected work or unresolved findings appeared.
+5. Squash-merge by default, subject to repository settings and owner authorization. Never bypass failing required checks. CODEOWNERS review requirements apply when enforced; the file alone does not enforce them.
+6. After merge, update the existing task record once with the resulting commit and remaining limitations. Close completed tasks; delete a merged task branch only when permitted. Do not perform a second full build solely because another assistant takes over.
+7. Deployment, repository publication, real learner data and spending remain separate controlled actions.
+
+Review comments can record independent review when both tools use the same GitHub identity; they do not bypass GitHub restrictions on formal self-approval. A comment is not a substitute for a required approval from an eligible reviewer.
+
+## Minimum necessary actions
+
+| Change | Necessary validation | Avoid |
+| --- | --- | --- |
+| Documentation/protocol | Privacy scan, relevant links and consistency, diff review | Dependency install, app build or browser suite solely for text changes |
+| Lesson/content data | Content/schema and answer-key checks, affected lesson smoke test, privacy/licensing review | Full browser matrix for an isolated content correction |
+| UI or learning logic | Type check and affected behavior tests; build when bundling or offline assets change | Repeating an unchanged suite after every small edit |
+| Shared engine, persistence, dependencies or build | Relevant regression/build/offline checks; broader coverage when the risk warrants it | Unrelated matrices and duplicate CI runs for the same code |
+| Security, authorization or data access | Focused negative/access-isolation checks and owner review | Real learner fixtures or production secrets |
+
+Read the current head, instructions and relevant open work once at task start. Reuse unchanged content within the task; refresh at handoff, before integration, when another assistant has changed relevant files or when evidence is stale. Reading all history is not a routine task-start requirement.
+
+Use one Issue for substantive coordinated work; a tiny fix can use its PR alone. Record meaningful scope changes, blockers, review findings or handoffs; skip acknowledgment-only comments and duplicate chat transcripts. Do not assume another assistant runs continuously or receives chat messages: pending handoffs live in GitHub until that assistant starts its next task.
+
+Prefer PR-triggered lightweight checks, concurrency cancellation and one canonical full-validation run when needed. No unnecessary push-plus-PR duplicate builds, scheduled runs or artifact uploads. Read-only checks do not need production secrets. Tool capabilities and repository rules still apply.
+
+## Set up before public publication
+
+Adopt these instructions and templates while the repository is private, and use them from the first task. Publication does not reset the protocol or grant additional permissions. Keep current visibility as a verified fact in setup evidence rather than claiming it from this policy.
+
+The owner completes the publication/privacy gate and configures the available security settings, branch protection, review requirements and required checks. If a control is unavailable for the private plan but available after publication, record that limitation and enable it during the controlled publication process. Do not pay for an upgrade without approval.
 
 ## Shared records
+
+Approved decisions on the default branch are authoritative. Branch documents and unmerged PRs are proposals until approved and integrated; a claim in a setup note does not replace current code or check evidence.
 
 | Record | Use |
 | --- | --- |
@@ -29,7 +77,7 @@ Applies equally to Claude and ChatGPT. Neither assistant's chat history is inher
 
 Chat decisions that change architecture or scope must be recorded in the appropriate document and reviewable change. A new explicit owner instruction supersedes older records; identify and reconcile it. Keep a proposal labelled as a proposal until confirmed. Tests cannot turn a proposed product decision into a confirmed requirement.
 
-Confirmed requirements in the two design documents apply unless the owner changes them.
+Confirmed requirements in the technical, full-scope and Pilot documents apply unless the owner explicitly changes them.
 
 ## Task workflow
 
@@ -39,7 +87,7 @@ Confirmed requirements in the two design documents apply unless the owner change
 4. Use a task branch and a focused PR against the agreed base. If work depends on an unmerged PR, declare that dependency; do not copy its changes into a second unrelated PR or assume it is merged. Never force-push over another assistant's work.
 5. Implement the task, run relevant checks, review privacy exposure and update affected evidence/docs in the same change. Pin new dependencies and commit lockfiles. Do not run redundant matrices/builds just because another assistant takes over.
 6. Have the other assistant review the actual diff, relevant requirements and test evidence. Review is independent of implementation; do not imply Claude reviewed code when only ChatGPT did. Do not submit a formal self-approval through a shared GitHub identity.
-7. Integrate through PRs following repository protections and the owner's task authorization. An onboarding, review or documentation request alone is not authorization to merge unrelated code, deploy, publish the repository, spend money or introduce real learner data.
+7. Integrate through PRs using the integration checklist and the owner's recorded merge authorization. An onboarding, review or documentation request alone is not authorization to merge unrelated code, deploy, publish the repository, spend money or introduce real learner data.
 8. After integration, update task status and implementation evidence with the merged commit. Before the next task, refresh from GitHub again.
 
 Roles are per task, not a permanent “Claude codes / ChatGPT plans” split. Either assistant can implement or review. The owner decides product changes, priorities, releases/publication and spending. Respect the human approval requirement for deployment in the confirmed architecture document.
@@ -60,7 +108,7 @@ Remaining steps / blockers / decisions required:
 Files or branch currently owned by this task:
 ```
 
-Do not include secrets, learner information, worksheet extracts, account or infrastructure identifiers, or private production logs: Issues and PRs here are public. A chat-only “done” does not establish a shared project state. Technical blockers must be recorded as blockers, not guessed around.
+Do not include secrets, learner information, worksheet extracts, account or infrastructure identifiers, or private production logs: Issues and PRs must be safe for public publication. A chat-only “done” does not establish a shared project state. Technical blockers must be recorded as blockers, not guessed around.
 
 ## Evidence and disagreements
 
@@ -79,11 +127,11 @@ Do not include secrets, learner information, worksheet extracts, account or infr
 - Guest remains local-only and cannot silently acquire registered-only capabilities.
 - Preserve offline data and distinguish submissions/story from verified mastery. Specify idempotency and reconciliation before implementing registered sync.
 - Keep unrelated applications, accounts/projects and environments isolated. Inspect actual target identities before service writes.
-- The repository is public: treat every commit, Issue, PR comment and CI log as published. No paid infrastructure by default. Deployment is a distinct approved action.
+- Treat every commit, Issue, PR comment and CI log as material intended for public publication. No paid infrastructure by default. Deployment is a distinct approved action.
 - The full feature scope is not the build list; `docs/PILOT_V0_1_SCOPE.md` defines the committed slice.
 
 ## Access setup
 
-Anyone can read this repository; pushing branches and opening PRs requires repository-scoped write access granted by the owner. Verify access by reading the current main SHA and the two planning documents. No tokens/passwords in source files, Issues, PRs or chat handoffs. Supabase/Vercel access is separate, must be verified independently, and its account and project details stay out of this repository.
+After public publication, anyone can read this repository. Before publication, each assistant needs verified read access. Pushing branches and opening PRs requires repository-scoped write access granted by the owner. Verify access by reading the current main SHA and the three authoritative decision/scope documents. No tokens/passwords in source files, Issues, PRs or chat handoffs. Supabase/Vercel access is separate, must be verified independently, and its account and project details stay out of this repository.
 
 If write access is unavailable, work from an explicitly identified snapshot and report its commit. Do not claim current GitHub inspection or push unverified changes.
