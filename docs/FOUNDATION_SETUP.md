@@ -2,11 +2,11 @@
 
 Updated: 2026-10-10. Implementation evidence only; architecture and feature decisions remain in their authoritative documents.
 
-This repository is public. Record evidence here without account names, project identifiers, regions, dashboard URLs, environment variable values or anything about real learners.
+This repository is prepared for public publication. Record evidence here without account names, project identifiers, regions, dashboard URLs, environment variable values or anything about real learners.
 
 ## Baseline
 
-This public repository starts from a sanitized, history-free snapshot of earlier private working files. The snapshot contains the planning documents, collaboration protocol, privacy guard, automatic pull-request privacy check, manual full CI workflow and the frontend foundation shell described below. Earlier private branches, PRs and CI runs are not published and are not linked from here.
+This repository starts from a sanitized, history-free snapshot of earlier private working files. The snapshot contains the planning documents, collaboration protocol, privacy guard, automatic pull-request privacy check, manual full CI workflow and the frontend foundation shell described below. Earlier private branches, PRs and CI runs are not published and are not linked from here.
 
 ## Accounts and infrastructure
 

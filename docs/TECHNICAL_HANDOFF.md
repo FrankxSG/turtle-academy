@@ -1,7 +1,7 @@
 # Turtle Academy — Technical Handoff
 
 Updated: 2026-10-10. Audience: Claude, ChatGPT and the project owner.
-This repository is public. Keep account names, project identifiers and any real learner information out of this document.
+This repository is prepared for public publication. Keep account names, project identifiers and any real learner information out of this document.
 
 This is an onboarding summary and dated implementation snapshot. Confirmed requirements live in `TECHNICAL_DESIGN_DECISIONS.md`, `FEATURE_SCOPE.md` and `PILOT_V0_1_SCOPE.md`. Current code, commits, PRs and check results establish implementation status. This document does not convert planned capabilities into delivered features or select an MVP.
 
@@ -154,7 +154,7 @@ Proposed Vercel settings: Vite, repository root, `npm run build`, output `dist`,
 
 Supabase staging and production are separate projects, not renamed versions of one project. Before accessing either, verify the account, project identity, region and environment from actual service metadata, and keep those details out of this repository. Never reuse another application's resources. Quotas, email recovery, retention/deletion, RLS and cross-family isolation require verification before real users.
 
-This repository is public. Every commit, Issue, PR description, comment and CI log is published and cannot be reliably deleted. Keep sensitive originals outside Git, use synthetic fixtures, and review each diff as published material. If anything private is pushed, rotate affected credentials immediately and tell the owner.
+This repository is prepared for public publication. Every commit, Issue, PR description, comment and CI log can be published and cannot be reliably withdrawn. Keep sensitive originals outside Git, use synthetic fixtures, and review each diff as published material. If anything private is pushed, rotate affected credentials immediately and tell the owner.
 
 ## 9. Suggested first Claude task
 
