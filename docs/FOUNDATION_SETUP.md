@@ -2,17 +2,17 @@
 
 Updated: 2026-10-10. Implementation evidence only; architecture and feature decisions remain in their authoritative documents.
 
-This repository is public. Record evidence here without account names, project identifiers, regions, dashboard URLs, environment variable values or anything about real learners.
+This repository is prepared for public publication. Record evidence here without account names, project identifiers, regions, dashboard URLs, environment variable values or anything about real learners.
 
 ## Baseline
 
-This public repository starts from a sanitized, history-free snapshot of earlier private working files. The snapshot contains the planning documents, collaboration protocol, privacy guard, automatic pull-request privacy check, manual full CI workflow and the frontend foundation shell described below. Earlier private branches, PRs and CI runs are not published and are not linked from here.
+This repository starts from a sanitized, history-free snapshot of earlier private working files. The snapshot contains the planning documents, collaboration protocol, privacy guard, automatic pull-request privacy check, manual full CI workflow and the frontend foundation shell described below. Earlier private branches, PRs and CI runs are not published and are not linked from here.
 
 ## Accounts and infrastructure
 
 | Item | Current evidence | Remaining verification |
 | --- | --- | --- |
-| GitHub | Public repository; owner and collaborator arrangement retained | Owner-only settings: Actions token permissions, fork PR approval, secret scanning and push protection, protection for `main` |
+| GitHub | Private as of 2026-10-10, pending owner publication; owner and collaborator arrangement retained | Owner-only settings listed under "Access and repository settings" in `docs/AI_COLLABORATION.md`; record each one here once configured |
 | Supabase | Separate staging and production projects reported by the owner; not verified through a connector | Verify the correct account and project identities from service metadata before any use; no schema, auth policy or storage configured |
 | Vercel | Existing account reported by the owner; not imported or deployed | Plan suitability, deployment approval, Git auto-deploy controls, preview access |
 
@@ -38,7 +38,7 @@ The `Privacy guard` workflow runs automatically on every pull request (read-only
 
 ## Next setup steps
 
-1. Owner: apply the GitHub settings listed above, check that no Actions secrets are stored, confirm that no hosting project is linked to this repository, and run the manual workflow once on `main`. Once `Privacy guard` has run on a pull request, it can be added as a required check on `main`.
+1. Owner: apply the repository settings listed in `docs/AI_COLLABORATION.md`, check that no Actions secrets are stored, confirm that no hosting project is linked to this repository, and run the manual workflow once on `main`. Once `Privacy guard` has run on a pull request, it can be added as a required check on `main`.
 2. Confirm Vercel plan and manual deployment controls before importing. Use the repository root, Vite preset, `npm run build`, output `dist`, Node 22 and the committed lockfile. This shell requires no environment variables.
 3. Deploy a synthetic preview only after approval. Verify HTTPS, assets, SPA routing, offline use, update behavior, preview access and logs.
 4. Connect the correct Supabase account. Implement invite redemption, family ownership, server authorization, RLS and private worksheet storage with synthetic cross-family access tests before real accounts.
