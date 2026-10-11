@@ -49,7 +49,7 @@ Do not link production credentials to PR workflows or previews; in a public repo
 ## Open product and recovery work
 
 - Only Pilot v0.1 (`docs/PILOT_V0_1_SCOPE.md`) is committed; later phases are provisional.
-- Pilot Auth/RLS, Google linking, snapshot conflict/retention, offline recovery and real-device acceptance remain unimplemented/unverified. Guest import, complete multi-device sync and full service-worker recovery remain longer-term work.
+- Pilot Auth/RLS, snapshot recovery and real-device acceptance remain unimplemented/unverified. The [Pilot decision register](PILOT_V0_1_SCOPE.md#conditionally-ratified-pilot-v01-decisions-2026-10-11-issue-3) owns the Google fallback and snapshot conflict/retention/deletion policy; [Pilot §7](PILOT_V0_1_SCOPE.md#7-testing-and-release-gates) lists acceptance tests. Private catalogue coverage and [data protection](TECHNICAL_DESIGN_DECISIONS.md#9-validation-status-and-open-questions) remain pre-implementation gates. Guest import, complete multi-device sync and full service-worker recovery remain longer-term work.
 
 ## 2026-10-11 conditional Pilot ratification
 
