@@ -43,7 +43,7 @@ Never provision, query or modify a backend project merely because a connected to
 - No runtime AI: no LLM calls, AI questions, AI grading, OCR grading, AI image interpretation or AI voice processing in the learning app. Claude and ChatGPT are development assistants outside the product runtime.
 - Curated, human-reviewed content and deterministic feedback. Free explanations receive curated hints and reference answers after an initial attempt; do not automatically declare them correct.
 - Separate story completion, task submission, verified concept mastery and subjective assessments. Attempt counts, finished quests and parent confirmations are not interchangeable with mastery.
-- Guest and Registered pathways must be designed together, preserving their distinct data and capability boundaries. The current guest-only spike is not a decision to defer Registered scope indefinitely.
+- Pilot now implements the **Registered-only** subset first (one parent + child); Guest remains explicitly in full long-term scope. Current guest-only foundation code is historical, not the Pilot commitment.
 - The full feature scope is not a build list. Only Pilot v0.1 is committed; do not invent phase allocations for anything else.
 - Zero incremental paid infrastructure. Separate this budget requirement from any assumptions about free hosting, database, storage, email or bandwidth allowances.
 - Keep this project independent from all other applications and their accounts, projects and repositories.
@@ -169,3 +169,7 @@ Still open: post-Pilot phase allocation, curriculum verification, content/pack a
 This summary combines the two confirmed design documents, earlier setup work and the pre-move validation run. Infrastructure project creation is owner-reported; it is not a direct verification of service configuration. No real learner records are included.
 
 After each merged implementation change, update the setup evidence and any affected handoff sections with the commit/PR/run. Change confirmed architecture and feature scope separately, and only when the owner explicitly changes a decision. Keep dates and branch distinctions visible so a later assistant does not inherit stale claims.
+
+## 2026-10-11 conditional Pilot v0.1 decision handoff
+
+Issue #3 conditionally ratifies the **documentation only**: Registered parent + one child, Family → Child ownership, no Pilot Guest, pre-provisioned Google sign-in and email/password fallback to be validated, IndexedDB + authenticated Supabase versioned snapshot backups (not full sync), private Chinese mistake bank and parent-verified external-AI-prepared worksheet import, four reviewed units in Chinese → Science → Mathematics → English order. First Chinese internal release requires a bounded movable hub and secure backup. Simple Chinese tracing is ephemeral. Follow the security and CONTENT_QA.md gates in PILOT_V0_1_SCOPE.md. No backend implementation, RLS verification, code change or deployment is implied; full Guest, multi-child, original private worksheet storage and full sync remain future scope.
