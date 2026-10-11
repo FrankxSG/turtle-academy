@@ -1,9 +1,9 @@
 # Turtle Academy — Learning Pilot v0.1 Scope
 
 **Document type:** Confirmed initial delivery slice  
-**Audience:** Private, single-household learning trial; **no public beta or user registration**  
+**Audience:** Private one-family Registered-only trial; no public beta/sign-up (see 2026-10-11 ratification below)  
 **Status:** Scope confirmed; implementation and real-device acceptance must be verified separately  
-**Decision date:** 2026-10-10
+**Decision date:** 2026-10-10; updated Pilot conditional ratification 2026-10-11
 
 ## 1. Position within the project
 
@@ -16,6 +16,22 @@ Read this document together with:
 
 The numbered cross-subject decision sequence ended at **#202**; separately confirmed English and Mathematics decisions use **E1–E12** and **M1–M12**, respectively. Decision identifiers are not a total feature or question count.
 
+## Conditionally ratified Pilot v0.1 decisions (2026-10-11, Issue #3)
+
+**This section supersedes inconsistent earlier Pilot-only statements in this document.** The approval covers documentation only; it does not approve merge, code, Supabase configuration, deployment, real learner imports or spending.
+
+- **Audience:** One pre-provisioned **Registered parent** and **one Child Profile**, with future-proof Family → Child → Learning Records ownership, server authorization and RLS. **No Guest Mode or public sign-up in Pilot**. Both Guest and multi-child management remain in the **long-term** feature scope. Invitation codes are Pilot-exempt; Google login plus email/password fallback and pre-provisioned identity linkage require a staging test before reliance. First use online; subsequent cached lessons work offline.
+- **Subject order:** Chinese Character & Word Repair → Science Living & Non-living Things → Mathematics Fractions → English Mystery in the Forest. All four remain Pilot requirements; the **first internal Chinese release includes the small playable hub/companion, Chinese learning loop and safe cloud backup**. Subsequent releases add the remaining reviewed units.
+- **Adventure:** A small explorable 2D hub with movable avatar, one companion, interactive quest locations, and visible nonpunitive world changes, not the full long-term 2.5D world/economy.
+- **Mistake Bank:** Registered-private entries include verified, uncertain and catalogue-unmatched targets, associated evidence, source and repeated observations; catalogue mapping is separate. Only verified, catalogue-matched targets generate reviewed personalised practice. Keep unmatched targets as pending content; never silently discard them. Objective mistakes do not automatically prove knowledge misconceptions.
+- **Worksheet intake:** Repeated parent-initiated use of private external ChatGPT/Claude on cropped/redacted worksheet images (redaction does **not** guarantee anonymity to the provider), extraction to draft structured candidates, parent verification of each item, then parent-only paste-in review/import. Original scans never enter Pilot app/backend or public repo. **No runtime AI/OCR**.
+- **Practice:** Nonpunitive approximately day 1/3/7/14 spaced review, independently reviewed examples for immediate understanding and later retention; separate objective correctness, ungraded, child self-review, parent review and game completion. No unsupported efficacy or mastery claims.
+- **Tracing:** Simple ungraded Chinese tracing with finger/stylus and appropriate palm handling, no stroke scoring, **discard strokes on exit** and exclude entirely from cloud backups.
+- **Cloud backup:** IndexedDB is the offline working copy; authenticated Supabase versioned JSON snapshots are **automatic backups, not multi-device sync**. Pending upload survives restart/retries idempotently, protect against stale overwrite, validate and explicitly confirm restore with parent re-authentication, show last successful backup, and retain **last 10** safely recoverable versions. No encrypted manual file export in Pilot.
+- **Educational QA:** Human-reviewed, versioned original/licensed educational catalogue; development-time AI cross-review plus owner approval; owner reviews every disputed item and randomly audits **1 in 5 AI-agreed items** per batch; escalate when needed to a qualified educator. Follow [CONTENT_QA.md](CONTENT_QA.md).
+- **Hard release gates:** independently verify dedicated staging/production identities before any service write; closed-signup Google/password identity linking, parent/child Auth and synthetic cross-family RLS denial, backup retry/collision/restore integrity, offline behavior after first login, landscape tablet/phone Safari/WebKit/PWA, Chinese glyph `lang="zh-Hans"` rendering and tracing input. **No actual learner data until security gates pass.** Mainland China online availability is not verified.
+- **Full scope protected:** Registered + Guest architecture, invitations, multi-child, full private worksheet storage, genuine per-record multi-device sync, complete 2.5D game and full four-subject curriculum remain future targets.
+
 ## 2. Pilot objective and success conditions
 
 Build the **lowest-cost genuinely playable four-subject learning trial**. Each subject needs an instructional loop, not just a subject button or static demonstration. Evaluate:
@@ -27,7 +43,7 @@ Build the **lowest-cost genuinely playable four-subject learning trial**. Each s
 
 Pilot success does **not** require full game engagement systems, long-term growth analytics, account creation or proof of educational impact from a short trial. Any observations of learning should be framed conservatively.
 
-## 3. Agreed minimal delivery boundaries
+## 3. Original minimal delivery boundaries (historical; superseded where inconsistent by ratification above)
 
 | Area | Pilot v0.1 | Deferred; not cancelled |
 |---|---|---|
@@ -44,7 +60,7 @@ Pilot success does **not** require full game engagement systems, long-term growt
 
 **Important:** A deployed public URL may be accessible to others even though the Pilot is only intended for private family use. Therefore, every committed lesson, fixture and bundled demo must be synthetic or generic and suitable for publication. Device-local progress must never be hard-coded into distributable files.
 
-## 4. P0 implementation checklist
+## 4. Original P0 checklist plus ratified additions (both apply unless inconsistent)
 
 | ID | Deliverable | Acceptance boundary |
 |---|---|---|
@@ -61,7 +77,7 @@ Pilot success does **not** require full game engagement systems, long-term growt
 | P0-11 | Offline readiness | With content loaded and cached, each unit works through navigation, refresh and local save without a network connection. |
 | P0-12 | Safety, original content and low-cost QA | No runtime AI, private student data, production credentials or unlicensed materials in build/tests; targeted smoke tests without unnecessary CI usage. |
 
-## 5. Exactly four first instructional units
+## 5. Exactly four first instructional units (ordered Chinese → Science → Mathematics → English)
 
 ### Science — Living & Non-living Things
 
@@ -92,7 +108,7 @@ Pilot success does **not** require full game engagement systems, long-term growt
 
 **Content rule:** One substantial, coherent, reviewed unit per subject. Avoid implementing a generic authoring system or inflating item counts simply to look complete.
 
-## 6. P1 and later release planning (provisional)
+## 6. P1 and later release planning (historical provisional text; Pilot Auth, cloud snapshots and Chinese bank are NOW P0)
 
 **P1 — Usable family version:** Add further units, secure family identity where needed, private Supabase records with RLS, reliable backup/sync, expanded mistake-bank management, practical parent oversight, more robust offline handling and a richer companion experience.
 
@@ -109,7 +125,7 @@ Pilot success does **not** require full game engagement systems, long-term growt
 3. **Resilience:** Handle IndexedDB denial/unavailability and browser data loss clearly. Local device storage is **not** a durable private backup.
 4. **Accuracy:** Review every answer key, pedagogical explanation, source licence and syllabus claim. Treat unscored writing as unscored.
 5. **Privacy:** No real worksheets, names, school information, handwriting samples, personal history, credentials or production exports in repository files, bundles, CI artifacts, PR comments, screenshot fixtures or preview outputs.
-6. **Security:** If a cloud learner record feature is added later, design and verify authentication, object access and per-learner RLS **before** transmitting any real data.
+6. **Security (Pilot):** Verify identity, staging Auth and cross-family/child RLS, backup collision/restore behavior, OAuth account linkage and key separation with synthetic data **before** transmitting any real learner data.
 7. **Budget:** No unapproved paid plan or service. Avoid unnecessary CI triggers, duplicate jobs and costly cross-browser matrices in the Pilot.
 8. **Publication:** These Markdown specifications may be included in a public repository after document-level review. **Making any repository that has held private material public requires its own full history/secrets/refs/preview audit** under `TECHNICAL_DESIGN_DECISIONS.md`, or a new clean repository.
 
