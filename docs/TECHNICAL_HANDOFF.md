@@ -156,11 +156,11 @@ Supabase staging and production are separate projects, not renamed versions of o
 
 This repository is public since 2026-10-10. Every commit, Issue, PR description, comment and CI log can be published and cannot be reliably withdrawn. Keep sensitive originals outside Git, use synthetic fixtures, and review each diff as published material. If anything private is pushed, rotate affected credentials immediately and tell the owner.
 
-## 9. Suggested first Claude task
+## 9. Suggested next implementation task
 
-Independently re-review the documentation changes in PR #4 against the owner decisions in Issue #3 and the current Pilot scope, technical decisions and full feature scope. Review the exact new head and the delta since `f1a5726`; record remaining findings and required privacy-check evidence on the PR. Implementation remains the foundation described above. Merge requires separate owner authorization of the reviewed head; code, service changes and deployment require separate authorization.
+Propose a scoped implementation task with acceptance criteria for the **Registered-only Pilot**, retaining long-term Guest requirements separately. Establish family/child identity, server authorization, RLS and snapshot contracts before dependent UI work. Resolve the private catalogue-coverage and data-protection gates before the implementation they govern, and define safety-copy recovery and owner-only retention/deletion operations before the backup PR. This is a suggested sequence, not an owner-approved MVP allocation or implementation authorization.
 
-Next, after owner-approved merge of the documentation PR, propose a scoped implementation task with acceptance criteria for the **Registered-only Pilot**; retain the long-term Guest requirements separately. Establish the family/child identity, RLS and snapshot contracts before dependent UI work. This is a suggested working sequence, not an owner-approved MVP allocation.
+Read the current authoritative documents and active GitHub work before proposing changes. Keep PR-specific review instructions, reviewed SHAs and merge authorization on the relevant PR. Code, service changes, merging and deployment require their separately applicable owner authorization.
 
 Still open: post-Pilot phase allocation, curriculum verification, content/pack and event schemas, secure imports/invitations, RLS/storage tests, registered sync, retention, device acceptance and hosting validation. Recheck the live repository before treating this list as current.
 
