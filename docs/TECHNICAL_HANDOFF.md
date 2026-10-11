@@ -1,7 +1,7 @@
 # Turtle Academy — Technical Handoff
 
 Updated: 2026-10-10. Audience: Claude, ChatGPT and the project owner.
-This repository is prepared for public publication. Keep account names, project identifiers and any real learner information out of this document.
+This repository is public since 2026-10-10. Keep account names, project identifiers and any real learner information out of this document.
 
 This is an onboarding summary and dated implementation snapshot. Confirmed requirements live in `TECHNICAL_DESIGN_DECISIONS.md`, `FEATURE_SCOPE.md` and `PILOT_V0_1_SCOPE.md`. Current code, commits, PRs and check results establish implementation status. This document does not convert planned capabilities into delivered features or select an MVP.
 
@@ -29,10 +29,10 @@ Use the name Turtle Academy. Earlier planning chats may mention other working na
 | --- | --- |
 | Repository | Public; default branch `main`; started from a sanitized, history-free snapshot of earlier private working files. Earlier private branches, PRs and CI runs are not published |
 | `main` | Planning documents, collaboration protocol, privacy guard, automatic pull-request privacy check, manual full CI and the frontend foundation shell |
-| Frontend validation | Identical code, lockfile and tests passed all checks before the move; a first public run of the manual workflow is still to be recorded |
+| Frontend validation | Identical code, lockfile and tests passed all checks before the move; public `Foundation checks` run #1 passed on `main` at `30eef37` (reported in Claude's review) |
 | Supabase | Separate staging and production projects reported by the owner; no Turtle Academy schema, invitation flow, RLS, private buckets or sync implemented or verified |
 | Vercel | Existing account reported by the owner; import, deployment, plan suitability and deployment controls not verified |
-| GitHub settings | Owner-only security settings for a public repository still to be confirmed (see `FOUNDATION_SETUP.md`) |
+| GitHub settings | Public repo protections documented in `FOUNDATION_SETUP.md`: squash-only, protect-main PR/privacy-guard, read-only Actions; periodically reverify |
 
 Never provision, query or modify a backend project merely because a connected tool lists it; verify identity from service metadata first.
 
@@ -57,21 +57,21 @@ flowchart TD
   C["Curated versioned content and assets"] --> P["PWA UI and deterministic lesson engine"]
   P --> L["IndexedDB: local records and drafts"]
   P --> W["Service worker: shell and lesson packs"]
-  L --> Q["Registered-only authenticated sync"]
+  L --> Q["Pilot: authenticated snapshot backup; long-term: event sync"]
   Q --> D["Supabase Auth and Postgres with RLS"]
   Q --> S["Private storage: selected works"]
 ```
 
-Guest records stop at the local layer. Supabase sync and storage arrows are future implementation. The service-worker cache stores downloadable app/content files, not a substitute for ownership-controlled learner storage.
+Pilot Registered records stay local-first with authenticated Supabase **snapshot backups**, not live per-record sync. Guest (when added later) remains local-only. Full sync and private selected-work storage arrows are future implementation. The service-worker cache stores downloadable app/content files, not a substitute for ownership-controlled learner storage.
 
 | Layer | Responsibility | Current implementation |
 | --- | --- | --- |
 | React UI and game presentation | Navigation, subject worlds, quests, accessible input, parent views | Small React shell |
 | Lesson/content engine | Stable content IDs and versions; concepts, prerequisites, answers, hints and reviewed explanations | One hard-coded generic Science question; no modular engine yet |
 | Progress and assessment | Distinct story/submission/mastery evidence; rule-based review scheduling | No domain progress model yet |
-| Local persistence | Guest records, active drafts, registered pending work, safe schema changes | One Dexie guest checkpoint |
+| Local persistence | Pilot Registered records and pending backup, draft state and safe schema changes | One Dexie guest-only checkpoint from earlier foundation spike (Pilot upgrade not implemented) |
 | Offline delivery | App shell, versioned lesson packs, readiness/download/recovery state | Workbox shell precaching only |
-| Sync and server authorization | Authenticated registered event sync, ownership enforcement and deduplication | Not implemented |
+| Pilot backup and server authorization | Authenticated child-scoped snapshot backup, RLS, conflict-safe recovery; full event sync later | Not implemented |
 | Private backend and storage | Family-owned records, selected portfolios, parent notes | Not implemented |
 | Hosting and CI | Static build delivery, checks and controlled releases | GitHub: automatic privacy check on pull requests, manual full CI; proposed Vercel configuration |
 
@@ -126,7 +126,7 @@ The pre-move validation reported zero dependency vulnerabilities at that time, a
 
 ## 6. Identity, privacy and imports
 
-Registered accounts are invitation-only, with unique expiring codes; parent email/password and optional Google sign-in where reachable. Parents own multiple child profiles; no child email is necessary. A parent PIN gates adult UI, but a PIN alone is not server authorization. Backend access must enforce authenticated parent/child ownership and RLS.
+**Pilot:** manually provisioned Registered parent with password fallback and Google sign-in only after safe staging identity-link verification; invitation codes remain a **full-product** requirement. Parents own multiple child profiles; no child email is necessary. A parent PIN gates adult UI, but a PIN alone is not server authorization. Backend access must enforce authenticated parent/child ownership and RLS.
 
 Guest mode is device-only, with restricted personalization. No cloud sync, persistent personal mistake bank, parent letters or registered-only analytics. Conversion requires parent-reviewed selective import; never silently merge all guest data into an account.
 
@@ -160,7 +160,7 @@ This repository is prepared for public publication. Every commit, Issue, PR desc
 
 Start with an independent technical review of the frontend foundation and this handoff against the two confirmed planning documents. Report findings tied to files/commits and distinguish bugs from unimplemented planned features. Do not rewrite the app or merge/deploy as part of onboarding.
 
-Next, create a scoped GitHub issue for the next jointly agreed task, with acceptance criteria for both Guest and Registered paths where relevant. Establish identity/security and sync contracts alongside local engine work. This is a suggested working sequence, not an owner-approved MVP allocation.
+Next, after owner-approved merge of the documentation PR, propose a scoped implementation task with acceptance criteria for the **Registered-only Pilot**; retain the long-term Guest requirements separately. Establish the family/child identity, RLS and snapshot contracts before dependent UI work. This is a suggested working sequence, not an owner-approved MVP allocation.
 
 Still open: post-Pilot phase allocation, curriculum verification, content/pack and event schemas, secure imports/invitations, RLS/storage tests, registered sync, retention, device acceptance and hosting validation. Recheck the live repository before treating this list as current.
 
@@ -172,4 +172,4 @@ After each merged implementation change, update the setup evidence and any affec
 
 ## 2026-10-11 conditional Pilot v0.1 decision handoff
 
-Issue #3 conditionally ratifies the **documentation only**: Registered parent + one child, Family → Child ownership, no Pilot Guest, pre-provisioned Google sign-in and email/password fallback to be validated, IndexedDB + authenticated Supabase versioned snapshot backups (not full sync), private Chinese mistake bank and parent-verified external-AI-prepared worksheet import, four reviewed units in Chinese → Science → Mathematics → English order. First Chinese internal release requires a bounded movable hub and secure backup. Simple Chinese tracing is ephemeral. Follow the security and CONTENT_QA.md gates in PILOT_V0_1_SCOPE.md. No backend implementation, RLS verification, code change or deployment is implied; full Guest, multi-child, original private worksheet storage and full sync remain future scope.
+Issue #3 conditionally ratifies documentation only: one pre-provisioned Registered parent and nickname-only child, no Pilot Guest; IndexedDB and child-scoped authenticated Supabase snapshot backup (not full sync); parent-verified private worksheet paste-in; Chinese → Science → Mathematics → English, starting with Chinese + movable hub/companion and backup, plus ephemeral tracing. Pilot details and gates are in PILOT_V0_1_SCOPE.md and CONTENT_QA.md. No code, RLS or service configuration is implemented by this documentation PR.
