@@ -10,6 +10,7 @@ Applies equally to Claude and ChatGPT. Neither assistant's chat history is inher
 - **Merging is authorized per PR.** The owner merges, or tells an assistant to merge a specific PR. Nothing in this protocol grants standing merge, publication, deployment or spending permission.
 - **Checks are proportional to the change**, and results for unchanged tested code are reused.
 - **Minimal administration.** One tracking record, one focused PR and one concise validation summary per task.
+- **Reviews produce GitHub action.** When the owner requests a PR review, record the reviewed head, actionable findings and validation limits on the PR; do not deliver a chat-only review. If fixes are already within the owner-authorised scope, update the existing PR branch, verify the changes and record the new head for independent review. If a decision is needed, post the concrete finding on the PR and ask only for that missing decision while completing unaffected work. Keep chat updates brief.
 - **Everything is public.** Every committed file, branch, PR, Issue, comment and log must be safe to publish. Real learner information, personal documents, infrastructure details and credentials stay outside the repository.
 
 ## Shared records
