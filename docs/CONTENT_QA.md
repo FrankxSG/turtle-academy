@@ -5,7 +5,7 @@
 ## Curated educational content
 
 - Every public lesson/question requires a stable versioned ID, objective and source/reference, task type, reviewed valid answers/variants where objective, explanation, hints, pedagogical rationale and original/licensed provenance. Do not reproduce teacher worksheets or proprietary textbook passages.
-- Development-time AI assistance may draft and cross-review educational content, but AI agreement is not correctness. **Owner reviews every item** and audits **every disputed/ambiguous item**, plus a random **1 in 5 (20%)** sample of items where both AIs agree, per batch. Escalate to a qualified educator whenever the owner cannot resolve an ambiguity. Record a public-safe review log of generic item IDs, review outcome and licence evidence.
+- Development-time AI assistance may draft and cross-review educational content, but AI agreement is not correctness. **Owner reviews every disputed/ambiguous item** and a random **1 in 5 (20%)** sample of AI-agreed items per batch, then signs off each batch. Escalate to a qualified educator whenever the owner cannot resolve an ambiguity. Maintain a public-safe batch log with owner sign-off, curriculum source and version, AI cross-review status, sampled generic item IDs and review outcomes, licensing/source evidence and artwork provenance; never learner records.
 - A low-cost content validator must check schema, unique IDs, references, answer key and explanation completeness; it cannot validate pedagogy or copyright by itself.
 - Development-time AI-generated artwork requires a dated provenance record (tool, terms/licence review, human edits, originality/third-party IP assessment); no copyrighted franchise reproductions.
 
