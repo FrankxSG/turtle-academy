@@ -2,7 +2,7 @@
 
 **Document type:** Long-term architecture, privacy, security and engineering decision record  
 **Status:** Confirmed design requirements, not a claim that the infrastructure or features are deployed  
-**Last consolidated:** 2026-10-10
+**Last consolidated:** 2026-10-11 (Pilot-only conditional ratification)
 
 ## 1. Decision hierarchy
 
@@ -23,14 +23,14 @@
 | Lessons | Reviewed, declarative and versioned content with stable IDs, answer keys, explanations and prerequisites | Content changes must preserve or explicitly migrate progress and mastery evidence |
 | Evaluation | Deterministic checking only when answers are objectively verifiable | Never present completion, hint use or unsupervised open writing as verified mastery |
 | Game | Narrative quests, companions, home, journals and progress are separate from curriculum and learner-data layers | A rich game experience is a later target; minimal Pilot story framing is sufficient at first |
-| AI | **No in-app/runtime AI** | No LLM calls, AI-generated lessons, AI grading, AI OCR, automated voice evaluation or exposure of learner data to AI services |
+| AI | **No in-app/runtime AI** | No LLM calls, AI-generated lessons, AI grading, AI OCR, automated voice evaluation or in-app transmission of learner data to AI services; private owner-authorised external worksheet preparation is allowed subject to data handling controls |
 | IP | Original characters, visual design, stories and learning assets | Do not reproduce protected franchise assets, teacher worksheets or third-party educational materials without permission |
 
 Science and Chinese were the initial pedagogical priorities; **English and Mathematics are also confirmed long-term subjects**, not optional placeholder tabs. Their complete curriculum decisions are recorded in `FEATURE_SCOPE.md`.
 
 ## 3. Long-term identities, authentication and privacy
 
-### Registered family accounts (later than Pilot)
+### Registered family accounts (narrow registered-only Pilot exception documented below)
 
 - Parent-controlled, invitation-only onboarding using unique expiring invitation codes; email/password login with **optional Google sign-in** where supported. Google sign-in must never be the sole way to access offline learning, especially in environments where Google services are unavailable.
 - Parents can manage multiple child profiles without requiring a child email. Parent-only actions use appropriate re-authentication or a parent PIN.
@@ -42,7 +42,7 @@ Science and Chinese were the initial pedagogical priorities; **English and Mathe
 
 - **Public/repository content:** generic application source, original approved game assets, general educational content, synthetic examples, architecture documents, and least-privilege CI workflows.
 - **Private learner content:** learner identity, work samples, handwriting and drawings, authentic worksheets, error banks, answer history, progress, observations, portfolios, personal messages and parent notes. Keep these out of public Git, deployment bundles, public APIs, screenshots, CI artifacts and logs.
-- Original worksheets and teacher-provided materials belong in private storage or separate private preparation workflows. Human-reviewed structured learning records may be imported only into authorised learner storage. Copyright permission is required before republishing educational materials.
+- Original worksheets and teacher-provided materials belong in private storage or separate private preparation workflows. Owner-initiated private external AI preparation of cropped/redacted worksheet images is allowed, with provider privacy considerations and mandatory human verification; cropping does not guarantee anonymity. No such images or records in public files. Human-reviewed structured learning records may be imported only into authorised learner storage. Copyright permission is required before republishing educational materials.
 - Draft writing/drawings should autosave locally, have a clear deletion/retention policy and allow intentional preservation of selected finished work in private authenticated storage when that feature is enabled. Voice input, if added, must follow a transient/minimised retention model rather than automatic recording archives.
 - An unauthenticated static deployment must contain no real learner information and no privileged backend credentials. Public access to a site URL is **not** access control.
 
@@ -94,7 +94,23 @@ Science and Chinese were the initial pedagogical priorities; **English and Mathe
 - No additional paid infrastructure or plan upgrade without explicit approval. GitHub runner terms do not determine separate hosting, database, email, storage, bandwidth or egress costs.
 - Treat merge, publishing and deployment as separate controlled operations; a public repository does not by itself authorise a public learner-data deployment.
 
-## 8. Explicit Pilot v0.1 engineering subset
+## Conditionally ratified Pilot v0.1 decisions (2026-10-11, Issue #3)
+
+**This section supersedes inconsistent earlier Pilot-only statements in this document.** The approval covers documentation only; it does not approve merge, code, Supabase configuration, deployment, real learner imports or spending.
+
+- **Audience:** One pre-provisioned **Registered parent** and **one Child Profile**, with future-proof Family → Child → Learning Records ownership, server authorization and RLS. **No Guest Mode or public sign-up in Pilot**. Both Guest and multi-child management remain in the **long-term** feature scope. Invitation codes are Pilot-exempt; Google login plus email/password fallback and pre-provisioned identity linkage require a staging test before reliance. First use online; subsequent cached lessons work offline.
+- **Subject order:** Chinese Character & Word Repair → Science Living & Non-living Things → Mathematics Fractions → English Mystery in the Forest. All four remain Pilot requirements; the **first internal Chinese release includes the small playable hub/companion, Chinese learning loop and safe cloud backup**. Subsequent releases add the remaining reviewed units.
+- **Adventure:** A small explorable 2D hub with movable avatar, one companion, interactive quest locations, and visible nonpunitive world changes, not the full long-term 2.5D world/economy.
+- **Mistake Bank:** Registered-private entries include verified, uncertain and catalogue-unmatched targets, associated evidence, source and repeated observations; catalogue mapping is separate. Only verified, catalogue-matched targets generate reviewed personalised practice. Keep unmatched targets as pending content; never silently discard them. Objective mistakes do not automatically prove knowledge misconceptions.
+- **Worksheet intake:** Repeated parent-initiated use of private external ChatGPT/Claude on cropped/redacted worksheet images (redaction does **not** guarantee anonymity to the provider), extraction to draft structured candidates, parent verification of each item, then parent-only paste-in review/import. Original scans never enter Pilot app/backend or public repo. **No runtime AI/OCR**.
+- **Practice:** Nonpunitive approximately day 1/3/7/14 spaced review, independently reviewed examples for immediate understanding and later retention; separate objective correctness, ungraded, child self-review, parent review and game completion. No unsupported efficacy or mastery claims.
+- **Tracing:** Simple ungraded Chinese tracing with finger/stylus and appropriate palm handling, no stroke scoring, **discard strokes on exit** and exclude entirely from cloud backups.
+- **Cloud backup:** IndexedDB is the offline working copy; authenticated Supabase versioned JSON snapshots are **automatic backups, not multi-device sync**. Pending upload survives restart/retries idempotently, protect against stale overwrite, validate and explicitly confirm restore with parent re-authentication, show last successful backup, and retain **last 10** safely recoverable versions. No encrypted manual file export in Pilot.
+- **Educational QA:** Human-reviewed, versioned original/licensed educational catalogue; development-time AI cross-review plus owner approval; owner reviews every disputed item and randomly audits **1 in 5 AI-agreed items** per batch; escalate when needed to a qualified educator. Follow [CONTENT_QA.md](CONTENT_QA.md).
+- **Hard release gates:** independently verify dedicated staging/production identities before any service write; closed-signup Google/password identity linking, parent/child Auth and synthetic cross-family RLS denial, backup retry/collision/restore integrity, offline behavior after first login, landscape tablet/phone Safari/WebKit/PWA, Chinese glyph `lang="zh-Hans"` rendering and tracing input. **No actual learner data until security gates pass.** Mainland China online availability is not verified.
+- **Full scope protected:** Registered + Guest architecture, invitations, multi-child, full private worksheet storage, genuine per-record multi-device sync, complete 2.5D game and full four-subject curriculum remain future targets.
+
+## 8. Original Pilot v0.1 engineering subset (historical; replaced where inconsistent by 2026-10-11 decisions)
 
 For the first **single-household, single-device** learning trial:
 
@@ -107,4 +123,4 @@ For the first **single-household, single-device** learning trial:
 
 ## 9. Validation status and open questions
 
-These are requirements or design directions, **not assertions of completed implementation**: registered-user RLS, invite flow, private storage, cross-device merge, mainland connectivity, offline auth recovery, real-device accessibility, retention/deletion, production-scale capacity and full publication audit. Verification must be documented separately before claiming readiness or making a repository public.
+Conditional ratification is **documentation-only**, not code/configuration/deployment approval. These are requirements, **not assertions of completed implementation**: registered-user RLS, invite flow, private storage, cross-device merge, mainland connectivity, offline auth recovery, real-device accessibility, retention/deletion, production-scale capacity and full publication audit. Verification must be documented separately before claiming readiness or making a repository public.
