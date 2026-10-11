@@ -50,3 +50,7 @@ Do not link production credentials to PR workflows or previews; in a public repo
 
 - Only Pilot v0.1 (`docs/PILOT_V0_1_SCOPE.md`) is committed; later phases are provisional.
 - Guest import, account synchronization, conflict reconciliation, retention durations, offline auth recovery and full service-worker recovery need separate specification and tests.
+
+## 2026-10-11 conditional Pilot ratification
+
+Owner approved documentation-only changes in Issue #3, not backend, code or deployment. Pilot now calls for Registered-only one parent/child, Auth/RLS, IndexedDB plus Supabase snapshots, private reviewed mistake intake, Chinese-first four-subject sequence, explorable hub and ephemeral tracing. The current foundation remains an earlier local-only prototype, not evidence these functions work. The owner reports personally verifying independent Singapore-region staging and production projects; this integration has **not independently verified them**, and no new service change was made. Refer to PILOT_V0_1_SCOPE.md and CONTENT_QA.md. No actual learner data or credentials are committed.
