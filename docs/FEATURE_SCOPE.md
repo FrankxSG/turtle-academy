@@ -2,7 +2,7 @@
 
 **Document type:** Long-term product and curriculum specification  
 **Status:** Confirmed feature directions and curriculum choices; not a release checklist or implementation report  
-**Last scope consolidation:** 2026-10-10
+**Last scope consolidation:** 2026-10-11 (Pilot alignment; full scope preserved)
 
 ## How to use this document
 
@@ -83,6 +83,10 @@ Turtle Academy is an original 2.5D fantasy-adventure PWA blending narrative, ani
 - Writing devices: finger, stylus, pen-and-paper printouts; no machine-vision or AI handwriting grading. Auto-save active draft locally, cleanup stale drafts after notice, preserve selected finished samples in private portfolio (#170–175).
 - Carefully distinguish actual knowledge mistakes from presentation neatness and possible inadvertent slips; do not stigmatise a child as careless.
 
+### Recurring private worksheet-to-mistake-bank workflow
+
+The parent may use a private ChatGPT/Claude account to prepare structured candidate characters/words and mistake classifications from newly completed, cropped/redacted worksheets; the AI provider receives that content subject to its terms, and cropping does not guarantee anonymity. Each candidate must be human-reviewed before import into the **Registered** Child's private mistake bank via a parent-only paste-in screen. Keep verified, uncertain and unmatched private records; only verified catalogue-matched entries generate approved practice. Catalogue-unmatched targets are retained privately as pending content, while public generic catalogue growth is curriculum-based and original/licensed. Original worksheet images stay outside the Pilot app/backend and all public Git/development artifacts. The app does not use runtime AI, OCR or automatic handwriting grading.
+
 ## 7. Focus, instruction-following and classroom transfer (#201–202)
 
 - **#201 C:** embed attention in learning: before task identify key focus, during task practice observation/step tracking/attention recovery, after task brief voluntary self-monitoring; optional strategies for classroom use. Do not assert whether child was truly attentive or promise school transfer.
@@ -110,7 +114,7 @@ Turtle Academy is an original 2.5D fantasy-adventure PWA blending narrative, ani
 
 - No attention disorder diagnosis or focus-score labelling. No forced login streaks, punitive missed-day penalties, harmful overuse loops, public comparison/leaderboards, monetary gambling or child-to-child chat.
 - Accessible alternatives for drag; audio repeat; input speed customization; study/leisure caps; offline course packs and clear connectivity messages; persistent progress handled by authenticated sync only for registered users.
-- Any identifiable learner artwork, handwriting, worksheets, school details and learning histories must remain private. Never include private learner data in development fixtures, logs, public assets, CI artifacts, screenshots or AI services.
+- Any identifiable learner artwork, handwriting, worksheets, school details and learning histories must remain private. Never include learner data in public repositories, Issues, PRs, dev fixtures, public logs, artifacts, screenshots, bundles or deployments. Parent-initiated private ChatGPT/Claude worksheet preparation is permitted outside the app after suitable cropping/redaction and under provider privacy terms; that does not guarantee anonymity. No in-app AI receives learner data.
 - Child-safe offline activities should specify tools, supervision, boundaries and real-world observation authenticity.
 
 ## 10. English World: confirmed E1–E12 curriculum decisions
@@ -193,7 +197,7 @@ Full lower-primary topic coverage and sophisticated mathematical reasoning are *
 
 - All learning assets committed to the repository must be original, permissively licensed or properly authorised for redistribution, with attribution and licence evidence where required. Educational materials obtained from teachers, schools, textbooks or worksheets are **not** presumed redistributable.
 - Generic curricular examples and synthetic test cases may be public. Original learner worksheets, identifiable writing or drawings, learner answers, mistakes, progress, photographs, school identifiers and household documents must remain **outside Git and the public build**. Private records require appropriate authenticated storage when cloud features are enabled.
-- The Pilot contains a deliberately tiny learning subset: **Living & Non-living Things** (Science), **Character & Word Repair** (Chinese), **Mystery in the Forest** (English), and **Fractions** (Mathematics). This selection does not supersede the rich educational, personalisation, parent or game capabilities listed here.
+- The Pilot contains a deliberately limited learning subset: **Living & Non-living Things** (Science), **Character & Word Repair** (Chinese), **Mystery in the Forest** (English), and **Fractions** (Mathematics). This selection does not supersede the rich educational, personalisation, parent or game capabilities listed here.
 - Features not selected for the Pilot remain part of the long-term scope where previously confirmed, but their schedule, budget, implementation readiness and educational outcomes are not guaranteed by this document.
 - No runtime AI, automatic correctness claims for open writing/scientific explanations, punitive streak mechanics or unsafe encouragement to prolong children's screen time.
 - Publishing a document that is safe to share **does not** by itself authorise publishing any repository or deployment. Any repository that has ever held private material needs a separate full-history, refs, secrets, CI artifacts, licensing and hosting-preview security audit under the technical decisions, or should be replaced by a new clean repository.

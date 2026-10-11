@@ -28,7 +28,7 @@ Before browser tests, run `npx playwright install chromium`. Offline behavior is
 - Guest progress can be lost if browser data is cleared or evicted.
 - Registered accounts, RLS, sync, curriculum packs, rewards, handwriting and parent controls remain unimplemented.
 - Keep staging and production isolated. Never connect previews to real learner data.
-- This repository is prepared for public publication. Never commit real learner data, account details or credentials.
+- This repository is public since 2026-10-10. Never commit real learner data, account details or credentials.
 
 Read `AGENTS.md`, `docs/TECHNICAL_DESIGN_DECISIONS.md`, `docs/FEATURE_SCOPE.md`, `docs/PILOT_V0_1_SCOPE.md` and `docs/FOUNDATION_SETUP.md` before implementation.
 

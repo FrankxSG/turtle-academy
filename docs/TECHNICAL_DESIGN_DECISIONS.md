@@ -2,7 +2,7 @@
 
 **Document type:** Long-term architecture, privacy, security and engineering decision record  
 **Status:** Confirmed design requirements, not a claim that the infrastructure or features are deployed  
-**Last consolidated:** 2026-10-10
+**Last consolidated:** 2026-10-11 (Pilot-only conditional ratification)
 
 ## 1. Decision hierarchy
 
@@ -22,15 +22,15 @@
 | Offline app assets | Versioned service worker and application/lesson caching; Workbox is an implementation option | Previously loaded required content remains usable without network; controlled updates do not discard learning records |
 | Lessons | Reviewed, declarative and versioned content with stable IDs, answer keys, explanations and prerequisites | Content changes must preserve or explicitly migrate progress and mastery evidence |
 | Evaluation | Deterministic checking only when answers are objectively verifiable | Never present completion, hint use or unsupervised open writing as verified mastery |
-| Game | Narrative quests, companions, home, journals and progress are separate from curriculum and learner-data layers | A rich game experience is a later target; minimal Pilot story framing is sufficient at first |
-| AI | **No in-app/runtime AI** | No LLM calls, AI-generated lessons, AI grading, AI OCR, automated voice evaluation or exposure of learner data to AI services |
+| Game | Narrative quests, companions, home, journals and progress are separate from curriculum and learner-data layers | A rich game experience is a later target; a bounded movable Pilot 2D hub is defined in the Pilot scope |
+| AI | **No in-app/runtime AI** | No LLM calls, AI-generated lessons, AI grading, AI OCR, automated voice evaluation or in-app transmission of learner data to AI services; private owner-authorised external worksheet preparation is allowed subject to data handling controls |
 | IP | Original characters, visual design, stories and learning assets | Do not reproduce protected franchise assets, teacher worksheets or third-party educational materials without permission |
 
 Science and Chinese were the initial pedagogical priorities; **English and Mathematics are also confirmed long-term subjects**, not optional placeholder tabs. Their complete curriculum decisions are recorded in `FEATURE_SCOPE.md`.
 
 ## 3. Long-term identities, authentication and privacy
 
-### Registered family accounts (later than Pilot)
+### Registered family accounts (Pilot subset in §8)
 
 - Parent-controlled, invitation-only onboarding using unique expiring invitation codes; email/password login with **optional Google sign-in** where supported. Google sign-in must never be the sole way to access offline learning, especially in environments where Google services are unavailable.
 - Parents can manage multiple child profiles without requiring a child email. Parent-only actions use appropriate re-authentication or a parent PIN.
@@ -42,7 +42,7 @@ Science and Chinese were the initial pedagogical priorities; **English and Mathe
 
 - **Public/repository content:** generic application source, original approved game assets, general educational content, synthetic examples, architecture documents, and least-privilege CI workflows.
 - **Private learner content:** learner identity, work samples, handwriting and drawings, authentic worksheets, error banks, answer history, progress, observations, portfolios, personal messages and parent notes. Keep these out of public Git, deployment bundles, public APIs, screenshots, CI artifacts and logs.
-- Original worksheets and teacher-provided materials belong in private storage or separate private preparation workflows. Human-reviewed structured learning records may be imported only into authorised learner storage. Copyright permission is required before republishing educational materials.
+- Original worksheets and teacher-provided materials belong in private storage or separate private preparation workflows. Owner-initiated private external AI preparation of cropped/redacted worksheet images is allowed, with provider privacy considerations and mandatory human verification; cropping does not guarantee anonymity. No such images or records in public files. Human-reviewed structured learning records may be imported only into authorised learner storage. Copyright permission is required before republishing educational materials.
 - Draft writing/drawings should autosave locally, have a clear deletion/retention policy and allow intentional preservation of selected finished work in private authenticated storage when that feature is enabled. Voice input, if added, must follow a transient/minimised retention model rather than automatic recording archives.
 - An unauthenticated static deployment must contain no real learner information and no privileged backend credentials. Public access to a site URL is **not** access control.
 
@@ -53,7 +53,7 @@ Science and Chinese were the initial pedagogical priorities; **English and Mathe
 - Registered-user learning uses a local-first event queue with unique/idempotent event identifiers, crash-safe persistence, retries, reconciliation of conflicting changes and deduplication of rewards and completed tasks. Naive last-write-wins is not acceptable for learning evidence.
 - A session or service-worker update must not erase active lessons, drafts or pending events. Validate device storage eviction, airplane-mode reload, and offline/online recovery.
 - **Mainland China accessibility cannot be guaranteed** merely by selecting an overseas provider. Test with real networks and target devices; support offline use after content download. Google OAuth reachability must not be assumed. Offline authentication recovery needs its own validation when registered accounts are implemented.
-- Pilot v0.1 only requires a self-contained locally cached course set and IndexedDB; it does **not** require a cloud reconciliation engine or a downloaded lesson-pack manager.
+- Pilot v0.1 uses cached lessons, IndexedDB and authenticated cloud snapshots for backup/restore; it does **not** require a cloud reconciliation engine or a downloaded lesson-pack manager.
 
 ## 5. Pedagogical and assessment integrity
 
@@ -85,6 +85,8 @@ Science and Chinese were the initial pedagogical priorities; **English and Mathe
 5. Verify hosting preview/production visibility, environment variables, APIs, storage permissions and logs. If learner cloud features exist, verify authenticated isolation including RLS and object policies using synthetic cross-family tests.
 6. Prefer a **new clean public repository** if sensitive contents exist in prior Git history; deleting them from the current tip is insufficient. Do not make a repository public until the gate passes.
 
+This repository used the sanitized, history-free clean-baseline publication route on 2026-10-10, as recorded in [FOUNDATION_SETUP.md](FOUNDATION_SETUP.md). This dated record does not certify future backend or preview safety.
+
 ### CI and cost controls
 
 - Prefer standard GitHub-hosted runners under the current applicable public-repository terms. Avoid unnecessary matrices, duplicate push/PR builds and redundant tests; use path-aware changes, concurrency cancellation, short timeouts and targeted checks.
@@ -94,17 +96,20 @@ Science and Chinese were the initial pedagogical priorities; **English and Mathe
 - No additional paid infrastructure or plan upgrade without explicit approval. GitHub runner terms do not determine separate hosting, database, email, storage, bandwidth or egress costs.
 - Treat merge, publishing and deployment as separate controlled operations; a public repository does not by itself authorise a public learner-data deployment.
 
-## 8. Explicit Pilot v0.1 engineering subset
+## 8. Pilot v0.1 technical subset (conditionally ratified 2026-10-11)
 
-For the first **single-household, single-device** learning trial:
+The authoritative feature and delivery boundaries are in [PILOT_V0_1_SCOPE.md](PILOT_V0_1_SCOPE.md). This technical subset does not change the full Registered + Guest architecture.
 
-- Four reviewed learning units: Science **Living & Non-living Things**; Chinese **Character & Word Repair**; English **Mystery in the Forest**; Mathematics **Fractions**.
-- No mandatory login, multi-user management, private backend API or cross-device sync. **Google sign-in remains optional later**, not a Pilot dependency.
-- Serve the application as a simple static PWA with all Pilot lessons precached; store progress, objective attempts, minimal error replay and unfinished drafts in IndexedDB.
-- Show basic local learning results and light adventure guidance. No complete parent-control suite, economy, ten-companion system, full user mistake-bank ingestion or automatic handwriting assessment.
-- Keep all committed course examples and automated tests **synthetic or original**. Do not bake real family data into any bundle or public path; local device data remains subject to browser storage loss.
-- The pilot is a **subset, not a replacement**, of registered-user architecture and the complete long-term curriculum/game feature scope.
+- Pilot provides **one pre-provisioned Registered parent** and one nickname-only Child Profile under **Family → Child → Learning Records** ownership. Public sign-up and invitation redemption are deferred for Pilot. Google login plus password fallback is planned; first verify closed-signup account linking with synthetic users in staging. If unsafe/unavailable, use email/password only in Pilot and revisit Google with invitation onboarding later.
+- Use Supabase Auth and child/family-scoped **RLS**, with synthetic negative tests for anonymous, other-family and spoofed-child reads/writes. A child operating in the parent's authenticated session is not separately authorised as a parent: destructive and restore operations require parent re-authentication.
+- IndexedDB stays the offline **working copy**; authenticated automatic versioned JSON snapshots provide backup/restore, not per-record bidirectional sync. The [Pilot decision register](PILOT_V0_1_SCOPE.md#conditionally-ratified-pilot-v01-decisions-2026-10-11-issue-3) is authoritative for conflict decision A, head selection, retention and owner-mediated deletion. Stale-base rejection stops upload; when a cloud head exists, only parent-approved cloud-head restore after password reauthentication and a local safety copy allows recovery. Only a server-confirmed absent head permits an explicitly parent-confirmed new first snapshot under the Pilot register's no-head exception. Never silently discard local changes; defer “keep this device”. Required synthetic first/retry/conflict/restore-then-upload and head-after-pruning and post-deletion new-history tests are in [Pilot §7.3](PILOT_V0_1_SCOPE.md#7-testing-and-release-gates); none is verified by this PR.
+- One online first login is accepted. Afterwards cached lessons/local saves must function even when offline or auth expires. Upload waits/retries; never claim indefinite authentication validity or mainland network availability.
+- Real learner data is prohibited until dedicated environment identity is independently verified and synthetic Auth/RLS, backup/recovery and real-device privacy gates have passed. No service-role key in frontend, PR checks or previews; no unapproved paid services. **No runtime AI**; private external worksheet preparation requires parent verification and complies with publication boundaries.
+
+This is a **documentation decision only**, not evidence of implementation or authorisation to modify code, services, merge or deploy.
 
 ## 9. Validation status and open questions
 
-These are requirements or design directions, **not assertions of completed implementation**: registered-user RLS, invite flow, private storage, cross-device merge, mainland connectivity, offline auth recovery, real-device accessibility, retention/deletion, production-scale capacity and full publication audit. Verification must be documented separately before claiming readiness or making a repository public.
+Conditional ratification is **documentation-only**, not code/configuration/deployment approval. These are requirements, **not assertions of completed implementation**: registered-user RLS, invite flow, private storage, cross-device merge, mainland connectivity, offline auth recovery, real-device accessibility, retention/deletion, production-scale capacity and full publication audit. Verification must be documented separately before claiming readiness or making a repository public.
+
+- **Pre-implementation data-protection gate (OPEN):** Before implementing handling of real children's records, resolve applicable data-protection obligations, parental consent/notices, provider handling and cross-border transfers, data minimisation, access, retention and deletion (including local safety copies and cloud backups). Record the operational policy and owner sign-off privately as appropriate; obtain qualified advice where needed. This gate is unresolved, not a legal compliance claim, and must be revisited before any use outside the family.

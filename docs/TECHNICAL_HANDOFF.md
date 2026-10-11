@@ -1,7 +1,7 @@
 # Turtle Academy — Technical Handoff
 
-Updated: 2026-10-10. Audience: Claude, ChatGPT and the project owner.
-This repository is prepared for public publication. Keep account names, project identifiers and any real learner information out of this document.
+Updated: 2026-10-11. Audience: Claude, ChatGPT and the project owner.
+This repository is public since 2026-10-10. Keep account names, project identifiers and any real learner information out of this document.
 
 This is an onboarding summary and dated implementation snapshot. Confirmed requirements live in `TECHNICAL_DESIGN_DECISIONS.md`, `FEATURE_SCOPE.md` and `PILOT_V0_1_SCOPE.md`. Current code, commits, PRs and check results establish implementation status. This document does not convert planned capabilities into delivered features or select an MVP.
 
@@ -29,10 +29,10 @@ Use the name Turtle Academy. Earlier planning chats may mention other working na
 | --- | --- |
 | Repository | Public; default branch `main`; started from a sanitized, history-free snapshot of earlier private working files. Earlier private branches, PRs and CI runs are not published |
 | `main` | Planning documents, collaboration protocol, privacy guard, automatic pull-request privacy check, manual full CI and the frontend foundation shell |
-| Frontend validation | Identical code, lockfile and tests passed all checks before the move; a first public run of the manual workflow is still to be recorded |
+| Frontend validation | Identical code, lockfile and tests passed all checks before the move; public `Foundation checks` run #1 passed on `main` at `30eef37` (reported in Claude's review) |
 | Supabase | Separate staging and production projects reported by the owner; no Turtle Academy schema, invitation flow, RLS, private buckets or sync implemented or verified |
 | Vercel | Existing account reported by the owner; import, deployment, plan suitability and deployment controls not verified |
-| GitHub settings | Owner-only security settings for a public repository still to be confirmed (see `FOUNDATION_SETUP.md`) |
+| GitHub settings | Public repo protections documented in `FOUNDATION_SETUP.md`: squash-only, protect-main PR/privacy-guard, read-only Actions; periodically reverify |
 
 Never provision, query or modify a backend project merely because a connected tool lists it; verify identity from service metadata first.
 
@@ -43,7 +43,7 @@ Never provision, query or modify a backend project merely because a connected to
 - No runtime AI: no LLM calls, AI questions, AI grading, OCR grading, AI image interpretation or AI voice processing in the learning app. Claude and ChatGPT are development assistants outside the product runtime.
 - Curated, human-reviewed content and deterministic feedback. Free explanations receive curated hints and reference answers after an initial attempt; do not automatically declare them correct.
 - Separate story completion, task submission, verified concept mastery and subjective assessments. Attempt counts, finished quests and parent confirmations are not interchangeable with mastery.
-- Guest and Registered pathways must be designed together, preserving their distinct data and capability boundaries. The current guest-only spike is not a decision to defer Registered scope indefinitely.
+- Pilot delivery requires the **Registered-only** subset first (one parent + child); Guest remains explicitly in full long-term scope. Current guest-only foundation code is historical, not the Pilot commitment.
 - The full feature scope is not a build list. Only Pilot v0.1 is committed; do not invent phase allocations for anything else.
 - Zero incremental paid infrastructure. Separate this budget requirement from any assumptions about free hosting, database, storage, email or bandwidth allowances.
 - Keep this project independent from all other applications and their accounts, projects and repositories.
@@ -57,21 +57,21 @@ flowchart TD
   C["Curated versioned content and assets"] --> P["PWA UI and deterministic lesson engine"]
   P --> L["IndexedDB: local records and drafts"]
   P --> W["Service worker: shell and lesson packs"]
-  L --> Q["Registered-only authenticated sync"]
+  L --> Q["Pilot: authenticated snapshot backup; long-term: event sync"]
   Q --> D["Supabase Auth and Postgres with RLS"]
   Q --> S["Private storage: selected works"]
 ```
 
-Guest records stop at the local layer. Supabase sync and storage arrows are future implementation. The service-worker cache stores downloadable app/content files, not a substitute for ownership-controlled learner storage.
+Pilot Registered records stay local-first with authenticated Supabase **snapshot backups**, not live per-record sync. Guest (when added later) remains local-only. Full sync and private selected-work storage arrows are future implementation. The service-worker cache stores downloadable app/content files, not a substitute for ownership-controlled learner storage.
 
 | Layer | Responsibility | Current implementation |
 | --- | --- | --- |
 | React UI and game presentation | Navigation, subject worlds, quests, accessible input, parent views | Small React shell |
 | Lesson/content engine | Stable content IDs and versions; concepts, prerequisites, answers, hints and reviewed explanations | One hard-coded generic Science question; no modular engine yet |
 | Progress and assessment | Distinct story/submission/mastery evidence; rule-based review scheduling | No domain progress model yet |
-| Local persistence | Guest records, active drafts, registered pending work, safe schema changes | One Dexie guest checkpoint |
+| Local persistence | Pilot Registered records and pending backup, draft state and safe schema changes | One Dexie guest-only checkpoint from earlier foundation spike (Pilot upgrade not implemented) |
 | Offline delivery | App shell, versioned lesson packs, readiness/download/recovery state | Workbox shell precaching only |
-| Sync and server authorization | Authenticated registered event sync, ownership enforcement and deduplication | Not implemented |
+| Pilot backup and server authorization | Authenticated child-scoped snapshot backup, RLS, conflict-safe recovery; full event sync later | Not implemented |
 | Private backend and storage | Family-owned records, selected portfolios, parent notes | Not implemented |
 | Hosting and CI | Static build delivery, checks and controlled releases | GitHub: automatic privacy check on pull requests, manual full CI; proposed Vercel configuration |
 
@@ -126,21 +126,21 @@ The pre-move validation reported zero dependency vulnerabilities at that time, a
 
 ## 6. Identity, privacy and imports
 
-Registered accounts are invitation-only, with unique expiring codes; parent email/password and optional Google sign-in where reachable. Parents own multiple child profiles; no child email is necessary. A parent PIN gates adult UI, but a PIN alone is not server authorization. Backend access must enforce authenticated parent/child ownership and RLS.
+**Pilot:** manually provisioned Registered parent with password fallback and Google sign-in only after safe staging identity-link verification; invitation codes remain a **full-product** requirement. Pilot has one nickname-only child; multiple child profiles and parent PIN controls remain long-term requirements. A PIN alone is not server authorization; Pilot sensitive operations require parent reauthentication. Backend access must enforce authenticated parent/child ownership and RLS.
 
 Guest mode is device-only, with restricted personalization. No cloud sync, persistent personal mistake bank, parent letters or registered-only analytics. Conversion requires parent-reviewed selective import; never silently merge all guest data into an account.
 
 Original worksheets and identifiable handwriting/photos remain outside Git, including ignored folders. A private preparation workflow may produce structured correction candidates; parent/human verification precedes secure import into the authenticated learner bank. Do not bundle private mistake entries into generic lesson JSON. No privileged backend key belongs in browser variables, public PR workflows, test logs or previews.
 
-Raw handwriting/drawing drafts autosave locally, with retention and cleanup notice still to specify. Learning outcomes sync for registered accounts; selected finished works may be explicitly preserved in private storage. Raw strokes stay local by default. Voice practice is transient and erased on task exit; no voice archive.
+**Pilot:** Chinese tracing is ephemeral and discarded on exit, with no local or cloud stroke storage. Registered records use snapshot backup under the [Pilot decision register](PILOT_V0_1_SCOPE.md#conditionally-ratified-pilot-v01-decisions-2026-10-11-issue-3). **Long term:** drawing drafts, selected private portfolios and per-record outcome sync remain separately scoped; retention/cleanup notices need specification. Voice practice, if added, is transient with no voice archive.
 
 Science journals must distinguish simulated values, actual observations and inferences. Corrections preserve original values, reason and time. Attention/instruction activities cannot diagnose disorders, claim measured attention or guarantee classroom transfer.
 
 ## 7. Offline and sync acceptance requirements
 
-Core lessons must run offline after installation/download without external runtime fonts, scripts, images or mandatory APIs. Show pack readiness, sizes and incomplete-download recovery. Guest storage can be evicted; communicate that limitation.
+Pilot cached lessons must run offline after first online login without external runtime fonts, scripts, images or mandatory APIs. Downloadable pack readiness, sizes and incomplete-download recovery are later full-scope work. Browser storage can be evicted; communicate that limitation.
 
-Registered sync requires stable event IDs, transactional persistence, idempotent retries, duplicate detection and reconciliation. Do not use naive last-write-wins for mastery, progress or rewards. Reward issuance must not duplicate during retries. Detailed event schema, account-switch isolation, offline-auth recovery and conflict rules remain design/implementation work.
+Pilot backup/recovery policy and tests are in [Pilot §7](PILOT_V0_1_SCOPE.md#7-testing-and-release-gates); cloud-restore-only conflict recovery is decision A, and full sync is deferred. Long-term registered sync requires stable event IDs, transactional persistence, idempotent retries, duplicate detection and reconciliation. Do not use naive last-write-wins for mastery, progress or rewards. Reward issuance must not duplicate during retries. Detailed event schema, account-switch isolation, offline-auth recovery and conflict rules remain design/implementation work.
 
 Test interrupted writes, repeated requests, multi-device conflicts, logout/account switching, stale packs, service-worker replacement, iOS Home Screen and storage eviction before claiming robust offline support. Do not claim indefinite offline authentication validity.
 
@@ -154,13 +154,13 @@ Proposed Vercel settings: Vite, repository root, `npm run build`, output `dist`,
 
 Supabase staging and production are separate projects, not renamed versions of one project. Before accessing either, verify the account, project identity, region and environment from actual service metadata, and keep those details out of this repository. Never reuse another application's resources. Quotas, email recovery, retention/deletion, RLS and cross-family isolation require verification before real users.
 
-This repository is prepared for public publication. Every commit, Issue, PR description, comment and CI log can be published and cannot be reliably withdrawn. Keep sensitive originals outside Git, use synthetic fixtures, and review each diff as published material. If anything private is pushed, rotate affected credentials immediately and tell the owner.
+This repository is public since 2026-10-10. Every commit, Issue, PR description, comment and CI log can be published and cannot be reliably withdrawn. Keep sensitive originals outside Git, use synthetic fixtures, and review each diff as published material. If anything private is pushed, rotate affected credentials immediately and tell the owner.
 
-## 9. Suggested first Claude task
+## 9. Suggested next implementation task
 
-Start with an independent technical review of the frontend foundation and this handoff against the two confirmed planning documents. Report findings tied to files/commits and distinguish bugs from unimplemented planned features. Do not rewrite the app or merge/deploy as part of onboarding.
+Propose a scoped implementation task with acceptance criteria for the **Registered-only Pilot**, retaining long-term Guest requirements separately. Establish family/child identity, server authorization, RLS and snapshot contracts before dependent UI work. Resolve the private catalogue-coverage and data-protection gates before the implementation they govern, and define safety-copy recovery and owner-only retention/deletion operations before the backup PR. This is a suggested sequence, not an owner-approved MVP allocation or implementation authorization.
 
-Next, create a scoped GitHub issue for the next jointly agreed task, with acceptance criteria for both Guest and Registered paths where relevant. Establish identity/security and sync contracts alongside local engine work. This is a suggested working sequence, not an owner-approved MVP allocation.
+Read the current authoritative documents and active GitHub work before proposing changes. Keep PR-specific review instructions, reviewed SHAs and merge authorization on the relevant PR. Code, service changes, merging and deployment require their separately applicable owner authorization.
 
 Still open: post-Pilot phase allocation, curriculum verification, content/pack and event schemas, secure imports/invitations, RLS/storage tests, registered sync, retention, device acceptance and hosting validation. Recheck the live repository before treating this list as current.
 
@@ -169,3 +169,7 @@ Still open: post-Pilot phase allocation, curriculum verification, content/pack a
 This summary combines the two confirmed design documents, earlier setup work and the pre-move validation run. Infrastructure project creation is owner-reported; it is not a direct verification of service configuration. No real learner records are included.
 
 After each merged implementation change, update the setup evidence and any affected handoff sections with the commit/PR/run. Change confirmed architecture and feature scope separately, and only when the owner explicitly changes a decision. Keep dates and branch distinctions visible so a later assistant does not inherit stale claims.
+
+## 2026-10-11 conditional Pilot v0.1 decision handoff
+
+Issue #3 conditionally ratifies documentation only: one pre-provisioned Registered parent and nickname-only child, no Pilot Guest; IndexedDB and child-scoped authenticated Supabase snapshot backup (not full sync); parent-verified private worksheet paste-in; Chinese → Science → Mathematics → English, starting with Chinese + movable hub/companion and backup, plus ephemeral tracing. Pilot details and gates are in PILOT_V0_1_SCOPE.md and CONTENT_QA.md. No code, RLS or service configuration is implemented by this documentation PR.
