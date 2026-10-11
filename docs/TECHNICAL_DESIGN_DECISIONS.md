@@ -22,7 +22,7 @@
 | Offline app assets | Versioned service worker and application/lesson caching; Workbox is an implementation option | Previously loaded required content remains usable without network; controlled updates do not discard learning records |
 | Lessons | Reviewed, declarative and versioned content with stable IDs, answer keys, explanations and prerequisites | Content changes must preserve or explicitly migrate progress and mastery evidence |
 | Evaluation | Deterministic checking only when answers are objectively verifiable | Never present completion, hint use or unsupervised open writing as verified mastery |
-| Game | Narrative quests, companions, home, journals and progress are separate from curriculum and learner-data layers | A rich game experience is a later target; minimal Pilot story framing is sufficient at first |
+| Game | Narrative quests, companions, home, journals and progress are separate from curriculum and learner-data layers | A rich game experience is a later target; a bounded movable Pilot 2D hub is defined in the Pilot scope |
 | AI | **No in-app/runtime AI** | No LLM calls, AI-generated lessons, AI grading, AI OCR, automated voice evaluation or in-app transmission of learner data to AI services; private owner-authorised external worksheet preparation is allowed subject to data handling controls |
 | IP | Original characters, visual design, stories and learning assets | Do not reproduce protected franchise assets, teacher worksheets or third-party educational materials without permission |
 
@@ -30,7 +30,7 @@ Science and Chinese were the initial pedagogical priorities; **English and Mathe
 
 ## 3. Long-term identities, authentication and privacy
 
-### Registered family accounts (narrow registered-only Pilot exception documented below)
+### Registered family accounts (Pilot subset in §8)
 
 - Parent-controlled, invitation-only onboarding using unique expiring invitation codes; email/password login with **optional Google sign-in** where supported. Google sign-in must never be the sole way to access offline learning, especially in environments where Google services are unavailable.
 - Parents can manage multiple child profiles without requiring a child email. Parent-only actions use appropriate re-authentication or a parent PIN.
@@ -53,7 +53,7 @@ Science and Chinese were the initial pedagogical priorities; **English and Mathe
 - Registered-user learning uses a local-first event queue with unique/idempotent event identifiers, crash-safe persistence, retries, reconciliation of conflicting changes and deduplication of rewards and completed tasks. Naive last-write-wins is not acceptable for learning evidence.
 - A session or service-worker update must not erase active lessons, drafts or pending events. Validate device storage eviction, airplane-mode reload, and offline/online recovery.
 - **Mainland China accessibility cannot be guaranteed** merely by selecting an overseas provider. Test with real networks and target devices; support offline use after content download. Google OAuth reachability must not be assumed. Offline authentication recovery needs its own validation when registered accounts are implemented.
-- Pilot v0.1 only requires a self-contained locally cached course set and IndexedDB; it does **not** require a cloud reconciliation engine or a downloaded lesson-pack manager.
+- Pilot v0.1 uses cached lessons, IndexedDB and authenticated cloud snapshots for backup/restore; it does **not** require a cloud reconciliation engine or a downloaded lesson-pack manager.
 
 ## 5. Pedagogical and assessment integrity
 
@@ -94,32 +94,17 @@ Science and Chinese were the initial pedagogical priorities; **English and Mathe
 - No additional paid infrastructure or plan upgrade without explicit approval. GitHub runner terms do not determine separate hosting, database, email, storage, bandwidth or egress costs.
 - Treat merge, publishing and deployment as separate controlled operations; a public repository does not by itself authorise a public learner-data deployment.
 
-## Conditionally ratified Pilot v0.1 decisions (2026-10-11, Issue #3)
+## 8. Pilot v0.1 technical subset (conditionally ratified 2026-10-11)
 
-**This section supersedes inconsistent earlier Pilot-only statements in this document.** The approval covers documentation only; it does not approve merge, code, Supabase configuration, deployment, real learner imports or spending.
+The authoritative feature and delivery boundaries are in [PILOT_V0_1_SCOPE.md](PILOT_V0_1_SCOPE.md). This technical subset does not change the full Registered + Guest architecture.
 
-- **Audience:** One pre-provisioned **Registered parent** and **one Child Profile**, with future-proof Family → Child → Learning Records ownership, server authorization and RLS. **No Guest Mode or public sign-up in Pilot**. Both Guest and multi-child management remain in the **long-term** feature scope. Invitation codes are Pilot-exempt; Google login plus email/password fallback and pre-provisioned identity linkage require a staging test before reliance. First use online; subsequent cached lessons work offline.
-- **Subject order:** Chinese Character & Word Repair → Science Living & Non-living Things → Mathematics Fractions → English Mystery in the Forest. All four remain Pilot requirements; the **first internal Chinese release includes the small playable hub/companion, Chinese learning loop and safe cloud backup**. Subsequent releases add the remaining reviewed units.
-- **Adventure:** A small explorable 2D hub with movable avatar, one companion, interactive quest locations, and visible nonpunitive world changes, not the full long-term 2.5D world/economy.
-- **Mistake Bank:** Registered-private entries include verified, uncertain and catalogue-unmatched targets, associated evidence, source and repeated observations; catalogue mapping is separate. Only verified, catalogue-matched targets generate reviewed personalised practice. Keep unmatched targets as pending content; never silently discard them. Objective mistakes do not automatically prove knowledge misconceptions.
-- **Worksheet intake:** Repeated parent-initiated use of private external ChatGPT/Claude on cropped/redacted worksheet images (redaction does **not** guarantee anonymity to the provider), extraction to draft structured candidates, parent verification of each item, then parent-only paste-in review/import. Original scans never enter Pilot app/backend or public repo. **No runtime AI/OCR**.
-- **Practice:** Nonpunitive approximately day 1/3/7/14 spaced review, independently reviewed examples for immediate understanding and later retention; separate objective correctness, ungraded, child self-review, parent review and game completion. No unsupported efficacy or mastery claims.
-- **Tracing:** Simple ungraded Chinese tracing with finger/stylus and appropriate palm handling, no stroke scoring, **discard strokes on exit** and exclude entirely from cloud backups.
-- **Cloud backup:** IndexedDB is the offline working copy; authenticated Supabase versioned JSON snapshots are **automatic backups, not multi-device sync**. Pending upload survives restart/retries idempotently, protect against stale overwrite, validate and explicitly confirm restore with parent re-authentication, show last successful backup, and retain **last 10** safely recoverable versions. No encrypted manual file export in Pilot.
-- **Educational QA:** Human-reviewed, versioned original/licensed educational catalogue; development-time AI cross-review plus owner approval; owner reviews every disputed item and randomly audits **1 in 5 AI-agreed items** per batch; escalate when needed to a qualified educator. Follow [CONTENT_QA.md](CONTENT_QA.md).
-- **Hard release gates:** independently verify dedicated staging/production identities before any service write; closed-signup Google/password identity linking, parent/child Auth and synthetic cross-family RLS denial, backup retry/collision/restore integrity, offline behavior after first login, landscape tablet/phone Safari/WebKit/PWA, Chinese glyph `lang="zh-Hans"` rendering and tracing input. **No actual learner data until security gates pass.** Mainland China online availability is not verified.
-- **Full scope protected:** Registered + Guest architecture, invitations, multi-child, full private worksheet storage, genuine per-record multi-device sync, complete 2.5D game and full four-subject curriculum remain future targets.
+- Pilot provides **one pre-provisioned Registered parent** and one nickname-only Child Profile under **Family → Child → Learning Records** ownership. Public sign-up and invitation redemption are deferred for Pilot. Google login plus password fallback is planned; first verify closed-signup account linking with synthetic users in staging. If unsafe/unavailable, use email/password only in Pilot and revisit Google with invitation onboarding later.
+- Use Supabase Auth and child/family-scoped **RLS**, with synthetic negative tests for anonymous, other-family and spoofed-child reads/writes. A child operating in the parent's authenticated session is not separately authorised as a parent: destructive and restore operations require parent re-authentication.
+- IndexedDB stays the offline **working copy**. The Pilot adds authenticated **automatic versioned JSON snapshot backup/explicit restore**, not per-record bidirectional sync. Persist pending attempts, use idempotent snapshot IDs, handle first snapshot and stale-base conflicts against a single linear head without silent overwrites, and validate snapshots before restore. Parent re-authenticates and confirms restore after saving a local safety copy. Keep ten newest recoverable snapshots by **manual owner pruning** for Pilot because clients have no delete permission; automated pruning may come later.
+- One online first login is accepted. Afterwards cached lessons/local saves must function even when offline or auth expires. Upload waits/retries; never claim indefinite authentication validity or mainland network availability.
+- Real learner data is prohibited until dedicated environment identity is independently verified and synthetic Auth/RLS, backup/recovery and real-device privacy gates have passed. No service-role key in frontend, PR checks or previews; no unapproved paid services. **No runtime AI**; private external worksheet preparation requires parent verification and complies with publication boundaries.
 
-## 8. Original Pilot v0.1 engineering subset (historical; replaced where inconsistent by 2026-10-11 decisions)
-
-For the first **single-household, single-device** learning trial:
-
-- Four reviewed learning units: Science **Living & Non-living Things**; Chinese **Character & Word Repair**; English **Mystery in the Forest**; Mathematics **Fractions**.
-- No mandatory login, multi-user management, private backend API or cross-device sync. **Google sign-in remains optional later**, not a Pilot dependency.
-- Serve the application as a simple static PWA with all Pilot lessons precached; store progress, objective attempts, minimal error replay and unfinished drafts in IndexedDB.
-- Show basic local learning results and light adventure guidance. No complete parent-control suite, economy, ten-companion system, full user mistake-bank ingestion or automatic handwriting assessment.
-- Keep all committed course examples and automated tests **synthetic or original**. Do not bake real family data into any bundle or public path; local device data remains subject to browser storage loss.
-- The pilot is a **subset, not a replacement**, of registered-user architecture and the complete long-term curriculum/game feature scope.
+This is a **documentation decision only**, not evidence of implementation or authorisation to modify code, services, merge or deploy.
 
 ## 9. Validation status and open questions
 
