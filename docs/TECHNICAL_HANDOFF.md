@@ -3,7 +3,7 @@
 Updated: 2026-10-11. Audience: Claude, ChatGPT and the project owner.
 This repository is public since 2026-10-10. Keep account names, project identifiers and any real learner information out of this document.
 
-This is an onboarding summary and dated implementation snapshot. Confirmed requirements live in `TECHNICAL_DESIGN_DECISIONS.md`, `FEATURE_SCOPE.md` and `PILOT_V0_1_SCOPE.md`. Current code, commits, PRs and check results establish implementation status. This document does not convert planned capabilities into delivered features or select an MVP.
+This is an onboarding summary and dated implementation snapshot. Technical authority remains in `TECHNICAL_DESIGN_DECISIONS.md`; `FEATURE_SCOPE.md` preserves long-term scope. `PILOT_V0_1_SCOPE.md`, `PILOT_FUNCTIONAL_DESIGN.md` and `PILOT_LEARNING_ENGINE_SPEC.md` together define the Pilot delivery slice. Current code, commits, PRs and check results establish implementation status. This document does not convert planned capabilities into delivered features or select an MVP.
 
 ## 1. Start here: source of truth
 
@@ -41,7 +41,7 @@ Never provision, query or modify a backend project merely because a connected to
 ## 3. Confirmed product and architectural boundaries
 
 - Original fantasy-adventure educational PWA, with a target 2.5D game presentation. Tablet, desktop and landscape phone are core targets. The current shell does not implement the full game renderer or world.
-- Four long-term subjects: Science, Chinese, English and Mathematics. Pilot v0.1 has expanded scoped P2 coverage for Chinese/Mathematics/English and selected introductory Science (see `PILOT_FUNCTIONAL_DESIGN.md`). Curriculum/source verification and editorial review remain necessary.
+- Four long-term subjects: Science, Chinese, English and Mathematics. Pilot v0.1 has scoped P2 + P3 coverage for Chinese/Higher Chinese, Mathematics and English, plus seven selected P3 Science topic areas (see `PILOT_FUNCTIONAL_DESIGN.md`). Curriculum/source verification and editorial review remain necessary.
 - No runtime AI: no LLM calls, AI questions, AI grading, OCR grading, AI image interpretation or AI voice processing in the learning app. Claude and ChatGPT are development assistants outside the product runtime.
 - Curated, human-reviewed content and deterministic feedback. Free explanations receive curated hints and reference answers after an initial attempt; do not automatically declare them correct.
 - Separate story completion, task submission, verified concept mastery and subjective assessments. Attempt counts, finished quests and parent confirmations are not interchangeable with mastery.
@@ -128,13 +128,13 @@ The pre-move validation reported zero dependency vulnerabilities at that time, a
 
 ## 6. Identity, privacy and imports
 
-**Pilot:** manually provisioned Registered parent with password fallback and Google sign-in only after safe staging identity-link verification; invitation codes remain a **full-product** requirement. Pilot has one nickname-only child; multiple child profiles remain long-term; routine parent controls require an offline-capable PIN in Pilot. A PIN alone is not server authorization; Pilot sensitive operations require parent reauthentication. Backend access must enforce authenticated parent/child ownership and RLS.
+**Pilot:** manually provisioned Registered parent with password fallback and Google sign-in only after safe staging identity-link verification; invitation codes remain a **full-product** requirement. Pilot has one nickname-only child; multiple child profiles remain long-term; routine parent controls require a 4–6 digit offline-capable PIN stored only as a salted slow hash on device, with growing back-off and online account-password reset; PIN/hash are excluded from snapshots. A PIN alone is not server authorization; Pilot sensitive operations require parent reauthentication. Backend access must enforce authenticated parent/child ownership and RLS.
 
 Guest mode is device-only, with restricted personalization. No cloud sync, persistent personal mistake bank, parent letters or registered-only analytics. Conversion requires parent-reviewed selective import; never silently merge all guest data into an account.
 
 Original worksheets and identifiable handwriting/photos remain outside Git, including ignored folders. A private preparation workflow may produce structured correction candidates; parent/human verification precedes secure import into the authenticated learner bank. Do not bundle private mistake entries into generic lesson JSON. No privileged backend key belongs in browser variables, public PR workflows, test logs or previews.
 
-**Pilot:** Chinese tracing and typed learning answers are excluded; objective selection remains supported and full writing is external. Registered records use snapshot backup under the [Pilot decision register](PILOT_V0_1_SCOPE.md#conditionally-ratified-pilot-v01-decisions-2026-10-11-issue-3). **Long term:** drawing drafts, selected private portfolios and per-record outcome sync remain separately scoped; retention/cleanup notices need specification. Voice practice, if added, is transient with no voice archive.
+**Pilot:** Chinese tracing and typed learning answers are excluded; objective selection remains supported and full writing is external. Registered records use snapshot backup under the [Pilot decision register](PILOT_V0_1_SCOPE.md#3-identity-and-protected-backup-policy). **Long term:** drawing drafts, selected private portfolios and per-record outcome sync remain separately scoped; retention/cleanup notices need specification. Voice practice, if added, is transient with no voice archive.
 
 Science journals must distinguish simulated values, actual observations and inferences. Corrections preserve original values, reason and time. Attention/instruction activities cannot diagnose disorders, claim measured attention or guarantee classroom transfer.
 
@@ -142,7 +142,7 @@ Science journals must distinguish simulated values, actual observations and infe
 
 Pilot cached lessons must run offline after first online login without external runtime fonts, scripts, images or mandatory APIs. Downloadable pack readiness, sizes and incomplete-download recovery are later full-scope work. Browser storage can be evicted; communicate that limitation.
 
-Pilot backup/recovery policy and tests are in [Pilot §7](PILOT_V0_1_SCOPE.md#7-testing-and-release-gates); cloud-restore-only conflict recovery is decision A, and full sync is deferred. Long-term registered sync requires stable event IDs, transactional persistence, idempotent retries, duplicate detection and reconciliation. Do not use naive last-write-wins for mastery, progress or rewards. Reward issuance must not duplicate during retries. Detailed event schema, account-switch isolation, offline-auth recovery and conflict rules remain design/implementation work.
+Pilot backup/recovery policy and tests are in [Pilot §5](PILOT_V0_1_SCOPE.md#5-testing-and-release-gates); cloud-restore-only conflict recovery is decision A, and full sync is deferred. Long-term registered sync requires stable event IDs, transactional persistence, idempotent retries, duplicate detection and reconciliation. Do not use naive last-write-wins for mastery, progress or rewards. Reward issuance must not duplicate during retries. Detailed event schema, account-switch isolation, offline-auth recovery and conflict rules remain design/implementation work.
 
 Test interrupted writes, repeated requests, multi-device conflicts, logout/account switching, stale packs, service-worker replacement, iOS Home Screen and storage eviction before claiming robust offline support. Do not claim indefinite offline authentication validity.
 
@@ -178,4 +178,8 @@ Issue #3 conditionally ratifies documentation only: one pre-provisioned Register
 
 ## 2026-10-14 consolidated documentation handoff
 
-The current task is documentation review only. Read Functional Design and Learning Engine and Acceptance together; older narrow-unit assumptions and three-consecutive-answer rules are superseded. No app behavior, registered backend or reviewed curriculum bank is implemented by this package. The earlier suggested implementation sequence is not permission to code. Retain the unresolved private-coverage/proceed, data-protection and backup safety-copy gates. Claude returns one consolidated ranked review at the exact PR head; keep Draft and do not merge.
+Dated design context: the two specifications replaced earlier narrow-unit and three-consecutive-answer assumptions. No app behavior, backend or reviewed curriculum bank was delivered by that documentation package; the suggested implementation sequence was not coding permission.
+
+## 2026-10-15 consolidated decision handoff
+
+Each subject has persistent X=6–19, default 10. Subject releases use the 75% coverage guideline and recorded owner override, with P2 entry for Chinese/Higher Chinese, Mathematics and English followed by reviewed P3 chapters; Science uses its seven selected P3 topic areas. Short-only repair supports all subjects; final transfer is on a later day and format-sensitive evidence applies. Snapshot recovery preserves story, suspensions and exposure but excludes local wrong forms/PIN. Earned story and past daily completion survive learning-evidence replay. Read Scope + Functional Design + Learning Engine together. The unresolved data-protection, private coverage/proceed and safety-copy gates remain. No implementation or merge is authorized by this handoff.

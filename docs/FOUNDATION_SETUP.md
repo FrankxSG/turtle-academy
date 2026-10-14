@@ -48,9 +48,13 @@ Do not link production credentials to PR workflows or previews; in a public repo
 
 ## Open product and recovery work
 
-- Only Pilot v0.1 (`docs/PILOT_V0_1_SCOPE.md`) is committed; later phases are provisional.
-- Pilot Auth/RLS, snapshot recovery and real-device acceptance remain unimplemented/unverified. The [Pilot decision register](PILOT_V0_1_SCOPE.md#conditionally-ratified-pilot-v01-decisions-2026-10-11-issue-3) owns the Google fallback and snapshot conflict/retention/deletion policy; [Pilot §7](PILOT_V0_1_SCOPE.md#7-testing-and-release-gates) lists acceptance tests. Private catalogue coverage and [data protection](TECHNICAL_DESIGN_DECISIONS.md#9-validation-status-and-open-questions) remain pre-implementation gates. Guest import, complete multi-device sync and full service-worker recovery remain longer-term work.
+- Pilot Scope + Functional Design + Learning Engine together define the delivery slice; later phases are provisional. The design is not evidence of implementation.
+- Pilot Auth/RLS, snapshot recovery and real-device acceptance remain unimplemented/unverified. The [Pilot decision register](PILOT_V0_1_SCOPE.md#3-identity-and-protected-backup-policy) owns the Google fallback and snapshot conflict/retention/deletion policy; [Pilot §5](PILOT_V0_1_SCOPE.md#5-testing-and-release-gates) lists acceptance tests. Private catalogue coverage and [data protection](TECHNICAL_DESIGN_DECISIONS.md#9-validation-status-and-open-questions) remain pre-implementation gates. Guest import, complete multi-device sync and full service-worker recovery remain longer-term work.
 
 ## 2026-10-11 conditional Pilot ratification
 
 Owner approved documentation-only changes in Issue #3, not backend, code or deployment. Pilot calls for Registered-only one parent/child, Auth/RLS, IndexedDB plus Supabase snapshots, private reviewed mistake intake, Chinese-first four-subject sequence and explorable hub. The 2026-10-14 functional-design package supersedes tracing and earlier narrow-unit assumptions; see PILOT_FUNCTIONAL_DESIGN.md. The current foundation remains an earlier local-only prototype, not evidence these functions work. The owner reports personally verifying dedicated staging and production environments; this integration has **not independently verified them**, and no new service change was made. Refer to PILOT_V0_1_SCOPE.md and CONTENT_QA.md. No actual learner data or credentials are committed.
+
+## 2026-10-15 documentation alignment
+
+The consolidated decision revision changes scope, per-subject X, evidence rules, PIN and snapshot allowlist requirements only. No application, service configuration or infrastructure verification is delivered. Private wrong forms and PIN/hash are excluded from snapshots; security/data-protection/safety-copy gates remain open. Preserve the dated foundation test evidence above.
