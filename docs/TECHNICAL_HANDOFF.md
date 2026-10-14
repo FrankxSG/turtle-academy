@@ -14,7 +14,9 @@ Read these repository files, using the latest `main` unless a task explicitly ta
 | `docs/AI_COLLABORATION.md` | Shared working protocol for Claude and ChatGPT |
 | `docs/TECHNICAL_DESIGN_DECISIONS.md` | Confirmed technical requirements and architecture constraints |
 | `docs/FEATURE_SCOPE.md` | Full long-term product and curriculum scope |
-| `docs/PILOT_V0_1_SCOPE.md` | The committed first delivery slice (Pilot v0.1) |
+| `docs/PILOT_V0_1_SCOPE.md` | Pilot scope and preserved security/release gates |
+| `docs/PILOT_FUNCTIONAL_DESIGN.md` | Current consolidated four-subject functional behavior |
+| `docs/PILOT_LEARNING_ENGINE_SPEC.md` | Proposed contracts, validation, coverage and acceptance cases |
 | `docs/TECHNICAL_HANDOFF.md` | Onboarding summary and dated implementation snapshot |
 | `docs/FOUNDATION_SETUP.md` | Setup evidence; check its branch and update date |
 | Code, migrations, PRs and Actions runs | What exists, what is proposed, and what was tested |
@@ -39,7 +41,7 @@ Never provision, query or modify a backend project merely because a connected to
 ## 3. Confirmed product and architectural boundaries
 
 - Original fantasy-adventure educational PWA, with a target 2.5D game presentation. Tablet, desktop and landscape phone are core targets. The current shell does not implement the full game renderer or world.
-- Four long-term subjects: Science, Chinese, English and Mathematics. Pilot v0.1 delivers one reviewed unit in each (see `PILOT_V0_1_SCOPE.md`). Curriculum/source verification and editorial review remain necessary.
+- Four long-term subjects: Science, Chinese, English and Mathematics. Pilot v0.1 has expanded scoped P2 coverage for Chinese/Mathematics/English and selected introductory Science (see `PILOT_FUNCTIONAL_DESIGN.md`). Curriculum/source verification and editorial review remain necessary.
 - No runtime AI: no LLM calls, AI questions, AI grading, OCR grading, AI image interpretation or AI voice processing in the learning app. Claude and ChatGPT are development assistants outside the product runtime.
 - Curated, human-reviewed content and deterministic feedback. Free explanations receive curated hints and reference answers after an initial attempt; do not automatically declare them correct.
 - Separate story completion, task submission, verified concept mastery and subjective assessments. Attempt counts, finished quests and parent confirmations are not interchangeable with mastery.
@@ -126,13 +128,13 @@ The pre-move validation reported zero dependency vulnerabilities at that time, a
 
 ## 6. Identity, privacy and imports
 
-**Pilot:** manually provisioned Registered parent with password fallback and Google sign-in only after safe staging identity-link verification; invitation codes remain a **full-product** requirement. Pilot has one nickname-only child; multiple child profiles and parent PIN controls remain long-term requirements. A PIN alone is not server authorization; Pilot sensitive operations require parent reauthentication. Backend access must enforce authenticated parent/child ownership and RLS.
+**Pilot:** manually provisioned Registered parent with password fallback and Google sign-in only after safe staging identity-link verification; invitation codes remain a **full-product** requirement. Pilot has one nickname-only child; multiple child profiles remain long-term; routine parent controls require an offline-capable PIN in Pilot. A PIN alone is not server authorization; Pilot sensitive operations require parent reauthentication. Backend access must enforce authenticated parent/child ownership and RLS.
 
 Guest mode is device-only, with restricted personalization. No cloud sync, persistent personal mistake bank, parent letters or registered-only analytics. Conversion requires parent-reviewed selective import; never silently merge all guest data into an account.
 
 Original worksheets and identifiable handwriting/photos remain outside Git, including ignored folders. A private preparation workflow may produce structured correction candidates; parent/human verification precedes secure import into the authenticated learner bank. Do not bundle private mistake entries into generic lesson JSON. No privileged backend key belongs in browser variables, public PR workflows, test logs or previews.
 
-**Pilot:** Chinese tracing is ephemeral and discarded on exit, with no local or cloud stroke storage. Registered records use snapshot backup under the [Pilot decision register](PILOT_V0_1_SCOPE.md#conditionally-ratified-pilot-v01-decisions-2026-10-11-issue-3). **Long term:** drawing drafts, selected private portfolios and per-record outcome sync remain separately scoped; retention/cleanup notices need specification. Voice practice, if added, is transient with no voice archive.
+**Pilot:** Chinese tracing and typed learning answers are excluded; objective selection remains supported and full writing is external. Registered records use snapshot backup under the [Pilot decision register](PILOT_V0_1_SCOPE.md#conditionally-ratified-pilot-v01-decisions-2026-10-11-issue-3). **Long term:** drawing drafts, selected private portfolios and per-record outcome sync remain separately scoped; retention/cleanup notices need specification. Voice practice, if added, is transient with no voice archive.
 
 Science journals must distinguish simulated values, actual observations and inferences. Corrections preserve original values, reason and time. Attention/instruction activities cannot diagnose disorders, claim measured attention or guarantee classroom transfer.
 
@@ -172,4 +174,8 @@ After each merged implementation change, update the setup evidence and any affec
 
 ## 2026-10-11 conditional Pilot v0.1 decision handoff
 
-Issue #3 conditionally ratifies documentation only: one pre-provisioned Registered parent and nickname-only child, no Pilot Guest; IndexedDB and child-scoped authenticated Supabase snapshot backup (not full sync); parent-verified private worksheet paste-in; Chinese → Science → Mathematics → English, starting with Chinese + movable hub/companion and backup, plus ephemeral tracing. Pilot details and gates are in PILOT_V0_1_SCOPE.md and CONTENT_QA.md. No code, RLS or service configuration is implemented by this documentation PR.
+Issue #3 conditionally ratifies documentation only: one pre-provisioned Registered parent and nickname-only child, no Pilot Guest; IndexedDB and child-scoped authenticated Supabase snapshot backup (not full sync); parent-verified private worksheet paste-in; Chinese → Science → Mathematics → English, starting with Chinese + movable hub/companion and backup. Later decisions exclude tracing and expand curriculum scope, as recorded in the consolidated functional design. Pilot details and gates are in PILOT_V0_1_SCOPE.md and CONTENT_QA.md. No code, RLS or service configuration is implemented by this documentation PR.
+
+## 2026-10-14 consolidated documentation handoff
+
+The current task is documentation review only. Read Functional Design and Learning Engine and Acceptance together; older narrow-unit assumptions and three-consecutive-answer rules are superseded. No app behavior, registered backend or reviewed curriculum bank is implemented by this package. The earlier suggested implementation sequence is not permission to code. Retain the unresolved private-coverage/proceed, data-protection and backup safety-copy gates. Claude returns one consolidated ranked review at the exact PR head; keep Draft and do not merge.

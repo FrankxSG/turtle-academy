@@ -1,6 +1,8 @@
 # Turtle Academy — Content QA and Privacy Gates
 
-**Status:** Conditionally ratified Pilot documentation, 2026-10-11, Issue #3. Not evidence of implemented tests or completed reviews.
+**Status:** Pilot QA policy aligned 2026-10-14; Issue #3 gates preserved. Not evidence of implemented tests or completed reviews.
+
+Current behavioral authority is [Functional Design](PILOT_FUNCTIONAL_DESIGN.md); [Learning Engine and Acceptance](PILOT_LEARNING_ENGINE_SPEC.md) defines scoped coverage and required future tests. Objective-only practice does not establish independent writing/oral/listening capability.
 
 ## Curated educational content
 
@@ -19,7 +21,7 @@
 ## Learning and release integrity
 
 - Distinguish objective correct/incorrect, ungraded, child self-reviewed, parent-reviewed and game/lesson completion. Do not equate any one signal with mastery.
-- Use independently reviewed, varied items for immediate understanding and delayed retention around days 1, 3, 7 and 14; avoid punitive missed-day consequences and unsupported claims of causal efficacy.
+- Use independently reviewed, varied items for immediate understanding and the confirmed 1/3/7/14/30-day review sequence, then every 30 days; avoid punitive missed-day consequences and unsupported claims of causal efficacy.
 - Check Simplified Chinese glyphs (including `lang="zh-Hans"`), pinyin tones and accessibility on target landscape phone/tablet and Safari/WebKit PWA.
 - Before real records: verify Auth/RLS negative cross-family tests, identity linking, safe snapshot conflict and restore handling and correct staging/production separation, using synthetic-only fixtures. Test offline use after first online login.
 - This document approves no implementation, merge, backend configuration, deployment or spending.
