@@ -4,7 +4,8 @@ export default defineConfig({
   fullyParallel: false,
   workers: 1,
   retries: 0,
-  reporter: 'list',
+  // In CI also emit GitHub annotations so failing test names and errors are visible on the check run.
+  reporter: process.env.CI ? [['list'], ['github']] : 'list',
   use: { browserName: 'chromium' },
   projects: [
     { name: 'app', testIgnore: '**/trials/**', use: { baseURL: 'http://127.0.0.1:4173', serviceWorkers: 'allow' } },
