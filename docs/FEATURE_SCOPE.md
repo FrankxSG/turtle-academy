@@ -136,11 +136,11 @@ The English track is designed for advanced lower-primary readiness and beyond-fo
 | E11 | B — Model-based Revision | Human-reviewed before/after examples, focused self-check, one or two revision targets at a time and preserved drafts; no required parent-marking workflow. |
 | E12 | C — Multi-dimensional Mastery, Transfer & Portfolio | Assess reading, vocabulary, language, writing and reasoning through unseen texts, cross-theme application, independent performance, writing portfolio and optional human observations; avoid automated scores for free writing. |
 
-**English Pilot subset:** P2 + P3 textual/visual practice across eight approved families; complete writing and oral practice external, listening deferred. Objective selected answers only. See [Functional Design](PILOT_FUNCTIONAL_DESIGN.md); the earlier single Mystery unit is superseded.
+**English Pilot subset:** P2 + P3 textual/visual practice across eight approved families; P3 general practice is unlocked from the start using reviewed available content, while P3 mistake imports follow later; complete writing and oral practice external, listening deferred. Objective selected answers only. See [Functional Design](PILOT_FUNCTIONAL_DESIGN.md); the earlier single Mystery unit is superseded.
 
 ## 11. Mathematics World: confirmed M1–M12 curriculum decisions
 
-Full lower-primary topic coverage and sophisticated mathematical reasoning are **target product scope**, with the Pilot's later P2 + P3 knowledge-point requirement defined separately. No opaque simulated mastery precision and no automatic grading of open reasoning.
+Full lower-primary topic coverage and sophisticated mathematical reasoning are **target product scope**, with the Pilot's P2-only knowledge-point requirement defined separately. No opaque simulated mastery precision and no automatic grading of open reasoning.
 
 | ID | Confirmed selection | Scope and educational intent |
 |---|---|---|
@@ -157,7 +157,7 @@ Full lower-primary topic coverage and sophisticated mathematical reasoning are *
 | M11 | B — Applied Mathematics & Interactive Exploration | Real-world problems plus virtual shopping, garden design, measurement lab, time planning and data explorer; **not** the larger multi-topic family-project option. |
 | M12 | C — Mastery + Transfer + Mathematical Portfolio | Unseen tasks, cross-context transfer, independent performance, delayed review, investigations, portfolio artefacts and optional human observations. |
 
-**Mathematics Pilot subset:** All P2 + P3 knowledge points represented through objective practice; no typed answers or free-workings scoring. See [Functional Design](PILOT_FUNCTIONAL_DESIGN.md). The earlier Fractions-only Pilot is superseded; broader full-product depth remains later work.
+**Mathematics Pilot subset:** All P2 knowledge points represented through objective practice; no typed answers or free-workings scoring. P3 Mathematics is locked, and no P3 Mathematics content needs authoring in Pilot. Confirmed post-Pilot phase: build a Mathematics teaching flow, then open P3. See [Functional Design](PILOT_FUNCTIONAL_DESIGN.md). The earlier Fractions-only Pilot is superseded; broader full-product depth remains later work.
 
 ## 12. Selected numbered cross-subject decisions
 
@@ -197,7 +197,7 @@ Full lower-primary topic coverage and sophisticated mathematical reasoning are *
 
 - All learning assets committed to the repository must be original, permissively licensed or properly authorised for redistribution, with attribution and licence evidence where required. Educational materials obtained from teachers, schools, textbooks or worksheets are **not** presumed redistributable.
 - Generic curricular examples and synthetic test cases may be public. Original learner worksheets, identifiable writing or drawings, learner answers, mistakes, progress, photographs, school identifiers and household documents must remain **outside Git and the public build**. Private records require appropriate authenticated storage when cloud features are enabled.
-- The Pilot delivers Chinese first, then Science, Mathematics and English under [Functional Design](PILOT_FUNCTIONAL_DESIGN.md). Scope is P2 + P3 Chinese/Higher Chinese, Mathematics and English textual/visual outcomes, plus the seven selected P3 Science topic areas. Each subject has its own X=6–19, default 10. P2 language/Math coverage and selected P3 Science coverage use a 75% release guideline with a recorded owner override; full scoped coverage remains the goal and reviewed content remains delivery work.
+- The Pilot delivers Chinese first, then Science, Mathematics and English under [Functional Design](PILOT_FUNCTIONAL_DESIGN.md). Scope is P2 + P3 Chinese/Higher Chinese and English textual/visual outcomes, P2 Mathematics, plus the seven selected P3 Science topic areas. P3 language general practice is unlocked from the start; P3 language mistake imports follow later. Each subject has its own X=6–19, default 10. P2 language/Math coverage and Science's first-two-topic coverage use a 75% release guideline with a recorded owner override; full scoped coverage remains the goal and reviewed content remains delivery work.
 - Features not selected for the Pilot remain part of the long-term scope where previously confirmed, but their schedule, budget, implementation readiness and educational outcomes are not guaranteed by this document.
 - No runtime AI, automatic correctness claims for open writing/scientific explanations, punitive streak mechanics or unsafe encouragement to prolong children's screen time.
 - Publishing a document that is safe to share **does not** by itself authorise publishing any repository or deployment. Any repository that has ever held private material needs a separate full-history, refs, secrets, CI artifacts, licensing and hosting-preview security audit under the technical decisions, or should be replaced by a new clean repository.

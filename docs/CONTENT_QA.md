@@ -20,8 +20,10 @@ Current behavioral authority is [Functional Design](PILOT_FUNCTIONAL_DESIGN.md);
 
 ## Learning and release integrity
 
-- Format-sensitive repair requires one independent first-correct for 4+ option MCQ/matching/ordering and two different-question first-correct responses for true-false/2–3 option MCQ. Passage aggregation still requires every related first answer correct. Do not create a new consecutive-answer rule.
-- Subject coverage reports use the approved grade/course inventory. The 75% guideline and recorded owner coverage override never waive source verification, rights, shipped-item QA, privacy/security or data-protection gates. Publish the versioned leaf curriculum manifest before accepting mapped extraction IDs.
+- Science due reviews prefer fresh questions but may reuse the least-recently presented suitable item with repeated-exposure labeling; the previous-seven-calendar-days exclusion is only for filler/general practice. After first acquisition failure and revealing help, a same-day second test cannot establish independent acquisition success.
+
+- Format-sensitive repair clears with one independent first-correct 4+ option MCQ/matching/ordering response OR two distinct low-option (true-false/2–3 option MCQ) first-correct responses. Any wrong first response resets low-option partial successes. Passage aggregation additionally requires every related first answer correct; a qualifying high-option success never overrides an aggregate failure.
+- Subject coverage reports use the approved grade/course inventory. Initial Science coverage uses its first two topics; Mathematics is P2-only in Pilot, while Chinese/Higher Chinese and English P3 general practice is unlocked from the start using reviewed available content and P3 mistake imports follow later. The 75% guideline and recorded owner coverage override never waive source verification, rights, shipped-item QA, privacy/security or data-protection gates. Publish the versioned leaf curriculum manifest before accepting mapped extraction IDs.
 - Necessary wrong forms remain device-local; exclude them and PIN/hash from cloud snapshots. App general-practice recurrence is separate from repair/review failures.
 
 - Distinguish objective correct/incorrect, ungraded, child self-reviewed, parent-reviewed and game/lesson completion. Do not equate any one signal with mastery.
