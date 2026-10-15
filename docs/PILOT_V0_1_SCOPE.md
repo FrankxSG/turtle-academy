@@ -1,35 +1,61 @@
-# Turtle Academy — Learning Pilot v0.1 Scope
+# Turtle Academy — Pilot v0.1 Scope
 
-**Document type:** Confirmed initial delivery slice  
-**Audience:** Private one-family Registered-only trial; no public beta/sign-up  
-**Status:** Scope confirmed; implementation and real-device acceptance must be verified separately  
-**Decision date:** 2026-10-10; Pilot conditional ratification 2026-10-11; Pilot follow-up decisions 2026-10-12
+**Status:** Consolidated owner decisions through 2026-10-15. Documentation only; not implementation, merge, deployment, real imports or spending authorization.
 
-## 1. Position within the project
+## 1. Objective and success criteria
 
-Turtle Academy is a long-term, four-subject learning and adventure product. **Pilot v0.1 is intentionally only a small subset of that complete design**, created to test whether the instructional approaches are usable, engaging and educationally valuable before investing in full game and family-management systems.
+Pilot is **a usable daily-practice tool for one family, with full scoped coverage as the goal**. Success is assessed through these questions:
 
-Read this document together with:
+- Can the parent set up each subject's X once, import reviewed minimal mistakes, inspect progress and safely correct records?
+- Can the child independently complete or resume meaningful daily practice, receive help after mistakes and explore the small world afterward?
+- Do stage/review decisions reflect independent evidence, preserve learning across pauses and avoid unsupported mastery claims?
+- Do released subjects have sufficient reviewed coverage and variety for actual use, with missing content and workload visible?
+- Do cached learning, local-save failure, private backup/recovery and device access behave safely under the release gates?
 
-- [`TECHNICAL_DESIGN_DECISIONS.md`](TECHNICAL_DESIGN_DECISIONS.md) — authoritative engineering, privacy, security and publication requirements.
-- [`FEATURE_SCOPE.md`](FEATURE_SCOPE.md) — complete confirmed four-subject product and educational scope, including English E1–E12 and Mathematics M1–M12. Features omitted from the Pilot **remain in the target scope**, subject to later release prioritisation.
+Scope, [Functional Design](PILOT_FUNCTIONAL_DESIGN.md) and [Learning Engine and Acceptance](PILOT_LEARNING_ENGINE_SPEC.md) **together define the committed delivery slice**. Scope owns the objective, boundary/index and protected release gates; Functional Design owns behavior; the engine owns proposed contracts and acceptance definitions. [Technical Decisions](TECHNICAL_DESIGN_DECISIONS.md) retains security authority, and [Full Feature Scope](FEATURE_SCOPE.md) retains long-term commitments.
 
-The numbered cross-subject decision sequence ended at **#202**; separately confirmed English and Mathematics decisions use **E1–E12** and **M1–M12**, respectively. Decision identifiers are not a total feature or question count.
+## 2. Delivery boundary and P0 index
 
-## Conditionally ratified Pilot v0.1 decisions (2026-10-11, Issue #3)
+Chinese first, then Science, Mathematics and English is delivery sequencing, not compulsory child subject order. Each subject releases separately; all available subjects have daily tasks. Each subject has persistent X=6–19, default 10.
 
-**This is the authoritative Pilot decision register, including the owner's Pilot-only backup conflict decision A (2026-10-11).** Other sections specify acceptance checks or link here rather than duplicate policy. The approval covers documentation only; it does not approve merge, code, Supabase configuration, deployment, real learner imports or spending.
+| Included in Pilot | Excluded or later |
+| --- | --- |
+| P2 + P3 Chinese/Higher Chinese and English; P2 Mathematics objective practice | P3 Mathematics in Pilot, typed answers, complete writing/oral assessment, listening |
+| Seven selected P3 Science topic areas; authored chapters unlock progressively | P2 Science course, unreviewed teaching, scored free explanations |
+| Private parent-reviewed minimal imports and app-caught general errors | In-app scans/OCR/runtime AI, original worksheet archive |
+| Routine offline parent PIN, records, per-subject X/active time, guarded timezone changes and today-rest action | Multi-child/Guest, public signup, weekly timetable |
+| Movable small 2D hub, one companion, shared scripted story and a few interactions | Full economy, large game/portfolio, open chat |
+| Cached app content updates, local working copy and protected snapshot backup | Tracing/PDF generation, parent generic-bank importer, live multi-device sync |
+
+| ID | Required delivery capability | Detailed authority and acceptance |
+| --- | --- | --- |
+| P0-01 | Reviewed curriculum and source inventory | Engine coverage acceptance; §4–5 below |
+| P0-02 | Complete daily objective practice | Functional §2–6; Engine F01–F13 |
+| P0-03 | Grade-readable academic language and accessibility | Functional §1/6; Engine F25/F26; §5 device gate |
+| P0-04 | Deterministic independent/assisted evidence | Functional §4; Engine §2–4 and F03/F04/F32 |
+| P0-05 | Guided Science learning and prerequisite chapters | Functional §5; Engine F05–F09/F35 |
+| P0-06 | Local persistence and warned retry | Functional §9; Engine F27 |
+| P0-07 | Derived stage/due/unlock history and preserved rewards | Engine §2–4, F14/F19/F23 |
+| P0-08 | Private bank, recurrence and delayed review | Functional §4/8; Engine F20/F21/F24 |
+| P0-09 | Parent summary, answers and actual subject time | Functional §2/8; Engine task contract |
+| P0-10 | Bounded shared adventure | Functional §7; Engine F15–F18/F30 |
+| P0-11 | Cached offline readiness and content versions | Functional §9; Engine F29; §5 offline gate |
+| P0-12 | Privacy, IP and educational QA | CONTENT_QA; §4–5; no coverage override of these gates |
+| P0-13 | Provisioned parent/child authentication | §3/5; staging identity/linking and reauthentication |
+| P0-14 | Family/child authorization and RLS | Technical Decisions §8; §5 negative access tests |
+| P0-15 | Idempotent snapshot backup and protected restore | §3/5; Engine F28 |
+| P0-16 | Validated private paste-in intake | Engine §5/F34; private coverage/proceed gate in §4 |
+| P0-17 | Offline PIN controls and online reset (replaces withdrawn tracing) | Functional §2; Engine F31 |
+| P0-18 | Format-sensitive stages and delayed generic checks | Functional §4; Engine F03/F19/F32 |
+| P0-19 | Landscape phone/tablet and real-device acceptance | §5; no automatic device-readiness claim |
+
+**Hard release gates:** Each released subject needs a usable learning loop, reviewed shipped content/keys/media, scoped coverage report and recorded owner proceed decision as required, objective/evidence acceptance, child/parent resume and story behavior, offline/local-save resilience, privacy/IP QA and real-device acceptance. Independently verify dedicated staging/production identities **before any service write**; pass synthetic Auth/RLS, snapshot/recovery and data-protection gates before real records. Coverage permission does not authorize implementation, services, deployment, spending or merge.
+
+## 3. Identity and protected backup policy
 
 - **Audience:** One pre-provisioned **Registered parent** and **one Child Profile** (nickname only; no real name, birth date or school), with future-proof Family → Child → Learning Records ownership, server authorization and RLS. **No Guest Mode or public sign-up in Pilot**. Both Guest and multi-child management remain in the **long-term** feature scope. Invitation codes are Pilot-exempt; Google login plus email/password fallback and pre-provisioned identity linkage require a staging test before reliance. First use online; subsequent cached lessons work offline. If staging cannot safely link Google to the pre-provisioned identity with public sign-up disabled, Pilot uses email/password only and defers Google login to the later invitation flow.
-- **Subject order:** Chinese Character & Word Repair → Science Living & Non-living Things → Mathematics Fractions → English Mystery in the Forest. All four remain Pilot requirements; the **first internal Chinese release includes the small playable hub/companion, Chinese learning loop and safe cloud backup**, together with the private mistake bank and parent-verified paste-in import that the personalised ladder needs (import is built only after the §5 group-coverage review and owner proceed decision are recorded). Subsequent releases add the remaining reviewed units.
-- **Adventure:** A small explorable 2D hub with movable avatar, one companion, interactive quest locations, and visible nonpunitive world changes, not the full long-term 2.5D world/economy.
-- **Mistake Bank:** Registered-private entries include verified, uncertain and catalogue-unmatched targets, structured parent-verified error type and repeated observations; catalogue mapping is separate. Intake metadata is minimised to a fixed-list source type, date only, an opaque import-batch ID and a random, app-generated source-instance reference that is never derived from worksheet content; on import the parent chooses “new worksheet” or “same worksheet as an earlier import”, which is how re-imports are deduplicated and independent occasions are told apart. There are no free-text source descriptions, worksheet titles, school or teacher details. Parent-entered error targets and review history remain private; no original worksheet text/image is required. Only verified, catalogue-matched targets trigger prescribed remedial practice; voluntary generic learning remains available to uncertain targets. A later parent review may move an uncertain entry to verified or rejected, preserving private review provenance; rejected entries do not prescribe practice, and verified unmatched entries remain pending content. Keep unmatched targets as pending content; never silently discard them. Objective mistakes do not automatically prove knowledge misconceptions.
-- **Worksheet intake:** Repeated parent-initiated use of private external ChatGPT/Claude on cropped/redacted worksheet images (redaction does **not** guarantee anonymity to the provider), extraction to draft structured candidates, parent verification of each item, then parent-only paste-in review/import. Original scans never enter Pilot app/backend or public repo. **No runtime AI/OCR**.
-- **Practice and review priority (owner-confirmed Pilot follow-up):** Nonpunitive approximately day 1/3/7/14 baseline spaced review, prioritising independently repeated **verified, catalogue-matched** errors and weak subsequent review performance. Count recurrence only across independent occasions determined by structured source type and date plus a privacy-preserving source-instance reference where needed; a new import batch alone is **not** a new occasion. Repeat wrong responses within one worksheet/session are not independent evidence. Same source-instance/target re-import must be deduplicated, while a verified target reappearing on a genuinely separate occasion is a new observation. Gradually reduce frequency after sustained success, impose reasonable per-session practice limits and no missed-day penalty. Use independently reviewed varied examples for immediate understanding and delayed retention; specific thresholds and scheduling algorithms require implementation review. Keep objective correctness, ungraded responses, child self-review, parent review and game completion separate. **No unsupported efficacy or mastery claims.** For an initial batch with no independent recurrence history, prioritise clearly verified knowledge errors rather than invent recurrence.
-- **Provisional mastery (owner-confirmed Pilot follow-up):** Applies to the Pilot Chinese personalised review loop. Derive the provisional state from the recorded sequence of objective attempts and human-reviewed evidence, rather than storing an unsupported standalone `mastered` flag; derive **step-cleared transitions and review schedule** from the same dated attempt/review events, not orphaned status flags; an older cloud restore must not leave mastery without its underlying evidence. Require independent correct performance on different days, varied tasks/contexts and delayed retention—not a single answer, memorising repeated items or quest completion. A ladder step can be **step cleared** on provisional success at that step, but this is **not** overall provisional mastery. Keep low-frequency review available; new verified errors or weak delayed evidence reopen priority. Do not claim permanent mastery or automatically grade open writing/explanations. In Science, the named lesson stage “Master” is a stage label, not a mastery assessment.
-- **Chinese practice ladder (owner-confirmed):** For verified catalogue-matched targets, run **exact error → similar mistakes → generic content**, in that strict order. Step 1 revisits the parent-verified error and its recorded error type, **not necessarily the original worksheet question** and not an inferred cause or diagnosis. Step 2 tests related confusions; Step 3 checks broader application in varied contexts. Move forward only when the current step is **step cleared** using reviewed material; exact/repeated answers alone do not establish provisional mastery. Similar and generic tasks supply varied-context evidence, while delayed review on other occasions remains required. The ladder is a private runtime choice over **complete, original/rights-cleared curriculum-level exercise groups**, never learner-specific exercises publicly committed to reveal a private mistake. Entries whose recorded error type is “possible slip” or “unclear” do not enter the prescribed ladder until the parent reclassifies them. Unmatched targets remain `pending_content` and receive no prescribed ladder until reviewed group coverage is available.
-- **Tracing:** Simple ungraded Chinese tracing with finger/stylus and appropriate palm handling, no stroke scoring, **discard strokes on exit** and exclude entirely from cloud backups.
-- **Cloud backup:** IndexedDB is the offline working copy; authenticated Supabase versioned JSON snapshots are **automatic backups, not multi-device sync**. The Pilot assumes one primary device and one server-authoritative linear snapshot head. Persist pending uploads across restarts; first, duplicate and interrupted uploads must be idempotent. **Snapshot minimisation and protection gate:** Child-scoped snapshots may contain only the approved minimal structured error targets/statuses, fixed-list source type/date/opaque source-instance and import-batch references, parent review provenance, dated attempt/review events, structured completion and objective-attempt state only (free-text child drafts, for example English or Science writing, are not included unless separately approved) and safe pending-upload metadata; exclude original worksheet images/text, copied questions, free-text child drafts, free-text source descriptions, school/teacher details, raw tracing strokes and device-local safety copies. Derive step-cleared, review-schedule and provisional-mastery states from event history after restore. Since snapshots now include **actual verified error targets** rather than catalogue IDs alone, the previously considered plain-JSON storage decision must be **re-evaluated under the unresolved TDD §9 data-protection gate before implementing or uploading real records**; this change does not pre-approve storing those targets in plaintext. Verify schema minimisation and privacy with synthetic fixtures. Follow this recovery procedure:
+
+- **Cloud backup:** IndexedDB is the offline working copy; authenticated Supabase versioned JSON snapshots are **automatic backups, not multi-device sync**. The Pilot assumes one primary device and one server-authoritative linear snapshot head. Persist pending uploads across restarts; first, duplicate and interrupted uploads must be idempotent. **Snapshot minimisation and protection gate:** Child-scoped snapshots may contain only minimal structured correct targets/statuses, controlled source type/date/opaque source-instance and batch references, parent review/amendment provenance, dated first/retry/correction and review events, active task cursors/target aggregates, structured completion, per-subject X/settings and active-time records, profile timezone/change history and calendar guards, rest-day state, checkpoint/shared story state, question flags/suspensions, exposure history and safe pending-upload metadata. Exclude `observed_wrong_form` (device-local only), parent PIN/hash, original worksheet images/text, copied source questions, free source descriptions, school/teacher details and local safety copies. Restore must retain suspension, exposure and checkpoint idempotence; repair falls back to the correct target alone if a wrong form is absent. Derive learning stages, due dates and dependent unlocks from compatible event history without revoking delivered story or past daily completions. Since snapshots now include **actual verified error targets** rather than catalogue IDs alone, the previously considered plain-JSON storage decision must be **re-evaluated under the unresolved TDD §9 data-protection gate before implementing or uploading real records**; this change does not pre-approve storing those targets in plaintext. Verify schema minimisation and privacy with synthetic fixtures. Follow this recovery procedure:
 
   1. On stale-base rejection, **stop upload**, preserve local changes and show **“backup paused — action needed”** alongside the last successful backup. Never silently rebase, replay the rejected upload or overwrite the cloud head.
   2. When a cloud head exists, this device or a second device can recover only by explicitly parent-approved restore of the **current cloud head**, after parent password reauthentication and successfully saving a private local safety copy, including pending local changes. Validate schema, size and content version; restore atomically. Cancellation or any failure preserves the working copy and leaves uploads paused.
@@ -39,110 +65,24 @@ The numbered cross-subject decision sequence ended at **#202**; separately confi
   No encrypted manual file export is included. **Safety-copy implementation gate:** Before the backup implementation PR, specify private local storage, lifetime, parent access/recovery/deletion controls and eviction limitations. Reopening a safety copy must not authorise overwriting an existing cloud head; keep uploads paused until the applicable recovery rule succeeds. Resolve this together with the data-protection gate in TDD §9; do not claim a safety copy is recoverable until its recovery path is implemented and tested.
 
 - **Snapshot retention and deletion:** The authorised owner manually initiates pruning through the backend dashboard using an owner-only operation that enforces retention, retaining the **newest ten recoverable committed snapshots** (or all if fewer); ordinary clients have no delete permission. The latest snapshot is the server-authoritative committed head, not a client timestamp, an uncommitted upload or whichever row happens to remain last after pruning. Pruning must preserve that head and its ability to accept the next upload even if older ancestors are removed; reject unsafe pruning. Before the backup implementation PR, specify owner-only database operations for pruning and child-scoped all-snapshot deletion, protecting the head and newest ten during pruning and coordinating with concurrent uploads; do not rely on ad hoc row deletes or client RLS to enforce owner actions. Automated cleanup is deferred. On an authenticated parent request, the authorised owner manually initiates deletion of **all** that child's cloud snapshots through a separate owner-only operation in the backend dashboard; this explicit deletion request is an exception to ten-snapshot retention. Confirm the affected child and consequences privately and keep uploads paused until the parent deliberately resumes backup, so deletion is not silently undone. Deleting cloud backups does not itself erase local working/safety copies; their retention and deletion must be explained before implementation (see TDD §9).
-- **Educational QA:** Human-reviewed, versioned original/licensed educational catalogue; development-time AI cross-review plus owner approval; owner reviews every disputed item and randomly audits **1 in 5 AI-agreed items** per batch; escalate when needed to a qualified educator. Follow [CONTENT_QA.md](CONTENT_QA.md).
-- **Hard release gates:** independently verify dedicated staging/production identities before any service write; closed-signup Google/password identity linking, parent/child Auth and synthetic cross-family RLS denial, backup retry/collision/restore integrity, offline behavior after first login, landscape tablet/phone Safari/WebKit/PWA, Chinese glyph `lang="zh-Hans"` rendering and tracing input. **No actual learner data until security gates pass**, including the TDD §9 data-protection gate and the plaintext-snapshot re-evaluation above. Mainland China online availability is not verified.
-- **Full scope protected:** Registered + Guest architecture, invitations, multi-child, full private worksheet storage, genuine per-record multi-device sync, complete 2.5D game and full four-subject curriculum remain future targets.
 
-## 2. Pilot objective and success conditions
+Routine parent PIN, its device-only protection and reset are defined in Functional Design §2. It is never server authorization.
 
-Build the **lowest-cost genuinely playable four-subject learning trial**. Each subject needs an instructional loop, not just a subject button or static demonstration. Evaluate:
+## 4. Content coverage and private proceed gates
 
-1. Whether the learner can independently start and finish meaningful lessons across four subjects.
-2. Whether guided explanation, practice, objective feedback and a short review are useful and understandable.
-3. Whether the four subject-specific teaching approaches warrant deeper content investment.
-4. Whether progress and drafts persist reliably and all bundled content works offline after initial installation/caching.
+Full scoped coverage is the goal. Chinese, Mathematics and English use **75% of their P2 in-scope outcomes** as the separate-subject release guideline. P3 Chinese/Higher Chinese and English general practice is unlocked from each subject's first release using reviewed available content; P3 mistake imports follow later. Mathematics is P2-only in Pilot, with P3 locked and no P3 content-authoring requirement. Science's initial release uses **75% of the in-scope outcomes in its first two topics** (Diversity of living and non-living things; Classification of living things); the other five topics unlock in syllabus order as authored and reviewed. The owner's recorded proceed decision in Issue #3 may override coverage either way. Report grade/course, inventory version, numerator/denominator and missing areas. Keep Chinese/Higher Chinese coverage visible separately. Unmatched targets remain private pending_content. This guideline does not waive QA, source/rights checks, privacy, security, backup, device or data-protection requirements.
 
-Pilot success does **not** require full game engagement systems, long-term growth analytics, public account registration or proof of educational impact from a short trial. Any observations of learning should be framed conservatively.
-
-## 3. Pilot delivery boundaries
-
-| Area | Pilot v0.1 | Deferred, not cancelled |
-|---|---|---|
-| Users | Registered-only: one provisioned parent, one nickname-only child profile; Family → Child → Learning Records | Guest, multi-child management, public sign-up and invitation codes |
-| Authentication | First online login; Google and email/password fallback subject to staging identity-link verification; otherwise email/password-only | Full invitation onboarding and broader family controls |
-| Storage | IndexedDB offline working copy and authenticated Supabase automatic versioned snapshot backup/parent-approved restore | Full bidirectional per-record sync, private scanned worksheet storage, encrypted manual export |
-| Hosting | Cached PWA, no privileged browser credentials | Downloadable content packs and broader account-aware services |
-| Learning | Four human-reviewed units, deterministic objective feedback, independent/delayed retention | Larger curricula, extensive adaptivity and causal diagnosis |
-| Chinese errors | Registered-private verified/uncertain/unmatched mistake bank, observations, paste-in parent import and spaced review | Private worksheet upload/storage; OCR and automatic handwriting grading remain prohibited |
-| Parent | Reviewed intake, backup status/restore, light progress summary, real re-authentication for sensitive actions | Full dashboard, multi-child oversight, letters and time controls |
-| Game | Small movable 2D hub, one companion, interactive quests and nonpunitive world progress | Full 2.5D world, inventory, economy, garden and ten companions |
-| Tracing | Ephemeral finger/stylus Chinese tracing, discarded on exit | Selected private portfolio storage; handwriting remains ungraded |
-| AI | No runtime AI; owner-authorised private external preparation | No runtime AI planned |
-| Data privacy | Private records only in authorised learner storage, synthetic public assets/tests | Expanded registered private portfolios |
-
-**Important:** A public URL is not access control. Public lesson bundles, fixtures, PRs and CI remain synthetic/generic, even when the private Pilot uses authenticated learner data.
-
-## 4. P0 implementation checklist
-
-| ID | Deliverable | Acceptance boundary |
-|---|---|---|
-| P0-01 | Four-subject quest navigation | Each of Chinese, Science, Mathematics and English opens a real reviewed lesson; first internal release includes Chinese and the playable hub. |
-| P0-02 | Shared learning interactions | Essential choice, matching, ordering and structured-response controls, plus fraction manipulation and text-evidence selection required by the units, with accessible alternatives. |
-| P0-03 | Versioned reviewed content | Stable IDs and objective tags, reviewed explanations, answers and variants, source/IP evidence, hints and validation in CONTENT_QA.md. |
-| P0-04 | Deterministic evaluation | Auto-check only objective responses; writing and creative explanations remain ungraded/self-reviewed. |
-| P0-05 | Guided lesson stages | Save and resume unfinished learning, without full adaptive planner. |
-| P0-06 | IndexedDB persistence | Save attempts, state and pending uploads crash-safely; no silent replacement on app updates or storage failure. |
-| P0-07 | Learning evidence | Separate incorrect objective attempts, uncertain cause, parent review, story completion and learning evidence. |
-| P0-08 | Chinese private review | Private verified/uncertain/unmatched targets and parent decisions; reviewed **exact-error → similar → generic** ladder with step-cleared transitions; nonpunitive day 1/3/7/14 baseline, recurrence-aware priority and evidence-derived provisional mastery; no unreviewed generation. |
-| P0-09 | Parent learning summary | Objective outcomes, review queue, last successful backup and explicit “backup paused — action needed” state, without unsupported mastery claims. |
-| P0-10 | Bounded 2D adventure | Movable avatar (tap-to-move acceptable), one companion and nonpunitive visible world changes. **First Chinese internal release:** location-triggered Chinese quests; subsequent subject releases add their own quest locations. |
-| P0-11 | Offline readiness | Once logged in and content cached, lessons, local saves and imports function despite network/auth expiry; retries wait safely. |
-| P0-12 | Privacy/IP/content QA | Only synthetic CI/public content, no privileged credentials or real mistakes; owner signs off each QA batch. |
-| P0-13 | Parent Auth/provisioning | One pre-created parent, one nickname-only child, closed signup, Google + password fallback verified in staging; use password only if safe linking fails; re-auth for restore/logout/delete. |
-| P0-14 | Family ownership/RLS | Family → Child ownership; anonymous, other-family and spoofed-child operations denied in synthetic tests before real records. |
-| P0-15 | Cloud backup and restore | Idempotent automatic post-lesson/import uploads, persisted pending work, linear head and stale-base rejection, parent-approved cloud-head recovery after password reauthentication and a local safety copy; parent-confirmed new history only when the server has no head; “keep this device” deferred. Test first snapshot, duplicate/interrupted retries, stale rejection, restore then successful upload, head selection after pruning, and new-history recovery after deletion (§7.3); retention/deletion follow the decision register. |
-| P0-16 | Worksheet paste-in and mistake bank | Parent reviews every extracted candidate; import rejects malformed data, deduplicates re-imported events without discarding distinct repeat observations, retains uncertain/unmatched `pending_content` privately, and permits later verify/reject. Before building import, complete the **private group-coverage comparison and explicit owner proceed decision** in §5 Chinese. No in-app image/OCR/AI or free-text worksheet-source metadata. |
-| P0-17 | Chinese tracing | Finger/stylus and palm behavior tested; ungraded, no stroke-order inference, nothing persisted after exit. |
-| P0-18 | Delayed-retention visit | **All four Pilot units** provide distinct reviewed immediate/delayed activities, mark repeated-versus-new items and test day 1/3/7/14 using an injectable clock. An identical repeated answer is insufficient for mastery evidence; **only Chinese personalised review** derives provisional-mastery, step-cleared and scheduling state from recorded events. Continue low-frequency Chinese review and reopen priority after verified errors; no causal efficacy claim. |
-| P0-19 | Device acceptance | Landscape tablet and phone Safari/WebKit PWA, Chinese simplified glyph/pinyin checks, offline reload, cache update and safe recovery. |
-
-## 5. Exactly four first instructional units (ordered Chinese → Science → Mathematics → English)
-
-### Science — Living & Non-living Things
-
-- The **first Science World unit** is *Living & Non-living Things*; *Magnets* is not the Pilot's first unit.
-- Provide a compact **Discover → Investigate → Understand → Apply → Master** sequence using classification, observable evidence, key scientific language, contrasted cases and explanation scaffolds.
-- Include objectively checkable questions and a light self-reviewed explanation or observation record. Distinguish observations from inferences and avoid automatic scoring of open responses.
-- Verify curriculum alignment before presenting a specific learning objective as belonging to a particular lower-primary syllabus chapter; do not invent experiment observations.
-
-### Chinese — Character & Word Repair
-
-- Provide a small, original/reviewed catalogue starting estimate of approximately **10–15 example target characters or words** for recognition, meaning, character distinctions, collocations and sentence context. This is only an initial estimate, not a fixed catalogue cap or permission to fabricate real learner errors; revise after the private coverage comparison.
 - **Pre-import, privacy-preserving group-coverage review (owner-confirmed):** The private list of verified individual character/word errors determines **which complete curriculum-level groups are authored first**, not a public one-to-one set of exercises for individual learner mistakes. Each published group is a coherent, original/rights-cleared set of reviewed exact-contrast, similar-error and generic-context material, named by curriculum topic only; public commits, PRs, fixtures and bundles must not name or tailor content to individual learner mistakes; author complete groups together to reduce inference from publication timing, without claiming to eliminate all aggregate inference. The runtime uses private verified targets to select exercises from these generic groups in the exact → similar → generic ladder. Before building paste-in import, privately compare distinct verified targets (not repeat occurrences) with reviewed group coverage, publish only a **rough aggregate** in Issue #3, and record the owner's **explicit proceed decision** there. This is a **procedural gate, not a numeric pass threshold**. Near-100% coverage is a long-term **content-building aim**, not a condition that every real mistake be covered before the Pilot can proceed. If coverage is weak, prioritise expanding complete groups without leaking which private target is absent; unmatched targets remain private `pending_content` until a reviewed group is available. Keep actual targets, error/context details, individual comparisons and learner outcomes out of GitHub and development artifacts. Batch sizing and reviewed-item counts per ladder step belong to release planning, not this Pilot decision.
-- Store verified, uncertain and unmatched mistakes in the Registered child's private learning bank, with deduplicated targets and observation history; only verified catalogue-matched targets prescribe remedial practice. Public course/examples remain synthetic and general.
-- **In Pilot:** parent-verified paste-in import of structured worksheet extracts prepared privately outside the app, catalogue matching with unmatched targets retained, and non-graded temporary Chinese tracing. **Out of Pilot:** worksheet photo upload within the app, OCR, AI grading and handwriting recognition.
 
-### English — Mystery in the Forest
+Use original/rights-cleared generic curriculum groups, not learner-specific public exercises. Parent verifies external extraction before one in-app preview confirmation. App general-practice errors are recorded automatically. No original worksheet archive; unknown cause is not a fabricated misconception.
 
-- One **original narrative** Integrated Literacy unit: **Read → Think → Learn → Write → Improve**.
-- Include reading comprehension, textual evidence and inference, precise vocabulary, sentence revision and one short paragraph or guided story-writing opportunity.
-- Provide human-written examples and focused self-review; save drafts locally. Never claim the app automatically scored original writing for quality or creativity.
-- Additional nonfiction units, deeper E1–E12 pathways and full writing portfolio remain part of `FEATURE_SCOPE.md`, not Pilot P0.
+[Content QA](CONTENT_QA.md) retains all-disputed-item review, random 20% sampling of AI-agreed items and batch sign-off. A schema check does not attest educational quality. The source-verified leaf curriculum manifest is required before mapped extraction/import; the specification's course ID register is not a completed inventory.
 
-### Mathematics — Fractions
+## 5. Testing and release gates
 
-- One introductory **CPA (Concrete–Pictorial–Abstract)** learning sequence, including manipulable/visual fractions, part–whole meaning, comparison and appropriate equivalence examples.
-- Use the compact **Understand → Apply → Reason** learning structure, objective checks and an age-appropriate explanation/reasoning challenge.
-- Provide simple retry/verification but no automated grading of free-form reasoning or mathematical proof.
-- Whole lower-primary coverage, larger heuristic libraries, the five applied maths environments and full M1–M12 depth stay in long-term scope.
-
-**Content rule:** One substantial, coherent, reviewed unit per subject. Avoid implementing a generic authoring system or inflating item counts simply to look complete.
-
-## 6. Provisional post-Pilot priorities
-
-**P1 — Usable family version (not yet committed):** Add further units, expanded parent oversight, Guest/multi-child support as prioritised later, and eventual per-record multi-device reconciliation. **Pilot already includes** minimum registered identity, RLS, private Chinese mistake bank and cloud snapshot backup.
-
-**Phase 2 candidates — deeper learning:** Broader Singapore lower-primary curriculum, advanced Science journal and experimentation, Chinese customised repair, English nonfiction/creative-writing sequence, Mathematics modelling and strategy banks, evidence-based diagnostics, more advanced spaced review, adaptive progression and parent learning plans.
-
-**Phase 3 candidates — expanded adventure and portfolio:** More animal companions and story worlds, garden/museum, sustained research activities, richer learner portfolios and longer-term performance views.
-
-**Backlog:** Optional cosmetic depth, hidden side quests, large content-authoring systems and other low-priority embellishments. **Only Pilot P0 is committed in this document; later phase assignment is indicative, not a change to the full confirmed feature scope.**
-
-## 7. Testing and release gates
-
-1. **Learning:** Each subject has usable instructions, a complete content loop, feedback and short review. A learner can complete and revisit all four units.
+1. **Learning:** Each subject has usable instructions, a complete content loop, feedback and short review. A learner can complete and revisit each released subject loop; later subjects need not ship simultaneously.
 2. **Offline:** After initial online login, test cached app, refresh, answer/import, expired session, delayed review and return visit on real landscape phone/tablet; no network should block cached lessons.
-3. **Resilience:** Follow the decision register's cloud backup, conflict recovery, retention and deletion policy. Handle IndexedDB denial/eviction; backups are not multi-device sync or independent provider disaster recovery. Before implementation acceptance, use synthetic data to test:
+3. **Resilience:** Follow the preserved cloud backup, conflict recovery, retention and deletion policy. Handle IndexedDB denial/eviction; backups are not multi-device sync or independent provider disaster recovery. Before implementation acceptance, use synthetic data to test:
    - First snapshot establishes exactly one head; duplicate/interrupted retries (including restart and a lost response after commit) neither duplicate snapshots nor lose pending work.
    - Competing/stale-base writes are rejected without moving the head; rejected devices stop uploads and retain local changes. A second device follows the cloud-restore-only policy.
    - Restore requires password reauthentication, explicit parent confirmation, a successful local safety copy and schema/size/content-version validation. Cancellation and every failure preserve local data and keep conflict uploads paused; no silent rollback.
@@ -151,13 +91,15 @@ Pilot success does **not** require full game engagement systems, long-term growt
    - After authorised deletion of all snapshots, an existing device can resume with parent reauthentication and explicit confirmation of a new first snapshot, without stale-base deadlock. First-use and post-deletion creation atomically establish only one head; concurrent creation cannot replace an existing head. Failed/denied reads cannot enable new-history creation, and deletion is not silently undone.
    - Ordinary clients cannot delete snapshots; authorised manual pruning respects retention. Explicit parent-requested deletion removes all targeted child snapshots, leaves other children untouched and does not silently recreate backups. Local-copy handling follows the separately resolved data-protection gate.
    These are required future tests, not tests run by this documentation PR.
-4. **Accuracy:** Review every answer key, pedagogical explanation, source licence and syllabus claim. Treat unscored writing as unscored.
+4. **Accuracy:** Review every answer key, pedagogical explanation, source licence and syllabus claim. Pilot formal responses are objective only; external writing is not scored.
 5. **Privacy:** No real worksheets, names, school information, handwriting samples, personal history, credentials or production exports in repository files, bundles, CI artifacts, PR comments, screenshot fixtures or preview outputs.
-6. **Security (Pilot):** Verify identity, staging Auth and cross-family/child RLS, backup collision/restore behavior, OAuth account linkage and key separation with synthetic data **before** transmitting any real learner data.
+6. **Security (Pilot):** Independently verify dedicated staging and production account/project identities from service metadata **before any service write**. Verify identity, staging Auth and cross-family/child RLS, backup collision/restore behavior, OAuth account linkage and key separation with synthetic data **before** transmitting any real learner data.
 7. **Budget:** No unapproved paid plan or service. Avoid unnecessary CI triggers, duplicate jobs and costly cross-browser matrices in the Pilot.
 8. **Data protection:** Resolve the pre-implementation open gate in [TDD §9](TECHNICAL_DESIGN_DECISIONS.md#9-validation-status-and-open-questions) before building real-record handling.
 9. **Publication:** These Markdown specifications may be included in a public repository after document-level review. **Making any repository that has held private material public requires its own full history/secrets/refs/preview audit** under `TECHNICAL_DESIGN_DECISIONS.md`, or a new clean repository.
 
-## 8. Change-control rule
+## 6. Change control
 
-Pilot v0.1 is a deliberately restricted **delivery subset** of Turtle Academy. It does not remove the full Science and Chinese teaching scope, English E1–E12, Mathematics M1–M12, authenticated architecture, privacy controls, parent functions or future adventure-game requirements. Any proposal to change a confirmed long-term decision must be recorded explicitly; mere omission from Pilot does not constitute cancellation.
+Confirmed post-Pilot Mathematics phase: build a teaching flow, then open P3 Mathematics. Pilot does not need to author that P3 content.
+
+Pilot omissions do not cancel the full product. Coding and merge require separate authorization. The private coverage/proceed, data-protection and safety-copy gates remain unresolved until their actual checks and decisions are recorded. A documentation revision cannot mark them passed.

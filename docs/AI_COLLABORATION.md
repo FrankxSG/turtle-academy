@@ -21,7 +21,7 @@ Approved decisions on the default branch are authoritative. Branch documents and
 | --- | --- |
 | `docs/TECHNICAL_DESIGN_DECISIONS.md` | Confirmed architecture, privacy and technical constraints |
 | `docs/FEATURE_SCOPE.md` | Full long-term feature and curriculum scope; not a release checklist |
-| `docs/PILOT_V0_1_SCOPE.md` | The only committed delivery slice (Pilot v0.1) |
+| `docs/PILOT_V0_1_SCOPE.md` + `docs/PILOT_FUNCTIONAL_DESIGN.md` + `docs/PILOT_LEARNING_ENGINE_SPEC.md` | Together define the committed Pilot delivery slice: scope/gates, functional behavior and engine/acceptance |
 | `docs/FOUNDATION_SETUP.md` | Infrastructure/code validation evidence, with date, branch and links |
 | `docs/TECHNICAL_HANDOFF.md` | Entry summary for new sessions |
 | GitHub Issues | Task scope, acceptance criteria, current owner, dependencies and blockers |
@@ -104,7 +104,7 @@ A handoff transfers ownership of the named branch and files. Do not include secr
 - Preserve offline data and distinguish submissions/story from verified mastery. Specify idempotency and reconciliation before implementing registered sync.
 - Keep unrelated applications, accounts/projects and environments isolated. Inspect actual target identities before service writes.
 - No paid infrastructure by default. Deployment is a distinct approved action.
-- The full feature scope is not the build list; `docs/PILOT_V0_1_SCOPE.md` defines the committed slice.
+- The full feature scope is not the build list; Pilot Scope + Functional Design + Learning Engine together define the committed slice.
 
 ## Access and repository settings
 
