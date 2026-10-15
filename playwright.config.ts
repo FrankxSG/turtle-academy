@@ -5,11 +5,24 @@ export default defineConfig({
   workers: 1,
   retries: 0,
   reporter: 'list',
-  use: { baseURL: 'http://127.0.0.1:4173', browserName: 'chromium', serviceWorkers: 'allow' },
-  webServer: {
-    command: 'npm run preview -- --port 4173 --strictPort',
-    url: 'http://127.0.0.1:4173',
-    reuseExistingServer: false,
-    timeout: 30000,
-  },
+  use: { browserName: 'chromium' },
+  projects: [
+    { name: 'app', testIgnore: '**/trials/**', use: { baseURL: 'http://127.0.0.1:4173', serviceWorkers: 'allow' } },
+    // Trials build only (Issue #8): served separately so it never shares the app's origin or cache.
+    { name: 'trials', testMatch: 'trials/**/*.spec.ts', use: { baseURL: 'http://127.0.0.1:4174', serviceWorkers: 'allow' } },
+  ],
+  webServer: [
+    {
+      command: 'npm run preview -- --port 4173 --strictPort',
+      url: 'http://127.0.0.1:4173',
+      reuseExistingServer: false,
+      timeout: 30000,
+    },
+    {
+      command: 'npm run build:trials && npm run preview:trials -- --port 4174 --strictPort',
+      url: 'http://127.0.0.1:4174',
+      reuseExistingServer: false,
+      timeout: 120000,
+    },
+  ],
 })

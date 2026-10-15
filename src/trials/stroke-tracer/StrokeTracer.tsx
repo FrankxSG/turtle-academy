@@ -1,96 +1,115 @@
 import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent } from 'react'
 import {
   DATA_TRANSFORM, VIEW_SIZE, checkStroke, medianLength, medianPath, toView,
-  type CharacterData, type Point,
+  type CharacterData, type Point, type StrokeCheck,
 } from './strokeMath'
 import './strokeTracer.css'
 
 /**
- * StrokeTracer (trial, later phase — not wired into the Pilot app).
+ * StrokeTracer — trial only (see Issue #8). Not imported by the learner app.
  *
- * - `watch`: animates the reference stroke order.
- * - `trace`: free finger/stylus ink over a faint outline. Ungraded, no
- *   stroke-order inference, nothing stored: compatible with Pilot P0-17.
- * - `guided`: each stroke is checked geometrically against the reference
- *   stroke in order (start, end, direction, shape). This IS stroke-order
- *   checking, so it is outside the current Pilot boundary and kept for a
- *   later-phase decision.
+ * - `watch`: reference stroke order with play / pause / step and speed.
+ * - `trace`: free ink over a faint outline. Ungraded; nothing is checked.
+ * - `guided` (experimental): each stroke is checked geometrically against the
+ *   next reference stroke. Accepted strokes show the clean reference shape —
+ *   reference progress, not a corrected sample of the user's writing.
  *
- * All ink lives in component state only and is discarded on unmount or when
- * the character/mode changes. The component never writes to storage.
+ * Ink and attempt details live in component state only, are cleared on any
+ * character/mode change and on unmount, and are never written to storage.
  */
 export type StrokeTracerMode = 'watch' | 'trace' | 'guided'
+/** Which pointer types may draw. Chosen explicitly by the tester. */
+export type InputChoice = 'finger' | 'stylus' | 'mouse'
 
-export type GuidedSummary = {
-  character: string
-  strokeCount: number
-  mistakes: number
-  hintsShown: number
+export type GuidedAttempt = {
+  strokeNumber: number
+  pointerType: string
+  check: StrokeCheck
 }
 
 export type StrokeTracerProps = {
   character: string
   data: CharacterData
   mode: StrokeTracerMode
-  /** Rendered width/height in CSS px. */
-  size?: number
-  /** Guided only: >1 is kinder, <1 stricter. */
+  input: InputChoice
+  /** Board width/height in CSS px. */
+  size: number
+  /** Guided only: >1 kinder, <1 stricter. */
   leniency?: number
-  /** Guided only: misses on one stroke before its hint animation plays. */
+  /** Guided only: misses on one stroke before the hint replays it. 0 disables. */
   hintAfterMisses?: number
-  /** Guided only: called once when all strokes are matched. Not persisted here. */
-  onGuidedComplete?: (summary: GuidedSummary) => void
+  /** Watch only: playback speed multiplier. */
+  speed?: number
+  /** Guided only: every checked stroke, for an in-memory tester panel. */
+  onGuidedAttempt?: (attempt: GuidedAttempt) => void
+  onGuidedComplete?: () => void
 }
 
 const INK_WIDTH = 46
-// Touch contacts wider than this (CSS px) are treated as a resting palm.
-const PALM_CONTACT_PX = 44
-const STROKE_MS = 650
+/** Experimental: in Finger mode, touch contacts wider than this (CSS px) are ignored as a possible palm. */
+export const WIDE_CONTACT_PX = 44
+const STROKE_MS = 700
 const STROKE_GAP_MS = 250
 
+function prefersReducedMotion() {
+  try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches } catch { return false }
+}
+
+/** Whether a pointer may start a stroke under the tester's input choice. */
+export function acceptsPointer(input: InputChoice, pointerType: string, width: number, height: number): boolean {
+  if (input === 'stylus') return pointerType === 'pen'
+  if (input === 'mouse') return pointerType === 'mouse' || pointerType === 'pen'
+  if (pointerType === 'touch') return width <= WIDE_CONTACT_PX && height <= WIDE_CONTACT_PX
+  return true
+}
+
 export function StrokeTracer({
-  character, data, mode, size = 320, leniency = 1, hintAfterMisses = 3, onGuidedComplete,
+  character, data, mode, input, size, leniency = 1, hintAfterMisses = 3, speed = 1,
+  onGuidedAttempt, onGuidedComplete,
 }: StrokeTracerProps) {
   const svgRef = useRef<SVGSVGElement>(null)
-  const activePointer = useRef<number | null>(null)
-  const penSeen = useRef(false)
-  const [ink, setInk] = useState<Point[][]>([])
-  const [current, setCurrentState] = useState<Point[] | null>(null)
-  // Mirror of `current` so pointerup always sees every point, even before React re-renders.
+  const active = useRef<{ id: number; type: string } | null>(null)
   const currentRef = useRef<Point[] | null>(null)
+  const [current, setCurrentState] = useState<Point[] | null>(null)
   const setCurrent = (line: Point[] | null) => { currentRef.current = line; setCurrentState(line) }
+  const [ink, setInk] = useState<Point[][]>([])
   const [rejected, setRejected] = useState<Point[] | null>(null)
   const [done, setDone] = useState(0)
-  const [mistakes, setMistakes] = useState(0)
   const [misses, setMisses] = useState(0)
-  const [hints, setHints] = useState(0)
-  const [replay, setReplay] = useState(0)
-  const completedRef = useRef(false)
+  const [hintKey, setHintKey] = useState(0)
+  const [showOutline, setShowOutline] = useState(true)
+  const reducedMotion = useMemo(prefersReducedMotion, [])
+  const [watchShown, setWatchShown] = useState(0)
+  const [playing, setPlaying] = useState(!reducedMotion)
+  const [playKey, setPlayKey] = useState(0)
 
   const medians = useMemo(() => data.medians.map((m) => m.map(toView)), [data])
   const strokeCount = data.strokes.length
   const finished = mode === 'guided' && done >= strokeCount
   const clipBase = useMemo(() => 'st-' + Math.random().toString(36).slice(2, 9), [])
 
-  // Every change of character or mode starts fresh in the same render, so old
-  // ink is never shown against a new character. Nothing carries over.
-  const [shownFor, setShownFor] = useState({ character, mode, data })
-  if (shownFor.character !== character || shownFor.mode !== mode || shownFor.data !== data) {
-    setShownFor({ character, mode, data })
+  // Any character, mode or input change starts fresh in the same render.
+  const [shownFor, setShownFor] = useState({ character, mode, data, input })
+  if (shownFor.character !== character || shownFor.mode !== mode || shownFor.data !== data || shownFor.input !== input) {
+    setShownFor({ character, mode, data, input })
     setInk([]); setCurrentState(null); setRejected(null)
-    setDone(0); setMistakes(0); setMisses(0); setHints(0)
+    setDone(0); setMisses(0); setWatchShown(0); setPlaying(!reducedMotion)
   }
-  useEffect(() => {
-    currentRef.current = null
-    activePointer.current = null
-    completedRef.current = false
-  }, [character, mode, data])
+  useEffect(() => { currentRef.current = null; active.current = null }, [character, mode, data, input])
 
   useEffect(() => {
     if (!rejected) return
     const timer = window.setTimeout(() => setRejected(null), 450)
     return () => window.clearTimeout(timer)
   }, [rejected])
+
+  // Watch playback: advance to the next stroke after a short gap.
+  const [gapPending, setGapPending] = useState(false)
+  useEffect(() => {
+    if (!gapPending) return
+    const timer = window.setTimeout(() => { setGapPending(false); setWatchShown((n) => n + 1) }, STROKE_GAP_MS / speed)
+    return () => window.clearTimeout(timer)
+  }, [gapPending, speed])
 
   function toPoint(event: { clientX: number; clientY: number }): Point | null {
     const ctm = svgRef.current?.getScreenCTM()
@@ -102,23 +121,24 @@ export function StrokeTracer({
   const canDraw = mode !== 'watch' && !finished
 
   function onPointerDown(event: ReactPointerEvent<SVGSVGElement>) {
-    if (!canDraw || activePointer.current !== null) return
-    if (event.pointerType === 'pen') penSeen.current = true
-    if (event.pointerType === 'touch'
-      && (penSeen.current || event.width > PALM_CONTACT_PX || event.height > PALM_CONTACT_PX)) return
+    if (!canDraw) return
     if (event.pointerType === 'mouse' && event.button !== 0) return
+    if (!acceptsPointer(input, event.pointerType, event.width, event.height)) return
+    if (active.current) {
+      // A pen may take over from a touch already in progress (e.g. a resting palm); nothing else interrupts.
+      if (!(event.pointerType === 'pen' && active.current.type === 'touch')) return
+      setCurrent(null)
+    }
     const point = toPoint(event)
     if (!point) return
     event.preventDefault()
-    activePointer.current = event.pointerId
-    // Capture keeps the stroke when a finger slides off the board; it can throw
-    // if the pointer has already gone, in which case drawing still works.
-    try { event.currentTarget.setPointerCapture(event.pointerId) } catch { /* ignore */ }
+    active.current = { id: event.pointerId, type: event.pointerType }
+    try { event.currentTarget.setPointerCapture(event.pointerId) } catch { /* drawing still works without capture */ }
     setCurrent([point])
   }
 
   function onPointerMove(event: ReactPointerEvent<SVGSVGElement>) {
-    if (event.pointerId !== activePointer.current) return
+    if (event.pointerId !== active.current?.id) return
     const native = event.nativeEvent
     const events = typeof native.getCoalescedEvents === 'function' ? native.getCoalescedEvents() : []
     const points = (events.length ? events : [native]).map(toPoint).filter((p): p is Point => p !== null)
@@ -126,42 +146,40 @@ export function StrokeTracer({
   }
 
   function finishStroke(event: ReactPointerEvent<SVGSVGElement>, cancelled: boolean) {
-    if (event.pointerId !== activePointer.current) return
-    activePointer.current = null
+    if (event.pointerId !== active.current?.id) return
+    const pointerType = active.current.type
+    active.current = null
     const line = currentRef.current
     setCurrent(null)
     if (cancelled || !line || line.length < 2) return
     if (mode === 'trace') { setInk((all) => all.concat([line])); return }
     if (mode !== 'guided' || done >= strokeCount) return
-    const result = checkStroke(line, medians[done], leniency)
-    if (result.matched) {
-      const next = done + 1
-      setDone(next); setMisses(0)
-      if (next >= strokeCount && !completedRef.current) {
-        completedRef.current = true
-        onGuidedComplete?.({ character, strokeCount, mistakes, hintsShown: hints })
-      }
+    const check = checkStroke(line, medians[done], leniency)
+    onGuidedAttempt?.({ strokeNumber: done + 1, pointerType, check })
+    if (check.matched) {
+      setDone(done + 1); setMisses(0)
+      if (done + 1 >= strokeCount) onGuidedComplete?.()
     } else {
-      const nextMisses = misses + 1
-      setMistakes((n) => n + 1); setMisses(nextMisses); setRejected(line)
-      if (hintAfterMisses > 0 && nextMisses >= hintAfterMisses && nextMisses % hintAfterMisses === 0) {
-        setHints((n) => n + 1); setReplay((n) => n + 1)
-      }
+      const next = misses + 1
+      setMisses(next); setRejected(line)
+      if (hintAfterMisses > 0 && next % hintAfterMisses === 0) setHintKey((k) => k + 1)
     }
   }
 
-  const status = mode === 'watch' ? 'Watch the strokes appear in order.'
-    : mode === 'trace' ? 'Trace over the grey character. Nothing is saved or marked.'
-      : finished ? 'All ' + strokeCount + ' strokes done. Well traced!'
-        : misses === 0 ? 'Stroke ' + (done + 1) + ' of ' + strokeCount + '.'
-          : misses >= hintAfterMisses ? 'Watch the glowing stroke, then try again from the dot.'
-            : 'Try stroke ' + (done + 1) + ' again. Start at the dot.'
+  const status = mode === 'watch'
+    ? (watchShown >= strokeCount ? 'All ' + strokeCount + ' strokes shown.' : 'Stroke ' + Math.min(watchShown + 1, strokeCount) + ' of ' + strokeCount + (playing ? '' : ' · paused'))
+    : mode === 'trace' ? 'Trace over the grey character. Nothing is checked or saved.'
+      : finished ? 'Reference strokes completed.'
+        : misses === 0 ? 'Stroke ' + (done + 1) + ' of ' + strokeCount + '. Start at the dot.'
+          : hintAfterMisses > 0 && misses >= hintAfterMisses ? 'Watch the orange stroke, then try again from the dot.'
+            : 'Not quite. Try stroke ' + (done + 1) + ' again from the dot.'
 
-  const nextStart = mode === 'guided' && !finished && misses > 0 ? medians[done][0] : null
-  const showHint = mode === 'guided' && !finished && hints > 0 && misses >= hintAfterMisses
+  const nextStart = mode === 'guided' && !finished ? medians[done][0] : null
+  const showHint = mode === 'guided' && !finished && hintKey > 0 && hintAfterMisses > 0 && misses >= hintAfterMisses
 
   return (
-    <div className="st" style={{ width: size }}>
+    <div className="st" style={{ width: Math.max(size, 300) }}>
+      {mode === 'guided' && <p className="st-badge">Experimental check</p>}
       <svg
         ref={svgRef}
         className={'st-board' + (canDraw ? ' st-drawable' : '')}
@@ -172,6 +190,7 @@ export function StrokeTracer({
         aria-label={'Character ' + character + ', ' + mode + ' mode'}
         data-testid="stroke-board"
         data-done={done}
+        data-shown={watchShown}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={(e) => finishStroke(e, false)}
@@ -186,28 +205,27 @@ export function StrokeTracer({
         </defs>
 
         <g className="st-grid" aria-hidden="true">
-          <rect x="8" y="8" width={VIEW_SIZE - 16} height={VIEW_SIZE - 16} />
           <line x1={VIEW_SIZE / 2} y1="8" x2={VIEW_SIZE / 2} y2={VIEW_SIZE - 8} />
           <line x1="8" y1={VIEW_SIZE / 2} x2={VIEW_SIZE - 8} y2={VIEW_SIZE / 2} />
         </g>
 
         <g transform={DATA_TRANSFORM}>
-          {data.strokes.map((d, i) => (
-            <path key={i} d={d} className={mode === 'guided' && i < done ? 'st-stroke-done' : 'st-outline'} />
-          ))}
+          {data.strokes.map((d, i) => {
+            const filled = (mode === 'guided' && i < done) || (mode === 'watch' && i < watchShown)
+            if (!filled && mode === 'trace' && !showOutline) return null
+            return <path key={i} d={d} className={filled ? 'st-stroke-done' : 'st-outline'} />
+          })}
         </g>
 
-        {mode === 'watch' && (
-          <g key={'watch-' + replay}>
-            {data.medians.map((median, i) => <AnimatedStroke key={i} clip={clipBase + '-' + i} median={median}
-              delay={i * (STROKE_MS + STROKE_GAP_MS)} className="st-anim" />)}
-          </g>
+        {mode === 'watch' && playing && watchShown < strokeCount && !gapPending && (
+          <AnimatedStroke key={'w-' + playKey + '-' + watchShown} clip={clipBase + '-' + watchShown}
+            median={data.medians[watchShown]} durationMs={STROKE_MS / speed} className="st-anim"
+            onEnd={() => setGapPending(true)} />
         )}
 
         {showHint && (
-          <g key={'hint-' + replay}>
-            <AnimatedStroke clip={clipBase + '-' + done} median={data.medians[done]} delay={0} className="st-anim st-hint" />
-          </g>
+          <AnimatedStroke key={'h-' + hintKey} clip={clipBase + '-' + done} median={data.medians[done]}
+            durationMs={STROKE_MS * 1.3} className="st-anim st-hint" />
         )}
 
         <g className="st-ink" aria-hidden="true">
@@ -216,36 +234,50 @@ export function StrokeTracer({
           {rejected && <polyline className="st-rejected" points={pointsAttr(rejected)} strokeWidth={INK_WIDTH} />}
         </g>
 
-        {nextStart && <circle className="st-start" cx={nextStart.x} cy={nextStart.y} r="34" aria-hidden="true" />}
+        {nextStart && <circle className={'st-start' + (misses > 0 ? ' st-start-strong' : '')}
+          cx={nextStart.x} cy={nextStart.y} r="30" aria-hidden="true" />}
       </svg>
 
       <p className="st-status" role="status" aria-live="polite" data-testid="stroke-status">{status}</p>
 
       <div className="st-actions">
-        {mode === 'watch' && <button type="button" onClick={() => setReplay((n) => n + 1)}>Replay</button>}
+        {mode === 'watch' && <>
+          {!reducedMotion && (playing && watchShown < strokeCount
+            ? <button type="button" onClick={() => setPlaying(false)}>Pause</button>
+            : <button type="button" onClick={() => {
+              if (watchShown >= strokeCount) setWatchShown(0)
+              setPlaying(true); setPlayKey((k) => k + 1)
+            }}>{watchShown >= strokeCount ? 'Replay' : 'Play'}</button>)}
+          <button type="button" disabled={watchShown >= strokeCount}
+            onClick={() => { setPlaying(false); setGapPending(false); setWatchShown((n) => Math.min(strokeCount, n + 1)) }}>Next stroke</button>
+          <button type="button" disabled={watchShown === 0}
+            onClick={() => { setPlaying(false); setGapPending(false); setWatchShown(0) }}>Restart</button>
+        </>}
         {mode === 'trace' && <>
           <button type="button" disabled={!ink.length} onClick={() => setInk((all) => all.slice(0, -1))}>Undo</button>
           <button type="button" disabled={!ink.length} onClick={() => setInk([])}>Clear</button>
+          <button type="button" aria-pressed={showOutline} onClick={() => setShowOutline((v) => !v)}>
+            {showOutline ? 'Hide outline' : 'Show outline'}</button>
         </>}
         {mode === 'guided' && <>
-          <button type="button" onClick={() => { setHints((n) => n + 1); setMisses((m) => Math.max(m, hintAfterMisses)); setReplay((n) => n + 1) }}
-            disabled={finished}>Show me</button>
-          <button type="button" onClick={() => {
-            setDone(0); setMistakes(0); setMisses(0); setHints(0); setRejected(null); completedRef.current = false
-          }}>Start again</button>
+          <button type="button" disabled={finished}
+            onClick={() => { setMisses((m) => Math.max(m, hintAfterMisses || 1)); setHintKey((k) => k + 1) }}>Show me</button>
+          <button type="button" onClick={() => { setDone(0); setMisses(0); setRejected(null) }}>Start again</button>
         </>}
       </div>
     </div>
   )
 }
 
-function AnimatedStroke({ clip, median, delay, className }: { clip: string; median: number[][]; delay: number; className: string }) {
-  // Extend the line slightly past both ends so the clipped fill reaches the stroke tips.
+function AnimatedStroke({ clip, median, durationMs, className, onEnd }: {
+  clip: string; median: number[][]; durationMs: number; className: string; onEnd?: () => void
+}) {
+  // Extend past both ends so the clipped fill reaches the stroke tips.
   const length = Math.ceil(medianLength(median)) + 200
   return (
     <g clipPath={'url(#' + clip + ')'} transform={DATA_TRANSFORM}>
-      <path d={medianPath(median)} className={className}
-        style={{ strokeDasharray: length, strokeDashoffset: length, animationDelay: delay + 'ms', animationDuration: STROKE_MS + 'ms' }} />
+      <path d={medianPath(median)} className={className} onAnimationEnd={onEnd}
+        style={{ strokeDasharray: length, strokeDashoffset: length, animationDuration: durationMs + 'ms' }} />
     </g>
   )
 }

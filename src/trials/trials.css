@@ -1,0 +1,47 @@
+/* Trials-only styles; independent of the learner app's stylesheet. */
+:root{font-family:ui-rounded,"Avenir Next",system-ui,sans-serif;color:#213c35;background:#faf7ef;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}body{margin:0;background:#faf7ef}
+button,select,input{font:inherit}button{cursor:pointer;min-height:44px;-webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid #b26c1f;outline-offset:3px}
+a{color:inherit}
+.t-app{max-width:1100px;margin:auto;padding:0 16px 32px}
+.t-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid #dce3d7;margin-bottom:16px}
+.t-brand{font-weight:750;text-decoration:none;font-size:18px}
+.t-tag{font-size:12px;background:#f5e8c6;color:#6d4a17;border-radius:20px;padding:6px 10px;white-space:nowrap}
+h1{font-size:clamp(26px,4vw,38px);letter-spacing:-.8px;margin:8px 0 12px}h2{font-size:20px;margin:0}
+.t-lede{color:#5b6c60;line-height:1.6;max-width:640px}
+.t-list{list-style:none;padding:0;margin:18px 0;display:grid;gap:16px}
+.t-card{border:1px solid #d6e1d2;border-radius:18px;background:#fffdf7;padding:18px}
+.t-card p{line-height:1.55}.t-card-head{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.t-status{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:4px 9px;border-radius:12px;background:#e9eddf}
+.t-meta{font-size:12px;color:#617065;line-height:1.5}
+.t-button{display:inline-flex;align-items:center;min-height:44px;padding:8px 16px;border:1px solid #b7c9b5;border-radius:12px;background:#eff4e9;color:#213c35;text-decoration:none;margin-top:8px}
+.t-primary{background:#174d43;color:#fff;border-color:#174d43}
+.t-back{display:inline-block;margin:4px 0;font-size:14px}
+.t-notice{background:#f5e8c6;border-radius:14px;padding:14px 16px;line-height:1.55;font-size:15px;margin:10px 0 18px}
+.t-choices{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.t-choice{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;padding:14px 16px;border:1px solid #b7c9b5;border-radius:14px;background:#eff4e9;color:#213c35}
+.t-choice strong{font-size:18px}.t-choice span{font-size:13px;color:#4f6356;line-height:1.45}
+.t-stage{display:grid;gap:16px;justify-items:center}
+.t-board-col{display:flex;justify-content:center;width:100%}
+.t-side{width:100%;max-width:560px;display:flex;flex-direction:column;gap:10px}
+.t-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.t-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid #b7c9b5;border-radius:12px;background:#eff4e9;color:#213c35}
+.t-pill[aria-pressed="true"]{background:#174d43;border-color:#174d43;color:#fff}
+.t-char{font-size:22px}
+.t-hint{margin:0;font-size:12px;color:#617065;text-align:center}
+.t-field{display:flex;align-items:center;justify-content:center;gap:10px;font-size:14px}
+.t-input{margin:0;font-size:14px;text-align:center;display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap}
+.t-link{min-height:36px;border:0;background:none;color:#174d43;text-decoration:underline;padding:4px}
+.t-done{margin:0;text-align:center;font-weight:650;color:#174d43}
+.t-panel{border:1px solid #dce3d7;border-radius:14px;padding:10px 14px;background:#fffdf7;font-size:13px}
+.t-panel summary{cursor:pointer;font-weight:650;min-height:32px;display:flex;align-items:center}
+.t-attempts{padding-left:20px;line-height:1.5;word-break:break-word}
+/* Landscape: board beside controls so both fit the screen height. */
+.t-landscape .t-header{padding:6px 0;margin-bottom:8px}
+.t-landscape .t-stage{grid-template-columns:auto minmax(0,1fr);align-items:start;justify-items:stretch}
+.t-landscape .t-side{max-width:none}
+.t-landscape .t-row{justify-content:flex-start}
+.t-landscape .t-char{font-size:18px}
+.t-landscape .st-actions button{padding:6px 10px}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}

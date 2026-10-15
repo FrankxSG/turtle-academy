@@ -1,35 +1,56 @@
-# StrokeTracer trial (later phase, not Pilot)
+# StrokeTracer trial
 
-A small, dependency-free Chinese stroke component for evaluating tracing ideas before any scope decision. It is **not linked from the app and not included in the production build**.
+Design, decisions and results: **Issue #8**. Status: `exploring`. Scope: later phase, outside Pilot delivery work. Under `main`, Pilot P0-17 is ungraded ephemeral tracing; draft PR #7 proposes withdrawing it. This trial assumes neither.
 
-Run `npm run dev`, then open `/trial/stroke-tracer.html`.
+**Question:** is watching and tracing stroke order comfortable on a landscape tablet and phone with finger and stylus, and does a simple guided check reject wrong strokes without frustrating false rejections?
 
-## Modes
+## Run it
 
-| Mode | What it does | Scope status |
-| --- | --- | --- |
-| `watch` | Animates the reference stroke order on a 田字格 grid | Display only |
-| `trace` | Free finger/stylus ink over a faint outline; undo/clear | Matches Pilot P0-17: ungraded, no stroke-order inference, nothing persisted |
-| `guided` | Checks each drawn stroke against the next reference stroke (start, end, direction, path), shows a start dot after a miss and a hint after repeated misses | **Stroke-order checking — outside the current Pilot boundary.** Kept for a later-phase decision |
+```sh
+npm run dev:trials          # local, then open the printed URL
+npm run build:trials        # separate output in dist-trials/
+npm run preview:trials
+```
 
-`guided` is deterministic geometry against reference data (`strokeMath.ts`). It is not handwriting recognition, OCR, AI or a neatness score, and its readout must not be presented as a handwriting grade.
+The learner app (`npm run build`) never includes this code. The trials build has no service worker, manifest, storage, auth or product imports. `tests/trials/isolation.spec.ts` checks both outputs.
 
-## Privacy and storage
+## Behaviour
 
-- All ink lives in React state and is discarded on unmount or when the character or mode changes.
-- The component writes nothing to IndexedDB, localStorage, sessionStorage or the network. `onGuidedComplete` hands a summary (stroke count, retries, hints) to the caller; the trial page shows it and does not store it.
-- Palm handling: one active pointer at a time; touch contacts wider than 44 CSS px are ignored; once a stylus is seen, finger touches are ignored. Thresholds need real-device tuning (P0-19 devices).
+| Mode | Behaviour |
+| --- | --- |
+| Watch (default) | Reference stroke order; play/pause, next stroke, restart, speed. Reduced-motion users step manually |
+| Free trace | Ink over a faint outline; undo, clear, outline toggle. Nothing is checked |
+| Guided (experimental) | Each stroke is checked against the next reference stroke. A start dot shows where to begin; after three misses the stroke replays in orange. "Show me" and "Start again" are always available |
+
+- **Input** is chosen explicitly: Finger, Stylus or Mouse. In Stylus mode, touch never draws. In Finger mode, very wide touch contacts are ignored (an experimental palm heuristic, not verified palm rejection). A stylus may take over from a touch already in progress. "Use finger" returns to touch at any time.
+- **Accepted strokes** show the clean reference shape. That is reference progress, not a corrected sample of the user's writing. The completion message is "Reference strokes completed." Retries and reasons appear only in the collapsed tester panel, never as a grade, knowledge-error record or mastery signal.
+- **Nothing is stored or sent.** Ink and attempt details live in memory, clear on any character, mode or input change, and disappear on leaving the page. "Reset trial" clears everything.
+
+## Guided checker
+
+`strokeMath.ts` compares the drawn stroke with the reference median (1024-unit box). It rejects a stroke that:
+
+- starts or ends too far from the reference start or end (catches reversed strokes);
+- is much shorter or longer than the reference;
+- moves backwards along the reference path beyond a length-scaled tolerance (backtracking, retracing, scribbling);
+- strays far from the path or averages too far from it (detours, overshoot);
+- misses part of the reference path (shortcuts, partial strokes).
+
+`tests/trials/stroke-math.spec.ts` runs synthetic valid and invalid strokes (`tests/support/syntheticStrokes.ts`) over all 22 strokes of the six characters, plus wrong-order checks. With leniency between 0.9 and 1.3 every case gives the expected result; the tester slider is limited to 0.8–1.4.
+
+**Limitations:**
+- Tolerances were tuned on the same synthetic strokes the tests use. They are not validated against real learners or devices and make no accuracy claim.
+- Straight shortcuts are rejected across clear bends (150+ units). Small hooks and gentle curves (under about 140 units) are not enforced.
 
 ## Data and licence
 
-- `data/*.json` holds six generic sample characters (人 大 山 木 水 字) copied unmodified from [hanzi-writer-data](https://github.com/chanind/hanzi-writer-data) (commit `68d10a4`). They are bundled so the trial works offline.
-- That data comes from [Make Me a Hanzi](https://github.com/skishore/makemeahanzi), extracted from Arphic Technology fonts. It is redistributed under the **Arphic Public License**; the full text is in `data/ARPHICPL.TXT`. Keep this attribution and licence file with any copy of the data.
-- No code is copied from Hanzi Writer (MIT). The rendering approach (a clipped median line animated with a stroke dash, in a y-flipped 1024 box) follows the same well-known technique.
+- `data/*.json`: six generic characters (人 大 山 木 水 字) copied unmodified from [hanzi-writer-data](https://github.com/chanind/hanzi-writer-data) at commit `68d10a4`, bundled so the trial works without a network.
+- Data origin: [Make Me a Hanzi](https://github.com/skishore/makemeahanzi), extracted from Arphic Technology fonts. Redistributed under the **Arphic Public License**; full text in `data/ARPHICPL.TXT`. Keep the licence file and attribution with any copy.
+- The data licence is separate from Hanzi Writer's MIT code licence. No Hanzi Writer code is copied.
 
-## Before any production use
+## Before any product use
 
-1. Owner scope decision: Pilot `trace` only, or a later phase that includes `guided`.
-2. Content pipeline: decide how character data is selected and versioned for reviewed lessons (only characters actually taught), with licence notices in the shipped bundle.
-3. Wire the component into the app. The JSON is imported into the JS bundle, so the existing PWA precache covers it once the app imports it; this trial page itself is never built.
-4. Real-device checks on landscape tablet and phone Safari/WebKit, with stylus and palm.
-5. Tune `guided` thresholds against synthetic test strokes only; never use real learner handwriting as fixtures.
+1. Explicit owner scope/release decision (Issue #8 lifecycle: `candidate` means evidence worth considering, not approved scope).
+2. Real-device results on landscape iPad Safari and iPhone Safari, stylus on compatible hardware only, recorded in Issue #8.
+3. Content pipeline: which characters ship, versioning, and shipped licence notices.
+4. Product-specific integration review; move the code into the product area with tests, then remove or mark this trial `promoted`.
