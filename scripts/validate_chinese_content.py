@@ -13,7 +13,7 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-SCHEMA = json.loads((ROOT / 'contracts/chinese/1.schema.json').read_text())
+SCHEMA = json.loads((ROOT / 'contracts/chinese/1.schema.json').read_text(encoding='utf-8'))
 KEYWORDS = {'$ref', 'type', 'const', 'enum', 'anyOf', 'properties', 'required',
             'additionalProperties', 'items', 'minItems', 'maxItems', 'minimum',
             'maximum', 'minLength', 'maxLength', 'pattern', 'format'}
@@ -71,7 +71,7 @@ def schema_check(value, definition, path='$'):
         require(len(value) >= definition.get('minLength', 0), path + ':minLength')
         require(len(value) <= definition.get('maxLength', math.inf), path + ':maxLength')
         if 'pattern' in definition:
-            require(re.search(definition['pattern'], value) is not None, path + ':pattern')
+            require(re.fullmatch(definition['pattern'], value) is not None, path + ':pattern')
         if definition.get('format') == 'date':
             try:
                 require(dt.date.fromisoformat(value).isoformat() == value, path + ':date')
@@ -92,6 +92,34 @@ def load(path):
     return json.loads(Path(path).read_text(encoding='utf-8'))
 
 
+def check_text_slots(record, field, question_ids):
+    """Check declarative text links only; this does not render learner UI."""
+    text = record[field]
+    blanks, annotations = unique(record['blanks']), unique(record['annotations'])
+    require(not (set(blanks) & set(annotations)), 'duplicate_text_slot')
+    tokens = re.findall(r'\{\{([^{}]+)\}\}', text)
+    require(len(tokens) == len(set(tokens)), 'repeated_text_slot')
+    require(set(tokens) == set(blanks) | set(annotations), 'text_slot_reference')
+    require('{{' not in re.sub(r'\{\{[^{}]+\}\}', '', text), 'malformed_text_slot')
+    require('}}' not in re.sub(r'\{\{[^{}]+\}\}', '', text), 'malformed_text_slot')
+    for blank in blanks.values():
+        require(blank['id'].startswith('blank-'), 'blank_id')
+        require(blank['question_id'] in question_ids, 'blank_question_reference')
+    for annotation in annotations.values():
+        require(annotation['id'].startswith('pinyin-'), 'annotation_id')
+    require(not re.search(r'（(?:\s*|\d+|[A-Za-z\u00c0-\u024f\u1e00-\u1eff ]+)）', text), 'unstructured_blank_or_pinyin')
+
+
+def safe_halfway_boundary(plan, materials):
+    """Static fixture expectation; correction completion remains a runtime gate."""
+    ends = {m['question_ids'][-1] for m in materials.values()}
+    inside = {q for m in materials.values() for q in m['question_ids'][:-1]}
+    for count, slot in enumerate(plan['slots'], 1):
+        if count >= plan['halfway_count'] and (slot['item_id'] in ends or slot['item_id'] not in inside):
+            return count
+    raise Invalid('no_safe_halfway_boundary')
+
+
 def check_catalogue(curriculum, batch):
     schema_check(curriculum, SCHEMA['$defs']['curriculum'])
     schema_check(batch, SCHEMA['$defs']['batch'])
@@ -105,13 +133,22 @@ def check_catalogue(curriculum, batch):
         require(row['source_ref'] in sources, 'curriculum_source')
     for row in outcomes.values():
         require(1 <= row['source_pdf_page'] <= sources[row['source_ref']]['pdf_pages'], 'outcome_source_page')
+        require(row['source_ref'] == 'moe-cl-2024' and row['source_printed_page'] == row['source_pdf_page'] - 2, 'outcome_printed_page')
         expected = ['exact', 'similar', 'generic'] if row['scope'] in {'in_app', 'partial'} else []
         require(row['required_stages'] == expected, 'outcome_stage_requirement')
     for row in targets.values():
         require(row['id'] == f"zh.{row['course']}.char.u{ord(row['character']):04x}", 'character_id')
         pages = row['recognition_list_pages'] + row['writing_list_pages']
         require(bool(pages) and all(1 <= p <= sources[row['source_ref']]['pdf_pages'] for p in pages), 'character_source_page')
+        expected_pages = {3, 4} if row['course'].startswith('p2_') else {5, 6}
+        expected_source = 'moe-hcl-characters-2024' if 'higher' in row['course'] else 'moe-cl-characters-2024'
+        require(set(pages) <= expected_pages and row['source_ref'] == expected_source, 'character_grade_source')
+        require(all(len(row[k]) == len(set(row[k])) for k in ['recognition_list_pages', 'writing_list_pages']), 'duplicate_character_page')
+    require(len(curriculum['courses']) == len(set(curriculum['courses'])), 'duplicate_course')
+    require(set(unique(curriculum['course_character_counts'], 'course')) == set(curriculum['courses']), 'character_count_courses')
     for count in curriculum['course_character_counts']:
+        expected_pages = [3, 4] if count['course'].startswith('p2_') else [5, 6]
+        require(count['source_pdf_pages'] == expected_pages, 'count_grade_pages')
         rows = [r for r in targets.values() if r['course'] == count['course']]
         require(len(rows) == count['union_unique'], 'character_count_union')
         for key, field in [('recognition_list_unique', 'recognition_list_pages'), ('writing_list_unique', 'writing_list_pages')]:
@@ -129,11 +166,25 @@ def check_catalogue(curriculum, batch):
         require({outcomes[r]['course'] for r in item['outcome_refs']} == set(item['courses']), 'outcome_course')
         for ref in item['target_refs']:
             require(ref in targets and targets[ref]['course'] in item['courses'], 'target_reference')
+        if item['target_refs']:
+            require({targets[r]['course'] for r in item['target_refs']} == set(item['courses']), 'target_course_coverage')
         require(bool(item['target_refs']) == (item['stage'] is not None), 'stage_target_pair')
         require(not item['asset_refs'], 'starter_external_asset_not_reviewed')
         require(item['material_id'] is None or item['material_id'] in materials, 'material_reference')
+        check_text_slots(item, 'stem', {item['id']})
+        available = {r['id']: r for r in item['blanks']}
+        if item['material_id'] is not None:
+            available.update({r['id']: r for r in materials[item['material_id']]['blanks']})
+        require(item['blank_ref'] is None or (item['blank_ref'] in available and available[item['blank_ref']]['question_id'] == item['id']), 'item_blank_reference')
+        require(not item['blanks'] or item['blank_ref'] in {r['id'] for r in item['blanks']}, 'unlinked_item_blank')
     assigned = []
     for material in materials.values():
+        check_text_slots(material, 'body', set(material['question_ids']))
+        for blank in material['blanks']:
+            require(blank['question_id'] in items and items[blank['question_id']]['blank_ref'] == blank['id'], 'reciprocal_material_blank')
+        if material['kind'] == 'cloze':
+            require({r['question_id'] for r in material['blanks']} == set(material['question_ids']), 'cloze_question_links')
+            require(len(material['blanks']) == len(material['question_ids']), 'cloze_blank_count')
         require(len(material['question_ids']) == len(set(material['question_ids'])), 'duplicate_material_question')
         for ref in material['question_ids']:
             require(ref in items and items[ref]['material_id'] == material['id'], 'material_membership')
@@ -144,6 +195,14 @@ def check_catalogue(curriculum, batch):
     require(len(assigned) == len(set(assigned)), 'question_in_multiple_materials')
     for target in {r for item in items.values() for r in item['target_refs']}:
         require({item['stage'] for item in items.values() if target in item['target_refs']} == {'exact', 'similar', 'generic'}, 'incomplete_repair_pool')
+    log = batch['review_log']
+    for field in ['sampled_item_ids', 'disputed_item_ids']:
+        require(len(log[field]) == len(set(log[field])) and set(log[field]) <= set(items), 'review_item_reference')
+    if batch['status'] == 'approved':
+        require(log['independent_review'] == 'passed' and log['owner_signoff'] == 'approved' and log['rights_status'] == 'cleared', 'approved_batch_review_state')
+        require(not log['disputed_item_ids'], 'approved_batch_unresolved_items')
+    if curriculum['status'] == 'approved':
+        require(curriculum['coverage_status'] == 'approved', 'approved_manifest_coverage_state')
     return items, materials
 
 
@@ -178,6 +237,7 @@ def check_plan(plan, curriculum, batch):
             require(slot['role'] != 'delayed_review' or slot['starting_stage'] == 'generic', 'review_stage')
     require(plan['planned_main_count'] == len(ids) and len(ids) >= plan['x'], 'planned_count')
     require(plan['halfway_count'] == math.ceil(len(ids) / 2), 'halfway_actual_total')
+    require(plan['halfway_safe_boundary_count'] == safe_halfway_boundary(plan, materials), 'halfway_safe_boundary')
 
 
 def check_import(payload, curriculum, today, approved_manifest_versions=()):
@@ -190,9 +250,10 @@ def check_import(payload, curriculum, today, approved_manifest_versions=()):
     manifest = payload['curriculum_manifest_version']
     if manifest is not None:
         require(manifest in approved_manifest_versions and manifest == curriculum['manifest_version'], 'manifest_not_approved')
+        require(curriculum['status'] == 'approved' and curriculum['coverage_status'] == 'approved', 'manifest_not_approved')
     known = {r['id']: r for r in curriculum['outcomes'] + curriculum['characters']}
     for entry in entries:
-        bound = 8 if entry['target_kind'] in {'character', 'word'} else 64
+        bound = {'character': 1, 'word': 8}.get(entry['target_kind'], 64)
         for field in ['target_value', 'observed_wrong_form']:
             require(field not in entry or len(entry[field]) <= bound, 'target_bound')
         require(dt.date.fromisoformat(entry['observation_date']) <= today, 'future_observation')
@@ -203,6 +264,10 @@ def check_import(payload, curriculum, today, approved_manifest_versions=()):
             require(manifest is not None and ref in known, 'mapped_ref')
             require(known[ref]['course'] == payload['course'], 'mapped_course')
             require(known[ref].get('scope', 'in_app') in {'in_app', 'partial'}, 'mapped_scope')
+            if entry['target_kind'] == 'character':
+                require(known[ref].get('character') == entry['target_value'], 'mapped_character_value')
+            else:
+                require('character' not in known[ref], 'mapped_target_kind')
 
 
 def check_attempt(event, item):

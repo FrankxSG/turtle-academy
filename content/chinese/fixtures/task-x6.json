@@ -2,7 +2,7 @@
   "schema_version": "chinese-task-plan/1",
   "plan_id": "zh-fixture-x6",
   "content_batch_id": "zh-starter-001",
-  "content_version": 1,
+  "content_version": 2,
   "manifest_version": "zh-2024-p2p3-draft.1",
   "course": "p2_chinese",
   "x": 6,
@@ -13,70 +13,70 @@
   "slots": [
     {
       "item_id": "zh-m03.q1",
-      "item_version": 1,
+      "item_version": 2,
       "role": "general",
       "target_ref": null,
       "starting_stage": null
     },
     {
       "item_id": "zh-m03.q2",
-      "item_version": 1,
+      "item_version": 2,
       "role": "general",
       "target_ref": null,
       "starting_stage": null
     },
     {
       "item_id": "zh-m03.q3",
-      "item_version": 1,
+      "item_version": 2,
       "role": "general",
       "target_ref": null,
       "starting_stage": null
     },
     {
       "item_id": "zh-m03.q4",
-      "item_version": 1,
+      "item_version": 2,
       "role": "general",
       "target_ref": null,
       "starting_stage": null
     },
     {
       "item_id": "zh-m03.q5",
-      "item_version": 1,
+      "item_version": 2,
       "role": "general",
       "target_ref": null,
       "starting_stage": null
     },
     {
       "item_id": "zh-m04.q1",
-      "item_version": 1,
+      "item_version": 2,
       "role": "general",
       "target_ref": null,
       "starting_stage": null
     },
     {
       "item_id": "zh-m04.q2",
-      "item_version": 1,
+      "item_version": 2,
       "role": "general",
       "target_ref": null,
       "starting_stage": null
     },
     {
       "item_id": "zh-m04.q3",
-      "item_version": 1,
+      "item_version": 2,
       "role": "general",
       "target_ref": null,
       "starting_stage": null
     },
     {
       "item_id": "zh-m04.q4",
-      "item_version": 1,
+      "item_version": 2,
       "role": "general",
       "target_ref": null,
       "starting_stage": null
     },
     {
       "item_id": "zh-m04.q5",
-      "item_version": 1,
+      "item_version": 2,
       "role": "general",
       "target_ref": null,
       "starting_stage": null
@@ -87,5 +87,6 @@
   "feedback_policy": "material_first_responses_then_help",
   "aggregation_policy": "whole_task_all_related_first_responses",
   "stage_gate": "next_task_and_transfer_later_calendar_day",
-  "purpose": "synthetic_contract_fixture_not_runtime_plan"
+  "purpose": "synthetic_contract_fixture_not_runtime_plan",
+  "halfway_safe_boundary_count": 5
 }

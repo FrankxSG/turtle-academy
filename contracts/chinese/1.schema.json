@@ -9,7 +9,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
         },
         "text": {
           "type": "string",
@@ -28,10 +28,11 @@
       "properties": {
         "id": {
           "type": "string",
-          "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
         },
         "version": {
-          "const": 1
+          "type": "integer",
+          "minimum": 1
         },
         "courses": {
           "type": "array",
@@ -49,7 +50,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+            "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
           },
           "minItems": 1
         },
@@ -57,7 +58,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+            "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
           },
           "minItems": 0
         },
@@ -86,7 +87,7 @@
         },
         "correct_option_id": {
           "type": "string",
-          "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
         },
         "hint": {
           "type": "string",
@@ -107,7 +108,7 @@
           "anyOf": [
             {
               "type": "string",
-              "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+              "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
             },
             {
               "type": "null"
@@ -135,9 +136,32 @@
           "type": "array",
           "items": {
             "type": "string",
-            "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+            "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
           },
           "minItems": 0
+        },
+        "blanks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/blank"
+          }
+        },
+        "annotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/annotation"
+          }
+        },
+        "blank_ref": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       },
       "required": [
@@ -157,7 +181,10 @@
         "material_id",
         "stage",
         "provenance",
-        "asset_refs"
+        "asset_refs",
+        "blanks",
+        "annotations",
+        "blank_ref"
       ],
       "additionalProperties": false
     },
@@ -166,10 +193,11 @@
       "properties": {
         "id": {
           "type": "string",
-          "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
         },
         "version": {
-          "const": 1
+          "type": "integer",
+          "minimum": 1
         },
         "courses": {
           "type": "array",
@@ -204,7 +232,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+            "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
           },
           "minItems": 1
         },
@@ -215,9 +243,21 @@
           "type": "array",
           "items": {
             "type": "string",
-            "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+            "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
           },
           "minItems": 0
+        },
+        "blanks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/blank"
+          }
+        },
+        "annotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/annotation"
+          }
         }
       },
       "required": [
@@ -229,7 +269,9 @@
         "body",
         "question_ids",
         "feedback_policy",
-        "asset_refs"
+        "asset_refs",
+        "blanks",
+        "annotations"
       ],
       "additionalProperties": false
     },
@@ -241,10 +283,11 @@
         },
         "batch_id": {
           "type": "string",
-          "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
         },
         "version": {
-          "const": 1
+          "type": "integer",
+          "minimum": 1
         },
         "curriculum_manifest_version": {
           "type": "string",
@@ -252,7 +295,12 @@
           "maxLength": 2000
         },
         "status": {
-          "const": "author_checked_pending_independent_and_owner_review"
+          "enum": [
+            "author_checked_pending_independent_and_owner_review",
+            "independently_reviewed_pending_owner",
+            "approved",
+            "retired"
+          ]
         },
         "materials": {
           "type": "array",
@@ -286,19 +334,23 @@
             },
             "independent_review": {
               "enum": [
-                "pending"
+                "pending",
+                "changes_requested",
+                "passed"
               ]
             },
             "owner_signoff": {
               "enum": [
-                "pending"
+                "pending",
+                "changes_requested",
+                "approved"
               ]
             },
             "sampled_item_ids": {
               "type": "array",
               "items": {
                 "type": "string",
-                "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+                "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
               },
               "minItems": 0
             },
@@ -306,13 +358,15 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+                "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
               },
               "minItems": 0
             },
             "rights_status": {
               "enum": [
-                "original_draft_pending_owner_rights_review"
+                "original_draft_pending_owner_rights_review",
+                "cleared",
+                "blocked"
               ]
             },
             "artwork": {
@@ -349,10 +403,11 @@
       "properties": {
         "item_id": {
           "type": "string",
-          "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
         },
         "item_version": {
-          "const": 1
+          "type": "integer",
+          "minimum": 1
         },
         "role": {
           "enum": [
@@ -365,7 +420,7 @@
           "anyOf": [
             {
               "type": "string",
-              "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+              "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
             },
             {
               "type": "null"
@@ -404,14 +459,15 @@
         },
         "plan_id": {
           "type": "string",
-          "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
         },
         "content_batch_id": {
           "type": "string",
-          "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
         },
         "content_version": {
-          "const": 1
+          "type": "integer",
+          "minimum": 1
         },
         "manifest_version": {
           "type": "string",
@@ -435,7 +491,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+            "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
           },
           "minItems": 2
         },
@@ -465,6 +521,10 @@
         },
         "purpose": {
           "const": "synthetic_contract_fixture_not_runtime_plan"
+        },
+        "halfway_safe_boundary_count": {
+          "type": "integer",
+          "minimum": 1
         }
       },
       "required": [
@@ -482,7 +542,8 @@
         "feedback_policy",
         "aggregation_policy",
         "stage_gate",
-        "purpose"
+        "purpose",
+        "halfway_safe_boundary_count"
       ],
       "additionalProperties": false
     },
@@ -504,7 +565,7 @@
           "anyOf": [
             {
               "type": "string",
-              "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+              "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
             },
             {
               "type": "null"
@@ -633,19 +694,18 @@
           "const": "chinese-attempt/1"
         },
         "event_id": {
-          "type": "string",
-          "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+          "$ref": "#/$defs/opaque_id"
         },
         "task_id": {
-          "type": "string",
-          "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+          "$ref": "#/$defs/opaque_id"
         },
         "item_id": {
           "type": "string",
-          "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
         },
         "item_version": {
-          "const": 1
+          "type": "integer",
+          "minimum": 1
         },
         "phase": {
           "enum": [
@@ -656,7 +716,7 @@
         },
         "selected_option_id": {
           "type": "string",
-          "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
         },
         "assistance": {
           "enum": [
@@ -674,8 +734,7 @@
           "minimum": 1
         },
         "idempotency_key": {
-          "type": "string",
-          "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+          "$ref": "#/$defs/opaque_id"
         }
       },
       "required": [
@@ -705,7 +764,10 @@
           "maxLength": 2000
         },
         "status": {
-          "const": "proposed_not_import_enabled"
+          "enum": [
+            "proposed_not_import_enabled",
+            "approved"
+          ]
         },
         "source_date": {
           "type": "string",
@@ -730,7 +792,7 @@
             "properties": {
               "id": {
                 "type": "string",
-                "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+                "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
               },
               "url": {
                 "type": "string",
@@ -739,7 +801,7 @@
               },
               "sha256": {
                 "type": "string",
-                "pattern": "^[0-9a-f]{64}$"
+                "pattern": "^[0-9a-f]{64}(?![\\s\\S])"
               },
               "accessed": {
                 "type": "string",
@@ -813,7 +875,7 @@
             "properties": {
               "id": {
                 "type": "string",
-                "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+                "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
               },
               "course": {
                 "enum": [
@@ -839,7 +901,7 @@
               },
               "source_ref": {
                 "type": "string",
-                "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+                "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
               },
               "source_pdf_page": {
                 "type": "integer",
@@ -855,7 +917,11 @@
                 "maxLength": 2000
               },
               "content_status": {
-                "const": "unfilled"
+                "enum": [
+                  "unfilled",
+                  "draft",
+                  "approved"
+                ]
               },
               "required_stages": {
                 "type": "array",
@@ -892,7 +958,7 @@
             "properties": {
               "id": {
                 "type": "string",
-                "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+                "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
               },
               "course": {
                 "enum": [
@@ -925,7 +991,7 @@
               },
               "source_ref": {
                 "type": "string",
-                "pattern": "^[a-z][a-z0-9_.-]{2,95}$"
+                "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
               }
             },
             "required": [
@@ -941,7 +1007,10 @@
           "minItems": 1
         },
         "coverage_status": {
-          "const": "denominator_and_mapping_review_pending"
+          "enum": [
+            "denominator_and_mapping_review_pending",
+            "approved"
+          ]
         },
         "limitations": {
           "type": "array",
@@ -965,6 +1034,55 @@
         "characters",
         "coverage_status",
         "limitations"
+      ],
+      "additionalProperties": false
+    },
+    "opaque_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}(?![\\s\\S])"
+    },
+    "blank": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+        },
+        "question_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+        }
+      },
+      "required": [
+        "id",
+        "question_id"
+      ],
+      "additionalProperties": false
+    },
+    "annotation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "pinyin": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "pinyin"
       ],
       "additionalProperties": false
     }

@@ -1,0 +1,68 @@
+{
+  "schema_version": "chinese-source-audit/1",
+  "manifest_version": "zh-2024-p2p3-draft.1",
+  "method": "checksum-pinned PDF text columns, set difference and comparison to manifest",
+  "extractor": "PyMuPDF 1.26.6",
+  "source_sha256": {
+    "moe-cl-characters-2024": "d833e9a4e4e632fb633a04b6471e9e6465a0097c7ea07a43e70913956942c145",
+    "moe-hcl-characters-2024": "461f131f3508e346de0aa5e9dc26298a9bfb8cacad67b7e3cc147a387d287914"
+  },
+  "records_match_manifest": true,
+  "set_differences": [
+    {
+      "grade": 2,
+      "recognition": {
+        "cl_count": 382,
+        "hcl_count": 382,
+        "cl_only": "",
+        "hcl_only": "",
+        "intersection_count": 382,
+        "hcl_is_superset": true
+      },
+      "writing": {
+        "cl_count": 183,
+        "hcl_count": 233,
+        "cl_only": "云兄冲凉动友地坐常拿方朋校步物球石红色花说走跑青飞香鱼",
+        "hcl_only": "丑互些亮位健冷刮加参吉吧呢喝国图坡娃婆孩就已帮应康张得急您找拔拾收教新旁晚最枝桌梦棵椅汤渴灭烤热爬猜直相真眼睛知礼祝空第约经能茶观觉角讲该踢道都重闹队静颜",
+        "intersection_count": 156,
+        "hcl_is_superset": false
+      },
+      "union": {
+        "cl_count": 477,
+        "hcl_count": 468,
+        "cl_only": "云兄冲凉动友地坐常拿方朋校步物球石红色花说走跑青飞香鱼",
+        "hcl_only": "喝国图孩拾收晚最桌椅汤直眼睛祝讲都重",
+        "intersection_count": 450,
+        "hcl_is_superset": false
+      }
+    },
+    {
+      "grade": 3,
+      "recognition": {
+        "cl_count": 285,
+        "hcl_count": 285,
+        "cl_only": "",
+        "hcl_only": "",
+        "intersection_count": 285,
+        "hcl_is_superset": true
+      },
+      "writing": {
+        "cl_count": 219,
+        "hcl_count": 269,
+        "cl_only": "些亮冷加吧呢喝国图圆坡孩就已帮应张得急扫找拾收新晚最桌梦棵爬直真眼睛知礼立第经能觉讲该道都重闹",
+        "hcl_only": "世举仍仔付代份偷傍冒准减努升卫卷厅原受周喊嘴圈备姓姨实尽希座弄弯忍感愿懂懒抖报拍持按挖搬撞改整替望末案洞浪消滚漫灵照熊特狮界留盖硬碰笨累脱舞船装讨论试谅贴费赔越趣跌转软近逃遍部量钟钻镜阿附陪鼻齐",
+        "intersection_count": 172,
+        "hcl_is_superset": false
+      },
+      "union": {
+        "cl_count": 430,
+        "hcl_count": 421,
+        "cl_only": "些亮冷加吧呢喝国图圆坡孩就已帮应张得急扫找拾收新晚最桌梦棵爬直真眼睛知礼立第经能觉讲该道都重闹",
+        "hcl_only": "卷厅原周圈姨实座弄弯愿懂拍持挖撞整末案浪消照特狮碰舞船讨试贴费趣转近遍阿附齐",
+        "intersection_count": 383,
+        "hcl_is_superset": false
+      }
+    }
+  ],
+  "limitation": "Reproducibility and selected visual spot checks do not complete independent audit of every source row or the syllabus outcome map."
+}

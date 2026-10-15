@@ -1,13 +1,13 @@
 {
   "schema_version": "chinese-content/1",
   "batch_id": "zh-starter-001",
-  "version": 1,
+  "version": 2,
   "curriculum_manifest_version": "zh-2024-p2p3-draft.1",
   "status": "author_checked_pending_independent_and_owner_review",
   "materials": [
     {
       "id": "zh-m01",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -23,11 +23,13 @@
         "zh-m01.q5"
       ],
       "feedback_policy": "after_all_first_responses",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": []
     },
     {
       "id": "zh-m02",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -43,18 +45,20 @@
         "zh-m02.q5"
       ],
       "feedback_policy": "after_all_first_responses",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": []
     },
     {
       "id": "zh-m03",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
       ],
       "kind": "cloze",
       "title": "公园里的早晨",
-      "body": "早上，我和妈妈到公园。太阳出来了，今天是个（1）天。小鸟在树上（2）。妈妈坐在长椅上，我沿（yán）着小路慢慢地（3）。走累了，我喝了几口（4）。回家前，我们把空瓶放进垃圾（5）。",
+      "body": "早上，我和妈妈到公园。雨停了，天放{{blank-1}}了。小鸟在树上{{blank-2}}。妈妈坐在长椅上，我{{pinyin-1}}着小路慢慢地{{blank-3}}。走累了，我喝了几口{{blank-4}}。回家前，我们把空瓶放进垃圾{{blank-5}}。",
       "question_ids": [
         "zh-m03.q1",
         "zh-m03.q2",
@@ -63,11 +67,40 @@
         "zh-m03.q5"
       ],
       "feedback_policy": "after_all_first_responses",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-m03.q1"
+        },
+        {
+          "id": "blank-2",
+          "question_id": "zh-m03.q2"
+        },
+        {
+          "id": "blank-3",
+          "question_id": "zh-m03.q3"
+        },
+        {
+          "id": "blank-4",
+          "question_id": "zh-m03.q4"
+        },
+        {
+          "id": "blank-5",
+          "question_id": "zh-m03.q5"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "pinyin-1",
+          "text": "沿",
+          "pinyin": "yán"
+        }
+      ]
     },
     {
       "id": "zh-m04",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -83,11 +116,13 @@
         "zh-m04.q5"
       ],
       "feedback_policy": "after_all_first_responses",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": []
     },
     {
       "id": "zh-m05",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_chinese",
         "p3_higher_chinese"
@@ -103,13 +138,15 @@
         "zh-m05.q5"
       ],
       "feedback_policy": "after_all_first_responses",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": []
     }
   ],
   "items": [
     {
       "id": "zh-m01.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -147,11 +184,14 @@
       "material_id": "zh-m01",
       "stage": null,
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
     },
     {
       "id": "zh-m01.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -184,16 +224,19 @@
       ],
       "correct_option_id": "opt-2",
       "hint": "看看“拿来”前面写的是谁。",
-      "explanation": "材料写明是姐姐拿来两个小盆。",
+      "explanation": "短文说是姐姐拿来两个小盆。",
       "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
       "material_id": "zh-m01",
       "stage": null,
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
     },
     {
       "id": "zh-m01.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -231,11 +274,14 @@
       "material_id": "zh-m01",
       "stage": null,
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
     },
     {
       "id": "zh-m01.q4",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -268,16 +314,19 @@
       ],
       "correct_option_id": "opt-3",
       "hint": "找“再”后面的动作。",
-      "explanation": "放好豆子后，材料接着写“再浇一点水”。这里只找已写明的动作。",
-      "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
+      "explanation": "放好豆子后，他们再浇一点水。",
+      "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。 订正只解释答案；课程范围和评估限制留在作者说明中。",
       "material_id": "zh-m01",
       "stage": null,
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
     },
     {
       "id": "zh-m01.q5",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -310,16 +359,19 @@
       ],
       "correct_option_id": "opt-4",
       "hint": "找“最后”后面写的地方。",
-      "explanation": "材料写明最后把小盆放在窗边。",
+      "explanation": "短文说最后把小盆放在窗边。",
       "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
       "material_id": "zh-m01",
       "stage": null,
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
     },
     {
       "id": "zh-m02.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -357,11 +409,14 @@
       "material_id": "zh-m02",
       "stage": null,
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
     },
     {
       "id": "zh-m02.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -399,11 +454,14 @@
       "material_id": "zh-m02",
       "stage": null,
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
     },
     {
       "id": "zh-m02.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -441,11 +499,14 @@
       "material_id": "zh-m02",
       "stage": null,
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
     },
     {
       "id": "zh-m02.q4",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -483,11 +544,14 @@
       "material_id": "zh-m02",
       "stage": null,
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
     },
     {
       "id": "zh-m02.q5",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -525,11 +589,14 @@
       "material_id": "zh-m02",
       "stage": null,
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
     },
     {
       "id": "zh-m03.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -541,7 +608,7 @@
       "target_refs": [],
       "family": "cloze",
       "format": "mcq_4plus",
-      "stem": "第（1）处选哪个字？",
+      "stem": "第1空选哪个字？",
       "options": [
         {
           "id": "opt-1",
@@ -561,17 +628,20 @@
         }
       ],
       "correct_option_id": "opt-1",
-      "hint": "这里写的是天气。",
-      "explanation": "说天气晴朗用“晴”；“睛”指眼睛，“请”表示请求，“情”常用于感情。",
+      "hint": "这里写的是雨后的天气。",
+      "explanation": "“放晴”是说天不再下雨，太阳出来了。",
       "rationale": "只评估选择答案的能力，不推断独立书写能力。",
       "material_id": "zh-m03",
       "stage": null,
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": "blank-1"
     },
     {
       "id": "zh-m03.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -583,7 +653,7 @@
       "target_refs": [],
       "family": "cloze",
       "format": "mcq_4plus",
-      "stem": "第（2）处选哪个词？",
+      "stem": "第2空选哪个词？",
       "options": [
         {
           "id": "opt-1",
@@ -604,16 +674,19 @@
       ],
       "correct_option_id": "opt-3",
       "hint": "看看做这个动作的是谁。",
-      "explanation": "小鸟在树上唱歌与上下文相合，其他动作不适合这里的场景。",
-      "rationale": "只评估选择答案的能力，不推断独立书写能力。",
+      "explanation": "这段话写小鸟在树上唱歌。",
+      "rationale": "只评估选择答案的能力，不推断独立书写能力。 订正只解释答案；课程范围和评估限制留在作者说明中。",
       "material_id": "zh-m03",
       "stage": null,
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": "blank-2"
     },
     {
       "id": "zh-m03.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -625,7 +698,7 @@
       "target_refs": [],
       "family": "cloze",
       "format": "mcq_4plus",
-      "stem": "第（3）处选哪个词？",
+      "stem": "第3空选哪个词？",
       "options": [
         {
           "id": "opt-1",
@@ -646,16 +719,19 @@
       ],
       "correct_option_id": "opt-2",
       "hint": "留意“小路”和后面的“走累了”。",
-      "explanation": "小路和“走累了”表明这里应选“走路”。",
-      "rationale": "只评估选择答案的能力，不推断独立书写能力。",
+      "explanation": "小路和“走累了”告诉我们，这里应选“走路”。",
+      "rationale": "只评估选择答案的能力，不推断独立书写能力。 订正只解释答案；课程范围和评估限制留在作者说明中。",
       "material_id": "zh-m03",
       "stage": null,
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": "blank-3"
     },
     {
       "id": "zh-m03.q4",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -667,7 +743,7 @@
       "target_refs": [],
       "family": "cloze",
       "format": "mcq_4plus",
-      "stem": "第（4）处选哪个字？",
+      "stem": "第4空选哪个字？",
       "options": [
         {
           "id": "opt-1",
@@ -688,16 +764,19 @@
       ],
       "correct_option_id": "opt-4",
       "hint": "想想“喝了几口”后面可以接什么。",
-      "explanation": "水可以喝；另外三个选项不能与这里的“喝了几口”搭配。",
-      "rationale": "只评估选择答案的能力，不推断独立书写能力。",
+      "explanation": "水可以喝，另外三个选项不合适。",
+      "rationale": "只评估选择答案的能力，不推断独立书写能力。 订正只解释答案；课程范围和评估限制留在作者说明中。",
       "material_id": "zh-m03",
       "stage": null,
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": "blank-4"
     },
     {
       "id": "zh-m03.q5",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -709,7 +788,7 @@
       "target_refs": [],
       "family": "cloze",
       "format": "mcq_4plus",
-      "stem": "第（5）处选哪个字？",
+      "stem": "第5空选哪个字？",
       "options": [
         {
           "id": "opt-1",
@@ -730,16 +809,19 @@
       ],
       "correct_option_id": "opt-1",
       "hint": "想想放垃圾的容器叫什么。",
-      "explanation": "“垃圾桶”是放垃圾的容器。这里只评估词语选择。",
-      "rationale": "只评估选择答案的能力，不推断独立书写能力。",
+      "explanation": "空瓶要放进垃圾桶，这里选“桶”。",
+      "rationale": "只评估选择答案的能力，不推断独立书写能力。 订正只解释答案；课程范围和评估限制留在作者说明中。",
       "material_id": "zh-m03",
       "stage": null,
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": "blank-5"
     },
     {
       "id": "zh-m04.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -777,11 +859,14 @@
       "material_id": "zh-m04",
       "stage": null,
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
     },
     {
       "id": "zh-m04.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -819,11 +904,14 @@
       "material_id": "zh-m04",
       "stage": null,
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
     },
     {
       "id": "zh-m04.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -856,16 +944,19 @@
       ],
       "correct_option_id": "opt-1",
       "hint": "找“借给他”前面的人。",
-      "explanation": "材料写明老师借给他一把蓝伞。",
+      "explanation": "短文说老师借给他一把蓝伞。",
       "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
       "material_id": "zh-m04",
       "stage": null,
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
     },
     {
       "id": "zh-m04.q4",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -898,16 +989,19 @@
       ],
       "correct_option_id": "opt-3",
       "hint": "看看老师借出的是什么伞。",
-      "explanation": "材料写的是蓝伞。",
+      "explanation": "短文写的是蓝伞。",
       "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
       "material_id": "zh-m04",
       "stage": null,
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
     },
     {
       "id": "zh-m04.q5",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -945,11 +1039,14 @@
       "material_id": "zh-m04",
       "stage": null,
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
     },
     {
       "id": "zh-m05.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_chinese",
         "p3_higher_chinese"
@@ -987,11 +1084,14 @@
       "material_id": "zh-m05",
       "stage": null,
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
     },
     {
       "id": "zh-m05.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_chinese",
         "p3_higher_chinese"
@@ -1024,16 +1124,19 @@
       ],
       "correct_option_id": "opt-3",
       "hint": "找“小宁想用”后面的材料。",
-      "explanation": "材料明确写明小宁想用纸盒做书架。",
+      "explanation": "短文说小宁想用纸盒做书架。",
       "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
       "material_id": "zh-m05",
       "stage": null,
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
     },
     {
       "id": "zh-m05.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_chinese",
         "p3_higher_chinese"
@@ -1066,16 +1169,19 @@
       ],
       "correct_option_id": "opt-1",
       "hint": "找“可是”后面明说的情况。",
-      "explanation": "文本直接说明大纸盒太软。这是提取明示原因，不是预测或推断。",
-      "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
+      "explanation": "短文说大纸盒太软，所以放进书后就倒了。",
+      "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。 订正只解释答案；课程范围和评估限制留在作者说明中。",
       "material_id": "zh-m05",
       "stage": null,
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
     },
     {
       "id": "zh-m05.q4",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_chinese",
         "p3_higher_chinese"
@@ -1113,11 +1219,14 @@
       "material_id": "zh-m05",
       "stage": null,
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
     },
     {
       "id": "zh-m05.q5",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_chinese",
         "p3_higher_chinese"
@@ -1155,11 +1264,14 @@
       "material_id": "zh-m05",
       "stage": null,
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
     },
     {
       "id": "zh-short-u5ea7.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -1174,7 +1286,7 @@
       ],
       "family": "character",
       "format": "mcq_4plus",
-      "stem": "一（　）大山",
+      "stem": "一{{blank-1}}大山",
       "options": [
         {
           "id": "opt-1",
@@ -1200,11 +1312,19 @@
       "material_id": null,
       "stage": "exact",
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-short-u5ea7.q1"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
     },
     {
       "id": "zh-short-u5ea7.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -1219,7 +1339,7 @@
       ],
       "family": "character",
       "format": "mcq_4plus",
-      "stem": "我们找到自己的（　）位。",
+      "stem": "这{{blank-1}}桥很长。",
       "options": [
         {
           "id": "opt-1",
@@ -1239,17 +1359,25 @@
         }
       ],
       "correct_option_id": "opt-3",
-      "hint": "这里要组成表示位置的词。",
-      "explanation": "表示位置的词是“座位”。“坐”表示动作。",
-      "rationale": "辨认“座”在不同用法中的字形与字义；只评估辨认，不评估手写。",
+      "hint": "这里要选表示桥的数量的字。",
+      "explanation": "说一座桥、这座桥，都用“座”。",
+      "rationale": "用桥的数量表达辨认“座”；撤掉可能引起词形变体争议的旧题，不裁定词典变体。只评估辨认。",
       "material_id": null,
       "stage": "similar",
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-short-u5ea7.q2"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
     },
     {
       "id": "zh-short-u5ea7.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -1264,7 +1392,7 @@
       ],
       "family": "character",
       "format": "mcq_4plus",
-      "stem": "车上没有空（　）了，只能站着。",
+      "stem": "车上没有空{{blank-1}}了，只能站着。",
       "options": [
         {
           "id": "opt-1",
@@ -1290,11 +1418,19 @@
       "material_id": null,
       "stage": "generic",
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-short-u5ea7.q3"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
     },
     {
       "id": "zh-short-u6674.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -1309,7 +1445,7 @@
       ],
       "family": "character",
       "format": "mcq_4plus",
-      "stem": "今天是（　）天。",
+      "stem": "天空没有云，今天是{{blank-1}}天。",
       "options": [
         {
           "id": "opt-1",
@@ -1329,17 +1465,25 @@
         }
       ],
       "correct_option_id": "opt-4",
-      "hint": "这里说的是天气。",
-      "explanation": "天气好、没有云或云很少，可以说“晴天”。",
+      "hint": "想一想，哪个字用来写天气？",
+      "explanation": "没有云、天气好，可以说“晴天”。",
       "rationale": "辨认“晴”在不同用法中的字形与字义；只评估辨认，不评估手写。",
       "material_id": null,
       "stage": "exact",
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-short-u6674.q1"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
     },
     {
       "id": "zh-short-u6674.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -1354,7 +1498,7 @@
       ],
       "family": "character",
       "format": "mcq_4plus",
-      "stem": "雨停了，天也放（　）了。",
+      "stem": "雨停了，天也放{{blank-1}}了。",
       "options": [
         {
           "id": "opt-1",
@@ -1380,11 +1524,19 @@
       "material_id": null,
       "stage": "similar",
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-short-u6674.q2"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
     },
     {
       "id": "zh-short-u6674.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -1399,7 +1551,7 @@
       ],
       "family": "character",
       "format": "mcq_4plus",
-      "stem": "天气预报（yù bào）说，明天（　），可以到公园走走。",
+      "stem": "天气{{pinyin-1}}说，明天{{blank-1}}，可以到公园走走。",
       "options": [
         {
           "id": "opt-1",
@@ -1425,11 +1577,25 @@
       "material_id": null,
       "stage": "generic",
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-short-u6674.q3"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "pinyin-1",
+          "text": "预报",
+          "pinyin": "yù bào"
+        }
+      ],
+      "blank_ref": "blank-1"
     },
     {
       "id": "zh-short-u4f4f.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -1444,7 +1610,7 @@
       ],
       "family": "character",
       "format": "mcq_4plus",
-      "stem": "我（　）在这座组（zǔ）屋。",
+      "stem": "我{{blank-1}}在这座{{pinyin-1}}屋。",
       "options": [
         {
           "id": "opt-1",
@@ -1470,11 +1636,25 @@
       "material_id": null,
       "stage": "exact",
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-short-u4f4f.q1"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "pinyin-1",
+          "text": "组",
+          "pinyin": "zǔ"
+        }
+      ],
+      "blank_ref": "blank-1"
     },
     {
       "id": "zh-short-u4f4f.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -1489,7 +1669,7 @@
       ],
       "family": "character",
       "format": "mcq_4plus",
-      "stem": "出门时，我记（　）了妈妈的话。",
+      "stem": "出门时，我记{{blank-1}}了妈妈的话。",
       "options": [
         {
           "id": "opt-1",
@@ -1515,11 +1695,19 @@
       "material_id": null,
       "stage": "similar",
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-short-u4f4f.q2"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
     },
     {
       "id": "zh-short-u4f4f.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -1534,7 +1722,7 @@
       ],
       "family": "character",
       "format": "mcq_4plus",
-      "stem": "风太大了，请把门按（　），别让它关上。",
+      "stem": "风太大了，请把门按{{blank-1}}，别让它关上。",
       "options": [
         {
           "id": "opt-1",
@@ -1560,7 +1748,15 @@
       "material_id": null,
       "stage": "generic",
       "provenance": "original_generic_author_draft",
-      "asset_refs": []
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-short-u4f4f.q3"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
     }
   ],
   "review_log": {
@@ -1572,10 +1768,12 @@
       "对照官方年级矩阵与字表",
       "核对原创内容与外部能力边界"
     ],
-    "independent_review": "pending",
+    "independent_review": "changes_requested",
     "owner_signoff": "pending",
     "sampled_item_ids": [],
-    "disputed_item_ids": [],
+    "disputed_item_ids": [
+      "zh-short-u5ea7.q2"
+    ],
     "rights_status": "original_draft_pending_owner_rights_review",
     "artwork": "none"
   }
