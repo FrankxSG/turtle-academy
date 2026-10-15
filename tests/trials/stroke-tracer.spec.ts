@@ -101,8 +101,12 @@ test('free trace: ungraded ink, undo, outline toggle, cleared on change', async 
 async function controlledWatch(page: Page) {
   await page.clock.install({ time: new Date('2026-01-01T00:00:00Z') })
   await page.clock.pauseAt(new Date('2026-01-01T00:00:01Z'))
-  await openTrial(page)
+  await page.goto('/#/stroke-tracer')
+  // Pause CSS playback before Watch mounts; otherwise a slow runner can finish
+  // the first real animation before the pause applies, and no .st-anim remains.
   await page.addStyleTag({ content: '.st-anim { animation-play-state: paused !important; }' })
+  await page.getByRole('button', { name: /^Mouse/ }).click()
+  await expect(page.getByTestId('input-choice')).toHaveText('Mouse')
 }
 
 test('watch Pause cancels a pending inter-stroke advance', async ({ page }) => {
