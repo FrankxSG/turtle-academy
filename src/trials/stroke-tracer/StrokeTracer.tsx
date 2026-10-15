@@ -43,6 +43,8 @@ export type StrokeTracerProps = {
   /** Guided only: every checked stroke, for an in-memory tester panel. */
   onGuidedAttempt?: (attempt: GuidedAttempt) => void
   onGuidedComplete?: () => void
+  /** Restart the trial's parent-owned completion and attempt evidence too. */
+  onGuidedRestart?: () => void
 }
 
 const INK_WIDTH = 46
@@ -65,7 +67,7 @@ export function acceptsPointer(input: InputChoice, pointerType: string, width: n
 
 export function StrokeTracer({
   character, data, mode, input, size, leniency = 1, hintAfterMisses = 3, speed = 1,
-  onGuidedAttempt, onGuidedComplete,
+  onGuidedAttempt, onGuidedComplete, onGuidedRestart,
 }: StrokeTracerProps) {
   const svgRef = useRef<SVGSVGElement>(null)
   const active = useRef<{ id: number; type: string } | null>(null)
@@ -82,6 +84,7 @@ export function StrokeTracer({
   const [watchShown, setWatchShown] = useState(0)
   const [playing, setPlaying] = useState(!reducedMotion)
   const [playKey, setPlayKey] = useState(0)
+  const [gapPending, setGapPending] = useState(false)
 
   const medians = useMemo(() => data.medians.map((m) => m.map(toView)), [data])
   const strokeCount = data.strokes.length
@@ -94,6 +97,7 @@ export function StrokeTracer({
     setShownFor({ character, mode, data, input })
     setInk([]); setCurrentState(null); setRejected(null)
     setDone(0); setMisses(0); setWatchShown(0); setPlaying(!reducedMotion)
+    setGapPending(false); setHintKey(0); setPlayKey((n) => n + 1)
   }
   useEffect(() => { currentRef.current = null; active.current = null }, [character, mode, data, input])
 
@@ -104,12 +108,11 @@ export function StrokeTracer({
   }, [rejected])
 
   // Watch playback: advance to the next stroke after a short gap.
-  const [gapPending, setGapPending] = useState(false)
   useEffect(() => {
-    if (!gapPending) return
+    if (!gapPending || !playing || mode !== 'watch') return
     const timer = window.setTimeout(() => { setGapPending(false); setWatchShown((n) => n + 1) }, STROKE_GAP_MS / speed)
     return () => window.clearTimeout(timer)
-  }, [gapPending, speed])
+  }, [gapPending, speed, playing, character, mode, data, input])
 
   function toPoint(event: { clientX: number; clientY: number }): Point | null {
     const ctm = svgRef.current?.getScreenCTM()
@@ -243,7 +246,7 @@ export function StrokeTracer({
       <div className="st-actions">
         {mode === 'watch' && <>
           {!reducedMotion && (playing && watchShown < strokeCount
-            ? <button type="button" onClick={() => setPlaying(false)}>Pause</button>
+            ? <button type="button" onClick={() => { setPlaying(false); setGapPending(false) }}>Pause</button>
             : <button type="button" onClick={() => {
               if (watchShown >= strokeCount) setWatchShown(0)
               setPlaying(true); setPlayKey((k) => k + 1)
@@ -262,7 +265,10 @@ export function StrokeTracer({
         {mode === 'guided' && <>
           <button type="button" disabled={finished}
             onClick={() => { setMisses((m) => Math.max(m, hintAfterMisses || 1)); setHintKey((k) => k + 1) }}>Show me</button>
-          <button type="button" onClick={() => { setDone(0); setMisses(0); setRejected(null) }}>Start again</button>
+          <button type="button" onClick={() => {
+            setDone(0); setMisses(0); setRejected(null); setHintKey(0); setCurrent(null); active.current = null
+            onGuidedRestart?.()
+          }}>Start again</button>
         </>}
       </div>
     </div>

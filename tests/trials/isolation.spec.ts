@@ -50,6 +50,12 @@ test('trials build has no service worker, manifest, storage or product code', ()
   expect(found).toEqual([])
 })
 
+test('trials distribution retains the unchanged character-data licence', () => {
+  const source = readFileSync(join(root, 'src/trials/stroke-tracer/data/ARPHICPL.TXT'))
+  const shipped = readFileSync(join(root, 'dist-trials/licences/ARPHICPL.TXT'))
+  expect(shipped.equals(source)).toBe(true)
+})
+
 test('learner app source never imports trial code', () => {
   const offenders = files(join(root, 'src'))
     .filter((file) => !file.includes('/src/trials/') && /\.(ts|tsx)$/.test(file))

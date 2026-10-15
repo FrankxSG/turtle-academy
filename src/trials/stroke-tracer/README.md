@@ -1,6 +1,6 @@
 # StrokeTracer trial
 
-Design, decisions and results: **Issue #8**. Status: `exploring`. Scope: later phase, outside Pilot delivery work. Under `main`, Pilot P0-17 is ungraded ephemeral tracing; draft PR #7 proposes withdrawing it. This trial assumes neither.
+Design, decisions and results: **Issue #8**. Status: `exploring`. Scope: later phase, outside Pilot delivery work. PR #7 merged as `dc3ed51`: tracing/PDF are outside Pilot delivery and P0-17 covers offline PIN controls. This trial does not promote tracing into the Pilot.
 
 **Question:** is watching and tracing stroke order comfortable on a landscape tablet and phone with finger and stylus, and does a simple guided check reject wrong strokes without frustrating false rejections?
 
@@ -25,6 +25,7 @@ The learner app (`npm run build`) never includes this code. The trials build has
 - **Input** is chosen explicitly: Finger, Stylus or Mouse. In Stylus mode, touch never draws. In Finger mode, very wide touch contacts are ignored (an experimental palm heuristic, not verified palm rejection). A stylus may take over from a touch already in progress. "Use finger" returns to touch at any time.
 - **Accepted strokes** show the clean reference shape. That is reference progress, not a corrected sample of the user's writing. The completion message is "Reference strokes completed." Retries and reasons appear only in the collapsed tester panel, never as a grade, knowledge-error record or mastery signal.
 - **Nothing is stored or sent.** Ink and attempt details live in memory, clear on any character, mode or input change, and disappear on leaving the page. "Reset trial" clears everything.
+- Watch timers and animation state reset with each character/mode/input session. Pause cancels the pending inter-stroke advance; Play replays the current stroke. Guided "Start again" also clears completion and tester attempt details.
 
 ## Guided checker
 
@@ -47,6 +48,7 @@ The learner app (`npm run build`) never includes this code. The trials build has
 - `data/*.json`: six generic characters (人 大 山 木 水 字) copied unmodified from [hanzi-writer-data](https://github.com/chanind/hanzi-writer-data) at commit `68d10a4`, bundled so the trial works without a network.
 - Data origin: [Make Me a Hanzi](https://github.com/skishore/makemeahanzi), extracted from Arphic Technology fonts. Redistributed under the **Arphic Public License**; full text in `data/ARPHICPL.TXT`. Keep the licence file and attribution with any copy.
 - The data licence is separate from Hanzi Writer's MIT code licence. No Hanzi Writer code is copied.
+- The trials build emits the unchanged full licence at `licences/ARPHICPL.TXT`, linked from the demo; the local development server serves the same file. Output checks compare the shipped bytes against the source licence.
 
 ## Before any product use
 

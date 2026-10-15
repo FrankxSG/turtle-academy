@@ -96,6 +96,88 @@ test('free trace: ungraded ink, undo, outline toggle, cleared on change', async 
   expect(await inkCount(page)).toBe(0)
 })
 
+// Pause CSS playback and deliver animation-end explicitly so these regressions
+// exercise the inter-stroke timer without timing-sensitive sleeps.
+async function controlledWatch(page: Page) {
+  await page.clock.install({ time: new Date('2026-01-01T00:00:00Z') })
+  await page.clock.pauseAt(new Date('2026-01-01T00:00:01Z'))
+  await openTrial(page)
+  await page.addStyleTag({ content: '.st-anim { animation-play-state: paused !important; }' })
+}
+
+test('watch Pause cancels a pending inter-stroke advance', async ({ page }) => {
+  await controlledWatch(page)
+  await page.locator('.st-board path.st-anim').dispatchEvent('animationend')
+  await page.getByRole('button', { name: 'Pause' }).click()
+  await page.clock.runFor(1000)
+  await expect(page.getByTestId('stroke-board')).toHaveAttribute('data-shown', '0')
+  await expect(page.getByTestId('stroke-status')).toContainText('paused')
+  await page.getByRole('button', { name: 'Play', exact: true }).click()
+  await page.locator('.st-board path.st-anim').dispatchEvent('animationend')
+  await page.clock.runFor(250)
+  await expect(page.getByTestId('stroke-board')).toHaveAttribute('data-shown', '1')
+})
+
+test('watch character changes cancel the old gap and start a fresh animation', async ({ page }) => {
+  await controlledWatch(page)
+  await page.locator('.st-board path.st-anim').dispatchEvent('animationend')
+  await page.getByRole('button', { name: '大 dà' }).click()
+  await page.clock.runFor(1000)
+  await expect(page.getByTestId('stroke-board')).toHaveAttribute('data-shown', '0')
+  await page.locator('.st-board path.st-anim').evaluate((el) => el.setAttribute('data-old-animation', 'true'))
+  await page.getByRole('button', { name: '字 zì' }).click()
+  await expect(page.locator('[data-old-animation]')).toHaveCount(0)
+  await expect(page.getByTestId('stroke-board')).toHaveAttribute('data-shown', '0')
+  await page.locator('.st-board path.st-anim').dispatchEvent('animationend')
+  await page.clock.runFor(250)
+  await expect(page.getByTestId('stroke-board')).toHaveAttribute('data-shown', '1')
+})
+
+test('watch mode, input changes and Restart discard pending playback', async ({ page }) => {
+  await controlledWatch(page)
+  await page.locator('.st-board path.st-anim').dispatchEvent('animationend')
+  await page.getByRole('button', { name: 'Free trace' }).click()
+  await page.getByRole('button', { name: 'Watch', exact: true }).click()
+  await page.clock.runFor(1000)
+  await expect(page.getByTestId('stroke-board')).toHaveAttribute('data-shown', '0')
+  await page.locator('.st-board path.st-anim').dispatchEvent('animationend')
+  await page.getByRole('button', { name: 'Use finger' }).click()
+  await page.clock.runFor(1000)
+  await expect(page.getByTestId('stroke-board')).toHaveAttribute('data-shown', '0')
+  await page.locator('.st-board path.st-anim').dispatchEvent('animationend')
+  await page.clock.runFor(250)
+  await expect(page.getByTestId('stroke-board')).toHaveAttribute('data-shown', '1')
+  await page.locator('.st-board path.st-anim').dispatchEvent('animationend')
+  await page.getByRole('button', { name: 'Restart', exact: true }).click()
+  await page.clock.runFor(1000)
+  await expect(page.getByTestId('stroke-board')).toHaveAttribute('data-shown', '0')
+})
+
+test('guided Start again clears parent completion and attempt evidence', async ({ page }) => {
+  await openTrial(page)
+  await page.getByRole('button', { name: 'Guided (experimental)' }).click()
+  for (let i = 0; i < 2; i++) await mouseStroke(page, median('人', i))
+  await expect(page.getByTestId('guided-complete')).toBeVisible()
+  await page.getByText('Tester details').click()
+  await expect(page.getByTestId('attempt-summary')).toHaveText('Checked strokes: 2 · not accepted: 0')
+  await page.getByRole('button', { name: 'Start again', exact: true }).click()
+  await expect(page.getByTestId('guided-complete')).toHaveCount(0)
+  await expect(page.getByTestId('stroke-board')).toHaveAttribute('data-done', '0')
+  await expect(page.getByTestId('attempt-summary')).toHaveText('Checked strokes: 0 · not accepted: 0')
+  await mouseStroke(page, median('人', 0))
+  await expect(page.getByTestId('stroke-board')).toHaveAttribute('data-done', '1')
+  await expect(page.getByTestId('attempt-summary')).toHaveText('Checked strokes: 1 · not accepted: 0')
+})
+
+test('demo licence link serves the exact bundled data licence', async ({ page }) => {
+  await openTrial(page)
+  const link = page.getByRole('link', { name: 'Arphic Public License', exact: true })
+  await expect(link).toHaveAttribute('href', './licences/ARPHICPL.TXT')
+  const response = await page.request.get('/licences/ARPHICPL.TXT')
+  expect(response.ok()).toBe(true)
+  expect(await response.body()).toEqual(readFileSync(new URL('../../src/trials/stroke-tracer/data/ARPHICPL.TXT', import.meta.url)))
+})
+
 test('guided: rejects reversed, wrong-order, scribbled and shortcut strokes; completes in order', async ({ page }) => {
   await openTrial(page)
   await page.getByRole('button', { name: '大 dà' }).click()

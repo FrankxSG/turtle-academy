@@ -1,4 +1,5 @@
 import { execSync } from 'node:child_process'
+import { readFileSync } from 'node:fs'
 import { defineConfig } from 'vite'
 
 // Trials-only build (Issue #8). Separate entry and output directory; no PWA
@@ -12,6 +13,22 @@ function commit() {
 export default defineConfig({
   root: 'trials',
   publicDir: false,
+  plugins: [{
+    name: 'trial-data-licence',
+    generateBundle() {
+      this.emitFile({
+        type: 'asset',
+        fileName: 'licences/ARPHICPL.TXT',
+        source: readFileSync(new URL('./src/trials/stroke-tracer/data/ARPHICPL.TXT', import.meta.url)),
+      })
+    },
+    configureServer(server) {
+      server.middlewares.use('/licences/ARPHICPL.TXT', (_request, response) => {
+        response.setHeader('Content-Type', 'text/plain; charset=utf-8')
+        response.end(readFileSync(new URL('./src/trials/stroke-tracer/data/ARPHICPL.TXT', import.meta.url)))
+      })
+    },
+  }],
   define: { __TRIALS_COMMIT__: JSON.stringify(commit()) },
   server: { fs: { allow: ['..'] } },
   build: { outDir: '../dist-trials', emptyOutDir: true, sourcemap: false },

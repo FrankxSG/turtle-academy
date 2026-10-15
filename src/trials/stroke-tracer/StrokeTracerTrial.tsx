@@ -65,6 +65,10 @@ export function StrokeTracerTrial() {
     setInput(null); setIndex(0); setMode('watch'); setSpeed(1); setLeniency(1); setSession((n) => n + 1)
   }
 
+  function restartGuided() {
+    setAttempts([]); setCompleted(false); setSession((n) => n + 1)
+  }
+
   if (!input) return (
     <Shell>
       <a href="#/" className="t-back">← All trials</a>
@@ -92,8 +96,9 @@ export function StrokeTracerTrial() {
       </header>
       <main className="t-stage" data-testid="trial-stage">
         <div className="t-board-col">
-          <StrokeTracer key={session} character={sample.character} data={sample.data} mode={mode} input={input}
+          <StrokeTracer key={`${session}:${sample.character}:${mode}:${input}`} character={sample.character} data={sample.data} mode={mode} input={input}
             size={view.size} leniency={leniency} speed={speed}
+            onGuidedRestart={restartGuided}
             onGuidedAttempt={(a) => setAttempts((all) => all.concat([a]))} onGuidedComplete={() => setCompleted(true)} />
         </div>
         <div className="t-side">
@@ -152,7 +157,7 @@ export function StrokeTracerTrial() {
               <ul>{CHECKLIST.map((item) => <li key={item}>{item}</li>)}</ul>
             </details>
           </details>
-          <p className="t-meta">Stroke data: hanzi-writer-data (from Make Me a Hanzi / Arphic fonts), Arphic Public License.</p>
+          <p className="t-meta">Stroke data: hanzi-writer-data (from Make Me a Hanzi / Arphic fonts), <a href="./licences/ARPHICPL.TXT">Arphic Public License</a>.</p>
         </div>
       </main>
     </div>
