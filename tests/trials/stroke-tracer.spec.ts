@@ -109,51 +109,66 @@ async function controlledWatch(page: Page) {
   await expect(page.getByTestId('input-choice')).toHaveText('Mouse')
 }
 
+/** Ends the current Watch animation and waits until React has handled it (the stroke unmounts for the gap). */
+async function endAnimation(page: Page) {
+  await page.locator('.st-board path.st-anim').dispatchEvent('animationend')
+  await expect(page.locator('.st-board path.st-anim')).toHaveCount(0)
+}
+
+/** Advances fake time in small steps so timers scheduled by React effects mid-way still fire. */
+async function advance(page: Page, ms: number) {
+  for (let elapsed = 0; elapsed < ms; elapsed += 50) await page.clock.runFor(50)
+}
+
+async function advanceUntilShown(page: Page, value: string) {
+  await expect.poll(async () => {
+    await page.clock.runFor(50)
+    return page.getByTestId('stroke-board').getAttribute('data-shown')
+  }, { timeout: 5000 }).toBe(value)
+}
+
 test('watch Pause cancels a pending inter-stroke advance', async ({ page }) => {
   await controlledWatch(page)
-  await page.locator('.st-board path.st-anim').dispatchEvent('animationend')
+  await endAnimation(page)
   await page.getByRole('button', { name: 'Pause' }).click()
-  await page.clock.runFor(1000)
+  await advance(page, 1000)
   await expect(page.getByTestId('stroke-board')).toHaveAttribute('data-shown', '0')
   await expect(page.getByTestId('stroke-status')).toContainText('paused')
   await page.getByRole('button', { name: 'Play', exact: true }).click()
-  await page.locator('.st-board path.st-anim').dispatchEvent('animationend')
-  await page.clock.runFor(250)
-  await expect(page.getByTestId('stroke-board')).toHaveAttribute('data-shown', '1')
+  await endAnimation(page)
+  await advanceUntilShown(page, '1')
 })
 
 test('watch character changes cancel the old gap and start a fresh animation', async ({ page }) => {
   await controlledWatch(page)
-  await page.locator('.st-board path.st-anim').dispatchEvent('animationend')
+  await endAnimation(page)
   await page.getByRole('button', { name: '大 dà' }).click()
-  await page.clock.runFor(1000)
+  await advance(page, 1000)
   await expect(page.getByTestId('stroke-board')).toHaveAttribute('data-shown', '0')
   await page.locator('.st-board path.st-anim').evaluate((el) => el.setAttribute('data-old-animation', 'true'))
   await page.getByRole('button', { name: '字 zì' }).click()
   await expect(page.locator('[data-old-animation]')).toHaveCount(0)
   await expect(page.getByTestId('stroke-board')).toHaveAttribute('data-shown', '0')
-  await page.locator('.st-board path.st-anim').dispatchEvent('animationend')
-  await page.clock.runFor(250)
-  await expect(page.getByTestId('stroke-board')).toHaveAttribute('data-shown', '1')
+  await endAnimation(page)
+  await advanceUntilShown(page, '1')
 })
 
 test('watch mode, input changes and Restart discard pending playback', async ({ page }) => {
   await controlledWatch(page)
-  await page.locator('.st-board path.st-anim').dispatchEvent('animationend')
+  await endAnimation(page)
   await page.getByRole('button', { name: 'Free trace' }).click()
   await page.getByRole('button', { name: 'Watch', exact: true }).click()
-  await page.clock.runFor(1000)
+  await advance(page, 1000)
   await expect(page.getByTestId('stroke-board')).toHaveAttribute('data-shown', '0')
-  await page.locator('.st-board path.st-anim').dispatchEvent('animationend')
+  await endAnimation(page)
   await page.getByRole('button', { name: 'Use finger' }).click()
-  await page.clock.runFor(1000)
+  await advance(page, 1000)
   await expect(page.getByTestId('stroke-board')).toHaveAttribute('data-shown', '0')
-  await page.locator('.st-board path.st-anim').dispatchEvent('animationend')
-  await page.clock.runFor(250)
-  await expect(page.getByTestId('stroke-board')).toHaveAttribute('data-shown', '1')
-  await page.locator('.st-board path.st-anim').dispatchEvent('animationend')
+  await endAnimation(page)
+  await advanceUntilShown(page, '1')
+  await endAnimation(page)
   await page.getByRole('button', { name: 'Restart', exact: true }).click()
-  await page.clock.runFor(1000)
+  await advance(page, 1000)
   await expect(page.getByTestId('stroke-board')).toHaveAttribute('data-shown', '0')
 })
 
