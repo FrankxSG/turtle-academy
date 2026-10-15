@@ -1,0 +1,1582 @@
+{
+  "schema_version": "chinese-content/1",
+  "batch_id": "zh-starter-001",
+  "version": 1,
+  "curriculum_manifest_version": "zh-2024-p2p3-draft.1",
+  "status": "author_checked_pending_independent_and_owner_review",
+  "materials": [
+    {
+      "id": "zh-m01",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "kind": "reading",
+      "title": "种豆子",
+      "body": "星期六早上，小安和姐姐在家种豆子。姐姐拿来两个小盆，小安把泥土放进盆里。他们把豆子放进泥土，再浇一点水。最后，他们把小盆放在窗边。小安说：“我明天还要来看！”",
+      "question_ids": [
+        "zh-m01.q1",
+        "zh-m01.q2",
+        "zh-m01.q3",
+        "zh-m01.q4",
+        "zh-m01.q5"
+      ],
+      "feedback_policy": "after_all_first_responses",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m02",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "kind": "visual_text",
+      "title": "图书角通知",
+      "body": "【图书角通知】\n星期三下午三点，图书角开放。\n地点：一楼小室。\n请带借书卡，每人可借两本书。\n请在下个星期三还书。",
+      "question_ids": [
+        "zh-m02.q1",
+        "zh-m02.q2",
+        "zh-m02.q3",
+        "zh-m02.q4",
+        "zh-m02.q5"
+      ],
+      "feedback_policy": "after_all_first_responses",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m03",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "kind": "cloze",
+      "title": "公园里的早晨",
+      "body": "早上，我和妈妈到公园。太阳出来了，今天是个（1）天。小鸟在树上（2）。妈妈坐在长椅上，我沿（yán）着小路慢慢地（3）。走累了，我喝了几口（4）。回家前，我们把空瓶放进垃圾（5）。",
+      "question_ids": [
+        "zh-m03.q1",
+        "zh-m03.q2",
+        "zh-m03.q3",
+        "zh-m03.q4",
+        "zh-m03.q5"
+      ],
+      "feedback_policy": "after_all_first_responses",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m04",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "kind": "reading",
+      "title": "找雨伞",
+      "body": "放学时下雨了。小文打开书包，发现没有带伞。老师借给他一把蓝伞。小文向老师道谢，撑着蓝伞回家。第二天早上，小文把伞擦干，放回老师的桌上。",
+      "question_ids": [
+        "zh-m04.q1",
+        "zh-m04.q2",
+        "zh-m04.q3",
+        "zh-m04.q4",
+        "zh-m04.q5"
+      ],
+      "feedback_policy": "after_all_first_responses",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m05",
+      "version": 1,
+      "courses": [
+        "p3_chinese",
+        "p3_higher_chinese"
+      ],
+      "kind": "reading",
+      "title": "换一个办法",
+      "body": "学校的图书角要增加一个放书的地方。小宁想用纸盒做书架，可是大纸盒太软，放进几本书就倒了。她和伙伴把书拿出来，在盒子里加了两块硬纸板，再把较重的书放在下面。这次，纸盒站稳了。伙伴说：“先试一试，再改一改，真有用！”",
+      "question_ids": [
+        "zh-m05.q1",
+        "zh-m05.q2",
+        "zh-m05.q3",
+        "zh-m05.q4",
+        "zh-m05.q5"
+      ],
+      "feedback_policy": "after_all_first_responses",
+      "asset_refs": []
+    }
+  ],
+  "items": [
+    {
+      "id": "zh-m01.q1",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-explicit",
+        "zh.p2_higher_chinese.r-explicit"
+      ],
+      "target_refs": [],
+      "family": "reading",
+      "format": "mcq_4plus",
+      "stem": "他们什么时候种豆子？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "星期六早上"
+        },
+        {
+          "id": "opt-2",
+          "text": "星期六晚上"
+        },
+        {
+          "id": "opt-3",
+          "text": "星期天早上"
+        },
+        {
+          "id": "opt-4",
+          "text": "星期天晚上"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "找一找第一句的时间。",
+      "explanation": "第一句写明是星期六早上。",
+      "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
+      "material_id": "zh-m01",
+      "stage": null,
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m01.q2",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-explicit",
+        "zh.p2_higher_chinese.r-explicit"
+      ],
+      "target_refs": [],
+      "family": "reading",
+      "format": "mcq_4plus",
+      "stem": "谁拿来小盆？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "小安"
+        },
+        {
+          "id": "opt-2",
+          "text": "姐姐"
+        },
+        {
+          "id": "opt-3",
+          "text": "爸爸"
+        },
+        {
+          "id": "opt-4",
+          "text": "奶奶"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "看看“拿来”前面写的是谁。",
+      "explanation": "材料写明是姐姐拿来两个小盆。",
+      "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
+      "material_id": "zh-m01",
+      "stage": null,
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m01.q3",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-explicit",
+        "zh.p2_higher_chinese.r-explicit"
+      ],
+      "target_refs": [],
+      "family": "reading",
+      "format": "mcq_4plus",
+      "stem": "姐姐拿来几个小盆？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "一个"
+        },
+        {
+          "id": "opt-2",
+          "text": "三个"
+        },
+        {
+          "id": "opt-3",
+          "text": "四个"
+        },
+        {
+          "id": "opt-4",
+          "text": "两个"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "再读姐姐拿小盆的那一句。",
+      "explanation": "姐姐拿来两个小盆。",
+      "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
+      "material_id": "zh-m01",
+      "stage": null,
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m01.q4",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-explicit",
+        "zh.p2_higher_chinese.r-explicit"
+      ],
+      "target_refs": [],
+      "family": "reading",
+      "format": "mcq_4plus",
+      "stem": "放好豆子后，他们接着做什么？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "拿来小盆"
+        },
+        {
+          "id": "opt-2",
+          "text": "放泥土"
+        },
+        {
+          "id": "opt-3",
+          "text": "浇一点水"
+        },
+        {
+          "id": "opt-4",
+          "text": "收起小盆"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "找“再”后面的动作。",
+      "explanation": "放好豆子后，材料接着写“再浇一点水”。这里只找已写明的动作。",
+      "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
+      "material_id": "zh-m01",
+      "stage": null,
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m01.q5",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-explicit",
+        "zh.p2_higher_chinese.r-explicit"
+      ],
+      "target_refs": [],
+      "family": "reading",
+      "format": "mcq_4plus",
+      "stem": "最后，小盆放在哪里？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "桌下"
+        },
+        {
+          "id": "opt-2",
+          "text": "门外"
+        },
+        {
+          "id": "opt-3",
+          "text": "床边"
+        },
+        {
+          "id": "opt-4",
+          "text": "窗边"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "找“最后”后面写的地方。",
+      "explanation": "材料写明最后把小盆放在窗边。",
+      "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
+      "material_id": "zh-m01",
+      "stage": null,
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m02.q1",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-explicit",
+        "zh.p2_higher_chinese.r-explicit"
+      ],
+      "target_refs": [],
+      "family": "visual_text",
+      "format": "mcq_4plus",
+      "stem": "图书角哪一天开放？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "星期一"
+        },
+        {
+          "id": "opt-2",
+          "text": "星期二"
+        },
+        {
+          "id": "opt-3",
+          "text": "星期三"
+        },
+        {
+          "id": "opt-4",
+          "text": "星期四"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "看通知中的开放时间。",
+      "explanation": "通知写明星期三开放。",
+      "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
+      "material_id": "zh-m02",
+      "stage": null,
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m02.q2",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-explicit",
+        "zh.p2_higher_chinese.r-explicit"
+      ],
+      "target_refs": [],
+      "family": "visual_text",
+      "format": "mcq_4plus",
+      "stem": "图书角几点开放？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "上午三点"
+        },
+        {
+          "id": "opt-2",
+          "text": "下午三点"
+        },
+        {
+          "id": "opt-3",
+          "text": "下午四点"
+        },
+        {
+          "id": "opt-4",
+          "text": "上午四点"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "注意“上午”和“下午”。",
+      "explanation": "通知写明下午三点。",
+      "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
+      "material_id": "zh-m02",
+      "stage": null,
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m02.q3",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-explicit",
+        "zh.p2_higher_chinese.r-explicit"
+      ],
+      "target_refs": [],
+      "family": "visual_text",
+      "format": "mcq_4plus",
+      "stem": "图书角在哪里？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "一楼小室"
+        },
+        {
+          "id": "opt-2",
+          "text": "二楼小室"
+        },
+        {
+          "id": "opt-3",
+          "text": "一楼大室"
+        },
+        {
+          "id": "opt-4",
+          "text": "二楼大室"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "找“地点”一栏。",
+      "explanation": "地点一栏写的是一楼小室。",
+      "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
+      "material_id": "zh-m02",
+      "stage": null,
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m02.q4",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-explicit",
+        "zh.p2_higher_chinese.r-explicit"
+      ],
+      "target_refs": [],
+      "family": "visual_text",
+      "format": "mcq_4plus",
+      "stem": "借书时要带什么？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "水杯"
+        },
+        {
+          "id": "opt-2",
+          "text": "画纸"
+        },
+        {
+          "id": "opt-3",
+          "text": "球"
+        },
+        {
+          "id": "opt-4",
+          "text": "借书卡"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "找“请带”后面的东西。",
+      "explanation": "通知要求带借书卡。",
+      "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
+      "material_id": "zh-m02",
+      "stage": null,
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m02.q5",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-explicit",
+        "zh.p2_higher_chinese.r-explicit"
+      ],
+      "target_refs": [],
+      "family": "visual_text",
+      "format": "mcq_4plus",
+      "stem": "每人可借几本书？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "一本"
+        },
+        {
+          "id": "opt-2",
+          "text": "两本"
+        },
+        {
+          "id": "opt-3",
+          "text": "三本"
+        },
+        {
+          "id": "opt-4",
+          "text": "四本"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "找“每人可借”后面的数目。",
+      "explanation": "通知写明每人可借两本书。",
+      "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
+      "material_id": "zh-m02",
+      "stage": null,
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m03.q1",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [],
+      "family": "cloze",
+      "format": "mcq_4plus",
+      "stem": "第（1）处选哪个字？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "晴"
+        },
+        {
+          "id": "opt-2",
+          "text": "睛"
+        },
+        {
+          "id": "opt-3",
+          "text": "请"
+        },
+        {
+          "id": "opt-4",
+          "text": "情"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "这里写的是天气。",
+      "explanation": "说天气晴朗用“晴”；“睛”指眼睛，“请”表示请求，“情”常用于感情。",
+      "rationale": "只评估选择答案的能力，不推断独立书写能力。",
+      "material_id": "zh-m03",
+      "stage": null,
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m03.q2",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [],
+      "family": "cloze",
+      "format": "mcq_4plus",
+      "stem": "第（2）处选哪个词？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "写字"
+        },
+        {
+          "id": "opt-2",
+          "text": "洗澡"
+        },
+        {
+          "id": "opt-3",
+          "text": "唱歌"
+        },
+        {
+          "id": "opt-4",
+          "text": "看书"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "看看做这个动作的是谁。",
+      "explanation": "小鸟在树上唱歌与上下文相合，其他动作不适合这里的场景。",
+      "rationale": "只评估选择答案的能力，不推断独立书写能力。",
+      "material_id": "zh-m03",
+      "stage": null,
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m03.q3",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [],
+      "family": "cloze",
+      "format": "mcq_4plus",
+      "stem": "第（3）处选哪个词？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "游泳"
+        },
+        {
+          "id": "opt-2",
+          "text": "走路"
+        },
+        {
+          "id": "opt-3",
+          "text": "睡觉"
+        },
+        {
+          "id": "opt-4",
+          "text": "吃饭"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "留意“小路”和后面的“走累了”。",
+      "explanation": "小路和“走累了”表明这里应选“走路”。",
+      "rationale": "只评估选择答案的能力，不推断独立书写能力。",
+      "material_id": "zh-m03",
+      "stage": null,
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m03.q4",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [],
+      "family": "cloze",
+      "format": "mcq_4plus",
+      "stem": "第（4）处选哪个字？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "沙"
+        },
+        {
+          "id": "opt-2",
+          "text": "风"
+        },
+        {
+          "id": "opt-3",
+          "text": "石"
+        },
+        {
+          "id": "opt-4",
+          "text": "水"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "想想“喝了几口”后面可以接什么。",
+      "explanation": "水可以喝；另外三个选项不能与这里的“喝了几口”搭配。",
+      "rationale": "只评估选择答案的能力，不推断独立书写能力。",
+      "material_id": "zh-m03",
+      "stage": null,
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m03.q5",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [],
+      "family": "cloze",
+      "format": "mcq_4plus",
+      "stem": "第（5）处选哪个字？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "桶"
+        },
+        {
+          "id": "opt-2",
+          "text": "桥"
+        },
+        {
+          "id": "opt-3",
+          "text": "床"
+        },
+        {
+          "id": "opt-4",
+          "text": "窗"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "想想放垃圾的容器叫什么。",
+      "explanation": "“垃圾桶”是放垃圾的容器。这里只评估词语选择。",
+      "rationale": "只评估选择答案的能力，不推断独立书写能力。",
+      "material_id": "zh-m03",
+      "stage": null,
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m04.q1",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-explicit",
+        "zh.p2_higher_chinese.r-explicit"
+      ],
+      "target_refs": [],
+      "family": "reading",
+      "format": "mcq_4plus",
+      "stem": "什么时候下雨了？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "上课时"
+        },
+        {
+          "id": "opt-2",
+          "text": "吃饭时"
+        },
+        {
+          "id": "opt-3",
+          "text": "睡觉时"
+        },
+        {
+          "id": "opt-4",
+          "text": "放学时"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "看第一句。",
+      "explanation": "第一句写明放学时下雨了。",
+      "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
+      "material_id": "zh-m04",
+      "stage": null,
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m04.q2",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-explicit",
+        "zh.p2_higher_chinese.r-explicit"
+      ],
+      "target_refs": [],
+      "family": "reading",
+      "format": "mcq_4plus",
+      "stem": "小文在书包里没有找到什么？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "书"
+        },
+        {
+          "id": "opt-2",
+          "text": "伞"
+        },
+        {
+          "id": "opt-3",
+          "text": "笔"
+        },
+        {
+          "id": "opt-4",
+          "text": "水杯"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "找“没有带”后面的东西。",
+      "explanation": "小文发现没有带伞。",
+      "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
+      "material_id": "zh-m04",
+      "stage": null,
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m04.q3",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-explicit",
+        "zh.p2_higher_chinese.r-explicit"
+      ],
+      "target_refs": [],
+      "family": "reading",
+      "format": "mcq_4plus",
+      "stem": "谁借伞给小文？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "老师"
+        },
+        {
+          "id": "opt-2",
+          "text": "同学"
+        },
+        {
+          "id": "opt-3",
+          "text": "妈妈"
+        },
+        {
+          "id": "opt-4",
+          "text": "姐姐"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "找“借给他”前面的人。",
+      "explanation": "材料写明老师借给他一把蓝伞。",
+      "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
+      "material_id": "zh-m04",
+      "stage": null,
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m04.q4",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-explicit",
+        "zh.p2_higher_chinese.r-explicit"
+      ],
+      "target_refs": [],
+      "family": "reading",
+      "format": "mcq_4plus",
+      "stem": "借来的伞是什么颜色？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "红色"
+        },
+        {
+          "id": "opt-2",
+          "text": "黄色"
+        },
+        {
+          "id": "opt-3",
+          "text": "蓝色"
+        },
+        {
+          "id": "opt-4",
+          "text": "绿色"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "看看老师借出的是什么伞。",
+      "explanation": "材料写的是蓝伞。",
+      "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
+      "material_id": "zh-m04",
+      "stage": null,
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m04.q5",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-explicit",
+        "zh.p2_higher_chinese.r-explicit"
+      ],
+      "target_refs": [],
+      "family": "reading",
+      "format": "mcq_4plus",
+      "stem": "第二天早上，小文把伞放在哪里？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "书包里"
+        },
+        {
+          "id": "opt-2",
+          "text": "门边"
+        },
+        {
+          "id": "opt-3",
+          "text": "椅子上"
+        },
+        {
+          "id": "opt-4",
+          "text": "老师的桌上"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "看最后一句。",
+      "explanation": "最后一句写明把伞放回老师的桌上。",
+      "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
+      "material_id": "zh-m04",
+      "stage": null,
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m05.q1",
+      "version": 1,
+      "courses": [
+        "p3_chinese",
+        "p3_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p3_chinese.r-explicit",
+        "zh.p3_higher_chinese.r-explicit"
+      ],
+      "target_refs": [],
+      "family": "reading",
+      "format": "mcq_4plus",
+      "stem": "他们想增加什么地方？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "放球的地方"
+        },
+        {
+          "id": "opt-2",
+          "text": "放书的地方"
+        },
+        {
+          "id": "opt-3",
+          "text": "放伞的地方"
+        },
+        {
+          "id": "opt-4",
+          "text": "放鞋的地方"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "先读第一句。",
+      "explanation": "第一句明确写明要增加放书的地方。",
+      "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
+      "material_id": "zh-m05",
+      "stage": null,
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m05.q2",
+      "version": 1,
+      "courses": [
+        "p3_chinese",
+        "p3_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p3_chinese.r-explicit",
+        "zh.p3_higher_chinese.r-explicit"
+      ],
+      "target_refs": [],
+      "family": "reading",
+      "format": "mcq_4plus",
+      "stem": "小宁最初准备用什么做书架？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "木板"
+        },
+        {
+          "id": "opt-2",
+          "text": "塑料箱"
+        },
+        {
+          "id": "opt-3",
+          "text": "纸盒"
+        },
+        {
+          "id": "opt-4",
+          "text": "铁架"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "找“小宁想用”后面的材料。",
+      "explanation": "材料明确写明小宁想用纸盒做书架。",
+      "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
+      "material_id": "zh-m05",
+      "stage": null,
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m05.q3",
+      "version": 1,
+      "courses": [
+        "p3_chinese",
+        "p3_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p3_chinese.r-explicit",
+        "zh.p3_higher_chinese.r-explicit"
+      ],
+      "target_refs": [],
+      "family": "reading",
+      "format": "mcq_4plus",
+      "stem": "纸盒开始为什么倒了？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "纸盒太软"
+        },
+        {
+          "id": "opt-2",
+          "text": "书太少"
+        },
+        {
+          "id": "opt-3",
+          "text": "地上有水"
+        },
+        {
+          "id": "opt-4",
+          "text": "没有伙伴"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "找“可是”后面明说的情况。",
+      "explanation": "文本直接说明大纸盒太软。这是提取明示原因，不是预测或推断。",
+      "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
+      "material_id": "zh-m05",
+      "stage": null,
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m05.q4",
+      "version": 1,
+      "courses": [
+        "p3_chinese",
+        "p3_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p3_chinese.r-explicit",
+        "zh.p3_higher_chinese.r-explicit"
+      ],
+      "target_refs": [],
+      "family": "reading",
+      "format": "mcq_4plus",
+      "stem": "他们加了几块硬纸板？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "一块"
+        },
+        {
+          "id": "opt-2",
+          "text": "三块"
+        },
+        {
+          "id": "opt-3",
+          "text": "四块"
+        },
+        {
+          "id": "opt-4",
+          "text": "两块"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "找“硬纸板”前面的数目。",
+      "explanation": "他们加了两块硬纸板。",
+      "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
+      "material_id": "zh-m05",
+      "stage": null,
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-m05.q5",
+      "version": 1,
+      "courses": [
+        "p3_chinese",
+        "p3_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p3_chinese.r-explicit",
+        "zh.p3_higher_chinese.r-explicit"
+      ],
+      "target_refs": [],
+      "family": "reading",
+      "format": "mcq_4plus",
+      "stem": "较重的书后来放在哪里？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "盒子旁边"
+        },
+        {
+          "id": "opt-2",
+          "text": "下面"
+        },
+        {
+          "id": "opt-3",
+          "text": "上面"
+        },
+        {
+          "id": "opt-4",
+          "text": "桌子底下"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "找“较重的书”后面的地方。",
+      "explanation": "文中写明把较重的书放在下面。",
+      "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
+      "material_id": "zh-m05",
+      "stage": null,
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-short-u5ea7.q1",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u5ea7",
+        "zh.p2_higher_chinese.char.u5ea7"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "一（　）大山",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "座"
+        },
+        {
+          "id": "opt-2",
+          "text": "坐"
+        },
+        {
+          "id": "opt-3",
+          "text": "作"
+        },
+        {
+          "id": "opt-4",
+          "text": "做"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "想一想，表示山的数量时用哪个字？",
+      "explanation": "“一座大山”用“座”表示山的数量。",
+      "rationale": "辨认“座”在不同用法中的字形与字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "exact",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-short-u5ea7.q2",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u5ea7",
+        "zh.p2_higher_chinese.char.u5ea7"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "我们找到自己的（　）位。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "坐"
+        },
+        {
+          "id": "opt-2",
+          "text": "作"
+        },
+        {
+          "id": "opt-3",
+          "text": "座"
+        },
+        {
+          "id": "opt-4",
+          "text": "做"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "这里要组成表示位置的词。",
+      "explanation": "表示位置的词是“座位”。“坐”表示动作。",
+      "rationale": "辨认“座”在不同用法中的字形与字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "similar",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-short-u5ea7.q3",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u5ea7",
+        "zh.p2_higher_chinese.char.u5ea7"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "车上没有空（　）了，只能站着。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "做"
+        },
+        {
+          "id": "opt-2",
+          "text": "座"
+        },
+        {
+          "id": "opt-3",
+          "text": "作"
+        },
+        {
+          "id": "opt-4",
+          "text": "坐"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "这里缺的是表示可以坐下的位置的字。",
+      "explanation": "可以坐下的位置是“座”。有空座，才有地方坐。",
+      "rationale": "辨认“座”在不同用法中的字形与字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "generic",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-short-u6674.q1",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u6674",
+        "zh.p2_higher_chinese.char.u6674"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "今天是（　）天。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "睛"
+        },
+        {
+          "id": "opt-2",
+          "text": "情"
+        },
+        {
+          "id": "opt-3",
+          "text": "请"
+        },
+        {
+          "id": "opt-4",
+          "text": "晴"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "这里说的是天气。",
+      "explanation": "天气好、没有云或云很少，可以说“晴天”。",
+      "rationale": "辨认“晴”在不同用法中的字形与字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "exact",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-short-u6674.q2",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u6674",
+        "zh.p2_higher_chinese.char.u6674"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "雨停了，天也放（　）了。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "晴"
+        },
+        {
+          "id": "opt-2",
+          "text": "请"
+        },
+        {
+          "id": "opt-3",
+          "text": "情"
+        },
+        {
+          "id": "opt-4",
+          "text": "睛"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "看看哪个字与天气有关。",
+      "explanation": "“放晴”表示雨后天空变晴。",
+      "rationale": "辨认“晴”在不同用法中的字形与字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "similar",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-short-u6674.q3",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u6674",
+        "zh.p2_higher_chinese.char.u6674"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "天气预报（yù bào）说，明天（　），可以到公园走走。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "请"
+        },
+        {
+          "id": "opt-2",
+          "text": "睛"
+        },
+        {
+          "id": "opt-3",
+          "text": "晴"
+        },
+        {
+          "id": "opt-4",
+          "text": "情"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "注意“天气预报”。",
+      "explanation": "这里说的是明天的天气，应选“晴”。",
+      "rationale": "辨认“晴”在不同用法中的字形与字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "generic",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-short-u4f4f.q1",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u4f4f",
+        "zh.p2_higher_chinese.char.u4f4f"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "我（　）在这座组（zǔ）屋。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "往"
+        },
+        {
+          "id": "opt-2",
+          "text": "住"
+        },
+        {
+          "id": "opt-3",
+          "text": "主"
+        },
+        {
+          "id": "opt-4",
+          "text": "注"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "这里说的是居住的地方。",
+      "explanation": "“住在”表示居住在某个地方。",
+      "rationale": "辨认“住”在不同用法中的字形与字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "exact",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-short-u4f4f.q2",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u4f4f",
+        "zh.p2_higher_chinese.char.u4f4f"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "出门时，我记（　）了妈妈的话。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "主"
+        },
+        {
+          "id": "opt-2",
+          "text": "往"
+        },
+        {
+          "id": "opt-3",
+          "text": "注"
+        },
+        {
+          "id": "opt-4",
+          "text": "住"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "这里要组成表示牢记的词。",
+      "explanation": "“记住”表示把事情牢牢记在心里。",
+      "rationale": "辨认“住”在不同用法中的字形与字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "similar",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    },
+    {
+      "id": "zh-short-u4f4f.q3",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u4f4f",
+        "zh.p2_higher_chinese.char.u4f4f"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "风太大了，请把门按（　），别让它关上。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "住"
+        },
+        {
+          "id": "opt-2",
+          "text": "注"
+        },
+        {
+          "id": "opt-3",
+          "text": "往"
+        },
+        {
+          "id": "opt-4",
+          "text": "主"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "这里表示保持门的位置。",
+      "explanation": "“按住”表示用力按着，让它保持原来的位置。",
+      "rationale": "辨认“住”在不同用法中的字形与字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "generic",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": []
+    }
+  ],
+  "review_log": {
+    "author_check_date": "2026-10-15",
+    "author_checks": [
+      "逐题核对答案、依据和干扰项",
+      "检查提示不直接给出答案",
+      "逐篇检查先答完整篇才提供反馈",
+      "对照官方年级矩阵与字表",
+      "核对原创内容与外部能力边界"
+    ],
+    "independent_review": "pending",
+    "owner_signoff": "pending",
+    "sampled_item_ids": [],
+    "disputed_item_ids": [],
+    "rights_status": "original_draft_pending_owner_rights_review",
+    "artwork": "none"
+  }
+}

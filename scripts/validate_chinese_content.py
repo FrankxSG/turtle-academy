@@ -1,0 +1,235 @@
+#!/usr/bin/env python3
+"""Offline authoring check. No app planner, grader, persistence or private data.
+
+Implements exactly the JSON Schema keywords used by contracts/chinese/1.schema.json;
+not a general-purpose JSON Schema implementation. Unsupported keywords fail closed.
+Errors contain paths/codes, never imported text. Python 3.10+, standard library only.
+"""
+import argparse
+import datetime as dt
+import json
+import math
+from pathlib import Path
+import re
+
+ROOT = Path(__file__).resolve().parents[1]
+SCHEMA = json.loads((ROOT / 'contracts/chinese/1.schema.json').read_text())
+KEYWORDS = {'$ref', 'type', 'const', 'enum', 'anyOf', 'properties', 'required',
+            'additionalProperties', 'items', 'minItems', 'maxItems', 'minimum',
+            'maximum', 'minLength', 'maxLength', 'pattern', 'format'}
+
+
+class Invalid(ValueError):
+    pass
+
+
+def require(condition, code):
+    if not condition:
+        raise Invalid(code)
+
+
+def schema_check(value, definition, path='$'):
+    require(not (set(definition) - KEYWORDS), path + ':unsupported_schema_keyword')
+    if '$ref' in definition:
+        ref = definition['$ref']
+        require(ref.startswith('#/$defs/'), path + ':nonlocal_schema_ref')
+        return schema_check(value, SCHEMA['$defs'][ref.split('/')[-1]], path)
+    if 'anyOf' in definition:
+        for branch in definition['anyOf']:
+            try:
+                schema_check(value, branch, path)
+                break
+            except Invalid:
+                pass
+        else:
+            raise Invalid(path + ':anyOf')
+    if 'const' in definition:
+        require(value == definition['const'], path + ':const')
+    if 'enum' in definition:
+        require(value in definition['enum'], path + ':enum')
+    if 'type' in definition:
+        kind = definition['type']
+        valid = {'object': type(value) is dict, 'array': type(value) is list,
+                 'string': type(value) is str, 'integer': type(value) is int,
+                 'null': value is None}.get(kind, False)
+        require(valid, path + ':type')
+    if type(value) is dict:
+        props = definition.get('properties', {})
+        require(set(definition.get('required', [])) <= set(value), path + ':required')
+        if definition.get('additionalProperties') is False:
+            require(set(value) <= set(props), path + ':unknown_key')
+        for key, child in value.items():
+            if key in props:
+                schema_check(child, props[key], path + '.' + key)
+    if type(value) is list:
+        require(len(value) >= definition.get('minItems', 0), path + ':minItems')
+        require(len(value) <= definition.get('maxItems', math.inf), path + ':maxItems')
+        for i, child in enumerate(value):
+            if 'items' in definition:
+                schema_check(child, definition['items'], f'{path}[{i}]')
+    if type(value) is str:
+        require(len(value) >= definition.get('minLength', 0), path + ':minLength')
+        require(len(value) <= definition.get('maxLength', math.inf), path + ':maxLength')
+        if 'pattern' in definition:
+            require(re.search(definition['pattern'], value) is not None, path + ':pattern')
+        if definition.get('format') == 'date':
+            try:
+                require(dt.date.fromisoformat(value).isoformat() == value, path + ':date')
+            except ValueError:
+                raise Invalid(path + ':date') from None
+    if type(value) is int:
+        require(value >= definition.get('minimum', -math.inf), path + ':minimum')
+        require(value <= definition.get('maximum', math.inf), path + ':maximum')
+
+
+def unique(records, key='id'):
+    ids = [r[key] for r in records]
+    require(len(ids) == len(set(ids)), 'duplicate_id')
+    return {r[key]: r for r in records}
+
+
+def load(path):
+    return json.loads(Path(path).read_text(encoding='utf-8'))
+
+
+def check_catalogue(curriculum, batch):
+    schema_check(curriculum, SCHEMA['$defs']['curriculum'])
+    schema_check(batch, SCHEMA['$defs']['batch'])
+    require(batch['curriculum_manifest_version'] == curriculum['manifest_version'], 'manifest_version')
+    outcomes = unique(curriculum['outcomes'])
+    targets = unique(curriculum['characters'])
+    sources = unique(curriculum['sources'])
+    require(not (set(outcomes) & set(targets)), 'duplicate_curriculum_id')
+    for row in list(outcomes.values()) + list(targets.values()):
+        require(row['course'] in curriculum['courses'], 'curriculum_course')
+        require(row['source_ref'] in sources, 'curriculum_source')
+    for row in outcomes.values():
+        require(1 <= row['source_pdf_page'] <= sources[row['source_ref']]['pdf_pages'], 'outcome_source_page')
+        expected = ['exact', 'similar', 'generic'] if row['scope'] in {'in_app', 'partial'} else []
+        require(row['required_stages'] == expected, 'outcome_stage_requirement')
+    for row in targets.values():
+        require(row['id'] == f"zh.{row['course']}.char.u{ord(row['character']):04x}", 'character_id')
+        pages = row['recognition_list_pages'] + row['writing_list_pages']
+        require(bool(pages) and all(1 <= p <= sources[row['source_ref']]['pdf_pages'] for p in pages), 'character_source_page')
+    for count in curriculum['course_character_counts']:
+        rows = [r for r in targets.values() if r['course'] == count['course']]
+        require(len(rows) == count['union_unique'], 'character_count_union')
+        for key, field in [('recognition_list_unique', 'recognition_list_pages'), ('writing_list_unique', 'writing_list_pages')]:
+            require(sum(bool(r[field]) for r in rows) == count[key], 'character_count_mode')
+    items, materials = unique(batch['items']), unique(batch['materials'])
+    require(not (set(items) & set(materials)), 'duplicate_catalogue_id')
+    for item in items.values():
+        options = unique(item['options'])
+        require(item['correct_option_id'] in options, 'answer_key_reference')
+        require(len({r['text'] for r in options.values()}) == len(options), 'duplicate_option_text')
+        require(set(item['courses']) <= set(curriculum['courses']), 'item_course')
+        for ref in item['outcome_refs']:
+            require(ref in outcomes, 'outcome_reference')
+            require(outcomes[ref]['scope'] in {'in_app', 'partial'}, 'outcome_scope')
+        require({outcomes[r]['course'] for r in item['outcome_refs']} == set(item['courses']), 'outcome_course')
+        for ref in item['target_refs']:
+            require(ref in targets and targets[ref]['course'] in item['courses'], 'target_reference')
+        require(bool(item['target_refs']) == (item['stage'] is not None), 'stage_target_pair')
+        require(not item['asset_refs'], 'starter_external_asset_not_reviewed')
+        require(item['material_id'] is None or item['material_id'] in materials, 'material_reference')
+    assigned = []
+    for material in materials.values():
+        require(len(material['question_ids']) == len(set(material['question_ids'])), 'duplicate_material_question')
+        for ref in material['question_ids']:
+            require(ref in items and items[ref]['material_id'] == material['id'], 'material_membership')
+            require(set(material['courses']) <= set(items[ref]['courses']), 'material_course')
+            require(items[ref]['family'] == material['kind'], 'material_kind')
+        assigned += material['question_ids']
+    require(set(assigned) == {r['id'] for r in items.values() if r['material_id']}, 'orphan_material_question')
+    require(len(assigned) == len(set(assigned)), 'question_in_multiple_materials')
+    for target in {r for item in items.values() for r in item['target_refs']}:
+        require({item['stage'] for item in items.values() if target in item['target_refs']} == {'exact', 'similar', 'generic'}, 'incomplete_repair_pool')
+    return items, materials
+
+
+def check_plan(plan, curriculum, batch):
+    schema_check(plan, SCHEMA['$defs']['task_plan'])
+    items, materials = check_catalogue(curriculum, batch)
+    require(plan['manifest_version'] == curriculum['manifest_version'], 'plan_manifest_version')
+    require(plan['content_batch_id'] == batch['batch_id'] and plan['content_version'] == batch['version'], 'plan_batch_version')
+    mids = plan['material_ids']
+    require(len(mids) == len(set(mids)), 'duplicate_planned_material')
+    require(len(mids) >= math.ceil(plan['x'] / 5), 'material_quota')
+    expected = []
+    for mid in mids:
+        require(mid in materials and plan['course'] in materials[mid]['courses'], 'plan_material_course')
+        expected += materials[mid]['question_ids']
+    ids = [r['item_id'] for r in plan['slots']]
+    require(len(ids) == len(set(ids)), 'duplicate_planned_question')
+    require([i for i in ids if i in expected] == expected, 'complete_ordered_materials')
+    for mid in mids:
+        positions = [ids.index(i) for i in materials[mid]['question_ids'] if i in ids]
+        require(len(positions) == len(materials[mid]['question_ids']), 'missing_material_question')
+        require(positions == list(range(positions[0], positions[0] + len(positions))), 'interleaved_material')
+    for slot in plan['slots']:
+        require(slot['item_id'] in items, 'plan_item')
+        item = items[slot['item_id']]
+        require(plan['course'] in item['courses'] and item['version'] == slot['item_version'], 'plan_item_course_version')
+        require(item['material_id'] is None or item['material_id'] in mids, 'unplanned_material_question')
+        if slot['role'] == 'general':
+            require(slot['target_ref'] is None and slot['starting_stage'] is None, 'general_not_repair')
+        else:
+            require(slot['target_ref'] in item['target_refs'] and slot['starting_stage'] == item['stage'], 'repair_role_mapping')
+            require(slot['role'] != 'delayed_review' or slot['starting_stage'] == 'generic', 'review_stage')
+    require(plan['planned_main_count'] == len(ids) and len(ids) >= plan['x'], 'planned_count')
+    require(plan['halfway_count'] == math.ceil(len(ids) / 2), 'halfway_actual_total')
+
+
+def check_import(payload, curriculum, today, approved_manifest_versions=()):
+    # No I/O, storage, ownership, logging, preview or mutation. Caller must first
+    # enforce <= 1 MiB decoded UTF-8 JSON; this authoring tool never accepts users.
+    schema_check(payload, SCHEMA['$defs']['import'])
+    result, entries = payload['extraction_result'], payload['items']
+    require(result != 'errors_found' or bool(entries), 'errors_found_empty')
+    require(result != 'no_errors_found' or not entries, 'no_errors_with_entries')
+    manifest = payload['curriculum_manifest_version']
+    if manifest is not None:
+        require(manifest in approved_manifest_versions and manifest == curriculum['manifest_version'], 'manifest_not_approved')
+    known = {r['id']: r for r in curriculum['outcomes'] + curriculum['characters']}
+    for entry in entries:
+        bound = 8 if entry['target_kind'] in {'character', 'word'} else 64
+        for field in ['target_value', 'observed_wrong_form']:
+            require(field not in entry or len(entry[field]) <= bound, 'target_bound')
+        require(dt.date.fromisoformat(entry['observation_date']) <= today, 'future_observation')
+        ref = entry['knowledge_point_ref']
+        if entry['mapping_status'] == 'pending_content':
+            require(ref is None, 'pending_ref_must_be_null')
+        else:
+            require(manifest is not None and ref in known, 'mapped_ref')
+            require(known[ref]['course'] == payload['course'], 'mapped_course')
+            require(known[ref].get('scope', 'in_app') in {'in_app', 'partial'}, 'mapped_scope')
+
+
+def check_attempt(event, item):
+    schema_check(event, SCHEMA['$defs']['attempt'])
+    require(event['item_id'] == item['id'] and event['item_version'] == item['version'], 'attempt_item_version')
+    require(event['selected_option_id'] in {r['id'] for r in item['options']}, 'attempt_option')
+    required = {'first': 'none', 'retry': 'hint', 'correction': 'answer_and_explanation'}
+    require(event['assistance'] == required[event['phase']], 'attempt_assistance_phase')
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.parse_args()
+    curriculum = load(ROOT / 'content/chinese/curriculum.json')
+    batch = load(ROOT / 'content/chinese/batches/starter-001.json')
+    check_catalogue(curriculum, batch)
+    plans = sorted((ROOT / 'content/chinese/fixtures').glob('task-*.json'))
+    for path in plans:
+        check_plan(load(path), curriculum, batch)
+    print(f"PASS: {len(curriculum['outcomes'])} course outcomes, {len(curriculum['characters'])} character records; "
+          f"{len(batch['materials'])} materials, {len(batch['items'])} items, {len(plans)} synthetic plans.")
+    print('QA pending: independent review, owner sign-off, approved coverage denominator. Not a content release.')
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except (Invalid, KeyError, TypeError, json.JSONDecodeError) as exc:
+        # This entry point reads public files only. No private payload output.
+        raise SystemExit('FAIL: ' + type(exc).__name__ + ': ' + str(exc)) from None

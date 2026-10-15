@@ -1,0 +1,163 @@
+{
+  "schema_version": "chinese-task-plan/1",
+  "plan_id": "zh-fixture-x19",
+  "content_batch_id": "zh-starter-001",
+  "content_version": 1,
+  "manifest_version": "zh-2024-p2p3-draft.1",
+  "course": "p2_chinese",
+  "x": 19,
+  "material_ids": [
+    "zh-m01",
+    "zh-m02",
+    "zh-m03",
+    "zh-m04"
+  ],
+  "slots": [
+    {
+      "item_id": "zh-m01.q1",
+      "item_version": 1,
+      "role": "general",
+      "target_ref": null,
+      "starting_stage": null
+    },
+    {
+      "item_id": "zh-m01.q2",
+      "item_version": 1,
+      "role": "general",
+      "target_ref": null,
+      "starting_stage": null
+    },
+    {
+      "item_id": "zh-m01.q3",
+      "item_version": 1,
+      "role": "general",
+      "target_ref": null,
+      "starting_stage": null
+    },
+    {
+      "item_id": "zh-m01.q4",
+      "item_version": 1,
+      "role": "general",
+      "target_ref": null,
+      "starting_stage": null
+    },
+    {
+      "item_id": "zh-m01.q5",
+      "item_version": 1,
+      "role": "general",
+      "target_ref": null,
+      "starting_stage": null
+    },
+    {
+      "item_id": "zh-m02.q1",
+      "item_version": 1,
+      "role": "general",
+      "target_ref": null,
+      "starting_stage": null
+    },
+    {
+      "item_id": "zh-m02.q2",
+      "item_version": 1,
+      "role": "general",
+      "target_ref": null,
+      "starting_stage": null
+    },
+    {
+      "item_id": "zh-m02.q3",
+      "item_version": 1,
+      "role": "general",
+      "target_ref": null,
+      "starting_stage": null
+    },
+    {
+      "item_id": "zh-m02.q4",
+      "item_version": 1,
+      "role": "general",
+      "target_ref": null,
+      "starting_stage": null
+    },
+    {
+      "item_id": "zh-m02.q5",
+      "item_version": 1,
+      "role": "general",
+      "target_ref": null,
+      "starting_stage": null
+    },
+    {
+      "item_id": "zh-m03.q1",
+      "item_version": 1,
+      "role": "general",
+      "target_ref": null,
+      "starting_stage": null
+    },
+    {
+      "item_id": "zh-m03.q2",
+      "item_version": 1,
+      "role": "general",
+      "target_ref": null,
+      "starting_stage": null
+    },
+    {
+      "item_id": "zh-m03.q3",
+      "item_version": 1,
+      "role": "general",
+      "target_ref": null,
+      "starting_stage": null
+    },
+    {
+      "item_id": "zh-m03.q4",
+      "item_version": 1,
+      "role": "general",
+      "target_ref": null,
+      "starting_stage": null
+    },
+    {
+      "item_id": "zh-m03.q5",
+      "item_version": 1,
+      "role": "general",
+      "target_ref": null,
+      "starting_stage": null
+    },
+    {
+      "item_id": "zh-m04.q1",
+      "item_version": 1,
+      "role": "general",
+      "target_ref": null,
+      "starting_stage": null
+    },
+    {
+      "item_id": "zh-m04.q2",
+      "item_version": 1,
+      "role": "general",
+      "target_ref": null,
+      "starting_stage": null
+    },
+    {
+      "item_id": "zh-m04.q3",
+      "item_version": 1,
+      "role": "general",
+      "target_ref": null,
+      "starting_stage": null
+    },
+    {
+      "item_id": "zh-m04.q4",
+      "item_version": 1,
+      "role": "general",
+      "target_ref": null,
+      "starting_stage": null
+    },
+    {
+      "item_id": "zh-m04.q5",
+      "item_version": 1,
+      "role": "general",
+      "target_ref": null,
+      "starting_stage": null
+    }
+  ],
+  "planned_main_count": 20,
+  "halfway_count": 10,
+  "feedback_policy": "material_first_responses_then_help",
+  "aggregation_policy": "whole_task_all_related_first_responses",
+  "stage_gate": "next_task_and_transfer_later_calendar_day",
+  "purpose": "synthetic_contract_fixture_not_runtime_plan"
+}
