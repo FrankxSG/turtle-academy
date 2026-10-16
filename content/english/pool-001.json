@@ -2,7 +2,7 @@
   "schema_version": "subject-content/1",
   "subject": "english",
   "batch_id": "el-pool-001",
-  "version": 2,
+  "version": 3,
   "manifest_version": "el-2020-p2p3-draft.1",
   "status": "author_checked_pending_independent_and_owner_review",
   "materials": [
@@ -127,7 +127,7 @@
     },
     {
       "id": "el-p2-visual-fair",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_english"
       ],
@@ -139,11 +139,14 @@
         "el-p2-visual-fair.q2",
         "el-p2-visual-fair.q3",
         "el-p2-visual-fair.q4"
+      ],
+      "asset_ids": [
+        "el-vt-p2-visual-fair"
       ]
     },
     {
       "id": "el-p2-visual-menu",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_english"
       ],
@@ -155,6 +158,9 @@
         "el-p2-visual-menu.q2",
         "el-p2-visual-menu.q3",
         "el-p2-visual-menu.q4"
+      ],
+      "asset_ids": [
+        "el-vt-p2-visual-menu"
       ]
     },
     {
@@ -295,23 +301,26 @@
     },
     {
       "id": "el-p3-visual-zoo",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_english"
       ],
       "kind": "visual_text",
-      "title": "Visual text: Zoo leaflet",
-      "body": "NIGHT SAFARI FAMILY NIGHTS\nEvery Friday and Saturday in December\nGates open: 7.15 p.m.  Last tram: 10.30 p.m.\nChild (3-12 years): $25  Adult: $40  Children under 3: free\nBook online and save 10%!\nPlease do not use camera flash — it frightens the animals.",
+      "title": "Visual text: Night zoo leaflet",
+      "body": "NIGHT ZOO FAMILY NIGHTS\nEvery Friday and Saturday in December\nGates open: 7.15 p.m.  Last tram: 10.30 p.m.\nChild (3-12 years): $25  Adult: $40  Children under 3: free\nBook online and save 10%!\nPlease do not use camera flash — it frightens the animals.",
       "question_ids": [
         "el-p3-visual-zoo.q1",
         "el-p3-visual-zoo.q2",
         "el-p3-visual-zoo.q3",
         "el-p3-visual-zoo.q4"
+      ],
+      "asset_ids": [
+        "el-vt-p3-visual-zoo"
       ]
     },
     {
       "id": "el-p3-visual-recycle",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_english"
       ],
@@ -323,6 +332,9 @@
         "el-p3-visual-recycle.q2",
         "el-p3-visual-recycle.q3",
         "el-p3-visual-recycle.q4"
+      ],
+      "asset_ids": [
+        "el-vt-p3-visual-recycle"
       ]
     }
   ],
@@ -361,7 +373,10 @@
       "hint": "Two means more than one.",
       "explanation": "More than one eraser: add -s to make \"erasers\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.plural-s-es"
+      ]
     },
     {
       "id": "el-p2-plural-s-es.q2",
@@ -397,7 +412,10 @@
       "hint": "Words ending in -x add -es.",
       "explanation": "\"Box\" ends in x, so the plural is \"boxes\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.plural-s-es"
+      ]
     },
     {
       "id": "el-p2-plural-s-es.q3",
@@ -433,7 +451,10 @@
       "hint": "Some words ending in -f change to -ves.",
       "explanation": "The plural of \"loaf\" is \"loaves\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.plural-s-es"
+      ]
     },
     {
       "id": "el-p2-plural-irregular.q1",
@@ -469,7 +490,10 @@
       "hint": "This plural does not add -s.",
       "explanation": "The plural of \"tooth\" is \"teeth\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.plural-irregular"
+      ]
     },
     {
       "id": "el-p2-plural-irregular.q2",
@@ -505,7 +529,10 @@
       "hint": "The plural changes a vowel.",
       "explanation": "The plural of \"woman\" is \"women\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.plural-irregular"
+      ]
     },
     {
       "id": "el-p2-plural-irregular.q3",
@@ -541,7 +568,10 @@
       "hint": "Think of the plural of \"mouse\".",
       "explanation": "The plural of \"mouse\" is \"mice\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.plural-irregular"
+      ]
     },
     {
       "id": "el-p2-plural-y.q1",
@@ -577,7 +607,10 @@
       "hint": "A consonant before -y: change y to i and add -es.",
       "explanation": "\"Berry\" becomes \"berries\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.plural-y"
+      ]
     },
     {
       "id": "el-p2-plural-y.q2",
@@ -613,7 +646,10 @@
       "hint": "A vowel comes before the y.",
       "explanation": "With a vowel before y, just add -s: \"toys\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.plural-y"
+      ]
     },
     {
       "id": "el-p2-plural-y.q3",
@@ -649,7 +685,10 @@
       "hint": "Look at the letter before the y.",
       "explanation": "\"City\" has a consonant before y, so it becomes \"cities\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.plural-y"
+      ]
     },
     {
       "id": "el-p2-collective-uncountable.q1",
@@ -685,7 +724,10 @@
       "hint": "A group of fish has a special name.",
       "explanation": "A group of fish is called a school.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.collective-uncountable"
+      ]
     },
     {
       "id": "el-p2-collective-uncountable.q2",
@@ -721,7 +763,10 @@
       "hint": "Choose the uncountable noun that can follow “some”.",
       "explanation": "\"Water\" is uncountable, so we say \"some water\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.collective-uncountable"
+      ]
     },
     {
       "id": "el-p2-collective-uncountable.q3",
@@ -757,7 +802,10 @@
       "hint": "Think of a group of birds.",
       "explanation": "A group of birds is a flock.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.collective-uncountable"
+      ]
     },
     {
       "id": "el-p2-a-an.q1",
@@ -793,7 +841,10 @@
       "hint": "Look at the first sound of \"apple\".",
       "explanation": "\"Apple\" begins with a vowel sound, so we use \"an\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.a-an"
+      ]
     },
     {
       "id": "el-p2-a-an.q2",
@@ -829,7 +880,10 @@
       "hint": "One owl; \"owl\" starts with a vowel sound.",
       "explanation": "Use \"an\" before a vowel sound: \"an owl\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.a-an"
+      ]
     },
     {
       "id": "el-p2-a-an.q3",
@@ -865,7 +919,10 @@
       "hint": "Say \"umbrella\" aloud. What sound does it start with?",
       "explanation": "\"Umbrella\" starts with a vowel sound, so \"an umbrella\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.a-an"
+      ]
     },
     {
       "id": "el-p2-this-these.q1",
@@ -901,7 +958,10 @@
       "hint": "\"Shoes\" is plural.",
       "explanation": "Use \"these\" with plural nouns that are near.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.this-these"
+      ]
     },
     {
       "id": "el-p2-this-these.q2",
@@ -937,7 +997,10 @@
       "hint": "One book, far away from you.",
       "explanation": "Use \"that\" for one thing that is far.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.this-these"
+      ]
     },
     {
       "id": "el-p2-this-these.q3",
@@ -973,7 +1036,10 @@
       "hint": "Many things that are far away.",
       "explanation": "Use \"those\" for many things that are far.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.this-these"
+      ]
     },
     {
       "id": "el-p2-some-any.q1",
@@ -1009,7 +1075,10 @@
       "hint": "Milk is uncountable. Check which option can come before it in this question.",
       "explanation": "“Any” fits this question about whether milk is left. “A”, “an” and “many” do not fit before uncountable “milk”.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.some-any"
+      ]
     },
     {
       "id": "el-p2-some-any.q2",
@@ -1045,7 +1114,10 @@
       "hint": "The sentence has \"not\".",
       "explanation": "“Any” fits this negative sentence. “A”, “an” and “many” do not fit before uncountable “bread”.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.some-any"
+      ]
     },
     {
       "id": "el-p2-some-any.q3",
@@ -1081,7 +1153,10 @@
       "hint": "This is a positive statement.",
       "explanation": "Use \"some\" in positive statements.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.some-any"
+      ]
     },
     {
       "id": "el-p2-simple-present.q1",
@@ -1117,7 +1192,10 @@
       "hint": "\"Every day\" tells us it is a habit.",
       "explanation": "For habits with \"he/she/it\", use the simple present with -s: \"walks\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.simple-present"
+      ]
     },
     {
       "id": "el-p2-simple-present.q2",
@@ -1153,7 +1231,10 @@
       "hint": "This is always true.",
       "explanation": "Facts use the simple present: \"rises\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.simple-present"
+      ]
     },
     {
       "id": "el-p2-simple-present.q3",
@@ -1189,7 +1270,10 @@
       "hint": "Look for the word showing it happens again and again.",
       "explanation": "\"Every Saturday\" shows a habit: \"tells\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.simple-present"
+      ]
     },
     {
       "id": "el-p2-simple-past-regular.q1",
@@ -1225,7 +1309,10 @@
       "hint": "\"Yesterday\" means the past.",
       "explanation": "Past actions use the past tense: \"cleaned\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.simple-past-regular"
+      ]
     },
     {
       "id": "el-p2-simple-past-regular.q2",
@@ -1261,7 +1348,10 @@
       "hint": "When did it happen?",
       "explanation": "\"Last night\" is the past, so \"called\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.simple-past-regular"
+      ]
     },
     {
       "id": "el-p2-simple-past-regular.q3",
@@ -1297,7 +1387,10 @@
       "hint": "Find the time word.",
       "explanation": "\"Yesterday\" shows the past: \"played\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.simple-past-regular"
+      ]
     },
     {
       "id": "el-p2-simple-past-irregular.q1",
@@ -1333,7 +1426,10 @@
       "hint": "This verb does not add -ed.",
       "explanation": "The past tense of \"catch\" is \"caught\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.simple-past-irregular"
+      ]
     },
     {
       "id": "el-p2-simple-past-irregular.q2",
@@ -1369,7 +1465,10 @@
       "hint": "An irregular past tense.",
       "explanation": "The past tense of \"forget\" is \"forgot\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.simple-past-irregular"
+      ]
     },
     {
       "id": "el-p2-simple-past-irregular.q3",
@@ -1405,7 +1504,10 @@
       "hint": "The past tense of \"see\" is a short word.",
       "explanation": "The past tense of \"see\" is \"saw\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.simple-past-irregular"
+      ]
     },
     {
       "id": "el-p2-present-continuous.q1",
@@ -1441,7 +1543,10 @@
       "hint": "After \"is\", use the -ing form.",
       "explanation": "\"Is sleeping\" shows an action happening now.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.present-continuous"
+      ]
     },
     {
       "id": "el-p2-present-continuous.q2",
@@ -1477,7 +1582,10 @@
       "hint": "\"Birds\" is plural and it is happening now.",
       "explanation": "Use \"are\" with plural subjects: \"are singing\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.present-continuous"
+      ]
     },
     {
       "id": "el-p2-present-continuous.q3",
@@ -1513,7 +1621,10 @@
       "hint": "\"Now\" shows it is happening at this moment.",
       "explanation": "Use \"is talking\" for one person doing something now.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.present-continuous"
+      ]
     },
     {
       "id": "el-p2-sva-is-are.q1",
@@ -1549,7 +1660,10 @@
       "hint": "Is the subject one or more than one?",
       "explanation": "\"Apples\" is plural, so we use \"are\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.sva-is-are"
+      ]
     },
     {
       "id": "el-p2-sva-is-are.q2",
@@ -1585,7 +1699,10 @@
       "hint": "\"Cat\" is one animal.",
       "explanation": "A singular subject takes \"is\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.sva-is-are"
+      ]
     },
     {
       "id": "el-p2-sva-is-are.q3",
@@ -1621,7 +1738,10 @@
       "hint": "Look at the noun after the blank.",
       "explanation": "\"Children\" is plural, so \"there are\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.sva-is-are"
+      ]
     },
     {
       "id": "el-p2-sva-has-have.q1",
@@ -1657,7 +1777,10 @@
       "hint": "Siti is one person.",
       "explanation": "Use \"has\" with he, she, it or one person.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.sva-has-have"
+      ]
     },
     {
       "id": "el-p2-sva-has-have.q2",
@@ -1693,7 +1816,10 @@
       "hint": "Use the verb that goes with \"we\".",
       "explanation": "\"We\" takes \"have\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.sva-has-have"
+      ]
     },
     {
       "id": "el-p2-sva-has-have.q3",
@@ -1729,7 +1855,10 @@
       "hint": "\"Dog\" is singular.",
       "explanation": "Singular subjects take \"has\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.sva-has-have"
+      ]
     },
     {
       "id": "el-p2-sva-verb-s.q1",
@@ -1765,7 +1894,10 @@
       "hint": "\"Children\" is plural.",
       "explanation": "Plural subjects do not add -s: \"swim\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.sva-verb-s"
+      ]
     },
     {
       "id": "el-p2-sva-verb-s.q2",
@@ -1801,7 +1933,10 @@
       "hint": "One person, a habit.",
       "explanation": "Singular subject in the simple present adds -s: \"reads\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.sva-verb-s"
+      ]
     },
     {
       "id": "el-p2-sva-verb-s.q3",
@@ -1837,7 +1972,10 @@
       "hint": "Two people are joined by \"and\".",
       "explanation": "Two people make a plural subject: \"ride\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.sva-verb-s"
+      ]
     },
     {
       "id": "el-p2-subject-object-pronoun.q1",
@@ -1873,7 +2011,10 @@
       "hint": "Mei is a girl and does the action.",
       "explanation": "Use \"she\" for a girl doing the action.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.subject-object-pronoun"
+      ]
     },
     {
       "id": "el-p2-subject-object-pronoun.q2",
@@ -1909,7 +2050,10 @@
       "hint": "Ben helped someone. Use the word after the action.",
       "explanation": "After a verb, use \"me\", not \"I\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.subject-object-pronoun"
+      ]
     },
     {
       "id": "el-p2-subject-object-pronoun.q3",
@@ -1945,7 +2089,10 @@
       "hint": "Who was fed? More than one.",
       "explanation": "\"Them\" is used after a verb for more than one.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.subject-object-pronoun"
+      ]
     },
     {
       "id": "el-p2-possessive-pronoun.q1",
@@ -1981,7 +2128,10 @@
       "hint": "Which word shows \"belongs to me\" at the end of a sentence?",
       "explanation": "\"Mine\" means \"belonging to me\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.possessive-pronoun"
+      ]
     },
     {
       "id": "el-p2-possessive-pronoun.q2",
@@ -2017,7 +2167,10 @@
       "hint": "The bags belong to the children.",
       "explanation": "\"Their\" shows something belongs to them.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.possessive-pronoun"
+      ]
     },
     {
       "id": "el-p2-possessive-pronoun.q3",
@@ -2053,7 +2206,10 @@
       "hint": "Which word means \"belonging to him\"?",
       "explanation": "\"His\" means \"belonging to him\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.possessive-pronoun"
+      ]
     },
     {
       "id": "el-p2-adjective-choice.q1",
@@ -2089,7 +2245,10 @@
       "hint": "Choose a describing word for the elephant.",
       "explanation": "\"Huge\" describes the elephant.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.adjective-choice"
+      ]
     },
     {
       "id": "el-p2-adjective-choice.q2",
@@ -2125,7 +2284,10 @@
       "hint": "Choose a word that describes the cake.",
       "explanation": "\"Delicious\" is an adjective describing the cake.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.adjective-choice"
+      ]
     },
     {
       "id": "el-p2-adjective-choice.q3",
@@ -2161,7 +2323,10 @@
       "hint": "Choose a word that describes the day.",
       "explanation": "\"Rainy\" describes the day.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.adjective-choice"
+      ]
     },
     {
       "id": "el-p2-adverb-ly.q1",
@@ -2197,7 +2362,10 @@
       "hint": "Describe how it walked.",
       "explanation": "\"Slowly\" tells how the tortoise walked.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.adverb-ly"
+      ]
     },
     {
       "id": "el-p2-adverb-ly.q2",
@@ -2233,7 +2401,10 @@
       "hint": "How should the door be closed?",
       "explanation": "\"Quietly\" describes how to close the door.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.adverb-ly"
+      ]
     },
     {
       "id": "el-p2-adverb-ly.q3",
@@ -2269,7 +2440,10 @@
       "hint": "The word describes how she finished.",
       "explanation": "\"Quickly\" is an adverb describing the action.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.adverb-ly"
+      ]
     },
     {
       "id": "el-p2-comparative.q1",
@@ -2305,7 +2479,10 @@
       "hint": "Two animals are compared.",
       "explanation": "Comparing two things: add -er, \"taller\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.comparative"
+      ]
     },
     {
       "id": "el-p2-comparative.q2",
@@ -2341,7 +2518,10 @@
       "hint": "He is compared with everyone in the class.",
       "explanation": "Comparing more than two: add -est, \"fastest\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.comparative"
+      ]
     },
     {
       "id": "el-p2-comparative.q3",
@@ -2377,7 +2557,10 @@
       "hint": "Two days are compared.",
       "explanation": "Compare two days with \"colder\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.comparative"
+      ]
     },
     {
       "id": "el-p2-preposition-place.q1",
@@ -2413,7 +2596,10 @@
       "hint": "The bed is above the cat.",
       "explanation": "The cat is below the bed, in the space above the floor, so it is under the bed.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.preposition-place"
+      ]
     },
     {
       "id": "el-p2-preposition-place.q2",
@@ -2449,7 +2635,10 @@
       "hint": "The books rest on the top surface.",
       "explanation": "Things resting on a surface use \"on\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.preposition-place"
+      ]
     },
     {
       "id": "el-p2-preposition-place.q3",
@@ -2485,7 +2674,10 @@
       "hint": "There are two people, one on each side.",
       "explanation": "\"Between\" is used for something in the middle of two.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.preposition-place"
+      ]
     },
     {
       "id": "el-p2-preposition-time.q1",
@@ -2521,7 +2713,10 @@
       "hint": "Use this preposition with a clock time.",
       "explanation": "Use \"at\" with clock times.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.preposition-time"
+      ]
     },
     {
       "id": "el-p2-preposition-time.q2",
@@ -2557,7 +2752,10 @@
       "hint": "Use this preposition with days.",
       "explanation": "Use \"on\" with days of the week.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.preposition-time"
+      ]
     },
     {
       "id": "el-p2-preposition-time.q3",
@@ -2593,7 +2791,10 @@
       "hint": "Use this preposition with months.",
       "explanation": "Use \"in\" with months and longer periods.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.preposition-time"
+      ]
     },
     {
       "id": "el-p2-and-but-or.q1",
@@ -2629,7 +2830,10 @@
       "hint": "Both are liked.",
       "explanation": "“And” adds oranges to apples: both fruits are liked.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.and-but-or"
+      ]
     },
     {
       "id": "el-p2-and-but-or.q2",
@@ -2665,7 +2869,10 @@
       "hint": "The two ideas are different.",
       "explanation": "“But” highlights the difference between tall and short.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.and-but-or"
+      ]
     },
     {
       "id": "el-p2-and-but-or.q3",
@@ -2701,7 +2908,10 @@
       "hint": "You choose one of the two.",
       "explanation": "“Or” offers a choice of one dish: rice or noodles.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.and-but-or"
+      ]
     },
     {
       "id": "el-p2-because-so.q1",
@@ -2737,7 +2947,10 @@
       "hint": "The second part gives the reason.",
       "explanation": "\"Because\" gives a reason.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.because-so"
+      ]
     },
     {
       "id": "el-p2-because-so.q2",
@@ -2773,7 +2986,10 @@
       "hint": "The second part is the result.",
       "explanation": "\"So\" shows a result.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.because-so"
+      ]
     },
     {
       "id": "el-p2-because-so.q3",
@@ -2809,7 +3025,10 @@
       "hint": "Why did he drink water?",
       "explanation": "\"Because\" introduces the reason.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.because-so"
+      ]
     },
     {
       "id": "el-p2-capitals-full-stops.q1",
@@ -2845,7 +3064,10 @@
       "hint": "Check the capital letters and the end mark.",
       "explanation": "Sentences start with a capital letter, names take capitals, and a full stop ends the sentence.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.capitals-full-stops"
+      ]
     },
     {
       "id": "el-p2-capitals-full-stops.q2",
@@ -2881,7 +3103,10 @@
       "hint": "Days of the week are special names.",
       "explanation": "Days of the week always begin with a capital letter.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.capitals-full-stops"
+      ]
     },
     {
       "id": "el-p2-capitals-full-stops.q3",
@@ -2917,7 +3142,10 @@
       "hint": "Look at names, days and the word \"I\".",
       "explanation": "Names, days, places and \"I\" take capital letters.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.capitals-full-stops"
+      ]
     },
     {
       "id": "el-p2-question-exclamation.q1",
@@ -2953,7 +3181,10 @@
       "hint": "Is it asking something?",
       "explanation": "A question ends with a question mark.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.question-exclamation"
+      ]
     },
     {
       "id": "el-p2-question-exclamation.q2",
@@ -2989,7 +3220,10 @@
       "hint": "It shows strong feeling.",
       "explanation": "An exclamation ends with an exclamation mark.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.question-exclamation"
+      ]
     },
     {
       "id": "el-p2-question-exclamation.q3",
@@ -3025,7 +3259,10 @@
       "hint": "It is a question that starts with \"Can\".",
       "explanation": "A question needs a capital letter and a question mark.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.question-exclamation"
+      ]
     },
     {
       "id": "el-p2-commas-lists.q1",
@@ -3061,7 +3298,10 @@
       "hint": "Commas separate items in a list.",
       "explanation": "Put a comma between items, with \"and\" before the last item.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.commas-lists"
+      ]
     },
     {
       "id": "el-p2-commas-lists.q2",
@@ -3097,7 +3337,10 @@
       "hint": "Look at the list of animals.",
       "explanation": "Commas go between items in a list.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.commas-lists"
+      ]
     },
     {
       "id": "el-p2-commas-lists.q3",
@@ -3133,7 +3376,10 @@
       "hint": "Find the list of things she bought.",
       "explanation": "Separate list items with commas.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.commas-lists"
+      ]
     },
     {
       "id": "el-p2-sentence-type.q1",
@@ -3169,7 +3415,10 @@
       "hint": "It tells someone to do something.",
       "explanation": "A sentence telling someone to do something is a command.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.sentence-type"
+      ]
     },
     {
       "id": "el-p2-sentence-type.q2",
@@ -3205,7 +3454,10 @@
       "hint": "It gives information.",
       "explanation": "A sentence that gives information is a statement.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.sentence-type"
+      ]
     },
     {
       "id": "el-p2-sentence-type.q3",
@@ -3241,7 +3493,10 @@
       "hint": "Which one asks for an answer?",
       "explanation": "It asks something and ends with a question mark.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.sentence-type"
+      ]
     },
     {
       "id": "el-p2-vocab-meaning.q1",
@@ -3277,7 +3532,10 @@
       "hint": "Huge describes size.",
       "explanation": "\"Enormous\" means very big, like \"huge\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.vocab-meaning"
+      ]
     },
     {
       "id": "el-p2-vocab-meaning.q2",
@@ -3313,7 +3571,10 @@
       "hint": "Glad is a feeling.",
       "explanation": "\"Glad\" and \"happy\" mean the same.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.vocab-meaning"
+      ]
     },
     {
       "id": "el-p2-vocab-meaning.q3",
@@ -3349,7 +3610,10 @@
       "hint": "Think about how you feel after a long walk.",
       "explanation": "\"Exhausted\" means very tired.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.vocab-meaning"
+      ]
     },
     {
       "id": "el-p2-vocab-opposite.q1",
@@ -3385,7 +3649,10 @@
       "hint": "Think of arriving at school.",
       "explanation": "\"Late\" is the opposite of \"early\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.vocab-opposite"
+      ]
     },
     {
       "id": "el-p2-vocab-opposite.q2",
@@ -3421,7 +3688,10 @@
       "hint": "Think of a glass of water.",
       "explanation": "\"Full\" is the opposite of \"empty\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.vocab-opposite"
+      ]
     },
     {
       "id": "el-p2-vocab-opposite.q3",
@@ -3457,7 +3727,10 @@
       "hint": "Choose the opposite of noisy.",
       "explanation": "\"Silent\" is the opposite of \"noisy\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.vocab-opposite"
+      ]
     },
     {
       "id": "el-p2-vocab-context.q1",
@@ -3493,7 +3766,10 @@
       "hint": "What do hungry babies do?",
       "explanation": "Hungry babies cry.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.vocab-context"
+      ]
     },
     {
       "id": "el-p2-vocab-context.q2",
@@ -3529,7 +3805,10 @@
       "hint": "What keeps us dry?",
       "explanation": "An umbrella keeps us dry in the rain.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.vocab-context"
+      ]
     },
     {
       "id": "el-p2-vocab-context.q3",
@@ -3565,7 +3844,10 @@
       "hint": "Firefighters help animals in danger.",
       "explanation": "\"Rescued\" means saved from danger.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.vocab-context"
+      ]
     },
     {
       "id": "el-p2-vocab-word-family.q1",
@@ -3601,7 +3883,10 @@
       "hint": "All the words are vegetables.",
       "explanation": "Broccoli is a vegetable.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.vocab-word-family"
+      ]
     },
     {
       "id": "el-p2-vocab-word-family.q2",
@@ -3637,7 +3922,10 @@
       "hint": "Three of them are tools.",
       "explanation": "A pillow is not a tool.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.vocab-word-family"
+      ]
     },
     {
       "id": "el-p2-vocab-word-family.q3",
@@ -3673,7 +3961,10 @@
       "hint": "Where do stationery items go?",
       "explanation": "Stationery goes into a pencil case.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.vocab-word-family"
+      ]
     },
     {
       "id": "el-p2-vocab-compound.q1",
@@ -3709,7 +4000,10 @@
       "hint": "Put the two words together.",
       "explanation": "\"Rain\" + \"bow\" = \"rainbow\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.vocab-compound"
+      ]
     },
     {
       "id": "el-p2-vocab-compound.q2",
@@ -3745,7 +4039,10 @@
       "hint": "It is made of two whole words.",
       "explanation": "\"Sun\" + \"flower\" = \"sunflower\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.vocab-compound"
+      ]
     },
     {
       "id": "el-p2-vocab-compound.q3",
@@ -3781,7 +4078,10 @@
       "hint": "Two words joined to name something in class.",
       "explanation": "\"White\" + \"board\" = \"whiteboard\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.vocab-compound"
+      ]
     },
     {
       "id": "el-p2-vocab-contractions.q1",
@@ -3817,7 +4117,10 @@
       "hint": "The apostrophe takes the place of a missing letter.",
       "explanation": "The o in \"not\" is replaced: \"don't\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.vocab-contractions"
+      ]
     },
     {
       "id": "el-p2-vocab-contractions.q2",
@@ -3853,7 +4156,10 @@
       "hint": "The apostrophe replaces a letter.",
       "explanation": "\"We're\" is the short form of \"we are\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.vocab-contractions"
+      ]
     },
     {
       "id": "el-p2-vocab-contractions.q3",
@@ -3889,7 +4195,10 @@
       "hint": "Put the apostrophe where the letter is missing.",
       "explanation": "\"Could not\" becomes \"couldn't\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.vocab-contractions"
+      ]
     },
     {
       "id": "el-p2-spell-common.q1",
@@ -3925,7 +4234,10 @@
       "hint": "Sound it out: be-cause.",
       "explanation": "The correct spelling is \"because\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.spell-common"
+      ]
     },
     {
       "id": "el-p2-spell-common.q2",
@@ -3961,7 +4273,10 @@
       "hint": "Remember the rule \"i before e\" for this word.",
       "explanation": "The correct spelling is \"friend\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.spell-common"
+      ]
     },
     {
       "id": "el-p2-spell-common.q3",
@@ -3997,7 +4312,10 @@
       "hint": "Find the word that should name the seaside place.",
       "explanation": "“Beech” names a tree. The sandy place beside the sea is spelt “beach”.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.spell-common"
+      ]
     },
     {
       "id": "el-p2-spell-homophones.q1",
@@ -4033,7 +4351,10 @@
       "hint": "This word is about using your ears.",
       "explanation": "\"Hear\" means to listen with your ears.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.spell-homophones"
+      ]
     },
     {
       "id": "el-p2-spell-homophones.q2",
@@ -4069,7 +4390,10 @@
       "hint": "The shoes belong to the children.",
       "explanation": "\"Their\" shows ownership.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.spell-homophones"
+      ]
     },
     {
       "id": "el-p2-spell-homophones.q3",
@@ -4105,7 +4429,10 @@
       "hint": "This word is a number.",
       "explanation": "\"Two\" is the number 2.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.spell-homophones"
+      ]
     },
     {
       "id": "el-p2-edit-grammar.q1",
@@ -4141,7 +4468,10 @@
       "hint": "Look for the time word.",
       "explanation": "\"Yesterday\" needs the past tense \"went\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.edit-grammar"
+      ]
     },
     {
       "id": "el-p2-edit-grammar.q2",
@@ -4177,7 +4507,10 @@
       "hint": "Is the subject one or many?",
       "explanation": "\"Dogs\" is plural, so it should be \"bark\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.edit-grammar"
+      ]
     },
     {
       "id": "el-p2-edit-grammar.q3",
@@ -4213,7 +4546,10 @@
       "hint": "Which verb goes with \"she\"?",
       "explanation": "\"She has\" is correct.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.edit-grammar"
+      ]
     },
     {
       "id": "el-p2-word-order.q1",
@@ -4249,7 +4585,10 @@
       "hint": "Start with who is doing it.",
       "explanation": "Subject + verb: \"The cat is sleeping.\"",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.word-order"
+      ]
     },
     {
       "id": "el-p2-word-order.q2",
@@ -4285,7 +4624,10 @@
       "hint": "Who did it? What did they do? Where?",
       "explanation": "Who + action + place: \"We went to the beach.\"",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.word-order"
+      ]
     },
     {
       "id": "el-p2-word-order.q3",
@@ -4321,7 +4663,10 @@
       "hint": "Who + action + what + where.",
       "explanation": "\"Mum bought fresh fish at the market.\" is in the correct order.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.word-order"
+      ]
     },
     {
       "id": "el-p2-sequence-events.q1",
@@ -4357,7 +4702,10 @@
       "hint": "Think about what you need to start.",
       "explanation": "You need bread first.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.sequence-events"
+      ]
     },
     {
       "id": "el-p2-sequence-events.q2",
@@ -4393,7 +4741,10 @@
       "hint": "It tells us the steps are ending.",
       "explanation": "\"Finally\" introduces the last step.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.sequence-events"
+      ]
     },
     {
       "id": "el-p2-sequence-events.q3",
@@ -4429,7 +4780,10 @@
       "hint": "What happens first in the morning?",
       "explanation": "He woke up, brushed his teeth, then went to school.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.sequence-events"
+      ]
     },
     {
       "id": "el-p2-connectors.q1",
@@ -4465,7 +4819,10 @@
       "hint": "This is the beginning of the steps.",
       "explanation": "\"First\" starts a sequence.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.connectors"
+      ]
     },
     {
       "id": "el-p2-connectors.q2",
@@ -4501,7 +4858,10 @@
       "hint": "This shows what happened next.",
       "explanation": "\"After that\" shows the next event.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.connectors"
+      ]
     },
     {
       "id": "el-p2-connectors.q3",
@@ -4537,7 +4897,10 @@
       "hint": "This tells us something finally happened after a long time.",
       "explanation": "\"At last\" shows something happened after waiting.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.connectors"
+      ]
     },
     {
       "id": "el-p2-sense-details.q1",
@@ -4573,7 +4936,10 @@
       "hint": "Look for the sense of smell.",
       "explanation": "It describes a smell.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.sense-details"
+      ]
     },
     {
       "id": "el-p2-sense-details.q2",
@@ -4609,7 +4975,10 @@
       "hint": "Look for a sound word.",
       "explanation": "\"Rumbled\" describes a sound.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.sense-details"
+      ]
     },
     {
       "id": "el-p2-sense-details.q3",
@@ -4645,7 +5014,10 @@
       "hint": "Choose the detail that helps the reader picture the park.",
       "explanation": "It adds what we can see and feel.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.sense-details"
+      ]
     },
     {
       "id": "el-p2-feelings.q1",
@@ -4681,7 +5053,10 @@
       "hint": "How would you feel?",
       "explanation": "Losing something you like makes you upset.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.feelings"
+      ]
     },
     {
       "id": "el-p2-feelings.q2",
@@ -4717,7 +5092,10 @@
       "hint": "Look for a body clue.",
       "explanation": "Shaking hands show nervousness.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.feelings"
+      ]
     },
     {
       "id": "el-p2-feelings.q3",
@@ -4753,7 +5131,10 @@
       "hint": "What do jumping and cheering show?",
       "explanation": "Jumping and cheering show she was thrilled.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.feelings"
+      ]
     },
     {
       "id": "el-p2-read-tree.q1",
@@ -4789,7 +5170,11 @@
       "hint": "Look at the first sentence.",
       "explanation": "The passage says they worked on it every Saturday.",
       "material_id": "el-p2-read-tree",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.read-detail",
+      "leaf_refs": [
+        "el.p2.leaf.read-detail"
+      ]
     },
     {
       "id": "el-p2-read-tree.q2",
@@ -4825,7 +5210,11 @@
       "hint": "Find the words \"so that\".",
       "explanation": "They wanted it to blend in with the leaves.",
       "material_id": "el-p2-read-tree",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.read-reason",
+      "leaf_refs": [
+        "el.p2.leaf.read-reason"
+      ]
     },
     {
       "id": "el-p2-read-tree.q3",
@@ -4861,7 +5250,11 @@
       "hint": "Read the second paragraph.",
       "explanation": "He covered the unfinished roof with a plastic sheet.",
       "material_id": "el-p2-read-tree",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.read-detail",
+      "leaf_refs": [
+        "el.p2.leaf.read-detail"
+      ]
     },
     {
       "id": "el-p2-read-tree.q4",
@@ -4897,7 +5290,11 @@
       "hint": "Think about what rain does to wood.",
       "explanation": "He covered it to protect the wood from the rain.",
       "material_id": "el-p2-read-tree",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.read-reason",
+      "leaf_refs": [
+        "el.p2.leaf.read-reason"
+      ]
     },
     {
       "id": "el-p2-read-tree.q5",
@@ -4933,7 +5330,11 @@
       "hint": "Read what he whispered.",
       "explanation": "\"The best place in the world\" shows he was very happy.",
       "material_id": "el-p2-read-tree",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.read-feelings",
+      "leaf_refs": [
+        "el.p2.leaf.read-feelings"
+      ]
     },
     {
       "id": "el-p2-read-hen.q1",
@@ -4969,7 +5370,11 @@
       "hint": "Read the first sentence.",
       "explanation": "They went to the wet market.",
       "material_id": "el-p2-read-hen",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.read-detail",
+      "leaf_refs": [
+        "el.p2.leaf.read-detail"
+      ]
     },
     {
       "id": "el-p2-read-hen.q2",
@@ -5005,7 +5410,11 @@
       "hint": "What was she looking at?",
       "explanation": "She stopped to look at a tank of crabs.",
       "material_id": "el-p2-read-hen",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.read-detail",
+      "leaf_refs": [
+        "el.p2.leaf.read-detail"
+      ]
     },
     {
       "id": "el-p2-read-hen.q3",
@@ -5041,7 +5450,11 @@
       "hint": "How do you feel when you are lost?",
       "explanation": "A fast heartbeat shows she was scared.",
       "material_id": "el-p2-read-hen",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.read-feelings",
+      "leaf_refs": [
+        "el.p2.leaf.read-feelings"
+      ]
     },
     {
       "id": "el-p2-read-hen.q4",
@@ -5077,7 +5490,11 @@
       "hint": "Read the second paragraph.",
       "explanation": "She told the fruit stall auntie what had happened.",
       "material_id": "el-p2-read-hen",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.read-sequence",
+      "leaf_refs": [
+        "el.p2.leaf.read-sequence"
+      ]
     },
     {
       "id": "el-p2-read-hen.q5",
@@ -5113,7 +5530,11 @@
       "hint": "Read the last sentence.",
       "explanation": "She thanked the auntie with a bag of rambutans.",
       "material_id": "el-p2-read-hen",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.read-detail",
+      "leaf_refs": [
+        "el.p2.leaf.read-detail"
+      ]
     },
     {
       "id": "el-p2-read-snail.q1",
@@ -5149,7 +5570,11 @@
       "hint": "Read the first paragraph.",
       "explanation": "The hard shell keeps its soft body safe.",
       "material_id": "el-p2-read-snail",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.read-detail",
+      "leaf_refs": [
+        "el.p2.leaf.read-detail"
+      ]
     },
     {
       "id": "el-p2-read-snail.q2",
@@ -5185,7 +5610,11 @@
       "hint": "Find the word \"frightened\".",
       "explanation": "It hides inside its shell.",
       "material_id": "el-p2-read-snail",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.read-detail",
+      "leaf_refs": [
+        "el.p2.leaf.read-detail"
+      ]
     },
     {
       "id": "el-p2-read-snail.q3",
@@ -5221,7 +5650,11 @@
       "hint": "Read the second paragraph.",
       "explanation": "The slime helps it glide without getting hurt.",
       "material_id": "el-p2-read-snail",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.read-reason",
+      "leaf_refs": [
+        "el.p2.leaf.read-reason"
+      ]
     },
     {
       "id": "el-p2-read-snail.q4",
@@ -5257,7 +5690,11 @@
       "hint": "Snails like damp places.",
       "explanation": "Snails come out in damp places, often after rain.",
       "material_id": "el-p2-read-snail",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.read-detail",
+      "leaf_refs": [
+        "el.p2.leaf.read-detail"
+      ]
     },
     {
       "id": "el-p2-read-snail.q5",
@@ -5293,7 +5730,11 @@
       "hint": "What do snails eat?",
       "explanation": "Snails eat leaves, flowers and fruit.",
       "material_id": "el-p2-read-snail",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.read-reason",
+      "leaf_refs": [
+        "el.p2.leaf.read-reason"
+      ]
     },
     {
       "id": "el-p2-read-kite.q1",
@@ -5329,7 +5770,11 @@
       "hint": "Look at the first sentence.",
       "explanation": "They went last June.",
       "material_id": "el-p2-read-kite",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.read-detail",
+      "leaf_refs": [
+        "el.p2.leaf.read-detail"
+      ]
     },
     {
       "id": "el-p2-read-kite.q2",
@@ -5365,7 +5810,11 @@
       "hint": "Find the words \"wavy legs\".",
       "explanation": "The giant octopus had long, wavy legs.",
       "material_id": "el-p2-read-kite",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.read-detail",
+      "leaf_refs": [
+        "el.p2.leaf.read-detail"
+      ]
     },
     {
       "id": "el-p2-read-kite.q3",
@@ -5401,7 +5850,11 @@
       "hint": "Read the second paragraph.",
       "explanation": "There was hardly any wind.",
       "material_id": "el-p2-read-kite",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.read-reason",
+      "leaf_refs": [
+        "el.p2.leaf.read-reason"
+      ]
     },
     {
       "id": "el-p2-read-kite.q4",
@@ -5437,7 +5890,11 @@
       "hint": "The eagle went \"high above us\".",
       "explanation": "\"Soared\" means flew high in the air.",
       "material_id": "el-p2-read-kite",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.read-word-meaning",
+      "leaf_refs": [
+        "el.p2.leaf.read-word-meaning"
+      ]
     },
     {
       "id": "el-p2-read-kite.q5",
@@ -5473,7 +5930,11 @@
       "hint": "Read the last sentence.",
       "explanation": "The writer says it was the best school outing ever.",
       "material_id": "el-p2-read-kite",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.read-feelings",
+      "leaf_refs": [
+        "el.p2.leaf.read-feelings"
+      ]
     },
     {
       "id": "el-p2-cloze-picnic.q1",
@@ -5509,7 +5970,11 @@
       "hint": "The story happened last Sunday.",
       "explanation": "\"Last Sunday\" needs the past tense \"went\".",
       "material_id": "el-p2-cloze-picnic",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.simple-past-irregular",
+      "leaf_refs": [
+        "el.p2.leaf.simple-past-irregular"
+      ]
     },
     {
       "id": "el-p2-cloze-picnic.q2",
@@ -5545,7 +6010,11 @@
       "hint": "Use the past tense.",
       "explanation": "The past tense of \"build\" is \"built\".",
       "material_id": "el-p2-cloze-picnic",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.simple-past-irregular",
+      "leaf_refs": [
+        "el.p2.leaf.simple-past-irregular"
+      ]
     },
     {
       "id": "el-p2-cloze-picnic.q3",
@@ -5581,7 +6050,11 @@
       "hint": "This is a positive statement about many sandwiches.",
       "explanation": "Use \"some\" in positive statements.",
       "material_id": "el-p2-cloze-picnic",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.some-any",
+      "leaf_refs": [
+        "el.p2.leaf.some-any"
+      ]
     },
     {
       "id": "el-p2-cloze-picnic.q4",
@@ -5617,7 +6090,11 @@
       "hint": "An irregular past tense.",
       "explanation": "The past tense of \"teach\" is \"taught\".",
       "material_id": "el-p2-cloze-picnic",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.simple-past-irregular",
+      "leaf_refs": [
+        "el.p2.leaf.simple-past-irregular"
+      ]
     },
     {
       "id": "el-p2-cloze-picnic.q5",
@@ -5653,7 +6130,11 @@
       "hint": "Tired and happy are different feelings.",
       "explanation": "\"But\" joins contrasting ideas.",
       "material_id": "el-p2-cloze-picnic",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.and-but-or",
+      "leaf_refs": [
+        "el.p2.leaf.and-but-or"
+      ]
     },
     {
       "id": "el-p2-cloze-pet.q1",
@@ -5689,7 +6170,11 @@
       "hint": "Snowy is one rabbit.",
       "explanation": "Singular subject: \"has\".",
       "material_id": "el-p2-cloze-pet",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.sva-has-have",
+      "leaf_refs": [
+        "el.p2.leaf.sva-has-have"
+      ]
     },
     {
       "id": "el-p2-cloze-pet.q2",
@@ -5725,7 +6210,11 @@
       "hint": "This is a habit and the subject is \"I\".",
       "explanation": "\"I give\" is the simple present for a habit.",
       "material_id": "el-p2-cloze-pet",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.simple-present",
+      "leaf_refs": [
+        "el.p2.leaf.simple-present"
+      ]
     },
     {
       "id": "el-p2-cloze-pet.q3",
@@ -5761,7 +6250,11 @@
       "hint": "She moves all over the garden.",
       "explanation": "\"Hop around the garden\" shows movement in many directions.",
       "material_id": "el-p2-cloze-pet",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.preposition-place",
+      "leaf_refs": [
+        "el.p2.leaf.preposition-place"
+      ]
     },
     {
       "id": "el-p2-cloze-pet.q4",
@@ -5797,7 +6290,11 @@
       "hint": "She is compared with all pets.",
       "explanation": "Comparing with many: \"cutest\".",
       "material_id": "el-p2-cloze-pet",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.comparative",
+      "leaf_refs": [
+        "el.p2.leaf.comparative"
+      ]
     },
     {
       "id": "el-p2-cloze-pet.q5",
@@ -5833,7 +6330,11 @@
       "hint": "After the verb \"love\", use the object pronoun.",
       "explanation": "\"Her\" is used after a verb.",
       "material_id": "el-p2-cloze-pet",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.subject-object-pronoun",
+      "leaf_refs": [
+        "el.p2.leaf.subject-object-pronoun"
+      ]
     },
     {
       "id": "el-p2-cloze-library.q1",
@@ -5869,7 +6370,11 @@
       "hint": "Where do you find many books and a librarian?",
       "explanation": "A librarian works in a library.",
       "material_id": "el-p2-cloze-library",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.vocab-context",
+      "leaf_refs": [
+        "el.p2.leaf.vocab-context"
+      ]
     },
     {
       "id": "el-p2-cloze-library.q2",
@@ -5905,7 +6410,11 @@
       "hint": "Where are books kept?",
       "explanation": "Books are kept on shelves.",
       "material_id": "el-p2-cloze-library",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.vocab-context",
+      "leaf_refs": [
+        "el.p2.leaf.vocab-context"
+      ]
     },
     {
       "id": "el-p2-cloze-library.q3",
@@ -5941,7 +6450,11 @@
       "hint": "You take a library book home for a while.",
       "explanation": "We borrow books from a library.",
       "material_id": "el-p2-cloze-library",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.vocab-context",
+      "leaf_refs": [
+        "el.p2.leaf.vocab-context"
+      ]
     },
     {
       "id": "el-p2-cloze-library.q4",
@@ -5977,7 +6490,11 @@
       "hint": "Others are reading.",
       "explanation": "Libraries need quiet.",
       "material_id": "el-p2-cloze-library",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.vocab-context",
+      "leaf_refs": [
+        "el.p2.leaf.vocab-context"
+      ]
     },
     {
       "id": "el-p2-cloze-library.q5",
@@ -6013,7 +6530,11 @@
       "hint": "Library books must go back.",
       "explanation": "We return borrowed books.",
       "material_id": "el-p2-cloze-library",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.vocab-context",
+      "leaf_refs": [
+        "el.p2.leaf.vocab-context"
+      ]
     },
     {
       "id": "el-p2-visual-fair.q1",
@@ -6049,7 +6570,11 @@
       "hint": "Look at \"Place\".",
       "explanation": "The poster says the School Hall.",
       "material_id": "el-p2-visual-fair",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.visual-find",
+      "leaf_refs": [
+        "el.p2.leaf.visual-find"
+      ]
     },
     {
       "id": "el-p2-visual-fair.q2",
@@ -6085,7 +6610,11 @@
       "hint": "Count from 9 a.m. to 1 p.m.",
       "explanation": "9 a.m. to 1 p.m. is 4 hours.",
       "material_id": "el-p2-visual-fair",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.visual-use",
+      "leaf_refs": [
+        "el.p2.leaf.visual-use"
+      ]
     },
     {
       "id": "el-p2-visual-fair.q3",
@@ -6121,7 +6650,11 @@
       "hint": "Look at the ticket line.",
       "explanation": "Tickets are sold at the General Office.",
       "material_id": "el-p2-visual-fair",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.visual-find",
+      "leaf_refs": [
+        "el.p2.leaf.visual-find"
+      ]
     },
     {
       "id": "el-p2-visual-fair.q4",
@@ -6157,7 +6690,11 @@
       "hint": "Read the last line.",
       "explanation": "All money raised goes to the school library.",
       "material_id": "el-p2-visual-fair",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.visual-find",
+      "leaf_refs": [
+        "el.p2.leaf.visual-find"
+      ]
     },
     {
       "id": "el-p2-visual-menu.q1",
@@ -6193,7 +6730,11 @@
       "hint": "Compare the prices.",
       "explanation": "Fish soup costs $3.00, the most.",
       "material_id": "el-p2-visual-menu",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.visual-find",
+      "leaf_refs": [
+        "el.p2.leaf.visual-find"
+      ]
     },
     {
       "id": "el-p2-visual-menu.q2",
@@ -6229,7 +6770,11 @@
       "hint": "Look at the drinks line.",
       "explanation": "Water is free.",
       "material_id": "el-p2-visual-menu",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.visual-find",
+      "leaf_refs": [
+        "el.p2.leaf.visual-find"
+      ]
     },
     {
       "id": "el-p2-visual-menu.q3",
@@ -6265,7 +6810,11 @@
       "hint": "Add the two prices.",
       "explanation": "$2.00 + $1.00 = $3.00.",
       "material_id": "el-p2-visual-menu",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.visual-use",
+      "leaf_refs": [
+        "el.p2.leaf.visual-use"
+      ]
     },
     {
       "id": "el-p2-visual-menu.q4",
@@ -6301,7 +6850,11 @@
       "hint": "Read the note with the star.",
       "explanation": "It is closed on public holidays.",
       "material_id": "el-p2-visual-menu",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p2.visual-find",
+      "leaf_refs": [
+        "el.p2.leaf.visual-find"
+      ]
     },
     {
       "id": "el-p3-past-continuous.q1",
@@ -6337,7 +6890,10 @@
       "hint": "One action was going on when another happened.",
       "explanation": "Use \"was doing\" for an action in progress in the past.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.past-continuous"
+      ]
     },
     {
       "id": "el-p3-past-continuous.q2",
@@ -6373,7 +6929,10 @@
       "hint": "\"Children\" is plural; the action was in progress.",
       "explanation": "\"Were playing\" is past continuous for a plural subject.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.past-continuous"
+      ]
     },
     {
       "id": "el-p3-past-continuous.q3",
@@ -6409,7 +6968,10 @@
       "hint": "\"While\" tells us an action was in progress.",
       "explanation": "\"Was cooking\" shows the action in progress in the past.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.past-continuous"
+      ]
     },
     {
       "id": "el-p3-future-will.q1",
@@ -6445,7 +7007,10 @@
       "hint": "\"Tomorrow\" is the future.",
       "explanation": "Use \"will\" + verb for the future.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.future-will"
+      ]
     },
     {
       "id": "el-p3-future-will.q2",
@@ -6481,7 +7046,10 @@
       "hint": "When will it happen?",
       "explanation": "“Will go” is the future form that fits here. “Has gone” and “went” refer to the past; “going” needs a helping verb.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.future-will"
+      ]
     },
     {
       "id": "el-p3-future-will.q3",
@@ -6517,7 +7085,10 @@
       "hint": "What will happen in the future if it rains?",
       "explanation": "The result in the future uses \"will\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.future-will"
+      ]
     },
     {
       "id": "el-p3-irregular-past.q1",
@@ -6553,7 +7124,10 @@
       "hint": "Irregular past tense of \"write\".",
       "explanation": "The past tense of \"write\" is \"wrote\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.irregular-past"
+      ]
     },
     {
       "id": "el-p3-irregular-past.q2",
@@ -6589,7 +7163,10 @@
       "hint": "Irregular past of \"break\".",
       "explanation": "The past tense of \"break\" is \"broke\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.irregular-past"
+      ]
     },
     {
       "id": "el-p3-irregular-past.q3",
@@ -6625,7 +7202,10 @@
       "hint": "Irregular past tense.",
       "explanation": "The past tense of \"run\" is \"ran\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.irregular-past"
+      ]
     },
     {
       "id": "el-p3-tense-consistency.q1",
@@ -6661,7 +7241,10 @@
       "hint": "Keep the same tense as \"opened\".",
       "explanation": "Both actions are in the past: \"walked\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.tense-consistency"
+      ]
     },
     {
       "id": "el-p3-tense-consistency.q2",
@@ -6697,7 +7280,10 @@
       "hint": "Keep the same tense as \"wakes\".",
       "explanation": "Both verbs are simple present: \"waters\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.tense-consistency"
+      ]
     },
     {
       "id": "el-p3-tense-consistency.q3",
@@ -6733,7 +7319,10 @@
       "hint": "Match the tense of \"rang\".",
       "explanation": "Keep the past tense: \"hurried\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.tense-consistency"
+      ]
     },
     {
       "id": "el-p3-sva-each-everyone.q1",
@@ -6769,7 +7358,10 @@
       "hint": "\"Each\" means one at a time.",
       "explanation": "\"Each\" is singular, so \"has\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.sva-each-everyone"
+      ]
     },
     {
       "id": "el-p3-sva-each-everyone.q2",
@@ -6805,7 +7397,10 @@
       "hint": "\"Everyone\" is treated as singular.",
       "explanation": "\"Everyone\" takes a singular verb: \"is\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.sva-each-everyone"
+      ]
     },
     {
       "id": "el-p3-sva-each-everyone.q3",
@@ -6841,11 +7436,14 @@
       "hint": "\"Neither of\" takes a singular verb.",
       "explanation": "\"Neither of the twins likes\" is correct.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.sva-each-everyone"
+      ]
     },
     {
       "id": "el-p3-sva-there.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_english"
       ],
@@ -6854,30 +7452,33 @@
       "stage": "exact",
       "family": "grammar",
       "format": "mcq_4plus",
-      "stem": "There ______ a bag and two umbrellas at the door.",
+      "stem": "There ______ two umbrellas at the door right now.",
       "options": [
         {
           "id": "opt-1",
-          "text": "is"
-        },
-        {
-          "id": "opt-2",
           "text": "are"
         },
         {
+          "id": "opt-2",
+          "text": "was"
+        },
+        {
           "id": "opt-3",
-          "text": "were"
+          "text": "has"
         },
         {
           "id": "opt-4",
-          "text": "have"
+          "text": "is"
         }
       ],
       "correct_option_id": "opt-1",
-      "hint": "Look at the noun closest to the verb.",
-      "explanation": "\"A bag\" comes first and is singular: \"There is a bag and two umbrellas.\"",
+      "hint": "How many umbrellas? \"Right now\" tells you the time.",
+      "explanation": "\"Two umbrellas\" is plural and \"right now\" is the present, so we use \"are\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.sva-there"
+      ]
     },
     {
       "id": "el-p3-sva-there.q2",
@@ -6913,7 +7514,10 @@
       "hint": "Plural noun, past time.",
       "explanation": "\"Many fish\" is plural and it was last year: \"were\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.sva-there"
+      ]
     },
     {
       "id": "el-p3-sva-there.q3",
@@ -6949,7 +7553,10 @@
       "hint": "\"Milk\" cannot be counted.",
       "explanation": "Uncountable nouns take \"is\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.sva-there"
+      ]
     },
     {
       "id": "el-p3-sva-together.q1",
@@ -6985,7 +7592,10 @@
       "hint": "The main subject is \"the teacher\".",
       "explanation": "The subject is \"the teacher\" (singular), so \"is\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.sva-together"
+      ]
     },
     {
       "id": "el-p3-sva-together.q2",
@@ -7021,7 +7631,10 @@
       "hint": "What is on the table: the box or the crayons?",
       "explanation": "The subject is \"a box\", so \"is\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.sva-together"
+      ]
     },
     {
       "id": "el-p3-sva-together.q3",
@@ -7057,7 +7670,10 @@
       "hint": "Who is singing?",
       "explanation": "The subject \"children\" is plural: \"are\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.sva-together"
+      ]
     },
     {
       "id": "el-p3-reflexive.q1",
@@ -7093,7 +7709,10 @@
       "hint": "He hurt the same person who climbed.",
       "explanation": "Use \"himself\" when the subject does the action to himself.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.reflexive"
+      ]
     },
     {
       "id": "el-p3-reflexive.q2",
@@ -7129,7 +7748,10 @@
       "hint": "No one helped \"we\".",
       "explanation": "\"Ourselves\" goes with \"we\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.reflexive"
+      ]
     },
     {
       "id": "el-p3-reflexive.q3",
@@ -7165,7 +7787,10 @@
       "hint": "The cat cleaned the cat.",
       "explanation": "\"Itself\" refers back to the cat.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.reflexive"
+      ]
     },
     {
       "id": "el-p3-relative-who-which.q1",
@@ -7201,7 +7826,10 @@
       "hint": "It refers to a person.",
       "explanation": "Use \"who\" for people.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.relative-who-which"
+      ]
     },
     {
       "id": "el-p3-relative-who-which.q2",
@@ -7237,7 +7865,10 @@
       "hint": "It refers to a thing.",
       "explanation": "Use \"which\" for things.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.relative-who-which"
+      ]
     },
     {
       "id": "el-p3-relative-who-which.q3",
@@ -7273,7 +7904,10 @@
       "hint": "The car belongs to the man.",
       "explanation": "\"Whose\" shows belonging.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.relative-who-which"
+      ]
     },
     {
       "id": "el-p3-preposition-movement.q1",
@@ -7309,7 +7943,10 @@
       "hint": "It passed above the top of the fence.",
       "explanation": "The cat cleared the top and landed on the other side, so it jumped over the fence.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.preposition-movement"
+      ]
     },
     {
       "id": "el-p3-preposition-movement.q2",
@@ -7345,7 +7982,10 @@
       "hint": "From one end inside to the other end.",
       "explanation": "\"Through\" means from one end to the other inside something.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.preposition-movement"
+      ]
     },
     {
       "id": "el-p3-preposition-movement.q3",
@@ -7381,7 +8021,10 @@
       "hint": "He moved from outside to inside the water.",
       "explanation": "\"Into\" shows movement to the inside.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.preposition-movement"
+      ]
     },
     {
       "id": "el-p3-preposition-phrases.q1",
@@ -7417,7 +8060,10 @@
       "hint": "This adjective is always followed by the same word.",
       "explanation": "We say \"afraid of\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.preposition-phrases"
+      ]
     },
     {
       "id": "el-p3-preposition-phrases.q2",
@@ -7453,7 +8099,10 @@
       "hint": "Fixed phrase: good ___ something.",
       "explanation": "We say \"good at\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.preposition-phrases"
+      ]
     },
     {
       "id": "el-p3-preposition-phrases.q3",
@@ -7489,11 +8138,14 @@
       "hint": "Fixed phrase: excited ___ something.",
       "explanation": "We say \"excited about\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.preposition-phrases"
+      ]
     },
     {
       "id": "el-p3-although.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_english"
       ],
@@ -7502,34 +8154,37 @@
       "stage": "exact",
       "family": "grammar",
       "format": "mcq_4plus",
-      "stem": "______ it was raining, the match continued.",
+      "stem": "______ it was raining heavily, the match did not stop. The players kept going.",
       "options": [
         {
           "id": "opt-1",
-          "text": "So"
-        },
-        {
-          "id": "opt-2",
-          "text": "Although"
-        },
-        {
-          "id": "opt-3",
           "text": "Because"
         },
         {
-          "id": "opt-4",
+          "id": "opt-2",
+          "text": "So"
+        },
+        {
+          "id": "opt-3",
           "text": "Unless"
+        },
+        {
+          "id": "opt-4",
+          "text": "Although"
         }
       ],
-      "correct_option_id": "opt-2",
-      "hint": "The two ideas are surprising together.",
-      "explanation": "\"Although\" shows contrast.",
+      "correct_option_id": "opt-4",
+      "hint": "Rain usually stops a match. Was that what happened?",
+      "explanation": "Heavy rain would usually stop a match, but it did not. \"Although\" joins two ideas that are surprising together.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.although"
+      ]
     },
     {
       "id": "el-p3-although.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_english"
       ],
@@ -7538,34 +8193,37 @@
       "stage": "similar",
       "family": "grammar",
       "format": "mcq_4plus",
-      "stem": "Ben finished the race ______ he hurt his ankle.",
+      "stem": "Ben finished the race ______ he had hurt his ankle. He limped across the finish line.",
       "options": [
         {
           "id": "opt-1",
-          "text": "because"
+          "text": "unless"
         },
         {
           "id": "opt-2",
-          "text": "so"
+          "text": "because"
         },
         {
           "id": "opt-3",
-          "text": "although"
+          "text": "so"
         },
         {
           "id": "opt-4",
-          "text": "unless"
+          "text": "although"
         }
       ],
-      "correct_option_id": "opt-3",
-      "hint": "Finishing despite being hurt is surprising.",
-      "explanation": "\"Although\" joins contrasting ideas.",
+      "correct_option_id": "opt-4",
+      "hint": "Did his hurt ankle help him finish, or make it harder?",
+      "explanation": "A hurt ankle makes running harder, yet Ben still finished. \"Although\" shows this contrast.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.although"
+      ]
     },
     {
       "id": "el-p3-although.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_english"
       ],
@@ -7574,7 +8232,7 @@
       "stage": "generic",
       "family": "grammar",
       "format": "mcq_4plus",
-      "stem": "______ she was tired, Mei helped her mother wash the dishes.",
+      "stem": "______ she was very tired, Mei still helped her mother wash the dishes.",
       "options": [
         {
           "id": "opt-1",
@@ -7582,11 +8240,11 @@
         },
         {
           "id": "opt-2",
-          "text": "Because"
+          "text": "So"
         },
         {
           "id": "opt-3",
-          "text": "So"
+          "text": "Because"
         },
         {
           "id": "opt-4",
@@ -7594,14 +8252,17 @@
         }
       ],
       "correct_option_id": "opt-1",
-      "hint": "Tired, yet she helped.",
-      "explanation": "\"Although\" introduces a contrast.",
+      "hint": "The word \"still\" is a clue.",
+      "explanation": "Being tired would make her want to rest, but she still helped. \"Although\" shows the contrast.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.although"
+      ]
     },
     {
       "id": "el-p3-when-while-before.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_english"
       ],
@@ -7610,34 +8271,37 @@
       "stage": "exact",
       "family": "grammar",
       "format": "mcq_4plus",
-      "stem": "Wash your hands ______ you eat.",
+      "stem": "Wash your hands ______ you eat, so that germs do not get onto your food.",
       "options": [
         {
           "id": "opt-1",
-          "text": "while"
+          "text": "after"
         },
         {
           "id": "opt-2",
-          "text": "before"
-        },
-        {
-          "id": "opt-3",
           "text": "unless"
         },
         {
+          "id": "opt-3",
+          "text": "before"
+        },
+        {
           "id": "opt-4",
-          "text": "after"
+          "text": "while"
         }
       ],
-      "correct_option_id": "opt-2",
-      "hint": "Which happens first?",
-      "explanation": "Washing comes first, so \"before\".",
+      "correct_option_id": "opt-3",
+      "hint": "Which must happen first to keep germs off your food?",
+      "explanation": "To keep germs off your food, you wash your hands first, before you eat.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.when-while-before"
+      ]
     },
     {
       "id": "el-p3-when-while-before.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_english"
       ],
@@ -7646,34 +8310,37 @@
       "stage": "similar",
       "family": "grammar",
       "format": "mcq_4plus",
-      "stem": "The phone rang ______ I was taking a shower.",
+      "stem": "The phone rang ______ I was still in the shower, so I missed the call.",
       "options": [
         {
           "id": "opt-1",
-          "text": "before"
+          "text": "while"
         },
         {
           "id": "opt-2",
-          "text": "unless"
-        },
-        {
-          "id": "opt-3",
           "text": "so"
         },
         {
+          "id": "opt-3",
+          "text": "before"
+        },
+        {
           "id": "opt-4",
-          "text": "while"
+          "text": "unless"
         }
       ],
-      "correct_option_id": "opt-4",
-      "hint": "One action happened during another.",
-      "explanation": "\"While\" shows actions happening at the same time.",
+      "correct_option_id": "opt-1",
+      "hint": "The two things happened at the same time.",
+      "explanation": "\"Still in the shower\" tells us the call came during the shower, so \"while\" is correct.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.when-while-before"
+      ]
     },
     {
       "id": "el-p3-when-while-before.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_english"
       ],
@@ -7682,7 +8349,7 @@
       "stage": "generic",
       "family": "grammar",
       "format": "mcq_4plus",
-      "stem": "We went home ______ the movie ended.",
+      "stem": "We went home ______ the movie ended, so we did not miss the ending.",
       "options": [
         {
           "id": "opt-1",
@@ -7690,22 +8357,25 @@
         },
         {
           "id": "opt-2",
-          "text": "although"
+          "text": "before"
         },
         {
           "id": "opt-3",
-          "text": "after"
+          "text": "although"
         },
         {
           "id": "opt-4",
-          "text": "before"
+          "text": "after"
         }
       ],
-      "correct_option_id": "opt-3",
-      "hint": "The movie ended first.",
-      "explanation": "\"After\" shows the second event.",
+      "correct_option_id": "opt-4",
+      "hint": "They saw the ending. Which happened first?",
+      "explanation": "They did not miss the ending, so the movie ended first and they went home after it.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.when-while-before"
+      ]
     },
     {
       "id": "el-p3-unless-if.q1",
@@ -7741,7 +8411,10 @@
       "hint": "It means \"if you do not\".",
       "explanation": "\"Unless\" means \"if not\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.unless-if"
+      ]
     },
     {
       "id": "el-p3-unless-if.q2",
@@ -7777,7 +8450,10 @@
       "hint": "Watering leads to growing.",
       "explanation": "\"If\" gives a condition.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.unless-if"
+      ]
     },
     {
       "id": "el-p3-unless-if.q3",
@@ -7813,7 +8489,10 @@
       "hint": "It bites only if its tail is pulled.",
       "explanation": "\"Unless\" means \"except if\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.unless-if"
+      ]
     },
     {
       "id": "el-p3-comparative-more-most.q1",
@@ -7849,7 +8528,10 @@
       "hint": "Long adjectives use a helping word.",
       "explanation": "Two-plus-syllable adjectives use \"more\": \"more difficult\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.comparative-more-most"
+      ]
     },
     {
       "id": "el-p3-comparative-more-most.q2",
@@ -7885,7 +8567,10 @@
       "hint": "Compared with everyone.",
       "explanation": "Use \"most\" for the top of a group.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.comparative-more-most"
+      ]
     },
     {
       "id": "el-p3-comparative-more-most.q3",
@@ -7921,7 +8606,10 @@
       "hint": "Irregular comparative of \"good\".",
       "explanation": "\"Good\" becomes \"better\" when comparing two.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.comparative-more-most"
+      ]
     },
     {
       "id": "el-p3-quantifiers.q1",
@@ -7957,7 +8645,10 @@
       "hint": "\"Apples\" can be counted.",
       "explanation": "Use \"many\" for countable nouns.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.quantifiers"
+      ]
     },
     {
       "id": "el-p3-quantifiers.q2",
@@ -7993,7 +8684,10 @@
       "hint": "\"Salt\" cannot be counted.",
       "explanation": "Use \"much\" for uncountable nouns.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.quantifiers"
+      ]
     },
     {
       "id": "el-p3-quantifiers.q3",
@@ -8029,7 +8723,10 @@
       "hint": "\"Pupils\" can be counted.",
       "explanation": "\"A few\" is used with countable nouns.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.quantifiers"
+      ]
     },
     {
       "id": "el-p3-adverb-frequency.q1",
@@ -8065,7 +8762,10 @@
       "hint": "It tells how often she does it.",
       "explanation": "\"Always\" is an adverb of frequency.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.adverb-frequency"
+      ]
     },
     {
       "id": "el-p3-adverb-frequency.q2",
@@ -8101,7 +8801,10 @@
       "hint": "If he is never late, he...",
       "explanation": "Never late means he always arrives on time.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.adverb-frequency"
+      ]
     },
     {
       "id": "el-p3-adverb-frequency.q3",
@@ -8137,7 +8840,10 @@
       "hint": "Think about Singapore's weather.",
       "explanation": "It never snows in Singapore.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.adverb-frequency"
+      ]
     },
     {
       "id": "el-p3-apostrophe-possession.q1",
@@ -8173,7 +8879,10 @@
       "hint": "One dog owns the bone.",
       "explanation": "For one owner, add 's: \"the dog's bone\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.apostrophe-possession"
+      ]
     },
     {
       "id": "el-p3-apostrophe-possession.q2",
@@ -8209,7 +8918,10 @@
       "hint": "\"Children\" is already plural.",
       "explanation": "Plural nouns not ending in s add 's.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.apostrophe-possession"
+      ]
     },
     {
       "id": "el-p3-apostrophe-possession.q3",
@@ -8245,7 +8957,10 @@
       "hint": "Plural ending in s: where does the apostrophe go?",
       "explanation": "Add only an apostrophe after the s for plural owners.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.apostrophe-possession"
+      ]
     },
     {
       "id": "el-p3-speech-marks.q1",
@@ -8281,7 +8996,10 @@
       "hint": "The spoken words go inside the speech marks with a comma.",
       "explanation": "Speech marks surround the spoken words, and a comma comes before the closing mark.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.speech-marks"
+      ]
     },
     {
       "id": "el-p3-speech-marks.q2",
@@ -8317,7 +9035,10 @@
       "hint": "The question mark belongs to the spoken words.",
       "explanation": "The question mark goes inside the speech marks.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.speech-marks"
+      ]
     },
     {
       "id": "el-p3-speech-marks.q3",
@@ -8353,7 +9074,10 @@
       "hint": "Where does the exclamation mark go?",
       "explanation": "The exclamation mark is inside the speech marks; \"shouted\" is not capitalised.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.speech-marks"
+      ]
     },
     {
       "id": "el-p3-commas-clauses.q1",
@@ -8389,7 +9113,10 @@
       "hint": "A comma comes after the opening time phrase.",
       "explanation": "Put a comma after the introductory clause.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.commas-clauses"
+      ]
     },
     {
       "id": "el-p3-commas-clauses.q2",
@@ -8425,7 +9152,10 @@
       "hint": "Where does the pause come?",
       "explanation": "Use a comma after \"Yes\" or \"No\" at the start.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.commas-clauses"
+      ]
     },
     {
       "id": "el-p3-commas-clauses.q3",
@@ -8461,7 +9191,10 @@
       "hint": "A comma comes after the \"although\" part.",
       "explanation": "Put a comma after the clause starting with \"although\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.commas-clauses"
+      ]
     },
     {
       "id": "el-p3-vocab-synonym.q1",
@@ -8497,7 +9230,10 @@
       "hint": "Think of a hero.",
       "explanation": "\"Courageous\" means brave.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-synonym"
+      ]
     },
     {
       "id": "el-p3-vocab-synonym.q2",
@@ -8533,7 +9269,10 @@
       "hint": "Think of speed.",
       "explanation": "\"Rapidly\" means quickly.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-synonym"
+      ]
     },
     {
       "id": "el-p3-vocab-synonym.q3",
@@ -8569,7 +9308,10 @@
       "hint": "Why did he need to rest?",
       "explanation": "\"Weary\" means very tired.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-synonym"
+      ]
     },
     {
       "id": "el-p3-vocab-antonym.q1",
@@ -8605,7 +9347,10 @@
       "hint": "Ancient means very old.",
       "explanation": "\"Modern\" is the opposite of \"ancient\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-antonym"
+      ]
     },
     {
       "id": "el-p3-vocab-antonym.q2",
@@ -8641,7 +9386,10 @@
       "hint": "A generous person shares.",
       "explanation": "\"Selfish\" is the opposite of \"generous\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-antonym"
+      ]
     },
     {
       "id": "el-p3-vocab-antonym.q3",
@@ -8677,7 +9425,10 @@
       "hint": "Choose the opposite of simple.",
       "explanation": "\"Complicated\" contrasts with \"simple\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-antonym"
+      ]
     },
     {
       "id": "el-p3-vocab-context.q1",
@@ -8713,7 +9464,10 @@
       "hint": "The rabbit could not be seen anymore.",
       "explanation": "\"Vanish\" means disappear.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-context"
+      ]
     },
     {
       "id": "el-p3-vocab-context.q2",
@@ -8749,7 +9503,10 @@
       "hint": "They moved people out to safety.",
       "explanation": "\"Evacuated\" means moved people away from danger.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-context"
+      ]
     },
     {
       "id": "el-p3-vocab-context.q3",
@@ -8785,7 +9542,10 @@
       "hint": "How do you feel when you make a mistake in front of others?",
       "explanation": "\"Embarrassed\" fits forgetting lines on stage.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-context"
+      ]
     },
     {
       "id": "el-p3-vocab-phrasal.q1",
@@ -8821,7 +9581,10 @@
       "hint": "What do older siblings do?",
       "explanation": "\"Look after\" means take care of.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-phrasal"
+      ]
     },
     {
       "id": "el-p3-vocab-phrasal.q2",
@@ -8857,7 +9620,10 @@
       "hint": "An alarm makes a sound.",
       "explanation": "\"Went off\" here means started ringing.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-phrasal"
+      ]
     },
     {
       "id": "el-p3-vocab-phrasal.q3",
@@ -8893,7 +9659,10 @@
       "hint": "You find a word in a dictionary.",
       "explanation": "\"Look up\" means find information.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-phrasal"
+      ]
     },
     {
       "id": "el-p3-vocab-word-form.q1",
@@ -8929,7 +9698,10 @@
       "hint": "You need a noun after \"The\".",
       "explanation": "\"Opening\" is the noun form.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-word-form"
+      ]
     },
     {
       "id": "el-p3-vocab-word-form.q2",
@@ -8965,7 +9737,10 @@
       "hint": "Describe how she answered.",
       "explanation": "\"Correctly\" is the adverb.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-word-form"
+      ]
     },
     {
       "id": "el-p3-vocab-word-form.q3",
@@ -9001,7 +9776,10 @@
       "hint": "After \"full of\", use a noun.",
       "explanation": "\"Surprises\" is a plural noun.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-word-form"
+      ]
     },
     {
       "id": "el-p3-vocab-idiom-simple.q1",
@@ -9037,7 +9815,10 @@
       "hint": "It is a saying, not real animals.",
       "explanation": "The saying means it is raining heavily.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-idiom-simple"
+      ]
     },
     {
       "id": "el-p3-vocab-idiom-simple.q2",
@@ -9073,7 +9854,10 @@
       "hint": "Being \"over the moon\" is a happy saying.",
       "explanation": "It means extremely happy.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-idiom-simple"
+      ]
     },
     {
       "id": "el-p3-vocab-idiom-simple.q3",
@@ -9109,7 +9893,10 @@
       "hint": "Think of how you feel before an exam.",
       "explanation": "The saying means feeling nervous.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-idiom-simple"
+      ]
     },
     {
       "id": "el-p3-edit-spelling.q1",
@@ -9145,7 +9932,10 @@
       "hint": "Remember \"beau\" at the start.",
       "explanation": "The correct spelling is \"beautiful\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.edit-spelling"
+      ]
     },
     {
       "id": "el-p3-edit-spelling.q2",
@@ -9181,7 +9971,10 @@
       "hint": "Remember: there is \"a rat\" in the middle of the word.",
       "explanation": "The correct spelling is \"separate\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.edit-spelling"
+      ]
     },
     {
       "id": "el-p3-edit-spelling.q3",
@@ -9217,7 +10010,10 @@
       "hint": "Remember \"i before e except after c\".",
       "explanation": "The correct spelling is \"received\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.edit-spelling"
+      ]
     },
     {
       "id": "el-p3-edit-grammar.q1",
@@ -9253,7 +10049,10 @@
       "hint": "\"Each\" is singular.",
       "explanation": "It should be \"Each of the pupils has a library card.\"",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.edit-grammar"
+      ]
     },
     {
       "id": "el-p3-edit-grammar.q2",
@@ -9289,7 +10088,10 @@
       "hint": "After \"has\", use the past participle.",
       "explanation": "It should be \"has gone\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.edit-grammar"
+      ]
     },
     {
       "id": "el-p3-edit-grammar.q3",
@@ -9325,7 +10127,10 @@
       "hint": "\"Books\" is plural.",
       "explanation": "It should be \"There are many books\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.edit-grammar"
+      ]
     },
     {
       "id": "el-p3-edit-homophone.q1",
@@ -9361,7 +10166,10 @@
       "hint": "Past tense of blow.",
       "explanation": "\"Blew\" is the past tense of \"blow\"; \"blue\" is a colour.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.edit-homophone"
+      ]
     },
     {
       "id": "el-p3-edit-homophone.q2",
@@ -9397,7 +10205,10 @@
       "hint": "This word means to stay until something happens.",
       "explanation": "\"Wait\" means to stay until something happens; \"weight\" is how heavy something is.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.edit-homophone"
+      ]
     },
     {
       "id": "el-p3-edit-homophone.q3",
@@ -9433,7 +10244,10 @@
       "hint": "It means \"Who is\".",
       "explanation": "\"Who's\" is short for \"who is\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.edit-homophone"
+      ]
     },
     {
       "id": "el-p3-combine-because.q1",
@@ -9469,7 +10283,10 @@
       "hint": "Which event caused the other?",
       "explanation": "Missing the bus caused him to be late.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.combine-because"
+      ]
     },
     {
       "id": "el-p3-combine-because.q2",
@@ -9505,7 +10322,10 @@
       "hint": "\"So\" introduces the result.",
       "explanation": "The result (doing well) comes after \"so\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.combine-because"
+      ]
     },
     {
       "id": "el-p3-combine-because.q3",
@@ -9541,7 +10361,10 @@
       "hint": "What made the road slippery?",
       "explanation": "The rain caused the slippery road.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.combine-because"
+      ]
     },
     {
       "id": "el-p3-combine-although.q1",
@@ -9577,7 +10400,10 @@
       "hint": "Start with the surprising condition.",
       "explanation": "\"Although it was late\" comes first, followed by a comma.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.combine-although"
+      ]
     },
     {
       "id": "el-p3-combine-although.q2",
@@ -9613,7 +10439,10 @@
       "hint": "What is surprising?",
       "explanation": "Swimming well is surprising for someone young.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.combine-although"
+      ]
     },
     {
       "id": "el-p3-combine-although.q3",
@@ -9649,7 +10478,10 @@
       "hint": "The ideas contrast.",
       "explanation": "\"Although\" shows the contrast.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.combine-although"
+      ]
     },
     {
       "id": "el-p3-combine-who-which.q1",
@@ -9685,7 +10517,10 @@
       "hint": "\"Who\" replaces \"she\".",
       "explanation": "\"Who\" joins the clauses and replaces \"she\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.combine-who-which"
+      ]
     },
     {
       "id": "el-p3-combine-who-which.q2",
@@ -9721,7 +10556,10 @@
       "hint": "\"Which\" replaces \"it\".",
       "explanation": "Remove \"it\" because \"which\" replaces it.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.combine-who-which"
+      ]
     },
     {
       "id": "el-p3-combine-who-which.q3",
@@ -9757,7 +10595,10 @@
       "hint": "Put the \"who\" clause right after \"the boy\".",
       "explanation": "\"Who won the prize\" describes the boy.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.combine-who-which"
+      ]
     },
     {
       "id": "el-p3-combine-before-after.q1",
@@ -9793,7 +10634,10 @@
       "hint": "Which happened first?",
       "explanation": "Homework came first, so it follows \"after\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.combine-before-after"
+      ]
     },
     {
       "id": "el-p3-combine-before-after.q2",
@@ -9829,7 +10673,10 @@
       "hint": "Brushing comes first.",
       "explanation": "Brushing happens before going to bed.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.combine-before-after"
+      ]
     },
     {
       "id": "el-p3-combine-before-after.q3",
@@ -9865,7 +10712,10 @@
       "hint": "The guests came first.",
       "explanation": "Dinner was served after the guests arrived.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.combine-before-after"
+      ]
     },
     {
       "id": "el-p3-combine-either-neither.q1",
@@ -9901,7 +10751,10 @@
       "hint": "\"Neither\" pairs with \"nor\" and the sentence is not negative again.",
       "explanation": "\"Neither ... nor\" already means \"not\", so use \"came\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.combine-either-neither"
+      ]
     },
     {
       "id": "el-p3-combine-either-neither.q2",
@@ -9937,7 +10790,10 @@
       "hint": "\"Either\" pairs with \"or\".",
       "explanation": "\"Either ... or\" gives a choice.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.combine-either-neither"
+      ]
     },
     {
       "id": "el-p3-combine-either-neither.q3",
@@ -9973,7 +10829,10 @@
       "hint": "The verb agrees with the noun closer to it.",
       "explanation": "\"Dogs\" is plural, so \"were\".",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.combine-either-neither"
+      ]
     },
     {
       "id": "el-p3-read-turtle.q1",
@@ -10009,7 +10868,11 @@
       "hint": "Read the first sentence.",
       "explanation": "They were walking along the beach at East Coast Park.",
       "material_id": "el-p3-read-turtle",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.read-detail",
+      "leaf_refs": [
+        "el.p3.leaf.read-detail"
+      ]
     },
     {
       "id": "el-p3-read-turtle.q2",
@@ -10045,7 +10908,11 @@
       "hint": "Find the word \"struggling\".",
       "explanation": "It was struggling to climb over a plastic bag.",
       "material_id": "el-p3-read-turtle",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.read-detail",
+      "leaf_refs": [
+        "el.p3.leaf.read-detail"
+      ]
     },
     {
       "id": "el-p3-read-turtle.q3",
@@ -10081,7 +10948,11 @@
       "hint": "What did he suggest doing instead?",
       "explanation": "He suggested calling the wildlife rescue hotline.",
       "material_id": "el-p3-read-turtle",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.read-reason",
+      "leaf_refs": [
+        "el.p3.leaf.read-reason"
+      ]
     },
     {
       "id": "el-p3-read-turtle.q4",
@@ -10117,7 +10988,11 @@
       "hint": "Think about what it had just been doing.",
       "explanation": "After struggling, it seemed tired and rested.",
       "material_id": "el-p3-read-turtle",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.read-inference",
+      "leaf_refs": [
+        "el.p3.leaf.read-inference"
+      ]
     },
     {
       "id": "el-p3-read-turtle.q5",
@@ -10153,7 +11028,11 @@
       "hint": "What did the officer say and what did Hana do after?",
       "explanation": "She learned rubbish can trap animals and picked up more bags.",
       "material_id": "el-p3-read-turtle",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.read-main-message",
+      "leaf_refs": [
+        "el.p3.leaf.read-main-message"
+      ]
     },
     {
       "id": "el-p3-read-garden.q1",
@@ -10189,7 +11068,11 @@
       "hint": "Read the first sentence.",
       "explanation": "The school had no space for a garden.",
       "material_id": "el-p3-read-garden",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.read-reason",
+      "leaf_refs": [
+        "el.p3.leaf.read-reason"
+      ]
     },
     {
       "id": "el-p3-read-garden.q2",
@@ -10225,7 +11108,11 @@
       "hint": "Find the word \"because\" in paragraph 2.",
       "explanation": "Soil spread everywhere would be too heavy.",
       "material_id": "el-p3-read-garden",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.read-reason",
+      "leaf_refs": [
+        "el.p3.leaf.read-reason"
+      ]
     },
     {
       "id": "el-p3-read-garden.q3",
@@ -10261,7 +11148,11 @@
       "hint": "Read about the groups.",
       "explanation": "Lily's group checked for caterpillars every morning.",
       "material_id": "el-p3-read-garden",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.read-detail",
+      "leaf_refs": [
+        "el.p3.leaf.read-detail"
+      ]
     },
     {
       "id": "el-p3-read-garden.q4",
@@ -10297,7 +11188,11 @@
       "hint": "Read the third paragraph.",
       "explanation": "Water could not drain away from the pots.",
       "material_id": "el-p3-read-garden",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.read-reason",
+      "leaf_refs": [
+        "el.p3.leaf.read-reason"
+      ]
     },
     {
       "id": "el-p3-read-garden.q5",
@@ -10333,7 +11228,11 @@
       "hint": "They found a solution to each problem.",
       "explanation": "They used the roof and fixed the drainage problem.",
       "material_id": "el-p3-read-garden",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.read-character",
+      "leaf_refs": [
+        "el.p3.leaf.read-character"
+      ]
     },
     {
       "id": "el-p3-read-owl.q1",
@@ -10369,7 +11268,11 @@
       "hint": "Read the first sentence.",
       "explanation": "Owls hunt mostly at night.",
       "material_id": "el-p3-read-owl",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.read-detail",
+      "leaf_refs": [
+        "el.p3.leaf.read-detail"
+      ]
     },
     {
       "id": "el-p3-read-owl.q2",
@@ -10405,7 +11308,11 @@
       "hint": "Read paragraph 1.",
       "explanation": "They can turn their heads almost all the way round.",
       "material_id": "el-p3-read-owl",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.read-detail",
+      "leaf_refs": [
+        "el.p3.leaf.read-detail"
+      ]
     },
     {
       "id": "el-p3-read-owl.q3",
@@ -10441,7 +11348,11 @@
       "hint": "Read paragraph 2.",
       "explanation": "It helps them work out exactly where a sound comes from.",
       "material_id": "el-p3-read-owl",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.read-reason",
+      "leaf_refs": [
+        "el.p3.leaf.read-reason"
+      ]
     },
     {
       "id": "el-p3-read-owl.q4",
@@ -10477,7 +11388,11 @@
       "hint": "Read paragraph 3.",
       "explanation": "The fringed feathers muffle the sound of its wings.",
       "material_id": "el-p3-read-owl",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.read-reason",
+      "leaf_refs": [
+        "el.p3.leaf.read-reason"
+      ]
     },
     {
       "id": "el-p3-read-owl.q5",
@@ -10513,7 +11428,11 @@
       "hint": "Check each statement against the passage.",
       "explanation": "The passage says it can be spotted near ponds and canals.",
       "material_id": "el-p3-read-owl",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.read-detail",
+      "leaf_refs": [
+        "el.p3.leaf.read-detail"
+      ]
     },
     {
       "id": "el-p3-read-baking.q1",
@@ -10549,7 +11468,11 @@
       "hint": "Read the first sentence.",
       "explanation": "She promised to bake for her grandmother's birthday.",
       "material_id": "el-p3-read-baking",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.read-detail",
+      "leaf_refs": [
+        "el.p3.leaf.read-detail"
+      ]
     },
     {
       "id": "el-p3-read-baking.q2",
@@ -10585,7 +11508,11 @@
       "hint": "What was Zara doing while they baked?",
       "explanation": "She was distracted by her friend's call.",
       "material_id": "el-p3-read-baking",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.read-reason",
+      "leaf_refs": [
+        "el.p3.leaf.read-reason"
+      ]
     },
     {
       "id": "el-p3-read-baking.q3",
@@ -10621,7 +11548,11 @@
       "hint": "Think about why she might cry.",
       "explanation": "She was upset that the cookies were ruined.",
       "material_id": "el-p3-read-baking",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.read-inference",
+      "leaf_refs": [
+        "el.p3.leaf.read-inference"
+      ]
     },
     {
       "id": "el-p3-read-baking.q4",
@@ -10657,7 +11588,11 @@
       "hint": "Read the third paragraph.",
       "explanation": "He suggested cutting away the burnt edges.",
       "material_id": "el-p3-read-baking",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.read-detail",
+      "leaf_refs": [
+        "el.p3.leaf.read-detail"
+      ]
     },
     {
       "id": "el-p3-read-baking.q5",
@@ -10693,7 +11628,11 @@
       "hint": "Think about how the problem ended.",
       "explanation": "They turned a mistake into \"cookie bites\".",
       "material_id": "el-p3-read-baking",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.read-main-message",
+      "leaf_refs": [
+        "el.p3.leaf.read-main-message"
+      ]
     },
     {
       "id": "el-p3-cloze-camp.q1",
@@ -10729,7 +11668,11 @@
       "hint": "\"Last week\" shows the past.",
       "explanation": "Past tense: \"attended\".",
       "material_id": "el-p3-cloze-camp",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.tense-consistency",
+      "leaf_refs": [
+        "el.p3.leaf.tense-consistency"
+      ]
     },
     {
       "id": "el-p3-cloze-camp.q2",
@@ -10765,7 +11708,11 @@
       "hint": "Keep the past tense.",
       "explanation": "\"Set up\" is also the past tense form.",
       "material_id": "el-p3-cloze-camp",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.tense-consistency",
+      "leaf_refs": [
+        "el.p3.leaf.tense-consistency"
+      ]
     },
     {
       "id": "el-p3-cloze-camp.q3",
@@ -10801,7 +11748,11 @@
       "hint": "\"Each of us\" is singular; the story is in the past.",
       "explanation": "\"Each of us had\" is correct.",
       "material_id": "el-p3-cloze-camp",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.tense-consistency",
+      "leaf_refs": [
+        "el.p3.leaf.tense-consistency"
+      ]
     },
     {
       "id": "el-p3-cloze-camp.q4",
@@ -10837,7 +11788,11 @@
       "hint": "Rain, yet they stayed dry.",
       "explanation": "\"Although\" shows contrast.",
       "material_id": "el-p3-cloze-camp",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.although",
+      "leaf_refs": [
+        "el.p3.leaf.although"
+      ]
     },
     {
       "id": "el-p3-cloze-camp.q5",
@@ -10873,7 +11828,11 @@
       "hint": "It refers to the teacher.",
       "explanation": "Use \"who\" for a person.",
       "material_id": "el-p3-cloze-camp",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.relative-who-which",
+      "leaf_refs": [
+        "el.p3.leaf.relative-who-which"
+      ]
     },
     {
       "id": "el-p3-cloze-robot.q1",
@@ -10909,7 +11868,11 @@
       "hint": "The story is told in the past.",
       "explanation": "Past tense: \"worked\".",
       "material_id": "el-p3-cloze-robot",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.tense-consistency",
+      "leaf_refs": [
+        "el.p3.leaf.tense-consistency"
+      ]
     },
     {
       "id": "el-p3-cloze-robot.q2",
@@ -10945,7 +11908,11 @@
       "hint": "What did it place? The blocks.",
       "explanation": "\"Them\" refers to the blocks.",
       "material_id": "el-p3-cloze-robot",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.edit-grammar",
+      "leaf_refs": [
+        "el.p3.leaf.edit-grammar"
+      ]
     },
     {
       "id": "el-p3-cloze-robot.q3",
@@ -10981,7 +11948,11 @@
       "hint": "Two actions in sequence.",
       "explanation": "\"And\" joins two actions.",
       "material_id": "el-p3-cloze-robot",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.edit-grammar",
+      "leaf_refs": [
+        "el.p3.leaf.edit-grammar"
+      ]
     },
     {
       "id": "el-p3-cloze-robot.q4",
@@ -11017,7 +11988,11 @@
       "hint": "Compared with before.",
       "explanation": "\"Faster\" compares two times.",
       "material_id": "el-p3-cloze-robot",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.comparative-more-most",
+      "leaf_refs": [
+        "el.p3.leaf.comparative-more-most"
+      ]
     },
     {
       "id": "el-p3-cloze-robot.q5",
@@ -11053,7 +12028,11 @@
       "hint": "After \"felt very\", use an adjective.",
       "explanation": "\"Proud\" is the adjective.",
       "material_id": "el-p3-cloze-robot",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.vocab-word-form",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-word-form"
+      ]
     },
     {
       "id": "el-p3-cloze-hawker.q1",
@@ -11089,7 +12068,11 @@
       "hint": "People from all walks of life eat there.",
       "explanation": "\"Popular\" fits a place many people visit.",
       "material_id": "el-p3-cloze-hawker",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.vocab-context",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-context"
+      ]
     },
     {
       "id": "el-p3-cloze-hawker.q2",
@@ -11125,7 +12108,11 @@
       "hint": "Hawker food is known for this.",
       "explanation": "\"Affordable\" means not expensive.",
       "material_id": "el-p3-cloze-hawker",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.vocab-context",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-context"
+      ]
     },
     {
       "id": "el-p3-cloze-hawker.q3",
@@ -11161,7 +12148,11 @@
       "hint": "You need somewhere to sit.",
       "explanation": "Diners find a table first.",
       "material_id": "el-p3-cloze-hawker",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.vocab-context",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-context"
+      ]
     },
     {
       "id": "el-p3-cloze-hawker.q4",
@@ -11197,7 +12188,11 @@
       "hint": "What are the tray stations for?",
       "explanation": "Diners return their trays.",
       "material_id": "el-p3-cloze-hawker",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.vocab-context",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-context"
+      ]
     },
     {
       "id": "el-p3-cloze-hawker.q5",
@@ -11233,7 +12228,11 @@
       "hint": "Who uses the tables next?",
       "explanation": "The next diners use the clean tables.",
       "material_id": "el-p3-cloze-hawker",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.vocab-context",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-context"
+      ]
     },
     {
       "id": "el-p3-cloze-volunteer.q1",
@@ -11269,7 +12268,11 @@
       "hint": "A habit, and Mrs Tan is one person.",
       "explanation": "Simple present for a habit: \"volunteers\".",
       "material_id": "el-p3-cloze-volunteer",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.tense-consistency",
+      "leaf_refs": [
+        "el.p3.leaf.tense-consistency"
+      ]
     },
     {
       "id": "el-p3-cloze-volunteer.q2",
@@ -11305,7 +12308,11 @@
       "hint": "What can be read aloud?",
       "explanation": "She reads stories.",
       "material_id": "el-p3-cloze-volunteer",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.vocab-context",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-context"
+      ]
     },
     {
       "id": "el-p3-cloze-volunteer.q3",
@@ -11341,7 +12348,11 @@
       "hint": "Listening is the result of not seeing well.",
       "explanation": "\"So\" shows the result.",
       "material_id": "el-p3-cloze-volunteer",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.combine-because",
+      "leaf_refs": [
+        "el.p3.leaf.combine-because"
+      ]
     },
     {
       "id": "el-p3-cloze-volunteer.q4",
@@ -11377,7 +12388,11 @@
       "hint": "Volunteering gives a good feeling.",
       "explanation": "Helping others makes her feel useful.",
       "material_id": "el-p3-cloze-volunteer",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.vocab-context",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-context"
+      ]
     },
     {
       "id": "el-p3-cloze-volunteer.q5",
@@ -11413,7 +12428,11 @@
       "hint": "She hopes others will do it with her.",
       "explanation": "\"Join\" means take part with her.",
       "material_id": "el-p3-cloze-volunteer",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.vocab-context",
+      "leaf_refs": [
+        "el.p3.leaf.vocab-context"
+      ]
     },
     {
       "id": "el-p3-visual-zoo.q1",
@@ -11449,7 +12468,11 @@
       "hint": "Look at the second line.",
       "explanation": "Every Friday and Saturday in December.",
       "material_id": "el-p3-visual-zoo",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.visual-find",
+      "leaf_refs": [
+        "el.p3.leaf.visual-find"
+      ]
     },
     {
       "id": "el-p3-visual-zoo.q2",
@@ -11485,7 +12508,11 @@
       "hint": "Two adult tickets and one child ticket.",
       "explanation": "$40 + $40 + $25 = $105.",
       "material_id": "el-p3-visual-zoo",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.visual-apply",
+      "leaf_refs": [
+        "el.p3.leaf.visual-apply"
+      ]
     },
     {
       "id": "el-p3-visual-zoo.q3",
@@ -11521,7 +12548,11 @@
       "hint": "Read the last line.",
       "explanation": "Flash frightens the animals.",
       "material_id": "el-p3-visual-zoo",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.visual-find",
+      "leaf_refs": [
+        "el.p3.leaf.visual-find"
+      ]
     },
     {
       "id": "el-p3-visual-zoo.q4",
@@ -11557,7 +12588,11 @@
       "hint": "Look for the word \"save\".",
       "explanation": "Booking online saves 10%.",
       "material_id": "el-p3-visual-zoo",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.visual-find",
+      "leaf_refs": [
+        "el.p3.leaf.visual-find"
+      ]
     },
     {
       "id": "el-p3-visual-recycle.q1",
@@ -11593,7 +12628,11 @@
       "hint": "Check the YES list.",
       "explanation": "Metal cans are on the YES list.",
       "material_id": "el-p3-visual-recycle",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.visual-apply",
+      "leaf_refs": [
+        "el.p3.leaf.visual-apply"
+      ]
     },
     {
       "id": "el-p3-visual-recycle.q2",
@@ -11629,7 +12668,11 @@
       "hint": "Check the NO list.",
       "explanation": "Styrofoam is on the NO list.",
       "material_id": "el-p3-visual-recycle",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.visual-apply",
+      "leaf_refs": [
+        "el.p3.leaf.visual-apply"
+      ]
     },
     {
       "id": "el-p3-visual-recycle.q3",
@@ -11665,7 +12708,11 @@
       "hint": "Read the tip.",
       "explanation": "The tip says to rinse bottles and cans.",
       "material_id": "el-p3-visual-recycle",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.visual-find",
+      "leaf_refs": [
+        "el.p3.leaf.visual-find"
+      ]
     },
     {
       "id": "el-p3-visual-recycle.q4",
@@ -11701,7 +12748,1649 @@
       "hint": "Read the last line.",
       "explanation": "Collection is every Tuesday morning.",
       "material_id": "el-p3-visual-recycle",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "el.p3.visual-find",
+      "leaf_refs": [
+        "el.p3.leaf.visual-find"
+      ]
+    },
+    {
+      "id": "el-p2-read-detail.q1",
+      "version": 1,
+      "courses": [
+        "p2_english"
+      ],
+      "topic_ref": "el.p2.comprehension",
+      "target_id": "el.p2.read-detail",
+      "stage": "exact",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "Tom has a little brown dog called Max. Every evening, Tom takes Max for a walk in the park near his flat. Max likes to chase the pigeons there.\n\nWhere does Tom take Max for a walk?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "to the pet shop"
+        },
+        {
+          "id": "opt-2",
+          "text": "to school"
+        },
+        {
+          "id": "opt-3",
+          "text": "to the beach"
+        },
+        {
+          "id": "opt-4",
+          "text": "to the park near his flat"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "Find the sentence that tells you about the walk.",
+      "explanation": "The passage says Tom takes Max for a walk \"in the park near his flat\".",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.read-detail"
+      ]
+    },
+    {
+      "id": "el-p2-read-detail.q2",
+      "version": 1,
+      "courses": [
+        "p2_english"
+      ],
+      "topic_ref": "el.p2.comprehension",
+      "target_id": "el.p2.read-detail",
+      "stage": "similar",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "Aisha’s class planted sunflower seeds in small pots. They put the pots on the window ledge so the seeds would get sunlight. Aisha watered her pot every morning.\n\nWhen did Aisha water her pot?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "once a week"
+        },
+        {
+          "id": "opt-2",
+          "text": "every evening"
+        },
+        {
+          "id": "opt-3",
+          "text": "only on Fridays"
+        },
+        {
+          "id": "opt-4",
+          "text": "every morning"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "Look for the word \"watered\".",
+      "explanation": "The last sentence says Aisha watered her pot every morning.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.read-detail"
+      ]
+    },
+    {
+      "id": "el-p2-read-detail.q3",
+      "version": 1,
+      "courses": [
+        "p2_english"
+      ],
+      "topic_ref": "el.p2.comprehension",
+      "target_id": "el.p2.read-detail",
+      "stage": "generic",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "The school bus was late on Monday because of a long jam on the road. The pupils waited at the gate with their teacher, Mrs Rao. When the bus came, everyone cheered.\n\nWho waited with the pupils?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "the bus driver"
+        },
+        {
+          "id": "opt-2",
+          "text": "Mrs Rao"
+        },
+        {
+          "id": "opt-3",
+          "text": "their parents"
+        },
+        {
+          "id": "opt-4",
+          "text": "the principal"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "Find the sentence about waiting at the gate.",
+      "explanation": "The pupils waited at the gate with their teacher, Mrs Rao.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.read-detail"
+      ]
+    },
+    {
+      "id": "el-p2-read-reason.q1",
+      "version": 1,
+      "courses": [
+        "p2_english"
+      ],
+      "topic_ref": "el.p2.comprehension",
+      "target_id": "el.p2.read-reason",
+      "stage": "exact",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "Lina wore her raincoat and boots to school. The sky was dark and grey, and her father said it would rain soon.\n\nWhy did Lina wear her raincoat?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "because she was going swimming"
+        },
+        {
+          "id": "opt-2",
+          "text": "because it would rain soon"
+        },
+        {
+          "id": "opt-3",
+          "text": "because her raincoat was new"
+        },
+        {
+          "id": "opt-4",
+          "text": "because it was hot"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "What did her father say about the weather?",
+      "explanation": "The sky was dark and her father said it would rain soon, so she wore her raincoat.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.read-reason"
+      ]
+    },
+    {
+      "id": "el-p2-read-reason.q2",
+      "version": 1,
+      "courses": [
+        "p2_english"
+      ],
+      "topic_ref": "el.p2.comprehension",
+      "target_id": "el.p2.read-reason",
+      "stage": "similar",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "Ken put his ice cream in the freezer as soon as he got home. He did not want it to melt before dinner.\n\nWhy did Ken put his ice cream in the freezer?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "so that it would not melt"
+        },
+        {
+          "id": "opt-2",
+          "text": "so that it would get warm"
+        },
+        {
+          "id": "opt-3",
+          "text": "so that his sister could eat it"
+        },
+        {
+          "id": "opt-4",
+          "text": "so that it would turn into juice"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "Read the second sentence again.",
+      "explanation": "Ken did not want his ice cream to melt before dinner.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.read-reason"
+      ]
+    },
+    {
+      "id": "el-p2-read-reason.q3",
+      "version": 1,
+      "courses": [
+        "p2_english"
+      ],
+      "topic_ref": "el.p2.comprehension",
+      "target_id": "el.p2.read-reason",
+      "stage": "generic",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "The class had to stay indoors during recess. There was lightning outside, and the teachers said it was not safe to play in the field.\n\nWhy did the class stay indoors?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "The field was closed for painting."
+        },
+        {
+          "id": "opt-2",
+          "text": "It was too hot."
+        },
+        {
+          "id": "opt-3",
+          "text": "There was lightning outside."
+        },
+        {
+          "id": "opt-4",
+          "text": "They wanted to watch a film."
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "What did the teachers say was not safe?",
+      "explanation": "There was lightning, so it was not safe to play in the field.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.read-reason"
+      ]
+    },
+    {
+      "id": "el-p2-read-feelings.q1",
+      "version": 1,
+      "courses": [
+        "p2_english"
+      ],
+      "topic_ref": "el.p2.comprehension",
+      "target_id": "el.p2.read-feelings",
+      "stage": "exact",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "Sam’s tower of blocks fell down just before he finished it. He stamped his feet and threw a block on the floor.\n\nHow did Sam feel?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "happy"
+        },
+        {
+          "id": "opt-2",
+          "text": "proud"
+        },
+        {
+          "id": "opt-3",
+          "text": "sleepy"
+        },
+        {
+          "id": "opt-4",
+          "text": "angry"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "What did Sam do with his feet and the block?",
+      "explanation": "Stamping his feet and throwing a block show that Sam was angry.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.read-feelings"
+      ]
+    },
+    {
+      "id": "el-p2-read-feelings.q2",
+      "version": 1,
+      "courses": [
+        "p2_english"
+      ],
+      "topic_ref": "el.p2.comprehension",
+      "target_id": "el.p2.read-feelings",
+      "stage": "similar",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "When Nora saw her birthday cake, her eyes opened wide and she clapped her hands. \"It’s a unicorn!\" she shouted.\n\nHow did Nora feel?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "sad"
+        },
+        {
+          "id": "opt-2",
+          "text": "excited"
+        },
+        {
+          "id": "opt-3",
+          "text": "bored"
+        },
+        {
+          "id": "opt-4",
+          "text": "scared"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "Look at what Nora did with her eyes and hands.",
+      "explanation": "Wide eyes, clapping and shouting happily show that Nora was excited.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.read-feelings"
+      ]
+    },
+    {
+      "id": "el-p2-read-feelings.q3",
+      "version": 1,
+      "courses": [
+        "p2_english"
+      ],
+      "topic_ref": "el.p2.comprehension",
+      "target_id": "el.p2.read-feelings",
+      "stage": "generic",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "On his first day at the new school, Jun stood alone at the gate. He held his bag tightly and looked down at his shoes.\n\nHow did Jun most likely feel?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "excited"
+        },
+        {
+          "id": "opt-2",
+          "text": "proud"
+        },
+        {
+          "id": "opt-3",
+          "text": "nervous"
+        },
+        {
+          "id": "opt-4",
+          "text": "angry"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "What do his hands and eyes tell you?",
+      "explanation": "Standing alone, holding his bag tightly and looking down show that Jun felt nervous.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.read-feelings"
+      ]
+    },
+    {
+      "id": "el-p2-read-sequence.q1",
+      "version": 1,
+      "courses": [
+        "p2_english"
+      ],
+      "topic_ref": "el.p2.comprehension",
+      "target_id": "el.p2.read-sequence",
+      "stage": "exact",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "First, Dad put the rice into the pot. Next, he washed the rice with water. Then he switched on the rice cooker.\n\nWhat did Dad do after he washed the rice?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "He switched on the rice cooker."
+        },
+        {
+          "id": "opt-2",
+          "text": "He ate the rice."
+        },
+        {
+          "id": "opt-3",
+          "text": "He bought more rice."
+        },
+        {
+          "id": "opt-4",
+          "text": "He put the rice into the pot."
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "Look for the word that comes after \"Next\".",
+      "explanation": "The word \"Then\" shows that switching on the rice cooker came after washing the rice.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.read-sequence"
+      ]
+    },
+    {
+      "id": "el-p2-read-sequence.q2",
+      "version": 1,
+      "courses": [
+        "p2_english"
+      ],
+      "topic_ref": "el.p2.comprehension",
+      "target_id": "el.p2.read-sequence",
+      "stage": "similar",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "Mia woke up early. She brushed her teeth and then put on her uniform. After breakfast, she walked to school with her brother.\n\nWhat did Mia do just before she put on her uniform?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "She went back to sleep."
+        },
+        {
+          "id": "opt-2",
+          "text": "She ate breakfast."
+        },
+        {
+          "id": "opt-3",
+          "text": "She brushed her teeth."
+        },
+        {
+          "id": "opt-4",
+          "text": "She walked to school."
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "Find the words \"put on her uniform\".",
+      "explanation": "Mia brushed her teeth \"and then\" put on her uniform.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.read-sequence"
+      ]
+    },
+    {
+      "id": "el-p2-read-sequence.q3",
+      "version": 1,
+      "courses": [
+        "p2_english"
+      ],
+      "topic_ref": "el.p2.comprehension",
+      "target_id": "el.p2.read-sequence",
+      "stage": "generic",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "The caterpillar ate leaves for many days. Then it made a hard case around itself. Two weeks later, a butterfly came out of the case.\n\nWhat happened last?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "The butterfly laid eggs."
+        },
+        {
+          "id": "opt-2",
+          "text": "The caterpillar made a hard case."
+        },
+        {
+          "id": "opt-3",
+          "text": "The caterpillar ate leaves."
+        },
+        {
+          "id": "opt-4",
+          "text": "A butterfly came out of the case."
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "Look for words that show time, like \"then\" and \"later\".",
+      "explanation": "\"Two weeks later\" shows that the butterfly coming out happened last.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.read-sequence"
+      ]
+    },
+    {
+      "id": "el-p2-read-word-meaning.q1",
+      "version": 1,
+      "courses": [
+        "p2_english"
+      ],
+      "topic_ref": "el.p2.comprehension",
+      "target_id": "el.p2.read-word-meaning",
+      "stage": "exact",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "The puppy was so tiny that it could fit in Ali’s hand.\n\nWhat does \"tiny\" mean?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "very fast"
+        },
+        {
+          "id": "opt-2",
+          "text": "very loud"
+        },
+        {
+          "id": "opt-3",
+          "text": "very small"
+        },
+        {
+          "id": "opt-4",
+          "text": "very old"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "What fits in a hand?",
+      "explanation": "The puppy could fit in a hand, so \"tiny\" means very small.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.read-word-meaning"
+      ]
+    },
+    {
+      "id": "el-p2-read-word-meaning.q2",
+      "version": 1,
+      "courses": [
+        "p2_english"
+      ],
+      "topic_ref": "el.p2.comprehension",
+      "target_id": "el.p2.read-word-meaning",
+      "stage": "similar",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "After the long race, Wei was exhausted. He lay down on the grass and closed his eyes.\n\nWhat does \"exhausted\" mean?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "very happy"
+        },
+        {
+          "id": "opt-2",
+          "text": "very cold"
+        },
+        {
+          "id": "opt-3",
+          "text": "very hungry"
+        },
+        {
+          "id": "opt-4",
+          "text": "very tired"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "What did Wei do after the race?",
+      "explanation": "He lay down and closed his eyes after a long race, so \"exhausted\" means very tired.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.read-word-meaning"
+      ]
+    },
+    {
+      "id": "el-p2-read-word-meaning.q3",
+      "version": 1,
+      "courses": [
+        "p2_english"
+      ],
+      "topic_ref": "el.p2.comprehension",
+      "target_id": "el.p2.read-word-meaning",
+      "stage": "generic",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "The old door creaked when Grandma pushed it open. It made a long, squeaky sound.\n\nWhat does \"creaked\" mean in this sentence?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "made a squeaky sound"
+        },
+        {
+          "id": "opt-2",
+          "text": "broke into pieces"
+        },
+        {
+          "id": "opt-3",
+          "text": "shut very quickly"
+        },
+        {
+          "id": "opt-4",
+          "text": "changed colour"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "Read the next sentence for a clue.",
+      "explanation": "The next sentence says it made a long, squeaky sound.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.read-word-meaning"
+      ]
+    },
+    {
+      "id": "el-p2-visual-find.q1",
+      "version": 1,
+      "courses": [
+        "p2_english"
+      ],
+      "topic_ref": "el.p2.visual-text",
+      "target_id": "el.p2.visual-find",
+      "stage": "exact",
+      "family": "visual_text",
+      "format": "mcq_4plus",
+      "stem": "CLASS 2B BIRTHDAY PARTY\nDate: Friday, 7 March\nTime: 2 p.m.\nPlace: Classroom 2B\nBring: a small snack to share\n\nWhat should pupils bring?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "a small snack to share"
+        },
+        {
+          "id": "opt-2",
+          "text": "a balloon"
+        },
+        {
+          "id": "opt-3",
+          "text": "their parents"
+        },
+        {
+          "id": "opt-4",
+          "text": "a present"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "Find the line that starts with \"Bring\".",
+      "explanation": "The notice says to bring a small snack to share.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.visual-find"
+      ]
+    },
+    {
+      "id": "el-p2-visual-find.q2",
+      "version": 1,
+      "courses": [
+        "p2_english"
+      ],
+      "topic_ref": "el.p2.visual-text",
+      "target_id": "el.p2.visual-find",
+      "stage": "similar",
+      "family": "visual_text",
+      "format": "mcq_4plus",
+      "stem": "SWIMMING CLASS\nDay: every Wednesday\nTime: 4 p.m. to 5 p.m.\nPlace: Community Pool\nRemember your swimming cap!\n\nOn which day is the swimming class?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "every day"
+        },
+        {
+          "id": "opt-2",
+          "text": "Friday"
+        },
+        {
+          "id": "opt-3",
+          "text": "Monday"
+        },
+        {
+          "id": "opt-4",
+          "text": "Wednesday"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "Find the line that starts with \"Day\".",
+      "explanation": "The notice says the class is every Wednesday.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.visual-find"
+      ]
+    },
+    {
+      "id": "el-p2-visual-find.q3",
+      "version": 1,
+      "courses": [
+        "p2_english"
+      ],
+      "topic_ref": "el.p2.visual-text",
+      "target_id": "el.p2.visual-find",
+      "stage": "generic",
+      "family": "visual_text",
+      "format": "mcq_4plus",
+      "stem": "LOST!\nA blue water bottle with a cat sticker.\nIf you find it, please return it to Ms Ong in the staff room.\n\nWhere should the bottle be returned?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "to the library"
+        },
+        {
+          "id": "opt-2",
+          "text": "to Ms Ong in the staff room"
+        },
+        {
+          "id": "opt-3",
+          "text": "to the canteen"
+        },
+        {
+          "id": "opt-4",
+          "text": "to the school gate"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "Read the last line.",
+      "explanation": "The notice asks you to return it to Ms Ong in the staff room.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.visual-find"
+      ]
+    },
+    {
+      "id": "el-p2-visual-use.q1",
+      "version": 1,
+      "courses": [
+        "p2_english"
+      ],
+      "topic_ref": "el.p2.visual-text",
+      "target_id": "el.p2.visual-use",
+      "stage": "exact",
+      "family": "visual_text",
+      "format": "mcq_4plus",
+      "stem": "ICE CREAM CART\nCup: $1.50\nCone: $2.00\nExtra topping: 50 cents\n\nHow much is a cone with one extra topping?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "$1.50"
+        },
+        {
+          "id": "opt-2",
+          "text": "$2.00"
+        },
+        {
+          "id": "opt-3",
+          "text": "$2.50"
+        },
+        {
+          "id": "opt-4",
+          "text": "$3.00"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "Add the price of a cone and one topping.",
+      "explanation": "A cone is $2.00 and one topping is 50 cents. $2.00 + 50 cents = $2.50.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.visual-use"
+      ]
+    },
+    {
+      "id": "el-p2-visual-use.q2",
+      "version": 1,
+      "courses": [
+        "p2_english"
+      ],
+      "topic_ref": "el.p2.visual-text",
+      "target_id": "el.p2.visual-use",
+      "stage": "similar",
+      "family": "visual_text",
+      "format": "mcq_4plus",
+      "stem": "PLAYGROUND OPENING HOURS\nOpen: 7 a.m. to 7 p.m.\nClosed for cleaning: every Monday, 9 a.m. to 11 a.m.\n\nCan Ravi play there on Monday at 10 a.m.?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "Yes, it is open all day."
+        },
+        {
+          "id": "opt-2",
+          "text": "No, it is closed for cleaning then."
+        },
+        {
+          "id": "opt-3",
+          "text": "No, it is closed every day."
+        },
+        {
+          "id": "opt-4",
+          "text": "Yes, because it opens at 7 a.m."
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "Check the line about cleaning.",
+      "explanation": "On Mondays it is closed from 9 a.m. to 11 a.m., and 10 a.m. is in that time.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.visual-use"
+      ]
+    },
+    {
+      "id": "el-p2-visual-use.q3",
+      "version": 1,
+      "courses": [
+        "p2_english"
+      ],
+      "topic_ref": "el.p2.visual-text",
+      "target_id": "el.p2.visual-use",
+      "stage": "generic",
+      "family": "visual_text",
+      "format": "mcq_4plus",
+      "stem": "BOOK SALE\nStory books: $2 each\nComics: $1 each\n\nLily buys 2 story books and 1 comic. How much does she pay?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "$3"
+        },
+        {
+          "id": "opt-2",
+          "text": "$5"
+        },
+        {
+          "id": "opt-3",
+          "text": "$6"
+        },
+        {
+          "id": "opt-4",
+          "text": "$4"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "Find the cost of the story books first.",
+      "explanation": "2 story books cost $4 and 1 comic costs $1. $4 + $1 = $5.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p2.leaf.visual-use"
+      ]
+    },
+    {
+      "id": "el-p3-read-detail.q1",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.comprehension",
+      "target_id": "el.p3.read-detail",
+      "stage": "exact",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "Every December, Uncle Wei decorates his shop with paper lanterns. This year, he hung forty red lanterns along the front of the shop and two gold ones above the door.\n\nWhere did Uncle Wei hang the gold lanterns?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "inside the window"
+        },
+        {
+          "id": "opt-2",
+          "text": "along the front of the shop"
+        },
+        {
+          "id": "opt-3",
+          "text": "on the roof"
+        },
+        {
+          "id": "opt-4",
+          "text": "above the door"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "Look for the word \"gold\".",
+      "explanation": "The passage says the two gold lanterns were hung above the door.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.read-detail"
+      ]
+    },
+    {
+      "id": "el-p3-read-detail.q2",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.comprehension",
+      "target_id": "el.p3.read-detail",
+      "stage": "similar",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "The library’s new reading corner has bean bags, a small fish tank and shelves of comics. Pupils may use it during recess but must not bring food inside.\n\nWhat must pupils NOT do in the reading corner?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "read comics"
+        },
+        {
+          "id": "opt-2",
+          "text": "use it during recess"
+        },
+        {
+          "id": "opt-3",
+          "text": "bring food inside"
+        },
+        {
+          "id": "opt-4",
+          "text": "sit on bean bags"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "Look for the words \"must not\".",
+      "explanation": "The passage says pupils must not bring food inside.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.read-detail"
+      ]
+    },
+    {
+      "id": "el-p3-read-detail.q3",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.comprehension",
+      "target_id": "el.p3.read-detail",
+      "stage": "generic",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "Priya trained for the inter-school run for two months. She jogged around the stadium three times a week and stretched before and after every run.\n\nHow often did Priya jog around the stadium?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "three times a week"
+        },
+        {
+          "id": "opt-2",
+          "text": "twice a day"
+        },
+        {
+          "id": "opt-3",
+          "text": "once a month"
+        },
+        {
+          "id": "opt-4",
+          "text": "every day"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "Find the sentence about the stadium.",
+      "explanation": "She jogged around the stadium three times a week.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.read-detail"
+      ]
+    },
+    {
+      "id": "el-p3-read-reason.q1",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.comprehension",
+      "target_id": "el.p3.read-reason",
+      "stage": "exact",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "The farmer put a net over his papaya trees. Birds had been pecking holes in the ripe fruit, and he could not sell the damaged papayas.\n\nWhy did the farmer cover his papaya trees?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "to stop birds from damaging the fruit"
+        },
+        {
+          "id": "opt-2",
+          "text": "to keep the trees warm"
+        },
+        {
+          "id": "opt-3",
+          "text": "to catch the birds to sell"
+        },
+        {
+          "id": "opt-4",
+          "text": "to help the fruit grow faster"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "What had been happening to the fruit?",
+      "explanation": "Birds were pecking the fruit and damaged papayas could not be sold, so he covered the trees.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.read-reason"
+      ]
+    },
+    {
+      "id": "el-p3-read-reason.q2",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.comprehension",
+      "target_id": "el.p3.read-reason",
+      "stage": "similar",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "Daniel’s team lost their first match. Their coach noticed that the players kept passing the ball to the same person, so the other team always knew where the ball would go.\n\nWhy did the team lose their first match?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "They had too many players."
+        },
+        {
+          "id": "opt-2",
+          "text": "Their coach was absent."
+        },
+        {
+          "id": "opt-3",
+          "text": "It rained during the match."
+        },
+        {
+          "id": "opt-4",
+          "text": "They kept passing to the same player, so the other team could guess the play."
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "What did the coach notice?",
+      "explanation": "The other team always knew where the ball would go because the players kept passing to the same person.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.read-reason"
+      ]
+    },
+    {
+      "id": "el-p3-read-reason.q3",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.comprehension",
+      "target_id": "el.p3.read-reason",
+      "stage": "generic",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "Mrs Lee switched off the classroom fans when the pupils left for the hall. \"We should not waste electricity,\" she said.\n\nWhy did Mrs Lee switch off the fans?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "because it was too cold"
+        },
+        {
+          "id": "opt-2",
+          "text": "because the fans were broken"
+        },
+        {
+          "id": "opt-3",
+          "text": "to make the classroom quiet"
+        },
+        {
+          "id": "opt-4",
+          "text": "to avoid wasting electricity"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "Read what Mrs Lee said.",
+      "explanation": "She said they should not waste electricity, and nobody was in the classroom.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.read-reason"
+      ]
+    },
+    {
+      "id": "el-p3-read-inference.q1",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.comprehension",
+      "target_id": "el.p3.read-inference",
+      "stage": "exact",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "When the bell rang, Kai packed his bag in a hurry and ran to the gate, where his grandmother usually waited. He looked left and right, then slowly sat down on the steps.\n\nWhat can we tell from the way Kai sat down?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "He was very excited."
+        },
+        {
+          "id": "opt-2",
+          "text": "His grandmother was not there yet, and he was disappointed."
+        },
+        {
+          "id": "opt-3",
+          "text": "His grandmother was waiting for him on the steps."
+        },
+        {
+          "id": "opt-4",
+          "text": "He wanted to go back to class."
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "Why would Kai look left and right?",
+      "explanation": "He looked around for his grandmother and then sat down slowly, so she had not arrived and he felt let down.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.read-inference"
+      ]
+    },
+    {
+      "id": "el-p3-read-inference.q2",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.comprehension",
+      "target_id": "el.p3.read-inference",
+      "stage": "similar",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "Farah looked at the dark clouds, then at the clothes hanging on the line outside. She grabbed the laundry basket and ran out of the door.\n\nWhy did Farah most likely run outside?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "to bring the clothes in before it rained"
+        },
+        {
+          "id": "opt-2",
+          "text": "to hang more clothes out"
+        },
+        {
+          "id": "opt-3",
+          "text": "to wash the laundry basket"
+        },
+        {
+          "id": "opt-4",
+          "text": "to play in the rain"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "Think about what dark clouds mean for clothes on a line.",
+      "explanation": "Dark clouds mean rain may come, so she ran out with the basket to bring the clothes in.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.read-inference"
+      ]
+    },
+    {
+      "id": "el-p3-read-inference.q3",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.comprehension",
+      "target_id": "el.p3.read-inference",
+      "stage": "generic",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "The plate of cookies was full when Ben’s mother left the kitchen. When she came back, there were crumbs on Ben’s shirt and only two cookies left.\n\nWhat most likely happened?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "The cookies fell on the floor."
+        },
+        {
+          "id": "opt-2",
+          "text": "Ben’s mother ate the cookies."
+        },
+        {
+          "id": "opt-3",
+          "text": "Ben ate some of the cookies."
+        },
+        {
+          "id": "opt-4",
+          "text": "The cookies were never baked."
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "What do the crumbs on Ben’s shirt tell you?",
+      "explanation": "The plate was full before, and now there are crumbs on Ben’s shirt, so Ben most likely ate them.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.read-inference"
+      ]
+    },
+    {
+      "id": "el-p3-read-character.q1",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.comprehension",
+      "target_id": "el.p3.read-character",
+      "stage": "exact",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "Although Marcus was tired after football practice, he stayed back to help the coach collect all the cones and balls. He did this every week without being asked.\n\nWhich word best describes Marcus?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "helpful"
+        },
+        {
+          "id": "opt-2",
+          "text": "lazy"
+        },
+        {
+          "id": "opt-3",
+          "text": "rude"
+        },
+        {
+          "id": "opt-4",
+          "text": "careless"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "What did Marcus do every week?",
+      "explanation": "He helped the coach every week without being asked, so he is helpful.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.read-character"
+      ]
+    },
+    {
+      "id": "el-p3-read-character.q2",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.comprehension",
+      "target_id": "el.p3.read-character",
+      "stage": "similar",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "Elena practised a difficult piano piece every day for a month. Even when she made mistakes, she started again from the beginning until she got it right.\n\nWhich word best describes Elena?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "hardworking"
+        },
+        {
+          "id": "opt-2",
+          "text": "impatient"
+        },
+        {
+          "id": "opt-3",
+          "text": "careless"
+        },
+        {
+          "id": "opt-4",
+          "text": "selfish"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "How did Elena deal with her mistakes?",
+      "explanation": "She practised every day and kept trying until she got it right, so she is hardworking.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.read-character"
+      ]
+    },
+    {
+      "id": "el-p3-read-character.q3",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.comprehension",
+      "target_id": "el.p3.read-character",
+      "stage": "generic",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "When Arif found a wallet on the bus, he gave it to the driver at once so that it could be returned to its owner.\n\nWhich word best describes Arif?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "unkind"
+        },
+        {
+          "id": "opt-2",
+          "text": "forgetful"
+        },
+        {
+          "id": "opt-3",
+          "text": "honest"
+        },
+        {
+          "id": "opt-4",
+          "text": "greedy"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "What did Arif do with the wallet?",
+      "explanation": "He gave the wallet back so it could reach its owner, so he is honest.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.read-character"
+      ]
+    },
+    {
+      "id": "el-p3-read-main-message.q1",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.comprehension",
+      "target_id": "el.p3.read-main-message",
+      "stage": "exact",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "Ling wanted to win the drawing competition, so she copied a picture from a book. When her teacher asked how she drew it, Ling could not explain. She felt ashamed and decided to draw her own picture next time.\n\nWhat is the main message of the story?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "Competitions are not important."
+        },
+        {
+          "id": "opt-2",
+          "text": "Teachers do not like drawings."
+        },
+        {
+          "id": "opt-3",
+          "text": "Copying is a good way to win."
+        },
+        {
+          "id": "opt-4",
+          "text": "It is better to do your own work honestly."
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "What did Ling decide at the end?",
+      "explanation": "Ling felt ashamed of copying and decided to do her own work, which shows that honest work is better.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.read-main-message"
+      ]
+    },
+    {
+      "id": "el-p3-read-main-message.q2",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.comprehension",
+      "target_id": "el.p3.read-main-message",
+      "stage": "similar",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "Two friends had a week to build a model. Zack started on the first day and worked a little each day. Lee waited until the night before and could not finish.\n\nWhat lesson does the story teach?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "Friends should not build models."
+        },
+        {
+          "id": "opt-2",
+          "text": "Always wait until the last minute."
+        },
+        {
+          "id": "opt-3",
+          "text": "Plan ahead and work steadily."
+        },
+        {
+          "id": "opt-4",
+          "text": "Models are too difficult to build."
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "Compare what happened to Zack and to Lee.",
+      "explanation": "Zack worked a little each day and finished; Lee waited and did not. The lesson is to plan ahead.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.read-main-message"
+      ]
+    },
+    {
+      "id": "el-p3-read-main-message.q3",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.comprehension",
+      "target_id": "el.p3.read-main-message",
+      "stage": "generic",
+      "family": "comprehension",
+      "format": "mcq_4plus",
+      "stem": "During a group project, Siva wanted to do everything his own way. His group stopped sharing ideas with him. When he started listening to the others, their project became much better.\n\nWhat is the main message?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "Group projects are always easy."
+        },
+        {
+          "id": "opt-2",
+          "text": "It is best to work alone."
+        },
+        {
+          "id": "opt-3",
+          "text": "The leader should do all the work."
+        },
+        {
+          "id": "opt-4",
+          "text": "Working well together means listening to others."
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "What changed when Siva started listening?",
+      "explanation": "The project improved when Siva listened to his group, so the message is about working together.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.read-main-message"
+      ]
+    },
+    {
+      "id": "el-p3-visual-find.q1",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.visual-text",
+      "target_id": "el.p3.visual-find",
+      "stage": "exact",
+      "family": "visual_text",
+      "format": "mcq_4plus",
+      "stem": "SCIENCE CLUB WORKSHOP: Build a Paper Rocket\nFor ages 8–12\nSaturday, 10 a.m. – 12 noon\nFee: $15 (materials included)\nRegister by 1 March at the front desk\n\nBy when must you register?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "by Saturday"
+        },
+        {
+          "id": "opt-2",
+          "text": "by 10 a.m."
+        },
+        {
+          "id": "opt-3",
+          "text": "by 1 March"
+        },
+        {
+          "id": "opt-4",
+          "text": "by 12 noon"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "Find the word \"Register\".",
+      "explanation": "The notice says to register by 1 March.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.visual-find"
+      ]
+    },
+    {
+      "id": "el-p3-visual-find.q2",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.visual-text",
+      "target_id": "el.p3.visual-find",
+      "stage": "similar",
+      "family": "visual_text",
+      "format": "mcq_4plus",
+      "stem": "POOL RULES\n• No running on the deck\n• Children under 10 must be with an adult\n• Shower before entering the pool\n\nWhat must everyone do before entering the pool?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "run on the deck"
+        },
+        {
+          "id": "opt-2",
+          "text": "bring an adult"
+        },
+        {
+          "id": "opt-3",
+          "text": "wear goggles"
+        },
+        {
+          "id": "opt-4",
+          "text": "take a shower"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "Find the rule with the word \"before\".",
+      "explanation": "The last rule says to shower before entering the pool.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.visual-find"
+      ]
+    },
+    {
+      "id": "el-p3-visual-find.q3",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.visual-text",
+      "target_id": "el.p3.visual-find",
+      "stage": "generic",
+      "family": "visual_text",
+      "format": "mcq_4plus",
+      "stem": "COMMUNITY CLEAN-UP DAY\nMeet at: Block 123 void deck\nTime: 8 a.m.\nGloves and bags will be provided.\nBring your own water bottle.\n\nWhat do volunteers need to bring?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "breakfast"
+        },
+        {
+          "id": "opt-2",
+          "text": "their own water bottle"
+        },
+        {
+          "id": "opt-3",
+          "text": "gloves"
+        },
+        {
+          "id": "opt-4",
+          "text": "rubbish bags"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "Some things will be given. What is not given?",
+      "explanation": "Gloves and bags are provided; volunteers bring their own water bottle.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.visual-find"
+      ]
+    },
+    {
+      "id": "el-p3-visual-apply.q1",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.visual-text",
+      "target_id": "el.p3.visual-apply",
+      "stage": "exact",
+      "family": "visual_text",
+      "format": "mcq_4plus",
+      "stem": "BIRD PARK TICKETS\nAdult: $30\nChild (3–12): $20\nSenior (60 and above): $15\n\nHow much do 1 adult and 2 children pay altogether?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "$50"
+        },
+        {
+          "id": "opt-2",
+          "text": "$60"
+        },
+        {
+          "id": "opt-3",
+          "text": "$70"
+        },
+        {
+          "id": "opt-4",
+          "text": "$80"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "Find the price for one adult and one child first.",
+      "explanation": "1 adult = $30 and 2 children = 2 × $20 = $40. $30 + $40 = $70.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.visual-apply"
+      ]
+    },
+    {
+      "id": "el-p3-visual-apply.q2",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.visual-text",
+      "target_id": "el.p3.visual-apply",
+      "stage": "similar",
+      "family": "visual_text",
+      "format": "mcq_4plus",
+      "stem": "LIBRARY LOAN RULES\nBooks: up to 8 at a time, for 3 weeks\nMagazines: up to 2 at a time, for 1 week\n\nMeena borrows 2 magazines on Monday, 4 March. By when must she return them?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "Monday, 11 March"
+        },
+        {
+          "id": "opt-2",
+          "text": "Monday, 4 March"
+        },
+        {
+          "id": "opt-3",
+          "text": "Thursday, 7 March"
+        },
+        {
+          "id": "opt-4",
+          "text": "Monday, 25 March"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "Which rule is for magazines?",
+      "explanation": "Magazines are lent for 1 week. One week after Monday, 4 March is Monday, 11 March.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.visual-apply"
+      ]
+    },
+    {
+      "id": "el-p3-visual-apply.q3",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.visual-text",
+      "target_id": "el.p3.visual-apply",
+      "stage": "generic",
+      "family": "visual_text",
+      "format": "mcq_4plus",
+      "stem": "SCHOOL CANTEEN: HEALTHY CHOICES\nMeals marked with ★ have less sugar and salt.\n★ Fish soup with rice\n★ Vegetable noodles\nFried chicken wings\nSugary milk tea\n\nWhich item has less sugar and salt?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "none of them"
+        },
+        {
+          "id": "opt-2",
+          "text": "vegetable noodles"
+        },
+        {
+          "id": "opt-3",
+          "text": "fried chicken wings"
+        },
+        {
+          "id": "opt-4",
+          "text": "sugary milk tea"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "Look for the ★ mark.",
+      "explanation": "Vegetable noodles has a ★, which means it has less sugar and salt.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.visual-apply"
+      ]
     }
   ],
   "review_log": {
@@ -11711,7 +14400,8 @@
       "Passages are original; local settings used without real people or schools",
       "Hints point to the rule or evidence without stating the answer",
       "No past-paper, STELLAR or commercial text copied",
-      "2026-10-16 correction pass: revised disputed and related items; item versions incremented; revised IDs remain listed for independent re-review, not approved."
+      "2026-10-16 correction pass: revised disputed and related items; item versions incremented; revised IDs remain listed for independent re-review, not approved.",
+      "2026-10-16 revision (PR #15 audit EL1–EL4): resolved the time-conjunction, there-is/are and although ambiguities with determining context; added 14 reading/visual-text skill targets with 42 new mini-passage repair items; routed every material question to a skill, grammar or vocabulary repair target; drew the four visual texts as notices; added a leaf map. Revised items have version + 1 and remain pending independent re-review."
     ],
     "independent_review": "changes_requested",
     "owner_signoff": "pending",
@@ -11748,5 +14438,39 @@
       "el-p2-collective-uncountable.q2"
     ],
     "rights_status": "original_draft_pending_owner_rights_review"
-  }
+  },
+  "assets": [
+    {
+      "id": "el-vt-p2-visual-fair",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/el-vt-p2-visual-fair.svg",
+      "alt": "A poster for a school fun fair with the date, time, place, activities and ticket information.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "el-vt-p2-visual-menu",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/el-vt-p2-visual-menu.svg",
+      "alt": "A canteen menu board with food and drink prices.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "el-vt-p3-visual-zoo",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/el-vt-p3-visual-zoo.svg",
+      "alt": "A leaflet for family nights at a night zoo with days, times, prices and a rule.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "el-vt-p3-visual-recycle",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/el-vt-p3-visual-recycle.svg",
+      "alt": "A recycling bin notice listing what can and cannot go in, with a tip and collection day.",
+      "provenance": "original_generic_author_draft"
+    }
+  ]
 }
