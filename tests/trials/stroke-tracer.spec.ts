@@ -342,14 +342,35 @@ test.describe('page zoom while drawing', () => {
     expect(await zoomBlocked(page)).toEqual({ pinch: false, oneFinger: false, gesture: false, locked: false })
   })
 
-  test('board and page disable double-tap zoom', async ({ page }) => {
+  test('one-finger touches on the board belong to the board; touches elsewhere keep page behaviour', async ({ page }) => {
     await openTrial(page, 'Finger')
-    const actions = await page.evaluate(() => ({
-      page: getComputedStyle(document.documentElement).touchAction,
-      board: getComputedStyle(document.querySelector('.st-board')!).touchAction,
-    }))
-    expect(actions).toEqual({ page: 'manipulation', board: 'manipulation' })
+    const cancelled = (selector: string) => page.evaluate((selector) => {
+      const target = document.querySelector(selector)!
+      const touch = new Touch({ identifier: 1, target, clientX: 10, clientY: 10 })
+      const event = new TouchEvent('touchstart', { bubbles: true, cancelable: true, touches: [touch], targetTouches: [touch], changedTouches: [touch] })
+      target.dispatchEvent(event)
+      return event.defaultPrevented
+    }, selector)
+    for (const mode of ['Watch', 'Free trace', 'Guided (experimental)']) {
+      await page.getByRole('button', { name: mode, exact: true }).click()
+      expect(await cancelled('[data-testid=stroke-board]'), mode).toBe(true)
+      expect(await cancelled('.t-header'), mode).toBe(false)
+      expect(await page.evaluate(() => getComputedStyle(document.querySelector('[data-testid=stroke-surface]')!).touchAction), mode).toBe('none')
+    }
+    expect(await page.evaluate(() => getComputedStyle(document.documentElement).touchAction)).toBe('manipulation')
+    // Drawing still works with the touch defaults cancelled.
     await page.getByRole('button', { name: 'Free trace' }).click()
-    expect(await page.evaluate(() => getComputedStyle(document.querySelector('.st-board')!).touchAction)).toBe('none')
+    await pointerStroke(page, 7, 'touch', diagonal, 12)
+    expect(await inkCount(page)).toBe(1)
+  })
+
+  test('landscape board stays clear of the left-edge back-swipe zone', async ({ page }) => {
+    for (const viewport of [{ width: 1024, height: 768 }, { width: 1180, height: 820 }, { width: 844, height: 390 }]) {
+      await page.setViewportSize(viewport)
+      await page.goto('/')
+      await openTrial(page, 'Finger')
+      const box = (await page.getByTestId('stroke-board').boundingBox())!
+      expect(box.x, viewport.width + 'x' + viewport.height).toBeGreaterThanOrEqual(40)
+    }
   })
 })

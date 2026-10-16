@@ -40,6 +40,8 @@ h1{font-size:clamp(26px,4vw,38px);letter-spacing:-.8px;margin:8px 0 12px}h2{font
 /* Landscape: board beside controls so both fit the screen height. */
 .t-landscape .t-header{padding:6px 0;margin-bottom:8px}
 .t-landscape .t-stage{grid-template-columns:auto minmax(0,1fr);align-items:start;justify-items:stretch}
+/* Keep the board clear of Safari's edge-swipe back gesture. */
+.t-landscape{padding-left:max(40px,env(safe-area-inset-left));padding-right:max(24px,env(safe-area-inset-right))}
 .t-landscape .t-side{max-width:none}
 .t-landscape .t-row{justify-content:flex-start}
 .t-landscape .t-char{font-size:18px}

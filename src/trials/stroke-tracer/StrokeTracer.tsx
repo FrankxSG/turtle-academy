@@ -70,6 +70,7 @@ export function StrokeTracer({
   onGuidedAttempt, onGuidedComplete, onGuidedRestart,
 }: StrokeTracerProps) {
   const svgRef = useRef<SVGSVGElement>(null)
+  const surfaceRef = useRef<HTMLDivElement>(null)
   const active = useRef<{ id: number; type: string } | null>(null)
   const currentRef = useRef<Point[] | null>(null)
   const [current, setCurrentState] = useState<Point[] | null>(null)
@@ -113,6 +114,20 @@ export function StrokeTracer({
     const timer = window.setTimeout(() => { setGapPending(false); setWatchShown((n) => n + 1) }, STROKE_GAP_MS / speed)
     return () => window.clearTimeout(timer)
   }, [gapPending, speed, playing, character, mode, data, input])
+
+  // iPad Safari can ignore touch-action on SVG and treats quick tap-then-drag
+  // strokes as one-finger zoom, scrolling or a text-selection magnifier. Any
+  // touch that starts on the board is the board's: cancel its default browser
+  // gestures with native non-passive listeners (React's are passive). Pointer
+  // events, which do the drawing, still fire.
+  useEffect(() => {
+    const surface = surfaceRef.current
+    if (!surface) return
+    const cancel = (event: TouchEvent) => { if (event.cancelable) event.preventDefault() }
+    const events = ['touchstart', 'touchmove', 'touchend'] as const
+    for (const name of events) surface.addEventListener(name, cancel, { passive: false })
+    return () => { for (const name of events) surface.removeEventListener(name, cancel) }
+  }, [])
 
   function toPoint(event: { clientX: number; clientY: number }): Point | null {
     const ctm = svgRef.current?.getScreenCTM()
@@ -183,6 +198,7 @@ export function StrokeTracer({
   return (
     <div className="st" style={{ width: Math.max(size, 300) }}>
       {mode === 'guided' && <p className="st-badge">Experimental check</p>}
+      <div ref={surfaceRef} className="st-surface" data-testid="stroke-surface">
       <svg
         ref={svgRef}
         className={'st-board' + (canDraw ? ' st-drawable' : '')}
@@ -240,6 +256,7 @@ export function StrokeTracer({
         {nextStart && <circle className={'st-start' + (misses > 0 ? ' st-start-strong' : '')}
           cx={nextStart.x} cy={nextStart.y} r="30" aria-hidden="true" />}
       </svg>
+      </div>
 
       <p className="st-status" role="status" aria-live="polite" data-testid="stroke-status">{status}</p>
 
