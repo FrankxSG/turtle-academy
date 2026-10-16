@@ -1,5 +1,7 @@
 # Mathematics content pool (P2-P3)
 
+Independent public-source research and current content findings: [research audit](content-review/MATHEMATICS_RESEARCH_AUDIT.md) (2026-10-16; changes required). This evidence supplements the authoring source register and does not approve the batch.
+
 **Review proposal · 16 October 2026 · generic/public content pool**
 
 Original P2 and P3 Mathematics questions for the public (generic) version of Turtle Academy, mapped to the Singapore primary syllabus with public sources cited. P2 content is open in the Pilot; **P3 content is authored now but stays locked in the Pilot app** until the post-Pilot Mathematics teaching flow exists (Functional Design §1). This document does not authorize implementation, release, merge or deployment.
