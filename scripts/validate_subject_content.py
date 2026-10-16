@@ -37,7 +37,9 @@ FAMILIES = {
 STATUSES = {'author_checked_pending_independent_and_owner_review',
             'independently_reviewed_pending_owner', 'approved', 'retired'}
 SVG_NS = '{http://www.w3.org/2000/svg}'
-SVG_FORBIDDEN = {'script', 'foreignObject', 'image', 'iframe', 'object', 'embed', 'a', 'use'}
+SVG_FORBIDDEN = {'script', 'foreignObject', 'image', 'iframe', 'object', 'embed', 'a', 'use', 'style',
+                 'feImage'}
+LOCAL_URL = re.compile(r'url\(\s*[\'"]?#[A-Za-z0-9_.-]+[\'"]?\s*\)')
 
 
 class Invalid(Exception):
@@ -135,6 +137,10 @@ def check_svg(path, where):
     require('http:' not in low.replace('http://www.w3.org/2000/svg', '') and 'https:' not in low,
             'asset_external_reference', where)
     require('javascript:' not in low, 'asset_script_url', where)
+    # No stylesheets or CSS imports, and url() may only point at an element inside the same file.
+    require('@import' not in low and '<?xml-stylesheet' not in low, 'asset_css_import', where)
+    require('url(' not in LOCAL_URL.sub('', low), 'asset_external_url', where)
+    require(not re.search(r'=\s*["\']\s*//', low), 'asset_protocol_relative', where)
     require(not re.search(r'\son[a-z]+\s*=', low), 'asset_event_handler', where)
     try:
         root = ET.fromstring(raw)
