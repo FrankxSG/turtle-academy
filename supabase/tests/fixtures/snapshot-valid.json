@@ -4,17 +4,48 @@
   "created_at": "2026-10-16T12:00:00Z",
   "app_version": "0.1.0",
   "content_versions": [
-    { "subject": "chinese", "catalogue_version": "synthetic-zh-1" },
-    { "subject": "science", "catalogue_version": "synthetic-sc-1" }
+    {
+      "subject": "chinese",
+      "catalogue_version": "synthetic-zh-1",
+      "manifest_version": "synthetic-manifest-1"
+    },
+    {
+      "subject": "science",
+      "catalogue_version": "synthetic-sc-1",
+      "manifest_version": null
+    }
   ],
   "settings": {
     "timezone": "Europe/London",
-    "timezone_history": [{ "timezone": "Europe/London", "changed_at": "2026-10-01T08:00:00+08:00" }],
+    "timezone_history": [
+      {
+        "from_timezone": "Asia/Tokyo",
+        "timezone": "Europe/London",
+        "changed_at": "2026-10-01T08:00:00+08:00"
+      }
+    ],
+    "ui_language": "en",
     "subjects": [
-      { "subject": "chinese", "x": 10 },
-      { "subject": "english", "x": 6 },
-      { "subject": "mathematics", "x": 12 },
-      { "subject": "science", "x": 19 }
+      {
+        "subject": "chinese",
+        "x": 10,
+        "changed_at": null
+      },
+      {
+        "subject": "english",
+        "x": 6,
+        "changed_at": "2026-10-02T09:00:00Z"
+      },
+      {
+        "subject": "mathematics",
+        "x": 12,
+        "changed_at": null
+      },
+      {
+        "subject": "science",
+        "x": 19,
+        "changed_at": null
+      }
     ]
   },
   "targets": [
@@ -23,11 +54,47 @@
       "subject": "chinese",
       "course": "p2_chinese",
       "target_kind": "character",
-      "knowledge_point_ref": "zh.p2_chinese.char.u6674",
+      "knowledge_point_ref": "zh.p2_chinese.char.synthetic-01",
       "target_value": "晴",
+      "assessed_skill": "recognition",
+      "error_type": "similar_form",
       "mapping_status": "mapped",
-      "source": { "type": "home_practice", "date": "2026-10-10", "instance_ref": "src-0001", "batch_ref": "batch-0001" },
-      "review": { "status": "verified", "reviewed_at": "2026-10-10T20:00:00+08:00", "amends": null }
+      "verification": "verified",
+      "status": "active",
+      "verified_at": "2026-10-10T20:00:00+08:00",
+      "replaces": null,
+      "observations": [
+        {
+          "id": "obs-0001",
+          "source_type": "home_practice",
+          "observed_on": "2026-10-09",
+          "recorded_on": "2026-10-10",
+          "instance_ref": "src-0001",
+          "batch_ref": "batch-0001",
+          "recurrence": "first",
+          "invalidated": false
+        },
+        {
+          "id": "obs-0002",
+          "source_type": "home_practice",
+          "observed_on": "2026-10-09",
+          "recorded_on": "2026-10-11",
+          "instance_ref": "src-0001",
+          "batch_ref": "batch-0002",
+          "recurrence": "duplicate",
+          "invalidated": false
+        },
+        {
+          "id": "obs-0003",
+          "source_type": "app_practice",
+          "observed_on": "2026-10-14",
+          "recorded_on": "2026-10-14",
+          "instance_ref": "app-task-0003",
+          "batch_ref": null,
+          "recurrence": "independent",
+          "invalidated": false
+        }
+      ]
     },
     {
       "id": "t-0002",
@@ -36,46 +103,624 @@
       "target_kind": "reading_skill",
       "knowledge_point_ref": null,
       "target_value": null,
+      "assessed_skill": "inference",
+      "error_type": "unknown",
       "mapping_status": "pending_content",
-      "source": { "type": "app_practice", "date": "2026-10-12", "instance_ref": "app-0001", "batch_ref": null },
-      "review": { "status": "amended", "reviewed_at": "2026-10-12T19:00:00+08:00", "amends": "t-0000" }
+      "verification": "uncertain",
+      "status": "active",
+      "verified_at": null,
+      "replaces": "t-0000",
+      "observations": [
+        {
+          "id": "obs-0004",
+          "source_type": "schoolwork",
+          "observed_on": "2026-10-08",
+          "recorded_on": "2026-10-12",
+          "instance_ref": "src-0002",
+          "batch_ref": "batch-0003",
+          "recurrence": "first",
+          "invalidated": true
+        }
+      ]
+    },
+    {
+      "id": "t-0003",
+      "subject": "mathematics",
+      "course": "p2_mathematics",
+      "target_kind": "math_relationship",
+      "knowledge_point_ref": "ma.p2_mathematics.synthetic-04",
+      "target_value": "part whole 3",
+      "assessed_skill": null,
+      "error_type": "interpretation",
+      "mapping_status": "mapped",
+      "verification": "verified",
+      "status": "active",
+      "verified_at": "2026-10-12T19:00:00+08:00",
+      "replaces": null,
+      "observations": []
+    }
+  ],
+  "presentations": [
+    {
+      "id": "pr-0006",
+      "task_id": "task-0001",
+      "position": 0,
+      "item_id": "ma-p2-synthetic-partwhole.q4",
+      "item_version": 1,
+      "role": "repair",
+      "material_ref": null,
+      "target_ref": "t-0003",
+      "stage": "exact",
+      "format_class": "high_option",
+      "first_response_eligible": true,
+      "prior_exposures": 0,
+      "novel_context": true,
+      "presented_at": "2026-10-13T16:59:30+08:00",
+      "status": "answered"
+    },
+    {
+      "id": "pr-0001",
+      "task_id": "task-0001",
+      "position": 1,
+      "item_id": "zh-p2-synthetic-passage-01.q1",
+      "item_version": 2,
+      "role": "material_question",
+      "material_ref": "zh-p2-synthetic-passage-01",
+      "target_ref": "t-0001",
+      "stage": "exact",
+      "format_class": "high_option",
+      "first_response_eligible": true,
+      "prior_exposures": 0,
+      "novel_context": true,
+      "presented_at": "2026-10-13T17:00:00+08:00",
+      "status": "corrected"
+    },
+    {
+      "id": "pr-0002",
+      "task_id": "task-0001",
+      "position": 2,
+      "item_id": "zh-p2-synthetic-passage-01.q2",
+      "item_version": 2,
+      "role": "material_question",
+      "material_ref": "zh-p2-synthetic-passage-01",
+      "target_ref": null,
+      "stage": null,
+      "format_class": "high_option",
+      "first_response_eligible": true,
+      "prior_exposures": 1,
+      "novel_context": false,
+      "presented_at": "2026-10-13T17:01:00+08:00",
+      "status": "answered"
+    },
+    {
+      "id": "pr-0003",
+      "task_id": "task-0001",
+      "position": 3,
+      "item_id": "zh-p2-synthetic-passage-01.q3",
+      "item_version": 2,
+      "role": "material_question",
+      "material_ref": "zh-p2-synthetic-passage-01",
+      "target_ref": "t-0001",
+      "stage": "exact",
+      "format_class": "low_option",
+      "first_response_eligible": true,
+      "prior_exposures": 0,
+      "novel_context": true,
+      "presented_at": "2026-10-13T17:02:00+08:00",
+      "status": "answered"
+    },
+    {
+      "id": "pr-0004",
+      "task_id": "task-0002",
+      "position": 1,
+      "item_id": "sc-p3-synthetic-poles.q1",
+      "item_version": 1,
+      "role": "acquisition_test",
+      "material_ref": null,
+      "target_ref": null,
+      "stage": "acquisition",
+      "format_class": "high_option",
+      "first_response_eligible": true,
+      "prior_exposures": 0,
+      "novel_context": true,
+      "presented_at": "2026-10-13T18:00:00+08:00",
+      "status": "answered"
+    },
+    {
+      "id": "pr-0005",
+      "task_id": "task-0002",
+      "position": 2,
+      "item_id": "sc-p3-synthetic-poles.q2",
+      "item_version": 1,
+      "role": "acquisition_test",
+      "material_ref": null,
+      "target_ref": null,
+      "stage": "acquisition",
+      "format_class": "high_option",
+      "first_response_eligible": true,
+      "prior_exposures": 0,
+      "novel_context": true,
+      "presented_at": "2026-10-13T18:02:00+08:00",
+      "status": "flagged_replaced"
     }
   ],
   "events": [
-    { "id": "e-0001", "task_id": "task-0001", "item_id": "zh-p2-confusable-u6674.q1", "item_version": 2, "target_ref": "t-0001", "phase": "first", "assistance": "none", "selected_option_id": "opt-2", "correct": false, "at": "2026-10-13T17:00:00+08:00" },
-    { "id": "e-0002", "task_id": "task-0001", "item_id": "zh-p2-confusable-u6674.q1", "item_version": 2, "target_ref": "t-0001", "phase": "retry", "assistance": "hint", "selected_option_id": "opt-4", "correct": true, "at": "2026-10-13T17:00:30+08:00" },
-    { "id": "e-0003", "task_id": "task-0002", "item_id": "sc-p3-poles-learn.q1", "item_version": 1, "phase": "first", "assistance": "none", "selected_option_id": "opt-1", "correct": true, "at": "2026-10-13T18:00:00.123+08:00" }
+    {
+      "id": "e-0000",
+      "presentation_id": "pr-0006",
+      "local_seq": 0,
+      "phase": "first",
+      "assistance": "none",
+      "response": {
+        "kind": "single",
+        "option_ids": [
+          "opt-2"
+        ],
+        "pairs": []
+      },
+      "correct": true,
+      "at": "2026-10-13T16:59:50+08:00"
+    },
+    {
+      "id": "e-0001",
+      "presentation_id": "pr-0001",
+      "local_seq": 1,
+      "phase": "first",
+      "assistance": "none",
+      "response": {
+        "kind": "ordered",
+        "option_ids": [
+          "opt-3",
+          "opt-1",
+          "opt-2",
+          "opt-4"
+        ],
+        "pairs": []
+      },
+      "correct": false,
+      "at": "2026-10-13T17:00:40+08:00"
+    },
+    {
+      "id": "e-0002",
+      "presentation_id": "pr-0002",
+      "local_seq": 2,
+      "phase": "first",
+      "assistance": "none",
+      "response": {
+        "kind": "matching",
+        "option_ids": [],
+        "pairs": [
+          {
+            "left": "l-1",
+            "right": "r-2"
+          },
+          {
+            "left": "l-2",
+            "right": "r-1"
+          }
+        ]
+      },
+      "correct": true,
+      "at": "2026-10-13T17:01:30+08:00"
+    },
+    {
+      "id": "e-0008",
+      "presentation_id": "pr-0003",
+      "local_seq": 3,
+      "phase": "first",
+      "assistance": "none",
+      "response": {
+        "kind": "single",
+        "option_ids": [
+          "opt-1"
+        ],
+        "pairs": []
+      },
+      "correct": true,
+      "at": "2026-10-13T17:01:40+08:00"
+    },
+    {
+      "id": "e-0003",
+      "presentation_id": "pr-0001",
+      "local_seq": 4,
+      "phase": "retry",
+      "assistance": "hint",
+      "response": {
+        "kind": "ordered",
+        "option_ids": [
+          "opt-1",
+          "opt-3",
+          "opt-2",
+          "opt-4"
+        ],
+        "pairs": []
+      },
+      "correct": false,
+      "at": "2026-10-13T17:01:50+08:00"
+    },
+    {
+      "id": "e-0004",
+      "presentation_id": "pr-0001",
+      "local_seq": 5,
+      "phase": "correction",
+      "assistance": "answer_and_explanation",
+      "response": {
+        "kind": "ordered",
+        "option_ids": [
+          "opt-1",
+          "opt-2",
+          "opt-3",
+          "opt-4"
+        ],
+        "pairs": []
+      },
+      "correct": true,
+      "at": "2026-10-13T17:02:00+08:00"
+    },
+    {
+      "id": "e-0005",
+      "presentation_id": "pr-0004",
+      "local_seq": 6,
+      "phase": "first",
+      "assistance": "none",
+      "response": {
+        "kind": "single",
+        "option_ids": [
+          "opt-1"
+        ],
+        "pairs": []
+      },
+      "correct": true,
+      "at": "2026-10-13T18:01:00.123+08:00"
+    },
+    {
+      "id": "e-0006",
+      "presentation_id": "pr-0005",
+      "local_seq": 7,
+      "phase": "first",
+      "assistance": "none",
+      "response": {
+        "kind": "word_bank",
+        "option_ids": [
+          "w-2",
+          "w-5"
+        ],
+        "pairs": []
+      },
+      "correct": false,
+      "at": "2026-10-13T18:02:40+08:00"
+    }
   ],
   "tasks": [
     {
-      "id": "task-0001", "subject": "chinese", "local_date": "2026-10-13", "x": 10, "planned_total": 12, "cursor": 7,
-      "status": "paused", "content_version": "synthetic-zh-1", "active_seconds": 640,
-      "target_aggregates": [{ "target_ref": "t-0001", "stage": "exact", "first_correct": 0, "first_wrong": 1 }]
+      "id": "task-0001",
+      "subject": "chinese",
+      "local_date": "2026-10-13",
+      "created_at": "2026-10-13T16:59:00+08:00",
+      "finalised_at": null,
+      "x": 10,
+      "policy_version": "pilot-policy-1",
+      "content_version": "synthetic-zh-1",
+      "status": "paused",
+      "plan": {
+        "materials": [
+          {
+            "material_ref": "zh-p2-synthetic-passage-01",
+            "material_version": 2,
+            "family": "short_passage",
+            "question_count": 3
+          },
+          {
+            "material_ref": "zh-p2-synthetic-cloze-02",
+            "material_version": 1,
+            "family": "cloze",
+            "question_count": 5
+          }
+        ],
+        "slots": [
+          {
+            "position": 0,
+            "kind": "short",
+            "material_ref": null,
+            "item_id": "ma-p2-synthetic-partwhole.q4",
+            "item_version": 1,
+            "role": "repair",
+            "target_ref": "t-0003",
+            "stage": "exact",
+            "counts_toward_x": true
+          },
+          {
+            "position": 1,
+            "kind": "material_question",
+            "material_ref": "zh-p2-synthetic-passage-01",
+            "item_id": "zh-p2-synthetic-passage-01.q1",
+            "item_version": 2,
+            "role": "material_question",
+            "target_ref": "t-0001",
+            "stage": "exact",
+            "counts_toward_x": true
+          },
+          {
+            "position": 2,
+            "kind": "material_question",
+            "material_ref": "zh-p2-synthetic-passage-01",
+            "item_id": "zh-p2-synthetic-passage-01.q2",
+            "item_version": 2,
+            "role": "material_question",
+            "target_ref": null,
+            "stage": null,
+            "counts_toward_x": true
+          },
+          {
+            "position": 3,
+            "kind": "material_question",
+            "material_ref": "zh-p2-synthetic-passage-01",
+            "item_id": "zh-p2-synthetic-passage-01.q3",
+            "item_version": 2,
+            "role": "material_question",
+            "target_ref": "t-0001",
+            "stage": "exact",
+            "counts_toward_x": true
+          },
+          {
+            "position": 4,
+            "kind": "short",
+            "material_ref": null,
+            "item_id": null,
+            "item_version": null,
+            "role": "repair",
+            "target_ref": "t-0003",
+            "stage": "similar",
+            "counts_toward_x": true
+          }
+        ]
+      },
+      "planned_total": 12,
+      "cursor": 4,
+      "active_seconds": 640,
+      "activity": [
+        {
+          "state": "active",
+          "at": "2026-10-13T16:59:00+08:00"
+        },
+        {
+          "state": "idle",
+          "at": "2026-10-13T17:05:00+08:00"
+        },
+        {
+          "state": "paused",
+          "at": "2026-10-13T17:08:00+08:00"
+        }
+      ],
+      "target_aggregates": [
+        {
+          "target_ref": "t-0001",
+          "route": "whole_task",
+          "starting_stage": "exact",
+          "related_presentation_ids": [
+            "pr-0001",
+            "pr-0003"
+          ],
+          "high_option_success_ids": [],
+          "low_option_success_ids": [
+            "pr-0003"
+          ],
+          "any_first_wrong": true,
+          "clearances": [],
+          "outcome": "pending",
+          "final_stage_not_before": null
+        },
+        {
+          "target_ref": "t-0003",
+          "route": "short_only",
+          "starting_stage": "exact",
+          "related_presentation_ids": [
+            "pr-0006"
+          ],
+          "high_option_success_ids": [
+            "pr-0006"
+          ],
+          "low_option_success_ids": [],
+          "any_first_wrong": false,
+          "clearances": [
+            {
+              "stage": "exact",
+              "cleared_on": "2026-10-13"
+            }
+          ],
+          "outcome": "advanced",
+          "final_stage_not_before": "2026-10-14"
+        }
+      ]
     },
     {
-      "id": "task-0002", "subject": "science", "local_date": "2026-10-13", "x": 19, "planned_total": 4, "cursor": 4,
-      "status": "finalised", "content_version": "synthetic-sc-1", "active_seconds": 300, "target_aggregates": []
+      "id": "task-0002",
+      "subject": "science",
+      "local_date": "2026-10-13",
+      "created_at": "2026-10-13T17:55:00+08:00",
+      "finalised_at": "2026-10-13T18:10:00+08:00",
+      "x": 19,
+      "policy_version": "pilot-policy-1",
+      "content_version": "synthetic-sc-1",
+      "status": "finalised",
+      "plan": {
+        "materials": [],
+        "slots": [
+          {
+            "position": 0,
+            "kind": "teaching",
+            "material_ref": null,
+            "item_id": "sc-p3-synthetic-poles-teach",
+            "item_version": 1,
+            "role": "teaching",
+            "target_ref": null,
+            "stage": null,
+            "counts_toward_x": false
+          },
+          {
+            "position": 1,
+            "kind": "short",
+            "material_ref": null,
+            "item_id": "sc-p3-synthetic-poles.q1",
+            "item_version": 1,
+            "role": "acquisition_test",
+            "target_ref": null,
+            "stage": "acquisition",
+            "counts_toward_x": true
+          },
+          {
+            "position": 2,
+            "kind": "short",
+            "material_ref": null,
+            "item_id": "sc-p3-synthetic-poles.q2",
+            "item_version": 1,
+            "role": "replacement",
+            "target_ref": null,
+            "stage": "acquisition",
+            "counts_toward_x": true
+          }
+        ]
+      },
+      "planned_total": 2,
+      "cursor": 2,
+      "active_seconds": 300,
+      "activity": [
+        {
+          "state": "active",
+          "at": "2026-10-13T17:55:00+08:00"
+        },
+        {
+          "state": "closed",
+          "at": "2026-10-13T18:10:00+08:00"
+        }
+      ],
+      "target_aggregates": []
+    }
+  ],
+  "eligibility": [
+    {
+      "target_ref": "t-0001",
+      "not_before": "2026-10-11",
+      "reason": "import_next_day",
+      "source_task_id": null
+    },
+    {
+      "target_ref": "t-0003",
+      "not_before": "2026-10-14",
+      "reason": "final_stage_gate",
+      "source_task_id": "task-0001"
+    }
+  ],
+  "amendments": [
+    {
+      "id": "am-0001",
+      "at": "2026-10-12T19:00:00+08:00",
+      "actor": "parent",
+      "kind": "amend_target",
+      "refs": [
+        "t-0000"
+      ],
+      "replacement_ref": "t-0002",
+      "reason": "wrong_skill",
+      "reducer_revision": 1
+    },
+    {
+      "id": "am-0002",
+      "at": "2026-10-13T20:00:00+08:00",
+      "actor": "parent",
+      "kind": "invalidate_observation",
+      "refs": [
+        "obs-0004"
+      ],
+      "replacement_ref": null,
+      "reason": "duplicate",
+      "reducer_revision": 2
     }
   ],
   "completions": [
-    { "subject": "science", "local_date": "2026-10-13", "task_id": "task-0002", "reason": "shortened_no_eligible_content" }
+    {
+      "subject": "science",
+      "local_date": "2026-10-13",
+      "task_id": "task-0002",
+      "reason": "shortened_no_eligible_content",
+      "answered": 1
+    },
+    {
+      "subject": "english",
+      "local_date": "2026-10-12",
+      "task_id": null,
+      "reason": "zero_eligible",
+      "answered": 0
+    }
   ],
-  "rest_days": ["2026-10-11"],
+  "rest_days": [
+    "2026-10-11"
+  ],
   "story": {
     "checkpoints": [
-      { "id": "cp-0001", "task_id": "task-0002", "kind": "completion", "local_date": "2026-10-13" },
-      { "id": "cp-0002", "task_id": null, "kind": "exploration", "local_date": "2026-10-13" }
+      {
+        "id": "cp-0001",
+        "task_id": "task-0002",
+        "kind": "completion",
+        "local_date": "2026-10-13",
+        "story_seq": 4,
+        "state": "delivered",
+        "delivered_at": "2026-10-13T18:10:05+08:00"
+      },
+      {
+        "id": "cp-0002",
+        "task_id": "task-0001",
+        "kind": "halfway",
+        "local_date": "2026-10-13",
+        "story_seq": 5,
+        "state": "pending",
+        "delivered_at": null
+      }
     ],
+    "next_story_seq": 6,
     "chapter": 2,
+    "world_flags": [
+      "bridge_repaired",
+      "lantern_lit"
+    ],
     "ended": false
   },
   "flags": [
-    { "item_id": "sc-p3-poles.q2", "item_version": 1, "reason": "question_unclear", "flagged_at": "2026-10-13T18:10:00+08:00", "status": "open" }
+    {
+      "presentation_id": "pr-0005",
+      "item_id": "sc-p3-synthetic-poles.q2",
+      "item_version": 1,
+      "reason": "question_unclear",
+      "flagged_at": "2026-10-13T18:03:00+08:00",
+      "status": "open",
+      "decided_at": null
+    }
   ],
   "suspensions": [
-    { "item_id": "sc-p3-poles.q2", "item_version": 1, "scope": "version", "since": "2026-10-13T18:10:00+08:00", "restored_at": null }
+    {
+      "item_id": "sc-p3-synthetic-poles.q2",
+      "item_version": 1,
+      "scope": "version",
+      "since": "2026-10-13T18:03:00+08:00",
+      "restored_at": null
+    }
   ],
-  "exposure": [{ "item_id": "sc-p3-poles-learn.q1", "last_presented_on": "2026-10-13", "times": 1 }],
-  "calendar_guards": { "last_finalised_date": "2026-10-13", "last_timezone_change_at": null },
-  "pending_upload": { "operation_id": "11111111-2222-4333-8444-555555555555", "base_snapshot_id": null, "queued_at": "2026-10-13T18:20:00+08:00" }
+  "exposure": [
+    {
+      "item_id": "sc-p3-synthetic-poles.q1",
+      "first_presented_on": "2026-10-13",
+      "last_presented_on": "2026-10-13",
+      "times": 1
+    }
+  ],
+  "calendar_guards": {
+    "last_finalised_date": "2026-10-13",
+    "last_timezone_change_at": "2026-10-01T08:00:00+08:00",
+    "max_local_date_seen": "2026-10-13"
+  },
+  "pending_upload": {
+    "operation_id": "11111111-2222-4333-8444-555555555555",
+    "base_snapshot_id": null,
+    "queued_at": "2026-10-13T18:20:00+08:00"
+  }
 }

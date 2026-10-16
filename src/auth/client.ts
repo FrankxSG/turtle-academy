@@ -23,8 +23,13 @@ export type AuthError =
   | 'not_configured'
   | 'google_disabled'
   | 'google_cancelled'
+  | 'google_signup_refused'
+  | 'google_failed'
   | 'storage_unavailable'
 export type AuthResult = { ok: true; session: Session } | { ok: false; error: AuthError }
+
+/** storage_unavailable: this device may still hold the old session after a reload; tell the parent. */
+export type SignOutResult = { ok: true } | { ok: false; error: 'storage_unavailable' }
 
 export type KeyValueStore = {
   getItem(key: string): string | null
@@ -34,6 +39,13 @@ export type KeyValueStore = {
 
 export const SESSION_KEY = 'ta.auth.session.v1'
 export const PKCE_KEY = 'ta.auth.pkce.v1'
+// Written in place of the session when removal fails, so a later reload reads "no session".
+const SIGNED_OUT = 'signed-out'
+// GoTrue's documented code (and, for older servers that send no code, its fixed message) for a
+// refused account creation. Only this counts as "sign-up refused"; anything else is a cancellation
+// or a failure. https://supabase.com/docs/guides/auth/debugging/error-codes
+const SIGNUP_DISABLED_CODE = 'signup_disabled'
+const SIGNUP_DISABLED_MESSAGE = 'Signups not allowed for this instance'
 
 /** Reads public client configuration. The anon key is a public, RLS-bound key, never a service key. */
 export function readAuthConfig(env: Record<string, string | undefined>): AuthConfig | null {
@@ -89,21 +101,52 @@ function mapStatus(status: number): AuthError {
   return 'unavailable'
 }
 
+/** The browser's localStorage, or null where reading the property itself throws (blocked storage). */
+function defaultStorage(): KeyValueStore | null {
+  try {
+    return (globalThis as { localStorage?: KeyValueStore }).localStorage ?? null
+  } catch {
+    return null
+  }
+}
+
+/** Distinguishes a server refusal to create an account from a cancellation or a failure. */
+export function classifyAuthRedirectError(params: URLSearchParams): AuthError {
+  const code = params.get('error_code')
+  if (code === SIGNUP_DISABLED_CODE) return 'google_signup_refused'
+  if (code === null && params.get('error_description') === SIGNUP_DISABLED_MESSAGE) return 'google_signup_refused'
+  if (code === null && params.get('error') === 'access_denied') return 'google_cancelled'
+  return 'google_failed'
+}
+
 export function createAuthClient(config: AuthConfig | null, deps: Deps = {}) {
   const doFetch = deps.fetch ?? globalThis.fetch
-  const storage = deps.storage === undefined ? (globalThis as { localStorage?: KeyValueStore }).localStorage ?? null : deps.storage
+  const storage = deps.storage === undefined ? defaultStorage() : deps.storage
+  // This instance's view of the session. undefined = not yet known, so read storage.
+  // After sign-out it is null even if the device storage could not be cleared.
+  let current: Session | null | undefined
 
-  function save(session: Session | null): void {
-    if (!storage) return
+  /** Persists the session; returns false if the device copy could not be written or cleared. */
+  function save(session: Session | null): boolean {
+    current = session
+    if (!storage) return session === null
     try {
       if (session) storage.setItem(SESSION_KEY, JSON.stringify(session))
       else storage.removeItem(SESSION_KEY)
+      return true
     } catch {
-      // Storage can be unavailable or full; the in-memory result is still returned.
+      if (session) return false // full or blocked storage: the in-memory session is still used
+    }
+    try {
+      storage.setItem(SESSION_KEY, SIGNED_OUT) // removal failed: overwrite the token instead
+      return true
+    } catch {
+      return false
     }
   }
 
   function getStoredSession(): Session | null {
+    if (current !== undefined) return current
     if (!storage) return null
     try {
       const raw = storage.getItem(SESSION_KEY)
@@ -193,13 +236,17 @@ export function createAuthClient(config: AuthConfig | null, deps: Deps = {}) {
       }
       let params: URLSearchParams
       try {
-        params = new URL(callbackUrl).searchParams
+        const u = new URL(callbackUrl)
+        params = new URLSearchParams(u.search)
+        // Errors may arrive in the fragment instead of the query.
+        for (const [k, v] of new URLSearchParams(u.hash.replace(/^#/, ''))) if (!params.has(k)) params.set(k, v)
       } catch {
-        return { ok: false, error: 'google_cancelled' }
+        return { ok: false, error: 'google_failed' }
       }
+      // A refusal ("sign-ups not allowed"), a cancellation and other failures are kept apart.
+      if (params.has('error') || params.has('error_code')) return { ok: false, error: classifyAuthRedirectError(params) }
       const code = params.get('code')
-      // A refused or cancelled sign-in (including "sign-ups not allowed") comes back as an error param.
-      if (params.has('error') || !code || !verifier) return { ok: false, error: 'google_cancelled' }
+      if (!code || !verifier) return { ok: false, error: 'google_failed' }
       return tokenRequest('pkce', { auth_code: code, code_verifier: verifier })
     },
 
@@ -218,19 +265,26 @@ export function createAuthClient(config: AuthConfig | null, deps: Deps = {}) {
       return session.expiresAt * 1000 <= now
     },
 
-    /** Clears the local session; the server-side logout is best effort. */
-    async signOut(): Promise<void> {
-      const current = getStoredSession()
-      save(null)
-      if (!config || !current) return
-      try {
-        await doFetch(`${config.url}/auth/v1/logout`, {
-          method: 'POST',
-          headers: { apikey: config.anonKey, Authorization: `Bearer ${current.accessToken}` },
-        })
-      } catch {
-        // Offline sign-out still clears this device.
+    /**
+     * Clears the session from this client at once, then from device storage. Returns
+     * storage_unavailable when the device copy could not be removed or overwritten: the caller must
+     * not claim a durable sign-out, because a reload could restore the session. Server-side logout is
+     * best effort and never changes the local result.
+     */
+    async signOut(): Promise<SignOutResult> {
+      const previous = getStoredSession()
+      const durable = save(null)
+      if (config && previous) {
+        try {
+          await doFetch(`${config.url}/auth/v1/logout`, {
+            method: 'POST',
+            headers: { apikey: config.anonKey, Authorization: `Bearer ${previous.accessToken}` },
+          })
+        } catch {
+          // Offline sign-out still clears this device.
+        }
       }
+      return durable ? { ok: true } : { ok: false, error: 'storage_unavailable' }
     },
   }
 }

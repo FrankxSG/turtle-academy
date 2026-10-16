@@ -38,6 +38,71 @@ test('every shared invalid case is rejected by the client validator, as on the s
   }
 })
 
+test('the valid fixture populates every declared field and every array of the contract', () => {
+  const schema = JSON.parse(readFileSync(new URL('../../../src/snapshot/schema.json', import.meta.url), 'utf8'))
+  const seenKeys = new Set()
+  const filledArrays = new Set()
+  const walk = (node, value, path) => {
+    while (node.$ref) node = schema.defs[node.$ref]
+    if (value === null || value === undefined) return
+    if (node.type === 'object') {
+      for (const [k, child] of Object.entries(node.properties ?? {})) {
+        if (k in value) {
+          seenKeys.add(`${path}.${k}`)
+          walk(child, value[k], `${path}.${k}`)
+        }
+      }
+    } else if (node.type === 'array') {
+      if (value.length > 0) filledArrays.add(path)
+      for (const v of value) walk(node.items, v, `${path}[]`)
+    }
+  }
+  const declaredKeys = new Set()
+  const declaredArrays = new Set()
+  const declare = (node, path) => {
+    while (node.$ref) node = schema.defs[node.$ref]
+    if (node.type === 'object') for (const [k, child] of Object.entries(node.properties ?? {})) { declaredKeys.add(`${path}.${k}`); declare(child, `${path}.${k}`) }
+    else if (node.type === 'array') { declaredArrays.add(path); declare(node.items, `${path}[]`) }
+  }
+  declare(schema.root, '$')
+  walk(schema.root, withChild(valid), '$')
+  assert.deepEqual([...declaredKeys].filter((k) => !seenKeys.has(k)), [], 'declared fields missing from the fixture')
+  assert.deepEqual([...declaredArrays].filter((k) => !filledArrays.has(k) && k !== '$.pending_upload'), [], 'declared arrays never populated in the fixture')
+})
+
+test('recoverable engine state is representable and survives a round trip (PR #19 review finding 1)', () => {
+  const doc = withChild(valid)
+  const back = JSON.parse(JSON.stringify(doc))
+  assert.deepEqual(back, doc)
+  assert.deepEqual(validateSnapshot(back, CHILD), { ok: true })
+  const responses = doc.events.map((e) => e.response)
+  // structured ordered and matching responses, not one selected option
+  assert.ok(responses.some((r) => r.kind === 'ordered' && r.option_ids.length > 1))
+  assert.ok(responses.some((r) => r.kind === 'matching' && r.pairs.length > 1))
+  // independent observation history with recurrence versus duplicate
+  const recurrences = doc.targets.flatMap((t) => t.observations.map((o) => o.recurrence))
+  assert.ok(recurrences.includes('independent') && recurrences.includes('duplicate'))
+  assert.ok(doc.targets.every((t) => 'assessed_skill' in t && 'error_type' in t))
+  // a paused whole-material task keeps its frozen plan, policy version and an unstarted short slot
+  const paused = doc.tasks.find((t) => t.status === 'paused')
+  assert.ok(paused.plan.materials.length >= 1 && paused.policy_version && paused.finalised_at === null)
+  assert.ok(paused.plan.slots.some((s) => s.kind === 'material_question' && s.item_id))
+  assert.ok(paused.plan.slots.some((s) => s.kind === 'short' && s.item_id === null))
+  assert.ok(paused.target_aggregates.some((a) => a.route === 'whole_task' && a.related_presentation_ids.length > 1))
+  assert.ok(doc.tasks.some((t) => t.finalised_at !== null))
+  // presentations carry roles; checkpoints carry delivery state
+  assert.ok(new Set(doc.presentations.map((p) => p.role)).size >= 3)
+  const states = doc.story.checkpoints.map((c) => c.state)
+  assert.ok(states.includes('pending') && states.includes('delivered'))
+  assert.ok(doc.amendments.length > 0 && doc.eligibility.length > 0)
+})
+
+test('the earlier lossy shape is no longer accepted', () => {
+  const doc = withChild(valid)
+  doc.events[0] = { ...doc.events[0], selected_option_id: 'opt-1' }
+  assert.deepEqual(validateSnapshot(doc, CHILD), { ok: false, reason: 'invalid_snapshot' })
+})
+
 test('snapshot naming another child is rejected', () => {
   assert.deepEqual(validateSnapshot(withChild(valid), '00000000-0000-4000-8000-000000000001'), { ok: false, reason: 'child_mismatch' })
 })
@@ -102,10 +167,11 @@ test('Google refusal or cancellation fails closed and clears the verifier', asyn
   const client = auth.createAuthClient({ url: 'https://example.invalid', anonKey: 'k', googleEnabled: true }, { fetch: async () => { called = true }, storage: store })
   assert.deepEqual(await client.startGoogleSignIn('http://evil.example.invalid/cb'), { ok: false, error: 'not_configured' })
   await client.startGoogleSignIn('https://app.example.invalid/cb')
-  const refused = await client.completeGoogleSignIn('https://app.example.invalid/cb?error=access_denied&error_description=Signups+not+allowed')
-  assert.deepEqual(refused, { ok: false, error: 'google_cancelled' })
+  const refused = await client.completeGoogleSignIn('https://app.example.invalid/cb?error=access_denied&error_code=signup_disabled')
+  assert.deepEqual(refused, { ok: false, error: 'google_signup_refused' })
   assert.equal(store.getItem(auth.PKCE_KEY), null)
-  assert.deepEqual(await client.completeGoogleSignIn('https://app.example.invalid/cb?code=replayed'), { ok: false, error: 'google_cancelled' })
+  // the verifier was consumed, so a replayed code fails without calling the token endpoint
+  assert.deepEqual(await client.completeGoogleSignIn('https://app.example.invalid/cb?code=replayed'), { ok: false, error: 'google_failed' })
   assert.equal(called, false)
   assert.equal(client.getStoredSession(), null)
 })
@@ -159,6 +225,48 @@ test('expired session is kept for the caller; sign-out clears it even offline', 
   assert.equal(client.isExpired(s), true)
   assert.deepEqual(await client.refreshSession(), { ok: false, error: 'network' })
   assert.ok(client.getStoredSession(), 'a failed refresh must not wipe the stored session')
-  await client.signOut()
+  assert.deepEqual(await client.signOut(), { ok: true })
   assert.equal(client.getStoredSession(), null)
+  assert.equal(auth.createAuthClient(null, { storage: store }).getStoredSession(), null, 'gone after reload')
+})
+
+const SESSION = { accessToken: 'a', refreshToken: 'r', expiresAt: 2000000000, userId: 'u-1' }
+
+test('sign-out when removal fails overwrites the token so a reload sees no session (review finding 4)', async () => {
+  const store = memoryStore()
+  store.setItem(auth.SESSION_KEY, JSON.stringify(SESSION))
+  const flaky = { ...store, removeItem: () => { throw new Error('removal blocked') } }
+  const client = auth.createAuthClient({ url: 'https://example.invalid', anonKey: 'k' }, { fetch: async () => new Response('{}'), storage: flaky })
+  assert.deepEqual(await client.signOut(), { ok: true })
+  assert.equal(client.getStoredSession(), null)
+  assert.equal(auth.createAuthClient(null, { storage: flaky }).getStoredSession(), null, 'reload reads no session')
+})
+
+test('sign-out that cannot clear device storage reports it and still clears this client (review finding 4)', async () => {
+  const store = memoryStore()
+  store.setItem(auth.SESSION_KEY, JSON.stringify(SESSION))
+  const stuck = { getItem: (k) => store.getItem(k), setItem: () => { throw new Error('read-only') }, removeItem: () => { throw new Error('read-only') } }
+  let logoutCalled = false
+  const client = auth.createAuthClient({ url: 'https://example.invalid', anonKey: 'k' }, { fetch: async () => { logoutCalled = true; return new Response('{}') }, storage: stuck })
+  assert.deepEqual(client.getStoredSession(), SESSION)
+  const result = await client.signOut()
+  assert.deepEqual(result, { ok: false, error: 'storage_unavailable' }, 'caller must not claim a durable sign-out')
+  assert.equal(client.getStoredSession(), null, 'this client no longer exposes the session')
+  assert.equal(logoutCalled, true, 'server-side logout is still attempted')
+  // The reload boundary the result warns about: a fresh client can still read the stored copy.
+  assert.deepEqual(auth.createAuthClient(null, { storage: stuck }).getStoredSession(), SESSION)
+})
+
+test('a throwing localStorage getter does not break the client', async () => {
+  const desc = Object.getOwnPropertyDescriptor(globalThis, 'localStorage')
+  Object.defineProperty(globalThis, 'localStorage', { configurable: true, get() { throw new DOMException('blocked', 'SecurityError') } })
+  try {
+    const client = auth.createAuthClient({ url: 'https://example.invalid', anonKey: 'k', googleEnabled: true }, { fetch: async () => { throw new TypeError('offline') } })
+    assert.equal(client.getStoredSession(), null)
+    assert.deepEqual(await client.startGoogleSignIn('https://app.example.invalid/cb'), { ok: false, error: 'storage_unavailable' })
+    assert.deepEqual(await client.signOut(), { ok: true })
+  } finally {
+    if (desc) Object.defineProperty(globalThis, 'localStorage', desc)
+    else delete globalThis.localStorage
+  }
 })

@@ -70,3 +70,14 @@ Local evidence (no services touched):
 - The new client modules type-check under strict settings. The repository's own `npm run build` is not rerun here because package installation was unavailable in the authoring environment. The new PR workflow `Database contract` runs both suites in CI.
 
 **Pending owner steps:** closed sign-up and anonymous sign-in in the hosted Auth settings, applying the migration to the test project, `scripts/check-hosted-auth.mjs` results, and synthetic provisioning. Until the owner records these here (pass/fail only, no identifiers), nothing about the hosted project is verified. No real learner record may be stored until the data-protection gate (Technical Decisions §9) is resolved.
+
+### 2026-10-16 review corrections (PR #19, ChatGPT review at `a352900`)
+
+All four findings are addressed on the same branch; the tested head is recorded on the PR.
+- **Snapshot contract (P1):** `pilot-snapshot/1` now represents the recoverable engine state: structured ordered, matching and word-bank responses; presentations with roles; frozen task plans with `policy_version` and finalisation time; per-target aggregates; observation history with recurrence versus duplicate; assessed skill and error type; eligibility bounds; amendment lineage; checkpoint pending/delivered state. Still closed, bounded and free-text-free. A test proves the fixture populates every declared field and array; the database test round-trips it unchanged through `upload_snapshot` and the RLS read path. 34 shared rejection cases (was 23).
+- **Closed sign-up check (P1):** passes only on the documented refusal codes; invalid key, address, CAPTCHA, rate-limit, route and server errors are `INCONCLUSIVE` (exit 3). Tested by running the real script against a local mock Auth server.
+- **Google link check (P2):** `--expect refused` passes only on `signup_disabled`; cancellation, token-exchange and network failures are inconclusive, with negative tests.
+- **Sign-out (P2):** clears the client at once, overwrites the stored token if removal fails, and returns `storage_unavailable` when neither works, so callers cannot claim a durable sign-out; the reload boundary is tested. A throwing `localStorage` getter is tolerated.
+
+Local evidence for this round: `test_database.py` **18 pass** (PostgreSQL 16); client and owner-check suites **30 pass** (Node 22); strict type-check of the changed modules passes (global TypeScript 6); privacy guard passes. `npm ci` crashed in the authoring environment, so `npm run build` was not rerun here. Hosted owner checks remain **pending**.
+

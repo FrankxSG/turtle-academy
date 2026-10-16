@@ -1,28 +1,373 @@
 {
   "note": "Each case applies one change to snapshot-valid.json; both the database and the client must reject every case. 'path' is a list of keys/indexes; op 'set' adds or replaces, 'delete' removes.",
   "cases": [
-    { "name": "observed wrong form on a target", "path": ["targets", 0, "observed_wrong_form"], "op": "set", "value": "睛" },
-    { "name": "parent PIN", "path": ["pin"], "op": "set", "value": "1234" },
-    { "name": "parent PIN hash in settings", "path": ["settings", "pin_hash"], "op": "set", "value": "pbkdf2$sha256$abc" },
-    { "name": "worksheet text", "path": ["worksheet_text"], "op": "set", "value": "copied worksheet text" },
-    { "name": "worksheet image", "path": ["targets", 0, "source", "worksheet_image"], "op": "set", "value": "data:image/png;base64,AAAA" },
-    { "name": "copied source question", "path": ["events", 0, "source_question"], "op": "set", "value": "copied question" },
-    { "name": "free-text source description", "path": ["targets", 0, "source", "description"], "op": "set", "value": "spelling test" },
-    { "name": "school detail", "path": ["school"], "op": "set", "value": "a school" },
-    { "name": "teacher detail", "path": ["targets", 0, "source", "teacher"], "op": "set", "value": "a teacher" },
-    { "name": "local safety copy", "path": ["safety_copy"], "op": "set", "value": { "targets": [] } },
-    { "name": "unknown key deep in a task aggregate", "path": ["tasks", 0, "target_aggregates", 0, "note"], "op": "set", "value": "x" },
-    { "name": "free text smuggled into an opaque id", "path": ["targets", 0, "source", "instance_ref"], "op": "set", "value": "Week 3 spelling test from class" },
-    { "name": "free text smuggled into a target value", "path": ["targets", 0, "target_value"], "op": "set", "value": "a long sentence about the mistake" },
-    { "name": "enum outside the allow-list", "path": ["flags", 0, "reason"], "op": "set", "value": "teacher said so" },
-    { "name": "daily size below 6", "path": ["settings", "subjects", 0, "x"], "op": "set", "value": 5 },
-    { "name": "daily size above 19", "path": ["tasks", 0, "x"], "op": "set", "value": 20 },
-    { "name": "fractional integer", "path": ["tasks", 0, "cursor"], "op": "set", "value": 1.5 },
-    { "name": "string instead of boolean", "path": ["events", 0, "correct"], "op": "set", "value": "false" },
-    { "name": "missing required section", "path": ["story"], "op": "delete" },
-    { "name": "unexpected null", "path": ["targets", 0, "subject"], "op": "set", "value": null },
-    { "name": "wrong schema version", "path": ["schema_version"], "op": "set", "value": "pilot-snapshot/2" },
-    { "name": "bad date format", "path": ["rest_days", 0], "op": "set", "value": "11/10/2026" },
-    { "name": "array instead of object", "path": ["calendar_guards"], "op": "set", "value": [] }
+    {
+      "name": "observed wrong form on a target",
+      "path": [
+        "targets",
+        0,
+        "observed_wrong_form"
+      ],
+      "op": "set",
+      "value": "睛"
+    },
+    {
+      "name": "parent PIN",
+      "path": [
+        "pin"
+      ],
+      "op": "set",
+      "value": "1234"
+    },
+    {
+      "name": "parent PIN hash in settings",
+      "path": [
+        "settings",
+        "pin_hash"
+      ],
+      "op": "set",
+      "value": "pbkdf2$sha256$abc"
+    },
+    {
+      "name": "worksheet text",
+      "path": [
+        "worksheet_text"
+      ],
+      "op": "set",
+      "value": "copied worksheet text"
+    },
+    {
+      "name": "worksheet image",
+      "path": [
+        "targets",
+        0,
+        "observations",
+        0,
+        "worksheet_image"
+      ],
+      "op": "set",
+      "value": "data:image/png;base64,AAAA"
+    },
+    {
+      "name": "copied source question",
+      "path": [
+        "events",
+        0,
+        "source_question"
+      ],
+      "op": "set",
+      "value": "copied question"
+    },
+    {
+      "name": "free-text source description",
+      "path": [
+        "targets",
+        0,
+        "observations",
+        0,
+        "description"
+      ],
+      "op": "set",
+      "value": "spelling test"
+    },
+    {
+      "name": "school detail",
+      "path": [
+        "school"
+      ],
+      "op": "set",
+      "value": "a school"
+    },
+    {
+      "name": "teacher detail",
+      "path": [
+        "targets",
+        0,
+        "observations",
+        0,
+        "teacher"
+      ],
+      "op": "set",
+      "value": "a teacher"
+    },
+    {
+      "name": "local safety copy",
+      "path": [
+        "safety_copy"
+      ],
+      "op": "set",
+      "value": {
+        "targets": []
+      }
+    },
+    {
+      "name": "unknown key deep in a task aggregate",
+      "path": [
+        "tasks",
+        0,
+        "target_aggregates",
+        0,
+        "note"
+      ],
+      "op": "set",
+      "value": "x"
+    },
+    {
+      "name": "free text smuggled into an opaque id",
+      "path": [
+        "targets",
+        0,
+        "observations",
+        0,
+        "instance_ref"
+      ],
+      "op": "set",
+      "value": "Week 3 spelling test from class"
+    },
+    {
+      "name": "free text smuggled into a target value",
+      "path": [
+        "targets",
+        0,
+        "target_value"
+      ],
+      "op": "set",
+      "value": "a long sentence about the mistake"
+    },
+    {
+      "name": "enum outside the allow-list",
+      "path": [
+        "flags",
+        0,
+        "reason"
+      ],
+      "op": "set",
+      "value": "teacher said so"
+    },
+    {
+      "name": "daily size below 6",
+      "path": [
+        "settings",
+        "subjects",
+        0,
+        "x"
+      ],
+      "op": "set",
+      "value": 5
+    },
+    {
+      "name": "daily size above 19",
+      "path": [
+        "tasks",
+        0,
+        "x"
+      ],
+      "op": "set",
+      "value": 20
+    },
+    {
+      "name": "fractional integer",
+      "path": [
+        "tasks",
+        0,
+        "cursor"
+      ],
+      "op": "set",
+      "value": 1.5
+    },
+    {
+      "name": "string instead of boolean",
+      "path": [
+        "events",
+        0,
+        "correct"
+      ],
+      "op": "set",
+      "value": "false"
+    },
+    {
+      "name": "missing required section",
+      "path": [
+        "story"
+      ],
+      "op": "delete"
+    },
+    {
+      "name": "unexpected null",
+      "path": [
+        "targets",
+        0,
+        "subject"
+      ],
+      "op": "set",
+      "value": null
+    },
+    {
+      "name": "wrong schema version",
+      "path": [
+        "schema_version"
+      ],
+      "op": "set",
+      "value": "pilot-snapshot/2"
+    },
+    {
+      "name": "bad date format",
+      "path": [
+        "rest_days",
+        0
+      ],
+      "op": "set",
+      "value": "11/10/2026"
+    },
+    {
+      "name": "array instead of object",
+      "path": [
+        "calendar_guards"
+      ],
+      "op": "set",
+      "value": []
+    },
+    {
+      "name": "observed wrong form inside an observation",
+      "path": [
+        "targets",
+        0,
+        "observations",
+        0,
+        "observed_wrong_form"
+      ],
+      "op": "set",
+      "value": "睛"
+    },
+    {
+      "name": "free text in an error-type token",
+      "path": [
+        "targets",
+        0,
+        "error_type"
+      ],
+      "op": "set",
+      "value": "teacher said careless"
+    },
+    {
+      "name": "free text in a response option id",
+      "path": [
+        "events",
+        1,
+        "response",
+        "option_ids",
+        0
+      ],
+      "op": "set",
+      "value": "The answer I wrote"
+    },
+    {
+      "name": "unknown key in a matching pair",
+      "path": [
+        "events",
+        2,
+        "response",
+        "pairs",
+        0,
+        "note"
+      ],
+      "op": "set",
+      "value": "x"
+    },
+    {
+      "name": "too many selected options",
+      "path": [
+        "events",
+        1,
+        "response",
+        "option_ids"
+      ],
+      "op": "set",
+      "value": [
+        "o-0",
+        "o-1",
+        "o-2",
+        "o-3",
+        "o-4",
+        "o-5",
+        "o-6",
+        "o-7",
+        "o-8",
+        "o-9",
+        "o-10",
+        "o-11",
+        "o-12",
+        "o-13",
+        "o-14",
+        "o-15",
+        "o-16"
+      ]
+    },
+    {
+      "name": "unknown key in a frozen plan slot",
+      "path": [
+        "tasks",
+        0,
+        "plan",
+        "slots",
+        0,
+        "question_text"
+      ],
+      "op": "set",
+      "value": "copied question"
+    },
+    {
+      "name": "free text in a material family token",
+      "path": [
+        "tasks",
+        0,
+        "plan",
+        "materials",
+        0,
+        "family"
+      ],
+      "op": "set",
+      "value": "Week 3 reading"
+    },
+    {
+      "name": "free text in a story world flag",
+      "path": [
+        "story",
+        "world_flags",
+        0
+      ],
+      "op": "set",
+      "value": "the teacher's class note"
+    },
+    {
+      "name": "locked P3 Mathematics course",
+      "path": [
+        "targets",
+        2,
+        "course"
+      ],
+      "op": "set",
+      "value": "p3_mathematics"
+    },
+    {
+      "name": "unknown key in an amendment",
+      "path": [
+        "amendments",
+        0,
+        "comment"
+      ],
+      "op": "set",
+      "value": "x"
+    },
+    {
+      "name": "free-text amendment reason",
+      "path": [
+        "amendments",
+        0,
+        "reason"
+      ],
+      "op": "set",
+      "value": "she was tired"
+    }
   ]
 }

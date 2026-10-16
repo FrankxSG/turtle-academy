@@ -329,6 +329,17 @@ class DatabaseContract(unittest.TestCase):
         self.upload(self.parent_a, child, uuid.uuid4(), None, self.payload(child))
         self.assertEqual(self.count(child), 1)
 
+    def test_populated_snapshot_round_trips_through_the_server(self):
+        # PR #19 review finding 1: the full recoverable state (structured responses, observation
+        # history, frozen plans, aggregates, eligibility, amendments, checkpoint delivery) must be
+        # stored and returned unchanged through the real upload entry point and RLS read path.
+        child = self.fresh_child()
+        sent = self.payload(child)
+        sid, _, _ = self.upload(self.parent_a, child, uuid.uuid4(), None, sent)
+        stored = self.db.run(as_role(f"select payload::text from public.snapshots where id = '{sid}';", sub=self.parent_a))
+        self.assertEqual(json.loads(stored[0][0]), sent)
+        self.assertEqual(self.db.run(as_role(f"select count(*) from public.snapshots where id = '{sid}';", sub=self.parent_b))[0][0], '0')
+
     def test_excluded_and_unknown_fields_rejected_without_side_effects(self):
         child = self.fresh_child()
         s1, _, _ = self.upload(self.parent_a, child, uuid.uuid4(), None, self.payload(child))

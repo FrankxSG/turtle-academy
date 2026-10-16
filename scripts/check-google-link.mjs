@@ -13,8 +13,13 @@
 //     node --experimental-strip-types scripts/check-google-link.mjs --expect same
 // Run 2 — a different Google account must be REFUSED (no new user created):
 //     … node --experimental-strip-types scripts/check-google-link.mjs --expect refused
+//
+// Run 2 passes ONLY on the server's documented sign-up refusal (signup_disabled). Cancelling the
+// Google consent screen, a network or token-exchange failure, or any other error is INCONCLUSIVE.
+// Exit codes: 0 PASS, 1 FAIL, 2 usage error, 3 INCONCLUSIVE.
 import { createServer } from 'node:http'
 import { createAuthClient, readAuthConfig } from '../src/auth/client.ts'
+import { classifyGoogleLink, EXIT } from './lib/owner-auth-checks.mjs'
 
 const expect = process.argv[process.argv.indexOf('--expect') + 1]
 if (!['same', 'refused'].includes(expect)) {
@@ -35,8 +40,8 @@ function memoryStore() {
 
 const pw = await createAuthClient(base, { storage: memoryStore() }).signInWithPassword(email, password)
 if (!pw.ok) {
-  console.log(`FAIL     password sign-in of the provisioned parent: ${pw.error}`)
-  process.exit(1)
+  console.log(`INCONCLUSIVE password sign-in of the provisioned parent failed: ${pw.error}`)
+  process.exit(3)
 }
 const parentId = pw.session.userId
 
@@ -45,8 +50,8 @@ const google = createAuthClient({ ...base, googleEnabled: true }, { storage: mem
 const PORT = 54329
 const start = await google.startGoogleSignIn(`http://127.0.0.1:${PORT}/callback`)
 if (!start.ok) {
-  console.log(`FAIL     could not start Google sign-in: ${start.error}`)
-  process.exit(1)
+  console.log(`INCONCLUSIVE could not start Google sign-in: ${start.error}`)
+  process.exit(3)
 }
 
 const server = createServer(async (req, res) => {
@@ -55,22 +60,11 @@ const server = createServer(async (req, res) => {
     return
   }
   const result = await google.completeGoogleSignIn(`http://127.0.0.1:${PORT}${req.url}`)
-  let pass
-  let line
-  if (!result.ok) {
-    pass = expect === 'refused'
-    line = `Google sign-in was refused (${result.error})`
-  } else if (result.session.userId === parentId) {
-    pass = expect === 'same'
-    line = 'Google sign-in landed on the SAME pre-provisioned parent'
-  } else {
-    pass = false
-    line = 'Google sign-in created or used a DIFFERENT account: delete that synthetic user and fix the sign-up setting'
-  }
-  console.log(`${pass ? 'PASS' : 'FAIL'}     expected ${expect}: ${line}`)
-  res.writeHead(200, { 'Content-Type': 'text/plain' }).end(`${pass ? 'PASS' : 'FAIL'} - you can close this tab.`)
+  const outcome = classifyGoogleLink(expect, result, parentId)
+  console.log(`${outcome.result.padEnd(12)} expected ${expect}: ${outcome.detail}`)
+  res.writeHead(200, { 'Content-Type': 'text/plain' }).end(`${outcome.result} - you can close this tab.`)
   server.close()
-  process.exitCode = pass ? 0 : 1
+  process.exitCode = EXIT[outcome.result]
 })
 server.listen(PORT, '127.0.0.1', () => {
   console.log('Open this link in a browser and sign in with the Google test account for this run:')
