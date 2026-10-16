@@ -97,6 +97,8 @@ The table enumerates the PR’s working groups, not an official MOE per-year ite
 
 ## Actual paper research, 2021–2026
 
+Citation revision (2026-10-16): third-party past papers are linked through public listing pages only. School/year/type, analysis pages and original file hashes still identify the copies examined; this citation format does not establish reuse rights.
+
 | Course | 2021 | 2022 | 2023 | 2024 | 2025 | 2026 |
 | --- | --- | --- | --- | --- | --- | --- |
 | p2 english | Retrieved | Retrieved | Retrieved | Retrieved¹ | Retrieved | Not retrieved |
@@ -109,7 +111,7 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p2_english-2021
 
 - Identity/date: Rosyth, Term 2 diagnostic; cover 2021.
-- Source: [public page/PDF](https://sgexam.com/subject/english/2021-p2-english-ha2-rosyth-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1eTzudilh1Aem9jmhchYiFj9_f4HCHEYl&export=download); 11 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/english/2021-p2-english-ha2-rosyth-pdf/); 11 PDF pages.
 - Analysis page anchors: 1, 3, 6, 8. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Grammar/vocabulary MCQs, visual text and comprehension; a term diagnostic, not a complete yearly blueprint.
 - SHA-256: `2748f602793301d2aefc3f4fd25dcff7caab3c10846ecadd92baf546e1f6847d`.
@@ -117,7 +119,7 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p2_english-2022
 
 - Identity/date: Nanyang, semestral packet; catalogue 2022.
-- Source: [public page/PDF](https://sgexam.com/subject/english/2022-p2-english-assessment-nanyang-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1FkoYXDus5q0jDW8fNHn1NjhQpm8Cevve&export=download); 20 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/english/2022-p2-english-assessment-nanyang-pdf/); 20 PDF pages.
 - Analysis page anchors: 1, 5, 10–16. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Packet includes composition/listening and language sections: grammar, vocabulary, cloze, editing, word order, sentence combining and comprehension. App selection cannot assess independent production.
 - SHA-256: `a8255fe0bf44c48789483b7e76df8dbf3a54a7062fdeb40467add8c965a545b9`.
@@ -125,7 +127,7 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p2_english-2023
 
 - Identity/date: Nanyang, short language practice; catalogue 2023.
-- Source: [public page/PDF](https://sgexam.com/subject/english/2023-p2-english-practice-paper-1-nanyang-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1W0t9zEj_v7jWXs_vUW6wyN5T6SpVgOy3&export=download); 18 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/english/2023-p2-english-practice-paper-1-nanyang-pdf/); 18 PDF pages.
 - Analysis page anchors: 1–8, 10, 12, 14. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Picture/phonics/spelling work, grammar/vocabulary and grammar cloze, sentence combining, information transfer and comprehension.
 - SHA-256: `fdb828549488147e53d967112eaaa48e88d6c015a2b13ac74b23e9f29f1556a1`.
@@ -133,7 +135,7 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p2_english-2024
 
 - Identity/date: Raffles Girls’, review practices; catalogue 2024.
-- Source: [public page/PDF](https://sgexam.com/subject/english/2024-p2-english-review-1-and-2-raffles-girls-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1deSJbC2NF29pSvaUS1zCSv9HDczWQFXH&export=download); 16 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/english/2024-p2-english-review-1-and-2-raffles-girls-pdf/); 16 PDF pages.
 - Analysis page anchors: 1–5, 7–12. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Unit-linked grammar, vocabulary, punctuation and comprehension; review packet rather than a nationally prescribed paper.
 - SHA-256: `c5ddf330fa8aa882f6fe72c7dd0882359e2c93acd1ed89f00e7b0b0171093e8c`.
@@ -141,7 +143,7 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p2_english-2025
 
 - Identity/date: Henry Park, quizzes; cover 2025.
-- Source: [public page/PDF](https://sgexam.com/subject/english/2025-p2-english-quiz-4_5_6-henry-park-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=12Gmvqz0hOurLjt8iMdj7rPps4xrr7KYY&export=download); 14 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/english/2025-p2-english-quiz-4_5_6-henry-park-pdf/); 14 PDF pages.
 - Analysis page anchors: 1, 5–8, 10–12. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Vocabulary cloze has four blanks; two grammar clozes have three each. Comprehension numbers 26–34 span nine questions, including sequencing, retrieval and true/false. Header numbering itself is inconsistent.
 - SHA-256: `ceb1c9b9395f03ad31dea02423243a1bb319a206b6188ed4f5fe4ef9798e19d6`.
@@ -149,7 +151,7 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p3_english-2021
 
 - Identity/date: Tao Nan as catalogued, SA2; year/school identity not independently certified from cover.
-- Source: [public page/PDF](https://sgexam.com/subject/english/2021-p3-english-semestral-assessment-2-tao-nan-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1vrsk3qXeYDa2DVtLZJyV8p0oPd1zDRQD&export=download); 16 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/english/2021-p3-english-semestral-assessment-2-tao-nan-pdf/); 16 PDF pages.
 - Analysis page anchors: 1, 3, 5, 7, 9–14. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Grammar/vocabulary, visual text, two cloze formats, synthesis, editing and open comprehension; includes an attributed adapted third-party passage, which must not become an app passage.
 - SHA-256: `94d8bcdf470ed7aa84f15002c71c36ebcfadaa94ba519fe1d39af1812743cea9`.
@@ -157,7 +159,7 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p3_english-2022
 
 - Identity/date: ACS Junior, SA2; cover 2022.
-- Source: [public page/PDF](https://sgexam.com/subject/english/2022-p3-english-semestral-assessment-2-acs-junior-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1wLdhwNwqZmC9613NSh86MTu0KtbCPkvN&export=download); 24 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/english/2022-p3-english-semestral-assessment-2-acs-junior-pdf/); 24 PDF pages.
 - Analysis page anchors: 1, 4, 9–16. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Grammar, two four-blank clozes, editing, synthesis and two comprehension materials.
 - SHA-256: `64c71c16fa7abcd419672d3f65d799b1bf3c0a3890f241dcf1688f00a787bae5`.
@@ -165,7 +167,7 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p3_english-2023
 
 - Identity/date: ACS Primary, EOY; cover 2023.
-- Source: [public page/PDF](https://sgexam.com/subject/english/2023-p3-english-end-of-year-exam-acsp-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1R3USZbenNtplN-Zu9j_yu7uGpz7GSweV&export=download); 22 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/english/2023-p3-english-end-of-year-exam-acsp-pdf/); 22 PDF pages.
 - Analysis page anchors: 1, 3, 5, 7, 11–14, 17. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Grammar eight items, vocabulary six, visual text six, four-blank clozes, editing and two comprehension materials.
 - SHA-256: `740c5ae08dbb22fe3548adb073455466a14818ce52175e8f1379f5bcd0b1854b`.
@@ -173,7 +175,7 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p3_english-2024
 
 - Identity/date: Catholic High, EOY; cover 2024.
-- Source: [public page/PDF](https://sgexam.com/subject/english/2024-p3-english-end-of-year-exam-catholic-high-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1LEE0V9sx0qb6rMeBTKz0fPuC-kHh09PA&export=download); 22 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/english/2024-p3-english-end-of-year-exam-catholic-high-pdf/); 22 PDF pages.
 - Analysis page anchors: 1, 3–10, 15. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Grammar, vocabulary, grammar/vocabulary/comprehension cloze, editing and comprehension; packet also includes listening. The app deliberately defers listening.
 - SHA-256: `61afcf6f29221853473d99d83fb4a47a9852d837c192b86d6d3385cd3a4743ee`.
@@ -181,14 +183,14 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p3_english-2025
 
 - Identity/date: ACS Junior as catalogued, EOY; cover 2025.
-- Source: [public page/PDF](https://sgexam.com/subject/english/2025-p3-english-end-of-year-exam-acs-junior-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1k2nWz65UIqAt9w6-31QpWj80CE-Lbq9N&export=download); 18 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/english/2025-p3-english-end-of-year-exam-acs-junior-pdf/); 18 PDF pages.
 - Analysis page anchors: 1–3, 7–15. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Two four-blank grammar clozes, editing and synthesis. First comprehension numbers 31–37 have seven questions with varied subparts. Fixed five-question app materials are a product choice, not the universal paper format.
 - SHA-256: `b5c41de8aee835bb87af5e590c94d0705f941f207f91686c517e307ad8df2d59`.
 
 ### Second-host 2022 bundle — english
 
-[SmileTutor public PDF](https://smiletutor.sg/wp-content/uploads/2023/10/P2_English_2022.pdf): 48 pages downloaded; **only PDF pp1–8 inspected/OCR processed**. The first packet is Maha Bodhi Review 1. PDF pp3–8 contain picture vocabulary, vocabulary/determiner cloze, adjective forms, word order and punctuation. These corroborate varied response demands; original app materials must not copy the packet.
+[SmileTutor public listing](https://smiletutor.sg/free-test-papers-download/primary-school-exam-papers/): 48 pages downloaded; **only PDF pp1–8 inspected/OCR processed**. The first packet is Maha Bodhi Review 1. PDF pp3–8 contain picture vocabulary, vocabulary/determiner cloze, adjective forms, word order and punctuation. These corroborate varied response demands; original app materials must not copy the packet.
 
 SHA-256: `6788d53e25b94262ddc241964491de0ff14d214f9c8dde5db44741fd1b182579`. Full bundle content/keys were not audited.
 
@@ -206,7 +208,7 @@ Additional actual public instruction was examined: [Lil’ but Mighty P1/P2 arti
 
 The app content is labelled original author draft. A bounded exact-overlap check compared every app material body and question stem against the retrieved same-subject paper OCR/text: 11 text files, 12 consecutive alphabetic words, case/punctuation normalised. **No threshold-length exact match was found.** This can miss paraphrases, OCR errors, shorter copying, images and sources outside the sample. It is not proof of originality, permission or copyright clearance. Common grammar/number templates are not by themselves evidence of copying. Retain pending rights/independent review/owner sign-off until the project’s review gates are satisfied.
 
-Reproduce source identity by downloading the cited public URLs, running `sha256sum` on each PDF/HTML, and comparing the recorded hashes. For paper structure, extract native PDF text and OCR scans (PyMuPDF + Tesseract English / Simplified Chinese), then inspect the stated PDF pages and course/year covers visually where OCR is ambiguous. HTML hashes identify the fetched snapshot, not an immutable future webpage. The documented overlaps used only stems/material bodies, not keys/explanations or character catalogues. Source retrieval and OCR happened outside the public repository; no signed download tokens or private files are required to follow these citations.
+For past papers, start at the cited public listing, identify the recorded grade/course, year and assessment, and obtain the matching file under the host’s current access conditions. Compare its `sha256sum` with the recorded hash; a mismatch may mean the host replaced the file. Official and other source snapshots are likewise identified by their cited URLs and hashes. For paper structure, extract native PDF text and OCR scans (PyMuPDF + Tesseract English / Simplified Chinese), then inspect the stated PDF pages and course/year covers visually where OCR is ambiguous. HTML hashes identify the fetched snapshot, not an immutable future webpage. The documented overlaps used only stems/material bodies, not keys/explanations or character catalogues. Source retrieval and OCR happened outside the public repository; no signed download tokens or private files are required to follow these citations.
 
 ## Disposition and next revision
 
