@@ -315,6 +315,8 @@ test.describe('page zoom while drawing', () => {
     const touch = (id: number) => new Touch({ identifier: id, target: document.body, clientX: 100 + id * 40, clientY: 200 })
     const touchmove = (count: number) => {
       const touches = Array.from({ length: count }, (_, i) => touch(i))
+      // Start where the move happens, so a one-finger move is not a downward pull.
+      document.body.dispatchEvent(new TouchEvent('touchstart', { bubbles: true, cancelable: true, touches, targetTouches: touches, changedTouches: touches }))
       const event = new TouchEvent('touchmove', { bubbles: true, cancelable: true, touches, targetTouches: touches, changedTouches: touches })
       document.body.dispatchEvent(event)
       return event.defaultPrevented
@@ -362,6 +364,28 @@ test.describe('page zoom while drawing', () => {
     await page.getByRole('button', { name: 'Free trace' }).click()
     await pointerStroke(page, 7, 'touch', diagonal, 12)
     expect(await inkCount(page)).toBe(1)
+  })
+
+  test('pull-to-refresh is blocked on the trial page only; scrolling still works', async ({ page }) => {
+    // Returns whether a one-finger drag from y=300 to `toY` had its default prevented.
+    const dragBlocked = (toY: number) => page.evaluate((toY) => {
+      window.scrollTo(0, 0)
+      const touch = (y: number) => new Touch({ identifier: 1, target: document.body, clientX: 200, clientY: y })
+      const fire = (type: string, y: number) => {
+        const t = touch(y)
+        const event = new TouchEvent(type, { bubbles: true, cancelable: true, touches: [t], targetTouches: [t], changedTouches: [t] })
+        document.body.dispatchEvent(event)
+        return event.defaultPrevented
+      }
+      fire('touchstart', 300)
+      return fire('touchmove', toY)
+    }, toY)
+    await page.goto('/')
+    expect(await dragBlocked(400)).toBe(false)
+    await openTrial(page, 'Finger')
+    expect(await dragBlocked(400)).toBe(true)
+    expect(await dragBlocked(200)).toBe(false)
+    expect(await page.evaluate(() => getComputedStyle(document.documentElement).overscrollBehaviorY)).toBe('none')
   })
 
   test('landscape board stays clear of the left-edge back-swipe zone', async ({ page }) => {

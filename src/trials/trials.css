@@ -46,6 +46,6 @@ h1{font-size:clamp(26px,4vw,38px);letter-spacing:-.8px;margin:8px 0 12px}h2{font
 .t-landscape .t-row{justify-content:flex-start}
 .t-landscape .t-char{font-size:18px}
 .t-landscape .st-actions button{padding:6px 10px}
-/* While a drawing trial is open: no double-tap zoom anywhere on the page (pinch is blocked in useNoPageZoom). */
-.t-zoom-locked,.t-zoom-locked body{touch-action:manipulation}
+/* While a drawing trial is open: no double-tap zoom and no overscroll bounce or pull-to-refresh (pinch and pull-down are blocked in useNoPageZoom). */
+.t-zoom-locked,.t-zoom-locked body{touch-action:manipulation;overscroll-behavior:none}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
