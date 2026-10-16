@@ -1,5 +1,7 @@
 # English content pool (P2-P3)
 
+Independent public-source research and current content findings: [research audit](content-review/ENGLISH_RESEARCH_AUDIT.md) (2026-10-16; changes required). This evidence supplements the authoring source register and does not approve the batch.
+
 **Review proposal · 16 October 2026 · generic/public content pool**
 
 Original P2 and P3 English questions and passages for the public (generic) version of Turtle Academy, across the eight approved exercise families (grammar, vocabulary, cloze, spelling/editing, sentence organisation, visual text, comprehension, writing foundations), with public sources cited. This document does not authorize implementation, release, merge or deployment.
