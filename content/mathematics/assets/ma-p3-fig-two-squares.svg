@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 332 228" width="332" height="228" role="img">
+<title>Two equal squares joined to make a rectangle.</title>
+<rect x="0" y="0" width="332" height="228" fill="#ffffff"/>
+<polygon points="62.0,62.0 270.0,62.0 270.0,166.0 62.0,166.0" fill="#9fd3c7" stroke="#1f2933" stroke-width="2.5"/>
+<line x1="166.0" y1="62.0" x2="166.0" y2="166.0" stroke="#1f2933" stroke-width="1.6" stroke-linecap="round"/>
+<text x="114.0" y="54.0" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" font-weight="bold" fill="#1f2933">4 cm</text>
+<text x="218.0" y="54.0" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" font-weight="bold" fill="#1f2933">4 cm</text>
+<text x="38.6" y="119.0" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" font-weight="bold" fill="#1f2933">4 cm</text>
+</svg>

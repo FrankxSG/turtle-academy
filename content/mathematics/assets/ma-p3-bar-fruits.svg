@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 326 326" width="326" height="326" role="img">
+<title>A bar graph with a vertical scale.</title>
+<rect x="0" y="0" width="326" height="326" fill="#ffffff"/>
+<text x="163.0" y="24.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">Fruits in a shop</text>
+<line x1="64.0" y1="264.0" x2="306.0" y2="264.0" stroke="#cbd2d9" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="58.0" y1="264.0" x2="64.0" y2="264.0" stroke="#1f2933" stroke-width="1.5" stroke-linecap="round"/>
+<text x="54.0" y="269.0" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="end" font-weight="normal" fill="#1f2933">0</text>
+<line x1="64.0" y1="239.6" x2="306.0" y2="239.6" stroke="#cbd2d9" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="58.0" y1="239.6" x2="64.0" y2="239.6" stroke="#1f2933" stroke-width="1.5" stroke-linecap="round"/>
+<text x="54.0" y="244.6" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="end" font-weight="normal" fill="#1f2933">4</text>
+<line x1="64.0" y1="215.1" x2="306.0" y2="215.1" stroke="#cbd2d9" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="58.0" y1="215.1" x2="64.0" y2="215.1" stroke="#1f2933" stroke-width="1.5" stroke-linecap="round"/>
+<text x="54.0" y="220.1" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="end" font-weight="normal" fill="#1f2933">8</text>
+<line x1="64.0" y1="190.7" x2="306.0" y2="190.7" stroke="#cbd2d9" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="58.0" y1="190.7" x2="64.0" y2="190.7" stroke="#1f2933" stroke-width="1.5" stroke-linecap="round"/>
+<text x="54.0" y="195.7" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="end" font-weight="normal" fill="#1f2933">12</text>
+<line x1="64.0" y1="166.2" x2="306.0" y2="166.2" stroke="#cbd2d9" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="58.0" y1="166.2" x2="64.0" y2="166.2" stroke="#1f2933" stroke-width="1.5" stroke-linecap="round"/>
+<text x="54.0" y="171.2" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="end" font-weight="normal" fill="#1f2933">16</text>
+<line x1="64.0" y1="141.8" x2="306.0" y2="141.8" stroke="#cbd2d9" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="58.0" y1="141.8" x2="64.0" y2="141.8" stroke="#1f2933" stroke-width="1.5" stroke-linecap="round"/>
+<text x="54.0" y="146.8" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="end" font-weight="normal" fill="#1f2933">20</text>
+<line x1="64.0" y1="117.3" x2="306.0" y2="117.3" stroke="#cbd2d9" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="58.0" y1="117.3" x2="64.0" y2="117.3" stroke="#1f2933" stroke-width="1.5" stroke-linecap="round"/>
+<text x="54.0" y="122.3" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="end" font-weight="normal" fill="#1f2933">24</text>
+<line x1="64.0" y1="92.9" x2="306.0" y2="92.9" stroke="#cbd2d9" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="58.0" y1="92.9" x2="64.0" y2="92.9" stroke="#1f2933" stroke-width="1.5" stroke-linecap="round"/>
+<text x="54.0" y="97.9" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="end" font-weight="normal" fill="#1f2933">28</text>
+<line x1="64.0" y1="68.4" x2="306.0" y2="68.4" stroke="#cbd2d9" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="58.0" y1="68.4" x2="64.0" y2="68.4" stroke="#1f2933" stroke-width="1.5" stroke-linecap="round"/>
+<text x="54.0" y="73.4" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="end" font-weight="normal" fill="#1f2933">32</text>
+<line x1="64.0" y1="44.0" x2="306.0" y2="44.0" stroke="#cbd2d9" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="58.0" y1="44.0" x2="64.0" y2="44.0" stroke="#1f2933" stroke-width="1.5" stroke-linecap="round"/>
+<text x="54.0" y="49.0" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="end" font-weight="normal" fill="#1f2933">36</text>
+<line x1="64.0" y1="44.0" x2="64.0" y2="264.0" stroke="#1f2933" stroke-width="2" stroke-linecap="round"/>
+<line x1="64.0" y1="264.0" x2="306.0" y2="264.0" stroke="#1f2933" stroke-width="2" stroke-linecap="round"/>
+<rect x="90" y="117.3" width="46" height="146.7" fill="#9fd3c7" stroke="#1f2933" stroke-width="1.2"/>
+<text x="113.0" y="284.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">Apples</text>
+<rect x="162" y="166.2" width="46" height="97.8" fill="#9fd3c7" stroke="#1f2933" stroke-width="1.2"/>
+<text x="185.0" y="284.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">Pears</text>
+<rect x="234" y="68.4" width="46" height="195.6" fill="#9fd3c7" stroke="#1f2933" stroke-width="1.2"/>
+<text x="257.0" y="284.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">Mangoes</text>
+<text x="16" y="154.0" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#1f2933" text-anchor="middle" transform="rotate(-90 16 154.0)">Number of fruits</text>
+</svg>

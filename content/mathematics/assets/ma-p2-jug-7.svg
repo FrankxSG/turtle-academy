@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 270" width="220" height="270" role="img">
+<title>A measuring container with water and a scale.</title>
+<rect x="0" y="0" width="220" height="270" fill="#ffffff"/>
+<rect x="70" y="96.0" width="120" height="154.0" fill="#9ccbf0"/>
+<path d="M70 20 L70 250 L190 250 L190 20" fill="none" stroke="#1f2933" stroke-width="3"/>
+<line x1="70.0" y1="250.0" x2="92.0" y2="250.0" stroke="#1f2933" stroke-width="2" stroke-linecap="round"/>
+<text x="62.0" y="255.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="end" font-weight="normal" fill="#1f2933">0 ℓ</text>
+<line x1="70.0" y1="228.0" x2="82.0" y2="228.0" stroke="#1f2933" stroke-width="1" stroke-linecap="round"/>
+<line x1="70.0" y1="206.0" x2="92.0" y2="206.0" stroke="#1f2933" stroke-width="2" stroke-linecap="round"/>
+<text x="62.0" y="211.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="end" font-weight="normal" fill="#1f2933">2 ℓ</text>
+<line x1="70.0" y1="184.0" x2="82.0" y2="184.0" stroke="#1f2933" stroke-width="1" stroke-linecap="round"/>
+<line x1="70.0" y1="162.0" x2="92.0" y2="162.0" stroke="#1f2933" stroke-width="2" stroke-linecap="round"/>
+<text x="62.0" y="167.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="end" font-weight="normal" fill="#1f2933">4 ℓ</text>
+<line x1="70.0" y1="140.0" x2="82.0" y2="140.0" stroke="#1f2933" stroke-width="1" stroke-linecap="round"/>
+<line x1="70.0" y1="118.0" x2="92.0" y2="118.0" stroke="#1f2933" stroke-width="2" stroke-linecap="round"/>
+<text x="62.0" y="123.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="end" font-weight="normal" fill="#1f2933">6 ℓ</text>
+<line x1="70.0" y1="96.0" x2="82.0" y2="96.0" stroke="#1f2933" stroke-width="1" stroke-linecap="round"/>
+<line x1="70.0" y1="74.0" x2="92.0" y2="74.0" stroke="#1f2933" stroke-width="2" stroke-linecap="round"/>
+<text x="62.0" y="79.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="end" font-weight="normal" fill="#1f2933">8 ℓ</text>
+<line x1="70.0" y1="52.0" x2="82.0" y2="52.0" stroke="#1f2933" stroke-width="1" stroke-linecap="round"/>
+<line x1="70.0" y1="30.0" x2="92.0" y2="30.0" stroke="#1f2933" stroke-width="2" stroke-linecap="round"/>
+<text x="62.0" y="35.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="end" font-weight="normal" fill="#1f2933">10 ℓ</text>
+</svg>

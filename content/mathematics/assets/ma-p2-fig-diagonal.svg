@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140" width="200" height="140" role="img">
+<title>A square with a dashed line from one corner to the opposite corner.</title>
+<rect x="0" y="0" width="200" height="140" fill="#ffffff"/>
+<rect x="60" y="30" width="80" height="80" fill="#9fd3c7" stroke="#1f2933" stroke-width="2"/>
+<line x1="60.0" y1="110.0" x2="140.0" y2="30.0" stroke="#1f2933" stroke-width="2" stroke-linecap="round" stroke-dasharray="6 4"/>
+</svg>

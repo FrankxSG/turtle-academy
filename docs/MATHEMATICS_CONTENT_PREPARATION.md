@@ -8,9 +8,10 @@ Original P2 and P3 Mathematics questions for the public (generic) version of Tur
 
 ## 1. What is in this pool
 
-- `content/mathematics/curriculum.json`: 29 topic records with scope (in-app / partial / external / deferred), Pilot status and cited sources.
-- `content/mathematics/pool-001.json`: 303 original questions (P2 153, P3 150), 0 materials, 101 three-stage repair sets (exact → similar → generic).
-- `scripts/validate_subject_content.py`: structural checks (unique IDs, answer key present, 4+ distinct options, topic and source references, complete repair sets, material membership, hints that do not state the answer).
+- `content/mathematics/curriculum.json`: 29 topic records with scope and Pilot status, 111 leaf records (assessed ability, representation, scope, MOE page reference) and cited sources.
+- `content/mathematics/pool-001.json` (batch version 3): 321 original questions (P2 165, P3 156), 0 materials, 107 three-stage repair sets (exact → similar → generic).
+- `content/mathematics/assets/`: 65 original SVG diagrams referenced by items or materials (no scripts, links, images or external references; titles and alt text describe the picture without giving the answer).
+- `scripts/validate_subject_content.py`: structural checks (IDs, keys, 4+ distinct options, topic/source/leaf references, complete repair sets with one leaf mapping, repair routes for every non-repair question when leaves are declared, diagrams present for visual leaves, knowledge-point links and acyclic prerequisites, SVG safety, hints that do not state the answer).
 
 Every question is newly written for this project. No question, passage or figure was copied from any past paper, school document or commercial resource. Status: **author-checked, pending independent review and owner sign-off**; not a content release.
 
@@ -55,43 +56,59 @@ Schools reference short daily practice and online platforms such as KooBits and 
 
 ## Topic coverage in this pool
 
-| Topic | Grade | Scope | Pilot | Repair sets | Questions |
-| --- | --- | --- | --- | ---: | ---: |
-| Numbers to 1000: place value, reading/writing, comparing, ordering, patterns (`ma.p2.numbers-1000`) | P2 | in_app | open | 5 | 15 |
-| Addition and subtraction within 1000, including regrouping and missing numbers (`ma.p2.add-sub-1000`) | P2 | in_app | open | 4 | 12 |
-| Multiplication and division: equal groups, repeated addition, sharing and grouping (`ma.p2.multiplication-division`) | P2 | in_app | open | 4 | 12 |
-| Multiplication tables of 2, 5 and 10 (`ma.p2.tables-2-5-10`) | P2 | in_app | open | 3 | 9 |
-| Multiplication tables of 3 and 4 (`ma.p2.tables-3-4`) | P2 | in_app | open | 2 | 6 |
-| Word problems (up to 2 steps) for the four operations (`ma.p2.word-problems`) | P2 | in_app | open | 3 | 9 |
-| Fractions: part of a whole, comparing/ordering unit and like fractions, adding/subtracting like fractions within one whole (`ma.p2.fractions`) | P2 | in_app | open | 6 | 18 |
-| Money: counting, decimal notation, adding/subtracting in dollars only or cents only (`ma.p2.money`) | P2 | in_app | open | 4 | 12 |
-| Length in m and cm: measuring, comparing, word problems (`ma.p2.length`) | P2 | in_app | open | 4 | 12 |
-| Mass in kg and g: measuring, comparing, word problems (`ma.p2.mass`) | P2 | in_app | open | 4 | 12 |
-| Volume of liquid in litres (`ma.p2.volume`) | P2 | in_app | open | 2 | 6 |
-| Time: telling time to 5 minutes, a.m./p.m., hours and minutes, duration (`ma.p2.time`) | P2 | in_app | open | 4 | 12 |
-| 2D shapes (incl. semicircle, quarter circle), 3D shapes, patterns, composing figures (`ma.p2.shapes`) | P2 | in_app | open | 4 | 12 |
-| Picture graphs with scales (`ma.p2.picture-graphs`) | P2 | in_app | open | 2 | 6 |
-| Numbers to 10 000: place value, comparing, ordering, patterns, odd and even (`ma.p3.numbers-10000`) | P3 | in_app | locked | 5 | 15 |
-| Addition and subtraction within 10 000 (`ma.p3.add-sub-10000`) | P3 | in_app | locked | 2 | 6 |
-| Multiplication tables of 6, 7, 8 and 9 and related division (`ma.p3.tables-6-9`) | P3 | in_app | locked | 6 | 18 |
-| Multiplication and division up to 3 digits by 1 digit, with remainder (`ma.p3.multiplication-division`) | P3 | in_app | locked | 4 | 12 |
-| Word problems with the four operations, including comparison models (`ma.p3.word-problems`) | P3 | in_app | locked | 3 | 9 |
-| Money in decimal notation: adding, subtracting, word problems (`ma.p3.money`) | P3 | in_app | locked | 3 | 9 |
-| Equivalent fractions; comparing/ordering unlike fractions; adding/subtracting related fractions within one whole (`ma.p3.fractions`) | P3 | in_app | locked | 5 | 15 |
-| Length (km, m, cm), mass (kg, g), volume (l, ml): compound units and conversion (`ma.p3.length-mass-volume`) | P3 | in_app | locked | 4 | 12 |
-| Time: seconds, duration, start and end times, conversion (`ma.p3.time`) | P3 | in_app | locked | 4 | 12 |
-| Area and perimeter: square units, rectangles and squares (`ma.p3.area-perimeter`) | P3 | in_app | locked | 6 | 18 |
-| Angles: right angles, comparing angles (`ma.p3.angles`) | P3 | in_app | locked | 3 | 9 |
-| Perpendicular and parallel lines (`ma.p3.perpendicular-parallel`) | P3 | in_app | locked | 2 | 6 |
-| Bar graphs: reading, interpreting, completing (`ma.p3.bar-graphs`) | P3 | in_app | locked | 3 | 9 |
-| Performance tasks, investigations, journals and explaining reasoning in words (`ma.p2.investigation`) | P2 | external | open | 0 | 0 |
-| Structured/long-answer questions with full written workings (`ma.p3.long-answer-workings`) | P3 | partial | locked | 0 | 0 |
+| Topic | Grade | Scope | Pilot | Leaves | Repair sets | Questions |
+| --- | --- | --- | --- | ---: | ---: | ---: |
+| Numbers to 1000: place value, reading/writing, comparing, ordering, patterns, odd and even (`ma.p2.numbers-1000`) | P2 | in_app | open | 6 | 6 | 18 |
+| Addition and subtraction within 1000, including regrouping and missing numbers (`ma.p2.add-sub-1000`) | P2 | in_app | open | 4 | 4 | 12 |
+| Multiplication and division: equal groups, repeated addition, sharing and grouping (`ma.p2.multiplication-division`) | P2 | in_app | open | 4 | 4 | 12 |
+| Multiplication tables of 2, 5 and 10 (`ma.p2.tables-2-5-10`) | P2 | in_app | open | 3 | 3 | 9 |
+| Multiplication tables of 3 and 4 (`ma.p2.tables-3-4`) | P2 | in_app | open | 2 | 2 | 6 |
+| Word problems (up to 2 steps) for the four operations (`ma.p2.word-problems`) | P2 | in_app | open | 3 | 3 | 9 |
+| Fractions: part of a whole, comparing/ordering unit and like fractions, adding/subtracting like fractions within one whole (`ma.p2.fractions`) | P2 | in_app | open | 6 | 6 | 18 |
+| Money: counting, decimal notation, converting between dollars and cents, adding/subtracting in dollars only or cents only (`ma.p2.money`) | P2 | in_app | open | 6 | 6 | 18 |
+| Length in m and cm: measuring, comparing, word problems (`ma.p2.length`) | P2 | in_app | open | 4 | 4 | 12 |
+| Mass in kg and g: measuring, comparing, word problems (`ma.p2.mass`) | P2 | in_app | open | 4 | 4 | 12 |
+| Volume of liquid in litres: measuring, comparing, word problems (`ma.p2.volume`) | P2 | in_app | open | 3 | 3 | 9 |
+| Time: telling time to the minute, a.m./p.m., hours and minutes, duration (`ma.p2.time`) | P2 | in_app | open | 4 | 4 | 12 |
+| 2D shapes (incl. semicircle, quarter circle), 3D shapes, patterns, composing figures (`ma.p2.shapes`) | P2 | in_app | open | 4 | 4 | 12 |
+| Picture graphs with scales (`ma.p2.picture-graphs`) | P2 | in_app | open | 2 | 2 | 6 |
+| Numbers to 10 000: place value, comparing, ordering, patterns, odd and even (`ma.p3.numbers-10000`) | P3 | in_app | locked | 5 | 5 | 15 |
+| Addition and subtraction within 10 000 (`ma.p3.add-sub-10000`) | P3 | in_app | locked | 2 | 2 | 6 |
+| Multiplication tables of 6, 7, 8 and 9 and related division (`ma.p3.tables-6-9`) | P3 | in_app | locked | 6 | 6 | 18 |
+| Multiplication and division up to 3 digits by 1 digit, with remainder (`ma.p3.multiplication-division`) | P3 | in_app | locked | 4 | 4 | 12 |
+| Word problems with the four operations, including comparison models (`ma.p3.word-problems`) | P3 | in_app | locked | 3 | 3 | 9 |
+| Money in decimal notation: adding, subtracting, word problems (`ma.p3.money`) | P3 | in_app | locked | 3 | 3 | 9 |
+| Equivalent fractions; comparing/ordering unlike fractions; adding/subtracting related fractions within one whole (`ma.p3.fractions`) | P3 | in_app | locked | 5 | 5 | 15 |
+| Length (km, m, cm), mass (kg, g), volume (l, ml): compound units and conversion (`ma.p3.length-mass-volume`) | P3 | in_app | locked | 4 | 4 | 12 |
+| Time: seconds, 24-hour clock, duration, start and end times, conversion (`ma.p3.time`) | P3 | in_app | locked | 6 | 6 | 18 |
+| Area and perimeter: square units, rectangles and squares (`ma.p3.area-perimeter`) | P3 | in_app | locked | 6 | 6 | 18 |
+| Angles: right angles, comparing angles (`ma.p3.angles`) | P3 | in_app | locked | 3 | 3 | 9 |
+| Perpendicular and parallel lines (`ma.p3.perpendicular-parallel`) | P3 | in_app | locked | 3 | 2 | 6 |
+| Bar graphs: reading, interpreting, completing (`ma.p3.bar-graphs`) | P3 | in_app | locked | 4 | 3 | 9 |
+| Performance tasks, investigations, journals and explaining reasoning in words (`ma.p2.investigation`) | P2 | external | open | 1 | 0 | 0 |
+| Structured/long-answer questions with full written workings (`ma.p3.long-answer-workings`) | P3 | partial | locked | 1 | 0 | 0 |
 
 ## Correction revision — 16 October 2026
 
 Batch version 2 corrects `ma-p2-fraction-subtract.q3`: both fractions now refer to the full tank, so the keyed 6/12 follows by like-fraction subtraction. Its hint and explanation use that same whole. The item version is incremented and remains listed for independent re-review. Counts remain P2 153/P3 150; every P3 topic remains locked. The separate time-curriculum gaps (P2 minute reading and P3 24-hour clock), official leaf audit and dated paper/enrichment evidence remain open; this item correction does not resolve those findings.
 
 These are proposed corrections, not independent approval. Existing task/history must retain earlier pinned versions; this authoring revision does not implement evidence migration or retroactive regrading.
+
+## Audit-response revision — 16 October 2026 (batch version 3)
+
+Responds to [MATHEMATICS_RESEARCH_AUDIT.md](content-review/MATHEMATICS_RESEARCH_AUDIT.md) MA1–MA3. Author revision only: every revised or new item is pending independent re-review and owner sign-off.
+
+| Finding | Change in this batch | Still open |
+| --- | --- | --- |
+| **MA1** P2 odd/even (§1.6) | New target `ma.p2.odd-even` (3 items). P3 odd/even is kept as retained revision (topic note). | Independent review |
+| **MA1** P2 dollars ↔ cents (§1.4) | New targets `ma.p2.money-to-cents` and `ma.p2.cents-to-dollars` (both directions, 3 items each). | Independent review |
+| **MA1** P2 time to the minute (§2.1) | Topic label corrected from "5 minutes" to "the minute". `ma.p2.time-read` now uses drawn clocks at 4.17, 7.43 and 12.38. | Confirm clock-reading distractors |
+| **MA1** P3 24-hour clock (§2.3) | New targets `ma.p3.time-24h` (conversion) and `ma.p3.time-24h-duration` (context). P3 stays locked. | Reviewer to confirm the 24-hour notation schools use (this batch writes `15:45`) |
+| **MA2** representations | 65 original SVG diagrams replace word descriptions: ruler, dial scales, measuring container (new `ma.p2.volume-read`), clocks, picture graphs, fraction diagrams, 2D/3D shapes, composing figures, angles, line pairs, letters, rectangles, bar graphs (including missing/incorrect bars), 1-cm grids and composite figures. Stems no longer disclose the measured value. The validator rejects any item mapped to a visual leaf without a diagram. | Visual check of every diagram by an independent reviewer |
+| **MA2** drawing | Drawing perpendicular/parallel lines and drawing bars are recorded as `production` leaves with `partial` scope; in-app items check recognition only. | — |
+| **MA3** leaf denominator | `curriculum.json` now has `leaves`: one per repair target (assessed ability, text/visual representation, MOE page range) plus production/external leaves. Every item has `leaf_refs`. | This is an **author working map** derived from the targets, not an independent page-by-page leaf audit. MOE leaves that have no target yet are therefore not listed; independent verification must add them before any coverage percentage is computed. |
+
+Not changed: three questions per target remains thin initial stock (MA3); no question was copied from any paper.
 
 ## Validation
 

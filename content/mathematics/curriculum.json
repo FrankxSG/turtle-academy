@@ -106,7 +106,7 @@
       "course": "p2_mathematics",
       "grade": "p2",
       "strand": "Number and Algebra",
-      "label": "Numbers to 1000: place value, reading/writing, comparing, ordering, patterns",
+      "label": "Numbers to 1000: place value, reading/writing, comparing, ordering, patterns, odd and even",
       "scope": "in_app",
       "pilot": "open",
       "source_refs": [
@@ -211,7 +211,7 @@
       "course": "p2_mathematics",
       "grade": "p2",
       "strand": "Measurement and Geometry",
-      "label": "Money: counting, decimal notation, adding/subtracting in dollars only or cents only",
+      "label": "Money: counting, decimal notation, converting between dollars and cents, adding/subtracting in dollars only or cents only",
       "scope": "in_app",
       "pilot": "open",
       "source_refs": [
@@ -256,7 +256,7 @@
       "course": "p2_mathematics",
       "grade": "p2",
       "strand": "Measurement and Geometry",
-      "label": "Volume of liquid in litres",
+      "label": "Volume of liquid in litres: measuring, comparing, word problems",
       "scope": "in_app",
       "pilot": "open",
       "source_refs": [
@@ -271,7 +271,7 @@
       "course": "p2_mathematics",
       "grade": "p2",
       "strand": "Measurement and Geometry",
-      "label": "Time: telling time to 5 minutes, a.m./p.m., hours and minutes, duration",
+      "label": "Time: telling time to the minute, a.m./p.m., hours and minutes, duration",
       "scope": "in_app",
       "pilot": "open",
       "source_refs": [
@@ -324,7 +324,8 @@
         "amkps-ma-p3-2026",
         "jwps-p3-2025",
         "cedar-p3-2025"
-      ]
+      ],
+      "note": "Odd and even numbers are a P2 outcome; the P3 set is retained revision."
     },
     {
       "id": "ma.p3.add-sub-10000",
@@ -436,7 +437,7 @@
       "course": "p3_mathematics",
       "grade": "p3",
       "strand": "Measurement and Geometry",
-      "label": "Time: seconds, duration, start and end times, conversion",
+      "label": "Time: seconds, 24-hour clock, duration, start and end times, conversion",
       "scope": "in_app",
       "pilot": "locked",
       "source_refs": [
@@ -540,8 +541,1346 @@
     }
   ],
   "limitations": [
-    "Topic boundaries follow school documents that implement the 2021 MOE syllabus; verify each against the official PDF before freezing IDs.",
-    "P3 Mathematics is locked in the Pilot app until the post-Pilot teaching flow exists.",
-    "Objective selection does not assess written workings or explanations."
+    "Leaf records are an author working map drawn from the MOE syllabus (PDF pp33–36) and need independent page-by-page verification before freezing IDs or computing release coverage.",
+    "P3 Mathematics is locked in the Pilot app until the post-Pilot teaching flow exists; its content is prepared but is not a P2 release prerequisite.",
+    "Objective selection does not assess written workings, explanations or drawing; those leaves are marked partial or external.",
+    "Three questions per repair target are initial stock, not a complete transfer pool for every imported mistake."
+  ],
+  "leaves": [
+    {
+      "id": "ma.p2.leaf.compare-order",
+      "topic_ref": "ma.p2.numbers-1000",
+      "label": "Compare order",
+      "assessed_ability": "Recognise or apply the concept",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.more-less",
+      "topic_ref": "ma.p2.numbers-1000",
+      "label": "More less",
+      "assessed_ability": "Recognise or apply the concept",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.number-patterns",
+      "topic_ref": "ma.p2.numbers-1000",
+      "label": "Number patterns",
+      "assessed_ability": "Recognise or apply the concept",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.number-words",
+      "topic_ref": "ma.p2.numbers-1000",
+      "label": "Number words",
+      "assessed_ability": "Recognise or apply the concept",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.odd-even",
+      "topic_ref": "ma.p2.numbers-1000",
+      "label": "Odd even",
+      "assessed_ability": "Recognise or apply the concept",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2) §1.6"
+    },
+    {
+      "id": "ma.p2.leaf.place-value",
+      "topic_ref": "ma.p2.numbers-1000",
+      "label": "Place value",
+      "assessed_ability": "Recognise or apply the concept",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.add-regroup",
+      "topic_ref": "ma.p2.add-sub-1000",
+      "label": "Add regroup",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.missing-number",
+      "topic_ref": "ma.p2.add-sub-1000",
+      "label": "Missing number",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.sub-across-zero",
+      "topic_ref": "ma.p2.add-sub-1000",
+      "label": "Sub across zero",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.sub-regroup",
+      "topic_ref": "ma.p2.add-sub-1000",
+      "label": "Sub regroup",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.divide-grouping",
+      "topic_ref": "ma.p2.multiplication-division",
+      "label": "Divide grouping",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.divide-sharing",
+      "topic_ref": "ma.p2.multiplication-division",
+      "label": "Divide sharing",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.mult-properties",
+      "topic_ref": "ma.p2.multiplication-division",
+      "label": "Mult properties",
+      "assessed_ability": "Recognise or apply the concept",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.repeated-addition",
+      "topic_ref": "ma.p2.multiplication-division",
+      "label": "Repeated addition",
+      "assessed_ability": "Recognise or apply the concept",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.table-10",
+      "topic_ref": "ma.p2.tables-2-5-10",
+      "label": "Table 10",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.table-2",
+      "topic_ref": "ma.p2.tables-2-5-10",
+      "label": "Table 2",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.table-5",
+      "topic_ref": "ma.p2.tables-2-5-10",
+      "label": "Table 5",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.table-3",
+      "topic_ref": "ma.p2.tables-3-4",
+      "label": "Table 3",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.table-4",
+      "topic_ref": "ma.p2.tables-3-4",
+      "label": "Table 4",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.compare-word",
+      "topic_ref": "ma.p2.word-problems",
+      "label": "Compare word",
+      "assessed_ability": "Solve a word problem by choosing operations",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.mult-div-word",
+      "topic_ref": "ma.p2.word-problems",
+      "label": "Mult div word",
+      "assessed_ability": "Solve a word problem by choosing operations",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.word-problem-2step",
+      "topic_ref": "ma.p2.word-problems",
+      "label": "Word problem 2step",
+      "assessed_ability": "Solve a word problem by choosing operations",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.fraction-add",
+      "topic_ref": "ma.p2.fractions",
+      "label": "Fraction add",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.fraction-compare",
+      "topic_ref": "ma.p2.fractions",
+      "label": "Fraction compare",
+      "assessed_ability": "Recognise or apply the concept",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.fraction-equal-parts",
+      "topic_ref": "ma.p2.fractions",
+      "label": "Fraction equal parts",
+      "assessed_ability": "Recognise or apply the concept from a diagram, scale, clock or graph",
+      "representation": "visual",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.fraction-of-whole",
+      "topic_ref": "ma.p2.fractions",
+      "label": "Fraction of whole",
+      "assessed_ability": "Recognise or apply the concept from a diagram, scale, clock or graph",
+      "representation": "visual",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.fraction-order",
+      "topic_ref": "ma.p2.fractions",
+      "label": "Fraction order",
+      "assessed_ability": "Recognise or apply the concept",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.fraction-subtract",
+      "topic_ref": "ma.p2.fractions",
+      "label": "Fraction subtract",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.cents-to-dollars",
+      "topic_ref": "ma.p2.money",
+      "label": "Cents to dollars",
+      "assessed_ability": "Recognise or apply the concept",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2) §1.4"
+    },
+    {
+      "id": "ma.p2.leaf.money-compare",
+      "topic_ref": "ma.p2.money",
+      "label": "Money compare",
+      "assessed_ability": "Measure, compare or convert quantities",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.money-count",
+      "topic_ref": "ma.p2.money",
+      "label": "Money count",
+      "assessed_ability": "Measure, compare or convert quantities",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.money-notation",
+      "topic_ref": "ma.p2.money",
+      "label": "Money notation",
+      "assessed_ability": "Measure, compare or convert quantities",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.money-to-cents",
+      "topic_ref": "ma.p2.money",
+      "label": "Money to cents",
+      "assessed_ability": "Recognise or apply the concept",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2) §1.4"
+    },
+    {
+      "id": "ma.p2.leaf.money-word",
+      "topic_ref": "ma.p2.money",
+      "label": "Money word",
+      "assessed_ability": "Solve a word problem by choosing operations",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.length-compare",
+      "topic_ref": "ma.p2.length",
+      "label": "Length compare",
+      "assessed_ability": "Measure, compare or convert quantities",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.length-ruler",
+      "topic_ref": "ma.p2.length",
+      "label": "Length ruler",
+      "assessed_ability": "Measure, compare or convert quantities from a diagram, scale, clock or graph",
+      "representation": "visual",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.length-units",
+      "topic_ref": "ma.p2.length",
+      "label": "Length units",
+      "assessed_ability": "Measure, compare or convert quantities",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.length-word",
+      "topic_ref": "ma.p2.length",
+      "label": "Length word",
+      "assessed_ability": "Solve a word problem by choosing operations",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.mass-compare",
+      "topic_ref": "ma.p2.mass",
+      "label": "Mass compare",
+      "assessed_ability": "Measure, compare or convert quantities",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.mass-scale",
+      "topic_ref": "ma.p2.mass",
+      "label": "Mass scale",
+      "assessed_ability": "Measure, compare or convert quantities from a diagram, scale, clock or graph",
+      "representation": "visual",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.mass-units",
+      "topic_ref": "ma.p2.mass",
+      "label": "Mass units",
+      "assessed_ability": "Measure, compare or convert quantities",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.mass-word",
+      "topic_ref": "ma.p2.mass",
+      "label": "Mass word",
+      "assessed_ability": "Solve a word problem by choosing operations",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.volume-compare",
+      "topic_ref": "ma.p2.volume",
+      "label": "Volume compare",
+      "assessed_ability": "Measure, compare or convert quantities",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.volume-litres",
+      "topic_ref": "ma.p2.volume",
+      "label": "Volume litres",
+      "assessed_ability": "Measure, compare or convert quantities",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.volume-read",
+      "topic_ref": "ma.p2.volume",
+      "label": "Volume read",
+      "assessed_ability": "Measure, compare or convert quantities from a diagram, scale, clock or graph",
+      "representation": "visual",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.time-ampm",
+      "topic_ref": "ma.p2.time",
+      "label": "Time ampm",
+      "assessed_ability": "Measure, compare or convert quantities",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.time-convert",
+      "topic_ref": "ma.p2.time",
+      "label": "Time convert",
+      "assessed_ability": "Measure, compare or convert quantities",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.time-duration",
+      "topic_ref": "ma.p2.time",
+      "label": "Time duration",
+      "assessed_ability": "Measure, compare or convert quantities",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.time-read",
+      "topic_ref": "ma.p2.time",
+      "label": "Time read",
+      "assessed_ability": "Measure, compare or convert quantities from a diagram, scale, clock or graph",
+      "representation": "visual",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2) §2.1"
+    },
+    {
+      "id": "ma.p2.leaf.shape-2d",
+      "topic_ref": "ma.p2.shapes",
+      "label": "Shape 2d",
+      "assessed_ability": "Recognise and reason about shapes, angles and lines from a diagram, scale, clock or graph",
+      "representation": "visual",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.shape-3d",
+      "topic_ref": "ma.p2.shapes",
+      "label": "Shape 3d",
+      "assessed_ability": "Recognise and reason about shapes, angles and lines from a diagram, scale, clock or graph",
+      "representation": "visual",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.shape-figures",
+      "topic_ref": "ma.p2.shapes",
+      "label": "Shape figures",
+      "assessed_ability": "Recognise and reason about shapes, angles and lines from a diagram, scale, clock or graph",
+      "representation": "visual",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.shape-pattern",
+      "topic_ref": "ma.p2.shapes",
+      "label": "Shape pattern",
+      "assessed_ability": "Recognise and reason about shapes, angles and lines",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.graph-interpret",
+      "topic_ref": "ma.p2.picture-graphs",
+      "label": "Graph interpret",
+      "assessed_ability": "Read and interpret data displays from a diagram, scale, clock or graph",
+      "representation": "visual",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p2.leaf.graph-read",
+      "topic_ref": "ma.p2.picture-graphs",
+      "label": "Graph read",
+      "assessed_ability": "Read and interpret data displays from a diagram, scale, clock or graph",
+      "representation": "visual",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p3.leaf.compare-order",
+      "topic_ref": "ma.p3.numbers-10000",
+      "label": "Compare order",
+      "assessed_ability": "Recognise or apply the concept",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.number-patterns",
+      "topic_ref": "ma.p3.numbers-10000",
+      "label": "Number patterns",
+      "assessed_ability": "Recognise or apply the concept",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.number-words",
+      "topic_ref": "ma.p3.numbers-10000",
+      "label": "Number words",
+      "assessed_ability": "Recognise or apply the concept",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.odd-even",
+      "topic_ref": "ma.p3.numbers-10000",
+      "label": "Odd even",
+      "assessed_ability": "Recognise or apply the concept",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.place-value",
+      "topic_ref": "ma.p3.numbers-10000",
+      "label": "Place value",
+      "assessed_ability": "Recognise or apply the concept",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.add-4digit",
+      "topic_ref": "ma.p3.add-sub-10000",
+      "label": "Add 4digit",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.sub-4digit",
+      "topic_ref": "ma.p3.add-sub-10000",
+      "label": "Sub 4digit",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.division-facts",
+      "topic_ref": "ma.p3.tables-6-9",
+      "label": "Division facts",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.mental-calculation",
+      "topic_ref": "ma.p3.tables-6-9",
+      "label": "Mental calculation",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.table-6",
+      "topic_ref": "ma.p3.tables-6-9",
+      "label": "Table 6",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.table-7",
+      "topic_ref": "ma.p3.tables-6-9",
+      "label": "Table 7",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.table-8",
+      "topic_ref": "ma.p3.tables-6-9",
+      "label": "Table 8",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.table-9",
+      "topic_ref": "ma.p3.tables-6-9",
+      "label": "Table 9",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.div-no-remainder",
+      "topic_ref": "ma.p3.multiplication-division",
+      "label": "Div no remainder",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.div-remainder",
+      "topic_ref": "ma.p3.multiplication-division",
+      "label": "Div remainder",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.mult-2digit",
+      "topic_ref": "ma.p3.multiplication-division",
+      "label": "Mult 2digit",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.mult-3digit",
+      "topic_ref": "ma.p3.multiplication-division",
+      "label": "Mult 3digit",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.add-sub-2step",
+      "topic_ref": "ma.p3.word-problems",
+      "label": "Add sub 2step",
+      "assessed_ability": "Solve a word problem by choosing operations",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.four-ops-word",
+      "topic_ref": "ma.p3.word-problems",
+      "label": "Four ops word",
+      "assessed_ability": "Solve a word problem by choosing operations",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.model-comparison",
+      "topic_ref": "ma.p3.word-problems",
+      "label": "Model comparison",
+      "assessed_ability": "Solve a word problem by choosing operations",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.money-add",
+      "topic_ref": "ma.p3.money",
+      "label": "Money add",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.money-sub",
+      "topic_ref": "ma.p3.money",
+      "label": "Money sub",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.money-word",
+      "topic_ref": "ma.p3.money",
+      "label": "Money word",
+      "assessed_ability": "Solve a word problem by choosing operations",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.add-related",
+      "topic_ref": "ma.p3.fractions",
+      "label": "Add related",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.compare-unlike",
+      "topic_ref": "ma.p3.fractions",
+      "label": "Compare unlike",
+      "assessed_ability": "Recognise or apply the concept",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.equivalent",
+      "topic_ref": "ma.p3.fractions",
+      "label": "Equivalent",
+      "assessed_ability": "Recognise or apply the concept",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.order-fractions",
+      "topic_ref": "ma.p3.fractions",
+      "label": "Order fractions",
+      "assessed_ability": "Recognise or apply the concept",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.sub-related",
+      "topic_ref": "ma.p3.fractions",
+      "label": "Sub related",
+      "assessed_ability": "Calculate accurately",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.convert-length",
+      "topic_ref": "ma.p3.length-mass-volume",
+      "label": "Convert length",
+      "assessed_ability": "Measure, compare or convert quantities",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.convert-mass",
+      "topic_ref": "ma.p3.length-mass-volume",
+      "label": "Convert mass",
+      "assessed_ability": "Measure, compare or convert quantities",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.convert-volume",
+      "topic_ref": "ma.p3.length-mass-volume",
+      "label": "Convert volume",
+      "assessed_ability": "Measure, compare or convert quantities",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.measure-word",
+      "topic_ref": "ma.p3.length-mass-volume",
+      "label": "Measure word",
+      "assessed_ability": "Solve a word problem by choosing operations",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.time-24h",
+      "topic_ref": "ma.p3.time",
+      "label": "Time 24h",
+      "assessed_ability": "Recognise or apply the concept",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3) §2.3"
+    },
+    {
+      "id": "ma.p3.leaf.time-24h-duration",
+      "topic_ref": "ma.p3.time",
+      "label": "Time 24h duration",
+      "assessed_ability": "Solve a word problem by choosing operations",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3) §2.3"
+    },
+    {
+      "id": "ma.p3.leaf.time-convert",
+      "topic_ref": "ma.p3.time",
+      "label": "Time convert",
+      "assessed_ability": "Measure, compare or convert quantities",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.time-duration",
+      "topic_ref": "ma.p3.time",
+      "label": "Time duration",
+      "assessed_ability": "Measure, compare or convert quantities",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.time-seconds",
+      "topic_ref": "ma.p3.time",
+      "label": "Time seconds",
+      "assessed_ability": "Measure, compare or convert quantities",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.time-start",
+      "topic_ref": "ma.p3.time",
+      "label": "Time start",
+      "assessed_ability": "Measure, compare or convert quantities",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.area-figures",
+      "topic_ref": "ma.p3.area-perimeter",
+      "label": "Area figures",
+      "assessed_ability": "Recognise and reason about shapes, angles and lines from a diagram, scale, clock or graph",
+      "representation": "visual",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.area-rectangle",
+      "topic_ref": "ma.p3.area-perimeter",
+      "label": "Area rectangle",
+      "assessed_ability": "Recognise and reason about shapes, angles and lines",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.area-units",
+      "topic_ref": "ma.p3.area-perimeter",
+      "label": "Area units",
+      "assessed_ability": "Recognise and reason about shapes, angles and lines from a diagram, scale, clock or graph",
+      "representation": "visual",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.area-vs-perimeter",
+      "topic_ref": "ma.p3.area-perimeter",
+      "label": "Area vs perimeter",
+      "assessed_ability": "Recognise and reason about shapes, angles and lines",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.perimeter",
+      "topic_ref": "ma.p3.area-perimeter",
+      "label": "Perimeter",
+      "assessed_ability": "Recognise and reason about shapes, angles and lines",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.perimeter-figures",
+      "topic_ref": "ma.p3.area-perimeter",
+      "label": "Perimeter figures",
+      "assessed_ability": "Recognise and reason about shapes, angles and lines from a diagram, scale, clock or graph",
+      "representation": "visual",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.compare-angles",
+      "topic_ref": "ma.p3.angles",
+      "label": "Compare angles",
+      "assessed_ability": "Recognise and reason about shapes, angles and lines from a diagram, scale, clock or graph",
+      "representation": "visual",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.count-angles",
+      "topic_ref": "ma.p3.angles",
+      "label": "Count angles",
+      "assessed_ability": "Recognise and reason about shapes, angles and lines from a diagram, scale, clock or graph",
+      "representation": "visual",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.right-angle",
+      "topic_ref": "ma.p3.angles",
+      "label": "Right angle",
+      "assessed_ability": "Recognise and reason about shapes, angles and lines from a diagram, scale, clock or graph",
+      "representation": "visual",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.draw-perpendicular-parallel",
+      "topic_ref": "ma.p3.perpendicular-parallel",
+      "label": "draw perpendicular and parallel lines",
+      "assessed_ability": "Draw perpendicular and parallel lines on square grids and through a point",
+      "representation": "production",
+      "scope": "partial",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)",
+      "note": "Drawing is assessed outside the app; in-app items only check recognition (MOE p36 requires drawing)."
+    },
+    {
+      "id": "ma.p3.leaf.parallel",
+      "topic_ref": "ma.p3.perpendicular-parallel",
+      "label": "Parallel",
+      "assessed_ability": "Recognise and reason about shapes, angles and lines from a diagram, scale, clock or graph",
+      "representation": "visual",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.perpendicular",
+      "topic_ref": "ma.p3.perpendicular-parallel",
+      "label": "Perpendicular",
+      "assessed_ability": "Recognise and reason about shapes, angles and lines from a diagram, scale, clock or graph",
+      "representation": "visual",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.bar-complete",
+      "topic_ref": "ma.p3.bar-graphs",
+      "label": "Bar complete",
+      "assessed_ability": "Read and interpret data displays from a diagram, scale, clock or graph",
+      "representation": "visual",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.bar-interpret",
+      "topic_ref": "ma.p3.bar-graphs",
+      "label": "Bar interpret",
+      "assessed_ability": "Read and interpret data displays from a diagram, scale, clock or graph",
+      "representation": "visual",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.bar-read",
+      "topic_ref": "ma.p3.bar-graphs",
+      "label": "Bar read",
+      "assessed_ability": "Read and interpret data displays from a diagram, scale, clock or graph",
+      "representation": "visual",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)"
+    },
+    {
+      "id": "ma.p3.leaf.draw-bar-graph",
+      "topic_ref": "ma.p3.bar-graphs",
+      "label": "complete a bar graph by drawing",
+      "assessed_ability": "Draw bars on a given scale",
+      "representation": "production",
+      "scope": "partial",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)",
+      "note": "In-app items check the value a bar should show, not the drawing."
+    },
+    {
+      "id": "ma.p2.leaf.investigation",
+      "topic_ref": "ma.p2.investigation",
+      "label": "investigations and explaining reasoning",
+      "assessed_ability": "Explain mathematical reasoning in words",
+      "representation": "production",
+      "scope": "external",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp33–34 (P2)"
+    },
+    {
+      "id": "ma.p3.leaf.long-answer-workings",
+      "topic_ref": "ma.p3.long-answer-workings",
+      "label": "structured questions with full workings",
+      "assessed_ability": "Write complete workings for multi-step problems",
+      "representation": "production",
+      "scope": "partial",
+      "source_refs": [
+        "moe-ma-2021"
+      ],
+      "source_pages": "MOE Primary Mathematics 2021 (updated Oct 2025) PDF pp35–36 (P3)",
+      "note": "Only the final selected answer is checked in-app."
+    }
   ]
 }

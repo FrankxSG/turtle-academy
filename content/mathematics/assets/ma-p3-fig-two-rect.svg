@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 294 294" width="294" height="294" role="img">
+<title>A figure made of two rectangles, with some side lengths marked.</title>
+<rect x="0" y="0" width="294" height="294" fill="#ffffff"/>
+<polygon points="62.0,62.0 198.0,62.0 198.0,164.0 232.0,164.0 232.0,232.0 62.0,232.0" fill="#9fd3c7" stroke="#1f2933" stroke-width="2.5"/>
+<line x1="62.0" y1="164.0" x2="198.0" y2="164.0" stroke="#1f2933" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="6 4"/>
+<text x="130.0" y="50.0" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" font-weight="bold" fill="#1f2933">4 cm</text>
+<text x="31.4" y="118.0" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" font-weight="bold" fill="#1f2933">3 cm</text>
+<text x="31.4" y="203.0" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" font-weight="bold" fill="#1f2933">2 cm</text>
+<text x="147.0" y="257.4" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" font-weight="bold" fill="#1f2933">5 cm</text>
+</svg>

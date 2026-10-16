@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 214" width="320" height="214" role="img">
+<title>A picture graph with a key.</title>
+<rect x="0" y="0" width="320" height="214" fill="#ffffff"/>
+<text x="160.0" y="26.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">Cars in a car park</text>
+<line x1="10.0" y1="71.0" x2="310.0" y2="71.0" stroke="#cbd2d9" stroke-width="0.8" stroke-linecap="round"/>
+<text x="98.0" y="58.0" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="end" font-weight="normal" fill="#1f2933">Red</text>
+<line x1="10.0" y1="109.0" x2="310.0" y2="109.0" stroke="#cbd2d9" stroke-width="0.8" stroke-linecap="round"/>
+<text x="98.0" y="96.0" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="end" font-weight="normal" fill="#1f2933">Blue</text>
+<polygon points="125.0,80 136.0,100 114.0,100" fill="#f6c177" stroke="#1f2933" stroke-width="1"/>
+<polygon points="155.0,80 166.0,100 144.0,100" fill="#f6c177" stroke="#1f2933" stroke-width="1"/>
+<polygon points="185.0,80 196.0,100 174.0,100" fill="#f6c177" stroke="#1f2933" stroke-width="1"/>
+<polygon points="215.0,80 226.0,100 204.0,100" fill="#f6c177" stroke="#1f2933" stroke-width="1"/>
+<line x1="10.0" y1="147.0" x2="310.0" y2="147.0" stroke="#cbd2d9" stroke-width="0.8" stroke-linecap="round"/>
+<text x="98.0" y="134.0" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="end" font-weight="normal" fill="#1f2933">White</text>
+<polygon points="125.0,118 136.0,138 114.0,138" fill="#f6c177" stroke="#1f2933" stroke-width="1"/>
+<polygon points="155.0,118 166.0,138 144.0,138" fill="#f6c177" stroke="#1f2933" stroke-width="1"/>
+<polygon points="185.0,118 196.0,138 174.0,138" fill="#f6c177" stroke="#1f2933" stroke-width="1"/>
+<polygon points="30,167 41,187 19,187" fill="#f6c177" stroke="#1f2933" stroke-width="1"/>
+<text x="48.0" y="183.0" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="start" font-weight="normal" fill="#1f2933">stands for 2 cars</text>
+</svg>

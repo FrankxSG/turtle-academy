@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 260" width="260" height="260" role="img">
+<title>A weighing scale dial with a pointer.</title>
+<rect x="0" y="0" width="260" height="260" fill="#ffffff"/>
+<circle cx="130" cy="130" r="112" fill="#eef2f5" stroke="#1f2933" stroke-width="3"/>
+<circle cx="130" cy="130" r="100" fill="#ffffff" stroke="#1f2933" stroke-width="1.5"/>
+<line x1="81.0" y1="214.9" x2="88.0" y2="202.7" stroke="#1f2933" stroke-width="2.4" stroke-linecap="round"/>
+<text x="96.0" y="193.9" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f2933">0</text>
+<line x1="45.1" y1="179.0" x2="51.2" y2="175.5" stroke="#1f2933" stroke-width="1.1" stroke-linecap="round"/>
+<line x1="32.0" y1="130.0" x2="46.0" y2="130.0" stroke="#1f2933" stroke-width="2.4" stroke-linecap="round"/>
+<text x="62.0" y="135.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f2933">2</text>
+<line x1="45.1" y1="81.0" x2="51.2" y2="84.5" stroke="#1f2933" stroke-width="1.1" stroke-linecap="round"/>
+<line x1="81.0" y1="45.1" x2="88.0" y2="57.3" stroke="#1f2933" stroke-width="2.4" stroke-linecap="round"/>
+<text x="96.0" y="76.1" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f2933">4</text>
+<line x1="130.0" y1="32.0" x2="130.0" y2="39.0" stroke="#1f2933" stroke-width="1.1" stroke-linecap="round"/>
+<line x1="179.0" y1="45.1" x2="172.0" y2="57.3" stroke="#1f2933" stroke-width="2.4" stroke-linecap="round"/>
+<text x="164.0" y="76.1" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f2933">6</text>
+<line x1="214.9" y1="81.0" x2="208.8" y2="84.5" stroke="#1f2933" stroke-width="1.1" stroke-linecap="round"/>
+<line x1="228.0" y1="130.0" x2="214.0" y2="130.0" stroke="#1f2933" stroke-width="2.4" stroke-linecap="round"/>
+<text x="198.0" y="135.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f2933">8</text>
+<line x1="214.9" y1="179.0" x2="208.8" y2="175.5" stroke="#1f2933" stroke-width="1.1" stroke-linecap="round"/>
+<line x1="179.0" y1="214.9" x2="172.0" y2="202.7" stroke="#1f2933" stroke-width="2.4" stroke-linecap="round"/>
+<text x="164.0" y="193.9" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f2933">10</text>
+<text x="130.0" y="208.0" font-family="Arial, Helvetica, sans-serif" font-size="16" text-anchor="middle" font-weight="bold" fill="#7b8794">kg</text>
+<line x1="130.0" y1="130.0" x2="206.2" y2="86.0" stroke="#c0392b" stroke-width="3" stroke-linecap="round"/>
+<circle cx="130" cy="130" r="7" fill="#c0392b"/>
+</svg>

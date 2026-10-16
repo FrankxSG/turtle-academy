@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 270" width="220" height="270" role="img">
+<title>A measuring container with water and a scale.</title>
+<rect x="0" y="0" width="220" height="270" fill="#ffffff"/>
+<rect x="70" y="112.5" width="120" height="137.5" fill="#9ccbf0"/>
+<path d="M70 20 L70 250 L190 250 L190 20" fill="none" stroke="#1f2933" stroke-width="3"/>
+<line x1="70.0" y1="250.0" x2="92.0" y2="250.0" stroke="#1f2933" stroke-width="2" stroke-linecap="round"/>
+<text x="62.0" y="255.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="end" font-weight="normal" fill="#1f2933">0 ℓ</text>
+<line x1="70.0" y1="222.5" x2="82.0" y2="222.5" stroke="#1f2933" stroke-width="1" stroke-linecap="round"/>
+<line x1="70.0" y1="195.0" x2="92.0" y2="195.0" stroke="#1f2933" stroke-width="2" stroke-linecap="round"/>
+<text x="62.0" y="200.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="end" font-weight="normal" fill="#1f2933">2 ℓ</text>
+<line x1="70.0" y1="167.5" x2="82.0" y2="167.5" stroke="#1f2933" stroke-width="1" stroke-linecap="round"/>
+<line x1="70.0" y1="140.0" x2="92.0" y2="140.0" stroke="#1f2933" stroke-width="2" stroke-linecap="round"/>
+<text x="62.0" y="145.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="end" font-weight="normal" fill="#1f2933">4 ℓ</text>
+<line x1="70.0" y1="112.5" x2="82.0" y2="112.5" stroke="#1f2933" stroke-width="1" stroke-linecap="round"/>
+<line x1="70.0" y1="85.0" x2="92.0" y2="85.0" stroke="#1f2933" stroke-width="2" stroke-linecap="round"/>
+<text x="62.0" y="90.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="end" font-weight="normal" fill="#1f2933">6 ℓ</text>
+<line x1="70.0" y1="57.5" x2="82.0" y2="57.5" stroke="#1f2933" stroke-width="1" stroke-linecap="round"/>
+<line x1="70.0" y1="30.0" x2="92.0" y2="30.0" stroke="#1f2933" stroke-width="2" stroke-linecap="round"/>
+<text x="62.0" y="35.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="end" font-weight="normal" fill="#1f2933">8 ℓ</text>
+</svg>
