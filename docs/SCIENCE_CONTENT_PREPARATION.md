@@ -1,5 +1,7 @@
 # Science content pool (P3)
 
+Independent public-source research and current content findings: [research audit](content-review/SCIENCE_RESEARCH_AUDIT.md) (2026-10-16; changes required). This evidence supplements the authoring source register and does not approve the batch.
+
 **Review proposal · 16 October 2026 · generic/public content pool**
 
 Original P3 Science content for the public (generic) version of Turtle Academy, covering the seven P3 topics of the 2023 MOE Primary Science syllabus, with public sources cited. Primary Science starts at P3, so there is no P2 pool. This document does not authorize implementation, release, merge or deployment.
