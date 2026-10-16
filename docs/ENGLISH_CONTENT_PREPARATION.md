@@ -89,6 +89,12 @@ Extensive reading is encouraged through NLB booklists and programmes such as kid
 | Guided composition (3-picture series, at least 80-100 words) (`el.p3.composition`) | P3 | external | open | 0 | 0 |
 | Listening comprehension (`el.p3.listening`) | P3 | deferred | open | 0 | 0 |
 
+## Correction revision — 16 October 2026
+
+Batch version 2 corrects 29 disputed or related items. The market passage answer now states that the mother gave the auntie rambutans. Preposition questions gain a distinguishing stimulus or lose defensible alternative options; determiner questions no longer reject a valid `some` question. Present-tense prompts explicitly name the required tense, conjunction/synthesis prompts state the intended relation, valid alternative `although` sentences are replaced, and before/after order is explicit. The homophone-editing item now distinguishes a valid tree word from the intended seaside word; its task does not claim that `beech` is intrinsically misspelt. A hint that directly named water is also replaced. Revised item versions are incremented and IDs remain listed for independent re-review. Counts and material grouping are unchanged. Skill-level coverage/repair mappings, verified source pages, dated paper/enrichment analysis and owner sign-off remain open.
+
+These are proposed corrections, not independent approval. Existing task/history must retain earlier pinned versions; this authoring revision does not implement evidence migration or retroactive regrading.
+
 ## Validation
 
 ```sh

@@ -2,7 +2,7 @@
   "schema_version": "subject-content/1",
   "subject": "english",
   "batch_id": "el-pool-001",
-  "version": 1,
+  "version": 2,
   "manifest_version": "el-2020-p2p3-draft.1",
   "status": "author_checked_pending_independent_and_owner_review",
   "materials": [
@@ -689,7 +689,7 @@
     },
     {
       "id": "el-p2-collective-uncountable.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_english"
       ],
@@ -718,7 +718,7 @@
         }
       ],
       "correct_option_id": "opt-4",
-      "hint": "Water cannot be counted one by one.",
+      "hint": "Choose the uncountable noun that can follow “some”.",
       "explanation": "\"Water\" is uncountable, so we say \"some water\".",
       "material_id": null,
       "provenance": "original_generic_author_draft"
@@ -977,7 +977,7 @@
     },
     {
       "id": "el-p2-some-any.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_english"
       ],
@@ -990,7 +990,7 @@
       "options": [
         {
           "id": "opt-1",
-          "text": "some"
+          "text": "an"
         },
         {
           "id": "opt-2",
@@ -1006,14 +1006,14 @@
         }
       ],
       "correct_option_id": "opt-2",
-      "hint": "This is a question.",
-      "explanation": "Use \"any\" in most questions and negative sentences.",
+      "hint": "Milk is uncountable. Check which option can come before it in this question.",
+      "explanation": "“Any” fits this question about whether milk is left. “A”, “an” and “many” do not fit before uncountable “milk”.",
       "material_id": null,
       "provenance": "original_generic_author_draft"
     },
     {
       "id": "el-p2-some-any.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_english"
       ],
@@ -1038,12 +1038,12 @@
         },
         {
           "id": "opt-4",
-          "text": "some"
+          "text": "an"
         }
       ],
       "correct_option_id": "opt-1",
       "hint": "The sentence has \"not\".",
-      "explanation": "Use \"any\" in negative sentences.",
+      "explanation": "“Any” fits this negative sentence. “A”, “an” and “many” do not fit before uncountable “bread”.",
       "material_id": null,
       "provenance": "original_generic_author_draft"
     },
@@ -1085,7 +1085,7 @@
     },
     {
       "id": "el-p2-simple-present.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_english"
       ],
@@ -1094,7 +1094,7 @@
       "stage": "exact",
       "family": "grammar",
       "format": "mcq_4plus",
-      "stem": "My brother ______ to school every day.",
+      "stem": "Complete in the simple present: My brother ______ to school every day.",
       "options": [
         {
           "id": "opt-1",
@@ -1121,7 +1121,7 @@
     },
     {
       "id": "el-p2-simple-present.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_english"
       ],
@@ -1130,7 +1130,7 @@
       "stage": "similar",
       "family": "grammar",
       "format": "mcq_4plus",
-      "stem": "The sun ______ in the east.",
+      "stem": "Complete in the simple present: The sun ______ in the east.",
       "options": [
         {
           "id": "opt-1",
@@ -1157,7 +1157,7 @@
     },
     {
       "id": "el-p2-simple-present.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_english"
       ],
@@ -1166,7 +1166,7 @@
       "stage": "generic",
       "family": "grammar",
       "format": "mcq_4plus",
-      "stem": "Every Saturday, Grandma ______ us a story.",
+      "stem": "Complete in the simple present: Every Saturday, Grandma ______ us a story.",
       "options": [
         {
           "id": "opt-1",
@@ -1769,7 +1769,7 @@
     },
     {
       "id": "el-p2-sva-verb-s.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_english"
       ],
@@ -1778,7 +1778,7 @@
       "stage": "similar",
       "family": "grammar",
       "format": "mcq_4plus",
-      "stem": "My father ______ the newspaper every morning.",
+      "stem": "Complete in the simple present: My father ______ the newspaper every morning.",
       "options": [
         {
           "id": "opt-1",
@@ -2381,7 +2381,7 @@
     },
     {
       "id": "el-p2-preposition-place.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_english"
       ],
@@ -2390,7 +2390,7 @@
       "stage": "exact",
       "family": "grammar",
       "format": "mcq_4plus",
-      "stem": "The cat is hiding ______ the bed.",
+      "stem": "The cat crawled into the space between the bed and the floor. It is hiding ______ the bed.",
       "options": [
         {
           "id": "opt-1",
@@ -2410,14 +2410,14 @@
         }
       ],
       "correct_option_id": "opt-2",
-      "hint": "Where can a cat hide?",
-      "explanation": "\"Under the bed\" shows where the cat is hiding.",
+      "hint": "The bed is above the cat.",
+      "explanation": "The cat is below the bed, in the space above the floor, so it is under the bed.",
       "material_id": null,
       "provenance": "original_generic_author_draft"
     },
     {
       "id": "el-p2-preposition-place.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_english"
       ],
@@ -2434,11 +2434,11 @@
         },
         {
           "id": "opt-2",
-          "text": "in"
+          "text": "between"
         },
         {
           "id": "opt-3",
-          "text": "at"
+          "text": "during"
         },
         {
           "id": "opt-4",
@@ -2489,7 +2489,7 @@
     },
     {
       "id": "el-p2-preposition-time.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_english"
       ],
@@ -2514,7 +2514,7 @@
         },
         {
           "id": "opt-4",
-          "text": "by"
+          "text": "since"
         }
       ],
       "correct_option_id": "opt-2",
@@ -2561,7 +2561,7 @@
     },
     {
       "id": "el-p2-preposition-time.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_english"
       ],
@@ -2582,7 +2582,7 @@
         },
         {
           "id": "opt-3",
-          "text": "at"
+          "text": "under"
         },
         {
           "id": "opt-4",
@@ -2597,7 +2597,7 @@
     },
     {
       "id": "el-p2-and-but-or.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_english"
       ],
@@ -2606,7 +2606,7 @@
       "stage": "exact",
       "family": "grammar",
       "format": "mcq_4plus",
-      "stem": "I like apples ______ oranges.",
+      "stem": "Choose the joining word that adds both fruits I like: I like apples ______ oranges.",
       "options": [
         {
           "id": "opt-1",
@@ -2627,13 +2627,13 @@
       ],
       "correct_option_id": "opt-2",
       "hint": "Both are liked.",
-      "explanation": "\"And\" joins two things that go together.",
+      "explanation": "“And” adds oranges to apples: both fruits are liked.",
       "material_id": null,
       "provenance": "original_generic_author_draft"
     },
     {
       "id": "el-p2-and-but-or.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_english"
       ],
@@ -2642,7 +2642,7 @@
       "stage": "similar",
       "family": "grammar",
       "format": "mcq_4plus",
-      "stem": "Ben is tall ______ his brother is short.",
+      "stem": "Choose the joining word that shows the difference between the brothers: Ben is tall ______ his brother is short.",
       "options": [
         {
           "id": "opt-1",
@@ -2663,13 +2663,13 @@
       ],
       "correct_option_id": "opt-2",
       "hint": "The two ideas are different.",
-      "explanation": "\"But\" joins ideas that are different.",
+      "explanation": "“But” highlights the difference between tall and short.",
       "material_id": null,
       "provenance": "original_generic_author_draft"
     },
     {
       "id": "el-p2-and-but-or.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_english"
       ],
@@ -2678,7 +2678,7 @@
       "stage": "generic",
       "family": "grammar",
       "format": "mcq_4plus",
-      "stem": "Would you like rice ______ noodles for lunch?",
+      "stem": "Only one dish is allowed. Choose the joining word that offers a choice: Would you like rice ______ noodles for lunch?",
       "options": [
         {
           "id": "opt-1",
@@ -2699,13 +2699,13 @@
       ],
       "correct_option_id": "opt-2",
       "hint": "You choose one of the two.",
-      "explanation": "\"Or\" gives a choice.",
+      "explanation": "“Or” offers a choice of one dish: rice or noodles.",
       "material_id": null,
       "provenance": "original_generic_author_draft"
     },
     {
       "id": "el-p2-because-so.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_english"
       ],
@@ -2714,7 +2714,7 @@
       "stage": "exact",
       "family": "grammar",
       "format": "mcq_4plus",
-      "stem": "Mei was happy ______ she won the race.",
+      "stem": "Choose the joining word that gives the reason for being happy: Mei was happy ______ she won the race.",
       "options": [
         {
           "id": "opt-1",
@@ -2741,7 +2741,7 @@
     },
     {
       "id": "el-p2-because-so.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_english"
       ],
@@ -2750,7 +2750,7 @@
       "stage": "similar",
       "family": "grammar",
       "format": "mcq_4plus",
-      "stem": "It was raining, ______ we brought our umbrellas.",
+      "stem": "Choose the joining word that introduces the result of the rain: It was raining, ______ we brought our umbrellas.",
       "options": [
         {
           "id": "opt-1",
@@ -2777,7 +2777,7 @@
     },
     {
       "id": "el-p2-because-so.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_english"
       ],
@@ -2786,7 +2786,7 @@
       "stage": "generic",
       "family": "grammar",
       "format": "mcq_4plus",
-      "stem": "Ali drank a lot of water ______ he was very thirsty.",
+      "stem": "Choose the joining word that gives the reason for drinking water: Ali drank a lot of water ______ he was very thirsty.",
       "options": [
         {
           "id": "opt-1",
@@ -3965,7 +3965,7 @@
     },
     {
       "id": "el-p2-spell-common.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_english"
       ],
@@ -3974,7 +3974,7 @@
       "stage": "generic",
       "family": "editing",
       "format": "mcq_4plus",
-      "stem": "Which word is spelt wrongly? \"We went to the beech on Saturday.\"",
+      "stem": "The writer means the sandy place beside the sea. Which word needs correcting? “We built a sandcastle at the beech.”",
       "options": [
         {
           "id": "opt-1",
@@ -3982,20 +3982,20 @@
         },
         {
           "id": "opt-2",
-          "text": "went"
+          "text": "built"
         },
         {
           "id": "opt-3",
-          "text": "We"
+          "text": "sandcastle"
         },
         {
           "id": "opt-4",
-          "text": "Saturday"
+          "text": "the"
         }
       ],
       "correct_option_id": "opt-1",
-      "hint": "Think of sand and the sea.",
-      "explanation": "The seaside word is spelt \"beach\".",
+      "hint": "Find the word that should name the seaside place.",
+      "explanation": "“Beech” names a tree. The sandy place beside the sea is spelt “beach”.",
       "material_id": null,
       "provenance": "original_generic_author_draft"
     },
@@ -5081,7 +5081,7 @@
     },
     {
       "id": "el-p2-read-hen.q5",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_english"
       ],
@@ -5102,7 +5102,7 @@
         },
         {
           "id": "opt-3",
-          "text": "She bought a bag of rambutans from her."
+          "text": "She gave her a bag of rambutans."
         },
         {
           "id": "opt-4",
@@ -6449,7 +6449,7 @@
     },
     {
       "id": "el-p3-future-will.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_english"
       ],
@@ -6470,7 +6470,7 @@
         },
         {
           "id": "opt-3",
-          "text": "goes"
+          "text": "going"
         },
         {
           "id": "opt-4",
@@ -6479,7 +6479,7 @@
       ],
       "correct_option_id": "opt-4",
       "hint": "When will it happen?",
-      "explanation": "\"Next year\" needs the future tense.",
+      "explanation": "“Will go” is the future form that fits here. “Has gone” and “went” refer to the past; “going” needs a helping verb.",
       "material_id": null,
       "provenance": "original_generic_author_draft"
     },
@@ -7277,7 +7277,7 @@
     },
     {
       "id": "el-p3-preposition-movement.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_english"
       ],
@@ -7286,7 +7286,7 @@
       "stage": "exact",
       "family": "grammar",
       "format": "mcq_4plus",
-      "stem": "The cat jumped ______ the fence.",
+      "stem": "The cat leapt high enough to clear the fence and landed on the other side. It jumped ______ the fence.",
       "options": [
         {
           "id": "opt-1",
@@ -7306,8 +7306,8 @@
         }
       ],
       "correct_option_id": "opt-3",
-      "hint": "It went from one side to the other above the fence.",
-      "explanation": "\"Over\" shows moving above something.",
+      "hint": "It passed above the top of the fence.",
+      "explanation": "The cat cleared the top and landed on the other side, so it jumped over the fence.",
       "material_id": null,
       "provenance": "original_generic_author_draft"
     },
@@ -7457,7 +7457,7 @@
     },
     {
       "id": "el-p3-preposition-phrases.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_english"
       ],
@@ -7470,7 +7470,7 @@
       "options": [
         {
           "id": "opt-1",
-          "text": "with"
+          "text": "between"
         },
         {
           "id": "opt-2",
@@ -7478,11 +7478,11 @@
         },
         {
           "id": "opt-3",
-          "text": "on"
+          "text": "into"
         },
         {
           "id": "opt-4",
-          "text": "at"
+          "text": "under"
         }
       ],
       "correct_option_id": "opt-2",
@@ -9437,7 +9437,7 @@
     },
     {
       "id": "el-p3-combine-because.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_english"
       ],
@@ -9446,7 +9446,7 @@
       "stage": "exact",
       "family": "sentence_organisation",
       "format": "mcq_4plus",
-      "stem": "Combine: \"Ali was late. He missed the bus.\" Which is correct?",
+      "stem": "Ali missed the bus. This made him late. Which sentence uses “because” to explain why he was late?",
       "options": [
         {
           "id": "opt-1",
@@ -9473,7 +9473,7 @@
     },
     {
       "id": "el-p3-combine-because.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_english"
       ],
@@ -9482,7 +9482,7 @@
       "stage": "similar",
       "family": "sentence_organisation",
       "format": "mcq_4plus",
-      "stem": "Combine: \"Mei studied hard. She did well in the test.\" Use \"so\".",
+      "stem": "Mei studied hard. As a result, she did well in the test. Join the ideas using “so”.",
       "options": [
         {
           "id": "opt-1",
@@ -9509,7 +9509,7 @@
     },
     {
       "id": "el-p3-combine-because.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_english"
       ],
@@ -9518,7 +9518,7 @@
       "stage": "generic",
       "family": "sentence_organisation",
       "format": "mcq_4plus",
-      "stem": "Combine: \"The road was slippery. It had rained.\" Begin with \"The road\".",
+      "stem": "Rain made the road slippery. Which sentence begins with “The road” and uses “because” to give the reason?",
       "options": [
         {
           "id": "opt-1",
@@ -9545,7 +9545,7 @@
     },
     {
       "id": "el-p3-combine-although.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_english"
       ],
@@ -9558,7 +9558,7 @@
       "options": [
         {
           "id": "opt-1",
-          "text": "Although the children were still awake, it was late."
+          "text": "Although it was late, but the children were still awake."
         },
         {
           "id": "opt-2",
@@ -9581,7 +9581,7 @@
     },
     {
       "id": "el-p3-combine-although.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_english"
       ],
@@ -9594,7 +9594,7 @@
       "options": [
         {
           "id": "opt-1",
-          "text": "Ben is young although he can swim very well."
+          "text": "Ben can swims very well although he is young."
         },
         {
           "id": "opt-2",
@@ -9606,7 +9606,7 @@
         },
         {
           "id": "opt-4",
-          "text": "Although Ben can swim very well, he is young."
+          "text": "Although Ben is young, but he can swim very well."
         }
       ],
       "correct_option_id": "opt-3",
@@ -9617,7 +9617,7 @@
     },
     {
       "id": "el-p3-combine-although.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_english"
       ],
@@ -9626,7 +9626,7 @@
       "stage": "generic",
       "family": "sentence_organisation",
       "format": "mcq_4plus",
-      "stem": "Which sentence correctly joins \"The shop was crowded\" and \"we found a seat\"?",
+      "stem": "Which sentence uses “although” to show that we found a seat despite the crowd?",
       "options": [
         {
           "id": "opt-1",
@@ -9833,7 +9833,7 @@
     },
     {
       "id": "el-p3-combine-before-after.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_english"
       ],
@@ -9842,7 +9842,7 @@
       "stage": "generic",
       "family": "sentence_organisation",
       "format": "mcq_4plus",
-      "stem": "Combine: \"The guests arrived. We served dinner.\" Begin with \"Before\".",
+      "stem": "The guests arrived first. Then we served dinner. Join the ideas without changing their order. Begin with “Before”.",
       "options": [
         {
           "id": "opt-1",
@@ -11710,12 +11710,43 @@
       "Each item has exactly one grammatically/semantically correct option, checked by hand",
       "Passages are original; local settings used without real people or schools",
       "Hints point to the rule or evidence without stating the answer",
-      "No past-paper, STELLAR or commercial text copied"
+      "No past-paper, STELLAR or commercial text copied",
+      "2026-10-16 correction pass: revised disputed and related items; item versions incremented; revised IDs remain listed for independent re-review, not approved."
     ],
-    "independent_review": "pending",
+    "independent_review": "changes_requested",
     "owner_signoff": "pending",
     "sampled_item_ids": [],
-    "disputed_item_ids": [],
+    "disputed_item_ids": [
+      "el-p2-read-hen.q5",
+      "el-p2-preposition-place.q1",
+      "el-p2-preposition-place.q2",
+      "el-p2-preposition-time.q1",
+      "el-p2-preposition-time.q3",
+      "el-p2-some-any.q1",
+      "el-p2-some-any.q2",
+      "el-p2-simple-present.q1",
+      "el-p2-simple-present.q2",
+      "el-p2-simple-present.q3",
+      "el-p2-sva-verb-s.q2",
+      "el-p2-and-but-or.q1",
+      "el-p2-and-but-or.q2",
+      "el-p2-and-but-or.q3",
+      "el-p2-because-so.q1",
+      "el-p2-because-so.q2",
+      "el-p2-because-so.q3",
+      "el-p2-spell-common.q3",
+      "el-p3-future-will.q2",
+      "el-p3-preposition-movement.q1",
+      "el-p3-preposition-phrases.q3",
+      "el-p3-combine-because.q1",
+      "el-p3-combine-because.q2",
+      "el-p3-combine-because.q3",
+      "el-p3-combine-although.q1",
+      "el-p3-combine-although.q2",
+      "el-p3-combine-although.q3",
+      "el-p3-combine-before-after.q3",
+      "el-p2-collective-uncountable.q2"
+    ],
     "rights_status": "original_draft_pending_owner_rights_review"
   }
 }
