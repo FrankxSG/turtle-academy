@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Shell } from '../Shell'
+import { useNoPageZoom } from '../useNoPageZoom'
 import { TRIALS_COMMIT } from '../build'
 import { SAMPLE_CHARACTERS } from './characters'
 import { StrokeTracer, type GuidedAttempt, type InputChoice, type StrokeTracerMode } from './StrokeTracer'
@@ -41,6 +42,7 @@ function layout() {
 }
 
 export function StrokeTracerTrial() {
+  useNoPageZoom()
   const [input, setInput] = useState<InputChoice | null>(null)
   const [index, setIndex] = useState(0)
   const [mode, setMode] = useState<StrokeTracerMode>('watch')

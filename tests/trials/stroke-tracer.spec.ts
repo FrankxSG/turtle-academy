@@ -306,3 +306,50 @@ for (const viewport of [{ width: 1180, height: 820 }, { width: 1024, height: 768
     }
   })
 }
+
+test.describe('page zoom while drawing', () => {
+  test.use({ hasTouch: true })
+
+  // Returns whether each synthetic zoom-type event had its default prevented.
+  const zoomBlocked = (page: Page) => page.evaluate(() => {
+    const touch = (id: number) => new Touch({ identifier: id, target: document.body, clientX: 100 + id * 40, clientY: 200 })
+    const touchmove = (count: number) => {
+      const touches = Array.from({ length: count }, (_, i) => touch(i))
+      const event = new TouchEvent('touchmove', { bubbles: true, cancelable: true, touches, targetTouches: touches, changedTouches: touches })
+      document.body.dispatchEvent(event)
+      return event.defaultPrevented
+    }
+    const gesture = new Event('gesturestart', { bubbles: true, cancelable: true })
+    document.body.dispatchEvent(gesture)
+    return {
+      pinch: touchmove(2),
+      oneFinger: touchmove(1),
+      gesture: gesture.defaultPrevented,
+      locked: document.documentElement.classList.contains('t-zoom-locked'),
+    }
+  })
+
+  test('trial page blocks pinch and Safari gesture zoom; hub keeps normal zoom', async ({ page }) => {
+    await page.goto('/')
+    expect(await zoomBlocked(page)).toEqual({ pinch: false, oneFinger: false, gesture: false, locked: false })
+    await page.goto('/#/stroke-tracer')
+    await expect(page.getByText('What will you draw with?')).toBeVisible()
+    expect(await zoomBlocked(page)).toEqual({ pinch: true, oneFinger: false, gesture: true, locked: true })
+    await page.getByRole('button', { name: /^Finger/ }).click()
+    expect(await zoomBlocked(page)).toEqual({ pinch: true, oneFinger: false, gesture: true, locked: true })
+    await page.getByRole('link', { name: '← Trials' }).click()
+    await expect(page.getByRole('heading', { name: 'Turtle Academy trials' })).toBeVisible()
+    expect(await zoomBlocked(page)).toEqual({ pinch: false, oneFinger: false, gesture: false, locked: false })
+  })
+
+  test('board and page disable double-tap zoom', async ({ page }) => {
+    await openTrial(page, 'Finger')
+    const actions = await page.evaluate(() => ({
+      page: getComputedStyle(document.documentElement).touchAction,
+      board: getComputedStyle(document.querySelector('.st-board')!).touchAction,
+    }))
+    expect(actions).toEqual({ page: 'manipulation', board: 'manipulation' })
+    await page.getByRole('button', { name: 'Free trace' }).click()
+    expect(await page.evaluate(() => getComputedStyle(document.querySelector('.st-board')!).touchAction)).toBe('none')
+  })
+})
