@@ -1,6 +1,6 @@
 # Foundation setup register
 
-Updated: 2026-10-11. Implementation evidence only; architecture and feature decisions remain in their authoritative documents.
+Updated: 2026-10-16. Implementation evidence only; architecture and feature decisions remain in their authoritative documents.
 
 This repository is public (since 2026-10-10). Record evidence here without account names, project identifiers, regions, dashboard URLs, environment variable values or anything about real learners.
 
@@ -58,3 +58,15 @@ Owner approved documentation-only changes in Issue #3, not backend, code or depl
 ## 2026-10-15 documentation alignment
 
 The consolidated decision revision changes scope, per-subject X, evidence rules, PIN and snapshot allowlist requirements only. No application, service configuration or infrastructure verification is delivered. Private wrong forms and PIN/hash are excluded from snapshots; security/data-protection/safety-copy gates remain open. Preserve the dated foundation test evidence above.
+
+## 2026-10-16 Pilot identity and snapshot contract (Issue #16, synthetic only)
+
+Branch `claude/pilot-identity-foundation`, based on `main` at `dc3ed51`. This adds the first Supabase migration (family/parent/child ownership, read-only RLS for clients, the guarded `upload_snapshot` function, a server-side closed snapshot allow-list and owner-only provisioning). It also adds the client snapshot validator and the email/password-only sign-in module. See `supabase/README.md`.
+
+Local evidence (no services touched):
+- `python3 supabase/tests/test_database.py`: **17 tests pass** on a throwaway PostgreSQL 16 cluster running the Supabase role/auth stub. The tests run as `anon`/`authenticated`/`service_role`, never as the owner. They cover read isolation, denied direct writes and ownership bypasses, spoofed children, the linear head, retry identity, minimisation (23 shared rejection cases), size limits, and two genuinely concurrent races on separate connections.
+- Mutation check: seven deliberate weakenings of the migration (no row lock, service-role upload, open membership reads, no child binding, open objects, leftover insert grant, no stale-base check) were each caught.
+- `node --experimental-strip-types --test supabase/tests/client/client.test.mjs`: **9 tests pass**. The client validator agrees with the server on every shared fixture, and the auth module has no sign-up, anonymous or Google path.
+- The new client modules type-check under strict settings. The repository's own `npm run build` is not rerun here because package installation was unavailable in the authoring environment. The new PR workflow `Database contract` runs both suites in CI.
+
+**Pending owner steps:** closed sign-up and anonymous sign-in in the hosted Auth settings, applying the migration to the test project, `scripts/check-hosted-auth.mjs` results, and synthetic provisioning. Until the owner records these here (pass/fail only, no identifiers), nothing about the hosted project is verified. No real learner record may be stored until the data-protection gate (Technical Decisions §9) is resolved.

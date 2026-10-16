@@ -1,0 +1,214 @@
+{
+  "id": "pilot-snapshot/1",
+  "note": "Closed allow-list for child-scoped backup snapshots (Pilot Scope section 3). Every object is closed: unknown keys are rejected. Free text is not representable; strings are enums, opaque IDs, dates or bounded target values. The same descriptor is embedded in the database migration and checked for parity by tests.",
+  "defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,127}$" },
+    "nullable_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,127}$", "nullable": true },
+    "uuid": { "type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$" },
+    "nullable_uuid": { "type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", "nullable": true },
+    "date": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+    "nullable_date": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$", "nullable": true },
+    "datetime": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]{1,6})?(Z|[+-][0-9]{2}:[0-9]{2})$" },
+    "nullable_datetime": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]{1,6})?(Z|[+-][0-9]{2}:[0-9]{2})$", "nullable": true },
+    "timezone": { "type": "string", "pattern": "^[A-Za-z_]{1,32}(/[A-Za-z0-9_+-]{1,32}){0,2}$" },
+    "subject": { "type": "string", "enum": ["chinese", "english", "mathematics", "science"] },
+    "course": { "type": "string", "enum": ["p2_chinese", "p2_higher_chinese", "p3_chinese", "p3_higher_chinese", "p2_english", "p3_english", "p2_mathematics", "p3_mathematics", "p3_science"] },
+    "count": { "type": "integer", "minimum": 0, "maximum": 100000 },
+    "x": { "type": "integer", "minimum": 6, "maximum": 19 }
+  },
+  "root": {
+    "type": "object",
+    "required": ["schema_version", "child_ref", "created_at", "app_version", "content_versions", "settings", "targets", "events", "tasks", "completions", "rest_days", "story", "flags", "suspensions", "exposure", "calendar_guards", "pending_upload"],
+    "properties": {
+      "schema_version": { "type": "string", "enum": ["pilot-snapshot/1"] },
+      "child_ref": { "$ref": "uuid" },
+      "created_at": { "$ref": "datetime" },
+      "app_version": { "type": "string", "pattern": "^[0-9]{1,4}\\.[0-9]{1,4}\\.[0-9]{1,4}$" },
+      "content_versions": {
+        "type": "array", "maxItems": 16,
+        "items": { "type": "object", "required": ["subject", "catalogue_version"], "properties": { "subject": { "$ref": "subject" }, "catalogue_version": { "$ref": "id" } } }
+      },
+      "settings": {
+        "type": "object",
+        "required": ["timezone", "timezone_history", "subjects"],
+        "properties": {
+          "timezone": { "$ref": "timezone" },
+          "timezone_history": {
+            "type": "array", "maxItems": 200,
+            "items": { "type": "object", "required": ["timezone", "changed_at"], "properties": { "timezone": { "$ref": "timezone" }, "changed_at": { "$ref": "datetime" } } }
+          },
+          "subjects": {
+            "type": "array", "maxItems": 4,
+            "items": { "type": "object", "required": ["subject", "x"], "properties": { "subject": { "$ref": "subject" }, "x": { "$ref": "x" } } }
+          }
+        }
+      },
+      "targets": {
+        "type": "array", "maxItems": 5000,
+        "items": {
+          "type": "object",
+          "required": ["id", "subject", "course", "target_kind", "knowledge_point_ref", "target_value", "mapping_status", "source", "review"],
+          "properties": {
+            "id": { "$ref": "id" },
+            "subject": { "$ref": "subject" },
+            "course": { "$ref": "course" },
+            "target_kind": { "type": "string", "enum": ["character", "word", "language_point", "reading_skill", "skill"] },
+            "knowledge_point_ref": { "$ref": "nullable_id" },
+            "target_value": { "type": "string", "pattern": "^[A-Za-z\\u3400-\\u4dbf\\u4e00-\\u9fff' -]{1,24}$", "nullable": true },
+            "mapping_status": { "type": "string", "enum": ["mapped", "pending_content"] },
+            "source": {
+              "type": "object",
+              "required": ["type", "date", "instance_ref", "batch_ref"],
+              "properties": {
+                "type": { "type": "string", "enum": ["schoolwork", "home_practice", "external_assessment", "other_reviewed_work", "app_practice"] },
+                "date": { "$ref": "date" },
+                "instance_ref": { "$ref": "id" },
+                "batch_ref": { "$ref": "nullable_id" }
+              }
+            },
+            "review": {
+              "type": "object",
+              "required": ["status", "reviewed_at", "amends"],
+              "properties": {
+                "status": { "type": "string", "enum": ["verified", "amended", "invalidated"] },
+                "reviewed_at": { "$ref": "datetime" },
+                "amends": { "$ref": "nullable_id" }
+              }
+            }
+          }
+        }
+      },
+      "events": {
+        "type": "array", "maxItems": 20000,
+        "items": {
+          "type": "object",
+          "required": ["id", "task_id", "item_id", "item_version", "phase", "assistance", "selected_option_id", "correct", "at"],
+          "properties": {
+            "id": { "$ref": "id" },
+            "task_id": { "$ref": "id" },
+            "item_id": { "$ref": "id" },
+            "item_version": { "type": "integer", "minimum": 1, "maximum": 100000 },
+            "target_ref": { "$ref": "nullable_id" },
+            "phase": { "type": "string", "enum": ["first", "retry", "correction", "review"] },
+            "assistance": { "type": "string", "enum": ["none", "hint", "answer_and_explanation"] },
+            "selected_option_id": { "$ref": "id" },
+            "correct": { "type": "boolean" },
+            "at": { "$ref": "datetime" }
+          }
+        }
+      },
+      "tasks": {
+        "type": "array", "maxItems": 5000,
+        "items": {
+          "type": "object",
+          "required": ["id", "subject", "local_date", "x", "planned_total", "cursor", "status", "content_version", "active_seconds", "target_aggregates"],
+          "properties": {
+            "id": { "$ref": "id" },
+            "subject": { "$ref": "subject" },
+            "local_date": { "$ref": "date" },
+            "x": { "$ref": "x" },
+            "planned_total": { "type": "integer", "minimum": 0, "maximum": 100 },
+            "cursor": { "type": "integer", "minimum": 0, "maximum": 100 },
+            "status": { "type": "string", "enum": ["active", "paused", "finalised"] },
+            "content_version": { "$ref": "id" },
+            "active_seconds": { "type": "integer", "minimum": 0, "maximum": 86400 },
+            "target_aggregates": {
+              "type": "array", "maxItems": 100,
+              "items": {
+                "type": "object",
+                "required": ["target_ref", "stage", "first_correct", "first_wrong"],
+                "properties": {
+                  "target_ref": { "$ref": "id" },
+                  "stage": { "type": "string", "enum": ["exact", "similar", "generic", "review"] },
+                  "first_correct": { "$ref": "count" },
+                  "first_wrong": { "$ref": "count" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "completions": {
+        "type": "array", "maxItems": 5000,
+        "items": {
+          "type": "object",
+          "required": ["subject", "local_date", "task_id", "reason"],
+          "properties": {
+            "subject": { "$ref": "subject" },
+            "local_date": { "$ref": "date" },
+            "task_id": { "$ref": "nullable_id" },
+            "reason": { "type": "string", "enum": ["full", "shortened_no_eligible_content", "flagged_replacements_exhausted"] }
+          }
+        }
+      },
+      "rest_days": { "type": "array", "maxItems": 3700, "items": { "$ref": "date" } },
+      "story": {
+        "type": "object",
+        "required": ["checkpoints", "chapter", "ended"],
+        "properties": {
+          "checkpoints": {
+            "type": "array", "maxItems": 10000,
+            "items": {
+              "type": "object",
+              "required": ["id", "task_id", "kind", "local_date"],
+              "properties": {
+                "id": { "$ref": "id" },
+                "task_id": { "$ref": "nullable_id" },
+                "kind": { "type": "string", "enum": ["halfway", "completion", "exploration"] },
+                "local_date": { "$ref": "date" }
+              }
+            }
+          },
+          "chapter": { "type": "integer", "minimum": 0, "maximum": 10000 },
+          "ended": { "type": "boolean" }
+        }
+      },
+      "flags": {
+        "type": "array", "maxItems": 2000,
+        "items": {
+          "type": "object",
+          "required": ["item_id", "item_version", "reason", "flagged_at", "status"],
+          "properties": {
+            "item_id": { "$ref": "id" },
+            "item_version": { "type": "integer", "minimum": 1, "maximum": 100000 },
+            "reason": { "type": "string", "enum": ["answer_looks_wrong", "question_unclear", "too_hard", "other"] },
+            "flagged_at": { "$ref": "datetime" },
+            "status": { "type": "string", "enum": ["open", "restored", "disabled"] }
+          }
+        }
+      },
+      "suspensions": {
+        "type": "array", "maxItems": 2000,
+        "items": {
+          "type": "object",
+          "required": ["item_id", "item_version", "scope", "since", "restored_at"],
+          "properties": {
+            "item_id": { "$ref": "id" },
+            "item_version": { "type": "integer", "minimum": 1, "maximum": 100000, "nullable": true },
+            "scope": { "type": "string", "enum": ["child", "version"] },
+            "since": { "$ref": "datetime" },
+            "restored_at": { "$ref": "nullable_datetime" }
+          }
+        }
+      },
+      "exposure": {
+        "type": "array", "maxItems": 20000,
+        "items": {
+          "type": "object",
+          "required": ["item_id", "last_presented_on", "times"],
+          "properties": { "item_id": { "$ref": "id" }, "last_presented_on": { "$ref": "date" }, "times": { "$ref": "count" } }
+        }
+      },
+      "calendar_guards": {
+        "type": "object",
+        "required": ["last_finalised_date", "last_timezone_change_at"],
+        "properties": { "last_finalised_date": { "$ref": "nullable_date" }, "last_timezone_change_at": { "$ref": "nullable_datetime" } }
+      },
+      "pending_upload": {
+        "type": "object", "nullable": true,
+        "required": ["operation_id", "base_snapshot_id", "queued_at"],
+        "properties": { "operation_id": { "$ref": "uuid" }, "base_snapshot_id": { "$ref": "nullable_uuid" }, "queued_at": { "$ref": "datetime" } }
+      }
+    }
+  }
+}
