@@ -8,11 +8,17 @@ Design, decisions and results: **Issue #8**. Status: `exploring`. Scope: later p
 
 ```sh
 npm run dev:trials          # local, then open the printed URL
-npm run build:trials        # separate output in dist-trials/
+npm run build:trials        # separate output in trials/dist/
 npm run preview:trials
 ```
 
 The learner app (`npm run build`) never includes this code. The trials build has no service worker, manifest, storage, auth or product imports. `tests/trials/isolation.spec.ts` checks both outputs.
+
+## Hosting for device testing (Issue #8, decision 3)
+
+The owner chose a private Vercel project, separate from the learner app. `trials/vercel.json` configures it: it installs and builds from the repository root (`npm ci`, `npm run build:trials`) and serves `trials/dist`. It has no rewrites, so an unknown path is a 404, never the learner app. The learner app's own `vercel.json` at the repository root is unchanged.
+
+Project settings: Root Directory `trials`; include files outside the Root Directory in the build (needed for `../src`); Node 22; Deployment Protection with Vercel Authentication. Preview links are then viewable only by signed-in Vercel users with access to the project.
 
 ## Behaviour
 

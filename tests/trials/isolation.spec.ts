@@ -34,7 +34,7 @@ test('app build contains no trial entry, code, data or precache entries', () => 
 })
 
 test('trials build has no service worker, manifest, storage or product code', () => {
-  const dist = join(root, 'dist-trials')
+  const dist = join(root, 'trials/dist')
   expect(existsSync(dist), 'trials build missing').toBe(true)
   const all = files(dist).map((file) => file.slice(dist.length + 1))
   expect(all.filter((f) => /(^|\/)(sw|workbox-[^/]*|registerSW)\.js$|\.webmanifest$/.test(f))).toEqual([])
@@ -52,8 +52,22 @@ test('trials build has no service worker, manifest, storage or product code', ()
 
 test('trials distribution retains the unchanged character-data licence', () => {
   const source = readFileSync(join(root, 'src/trials/stroke-tracer/data/ARPHICPL.TXT'))
-  const shipped = readFileSync(join(root, 'dist-trials/licences/ARPHICPL.TXT'))
+  const shipped = readFileSync(join(root, 'trials/dist/licences/ARPHICPL.TXT'))
   expect(shipped.equals(source)).toBe(true)
+})
+
+test('trials hosting config builds only the trials output, never the learner app', () => {
+  const hosting = JSON.parse(readFileSync(join(root, 'trials/vercel.json'), 'utf8'))
+  expect(hosting.buildCommand).toBe('cd .. && npm run build:trials')
+  expect(hosting.installCommand).toBe('cd .. && npm ci')
+  expect(hosting.outputDirectory).toBe('dist')
+  expect(hosting.framework).toBeNull()
+  // No SPA rewrites: an unknown path is a 404, never a fallback page.
+  expect(hosting.rewrites).toBeUndefined()
+  // The app's own hosting config is unchanged and still builds the app.
+  const app = JSON.parse(readFileSync(join(root, 'vercel.json'), 'utf8'))
+  expect(app.buildCommand).toBe('npm run build')
+  expect(app.outputDirectory).toBe('dist')
 })
 
 test('learner app source never imports trial code', () => {

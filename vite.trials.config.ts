@@ -31,5 +31,6 @@ export default defineConfig({
   }],
   define: { __TRIALS_COMMIT__: JSON.stringify(commit()) },
   server: { fs: { allow: ['..'] } },
-  build: { outDir: '../dist-trials', emptyOutDir: true, sourcemap: false },
+  // Output stays inside trials/ so a hosting project rooted at trials/ (see trials/vercel.json) can serve it.
+  build: { outDir: 'dist', emptyOutDir: true, sourcemap: false },
 })
