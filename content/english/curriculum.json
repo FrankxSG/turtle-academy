@@ -1,0 +1,646 @@
+{
+  "schema_version": "subject-curriculum/1",
+  "subject": "english",
+  "manifest_version": "el-2020-p2p3-draft.1",
+  "status": "proposed_not_import_enabled",
+  "courses": [
+    "p2_english",
+    "p3_english"
+  ],
+  "sources": [
+    {
+      "id": "moe-el-2020",
+      "kind": "moe_official",
+      "title": "MOE English Language Syllabus 2020 (Primary)",
+      "url": "https://www.moe.gov.sg/-/media/files/primary/2020-english-language-primary.ashx",
+      "accessed": "2026-10-16",
+      "used_for": "Authoritative areas of language learning and grammar/vocabulary scope",
+      "note": "Official MOE file; direct retrieval was blocked from the authoring environment, so content was cross-checked against school documents that follow it. Verify against the PDF during inventory audit."
+    },
+    {
+      "id": "acs-el",
+      "kind": "school_public",
+      "title": "ACS (Primary): English Language curriculum page",
+      "url": "https://www.acspri.moe.edu.sg/our-curriculum/english-language/",
+      "accessed": "2026-10-16",
+      "used_for": "STELLAR approach context"
+    },
+    {
+      "id": "shuqun-el-p2-2025",
+      "kind": "school_public",
+      "title": "Shuqun Primary: P2 English Handbook 2025",
+      "url": "https://shuqunpri.moe.edu.sg/files/P2_English_Handbook_2025.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "P2 grammar items by STELLAR unit (nouns, determiners, verbs, SVA, conjunctions, adverbs, prepositions, punctuation, sentence types); comprehension skills"
+    },
+    {
+      "id": "yuhua-el-p2-2025",
+      "kind": "school_public",
+      "title": "Yuhua Primary: 2025 P2 Parents Engagement Handouts (EL)",
+      "url": "https://yuhuapri.moe.edu.sg/files/2025_P2_Parents_Engagement_Handouts_EL.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "P2 reading outcomes and holistic assessment"
+    },
+    {
+      "id": "edgefield-p2-2025",
+      "kind": "school_public",
+      "title": "Edgefield Primary: 2025 P2 Learning Outcomes letter",
+      "url": "https://www.edgefieldpri.moe.edu.sg/files/2025_Assessment_Letter_to_Parents___P2_Learning_Outcomes.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "P2 English learning outcomes (tenses, connectors, sequencing)"
+    },
+    {
+      "id": "cedar-p3-2025",
+      "kind": "school_public",
+      "title": "Cedar Primary: P3 Curriculum Briefing 2025",
+      "url": "https://www.cedarpri.moe.edu.sg/files/Parent%20Engagement/2025%20P3%20Engagement/3__14_mar_p3_curriculum_briefing_2025.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "P3 EL paper format: grammar, vocabulary, punctuation, visual text MCQ; grammar cloze, editing, sentence combining, comprehension"
+    },
+    {
+      "id": "jwps-p3-2025",
+      "kind": "school_public",
+      "title": "Jurong West Primary: 2025 P3 Assessment Overview, Topics and Components",
+      "url": "https://www.jurongwestpri.moe.edu.sg/files/JWPS_2025_P3_Assessment_Overview__Topics_and_Components_.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "P3 EL component counts (vocabulary 6, grammar 8, grammar cloze 8, editing 4, comprehension cloze 4, sentence combining 4)"
+    },
+    {
+      "id": "eliaspark-el-p3",
+      "kind": "school_public",
+      "title": "Elias Park Primary: P3 to P6 English Language Assessment Formats",
+      "url": "https://www.eliasparkpri.moe.edu.sg/files/P3_to_P6_English_Language_Assessment_Formats_.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "P3 grammar cloze focus (pronouns, subject-verb agreement), passage lengths"
+    },
+    {
+      "id": "geniebook-p2-papers",
+      "kind": "past_paper_index",
+      "title": "Geniebook: Primary 2 sample papers index (2021-2023 listed)",
+      "url": "https://geniebook.com/exam-preparation/sample-papers/primary-2",
+      "accessed": "2026-10-16",
+      "used_for": "Format survey of P2 English practice/SA papers; no questions copied",
+      "note": "No stated reuse licence; format analysis only."
+    },
+    {
+      "id": "smiletutor-papers",
+      "kind": "past_paper_index",
+      "title": "SmileTutor: primary school exam papers index",
+      "url": "https://smiletutor.sg/free-test-papers-download/primary-school-exam-papers/",
+      "accessed": "2026-10-16",
+      "used_for": "Format survey of P2/P3 English papers (2022 within range); no questions copied",
+      "note": "Site states copyright; format analysis only."
+    },
+    {
+      "id": "nlb-booklists",
+      "kind": "enrichment",
+      "title": "National Library Board: primary school book recommendations",
+      "url": "https://www.nlb.gov.sg/main/site/discovereads/children/reading-recommendations/booklists",
+      "accessed": "2026-10-16",
+      "used_for": "Enrichment context: extensive reading"
+    },
+    {
+      "id": "cdac-kidsread",
+      "kind": "enrichment",
+      "title": "CDAC: kidsREAD reading programme",
+      "url": "https://cdac.org.sg/kidsread",
+      "accessed": "2026-10-16",
+      "used_for": "Enrichment context: reading support programme"
+    }
+  ],
+  "topics": [
+    {
+      "id": "el.p2.nouns",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Grammar",
+      "label": "Nouns and noun phrases: plurals (regular, -es, -ies, -ves, irregular), collective and uncountable nouns",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.determiners",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Grammar",
+      "label": "Determiners: a/an, this/that/these/those, some/any",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.verbs",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Grammar",
+      "label": "Verbs and verb phrases: simple present, simple past (regular/irregular), present continuous",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.sva",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Grammar",
+      "label": "Subject-verb agreement: is/are, has/have, verb -s",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.pronouns",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Grammar",
+      "label": "Pronouns: subject, object and possessive",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.adjectives-adverbs",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Grammar",
+      "label": "Adjectives (incl. -er/-est) and -ly adverbs",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.prepositions",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Grammar",
+      "label": "Prepositions of place and time",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.conjunctions",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Grammar",
+      "label": "Conjunctions: and, but, or, because, so",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.punctuation",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Grammar",
+      "label": "Punctuation: capitals, full stops, question and exclamation marks, commas in lists",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.sentence-types",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Grammar",
+      "label": "Sentence types: statement, question, command, exclamation",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.vocabulary",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Vocabulary",
+      "label": "Vocabulary: synonyms, antonyms, context, word groups, compound words, contractions",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.spelling-editing",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Spelling and editing",
+      "label": "Spelling (incl. common homophones) and editing for grammar (recognition only)",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.sentence-organisation",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Writing foundations",
+      "label": "Word order and sequencing events",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.writing-foundations",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Writing foundations",
+      "label": "Connectors, sensory details and showing feelings (selection, not free writing)",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.comprehension",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Reading",
+      "label": "Short-passage comprehension: details, sequence, vocabulary in context, feelings, simple inference",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.grammar-cloze",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Grammar",
+      "label": "Grammar cloze passages",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.vocab-cloze",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Vocabulary",
+      "label": "Vocabulary cloze passages",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.visual-text",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Reading",
+      "label": "Visual text comprehension: posters, menus, notices",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p3.tenses",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Grammar",
+      "label": "Tenses: past continuous, future with will, irregular past, tense consistency",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.sva",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Grammar",
+      "label": "Subject-verb agreement: each/everyone/neither, there is/are, intervening phrases",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.pronouns",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Grammar",
+      "label": "Reflexive pronouns and relative pronouns who/which/whose",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.prepositions",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Grammar",
+      "label": "Prepositions of movement and fixed preposition phrases",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.conjunctions",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Grammar",
+      "label": "Conjunctions: although, when/while/before/after, if/unless",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.adjectives-adverbs",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Grammar",
+      "label": "Comparatives/superlatives (more/most, irregular), quantifiers, adverbs of frequency",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.punctuation",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Grammar",
+      "label": "Apostrophes for possession, speech marks, commas after clauses",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.vocabulary",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Vocabulary",
+      "label": "Vocabulary: synonyms, antonyms, context, phrasal verbs, word forms, simple idioms",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.editing",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Spelling and editing",
+      "label": "Editing for spelling, grammar and homophones (recognition only)",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.synthesis",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Sentence combining",
+      "label": "Sentence combining with because/so, although, who/which, before/after, either/neither",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.comprehension",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Reading",
+      "label": "Passage comprehension: details, reasons, inference, character traits, main message",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.grammar-cloze",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Grammar",
+      "label": "Grammar cloze passages",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.comprehension-cloze",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Reading",
+      "label": "Comprehension cloze passages (no helping words in school papers; options used in app)",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.visual-text",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Reading",
+      "label": "Visual text comprehension: leaflets and notices",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p2.oral",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Speaking",
+      "label": "Reading aloud and picture/stimulus-based conversation",
+      "scope": "external",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ],
+      "note": "Oral practice stays outside the app."
+    },
+    {
+      "id": "el.p3.composition",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Writing",
+      "label": "Guided composition (3-picture series, at least 80-100 words)",
+      "scope": "external",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ],
+      "note": "Full writing stays outside the app."
+    },
+    {
+      "id": "el.p3.listening",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Listening",
+      "label": "Listening comprehension",
+      "scope": "deferred",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ],
+      "note": "Listening is deferred in the Pilot."
+    }
+  ],
+  "limitations": [
+    "Grammar scope follows school documents implementing the 2020 EL syllabus; verify against the official syllabus.",
+    "Objective selection recognises correct forms; it does not assess independent writing, spelling production, speaking or listening.",
+    "School papers use open-ended grammar cloze, editing and synthesis; the app presents them as options."
+  ]
+}
