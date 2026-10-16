@@ -1,0 +1,267 @@
+{
+  "schema_version": "subject-curriculum/1",
+  "subject": "science",
+  "manifest_version": "sc-2023-p3-draft.1",
+  "status": "proposed_not_import_enabled",
+  "courses": [
+    "p3_science"
+  ],
+  "sources": [
+    {
+      "id": "moe-sc-2023",
+      "kind": "moe_official",
+      "title": "MOE Primary Science Syllabus 2023 (May 2024 revision)",
+      "url": "https://www.moe.gov.sg/-/media/files/primary/syllabus/primary-science-syllabus-2023_may24.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "Authoritative P3 themes, topics and learning outcomes",
+      "note": "Official MOE file; direct retrieval was blocked from the authoring environment, so content was cross-checked against school documents that follow it. Verify against the PDF during inventory audit."
+    },
+    {
+      "id": "junyuan-sc-p3-2026",
+      "kind": "school_public",
+      "title": "Jun Yuan Primary: 2026 P3 Science briefing",
+      "url": "https://www.junyuanpri.moe.edu.sg/files/2026_P3_SCI.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "P3 topic list under the 2023 syllabus; magnet repulsion test as key concept"
+    },
+    {
+      "id": "rivervale-sc-p34-2025",
+      "kind": "school_public",
+      "title": "Rivervale Primary: 2025 P3/P4 Science subject sharing",
+      "url": "https://rivervalepri.moe.edu.sg/files/6__2025_P34_subject_sharing_SC.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "P3 vs P4 topic split by theme"
+    },
+    {
+      "id": "tnps-sc-p3-2026",
+      "kind": "school_public",
+      "title": "Tampines North Primary: 2026 P3 Science Scheme of Work Outline",
+      "url": "https://www.tampinesnorthpri.moe.edu.sg/files/2026_P3_Science_SOW_Outline.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "P3 topic order by term"
+    },
+    {
+      "id": "bpps-sc-p3-2026",
+      "kind": "school_public",
+      "title": "Bukit Panjang Primary: Meet & Greet P3 Science Sharing 2026",
+      "url": "https://www.bukitpanjangpri.moe.edu.sg/files/Meet___Greet_P3_Science_Sharing_with_Parents_2026.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "Common misconceptions (magnet attraction vs repulsion); Claim-Evidence-Reasoning answering"
+    },
+    {
+      "id": "cedar-p3-2025",
+      "kind": "school_public",
+      "title": "Cedar Primary: P3 Curriculum Briefing 2025",
+      "url": "https://www.cedarpri.moe.edu.sg/files/Parent%20Engagement/2025%20P3%20Engagement/3__14_mar_p3_curriculum_briefing_2025.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "P3 topic order by term; WA and EOY format (MCQ 2 marks each, open-ended)"
+    },
+    {
+      "id": "jwps-p3-2025",
+      "kind": "school_public",
+      "title": "Jurong West Primary: 2025 P3 Assessment Overview, Topics and Components",
+      "url": "https://www.jurongwestpri.moe.edu.sg/files/JWPS_2025_P3_Assessment_Overview__Topics_and_Components_.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "P3 EOY themes and practical-test process skills"
+    },
+    {
+      "id": "smiletutor-papers",
+      "kind": "past_paper_index",
+      "title": "SmileTutor: primary school exam papers index",
+      "url": "https://smiletutor.sg/free-test-papers-download/primary-school-exam-papers/",
+      "accessed": "2026-10-16",
+      "used_for": "Format survey of P3 Science papers (2022 within range); no questions copied",
+      "note": "Site states copyright; used for format analysis only."
+    },
+    {
+      "id": "scs-zooms",
+      "kind": "enrichment",
+      "title": "Science Centre Singapore: SCS Zooms to School programme",
+      "url": "https://www.science.edu.sg/for-schools/specialized-programmes/scs-zooms-to-school",
+      "accessed": "2026-10-16",
+      "used_for": "Enrichment context: hands-on science programmes for schools"
+    },
+    {
+      "id": "onepa-sc-p34",
+      "kind": "enrichment",
+      "title": "OnePA: Science for Primary 3/4 community courses",
+      "url": "https://www.onepa.gov.sg/courses/science-for-primary-3-4-c027241447",
+      "accessed": "2026-10-16",
+      "used_for": "Enrichment context: community P3/P4 science classes"
+    }
+  ],
+  "topics": [
+    {
+      "id": "sc.p3.living-nonliving",
+      "course": "p3_science",
+      "grade": "p3",
+      "strand": "Diversity",
+      "label": "Diversity of living and non-living things: characteristics of living things",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-sc-2023",
+        "junyuan-sc-p3-2026",
+        "rivervale-sc-p34-2025",
+        "tnps-sc-p3-2026",
+        "cedar-p3-2025"
+      ]
+    },
+    {
+      "id": "sc.p3.classification",
+      "course": "p3_science",
+      "grade": "p3",
+      "strand": "Diversity",
+      "label": "Classification of living things: plants (flowering/non-flowering), animals, fungi, bacteria",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-sc-2023",
+        "junyuan-sc-p3-2026",
+        "rivervale-sc-p34-2025",
+        "tnps-sc-p3-2026",
+        "cedar-p3-2025"
+      ]
+    },
+    {
+      "id": "sc.p3.materials",
+      "course": "p3_science",
+      "grade": "p3",
+      "strand": "Diversity",
+      "label": "Diversity of materials: types and properties (strength, hardness, flexibility, waterproof, transparency, floating)",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-sc-2023",
+        "junyuan-sc-p3-2026",
+        "rivervale-sc-p34-2025",
+        "tnps-sc-p3-2026",
+        "cedar-p3-2025"
+      ]
+    },
+    {
+      "id": "sc.p3.plant-life-cycle",
+      "course": "p3_science",
+      "grade": "p3",
+      "strand": "Cycles",
+      "label": "Life cycles of plants: stages, germination conditions, seed parts",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-sc-2023",
+        "junyuan-sc-p3-2026",
+        "rivervale-sc-p34-2025",
+        "tnps-sc-p3-2026",
+        "cedar-p3-2025"
+      ]
+    },
+    {
+      "id": "sc.p3.animal-life-cycle",
+      "course": "p3_science",
+      "grade": "p3",
+      "strand": "Cycles",
+      "label": "Life cycles of animals: three- and four-stage cycles, frog, mosquito control",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-sc-2023",
+        "junyuan-sc-p3-2026",
+        "rivervale-sc-p34-2025",
+        "tnps-sc-p3-2026",
+        "cedar-p3-2025"
+      ]
+    },
+    {
+      "id": "sc.p3.magnets-properties",
+      "course": "p3_science",
+      "grade": "p3",
+      "strand": "Interactions",
+      "label": "Properties of magnets: magnetic materials, poles, attraction and repulsion, force through materials",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-sc-2023",
+        "junyuan-sc-p3-2026",
+        "rivervale-sc-p34-2025",
+        "tnps-sc-p3-2026",
+        "cedar-p3-2025",
+        "bpps-sc-p3-2026"
+      ]
+    },
+    {
+      "id": "sc.p3.making-magnets",
+      "course": "p3_science",
+      "grade": "p3",
+      "strand": "Interactions",
+      "label": "Making and using magnets: stroke and electrical methods, temporary/permanent magnets, uses",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-sc-2023",
+        "junyuan-sc-p3-2026",
+        "rivervale-sc-p34-2025",
+        "tnps-sc-p3-2026",
+        "cedar-p3-2025"
+      ]
+    },
+    {
+      "id": "sc.p3.open-ended-cer",
+      "course": "p3_science",
+      "grade": "p3",
+      "strand": "Process skills",
+      "label": "Open-ended explanations using claim, evidence and reasoning",
+      "scope": "external",
+      "pilot": "open",
+      "source_refs": [
+        "moe-sc-2023",
+        "junyuan-sc-p3-2026",
+        "rivervale-sc-p34-2025",
+        "tnps-sc-p3-2026",
+        "cedar-p3-2025",
+        "bpps-sc-p3-2026"
+      ],
+      "note": "Schools assess written explanations; the app uses objective items only (Functional Design §1)."
+    },
+    {
+      "id": "sc.p3.practical",
+      "course": "p3_science",
+      "grade": "p3",
+      "strand": "Process skills",
+      "label": "Practical test: observing, measuring, classifying with real materials",
+      "scope": "external",
+      "pilot": "open",
+      "source_refs": [
+        "moe-sc-2023",
+        "junyuan-sc-p3-2026",
+        "rivervale-sc-p34-2025",
+        "tnps-sc-p3-2026",
+        "cedar-p3-2025",
+        "jwps-p3-2025"
+      ],
+      "note": "Hands-on practical assessment stays outside the app."
+    },
+    {
+      "id": "sc.p3.p4-topics",
+      "course": "p3_science",
+      "grade": "p3",
+      "strand": "Systems / Energy / Cycles",
+      "label": "P4 lower-block topics (plant and human systems, matter, light, heat)",
+      "scope": "deferred",
+      "pilot": "open",
+      "source_refs": [
+        "moe-sc-2023",
+        "junyuan-sc-p3-2026",
+        "rivervale-sc-p34-2025",
+        "tnps-sc-p3-2026",
+        "cedar-p3-2025",
+        "rivervale-sc-p34-2025"
+      ],
+      "note": "Taught in P4 under the 2023 syllabus; outside Pilot Science scope."
+    }
+  ],
+  "limitations": [
+    "Primary Science starts at P3; there is no P2 Science course.",
+    "Pilot release: first two topics (living/non-living, classification) at the 75% guideline; the other five unlock in syllabus order.",
+    "Topic placement follows school documents implementing the 2023 syllabus; some schools teach magnets in P4. Verify against the official PDF."
+  ]
+}
