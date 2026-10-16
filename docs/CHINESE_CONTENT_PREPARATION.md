@@ -1,5 +1,7 @@
 # Chinese curriculum, contracts and first content batch
 
+Independent public-source research and current content findings: [research audit](content-review/CHINESE_RESEARCH_AUDIT.md) (2026-10-16; changes required). This evidence supplements the authoring source register and does not approve the batch.
+
 **Review proposal · 15 October 2026 · Issue #10**
 
 This is one review entry point for curriculum preparation and authoring contracts. It does not authorize an app build, private-data processing feature, content release, merge or deployment. The functional authority remains [Pilot Functional Design](PILOT_FUNCTIONAL_DESIGN.md), with [engine rules](PILOT_LEARNING_ENGINE_SPEC.md) and [QA gates](CONTENT_QA.md). No confirmed product decision is changed here.
