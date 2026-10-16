@@ -48,21 +48,73 @@ test('oversized snapshot is rejected before structural checks', () => {
   assert.deepEqual(validateSnapshot(big, CHILD), { ok: false, reason: 'too_large' })
 })
 
-test('auth module has no sign-up, anonymous or Google sign-in path', () => {
-  const client = auth.createAuthClient({ url: 'https://example.invalid', anonKey: 'public-anon' }, { fetch: async () => { throw new Error('no network') }, storage: null })
+test('auth module has no sign-up, anonymous, OTP or magic-link path', () => {
+  const client = auth.createAuthClient({ url: 'https://example.invalid', anonKey: 'public-anon', googleEnabled: false }, { fetch: async () => { throw new Error('no network') }, storage: null })
   const callables = [...Object.entries(auth), ...Object.entries(client)].filter(([, v]) => typeof v === 'function').map(([k]) => k)
   const names = callables.join(' ').toLowerCase()
-  for (const banned of ['signup', 'sign_up', 'anonymous', 'oauth', 'google', 'otp', 'magiclink', 'idtoken']) {
+  for (const banned of ['signup', 'sign_up', 'anonymous', 'otp', 'magiclink', 'idtoken']) {
     assert.ok(!names.includes(banned), banned)
   }
-  assert.equal(auth.GOOGLE_LOGIN_ENABLED, false)
+})
+
+test('Google sign-in is off by default and refuses to start or complete', async () => {
+  assert.equal(auth.readAuthConfig({ VITE_SUPABASE_URL: 'https://example.invalid', VITE_SUPABASE_ANON_KEY: 'k' }).googleEnabled, false)
+  assert.equal(auth.readAuthConfig({ VITE_SUPABASE_URL: 'https://example.invalid', VITE_SUPABASE_ANON_KEY: 'k', VITE_GOOGLE_LOGIN: 'true' }).googleEnabled, false)
+  assert.equal(auth.readAuthConfig({ VITE_SUPABASE_URL: 'https://example.invalid', VITE_SUPABASE_ANON_KEY: 'k', VITE_GOOGLE_LOGIN: 'on' }).googleEnabled, true)
+  let called = false
+  const store = memoryStore()
+  const client = auth.createAuthClient({ url: 'https://example.invalid', anonKey: 'k', googleEnabled: false }, { fetch: async () => { called = true }, storage: store })
+  assert.deepEqual(await client.startGoogleSignIn('https://app.example.invalid/auth/callback'), { ok: false, error: 'google_disabled' })
+  assert.deepEqual(await client.completeGoogleSignIn('https://app.example.invalid/auth/callback?code=c'), { ok: false, error: 'google_disabled' })
+  assert.equal(called, false)
+  assert.equal(store.m.size, 0)
+})
+
+test('Google sign-in, when switched on, uses PKCE and stores the session', async () => {
+  const calls = []
+  const store = memoryStore()
+  const fetch = async (url, init) => {
+    calls.push({ url, init })
+    return new Response(JSON.stringify({ access_token: 'g', refresh_token: 'gr', expires_at: 2000000000, user: { id: 'u-1' } }), { status: 200 })
+  }
+  const client = auth.createAuthClient({ url: 'https://example.invalid', anonKey: 'k', googleEnabled: true }, { fetch, storage: store })
+  const start = await client.startGoogleSignIn('https://app.example.invalid/auth/callback')
+  assert.equal(start.ok, true)
+  const u = new URL(start.url)
+  assert.equal(u.origin + u.pathname, 'https://example.invalid/auth/v1/authorize')
+  assert.equal(u.searchParams.get('provider'), 'google')
+  assert.equal(u.searchParams.get('code_challenge_method'), 's256')
+  const verifier = store.getItem(auth.PKCE_KEY)
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier))
+  assert.equal(u.searchParams.get('code_challenge'), Buffer.from(digest).toString('base64url'))
+  assert.ok(!start.url.includes(verifier), 'the verifier never leaves the device in step 1')
+
+  const done = await client.completeGoogleSignIn('https://app.example.invalid/auth/callback?code=abc')
+  assert.deepEqual(done, { ok: true, session: { accessToken: 'g', refreshToken: 'gr', expiresAt: 2000000000, userId: 'u-1' } })
+  assert.equal(calls[0].url, 'https://example.invalid/auth/v1/token?grant_type=pkce')
+  assert.deepEqual(JSON.parse(calls[0].init.body), { auth_code: 'abc', code_verifier: verifier })
+  assert.equal(store.getItem(auth.PKCE_KEY), null, 'verifier is single use')
+})
+
+test('Google refusal or cancellation fails closed and clears the verifier', async () => {
+  let called = false
+  const store = memoryStore()
+  const client = auth.createAuthClient({ url: 'https://example.invalid', anonKey: 'k', googleEnabled: true }, { fetch: async () => { called = true }, storage: store })
+  assert.deepEqual(await client.startGoogleSignIn('http://evil.example.invalid/cb'), { ok: false, error: 'not_configured' })
+  await client.startGoogleSignIn('https://app.example.invalid/cb')
+  const refused = await client.completeGoogleSignIn('https://app.example.invalid/cb?error=access_denied&error_description=Signups+not+allowed')
+  assert.deepEqual(refused, { ok: false, error: 'google_cancelled' })
+  assert.equal(store.getItem(auth.PKCE_KEY), null)
+  assert.deepEqual(await client.completeGoogleSignIn('https://app.example.invalid/cb?code=replayed'), { ok: false, error: 'google_cancelled' })
+  assert.equal(called, false)
+  assert.equal(client.getStoredSession(), null)
 })
 
 test('config accepts https or local http only, never a missing key', () => {
   assert.equal(auth.readAuthConfig({}), null)
   assert.equal(auth.readAuthConfig({ VITE_SUPABASE_URL: 'http://example.invalid', VITE_SUPABASE_ANON_KEY: 'k' }), null)
-  assert.deepEqual(auth.readAuthConfig({ VITE_SUPABASE_URL: 'https://example.invalid/', VITE_SUPABASE_ANON_KEY: 'k' }), { url: 'https://example.invalid', anonKey: 'k' })
-  assert.deepEqual(auth.readAuthConfig({ VITE_SUPABASE_URL: 'http://127.0.0.1:54321', VITE_SUPABASE_ANON_KEY: 'k' }), { url: 'http://127.0.0.1:54321', anonKey: 'k' })
+  assert.deepEqual(auth.readAuthConfig({ VITE_SUPABASE_URL: 'https://example.invalid/', VITE_SUPABASE_ANON_KEY: 'k' }), { url: 'https://example.invalid', anonKey: 'k', googleEnabled: false })
+  assert.deepEqual(auth.readAuthConfig({ VITE_SUPABASE_URL: 'http://127.0.0.1:54321', VITE_SUPABASE_ANON_KEY: 'k' }), { url: 'http://127.0.0.1:54321', anonKey: 'k', googleEnabled: false })
 })
 
 function memoryStore() {

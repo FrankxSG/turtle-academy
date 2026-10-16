@@ -11,6 +11,7 @@ Issue #16. This folder holds the database migration for the Pilot's **server fou
 | RLS + grants | Clients may only **read** their own family's rows. No client role (`anon`, `authenticated`, `service_role`) can insert, update or delete any table. |
 | `public.upload_snapshot(child, operation_id, base, payload)` | The **only** client write path (see below). |
 | `private.provision_family(parent_user_id, nickname)` | Owner-only setup of the one parent and child. Not callable by any client role. |
+| Google sign-in | Built in `src/auth/client.ts` (OAuth with PKCE) but **off** unless `VITE_GOOGLE_LOGIN=on`, which is set only after step 6 below passes. Email/password always remains. |
 | `private.snapshot_schema()` | The closed snapshot allow-list. It is identical to `src/snapshot/schema.json`, and a test enforces that. |
 
 ### Upload rules (`upload_snapshot`)
@@ -48,7 +49,7 @@ These are done by the owner. Never record project identifiers, URLs or keys in G
 2. **Auth settings** (Authentication → Sign In / Providers):
    - turn **off** "Allow new users to sign up"
    - keep **Anonymous sign-ins** off
-   - leave Google off unless the separate staging link test passes (Pilot Scope §3)
+   - leave Google off for now (step 6 tests it)
 3. **Apply the migration.** Run the SQL file in `supabase/migrations/` once, in the SQL editor or with the Supabase CLI.
 4. **Check the hosted Auth settings.**
 
@@ -58,6 +59,18 @@ These are done by the owner. Never record project identifiers, URLs or keys in G
 
    Both lines must say `PASS`. The script prints only the HTTP status codes.
 5. **Synthetic parent only.** Create one synthetic test user in the dashboard, then run `select private.provision_family('<that user id>', 'Synthetic');` in the SQL editor. Do not use a real child's nickname until the data-protection gate is resolved.
-6. Record in the PR **only** pass or fail for steps 2–5, with no identifiers.
+6. **Google link test (Pilot Scope §3).** Google sign-in is built but switched off. It may be switched on only if this test passes.
+   - Create the synthetic parent in step 5 with the email of a **synthetic Google test account**, marked confirmed.
+   - Turn on the Google provider in the test project, and add `http://127.0.0.1:54329/callback` to the redirect allow-list. Keep sign-ups off.
+   - Run with that same Google account; it must print `PASS … SAME pre-provisioned parent`:
+     ```sh
+     TA_SUPABASE_URL=… TA_SUPABASE_ANON_KEY=… TA_PARENT_EMAIL=… TA_PARENT_PASSWORD=… \
+       node --experimental-strip-types scripts/check-google-link.mjs --expect same
+     ```
+   - Run again with `--expect refused`, signing in with a **different** Google account. It must print `PASS … refused`, and the Users list must show no new user.
+   - Rerun the password sign-in to confirm email/password still works.
+   - If any run fails, Google stays off for the Pilot and returns with the invitation flow (Pilot Scope §3).
+   - Only if all pass: set `VITE_GOOGLE_LOGIN=on` in the app's environment, and add the app's real callback page to the redirect allow-list.
+7. Record in the PR **only** pass or fail for steps 2–6, with no identifiers.
 
 The hosted checks stay **pending** until the owner records them. The local SQL tests cannot verify hosted Auth configuration.

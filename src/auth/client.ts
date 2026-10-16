@@ -1,10 +1,12 @@
 // Pilot sign-in for the single pre-provisioned parent (Issue #16).
-// Email/password only. There is deliberately no sign-up, anonymous or Google path in this module:
-// sign-up and anonymous sign-in must also be disabled in the hosted Auth settings, which is the
-// real enforcement (see supabase/README.md). Google login stays off until the owner records a
-// passing staging link test (Pilot Scope section 3).
+// Email/password is always available. Google sign-in (OAuth with PKCE) is built but OFF by default:
+// it is switched on only by setting VITE_GOOGLE_LOGIN=on after the owner records a passing staging
+// link test on the PR (Pilot Scope section 3). There is deliberately no sign-up or anonymous path:
+// sign-up and anonymous sign-in must also be disabled in the hosted Auth settings, which is the real
+// enforcement (see supabase/README.md). A Google account that is not linked to the pre-provisioned
+// parent gets no family membership, so RLS gives it no data.
 
-export type AuthConfig = { url: string; anonKey: string }
+export type AuthConfig = { url: string; anonKey: string; googleEnabled: boolean }
 
 export type Session = {
   accessToken: string
@@ -13,7 +15,15 @@ export type Session = {
   userId: string
 }
 
-export type AuthError = 'invalid_credentials' | 'rate_limited' | 'network' | 'unavailable' | 'not_configured'
+export type AuthError =
+  | 'invalid_credentials'
+  | 'rate_limited'
+  | 'network'
+  | 'unavailable'
+  | 'not_configured'
+  | 'google_disabled'
+  | 'google_cancelled'
+  | 'storage_unavailable'
 export type AuthResult = { ok: true; session: Session } | { ok: false; error: AuthError }
 
 export type KeyValueStore = {
@@ -23,7 +33,7 @@ export type KeyValueStore = {
 }
 
 export const SESSION_KEY = 'ta.auth.session.v1'
-export const GOOGLE_LOGIN_ENABLED = false
+export const PKCE_KEY = 'ta.auth.pkce.v1'
 
 /** Reads public client configuration. The anon key is a public, RLS-bound key, never a service key. */
 export function readAuthConfig(env: Record<string, string | undefined>): AuthConfig | null {
@@ -36,12 +46,31 @@ export function readAuthConfig(env: Record<string, string | undefined>): AuthCon
   } catch {
     return null
   }
-  const local = parsed.hostname === '127.0.0.1' || parsed.hostname === 'localhost'
-  if (parsed.protocol !== 'https:' && !(local && parsed.protocol === 'http:')) return null
-  return { url: parsed.origin, anonKey }
+  if (!isSafeOrigin(parsed)) return null
+  // Off unless explicitly switched on, and only after the staging link test is recorded.
+  return { url: parsed.origin, anonKey, googleEnabled: env.VITE_GOOGLE_LOGIN?.trim() === 'on' }
+}
+
+function isSafeOrigin(u: URL): boolean {
+  const local = u.hostname === '127.0.0.1' || u.hostname === 'localhost'
+  return u.protocol === 'https:' || (local && u.protocol === 'http:')
+}
+
+function base64url(bytes: Uint8Array): string {
+  let bin = ''
+  for (const b of bytes) bin += String.fromCharCode(b)
+  return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+}
+
+async function pkcePair(): Promise<{ verifier: string; challenge: string }> {
+  const verifier = base64url(globalThis.crypto.getRandomValues(new Uint8Array(32)))
+  const digest = await globalThis.crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier))
+  return { verifier, challenge: base64url(new Uint8Array(digest)) }
 }
 
 type Deps = { fetch?: typeof fetch; storage?: KeyValueStore | null; now?: () => number }
+
+export type GoogleStart = { ok: true; url: string } | { ok: false; error: AuthError }
 
 function toSession(body: unknown): Session | null {
   if (typeof body !== 'object' || body === null) return null
@@ -89,7 +118,7 @@ export function createAuthClient(config: AuthConfig | null, deps: Deps = {}) {
     }
   }
 
-  async function tokenRequest(grant: 'password' | 'refresh_token', body: Record<string, string>): Promise<AuthResult> {
+  async function tokenRequest(grant: 'password' | 'refresh_token' | 'pkce', body: Record<string, string>): Promise<AuthResult> {
     if (!config) return { ok: false, error: 'not_configured' }
     let res: Response
     try {
@@ -119,6 +148,59 @@ export function createAuthClient(config: AuthConfig | null, deps: Deps = {}) {
     signInWithPassword(email: string, password: string): Promise<AuthResult> {
       if (!email.includes('@') || password.length === 0) return Promise.resolve({ ok: false, error: 'invalid_credentials' })
       return tokenRequest('password', { email: email.trim(), password })
+    },
+
+    /**
+     * Step 1 of Google sign-in: returns the URL to navigate to. The app's callback page must be on the
+     * hosted project's redirect allow-list. Refused unless Google login is switched on.
+     */
+    async startGoogleSignIn(redirectTo: string): Promise<GoogleStart> {
+      if (!config) return { ok: false, error: 'not_configured' }
+      if (!config.googleEnabled) return { ok: false, error: 'google_disabled' }
+      let redirect: URL
+      try {
+        redirect = new URL(redirectTo)
+      } catch {
+        return { ok: false, error: 'not_configured' }
+      }
+      if (!isSafeOrigin(redirect)) return { ok: false, error: 'not_configured' }
+      if (!storage) return { ok: false, error: 'storage_unavailable' }
+      const { verifier, challenge } = await pkcePair()
+      try {
+        storage.setItem(PKCE_KEY, verifier)
+      } catch {
+        return { ok: false, error: 'storage_unavailable' }
+      }
+      const q = new URLSearchParams({
+        provider: 'google',
+        redirect_to: redirect.toString(),
+        code_challenge: challenge,
+        code_challenge_method: 's256',
+      })
+      return { ok: true, url: `${config.url}/auth/v1/authorize?${q}` }
+    },
+
+    /** Step 2 of Google sign-in: call on the callback page with its full URL. */
+    async completeGoogleSignIn(callbackUrl: string): Promise<AuthResult> {
+      if (!config) return { ok: false, error: 'not_configured' }
+      if (!config.googleEnabled) return { ok: false, error: 'google_disabled' }
+      let verifier: string | null = null
+      try {
+        verifier = storage ? storage.getItem(PKCE_KEY) : null
+        storage?.removeItem(PKCE_KEY) // single use, whatever the outcome
+      } catch {
+        return { ok: false, error: 'storage_unavailable' }
+      }
+      let params: URLSearchParams
+      try {
+        params = new URL(callbackUrl).searchParams
+      } catch {
+        return { ok: false, error: 'google_cancelled' }
+      }
+      const code = params.get('code')
+      // A refused or cancelled sign-in (including "sign-ups not allowed") comes back as an error param.
+      if (params.has('error') || !code || !verifier) return { ok: false, error: 'google_cancelled' }
+      return tokenRequest('pkce', { auth_code: code, code_verifier: verifier })
     },
 
     /** Exchange the stored refresh token for a new session (requires network). */
