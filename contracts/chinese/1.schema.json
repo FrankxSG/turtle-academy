@@ -384,6 +384,13 @@
             "artwork"
           ],
           "additionalProperties": false
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/group"
+          },
+          "minItems": 0
         }
       },
       "required": [
@@ -394,7 +401,8 @@
         "status",
         "materials",
         "items",
-        "review_log"
+        "review_log",
+        "groups"
       ],
       "additionalProperties": false
     },
@@ -1083,6 +1091,67 @@
         "id",
         "text",
         "pinyin"
+      ],
+      "additionalProperties": false
+    },
+    "group": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "label_zh": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "label_en": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "courses": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "p2_chinese",
+              "p2_higher_chinese",
+              "p3_chinese",
+              "p3_higher_chinese"
+            ]
+          },
+          "minItems": 1
+        },
+        "target_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+          },
+          "minItems": 1
+        },
+        "item_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+          },
+          "minItems": 3
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "label_zh",
+        "label_en",
+        "courses",
+        "target_refs",
+        "item_ids"
       ],
       "additionalProperties": false
     }

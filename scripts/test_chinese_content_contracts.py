@@ -66,6 +66,18 @@ class Contracts(unittest.TestCase):
         with self.assertRaisesRegex(Invalid, 'incomplete_repair_pool'):
             check_catalogue(self.curriculum, self.batch)
 
+    def test_whole_repair_pool_deletion_is_detected(self):
+        self.batch['items'] = [r for r in self.batch['items'] if not r['id'].startswith('zh-p2-confusable-u6e05.')]
+        with self.assertRaisesRegex(Invalid, 'group_missing_item'):
+            check_catalogue(self.curriculum, self.batch)
+
+    def test_group_must_declare_every_repair_item(self):
+        group = self.batch['groups'][0]
+        group['item_ids'] = [i for i in group['item_ids'] if not i.startswith('zh-p2-confusable-u6e05.')]
+        group['target_refs'] = [t for t in group['target_refs'] if not t.endswith('.u6e05')]
+        with self.assertRaisesRegex(Invalid, 'repair_item_group_membership'):
+            check_catalogue(self.curriculum, self.batch)
+
     def test_import_pending_and_structurally_empty_no_errors(self):
         check_import(self.payload, self.curriculum, dt.date(2026, 10, 15))
         self.payload.update(extraction_result='no_errors_found', items=[])
@@ -162,7 +174,7 @@ class Contracts(unittest.TestCase):
             mutate(c)
             with self.assertRaises(Invalid):
                 check_catalogue(c, self.batch)
-        self.batch['items'][-1]['target_refs'].pop()
+        next(r for r in reversed(self.batch['items']) if r['target_refs'])['target_refs'].pop()
         with self.assertRaisesRegex(Invalid, 'target_course_coverage'):
             check_catalogue(self.curriculum, self.batch)
 

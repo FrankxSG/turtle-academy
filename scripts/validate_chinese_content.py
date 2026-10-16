@@ -195,6 +195,28 @@ def check_catalogue(curriculum, batch):
     require(len(assigned) == len(set(assigned)), 'question_in_multiple_materials')
     for target in {r for item in items.values() for r in item['target_refs']}:
         require({item['stage'] for item in items.values() if target in item['target_refs']} == {'exact', 'similar', 'generic'}, 'incomplete_repair_pool')
+    # Declared repair groups: a published group must contain every declared target's complete
+    # exact/similar/generic pool, and every repair item must belong to exactly one group.
+    groups = unique(batch['groups'])
+    require(not (set(groups) & (set(items) | set(materials))), 'duplicate_catalogue_id')
+    membership = {}
+    for group in groups.values():
+        require(len(group['item_ids']) == len(set(group['item_ids'])), 'group_duplicate_item')
+        require(len(group['target_refs']) == len(set(group['target_refs'])), 'group_duplicate_target')
+        require(all(ref in targets for ref in group['target_refs']), 'group_target_reference')
+        require({targets[ref]['course'] for ref in group['target_refs']} == set(group['courses']), 'group_course_coverage')
+        for ref in group['item_ids']:
+            require(ref in items, 'group_missing_item')
+            require(items[ref]['stage'] is not None, 'group_non_repair_item')
+            require(set(items[ref]['target_refs']) <= set(group['target_refs']), 'group_item_target')
+            require(set(items[ref]['courses']) == set(group['courses']), 'group_item_course')
+            membership[ref] = membership.get(ref, 0) + 1
+        for ref in group['target_refs']:
+            stages = [items[i]['stage'] for i in group['item_ids'] if ref in items[i]['target_refs']]
+            require(sorted(stages) == sorted(['exact', 'similar', 'generic']), 'group_incomplete_pool')
+    for item in items.values():
+        if item['stage'] is not None:
+            require(membership.get(item['id']) == 1, 'repair_item_group_membership')
     log = batch['review_log']
     for field in ['sampled_item_ids', 'disputed_item_ids']:
         require(len(log[field]) == len(set(log[field])) and set(log[field]) <= set(items), 'review_item_reference')
