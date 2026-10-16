@@ -56,18 +56,13 @@ test('trials distribution retains the unchanged character-data licence', () => {
   expect(shipped.equals(source)).toBe(true)
 })
 
-test('trials hosting config builds only the trials output, never the learner app', () => {
-  const hosting = JSON.parse(readFileSync(join(root, 'trials/vercel.json'), 'utf8'))
-  expect(hosting.buildCommand).toBe('cd .. && npm run build:trials')
-  expect(hosting.installCommand).toBe('cd .. && npm ci')
+test('hosting builds the learner app by default and the trials site only when selected', () => {
+  const hosting = JSON.parse(readFileSync(join(root, 'vercel.json'), 'utf8'))
+  expect(hosting.buildCommand).toBe('npm run build:hosted')
   expect(hosting.outputDirectory).toBe('dist')
-  expect(hosting.framework).toBeNull()
-  // No SPA rewrites: an unknown path is a 404, never a fallback page.
-  expect(hosting.rewrites).toBeUndefined()
-  // The app's own hosting config is unchanged and still builds the app.
-  const app = JSON.parse(readFileSync(join(root, 'vercel.json'), 'utf8'))
-  expect(app.buildCommand).toBe('npm run build')
-  expect(app.outputDirectory).toBe('dist')
+  const script: string = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8')).scripts['build:hosted']
+  // Only an explicit TURTLE_SITE=trials selects the trials build; anything else builds the learner app.
+  expect(script).toBe('if [ "$TURTLE_SITE" = "trials" ]; then npm run build:trials && rm -rf dist && cp -R trials/dist dist; else npm run build; fi')
 })
 
 test('learner app source never imports trial code', () => {

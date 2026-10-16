@@ -16,9 +16,14 @@ The learner app (`npm run build`) never includes this code. The trials build has
 
 ## Hosting for device testing (Issue #8, decision 3)
 
-The owner chose a private Vercel project, separate from the learner app. `trials/vercel.json` configures it: it installs and builds from the repository root (`npm ci`, `npm run build:trials`) and serves `trials/dist`. It has no rewrites, so an unknown path is a 404, never the learner app. The learner app's own `vercel.json` at the repository root is unchanged.
+The owner chose a private Vercel project, separate from the learner app. Both projects use the repository root and the root `vercel.json`, whose build command is `npm run build:hosted`:
 
-Project settings: Root Directory `trials`; include files outside the Root Directory in the build (needed for `../src`); Node 22; Deployment Protection with Vercel Authentication. Preview links are then viewable only by signed-in Vercel users with access to the project.
+- By default, `build:hosted` runs the normal learner-app build (`npm run build`).
+- Only when the hosting project sets the environment variable `TURTLE_SITE=trials` does it run `npm run build:trials` and serve that output instead. The learner app is not built at all in that case.
+
+(A project rooted at `trials/` is not possible: Vercel builds cannot read files outside the Root Directory.)
+
+Trials project settings: Root Directory left at the repository root; environment variable `TURTLE_SITE` = `trials`; Deployment Protection with Vercel Authentication on All Deployments. Links are then viewable only by signed-in Vercel users with access to the project.
 
 ## Behaviour
 
