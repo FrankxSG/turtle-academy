@@ -73,13 +73,23 @@ class Cluster:
     def _server_cmd(self, args):
         return (['runuser', '-u', 'postgres', '--'] if self.as_root else []) + args
 
+    def _checked(self, args, step):
+        p = subprocess.run(self._server_cmd(args), capture_output=True, text=True)
+        if p.returncode != 0:
+            log = ''
+            try:
+                with open(os.path.join(self.tmp, 'log')) as f:
+                    log = f.read()[-2000:]
+            except OSError:
+                pass
+            raise RuntimeError(f'{step} failed ({p.returncode}):\n{p.stdout[-2000:]}\n{p.stderr[-2000:]}\n{log}')
+
     def start(self):
-        subprocess.run(self._server_cmd([pg_bin('initdb'), '-D', self.data, '-U', self.user, '--auth=trust',
-                                         '-E', 'UTF8', '--locale=C.UTF-8', '--no-sync']),
-                       check=True, capture_output=True)
+        self._checked([pg_bin('initdb'), '-D', self.data, '-U', self.user, '--auth=trust',
+                       '-E', 'UTF8', '--locale=C.UTF-8', '--no-sync'], 'initdb')
         opts = f"-k {self.sock} -c listen_addresses='' -p {self.port} -c fsync=off"
-        subprocess.run(self._server_cmd([pg_bin('pg_ctl'), '-D', self.data, '-o', opts, '-w', '-l',
-                                         os.path.join(self.tmp, 'log'), 'start']), check=True, capture_output=True)
+        self._checked([pg_bin('pg_ctl'), '-D', self.data, '-o', opts, '-w', '-l',
+                       os.path.join(self.tmp, 'log'), 'start'], 'pg_ctl start')
 
     def stop(self):
         subprocess.run(self._server_cmd([pg_bin('pg_ctl'), '-D', self.data, '-m', 'immediate', 'stop']), capture_output=True)

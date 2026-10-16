@@ -24,5 +24,11 @@ jobs:
         with:
           node-version-file: .nvmrc
       # Synthetic-only: a throwaway local PostgreSQL cluster, no services, secrets or network.
-      - run: python3 supabase/tests/test_database.py
+      # On failure, the last lines are also emitted as an annotation so they are readable from the checks API.
+      - run: |
+          set -o pipefail
+          if ! python3 supabase/tests/test_database.py -v 2>&1 | tee db-test.log; then
+            tail -n 40 db-test.log | python3 -c "import sys; t=sys.stdin.read(); print('::error title=db-contract::' + t.replace('%','%25').replace('\r','').replace('\n','%0A'))"
+            exit 1
+          fi
       - run: node --experimental-strip-types --test supabase/tests/client/client.test.mjs
