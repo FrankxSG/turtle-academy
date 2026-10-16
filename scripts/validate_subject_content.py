@@ -221,7 +221,7 @@ def check_pool(pool, subject, cur, topics, leaves, base):
             id_list(it['leaf_refs'], where)
             for lid in it['leaf_refs']:
                 require(lid in leaves, 'item_leaf', f'{where} {lid}')
-                require(leaves[lid]['topic_ref'] == it['topic_ref'], 'item_leaf_topic', f'{where} {lid}')
+                require(topics[leaves[lid]['topic_ref']]['course'] == topic['course'], 'item_leaf_course', f'{where} {lid}')
                 require(leaves[lid]['scope'] in {'in_app', 'partial', 'extension'}, 'item_leaf_scope', f'{where} {lid}')
         items[it['id']] = it
     for m in pool['materials']:
