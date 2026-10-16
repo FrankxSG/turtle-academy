@@ -162,6 +162,14 @@
               "type": "null"
             }
           ]
+        },
+        "repair_target_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+          },
+          "minItems": 0
         }
       },
       "required": [
@@ -1028,6 +1036,13 @@
             "maxLength": 2000
           },
           "minItems": 1
+        },
+        "skill_targets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/skill_target"
+          },
+          "minItems": 0
         }
       },
       "required": [
@@ -1152,6 +1167,47 @@
         "courses",
         "target_refs",
         "item_ids"
+      ],
+      "additionalProperties": false
+    },
+    "skill_target": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+        },
+        "course": {
+          "enum": [
+            "p2_chinese",
+            "p2_higher_chinese",
+            "p3_chinese",
+            "p3_higher_chinese"
+          ]
+        },
+        "outcome_ref": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+        },
+        "kind": {
+          "enum": [
+            "word",
+            "language_point",
+            "reading_skill"
+          ]
+        },
+        "label_zh": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      },
+      "required": [
+        "id",
+        "course",
+        "outcome_ref",
+        "kind",
+        "label_zh"
       ],
       "additionalProperties": false
     }

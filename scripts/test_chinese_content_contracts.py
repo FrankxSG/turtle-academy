@@ -218,6 +218,29 @@ class Contracts(unittest.TestCase):
             with self.assertRaises(Invalid):
                 check_catalogue(self.curriculum, b)
 
+    def test_every_non_repair_question_declares_a_complete_route(self):
+        item = next(r for r in self.batch['items'] if r['id'] == 'zh-m01.q1')
+        for mutate, code in [(lambda r: r.pop('repair_target_refs'), 'missing_repair_route'),
+                             (lambda r: r.update(repair_target_refs=['zh.p2_chinese.skill.explicit-info']), 'repair_route_course'),
+                             (lambda r: r.update(repair_target_refs=['zh.p2_chinese.skill.unknown', 'zh.p2_higher_chinese.skill.unknown']), 'repair_route_reference')]:
+            b = copy.deepcopy(self.batch)
+            mutate(next(r for r in b['items'] if r['id'] == item['id']))
+            with self.subTest(code=code), self.assertRaisesRegex(Invalid, code):
+                check_catalogue(self.curriculum, b)
+        b = copy.deepcopy(self.batch)
+        next(r for r in b['items'] if r['id'] == 'zh-p2-measure.q1').update(repair_target_refs=['zh.p2_chinese.skill.measure-word'])
+        with self.assertRaisesRegex(Invalid, 'repair_item_has_route'):
+            check_catalogue(self.curriculum, b)
+
+    def test_skill_targets_sit_under_an_in_scope_outcome_of_the_same_course(self):
+        for mutate, code in [(lambda c: c['skill_targets'][0].update(outcome_ref='zh.p3_chinese.r-explicit'), 'skill_target_outcome'),
+                             (lambda c: c['skill_targets'][0].update(outcome_ref='zh.p2_chinese.listen-sounds'), 'skill_target_scope'),
+                             (lambda c: c['skill_targets'].append(dict(c['skill_targets'][0])), 'duplicate_id')]:
+            c = copy.deepcopy(self.curriculum)
+            mutate(c)
+            with self.subTest(code=code), self.assertRaisesRegex(Invalid, code):
+                check_catalogue(c, self.batch)
+
 
 if __name__ == '__main__':
     unittest.main()

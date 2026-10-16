@@ -10,9 +10,9 @@ This is one review entry point for curriculum preparation and authoring contract
 
 | Artifact | Purpose | Current state |
 | --- | --- | --- |
-| [Curriculum manifest](../content/chinese/curriculum.json) | Four course identities, official references, 104 course-specific outcome records and 1,796 character records | Source-based working inventory; independent grade/denominator audit pending |
+| [Curriculum manifest](../content/chinese/curriculum.json) | Four course identities, official references, 124 course-specific outcome records (including language-use leaves), 36 word/language-point/reading-skill repair targets and 1,796 character records | Source-based working inventory; independent grade/denominator audit pending |
 | [Contract schema](../contracts/chinese/1.schema.json) | Curriculum, original catalogue, frozen synthetic task plan, minimal Chinese intake and answer-event shapes | Proposed engineering contract; no app integration |
-| [Starter batch](../content/chinese/batches/starter-001.json) | Version 5: 300 original items (P2 150, P3 150) — 18 materials (reading, cloze, visual text; 90 questions), four declared repair groups (45 three-stage pools, 135 questions) and 75 language-use and punctuation practice items | Author checked; independent review and owner sign-off pending |
+| [Starter batch](../content/chinese/batches/starter-001.json) | Version 6: 318 original items — 18 materials (reading, cloze, visual text; 90 questions), eight declared repair groups (45 character pools and 18 word/language-point/reading-skill pools; 189 questions) and 39 further language-use and punctuation practice items; every non-repair question declares a repair route | Author checked; independent review and owner sign-off pending |
 | [Task fixtures](../content/chinese/fixtures/) | Complete P2 examples for X=6, 10, 12 and 19 | Synthetic, deterministic validation examples; no learner data |
 | [Validator](../scripts/validate_chinese_content.py) and [boundary checks](../scripts/test_chinese_content_contracts.py) | Structural integrity and cross-file rejection cases | Standard-library authoring tools; not learning-engine implementation |
 
@@ -157,7 +157,7 @@ No percentage is claimed. The release denominator is the independently verified,
 
 **Owner decision (2026-10-16) — coverage counting:** the 75% guideline is measured against **finer skill leaves**, not the current broad rows. Before freezing IDs, the independent source audit must (1) split broad in-app/partial leaves (for example character form/meaning, punctuation/sentence meaning, explicit-information retrieval) into separately reviewable leaves, and (2) add explicit **language-use leaves** — classifiers (量词), collocation (搭配), sentence patterns (句型) and word choice — each mapped to a verified syllabus page rather than folded into character recognition. **Character-group coverage is reported separately alongside** the skill percentage, never merged into it. New leaves need real source page references from the official PDFs; none are invented in this revision.
 
-A covered mapping needs reviewed questions for its required stages, valid keys/help, suitable objective interactions, rights/QA sign-off and usable offline assets. Empty leaves remain in the denominator. A single general passage item does not make an entire reading outcome covered. Version 4 has two complete P2 character groups (22 pools) and two complete P3 groups (23 pools); it is not a 75% release bank. Language-use items (量词, 词语搭配, 词语选择, sentence order and transformation, punctuation) are **general practice only** for now: their repair targets wait for the audited language-use leaves required by the coverage decision above, because a lexical target must not borrow a character ID. No fixed per-stage authoring quota is introduced.
+A covered mapping needs reviewed questions for its required stages, valid keys/help, suitable objective interactions, rights/QA sign-off and usable offline assets. Empty leaves remain in the denominator. A single general passage item does not make an entire reading outcome covered. Version 4 has two complete P2 character groups (22 pools) and two complete P3 groups (23 pools); it is not a 75% release bank. Version 6 maps language-use items (量词, 词语搭配, 词语选择, 关联词, sentence order and transformation, punctuation) to explicit language-use leaves and gives them non-character repair targets (`skill_targets`), so a lexical target never borrows a character ID. These leaves use the page of their parent outcome and still need the independent page audit above. No fixed per-stage authoring quota is introduced.
 
 Author review checked keys against each stimulus, plausible single-answer interpretation, hint-before-retry ordering, explanations, basic readability and source applicability. All four options are visible for inspection below. The supplied changes-requested review covered the review document, schemas, validator and three initial fixtures, but explicitly excluded the raw data, test file and full source audit. It is not full content agreement or owner sign-off. Version 2 removes author scoping notes from child explanations, simplifies vocabulary, changes the general 晴 cloze to 放晴 while retaining a different 晴天 repair context, and replaces the disputed 座位/坐位 item with 这座桥. No dictionary/educator ruling about the removed wording is claimed; its replacement was later accepted by the owner (below). Version 3 (owner-directed review revision) replaces the three standalone repair pools with one twelve-character P2 look-alike/sound-alike group renamed by topic (`zh-p2-confusable-*`); gives the 晴 related-use item a new 晴朗 context so it no longer duplicates the 放晴 general cloze; removes the 座 cue from a 住 item; replaces 按住 with 抓住 and 一楼小室 with 一楼活动室; and uses look-alike distractors (永/木/禾) for the 水 cloze. Owner decision (2026-10-16): the 这座桥 item is accepted as written, because 座 is the standard classifier for a bridge, and it is removed from `disputed_item_ids`. Version 4 addresses the follow-up review on `a0b2b55`: the 已 related-use hint no longer shows 已经; 请低声一点 becomes 请把声音放低一点; the author-check date is updated; and repair groups are declared and validated (above). It also adds a P2 radicals group, P3 look-alike/sound-alike and radicals groups, six P2 and eight P3 materials, and language-use practice. No artwork/audio assets are used.
 
@@ -175,7 +175,7 @@ python3 -m unittest discover -s scripts -p test_chinese_content_contracts.py -v
 python3 scripts/privacy_guard.py
 ```
 
-Current authoring evidence: schema/reference/key checks and 20 boundary test methods pass (including whole-pool deletion and undeclared repair items); the optional PDF source audit reproduces all character records and counts. Additional rejection cases include nonpositive versions, stale item pins, ID/hash trailing newlines, inconsistent approval states, invalid review IDs, wrong grade/source pages, incomplete target course coverage, wrong mapped character values, broken blank/annotation links and a premature X=12 halfway boundary. Existing X/material/import/assistance checks remain. No app/browser/backend tests are claimed; application files and dependencies are unchanged.
+Current authoring evidence: schema/reference/key checks and 22 boundary test methods pass (including whole-pool deletion and undeclared repair items); the optional PDF source audit reproduces all character records and counts. Additional rejection cases include nonpositive versions, stale item pins, ID/hash trailing newlines, inconsistent approval states, invalid review IDs, wrong grade/source pages, incomplete target course coverage, wrong mapped character values, broken blank/annotation links and a premature X=12 halfway boundary. Existing X/material/import/assistance checks remain. No app/browser/backend tests are claimed; application files and dependencies are unchanged.
 
 Before building Chinese: approve the independently audited source map/leaf boundaries and contracts; complete content QA and private coverage/proceed gates; resolve the existing data-protection gates for real records. Then authorize a focused synthetic-only implementation slice separately. This preparation PR must remain draft until review is resolved, and must not merge or deploy without the owner's explicit authorization.
 
@@ -186,9 +186,22 @@ Version 5 corrects seven items: sentence order, the fishing stimulus, explicit h
 These are proposed corrections, not independent approval. Existing task/history must retain earlier pinned versions; this authoring revision does not implement evidence migration or retroactive regrading.
 
 
+## Audit-response revision — 16 October 2026 (batch version 6)
+
+Responds to [CHINESE_RESEARCH_AUDIT.md](content-review/CHINESE_RESEARCH_AUDIT.md) ZH1–ZH4. Author revision only: every revised or new item remains pending independent re-review and owner sign-off. Mapping-only changes keep item versions (so the four synthetic plans still pin their items); content changes increment them. The plans now pin batch version 6.
+
+| Finding | Change in this batch | Still open |
+| --- | --- | --- |
+| **ZH1** skill mapping and course depth | 18 language-use outcome records are added: 量词运用, 词语搭配 and 排列词语成句 for all four courses; 根据句意选择词语 for P2; 关联词 and 句式转换 for P3. No language-use item maps to `w-ideas` any more. Each leaf uses its parent outcome's page (完整句子组织, PDF p31), as recorded in `grade_basis`. | Independent page audit of the language-use leaves; HCL-specific depth evidence (shared CL/HCL tags still do not prove HCL depth; recorded in `limitations`) |
+| **ZH2** progression matrix | The audit's matrix rows are applied: P3 CL now has 根据语境理解字词和句子 (`zh.p3_chinese.r-word-context`). P3 HCL has 根据起因和过程推断发展 (`zh.p3_higher_chinese.r-infer-cause`, no items yet, so it stays in the denominator). `zh-m11.q1` cannot test prediction once the body is shown, so it is now an explicit-retrieval question; title prediction remains an unfilled P3 leaf. Later rows (comparison; main idea and implicit meaning) are not P2/P3 core. | A pre-reading phase would be needed before any prediction item counts |
+| **ZH3** non-character repair routes | The contract adds `skill_targets` (word, language point or reading skill, each under an in-scope outcome of the same course) and `repair_target_refs`. The validator now requires every non-repair question to declare a complete route for each of its courses, and repair items may not declare one. 18 skill pools are added in four new groups. Twelve are built from existing language-use items; six are new (P2/P3 explicit information, notices and character-in-context; 18 new items). Reading and notice questions route to the reading-skill pools. Cloze blanks route to the character's own pool when one exists, otherwise to character-in-context or word-choice. Mistake import may now map words, language points and reading skills (`mapped_target_kind` is checked). | Pools are one item per stage, which is thin stock. Repair is chosen by skill, not by a guessed error cause. |
+| **ZH4** windmill process | `zh-m16` now describes an accurate pinwheel: fold along both diagonals, cut from the corners towards the centre leaving the middle uncut, bring one corner of each triangle to the centre, and pin it loosely to a stick so it can turn. All five blanks, hints and explanations were revised together. | Independent review |
+
+Citation follow-up (owner decision): the dated enrichment table and the 2026 sample images now cite the publisher's public sample and listing pages instead of direct PDF and PNG file links. Hashes and page numbers are kept.
+
 ## 6. Starter content review
 
-Version 5. These are newly drafted generic examples, not extracted learner targets or copied passages. `[空n]` is a readable substitute for a linked blank token; annotation text and pinyin are combined for this review view only. App rendering remains unimplemented.
+Version 6. These are newly drafted generic examples, not extracted learner targets or copied passages. `[空n]` is a readable substitute for a linked blank token; annotation text and pinyin are combined for this review view only. App rendering remains unimplemented. "Repair route" names the repair pool a wrong first answer is sent to.
 
 ### Materials
 
@@ -198,13 +211,13 @@ Courses: p2_chinese, p2_higher_chinese. Kind: reading.
 
 > 星期六早上，小安和姐姐在家种豆子。姐姐拿来两个小盆，小安把泥土放进盆里。他们把豆子放进泥土，再浇一点水。最后，他们把小盆放在窗边。小安说：“我明天还要来看！”
 
-| ID / stage | Question and options | Key | Hint | Explanation |
-| --- | --- | --- | --- | --- |
-| zh-m01.q1 | 他们什么时候种豆子？<br>1 星期六早上；2 星期六晚上；3 星期天早上；4 星期天晚上 | 星期六早上 | 找一找第一句的时间。 | 第一句写明是星期六早上。 |
-| zh-m01.q2 | 谁拿来小盆？<br>1 小安；2 姐姐；3 爸爸；4 奶奶 | 姐姐 | 看看“拿来”前面写的是谁。 | 短文说是姐姐拿来两个小盆。 |
-| zh-m01.q3 | 姐姐拿来几个小盆？<br>1 一个；2 三个；3 四个；4 两个 | 两个 | 再读姐姐拿小盆的那一句。 | 姐姐拿来两个小盆。 |
-| zh-m01.q4 | 放好豆子后，他们接着做什么？<br>1 拿来小盆；2 放泥土；3 浇一点水；4 收起小盆 | 浇一点水 | 找“再”后面的动作。 | 放好豆子后，他们再浇一点水。 |
-| zh-m01.q5 | 最后，小盆放在哪里？<br>1 桌下；2 门外；3 床边；4 窗边 | 窗边 | 找“最后”后面写的地方。 | 短文说最后把小盆放在窗边。 |
+| ID / stage | Question and options | Key | Hint | Explanation | Repair route |
+| --- | --- | --- | --- | --- | --- |
+| zh-m01.q1 | 他们什么时候种豆子？<br>1 星期六早上；2 星期六晚上；3 星期天早上；4 星期天晚上 | 星期六早上 | 找一找第一句的时间。 | 第一句写明是星期六早上。 | 找出短文中明示的信息 |
+| zh-m01.q2 | 谁拿来小盆？<br>1 小安；2 姐姐；3 爸爸；4 奶奶 | 姐姐 | 看看“拿来”前面写的是谁。 | 短文说是姐姐拿来两个小盆。 | 找出短文中明示的信息 |
+| zh-m01.q3 | 姐姐拿来几个小盆？<br>1 一个；2 三个；3 四个；4 两个 | 两个 | 再读姐姐拿小盆的那一句。 | 姐姐拿来两个小盆。 | 找出短文中明示的信息 |
+| zh-m01.q4 | 放好豆子后，他们接着做什么？<br>1 拿来小盆；2 放泥土；3 浇一点水；4 收起小盆 | 浇一点水 | 找“再”后面的动作。 | 放好豆子后，他们再浇一点水。 | 找出短文中明示的信息 |
+| zh-m01.q5 | 最后，小盆放在哪里？<br>1 桌下；2 门外；3 床边；4 窗边 | 窗边 | 找“最后”后面写的地方。 | 短文说最后把小盆放在窗边。 | 找出短文中明示的信息 |
 
 #### zh-m02 · 图书角通知
 
@@ -216,13 +229,13 @@ Courses: p2_chinese, p2_higher_chinese. Kind: visual_text.
 > 请带借书卡，每人可借两本书。
 > 请在下个星期三还书。
 
-| ID / stage | Question and options | Key | Hint | Explanation |
-| --- | --- | --- | --- | --- |
-| zh-m02.q1 | 图书角哪一天开放？<br>1 星期一；2 星期二；3 星期三；4 星期四 | 星期三 | 看通知中的开放时间。 | 通知写明星期三开放。 |
-| zh-m02.q2 | 图书角几点开放？<br>1 上午三点；2 下午三点；3 下午四点；4 上午四点 | 下午三点 | 注意“上午”和“下午”。 | 通知写明下午三点。 |
-| zh-m02.q3 | 图书角在哪里？<br>1 一楼活动室；2 二楼活动室；3 一楼音乐室；4 二楼音乐室 | 一楼活动室 | 找“地点”一栏。 | 地点一栏写的是一楼活动室。 |
-| zh-m02.q4 | 借书时要带什么？<br>1 水杯；2 画纸；3 球；4 借书卡 | 借书卡 | 找“请带”后面的东西。 | 通知要求带借书卡。 |
-| zh-m02.q5 | 每人可借几本书？<br>1 一本；2 两本；3 三本；4 四本 | 两本 | 找“每人可借”后面的数目。 | 通知写明每人可借两本书。 |
+| ID / stage | Question and options | Key | Hint | Explanation | Repair route |
+| --- | --- | --- | --- | --- | --- |
+| zh-m02.q1 | 图书角哪一天开放？<br>1 星期一；2 星期二；3 星期三；4 星期四 | 星期三 | 看通知中的开放时间。 | 通知写明星期三开放。 | 从通知、告示中找信息 |
+| zh-m02.q2 | 图书角几点开放？<br>1 上午三点；2 下午三点；3 下午四点；4 上午四点 | 下午三点 | 注意“上午”和“下午”。 | 通知写明下午三点。 | 从通知、告示中找信息 |
+| zh-m02.q3 | 图书角在哪里？<br>1 一楼活动室；2 二楼活动室；3 一楼音乐室；4 二楼音乐室 | 一楼活动室 | 找“地点”一栏。 | 地点一栏写的是一楼活动室。 | 从通知、告示中找信息 |
+| zh-m02.q4 | 借书时要带什么？<br>1 水杯；2 画纸；3 球；4 借书卡 | 借书卡 | 找“请带”后面的东西。 | 通知要求带借书卡。 | 从通知、告示中找信息 |
+| zh-m02.q5 | 每人可借几本书？<br>1 一本；2 两本；3 三本；4 四本 | 两本 | 找“每人可借”后面的数目。 | 通知写明每人可借两本书。 | 从通知、告示中找信息 |
 
 #### zh-m03 · 公园里的早晨
 
@@ -230,13 +243,13 @@ Courses: p2_chinese, p2_higher_chinese. Kind: cloze.
 
 > 早上，我和妈妈到公园。雨停了，天放[空1]了。小鸟在树上[空2]。妈妈坐在长椅上，我沿 (yán)着小路慢慢地[空3]。走累了，我喝了几口[空4]。回家前，我们把空瓶放进垃圾[空5]。
 
-| ID / stage | Question and options | Key | Hint | Explanation |
-| --- | --- | --- | --- | --- |
-| zh-m03.q1 | 第1空选哪个字？<br>1 晴；2 睛；3 请；4 情 | 晴 | 这里写的是雨后的天气。 | “放晴”是说天不再下雨，太阳出来了。 |
-| zh-m03.q2 | 第2空选哪个词？<br>1 写字；2 洗澡；3 唱歌；4 看书 | 唱歌 | 看看做这个动作的是谁。 | 这段话写小鸟在树上唱歌。 |
-| zh-m03.q3 | 第3空选哪个词？<br>1 游泳；2 走路；3 睡觉；4 吃饭 | 走路 | 留意“小路”和后面的“走累了”。 | 小路和“走累了”告诉我们，这里应选“走路”。 |
-| zh-m03.q4 | 第4空选哪个字？<br>1 永；2 水；3 木；4 禾 | 水 | 想想“喝了几口”后面可以接什么。 | “水”可以喝。“永”和“水”样子很像，要看清楚。 |
-| zh-m03.q5 | 第5空选哪个字？<br>1 桶；2 桥；3 床；4 窗 | 桶 | 想想放垃圾的容器叫什么。 | 空瓶要放进垃圾桶，这里选“桶”。 |
+| ID / stage | Question and options | Key | Hint | Explanation | Repair route |
+| --- | --- | --- | --- | --- | --- |
+| zh-m03.q1 | 第1空选哪个字？<br>1 晴；2 睛；3 请；4 情 | 晴 | 这里写的是雨后的天气。 | “放晴”是说天不再下雨，太阳出来了。 | “晴”字组 |
+| zh-m03.q2 | 第2空选哪个词？<br>1 写字；2 洗澡；3 唱歌；4 看书 | 唱歌 | 看看做这个动作的是谁。 | 这段话写小鸟在树上唱歌。 | 根据句意选择词语 |
+| zh-m03.q3 | 第3空选哪个词？<br>1 游泳；2 走路；3 睡觉；4 吃饭 | 走路 | 留意“小路”和后面的“走累了”。 | 小路和“走累了”告诉我们，这里应选“走路”。 | 根据句意选择词语 |
+| zh-m03.q4 | 第4空选哪个字？<br>1 永；2 水；3 木；4 禾 | 水 | 想想“喝了几口”后面可以接什么。 | “水”可以喝。“永”和“水”样子很像，要看清楚。 | 根据句意选字 |
+| zh-m03.q5 | 第5空选哪个字？<br>1 桶；2 桥；3 床；4 窗 | 桶 | 想想放垃圾的容器叫什么。 | 空瓶要放进垃圾桶，这里选“桶”。 | 根据句意选字 |
 
 #### zh-m04 · 找雨伞
 
@@ -244,13 +257,13 @@ Courses: p2_chinese, p2_higher_chinese. Kind: reading.
 
 > 放学时下雨了。小文打开书包，发现没有带伞。老师借给他一把蓝伞。小文向老师道谢，撑着蓝伞回家。第二天早上，小文把伞擦干，放回老师的桌上。
 
-| ID / stage | Question and options | Key | Hint | Explanation |
-| --- | --- | --- | --- | --- |
-| zh-m04.q1 | 什么时候下雨了？<br>1 上课时；2 吃饭时；3 睡觉时；4 放学时 | 放学时 | 看第一句。 | 第一句写明放学时下雨了。 |
-| zh-m04.q2 | 小文在书包里没有找到什么？<br>1 书；2 伞；3 笔；4 水杯 | 伞 | 找“没有带”后面的东西。 | 小文发现没有带伞。 |
-| zh-m04.q3 | 谁借伞给小文？<br>1 老师；2 同学；3 妈妈；4 姐姐 | 老师 | 找“借给他”前面的人。 | 短文说老师借给他一把蓝伞。 |
-| zh-m04.q4 | 借来的伞是什么颜色？<br>1 红色；2 黄色；3 蓝色；4 绿色 | 蓝色 | 看看老师借出的是什么伞。 | 短文写的是蓝伞。 |
-| zh-m04.q5 | 第二天早上，小文把伞放在哪里？<br>1 书包里；2 门边；3 椅子上；4 老师的桌上 | 老师的桌上 | 看最后一句。 | 最后一句写明把伞放回老师的桌上。 |
+| ID / stage | Question and options | Key | Hint | Explanation | Repair route |
+| --- | --- | --- | --- | --- | --- |
+| zh-m04.q1 | 什么时候下雨了？<br>1 上课时；2 吃饭时；3 睡觉时；4 放学时 | 放学时 | 看第一句。 | 第一句写明放学时下雨了。 | 找出短文中明示的信息 |
+| zh-m04.q2 | 小文在书包里没有找到什么？<br>1 书；2 伞；3 笔；4 水杯 | 伞 | 找“没有带”后面的东西。 | 小文发现没有带伞。 | 找出短文中明示的信息 |
+| zh-m04.q3 | 谁借伞给小文？<br>1 老师；2 同学；3 妈妈；4 姐姐 | 老师 | 找“借给他”前面的人。 | 短文说老师借给他一把蓝伞。 | 找出短文中明示的信息 |
+| zh-m04.q4 | 借来的伞是什么颜色？<br>1 红色；2 黄色；3 蓝色；4 绿色 | 蓝色 | 看看老师借出的是什么伞。 | 短文写的是蓝伞。 | 找出短文中明示的信息 |
+| zh-m04.q5 | 第二天早上，小文把伞放在哪里？<br>1 书包里；2 门边；3 椅子上；4 老师的桌上 | 老师的桌上 | 看最后一句。 | 最后一句写明把伞放回老师的桌上。 | 找出短文中明示的信息 |
 
 #### zh-m05 · 换一个办法
 
@@ -258,13 +271,13 @@ Courses: p3_chinese, p3_higher_chinese. Kind: reading.
 
 > 学校的图书角要增加一个放书的地方。小宁想用纸盒做书架，可是大纸盒太软，放进几本书就倒了。她和伙伴把书拿出来，在盒子里加了两块硬纸板，再把较重的书放在下面。这次，纸盒站稳了。伙伴说：“先试一试，再改一改，真有用！”
 
-| ID / stage | Question and options | Key | Hint | Explanation |
-| --- | --- | --- | --- | --- |
-| zh-m05.q1 | 他们想增加什么地方？<br>1 放球的地方；2 放书的地方；3 放伞的地方；4 放鞋的地方 | 放书的地方 | 先读第一句。 | 第一句明确写明要增加放书的地方。 |
-| zh-m05.q2 | 小宁最初准备用什么做书架？<br>1 木板；2 塑料箱；3 纸盒；4 铁架 | 纸盒 | 找“小宁想用”后面的材料。 | 短文说小宁想用纸盒做书架。 |
-| zh-m05.q3 | 纸盒开始为什么倒了？<br>1 纸盒太软；2 书太少；3 地上有水；4 没有伙伴 | 纸盒太软 | 找“可是”后面明说的情况。 | 短文说大纸盒太软，所以放进书后就倒了。 |
-| zh-m05.q4 | 他们加了几块硬纸板？<br>1 一块；2 三块；3 四块；4 两块 | 两块 | 找“硬纸板”前面的数目。 | 他们加了两块硬纸板。 |
-| zh-m05.q5 | 较重的书后来放在哪里？<br>1 盒子旁边；2 下面；3 上面；4 桌子底下 | 下面 | 找“较重的书”后面的地方。 | 文中写明把较重的书放在下面。 |
+| ID / stage | Question and options | Key | Hint | Explanation | Repair route |
+| --- | --- | --- | --- | --- | --- |
+| zh-m05.q1 | 他们想增加什么地方？<br>1 放球的地方；2 放书的地方；3 放伞的地方；4 放鞋的地方 | 放书的地方 | 先读第一句。 | 第一句明确写明要增加放书的地方。 | 找出短文中明示的信息 |
+| zh-m05.q2 | 小宁最初准备用什么做书架？<br>1 木板；2 塑料箱；3 纸盒；4 铁架 | 纸盒 | 找“小宁想用”后面的材料。 | 短文说小宁想用纸盒做书架。 | 找出短文中明示的信息 |
+| zh-m05.q3 | 纸盒开始为什么倒了？<br>1 纸盒太软；2 书太少；3 地上有水；4 没有伙伴 | 纸盒太软 | 找“可是”后面明说的情况。 | 短文说大纸盒太软，所以放进书后就倒了。 | 找出短文中明示的信息 |
+| zh-m05.q4 | 他们加了几块硬纸板？<br>1 一块；2 三块；3 四块；4 两块 | 两块 | 找“硬纸板”前面的数目。 | 他们加了两块硬纸板。 | 找出短文中明示的信息 |
+| zh-m05.q5 | 较重的书后来放在哪里？<br>1 盒子旁边；2 下面；3 上面；4 桌子底下 | 下面 | 找“较重的书”后面的地方。 | 文中写明把较重的书放在下面。 | 找出短文中明示的信息 |
 
 #### zh-m06 · 帮奶奶
 
@@ -272,13 +285,13 @@ Courses: p2_chinese, p2_higher_chinese. Kind: reading.
 
 > 星期天，我去奶奶家。奶奶的腿不好，走路很慢。我帮奶奶扫地，还帮她把晒干的衣服收进来。中午，奶奶给我做了我最爱吃的鸡蛋面。吃完饭，我和奶奶一起看照片。奶奶说：“你长大了，真是一个好孩子！”我听了，心里很高兴。
 
-| ID / stage | Question and options | Key | Hint | Explanation |
-| --- | --- | --- | --- | --- |
-| zh-m06.q1 | 我什么时候去奶奶家？<br>1 星期一；2 星期六；3 放学后；4 星期天 | 星期天 | 看第一句。 | 第一句写明是星期天。 |
-| zh-m06.q2 | 奶奶走路为什么很慢？<br>1 路太远了；2 外面下雨了；3 奶奶太累了；4 奶奶的腿不好 | 奶奶的腿不好 | 找写奶奶走路的句子。 | 短文说奶奶的腿不好，走路很慢。 |
-| zh-m06.q3 | 我帮奶奶做了哪件事？<br>1 洗碗；2 扫地；3 买菜；4 做饭 | 扫地 | 找“我帮奶奶”后面的话。 | 我帮奶奶扫地，还把衣服收进来。 |
-| zh-m06.q4 | 中午奶奶给我做了什么？<br>1 鸡汤；2 炒饭；3 鸡蛋面；4 面包 | 鸡蛋面 | 找“中午”那一句。 | 奶奶做了鸡蛋面。 |
-| zh-m06.q5 | 听了奶奶的话，我心里觉得怎样？<br>1 生气；2 难过；3 高兴；4 害怕 | 高兴 | 看最后一句。 | 最后一句写我心里很高兴。 |
+| ID / stage | Question and options | Key | Hint | Explanation | Repair route |
+| --- | --- | --- | --- | --- | --- |
+| zh-m06.q1 | 我什么时候去奶奶家？<br>1 星期一；2 星期六；3 放学后；4 星期天 | 星期天 | 看第一句。 | 第一句写明是星期天。 | 找出短文中明示的信息 |
+| zh-m06.q2 | 奶奶走路为什么很慢？<br>1 路太远了；2 外面下雨了；3 奶奶太累了；4 奶奶的腿不好 | 奶奶的腿不好 | 找写奶奶走路的句子。 | 短文说奶奶的腿不好，走路很慢。 | 找出短文中明示的信息 |
+| zh-m06.q3 | 我帮奶奶做了哪件事？<br>1 洗碗；2 扫地；3 买菜；4 做饭 | 扫地 | 找“我帮奶奶”后面的话。 | 我帮奶奶扫地，还把衣服收进来。 | 找出短文中明示的信息 |
+| zh-m06.q4 | 中午奶奶给我做了什么？<br>1 鸡汤；2 炒饭；3 鸡蛋面；4 面包 | 鸡蛋面 | 找“中午”那一句。 | 奶奶做了鸡蛋面。 | 找出短文中明示的信息 |
+| zh-m06.q5 | 听了奶奶的话，我心里觉得怎样？<br>1 生气；2 难过；3 高兴；4 害怕 | 高兴 | 看最后一句。 | 最后一句写我心里很高兴。 | 找出短文中明示的信息 |
 
 #### zh-m07 · 小蚂蚁搬家
 
@@ -286,13 +299,13 @@ Courses: p2_chinese, p2_higher_chinese. Kind: reading.
 
 > 天空乌云密布，小蚂蚁们排着长长的队伍，一只接一只地往高处搬。它们有的搬米粒，有的搬面包屑。一只小蚂蚁搬不动一块大饼干，旁边的两只蚂蚁马上过来帮忙。不久，大雨哗哗地下起来了，这时蚂蚁们已经住进了新家。
 
-| ID / stage | Question and options | Key | Hint | Explanation |
-| --- | --- | --- | --- | --- |
-| zh-m07.q1 | 故事开始时，天空是什么样子？<br>1 下着大雪；2 阳光很好；3 乌云密布；4 出现彩虹 | 乌云密布 | 看第一句。 | 第一句写天空乌云密布。 |
-| zh-m07.q2 | 蚂蚁们往哪里搬？<br>1 往低处搬；2 往河里搬；3 往高处搬；4 往树洞里搬 | 往高处搬 | 找“往”后面的词。 | 蚂蚁们往高处搬。 |
-| zh-m07.q3 | 小蚂蚁搬不动什么？<br>1 一块大饼干；2 一片叶子；3 一点面包屑；4 一粒米 | 一块大饼干 | 找“搬不动”。 | 小蚂蚁搬不动一块大饼干。 |
-| zh-m07.q4 | 谁来帮小蚂蚁？<br>1 一只小鸟；2 蚂蚁妈妈；3 没有人；4 旁边的两只蚂蚁 | 旁边的两只蚂蚁 | 找“帮忙”前面的词。 | 旁边的两只蚂蚁马上过来帮忙。 |
-| zh-m07.q5 | 下大雨时，小蚂蚁们已经住进了哪里？<br>1 新家；2 河里；3 树顶；4 饼干下面 | 新家 | 再读故事的最后一句。 | 最后一句说，蚂蚁们已经住进了新家。 |
+| ID / stage | Question and options | Key | Hint | Explanation | Repair route |
+| --- | --- | --- | --- | --- | --- |
+| zh-m07.q1 | 故事开始时，天空是什么样子？<br>1 下着大雪；2 阳光很好；3 乌云密布；4 出现彩虹 | 乌云密布 | 看第一句。 | 第一句写天空乌云密布。 | 找出短文中明示的信息 |
+| zh-m07.q2 | 蚂蚁们往哪里搬？<br>1 往低处搬；2 往河里搬；3 往高处搬；4 往树洞里搬 | 往高处搬 | 找“往”后面的词。 | 蚂蚁们往高处搬。 | 找出短文中明示的信息 |
+| zh-m07.q3 | 小蚂蚁搬不动什么？<br>1 一块大饼干；2 一片叶子；3 一点面包屑；4 一粒米 | 一块大饼干 | 找“搬不动”。 | 小蚂蚁搬不动一块大饼干。 | 找出短文中明示的信息 |
+| zh-m07.q4 | 谁来帮小蚂蚁？<br>1 一只小鸟；2 蚂蚁妈妈；3 没有人；4 旁边的两只蚂蚁 | 旁边的两只蚂蚁 | 找“帮忙”前面的词。 | 旁边的两只蚂蚁马上过来帮忙。 | 找出短文中明示的信息 |
+| zh-m07.q5 | 下大雨时，小蚂蚁们已经住进了哪里？<br>1 新家；2 河里；3 树顶；4 饼干下面 | 新家 | 再读故事的最后一句。 | 最后一句说，蚂蚁们已经住进了新家。 | 找出短文中明示的信息 |
 
 #### zh-m08 · 游泳班报名
 
@@ -305,13 +318,13 @@ Courses: p2_chinese, p2_higher_chinese. Kind: visual_text.
 > 费用：每人二十元
 > 请在三月五日以前把报名表交给林老师。
 
-| ID / stage | Question and options | Key | Hint | Explanation |
-| --- | --- | --- | --- | --- |
-| zh-m08.q1 | 谁可以报名参加游泳班？<br>1 家长；2 二年级学生；3 所有老师；4 一年级学生 | 二年级学生 | 看“对象”。 | 对象是二年级学生。 |
-| zh-m08.q2 | 游泳班在星期几上课？<br>1 星期一；2 星期二；3 星期六；4 星期三 | 星期二 | 看“时间”。 | 时间是每星期二。 |
-| zh-m08.q3 | 每次上课多长时间？<br>1 三个小时；2 一个小时；3 半个小时；4 两个小时 | 一个小时 | 从下午三点到四点。 | 三点到四点是一个小时。 |
-| zh-m08.q4 | 报名表要交给谁？<br>1 游泳教练；2 校长；3 班长；4 林老师 | 林老师 | 看最后一句。 | 报名表交给林老师。 |
-| zh-m08.q5 | 最迟要在什么时候交报名表？<br>1 每星期二；2 三月五日以后；3 三月五日以前；4 下午四点以后 | 三月五日以前 | 找“以前”。 | 要在三月五日以前交。 |
+| ID / stage | Question and options | Key | Hint | Explanation | Repair route |
+| --- | --- | --- | --- | --- | --- |
+| zh-m08.q1 | 谁可以报名参加游泳班？<br>1 家长；2 二年级学生；3 所有老师；4 一年级学生 | 二年级学生 | 看“对象”。 | 对象是二年级学生。 | 从通知、告示中找信息 |
+| zh-m08.q2 | 游泳班在星期几上课？<br>1 星期一；2 星期二；3 星期六；4 星期三 | 星期二 | 看“时间”。 | 时间是每星期二。 | 从通知、告示中找信息 |
+| zh-m08.q3 | 每次上课多长时间？<br>1 三个小时；2 一个小时；3 半个小时；4 两个小时 | 一个小时 | 从下午三点到四点。 | 三点到四点是一个小时。 | 从通知、告示中找信息 |
+| zh-m08.q4 | 报名表要交给谁？<br>1 游泳教练；2 校长；3 班长；4 林老师 | 林老师 | 看最后一句。 | 报名表交给林老师。 | 从通知、告示中找信息 |
+| zh-m08.q5 | 最迟要在什么时候交报名表？<br>1 每星期二；2 三月五日以后；3 三月五日以前；4 下午四点以后 | 三月五日以前 | 找“以前”。 | 要在三月五日以前交。 | 从通知、告示中找信息 |
 
 #### zh-m09 · 过春节
 
@@ -319,13 +332,13 @@ Courses: p2_chinese, p2_higher_chinese. Kind: reading.
 
 > 春节是华人最重要的节日。过年前，大家把家里打扫干净，贴上红红的春联。除夕晚上，一家人围在一起吃团圆饭。大年初一，孩子们穿上新衣服，向长辈拜年，还会收到红包。
 
-| ID / stage | Question and options | Key | Hint | Explanation |
-| --- | --- | --- | --- | --- |
-| zh-m09.q1 | 过年前大家会做什么？<br>1 打扫家里；2 种很多树；3 去海边游泳；4 搬新家 | 打扫家里 | 看第二句。 | 过年前大家把家里打扫干净。 |
-| zh-m09.q2 | 春联是什么颜色的？<br>1 白色；2 红色；3 蓝色；4 绿色 | 红色 | 找“春联”前面的词。 | 短文说“红红的春联”。 |
-| zh-m09.q3 | 除夕晚上一家人做什么？<br>1 出门旅行；2 早早睡觉；3 去看电影；4 吃团圆饭 | 吃团圆饭 | 找“除夕晚上”。 | 除夕晚上一家人吃团圆饭。 |
-| zh-m09.q4 | 大年初一孩子们会穿什么？<br>1 雨衣；2 睡衣；3 校服；4 新衣服 | 新衣服 | 找“大年初一”。 | 孩子们穿上新衣服。 |
-| zh-m09.q5 | 孩子们拜年时会收到什么？<br>1 玩具车；2 书包；3 红包；4 蛋糕 | 红包 | 看最后一句。 | 孩子们会收到红包。 |
+| ID / stage | Question and options | Key | Hint | Explanation | Repair route |
+| --- | --- | --- | --- | --- | --- |
+| zh-m09.q1 | 过年前大家会做什么？<br>1 打扫家里；2 种很多树；3 去海边游泳；4 搬新家 | 打扫家里 | 看第二句。 | 过年前大家把家里打扫干净。 | 找出短文中明示的信息 |
+| zh-m09.q2 | 春联是什么颜色的？<br>1 白色；2 红色；3 蓝色；4 绿色 | 红色 | 找“春联”前面的词。 | 短文说“红红的春联”。 | 找出短文中明示的信息 |
+| zh-m09.q3 | 除夕晚上一家人做什么？<br>1 出门旅行；2 早早睡觉；3 去看电影；4 吃团圆饭 | 吃团圆饭 | 找“除夕晚上”。 | 除夕晚上一家人吃团圆饭。 | 找出短文中明示的信息 |
+| zh-m09.q4 | 大年初一孩子们会穿什么？<br>1 雨衣；2 睡衣；3 校服；4 新衣服 | 新衣服 | 找“大年初一”。 | 孩子们穿上新衣服。 | 找出短文中明示的信息 |
+| zh-m09.q5 | 孩子们拜年时会收到什么？<br>1 玩具车；2 书包；3 红包；4 蛋糕 | 红包 | 看最后一句。 | 孩子们会收到红包。 | 找出短文中明示的信息 |
 
 #### zh-m18 · 我的一天
 
@@ -333,13 +346,13 @@ Courses: p2_chinese, p2_higher_chinese. Kind: cloze.
 
 > 早上六点半，我[空1]床了。我刷牙、洗脸，然后吃早饭。七点，我[空2]着书包去上学。在学校里，我认真上课，下课时和同学们一起[空3]游戏。放学回家后，我先做功课，再帮妈妈摆碗筷。晚上九点，我[空4]时上床睡觉。我觉得这一天过得很[空5]。
 
-| ID / stage | Question and options | Key | Hint | Explanation |
-| --- | --- | --- | --- | --- |
-| zh-m18.q1 | 第1空选哪个字？<br>1 走；2 赶；3 起；4 超 | 起 | 早上醒来以后，要从床上怎样？ | “起床”表示醒来后离开床。 |
-| zh-m18.q2 | 第2空选哪个字？<br>1 倍；2 北；3 背；4 被 | 背 | 书包放在身后，用肩膀带着。 | 书包要“背”着。 |
-| zh-m18.q3 | 第3空选哪个字？<br>1 完；2 园；3 玩；4 远 | 玩 | 和同学们一起做游戏。 | “玩游戏”的“玩”是王字旁。 |
-| zh-m18.q4 | 第4空选哪个字？<br>1 案；2 按；3 安；4 暗 | 按 | 照着规定的时间去做。 | “按时”表示照着规定的时间。 |
-| zh-m18.q5 | 第5空选哪个词？<br>1 可怕；2 难过；3 无聊；4 充实 | 充实 | 一天里做了很多有意义的事。 | 做了很多事，一天过得很充实。 |
+| ID / stage | Question and options | Key | Hint | Explanation | Repair route |
+| --- | --- | --- | --- | --- | --- |
+| zh-m18.q1 | 第1空选哪个字？<br>1 走；2 赶；3 起；4 超 | 起 | 早上醒来以后，要从床上怎样？ | “起床”表示醒来后离开床。 | 根据句意选字 |
+| zh-m18.q2 | 第2空选哪个字？<br>1 倍；2 北；3 背；4 被 | 背 | 书包放在身后，用肩膀带着。 | 书包要“背”着。 | 根据句意选字 |
+| zh-m18.q3 | 第3空选哪个字？<br>1 完；2 园；3 玩；4 远 | 玩 | 和同学们一起做游戏。 | “玩游戏”的“玩”是王字旁。 | 根据句意选字 |
+| zh-m18.q4 | 第4空选哪个字？<br>1 案；2 按；3 安；4 暗 | 按 | 照着规定的时间去做。 | “按时”表示照着规定的时间。 | 根据句意选字 |
+| zh-m18.q5 | 第5空选哪个词？<br>1 可怕；2 难过；3 无聊；4 充实 | 充实 | 一天里做了很多有意义的事。 | 做了很多事，一天过得很充实。 | 根据句意选择词语 |
 
 #### zh-m10 · 小熊开店
 
@@ -347,13 +360,13 @@ Courses: p3_chinese, p3_higher_chinese. Kind: reading.
 
 > 小熊在森林里开了一家面包店。开业第一天，它做了很多面包，可是来买的动物很少。小熊很着急，就去问猫头鹰。猫头鹰说：“你的店在树林深处，大家都找不到。”小熊想了想，在路口挂了一块写着“香香面包店”的牌子，还送面包给路过的动物试吃。第二天，店里挤满了客人。
 
-| ID / stage | Question and options | Key | Hint | Explanation |
-| --- | --- | --- | --- | --- |
-| zh-m10.q1 | 小熊开了一家什么店？<br>1 书店；2 花店；3 水果店；4 面包店 | 面包店 | 看第一句。 | 小熊开了一家面包店。 |
-| zh-m10.q2 | 第一天为什么来买面包的动物很少？<br>1 价钱太贵；2 店在树林深处，大家找不到；3 那天下大雨；4 面包不好吃 | 店在树林深处，大家找不到 | 猫头鹰说了什么？ | 猫头鹰说店在树林深处，大家都找不到。 |
-| zh-m10.q3 | 小熊去问谁？<br>1 小兔；2 猫头鹰；3 狐狸；4 大象 | 猫头鹰 | 找“去问”。 | 小熊去问猫头鹰。 |
-| zh-m10.q4 | 小熊想到了什么办法？<br>1 挂牌子，还送面包给大家试吃；2 把面包卖得更贵；3 搬到河边；4 把店关了 | 挂牌子，还送面包给大家试吃 | 找“小熊想了想”后面的话。 | 它挂了牌子，还送面包试吃。 |
-| zh-m10.q5 | 第二天，面包店里有什么变化？<br>1 面包全都不见了；2 店里没有客人；3 店搬到了路口；4 店里挤满了客人 | 店里挤满了客人 | 找一找写“第二天”的那一句。 | 最后一句说，第二天店里挤满了客人。 |
+| ID / stage | Question and options | Key | Hint | Explanation | Repair route |
+| --- | --- | --- | --- | --- | --- |
+| zh-m10.q1 | 小熊开了一家什么店？<br>1 书店；2 花店；3 水果店；4 面包店 | 面包店 | 看第一句。 | 小熊开了一家面包店。 | 找出短文中明示的信息 |
+| zh-m10.q2 | 第一天为什么来买面包的动物很少？<br>1 价钱太贵；2 店在树林深处，大家找不到；3 那天下大雨；4 面包不好吃 | 店在树林深处，大家找不到 | 猫头鹰说了什么？ | 猫头鹰说店在树林深处，大家都找不到。 | 找出短文中明示的信息 |
+| zh-m10.q3 | 小熊去问谁？<br>1 小兔；2 猫头鹰；3 狐狸；4 大象 | 猫头鹰 | 找“去问”。 | 小熊去问猫头鹰。 | 找出短文中明示的信息 |
+| zh-m10.q4 | 小熊想到了什么办法？<br>1 挂牌子，还送面包给大家试吃；2 把面包卖得更贵；3 搬到河边；4 把店关了 | 挂牌子，还送面包给大家试吃 | 找“小熊想了想”后面的话。 | 它挂了牌子，还送面包试吃。 | 找出短文中明示的信息 |
+| zh-m10.q5 | 第二天，面包店里有什么变化？<br>1 面包全都不见了；2 店里没有客人；3 店搬到了路口；4 店里挤满了客人 | 店里挤满了客人 | 找一找写“第二天”的那一句。 | 最后一句说，第二天店里挤满了客人。 | 找出短文中明示的信息 |
 
 #### zh-m11 · 垃圾分类
 
@@ -361,13 +374,13 @@ Courses: p3_chinese, p3_higher_chinese. Kind: reading.
 
 > 垃圾可以分成可回收的和不可回收的。纸张、塑料瓶和铁罐都可以回收，回收后能做成新的东西。剩饭剩菜和用过的纸巾不能放进回收箱。如果大家都做好分类，就能减少垃圾，保护我们的环境。
 
-| ID / stage | Question and options | Key | Hint | Explanation |
-| --- | --- | --- | --- | --- |
-| zh-m11.q1 | 看了题目《垃圾分类》，你猜这篇短文会讲什么？<br>1 怎样养小猫；2 怎样学游泳；3 怎样做蛋糕；4 怎样把垃圾分开处理 | 怎样把垃圾分开处理 | 题目里有哪些关键词？ | 题目告诉我们短文和垃圾分类有关。 |
-| zh-m11.q2 | 下面哪样东西可以回收？<br>1 塑料瓶；2 剩饭；3 剩菜；4 用过的纸巾 | 塑料瓶 | 找“可以回收”。 | 纸张、塑料瓶和铁罐可以回收。 |
-| zh-m11.q3 | 下面哪样东西不能放进回收箱？<br>1 用过的纸巾；2 纸张；3 塑料瓶；4 铁罐 | 用过的纸巾 | 找“不能放进回收箱”。 | 用过的纸巾不能回收。 |
-| zh-m11.q4 | 回收的东西可以怎样？<br>1 做成新的东西；2 扔进大海；3 全部烧掉；4 埋进土里 | 做成新的东西 | 找“回收后”。 | 回收后能做成新的东西。 |
-| zh-m11.q5 | 做好垃圾分类有什么好处？<br>1 减少垃圾，保护环境；2 让天气变热；3 让垃圾变多；4 让食物更好吃 | 减少垃圾，保护环境 | 看最后一句。 | 可以减少垃圾，保护环境。 |
+| ID / stage | Question and options | Key | Hint | Explanation | Repair route |
+| --- | --- | --- | --- | --- | --- |
+| zh-m11.q1 | 短文说垃圾可以分成哪两类？<br>1 大的和小的；2 可回收的和不可回收的；3 新的和旧的；4 干的和湿的 | 可回收的和不可回收的 | 读第一句。 | 第一句写明垃圾可以分成可回收的和不可回收的。 | 找出短文中明示的信息 |
+| zh-m11.q2 | 下面哪样东西可以回收？<br>1 塑料瓶；2 剩饭；3 剩菜；4 用过的纸巾 | 塑料瓶 | 找“可以回收”。 | 纸张、塑料瓶和铁罐可以回收。 | 找出短文中明示的信息 |
+| zh-m11.q3 | 下面哪样东西不能放进回收箱？<br>1 用过的纸巾；2 纸张；3 塑料瓶；4 铁罐 | 用过的纸巾 | 找“不能放进回收箱”。 | 用过的纸巾不能回收。 | 找出短文中明示的信息 |
+| zh-m11.q4 | 回收的东西可以怎样？<br>1 做成新的东西；2 扔进大海；3 全部烧掉；4 埋进土里 | 做成新的东西 | 找“回收后”。 | 回收后能做成新的东西。 | 找出短文中明示的信息 |
+| zh-m11.q5 | 做好垃圾分类有什么好处？<br>1 减少垃圾，保护环境；2 让天气变热；3 让垃圾变多；4 让食物更好吃 | 减少垃圾，保护环境 | 看最后一句。 | 可以减少垃圾，保护环境。 | 找出短文中明示的信息 |
 
 #### zh-m12 · 我的好朋友
 
@@ -375,13 +388,13 @@ Courses: p3_chinese, p3_higher_chinese. Kind: reading.
 
 > 我的好朋友叫小美。她个子不高，戴着一副圆圆的眼镜。小美很爱看书，每次下课都在图书角看书。有一次，我的铅笔盒掉在地上，铅笔撒了一地，小美马上蹲下来帮我捡。她还常常教我做数学题。有这样的好朋友，我觉得很幸福。
 
-| ID / stage | Question and options | Key | Hint | Explanation |
-| --- | --- | --- | --- | --- |
-| zh-m12.q1 | 小美长什么样子？<br>1 很瘦，穿着红裙子；2 很胖，戴着帽子；3 个子不高，戴着圆眼镜；4 个子很高，留着长发 | 个子不高，戴着圆眼镜 | 看第二句。 | 小美个子不高，戴着一副圆圆的眼镜。 |
-| zh-m12.q2 | 下课时，小美常常做什么？<br>1 在操场打球；2 在图书角看书；3 在食堂吃东西；4 在课室睡觉 | 在图书角看书 | 找“每次下课”。 | 每次下课她都在图书角看书。 |
-| zh-m12.q3 | 我的铅笔盒掉了，小美怎么做？<br>1 马上蹲下来帮我捡铅笔；2 去告诉老师；3 走开了；4 笑我不小心 | 马上蹲下来帮我捡铅笔 | 找“有一次”那几句。 | 小美马上蹲下来帮我捡。 |
-| zh-m12.q4 | 小美还常常帮我做什么？<br>1 教我做数学题；2 帮我写作文；3 帮我买午餐；4 帮我打扫课室 | 教我做数学题 | 找“她还常常”。 | 她常常教我做数学题。 |
-| zh-m12.q5 | 小美戴着什么样的眼镜？<br>1 方方的眼镜；2 圆圆的眼镜；3 红色的太阳眼镜；4 没有镜片的眼镜 | 圆圆的眼镜 | 再读写小美样子的那一句。 | 短文说，小美戴着一副圆圆的眼镜。 |
+| ID / stage | Question and options | Key | Hint | Explanation | Repair route |
+| --- | --- | --- | --- | --- | --- |
+| zh-m12.q1 | 小美长什么样子？<br>1 很瘦，穿着红裙子；2 很胖，戴着帽子；3 个子不高，戴着圆眼镜；4 个子很高，留着长发 | 个子不高，戴着圆眼镜 | 看第二句。 | 小美个子不高，戴着一副圆圆的眼镜。 | 找出短文中明示的信息 |
+| zh-m12.q2 | 下课时，小美常常做什么？<br>1 在操场打球；2 在图书角看书；3 在食堂吃东西；4 在课室睡觉 | 在图书角看书 | 找“每次下课”。 | 每次下课她都在图书角看书。 | 找出短文中明示的信息 |
+| zh-m12.q3 | 我的铅笔盒掉了，小美怎么做？<br>1 马上蹲下来帮我捡铅笔；2 去告诉老师；3 走开了；4 笑我不小心 | 马上蹲下来帮我捡铅笔 | 找“有一次”那几句。 | 小美马上蹲下来帮我捡。 | 找出短文中明示的信息 |
+| zh-m12.q4 | 小美还常常帮我做什么？<br>1 教我做数学题；2 帮我写作文；3 帮我买午餐；4 帮我打扫课室 | 教我做数学题 | 找“她还常常”。 | 她常常教我做数学题。 | 找出短文中明示的信息 |
+| zh-m12.q5 | 小美戴着什么样的眼镜？<br>1 方方的眼镜；2 圆圆的眼镜；3 红色的太阳眼镜；4 没有镜片的眼镜 | 圆圆的眼镜 | 再读写小美样子的那一句。 | 短文说，小美戴着一副圆圆的眼镜。 | 找出短文中明示的信息 |
 
 #### zh-m13 · 中秋节
 
@@ -389,13 +402,13 @@ Courses: p3_chinese, p3_higher_chinese. Kind: reading.
 
 > 农历八月十五是中秋节。晚上，月亮又大又圆。家家户户都会吃月饼，孩子们提着各种各样的灯笼在公园里玩。奶奶告诉我，月亮圆了，一家人也要团团圆圆。
 
-| ID / stage | Question and options | Key | Hint | Explanation |
-| --- | --- | --- | --- | --- |
-| zh-m13.q1 | 中秋节是哪一天？<br>1 农历五月五日；2 农历十二月三十日；3 农历八月十五；4 农历一月一日 | 农历八月十五 | 看第一句。 | 农历八月十五是中秋节。 |
-| zh-m13.q2 | 中秋节晚上的月亮是什么样子的？<br>1 是红色的；2 又大又圆；3 看不见；4 又小又弯 | 又大又圆 | 看第二句。 | 月亮又大又圆。 |
-| zh-m13.q3 | 中秋节大家会吃什么？<br>1 年糕；2 粽子；3 月饼；4 汤圆 | 月饼 | 找“都会吃”。 | 家家户户都会吃月饼。 |
-| zh-m13.q4 | 孩子们在公园里提着什么玩？<br>1 灯笼；2 雨伞；3 气球；4 风筝 | 灯笼 | 找“孩子们提着”。 | 孩子们提着灯笼玩。 |
-| zh-m13.q5 | 奶奶说月亮圆了，代表什么？<br>1 要多吃月饼；2 要早点睡觉；3 一家人要团圆；4 明天会下雨 | 一家人要团圆 | 看最后一句。 | 月亮圆了，一家人也要团团圆圆。 |
+| ID / stage | Question and options | Key | Hint | Explanation | Repair route |
+| --- | --- | --- | --- | --- | --- |
+| zh-m13.q1 | 中秋节是哪一天？<br>1 农历五月五日；2 农历十二月三十日；3 农历八月十五；4 农历一月一日 | 农历八月十五 | 看第一句。 | 农历八月十五是中秋节。 | 找出短文中明示的信息 |
+| zh-m13.q2 | 中秋节晚上的月亮是什么样子的？<br>1 是红色的；2 又大又圆；3 看不见；4 又小又弯 | 又大又圆 | 看第二句。 | 月亮又大又圆。 | 找出短文中明示的信息 |
+| zh-m13.q3 | 中秋节大家会吃什么？<br>1 年糕；2 粽子；3 月饼；4 汤圆 | 月饼 | 找“都会吃”。 | 家家户户都会吃月饼。 | 找出短文中明示的信息 |
+| zh-m13.q4 | 孩子们在公园里提着什么玩？<br>1 灯笼；2 雨伞；3 气球；4 风筝 | 灯笼 | 找“孩子们提着”。 | 孩子们提着灯笼玩。 | 找出短文中明示的信息 |
+| zh-m13.q5 | 奶奶说月亮圆了，代表什么？<br>1 要多吃月饼；2 要早点睡觉；3 一家人要团圆；4 明天会下雨 | 一家人要团圆 | 看最后一句。 | 月亮圆了，一家人也要团团圆圆。 | 找出短文中明示的信息 |
 
 #### zh-m14 · 学飞的小鸟
 
@@ -403,13 +416,13 @@ Courses: p3_chinese, p3_higher_chinese. Kind: reading.
 
 > 小鸟第一次学飞，它站在树枝上，看着下面，心里有点害怕。妈妈说：“别怕，张开翅膀，用力拍！”小鸟试了一次，摔到了草地上。它没有哭，爬起来又飞了一次、两次……到了傍晚，它终于飞上了天空。
 
-| ID / stage | Question and options | Key | Hint | Explanation |
-| --- | --- | --- | --- | --- |
-| zh-m14.q1 | 小鸟第一次学什么？<br>1 学游泳；2 学找虫子；3 学飞；4 学唱歌 | 学飞 | 看第一句。 | 小鸟第一次学飞。 |
-| zh-m14.q2 | 小鸟站在树枝上时，心里觉得怎样？<br>1 很生气；2 有点害怕；3 非常开心；4 很想睡觉 | 有点害怕 | 找“心里”。 | 它心里有点害怕。 |
-| zh-m14.q3 | 小鸟摔到草地上以后，怎么做？<br>1 在草地上睡觉；2 爬起来再飞；3 不再学飞；4 哭着回家 | 爬起来再飞 | 找“它没有哭”。 | 它爬起来又飞了一次、两次。 |
-| zh-m14.q4 | 小鸟什么时候终于飞上天空？<br>1 半夜；2 早上；3 傍晚；4 中午 | 傍晚 | 找“终于”。 | 到了傍晚，它终于飞上了天空。 |
-| zh-m14.q5 | 妈妈叫小鸟张开什么？<br>1 嘴巴；2 翅膀；3 尾巴；4 爪子 | 翅膀 | 再读妈妈对小鸟说的话。 | 妈妈说：“张开翅膀，用力拍！” |
+| ID / stage | Question and options | Key | Hint | Explanation | Repair route |
+| --- | --- | --- | --- | --- | --- |
+| zh-m14.q1 | 小鸟第一次学什么？<br>1 学游泳；2 学找虫子；3 学飞；4 学唱歌 | 学飞 | 看第一句。 | 小鸟第一次学飞。 | 找出短文中明示的信息 |
+| zh-m14.q2 | 小鸟站在树枝上时，心里觉得怎样？<br>1 很生气；2 有点害怕；3 非常开心；4 很想睡觉 | 有点害怕 | 找“心里”。 | 它心里有点害怕。 | 找出短文中明示的信息 |
+| zh-m14.q3 | 小鸟摔到草地上以后，怎么做？<br>1 在草地上睡觉；2 爬起来再飞；3 不再学飞；4 哭着回家 | 爬起来再飞 | 找“它没有哭”。 | 它爬起来又飞了一次、两次。 | 找出短文中明示的信息 |
+| zh-m14.q4 | 小鸟什么时候终于飞上天空？<br>1 半夜；2 早上；3 傍晚；4 中午 | 傍晚 | 找“终于”。 | 到了傍晚，它终于飞上了天空。 | 找出短文中明示的信息 |
+| zh-m14.q5 | 妈妈叫小鸟张开什么？<br>1 嘴巴；2 翅膀；3 尾巴；4 爪子 | 翅膀 | 再读妈妈对小鸟说的话。 | 妈妈说：“张开翅膀，用力拍！” | 找出短文中明示的信息 |
 
 #### zh-m15 · 去动物园
 
@@ -417,27 +430,27 @@ Courses: p3_chinese, p3_higher_chinese. Kind: cloze.
 
 > 星期六，爸爸带我去动物园。我们先去看猴子，它们在树上爬上爬下，真[空1]爱。接着，我们看到一只大象正在用长鼻子[空2]水。吃完午饭[空3]后，我们去看企鹅。企鹅走路一[空4]一摆的，大家都笑了。这真是[空5]快的一天。
 
-| ID / stage | Question and options | Key | Hint | Explanation |
-| --- | --- | --- | --- | --- |
-| zh-m15.q1 | 第1空选哪个字？<br>1 哥；2 河；3 何；4 可 | 可 | 组成一个形容猴子的词。 | “可爱”是形容猴子的词。 |
-| zh-m15.q2 | 第2空选哪个字？<br>1 跑；2 喷；3 唱；4 睡 | 喷 | 大象用鼻子把水怎样？ | 大象用鼻子“喷水”。 |
-| zh-m15.q3 | 第3空选哪个字？<br>1 以；2 心；3 比；4 已 | 以 | 组成表示时间先后的词。 | “以后”表示时间在后面。 |
-| zh-m15.q4 | 第4空选哪个字？<br>1 瑶；2 摇；3 谣；4 遥 | 摇 | 企鹅走路时身体怎么动？用手的动作。 | “一摇一摆”是提手旁的“摇”。 |
-| zh-m15.q5 | 第5空选哪个字？<br>1 偷；2 榆；3 输；4 愉 | 愉 | 组成表示开心的词。 | “愉快”表示开心，竖心旁。 |
+| ID / stage | Question and options | Key | Hint | Explanation | Repair route |
+| --- | --- | --- | --- | --- | --- |
+| zh-m15.q1 | 第1空选哪个字？<br>1 哥；2 河；3 何；4 可 | 可 | 组成一个形容猴子的词。 | “可爱”是形容猴子的词。 | 根据句意选字 |
+| zh-m15.q2 | 第2空选哪个字？<br>1 跑；2 喷；3 唱；4 睡 | 喷 | 大象用鼻子把水怎样？ | 大象用鼻子“喷水”。 | 根据句意选字 |
+| zh-m15.q3 | 第3空选哪个字？<br>1 以；2 心；3 比；4 已 | 以 | 组成表示时间先后的词。 | “以后”表示时间在后面。 | 根据句意选字 |
+| zh-m15.q4 | 第4空选哪个字？<br>1 瑶；2 摇；3 谣；4 遥 | 摇 | 企鹅走路时身体怎么动？用手的动作。 | “一摇一摆”是提手旁的“摇”。 | 根据句意选字 |
+| zh-m15.q5 | 第5空选哪个字？<br>1 偷；2 榆；3 输；4 愉 | 愉 | 组成表示开心的词。 | “愉快”表示开心，竖心旁。 | 根据句意选字 |
 
 #### zh-m16 · 做纸风车
 
 Courses: p3_chinese, p3_higher_chinese. Kind: cloze.
 
-> 今天美术课，老师教我们做纸风车。我先把一张正方形的纸[空1]成四个三角形，再用剪刀沿着线剪开。接着，我把四个纸角都[空2]到中间，用胶水粘好。风车做好了！风一吹，风车就[空3]了起来。我[空4]地拿给妈妈看，妈妈[空5]我做得很好。
+> 今天美术课，老师教我们做纸风车。我先把一张正方形的纸沿着两条对角线对[空1]，压出折痕。再从四个角往中心剪，中间留一小块不剪。接着，我把每个三角形的一个角[空2]到中心，叠在一起，用一枚图钉把中心钉在一根小木棍上，不要钉得太紧。风车做好了！风一吹，风车就[空3]了起来。我[空4]地拿给妈妈看，妈妈[空5]我做得很好。
 
-| ID / stage | Question and options | Key | Hint | Explanation |
-| --- | --- | --- | --- | --- |
-| zh-m16.q1 | 第1空选哪个字？<br>1 拆；2 吃；3 跳；4 折 | 折 | 把纸对着弯过来压平。 | 把纸“折”成三角形。 |
-| zh-m16.q2 | 第2空选哪个字？<br>1 唱；2 跑；3 吃；4 拉 | 拉 | 用手把纸角带到中间。 | 用手“拉”到中间。 |
-| zh-m16.q3 | 第3空选哪个字？<br>1 软；2 传；3 转；4 砖 | 转 | 风车被风一吹会怎样？ | 风车会“转”起来。 |
-| zh-m16.q4 | 第4空选哪个词？<br>1 难过；2 害怕；3 生气；4 高兴 | 高兴 | 做好了风车，心情怎样？ | 做好风车，我很高兴。 |
-| zh-m16.q5 | 第5空选哪个字？<br>1 问；2 夸；3 叫；4 骂 | 夸 | 妈妈说我做得很好。 | “夸”就是称赞。 |
+| ID / stage | Question and options | Key | Hint | Explanation | Repair route |
+| --- | --- | --- | --- | --- | --- |
+| zh-m16.q1 | 第1空选哪个字？<br>1 跳；2 折；3 吃；4 拆 | 折 | 把纸对齐压出一条线，这个动作叫什么？ | “对折”是把纸对齐折起来，才能压出折痕。 | 根据句意选字 |
+| zh-m16.q2 | 第2空选哪个字？<br>1 跑；2 拉；3 唱；4 吃 | 拉 | 要把纸角移到中心，用手怎么做？ | 把纸角“拉”到中心，四个角才能叠在一起。 | 根据句意选字 |
+| zh-m16.q3 | 第3空选哪个字？<br>1 转；2 砖；3 软；4 传 | 转 | 风车被风吹时会怎样动？ | 风车被风吹，会一圈一圈地“转”起来。这几个字字形相近，要看部首和意思。 | 根据句意选字 |
+| zh-m16.q4 | 第4空选哪个词？<br>1 生气；2 难过；3 高兴；4 害怕 | 高兴 | 风车做好了，“我”的心情会怎样？ | 自己做好了风车，所以很高兴地拿给妈妈看。 | 根据语境理解和选择词语 |
+| zh-m16.q5 | 第5空选哪个字？<br>1 叫；2 夸；3 骂；4 问 | 夸 | 妈妈说“我”做得很好，是在做什么？ | 说别人做得好，就是“夸”别人。 | 根据句意选字 |
 
 #### zh-m17 · 图书馆借书须知
 
@@ -450,13 +463,13 @@ Courses: p3_chinese, p3_higher_chinese. Kind: visual_text.
 > 4. 逾期 (yú qī)还书，每本每天罚款十分钱。
 > 开放时间：星期一至星期五，上午七点半到下午四点
 
-| ID / stage | Question and options | Key | Hint | Explanation |
-| --- | --- | --- | --- | --- |
-| zh-m17.q1 | 每人每次最多可以借几本书？<br>1 五本；2 一本；3 两本；4 三本 | 三本 | 看第1条。 | 每人每次最多可借三本书。 |
-| zh-m17.q2 | 借书可以借多久？<br>1 两个星期；2 三天；3 一个星期；4 一个月 | 两个星期 | 看第2条。 | 借书期限为两个星期。 |
-| zh-m17.q3 | 下面哪种做法是不对的？<br>1 星期一来借书；2 按时还书；3 在书上画画；4 爱护图书 | 在书上画画 | 看第3条。 | 须知说不要在书上画画。 |
-| zh-m17.q4 | 星期六可以去图书馆借书吗？<br>1 可以；2 只能上午去；3 只能下午去；4 不可以 | 不可以 | 看开放时间。 | 图书馆只在星期一至星期五开放。 |
-| zh-m17.q5 | 一本书迟还了两天，要罚多少钱？<br>1 十分钱；2 四十分钱；3 两元；4 二十分钱 | 二十分钱 | 每本每天十分钱，算两天。 | 十分钱 × 2 = 二十分钱。 |
+| ID / stage | Question and options | Key | Hint | Explanation | Repair route |
+| --- | --- | --- | --- | --- | --- |
+| zh-m17.q1 | 每人每次最多可以借几本书？<br>1 五本；2 一本；3 两本；4 三本 | 三本 | 看第1条。 | 每人每次最多可借三本书。 | 从通知、告示中找信息 |
+| zh-m17.q2 | 借书可以借多久？<br>1 两个星期；2 三天；3 一个星期；4 一个月 | 两个星期 | 看第2条。 | 借书期限为两个星期。 | 从通知、告示中找信息 |
+| zh-m17.q3 | 下面哪种做法是不对的？<br>1 星期一来借书；2 按时还书；3 在书上画画；4 爱护图书 | 在书上画画 | 看第3条。 | 须知说不要在书上画画。 | 从通知、告示中找信息 |
+| zh-m17.q4 | 星期六可以去图书馆借书吗？<br>1 可以；2 只能上午去；3 只能下午去；4 不可以 | 不可以 | 看开放时间。 | 图书馆只在星期一至星期五开放。 | 从通知、告示中找信息 |
+| zh-m17.q5 | 一本书迟还了两天，要罚多少钱？<br>1 十分钱；2 四十分钱；3 两元；4 二十分钱 | 二十分钱 | 每本每天十分钱，算两天。 | 十分钱 × 2 = 二十分钱。 | 从通知、告示中找信息 |
 
 ### Repair groups
 
@@ -623,82 +636,128 @@ Courses: p3_chinese, p3_higher_chinese. 8 pools, authored together as one curric
 | zh-p3-radical-u94f6.q2 / similar | 月光照在河上，像一条[空1]带。<br>1 银；2 跟；3 很；4 根 | 银 | 月光是白亮白亮的。 | 白亮的颜色可以说“银色”。 |
 | zh-p3-radical-u94f6.q3 / generic | [空1]行可以帮我们存钱。<br>1 银；2 跟；3 根；4 很 | 银 | 存钱的地方，选金字旁的字。 | “银行”的“银”是金字旁。 |
 
-### Language-use and punctuation practice (general practice, no repair targets yet)
+#### 二年级语言运用组 · P2 language use (`zh-group-p2-language-use`)
+
+Courses: p2_chinese, p2_higher_chinese. 5 pools, authored together as one curriculum-level group.
 
 | ID / stage | Question and options | Key | Hint | Explanation |
 | --- | --- | --- | --- | --- |
-| zh-p2-measure.q1 | 妈妈给我买了一[空1]故事书。<br>1 张；2 只；3 本；4 条 | 本 | 书一般怎么数？ | 书用“本”来数：一本书。 |
-| zh-p2-measure.q2 | 河里游着一[空1]小鱼。<br>1 条；2 张；3 块；4 本 | 条 | 鱼的身体长长的。 | 鱼用“条”来数。 |
-| zh-p2-measure.q3 | 请给我一[空1]白纸。<br>1 条；2 本；3 只；4 张 | 张 | 纸是薄薄平平的。 | 纸用“张”来数。 |
-| zh-p2-measure.q4 | 门口坐着一[空1]小狗。<br>1 本；2 张；3 块；4 只 | 只 | 小动物常常怎么数？ | 小狗可以说“一只小狗”。 |
-| zh-p2-measure.q5 | 路边停着一[空1]汽车。<br>1 本；2 张；3 只；4 辆 | 辆 | 车子用哪个量词？ | 车用“辆”来数。 |
-| zh-p2-measure.q6 | 姐姐穿了一[空1]新衣服。<br>1 件；2 张；3 只；4 本 | 件 | 衣服怎么数？ | 衣服用“件”来数。 |
-| zh-p2-measure.q7 | 花园里开了一[空1]红花。<br>1 张；2 朵；3 辆；4 本 | 朵 | 花怎么数？ | 花用“朵”来数。 |
-| zh-p2-measure.q8 | 下雨了，我带了一[空1]雨伞。<br>1 只；2 张；3 把；4 本 | 把 | 有柄可以拿着的东西。 | 伞用“把”来数。 |
-| zh-p2-measure.q9 | 妹妹吃了一[空1]蛋糕。<br>1 本；2 块；3 件；4 辆 | 块 | 切下来的一小份。 | 切下的一份蛋糕是“一块蛋糕”。 |
-| zh-p2-measure.q10 | 学校门口有一[空1]大树。<br>1 本；2 张；3 棵；4 辆 | 棵 | 树怎么数？ | 树用“棵”来数。 |
-| zh-p2-collocation.q1 | 我们在草地上[空1]风筝。<br>1 放；2 洗；3 踢；4 打 | 放 | 风筝要飞上天空。 | 风筝要“放”：放风筝。 |
-| zh-p2-collocation.q2 | 妹妹在家里[空1]钢琴。<br>1 打；2 拍；3 弹；4 踢 | 弹 | 钢琴要用手指在琴键上按。 | 钢琴要“弹”：弹钢琴。 |
-| zh-p2-collocation.q3 | 爸爸在球场上[空1]篮球。<br>1 踢；2 打；3 弹；4 放 | 打 | 篮球用手玩。 | 篮球要“打”：打篮球。 |
-| zh-p2-collocation.q4 | 奶奶在厨房[空1]饭。<br>1 踢；2 弹；3 煮；4 放 | 煮 | 做饭要用锅和火。 | 做饭可以说“煮饭”。 |
-| zh-p2-collocation.q5 | 我每天早上都[空1]牙。<br>1 踢；2 放；3 打；4 刷 | 刷 | 用牙刷做的事。 | 用牙刷“刷牙”。 |
-| zh-p2-collocation.q6 | 老师在白板上[空1]字。<br>1 放；2 弹；3 写；4 踢 | 写 | 用笔做的事。 | 用笔“写字”。 |
-| zh-p2-collocation.q7 | 音乐课上，我们一起[空1]歌。<br>1 唱；2 放；3 踢；4 打 | 唱 | 用声音做的事。 | 用嘴“唱歌”。 |
-| zh-p2-collocation.q8 | 哥哥拿着鱼竿在河边[空1]鱼。<br>1 钓；2 放；3 踢；4 弹 | 钓 | 想一想用鱼竿做什么。 | 哥哥用鱼竿钓鱼，所以选“钓”。 |
-| zh-p2-wordchoice.q1 | 天气太[空1]了，我们都出了很多汗。<br>1 热；2 黑；3 亮；4 冷 | 热 | 出汗是因为什么？ | 天气热会出汗。 |
-| zh-p2-wordchoice.q2 | 妹妹找不到妈妈，[空1]得哭了起来。<br>1 高；2 急；3 笑；4 饱 | 急 | 找不到妈妈时心里会怎样？ | 心里着急，“急得哭了”。 |
-| zh-p2-wordchoice.q3 | 这条路很[空1]，我们走了很久。<br>1 短；2 长；3 新；4 甜 | 长 | 走了很久说明路怎么样？ | 路长才要走很久。 |
-| zh-p2-wordchoice.q4 | 图书馆里很[空1]，大家都在看书。<br>1 忙乱；2 吵闹；3 热闹；4 安静 | 安静 | 看书的地方需要怎样？ | 图书馆里要安静。 |
-| zh-p2-wordchoice.q5 | 他每天都很早起床，从来不[空1]到。<br>1 迟；2 先；3 早；4 快 | 迟 | 早起床就不会怎样？ | 早起床就不会迟到。 |
-| zh-p2-wordchoice.q6 | 小明不小心打[空1]了杯子。<br>1 长；2 高；3 红；4 破 | 破 | 杯子掉下去会怎样？ | 杯子“打破”了。 |
-| zh-p2-wordchoice.q7 | 这个西瓜又大又[空1]。<br>1 辣；2 苦；3 甜；4 臭 | 甜 | 好吃的西瓜是什么味道？ | 西瓜又大又甜。 |
-| zh-p2-wordchoice.q8 | 下雨了，地上很[空1]，走路要小心。<br>1 干；2 热；3 湿；4 亮 | 湿 | 下雨后地上会怎样？ | 下雨后地上是湿的。 |
-| zh-p2-order.q1 | 哪个句子排列正确？（我 / 上学 / 每天 / 走路）<br>1 每天走路我上学。；2 我每天走路上学。；3 走路我每天上学。；4 我上学每天走路。 | 我每天走路上学。 | 先说谁，再说什么时候，最后说做什么。 | 正确的句子是“我每天走路上学。” |
-| zh-p2-order.q2 | 哪个句子排列正确？（妈妈 / 在厨房 / 做饭 / 正）<br>1 妈妈正在做饭厨房。；2 在厨房妈妈做饭正。；3 正妈妈在厨房做饭。；4 妈妈正在厨房做饭。 | 妈妈正在厨房做饭。 | 先找出谁在做什么，再看看地点放在哪里。 | 妈妈在厨房里做饭，所以选“妈妈正在厨房做饭。” |
-| zh-p2-order.q3 | 哪个句子排列正确？（小狗 / 在草地上 / 开心地 / 跑）<br>1 小狗在草地上跑开心地。；2 开心地小狗跑在草地上。；3 在草地上小狗跑开心地。；4 小狗开心地在草地上跑。 | 小狗开心地在草地上跑。 | “开心地”要放在动作前面。 | “小狗开心地在草地上跑。” |
-| zh-p2-order.q4 | 哪个句子排列正确？（星期天 / 我们 / 去公园 / 玩）<br>1 星期天我们去公园玩。；2 玩星期天我们去公园。；3 我们去公园星期天玩。；4 去公园玩我们星期天。 | 星期天我们去公园玩。 | 时间可以放在句子开头。 | “星期天我们去公园玩。” |
-| zh-p2-order.q5 | 哪个句子排列正确？（老师 / 讲故事 / 给我们 / 听）<br>1 老师给我们听讲故事。；2 讲故事老师听给我们。；3 给我们老师听讲故事。；4 老师讲故事给我们听。 | 老师讲故事给我们听。 | 谁做了什么，给谁听？ | “老师讲故事给我们听。” |
-| zh-p2-order.q6 | 哪个句子排列正确？（弟弟 / 把玩具 / 收好 / 了）<br>1 把玩具弟弟了收好。；2 弟弟把玩具收好了。；3 弟弟收好了把玩具。；4 收好弟弟把玩具了。 | 弟弟把玩具收好了。 | “把”后面先说东西，再说做了什么。 | “弟弟把玩具收好了。” |
-| zh-p2-punct.q1 | 选出正确的标点：你今天想去哪里[空1]<br>1 ？；2 、；3 。；4 ！ | ？ | 这句话在问别人。 | 问句用问号“？”。 |
-| zh-p2-punct.q2 | 选出正确的标点：这里的风景真美[空1]<br>1 、；2 ！；3 ？；4 ： | ！ | 这句话表示很强的感情。 | 表示赞叹用感叹号“！”。 |
-| zh-p2-punct.q3 | 选出正确的标点：我喜欢苹果[空1]香蕉和葡萄。<br>1 ！；2 、；3 。；4 ？ | 、 | 几样东西排在一起时用什么隔开？ | 并列的词语之间用顿号“、”。 |
-| zh-p2-punct.q4 | 选出正确的标点：老师说[空1]“明天要带水壶。”<br>1 ：；2 、；3 ？；4 ！ | ： | 说话的内容前面用什么标点？ | 引出说的话要用冒号“：”。 |
-| zh-p2-wordchoice2.q1 | 小明考试前很[空1]，手心都出汗了。<br>1 紧张；2 安静；3 舒服；4 开心 | 紧张 | 手心出汗是什么感觉？ | 考试前手心出汗，说明很紧张。 |
-| zh-p2-wordchoice2.q2 | 弟弟[空1]地把玩具借给了好朋友。<br>1 小气；2 难过；3 大方；4 生气 | 大方 | 愿意把东西借给别人的人是怎样的？ | 愿意分享就是“大方”。 |
-| zh-p2-wordchoice2.q3 | 外面的雷声很大，小猫吓得[空1]到床底下。<br>1 笑；2 跳；3 躲；4 唱 | 躲 | 害怕时会去藏起来。 | 害怕时会“躲”起来。 |
-| zh-p3-measure.q1 | 墙上挂着一[空1]镜子。<br>1 面；2 张；3 只；4 本 | 面 | 镜子是平平的一片。 | 镜子用“面”来数。 |
-| zh-p3-measure.q2 | 我买了一[空1]牙膏。<br>1 只；2 张；3 块；4 支 | 支 | 牙膏是细长的。 | 牙膏用“支”来数。 |
-| zh-p3-measure.q3 | 爷爷戴着一[空1]眼镜。<br>1 本；2 张；3 副；4 只 | 副 | 眼镜有两片镜片，是一套。 | 眼镜用“副”来数。 |
-| zh-p3-measure.q4 | 他们住在一[空1]小房子里。<br>1 条；2 间；3 双；4 本 | 间 | 房子怎么数？ | 房子可以说“一间房子”。 |
-| zh-p3-measure.q5 | 妈妈给我买了一[空1]新鞋子。<br>1 双；2 头；3 本；4 张 | 双 | 鞋子是两只一起的。 | 成对的鞋子用“双”。 |
-| zh-p3-measure.q6 | 农场里有一[空1]大黄牛。<br>1 头；2 辆；3 张；4 本 | 头 | 牛这样的大动物怎么数？ | 牛可以说“一头牛”。 |
-| zh-p3-measure.q7 | 我给外婆写了一[空1]信。<br>1 本；2 块；3 封；4 条 | 封 | 信装在信封里。 | 信用“封”来数。 |
-| zh-p3-measure.q8 | 雨后，天上出现了一[空1]彩虹。<br>1 只；2 本；3 辆；4 道 | 道 | 彩虹是长长的弧线。 | 彩虹可以说“一道彩虹”。 |
-| zh-p3-collocation.q1 | 我报名[空1]了学校的歌唱比赛。<br>1 参观；2 观察；3 打开；4 参加 | 参加 | 加入比赛用哪个词？ | “参加比赛”表示加入比赛。 |
-| zh-p3-collocation.q2 | 老师带我们去[空1]博物馆。<br>1 参观；2 参加；3 穿上；4 修理 | 参观 | 到一个地方去看看。 | “参观博物馆”表示去看展览。 |
-| zh-p3-collocation.q3 | 上课时，他举手[空1]老师的问题。<br>1 回答；2 吃；3 穿；4 唱 | 回答 | 老师问了问题，学生要怎样？ | “回答问题”。 |
-| zh-p3-collocation.q4 | 我们要爱护地球，保护[空1]。<br>1 饭菜；2 环境；3 时间；4 声音 | 环境 | 地球上的空气、水和树木。 | “保护环境”。 |
-| zh-p3-collocation.q5 | 早睡早起是一个好[空1]。<br>1 天气；2 衣服；3 颜色；4 习惯 | 习惯 | 每天都会这样做的事。 | “好习惯”。 |
-| zh-p3-collocation.q6 | 过马路时要遵守交通[空1]。<br>1 树叶；2 书包；3 规则；4 汽车 | 规则 | 大家都要遵守的要求。 | “遵守规则”。 |
-| zh-p3-collocation.q7 | 大家一起想办法，终于解决了这个[空1]。<br>1 窗户；2 蛋糕；3 鞋子；4 问题 | 问题 | 想办法要解决的是什么？ | “解决问题”。 |
-| zh-p3-collocation.q8 | 学校下个月要举行[空1]。<br>1 书包；2 树叶；3 运动会；4 铅笔 | 运动会 | 学校会举办的活动。 | “举行运动会”。 |
-| zh-p3-wordchoice.q1 | 这次考试他得了满分，大家都很[空1]他。<br>1 担心；2 害怕；3 讨厌；4 佩服 | 佩服 | 别人做得很好时，我们心里会怎样？ | “佩服”表示觉得别人很了不起。 |
-| zh-p3-wordchoice.q2 | 弟弟把房间弄得乱七八糟，妈妈很[空1]。<br>1 感谢；2 骄傲；3 生气；4 开心 | 生气 | 房间被弄乱了，妈妈会有什么感觉？ | 房间被弄乱，妈妈很生气。 |
-| zh-p3-wordchoice.q3 | 这道数学题太[空1]了，我想了很久也不会做。<br>1 容易；2 快；3 简单；4 难 | 难 | 想了很久也不会做，说明题目怎样？ | 题目难才会想很久。 |
-| zh-p3-wordchoice.q4 | 他做事很[空1]，从来不会忘记带东西。<br>1 随便；2 马虎；3 细心；4 粗心 | 细心 | 从不忘记东西的人是怎样的？ | 细心的人不会忘记东西。 |
-| zh-p3-wordchoice.q5 | 哪个词的意思是“说实话，不说谎”？小明[空1]地向老师承认了错误。<br>1 生气；2 诚实；3 骄傲；4 害怕 | 诚实 | 找表示不说假话的词。 | 小明没有说假话，是诚实地承认错误。 |
-| zh-p3-wordchoice.q6 | 练习了很多次，我们班[空1]得了第一名。<br>1 从来；2 不但；3 终于；4 虽然 | 终于 | 经过很多努力后的结果。 | “终于”表示经过努力后得到结果。 |
-| zh-p3-wordchoice.q7 | 雨下得很大，[空1]我们还是去上学了。<br>1 因为；2 而且；3 但是；4 所以 | 但是 | 前后意思相反。 | 前后意思相反用“但是”。 |
-| zh-p3-wordchoice.q8 | [空1]下大雨，所以比赛取消了。<br>1 虽然；2 如果；3 但是；4 因为 | 因为 | 后面有“所以”。 | “因为……所以……”说明原因和结果。 |
-| zh-p3-sentence.q1 | 哪个句子排列正确？（小鸟 / 在树上 / 快乐地 / 唱歌）<br>1 小鸟唱歌在树上快乐地。；2 在树上唱歌小鸟快乐地。；3 快乐地小鸟唱歌在树上。；4 小鸟在树上快乐地唱歌。 | 小鸟在树上快乐地唱歌。 | 谁在哪里怎样做什么？ | “小鸟在树上快乐地唱歌。” |
-| zh-p3-sentence.q2 | 哪个句子排列正确？（我们 / 把 / 打扫干净 / 教室 / 了）<br>1 教室把我们打扫干净了。；2 我们把教室打扫干净了。；3 把教室我们了打扫干净。；4 我们打扫干净把教室了。 | 我们把教室打扫干净了。 | “把”后面先说东西，再说做了什么。 | “我们把教室打扫干净了。” |
-| zh-p3-sentence.q3 | 哪个句子排列正确？（因为 / 下大雨 / 运动会 / 改期了）<br>1 运动会因为改期了，下大雨。；2 改期了因为运动会下大雨。；3 因为下大雨，运动会改期了。；4 下大雨因为，运动会改期了。 | 因为下大雨，运动会改期了。 | 先说原因，再说结果。 | “因为下大雨，运动会改期了。” |
-| zh-p3-sentence.q4 | 用“被”改写：“小猫打翻了花瓶。”<br>1 被小猫花瓶打翻了。；2 花瓶被小猫打翻了。；3 花瓶把小猫打翻了。；4 小猫被花瓶打翻了。 | 花瓶被小猫打翻了。 | “被”前面是受到动作的东西。 | 受到动作的是花瓶，所以“花瓶被小猫打翻了。” |
-| zh-p3-sentence.q5 | 用“把”改写：“弟弟吃完了饼干。”<br>1 弟弟吃完了把饼干。；2 弟弟把饼干吃完了。；3 饼干把弟弟吃完了。；4 把弟弟饼干吃完了。 | 弟弟把饼干吃完了。 | “把”后面是被处理的东西。 | “弟弟把饼干吃完了。” |
-| zh-p3-sentence.q6 | 把“妈妈买了一个蛋糕。”改成问句，哪一句正确？<br>1 一个蛋糕买了妈妈。；2 妈妈买了什么？；3 妈妈买了一个蛋糕！；4 妈妈为什么蛋糕？ | 妈妈买了什么？ | 问句要问出“蛋糕”这部分。 | 问买了什么东西：“妈妈买了什么？” |
-| zh-p3-punct.q1 | 选出正确的标点：你喜欢吃苹果还是香蕉[空1]<br>1 、；2 ！；3 。；4 ？ | ？ | 这句话在问人选择。 | 问句用问号。 |
-| zh-p3-punct.q2 | 选出正确的标点：哇[空1]这里的风景真美！<br>1 、；2 。；3 ？；4 ！ | ！ | “哇”表示很惊喜。 | 表示强烈感情的叹词后面用感叹号。 |
-| zh-p3-punct.q3 | 选出正确的标点：老师说[空1]“明天去郊游。”<br>1 ？；2 ：；3 、；4 ！ | ： | 说的话前面用什么标点？ | 引出说的话用冒号。 |
-| zh-p3-punct.q4 | 选出正确的标点：他买了铅笔[空1]橡皮和尺子。<br>1 ！；2 ：；3 。；4 、 | 、 | 几样东西并列时用什么隔开？ | 并列词语之间用顿号。 |
-| zh-p3-punct.q5 | 选出正确的标点：妈妈问：[空1]你吃饭了吗？”<br>1 （；2 ”；3 “；4 《 | “ | 说的话开始时用什么标点？ | 说话内容开始用前引号“。 |
-| zh-p3-punct.q6 | 选出正确的标点：我最喜欢读[空1]西游记》这本书。<br>1 、；2 “；3 《；4 （ | 《 | 书名要用什么符号括起来？ | 书名用书名号《》。 |
+| zh-p2-measure.q1 / exact | 妈妈给我买了一[空1]故事书。<br>1 张；2 只；3 本；4 条 | 本 | 书一般怎么数？ | 书用“本”来数：一本书。 |
+| zh-p2-measure.q2 / similar | 河里游着一[空1]小鱼。<br>1 条；2 张；3 块；4 本 | 条 | 鱼的身体长长的。 | 鱼用“条”来数。 |
+| zh-p2-measure.q3 / generic | 请给我一[空1]白纸。<br>1 条；2 本；3 只；4 张 | 张 | 纸是薄薄平平的。 | 纸用“张”来数。 |
+| zh-p2-collocation.q1 / exact | 我们在草地上[空1]风筝。<br>1 放；2 洗；3 踢；4 打 | 放 | 风筝要飞上天空。 | 风筝要“放”：放风筝。 |
+| zh-p2-collocation.q2 / similar | 妹妹在家里[空1]钢琴。<br>1 打；2 拍；3 弹；4 踢 | 弹 | 钢琴要用手指在琴键上按。 | 钢琴要“弹”：弹钢琴。 |
+| zh-p2-collocation.q3 / generic | 爸爸在球场上[空1]篮球。<br>1 踢；2 打；3 弹；4 放 | 打 | 篮球用手玩。 | 篮球要“打”：打篮球。 |
+| zh-p2-wordchoice.q1 / exact | 天气太[空1]了，我们都出了很多汗。<br>1 热；2 黑；3 亮；4 冷 | 热 | 出汗是因为什么？ | 天气热会出汗。 |
+| zh-p2-wordchoice.q2 / similar | 妹妹找不到妈妈，[空1]得哭了起来。<br>1 高；2 急；3 笑；4 饱 | 急 | 找不到妈妈时心里会怎样？ | 心里着急，“急得哭了”。 |
+| zh-p2-wordchoice.q3 / generic | 这条路很[空1]，我们走了很久。<br>1 短；2 长；3 新；4 甜 | 长 | 走了很久说明路怎么样？ | 路长才要走很久。 |
+| zh-p2-order.q1 / exact | 哪个句子排列正确？（我 / 上学 / 每天 / 走路）<br>1 每天走路我上学。；2 我每天走路上学。；3 走路我每天上学。；4 我上学每天走路。 | 我每天走路上学。 | 先说谁，再说什么时候，最后说做什么。 | 正确的句子是“我每天走路上学。” |
+| zh-p2-order.q3 / similar | 哪个句子排列正确？（小狗 / 在草地上 / 开心地 / 跑）<br>1 小狗在草地上跑开心地。；2 开心地小狗跑在草地上。；3 在草地上小狗跑开心地。；4 小狗开心地在草地上跑。 | 小狗开心地在草地上跑。 | “开心地”要放在动作前面。 | “小狗开心地在草地上跑。” |
+| zh-p2-order.q4 / generic | 哪个句子排列正确？（星期天 / 我们 / 去公园 / 玩）<br>1 星期天我们去公园玩。；2 玩星期天我们去公园。；3 我们去公园星期天玩。；4 去公园玩我们星期天。 | 星期天我们去公园玩。 | 时间可以放在句子开头。 | “星期天我们去公园玩。” |
+| zh-p2-punct.q1 / exact | 选出正确的标点：你今天想去哪里[空1]<br>1 ？；2 、；3 。；4 ！ | ？ | 这句话在问别人。 | 问句用问号“？”。 |
+| zh-p2-punct.q2 / similar | 选出正确的标点：这里的风景真美[空1]<br>1 、；2 ！；3 ？；4 ： | ！ | 这句话表示很强的感情。 | 表示赞叹用感叹号“！”。 |
+| zh-p2-punct.q3 / generic | 选出正确的标点：我喜欢苹果[空1]香蕉和葡萄。<br>1 ！；2 、；3 。；4 ？ | 、 | 几样东西排在一起时用什么隔开？ | 并列的词语之间用顿号“、”。 |
+
+#### 二年级阅读与选字组 · P2 reading and character-in-context (`zh-group-p2-reading-skills`)
+
+Courses: p2_chinese, p2_higher_chinese. 3 pools, authored together as one curriculum-level group.
+
+| ID / stage | Question and options | Key | Hint | Explanation |
+| --- | --- | --- | --- | --- |
+| zh-p2-read-repair.q1 / exact | 读一读：星期五下午，小林和爸爸去海边放风筝。风很大，他们的风筝飞得又高又远。<br>小林和谁去海边？<br>1 哥哥；2 爸爸；3 妈妈；4 老师 | 爸爸 | 找一找第一句里和小林一起去的人。 | 第一句写明小林和爸爸去海边。 |
+| zh-p2-read-repair.q2 / similar | 读一读：小红每天早上七点起床。她先刷牙洗脸，再吃早饭，然后和哥哥一起走路上学。<br>小红每天几点起床？<br>1 六点；2 八点；3 九点；4 七点 | 七点 | 找一找“起床”前面的时间。 | 第一句写明小红每天早上七点起床。 |
+| zh-p2-read-repair.q3 / generic | 读一读：学校的花园里种了很多花，有红花、黄花，还有白花。放学后，同学们轮流去浇水。<br>花园里有哪几种颜色的花？<br>1 只有白色；2 黄色和紫色；3 红色、黄色和白色；4 红色和蓝色 | 红色、黄色和白色 | 把短文里说到的颜色都找出来。 | 短文写了红花、黄花和白花。 |
+| zh-p2-notice-repair.q1 / exact | 读一读：【美术比赛】<br>时间：五月八日上午九点<br>地点：二楼美术室<br>请自己带彩色笔。<br>比赛在哪里举行？<br>1 学校礼堂；2 二楼美术室；3 一楼美术室；4 二楼音乐室 | 二楼美术室 | 找一找“地点”这一行。 | 通知写明地点是二楼美术室。 |
+| zh-p2-notice-repair.q2 / similar | 读一读：【失物招领】<br>捡到一个红色水壶。<br>请到办公室找陈老师领取。<br>要到哪里领取水壶？<br>1 操场；2 食堂；3 办公室；4 图书馆 | 办公室 | 读最后一行。 | 通知请大家到办公室找陈老师领取。 |
+| zh-p2-notice-repair.q3 / generic | 读一读：【食堂今日午餐】<br>鸡饭：两元<br>炒面：一元五角<br>苹果：五角<br>哪样东西最便宜？<br>1 鸡饭；2 苹果；3 炒面；4 三样一样便宜 | 苹果 | 比一比三样东西的价钱。 | 苹果五角，比一元五角和两元都便宜。 |
+| zh-p2-charctx-repair.q1 / exact | 天黑了，请把灯打[空1]。<br>1 闭；2 开；3 门；4 并 | 开 | 想一想，天黑了要让灯怎么样。 | “打开”灯，房间才会亮。 |
+| zh-p2-charctx-repair.q2 / similar | 小狗在院子里跑来[空1]去。<br>1 跑；2 抱；3 泡；4 饱 | 跑 | “跑来……去”，前后用同一个字。 | “跑来跑去”是说小狗到处跑。 |
+| zh-p2-charctx-repair.q3 / generic | 妈妈给我买了一个新书[空1]。<br>1 包；2 抱；3 跑；4 饱 | 包 | 上学时用来装书的东西叫什么？ | 装书的是“书包”。 |
+
+#### 三年级语言运用组 · P3 language use (`zh-group-p3-language-use`)
+
+Courses: p3_chinese, p3_higher_chinese. 7 pools, authored together as one curriculum-level group.
+
+| ID / stage | Question and options | Key | Hint | Explanation |
+| --- | --- | --- | --- | --- |
+| zh-p3-measure.q1 / exact | 墙上挂着一[空1]镜子。<br>1 面；2 张；3 只；4 本 | 面 | 镜子是平平的一片。 | 镜子用“面”来数。 |
+| zh-p3-measure.q2 / similar | 我买了一[空1]牙膏。<br>1 只；2 张；3 块；4 支 | 支 | 牙膏是细长的。 | 牙膏用“支”来数。 |
+| zh-p3-measure.q3 / generic | 爷爷戴着一[空1]眼镜。<br>1 本；2 张；3 副；4 只 | 副 | 眼镜有两片镜片，是一套。 | 眼镜用“副”来数。 |
+| zh-p3-collocation.q1 / exact | 我报名[空1]了学校的歌唱比赛。<br>1 参观；2 观察；3 打开；4 参加 | 参加 | 加入比赛用哪个词？ | “参加比赛”表示加入比赛。 |
+| zh-p3-collocation.q2 / similar | 老师带我们去[空1]博物馆。<br>1 参观；2 参加；3 穿上；4 修理 | 参观 | 到一个地方去看看。 | “参观博物馆”表示去看展览。 |
+| zh-p3-collocation.q3 / generic | 上课时，他举手[空1]老师的问题。<br>1 回答；2 吃；3 穿；4 唱 | 回答 | 老师问了问题，学生要怎样？ | “回答问题”。 |
+| zh-p3-wordchoice.q1 / exact | 这次考试他得了满分，大家都很[空1]他。<br>1 担心；2 害怕；3 讨厌；4 佩服 | 佩服 | 别人做得很好时，我们心里会怎样？ | “佩服”表示觉得别人很了不起。 |
+| zh-p3-wordchoice.q2 / similar | 弟弟把房间弄得乱七八糟，妈妈很[空1]。<br>1 感谢；2 骄傲；3 生气；4 开心 | 生气 | 房间被弄乱了，妈妈会有什么感觉？ | 房间被弄乱，妈妈很生气。 |
+| zh-p3-wordchoice.q3 / generic | 这道数学题太[空1]了，我想了很久也不会做。<br>1 容易；2 快；3 简单；4 难 | 难 | 想了很久也不会做，说明题目怎样？ | 题目难才会想很久。 |
+| zh-p3-wordchoice.q6 / exact | 练习了很多次，我们班[空1]得了第一名。<br>1 从来；2 不但；3 终于；4 虽然 | 终于 | 经过很多努力后的结果。 | “终于”表示经过努力后得到结果。 |
+| zh-p3-wordchoice.q7 / similar | 雨下得很大，[空1]我们还是去上学了。<br>1 因为；2 而且；3 但是；4 所以 | 但是 | 前后意思相反。 | 前后意思相反用“但是”。 |
+| zh-p3-wordchoice.q8 / generic | [空1]下大雨，所以比赛取消了。<br>1 虽然；2 如果；3 但是；4 因为 | 因为 | 后面有“所以”。 | “因为……所以……”说明原因和结果。 |
+| zh-p3-sentence.q1 / exact | 哪个句子排列正确？（小鸟 / 在树上 / 快乐地 / 唱歌）<br>1 小鸟唱歌在树上快乐地。；2 在树上唱歌小鸟快乐地。；3 快乐地小鸟唱歌在树上。；4 小鸟在树上快乐地唱歌。 | 小鸟在树上快乐地唱歌。 | 谁在哪里怎样做什么？ | “小鸟在树上快乐地唱歌。” |
+| zh-p3-sentence.q2 / similar | 哪个句子排列正确？（我们 / 把 / 打扫干净 / 教室 / 了）<br>1 教室把我们打扫干净了。；2 我们把教室打扫干净了。；3 把教室我们了打扫干净。；4 我们打扫干净把教室了。 | 我们把教室打扫干净了。 | “把”后面先说东西，再说做了什么。 | “我们把教室打扫干净了。” |
+| zh-p3-sentence.q3 / generic | 哪个句子排列正确？（因为 / 下大雨 / 运动会 / 改期了）<br>1 运动会因为改期了，下大雨。；2 改期了因为运动会下大雨。；3 因为下大雨，运动会改期了。；4 下大雨因为，运动会改期了。 | 因为下大雨，运动会改期了。 | 先说原因，再说结果。 | “因为下大雨，运动会改期了。” |
+| zh-p3-sentence.q4 / exact | 用“被”改写：“小猫打翻了花瓶。”<br>1 被小猫花瓶打翻了。；2 花瓶被小猫打翻了。；3 花瓶把小猫打翻了。；4 小猫被花瓶打翻了。 | 花瓶被小猫打翻了。 | “被”前面是受到动作的东西。 | 受到动作的是花瓶，所以“花瓶被小猫打翻了。” |
+| zh-p3-sentence.q5 / similar | 用“把”改写：“弟弟吃完了饼干。”<br>1 弟弟吃完了把饼干。；2 弟弟把饼干吃完了。；3 饼干把弟弟吃完了。；4 把弟弟饼干吃完了。 | 弟弟把饼干吃完了。 | “把”后面是被处理的东西。 | “弟弟把饼干吃完了。” |
+| zh-p3-sentence.q6 / generic | 把“妈妈买了一个蛋糕。”改成问句，哪一句正确？<br>1 一个蛋糕买了妈妈。；2 妈妈买了什么？；3 妈妈买了一个蛋糕！；4 妈妈为什么蛋糕？ | 妈妈买了什么？ | 问句要问出“蛋糕”这部分。 | 问买了什么东西：“妈妈买了什么？” |
+| zh-p3-punct.q1 / exact | 选出正确的标点：你喜欢吃苹果还是香蕉[空1]<br>1 、；2 ！；3 。；4 ？ | ？ | 这句话在问人选择。 | 问句用问号。 |
+| zh-p3-punct.q2 / similar | 选出正确的标点：哇[空1]这里的风景真美！<br>1 、；2 。；3 ？；4 ！ | ！ | “哇”表示很惊喜。 | 表示强烈感情的叹词后面用感叹号。 |
+| zh-p3-punct.q3 / generic | 选出正确的标点：老师说[空1]“明天去郊游。”<br>1 ？；2 ：；3 、；4 ！ | ： | 说的话前面用什么标点？ | 引出说的话用冒号。 |
+
+#### 三年级阅读与选字组 · P3 reading and character-in-context (`zh-group-p3-reading-skills`)
+
+Courses: p3_chinese, p3_higher_chinese. 3 pools, authored together as one curriculum-level group.
+
+| ID / stage | Question and options | Key | Hint | Explanation |
+| --- | --- | --- | --- | --- |
+| zh-p3-read-repair.q1 / exact | 读一读：一年一度的书展在星期六开幕。小华和同学一早就到了会场。他们先去童书区看漫画，然后去科学区买了一本介绍恐龙的书。<br>小华在科学区买了什么书？<br>1 介绍太空的书；2 介绍恐龙的书；3 漫画书；4 故事书 | 介绍恐龙的书 | 找一找“科学区”后面写了什么。 | 短文写明他们在科学区买了一本介绍恐龙的书。 |
+| zh-p3-read-repair.q2 / similar | 读一读：这次远足，我们沿着河边走了两个小时。路上，老师教我们认识了三种不同的鸟，还提醒大家不要乱丢垃圾。<br>老师提醒大家什么？<br>1 不要大声说话；2 要走快一点；3 不要乱丢垃圾；4 要多喝水 | 不要乱丢垃圾 | 找一找“提醒”后面的话。 | 短文写明老师提醒大家不要乱丢垃圾。 |
+| zh-p3-read-repair.q3 / generic | 读一读：哥哥参加了学校的乐队，他负责打鼓。每个星期二和星期四放学后，乐队都要练习一个半小时。<br>乐队每次练习多长时间？<br>1 一个半小时；2 一个小时；3 半个小时；4 两个小时 | 一个半小时 | 找一找“练习”后面的时间。 | 短文写明乐队每次练习一个半小时。 |
+| zh-p3-notice-repair.q1 / exact | 读一读：【游泳池开放时间】<br>星期二至星期日：上午八点到晚上九点<br>星期一：休息<br>十二岁以下儿童须由大人陪同。<br>哪一天游泳池不开放？<br>1 星期六；2 星期日；3 星期二；4 星期一 | 星期一 | 找一找写着“休息”的那一天。 | 告示写明星期一休息，所以那天不开放。 |
+| zh-p3-notice-repair.q2 / similar | 读一读：【环保手工比赛】<br>参加者：三年级学生<br>作品要用旧报纸、旧瓶子等旧材料制作。<br>交件日期：十月二十日以前<br>作品要用什么材料制作？<br>1 新买的彩纸；2 布和珠子；3 木头和铁；4 旧报纸、旧瓶子等旧材料 | 旧报纸、旧瓶子等旧材料 | 找一找“材料”这两个字。 | 告示写明作品要用旧报纸、旧瓶子等旧材料制作。 |
+| zh-p3-notice-repair.q3 / generic | 读一读：【巴士车费】<br>大人：一元五角<br>小学生：五角<br>小明（小学生）和妈妈一起坐巴士。<br>他们一共要付多少钱？<br>1 两元；2 一元五角；3 三元；4 一元 | 两元 | 先找出大人和小学生各要付多少钱。 | 妈妈一元五角，小明五角，一共两元。 |
+| zh-p3-charctx-repair.q1 / exact | 他做事很认真，从来不[空1]虎。<br>1 马；2 妈；3 吗；4 码 | 马 | “不认真”可以说成哪个词？ | “马虎”是不认真的意思，句子说他从来不马虎。 |
+| zh-p3-charctx-repair.q2 / similar | 外面下大雨，我们只好在屋子里[空1]棋。<br>1 上；2 下；3 卡；4 不 | 下 | 玩棋的时候，我们说“……棋”。 | 玩棋叫“下棋”。 |
+| zh-p3-charctx-repair.q3 / generic | 冬天，北方很冷，河面都结[空1]了。<br>1 永；2 求；3 水；4 冰 | 冰 | 水很冷的时候会变成什么？ | 水冷到一定程度会结冰。 |
+
+### Language-use and punctuation practice (general practice with declared repair routes)
+
+| ID / stage | Question and options | Key | Hint | Explanation | Repair route |
+| --- | --- | --- | --- | --- | --- |
+| zh-p2-measure.q4 | 门口坐着一[空1]小狗。<br>1 本；2 张；3 块；4 只 | 只 | 小动物常常怎么数？ | 小狗可以说“一只小狗”。 | 量词运用 |
+| zh-p2-measure.q5 | 路边停着一[空1]汽车。<br>1 本；2 张；3 只；4 辆 | 辆 | 车子用哪个量词？ | 车用“辆”来数。 | 量词运用 |
+| zh-p2-measure.q6 | 姐姐穿了一[空1]新衣服。<br>1 件；2 张；3 只；4 本 | 件 | 衣服怎么数？ | 衣服用“件”来数。 | 量词运用 |
+| zh-p2-measure.q7 | 花园里开了一[空1]红花。<br>1 张；2 朵；3 辆；4 本 | 朵 | 花怎么数？ | 花用“朵”来数。 | 量词运用 |
+| zh-p2-measure.q8 | 下雨了，我带了一[空1]雨伞。<br>1 只；2 张；3 把；4 本 | 把 | 有柄可以拿着的东西。 | 伞用“把”来数。 | 量词运用 |
+| zh-p2-measure.q9 | 妹妹吃了一[空1]蛋糕。<br>1 本；2 块；3 件；4 辆 | 块 | 切下来的一小份。 | 切下的一份蛋糕是“一块蛋糕”。 | 量词运用 |
+| zh-p2-measure.q10 | 学校门口有一[空1]大树。<br>1 本；2 张；3 棵；4 辆 | 棵 | 树怎么数？ | 树用“棵”来数。 | 量词运用 |
+| zh-p2-collocation.q4 | 奶奶在厨房[空1]饭。<br>1 踢；2 弹；3 煮；4 放 | 煮 | 做饭要用锅和火。 | 做饭可以说“煮饭”。 | 词语搭配 |
+| zh-p2-collocation.q5 | 我每天早上都[空1]牙。<br>1 踢；2 放；3 打；4 刷 | 刷 | 用牙刷做的事。 | 用牙刷“刷牙”。 | 词语搭配 |
+| zh-p2-collocation.q6 | 老师在白板上[空1]字。<br>1 放；2 弹；3 写；4 踢 | 写 | 用笔做的事。 | 用笔“写字”。 | 词语搭配 |
+| zh-p2-collocation.q7 | 音乐课上，我们一起[空1]歌。<br>1 唱；2 放；3 踢；4 打 | 唱 | 用声音做的事。 | 用嘴“唱歌”。 | 词语搭配 |
+| zh-p2-collocation.q8 | 哥哥拿着鱼竿在河边[空1]鱼。<br>1 钓；2 放；3 踢；4 弹 | 钓 | 想一想用鱼竿做什么。 | 哥哥用鱼竿钓鱼，所以选“钓”。 | 词语搭配 |
+| zh-p2-wordchoice.q4 | 图书馆里很[空1]，大家都在看书。<br>1 忙乱；2 吵闹；3 热闹；4 安静 | 安静 | 看书的地方需要怎样？ | 图书馆里要安静。 | 根据句意选择词语 |
+| zh-p2-wordchoice.q5 | 他每天都很早起床，从来不[空1]到。<br>1 迟；2 先；3 早；4 快 | 迟 | 早起床就不会怎样？ | 早起床就不会迟到。 | 根据句意选择词语 |
+| zh-p2-wordchoice.q6 | 小明不小心打[空1]了杯子。<br>1 长；2 高；3 红；4 破 | 破 | 杯子掉下去会怎样？ | 杯子“打破”了。 | 根据句意选择词语 |
+| zh-p2-wordchoice.q7 | 这个西瓜又大又[空1]。<br>1 辣；2 苦；3 甜；4 臭 | 甜 | 好吃的西瓜是什么味道？ | 西瓜又大又甜。 | 根据句意选择词语 |
+| zh-p2-wordchoice.q8 | 下雨了，地上很[空1]，走路要小心。<br>1 干；2 热；3 湿；4 亮 | 湿 | 下雨后地上会怎样？ | 下雨后地上是湿的。 | 根据句意选择词语 |
+| zh-p2-order.q2 | 哪个句子排列正确？（妈妈 / 在厨房 / 做饭 / 正）<br>1 妈妈正在做饭厨房。；2 在厨房妈妈做饭正。；3 正妈妈在厨房做饭。；4 妈妈正在厨房做饭。 | 妈妈正在厨房做饭。 | 先找出谁在做什么，再看看地点放在哪里。 | 妈妈在厨房里做饭，所以选“妈妈正在厨房做饭。” | 排列词语成句 |
+| zh-p2-order.q5 | 哪个句子排列正确？（老师 / 讲故事 / 给我们 / 听）<br>1 老师给我们听讲故事。；2 讲故事老师听给我们。；3 给我们老师听讲故事。；4 老师讲故事给我们听。 | 老师讲故事给我们听。 | 谁做了什么，给谁听？ | “老师讲故事给我们听。” | 排列词语成句 |
+| zh-p2-order.q6 | 哪个句子排列正确？（弟弟 / 把玩具 / 收好 / 了）<br>1 把玩具弟弟了收好。；2 弟弟把玩具收好了。；3 弟弟收好了把玩具。；4 收好弟弟把玩具了。 | 弟弟把玩具收好了。 | “把”后面先说东西，再说做了什么。 | “弟弟把玩具收好了。” | 排列词语成句 |
+| zh-p2-punct.q4 | 选出正确的标点：老师说[空1]“明天要带水壶。”<br>1 ：；2 、；3 ？；4 ！ | ： | 说话的内容前面用什么标点？ | 引出说的话要用冒号“：”。 | 标点选择 |
+| zh-p2-wordchoice2.q1 | 小明考试前很[空1]，手心都出汗了。<br>1 紧张；2 安静；3 舒服；4 开心 | 紧张 | 手心出汗是什么感觉？ | 考试前手心出汗，说明很紧张。 | 根据句意选择词语 |
+| zh-p2-wordchoice2.q2 | 弟弟[空1]地把玩具借给了好朋友。<br>1 小气；2 难过；3 大方；4 生气 | 大方 | 愿意把东西借给别人的人是怎样的？ | 愿意分享就是“大方”。 | 根据句意选择词语 |
+| zh-p2-wordchoice2.q3 | 外面的雷声很大，小猫吓得[空1]到床底下。<br>1 笑；2 跳；3 躲；4 唱 | 躲 | 害怕时会去藏起来。 | 害怕时会“躲”起来。 | 根据句意选择词语 |
+| zh-p3-measure.q4 | 他们住在一[空1]小房子里。<br>1 条；2 间；3 双；4 本 | 间 | 房子怎么数？ | 房子可以说“一间房子”。 | 量词运用 |
+| zh-p3-measure.q5 | 妈妈给我买了一[空1]新鞋子。<br>1 双；2 头；3 本；4 张 | 双 | 鞋子是两只一起的。 | 成对的鞋子用“双”。 | 量词运用 |
+| zh-p3-measure.q6 | 农场里有一[空1]大黄牛。<br>1 头；2 辆；3 张；4 本 | 头 | 牛这样的大动物怎么数？ | 牛可以说“一头牛”。 | 量词运用 |
+| zh-p3-measure.q7 | 我给外婆写了一[空1]信。<br>1 本；2 块；3 封；4 条 | 封 | 信装在信封里。 | 信用“封”来数。 | 量词运用 |
+| zh-p3-measure.q8 | 雨后，天上出现了一[空1]彩虹。<br>1 只；2 本；3 辆；4 道 | 道 | 彩虹是长长的弧线。 | 彩虹可以说“一道彩虹”。 | 量词运用 |
+| zh-p3-collocation.q4 | 我们要爱护地球，保护[空1]。<br>1 饭菜；2 环境；3 时间；4 声音 | 环境 | 地球上的空气、水和树木。 | “保护环境”。 | 词语搭配 |
+| zh-p3-collocation.q5 | 早睡早起是一个好[空1]。<br>1 天气；2 衣服；3 颜色；4 习惯 | 习惯 | 每天都会这样做的事。 | “好习惯”。 | 词语搭配 |
+| zh-p3-collocation.q6 | 过马路时要遵守交通[空1]。<br>1 树叶；2 书包；3 规则；4 汽车 | 规则 | 大家都要遵守的要求。 | “遵守规则”。 | 词语搭配 |
+| zh-p3-collocation.q7 | 大家一起想办法，终于解决了这个[空1]。<br>1 窗户；2 蛋糕；3 鞋子；4 问题 | 问题 | 想办法要解决的是什么？ | “解决问题”。 | 词语搭配 |
+| zh-p3-collocation.q8 | 学校下个月要举行[空1]。<br>1 书包；2 树叶；3 运动会；4 铅笔 | 运动会 | 学校会举办的活动。 | “举行运动会”。 | 词语搭配 |
+| zh-p3-wordchoice.q4 | 他做事很[空1]，从来不会忘记带东西。<br>1 随便；2 马虎；3 细心；4 粗心 | 细心 | 从不忘记东西的人是怎样的？ | 细心的人不会忘记东西。 | 根据语境理解和选择词语 |
+| zh-p3-wordchoice.q5 | 哪个词的意思是“说实话，不说谎”？小明[空1]地向老师承认了错误。<br>1 生气；2 诚实；3 骄傲；4 害怕 | 诚实 | 找表示不说假话的词。 | 小明没有说假话，是诚实地承认错误。 | 根据语境理解和选择词语 |
+| zh-p3-punct.q4 | 选出正确的标点：他买了铅笔[空1]橡皮和尺子。<br>1 ！；2 ：；3 。；4 、 | 、 | 几样东西并列时用什么隔开？ | 并列词语之间用顿号。 | 标点选择 |
+| zh-p3-punct.q5 | 选出正确的标点：妈妈问：[空1]你吃饭了吗？”<br>1 （；2 ”；3 “；4 《 | “ | 说的话开始时用什么标点？ | 说话内容开始用前引号“。 | 标点选择 |
+| zh-p3-punct.q6 | 选出正确的标点：我最喜欢读[空1]西游记》这本书。<br>1 、；2 “；3 《；4 （ | 《 | 书名要用什么符号括起来？ | 书名用书名号《》。 | 标点选择 |

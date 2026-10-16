@@ -153,6 +153,14 @@ def check_catalogue(curriculum, batch):
         require(len(rows) == count['union_unique'], 'character_count_union')
         for key, field in [('recognition_list_unique', 'recognition_list_pages'), ('writing_list_unique', 'writing_list_pages')]:
             require(sum(bool(r[field]) for r in rows) == count[key], 'character_count_mode')
+    # Non-character repair targets (word, language point, reading skill) sit under an in-scope outcome.
+    skills = unique(curriculum.get('skill_targets', []))
+    require(not (set(skills) & (set(outcomes) | set(targets))), 'duplicate_curriculum_id')
+    for row in skills.values():
+        require(row['course'] in curriculum['courses'], 'curriculum_course')
+        require(row['outcome_ref'] in outcomes and outcomes[row['outcome_ref']]['course'] == row['course'], 'skill_target_outcome')
+        require(outcomes[row['outcome_ref']]['scope'] in {'in_app', 'partial'}, 'skill_target_scope')
+    targets = {**targets, **skills}
     items, materials = unique(batch['items']), unique(batch['materials'])
     require(not (set(items) & set(materials)), 'duplicate_catalogue_id')
     for item in items.values():
@@ -217,6 +225,22 @@ def check_catalogue(curriculum, batch):
     for item in items.values():
         if item['stage'] is not None:
             require(membership.get(item['id']) == 1, 'repair_item_group_membership')
+    # Every non-repair question declares where a wrong answer is repaired; repair items do not.
+    stages = {}
+    for item in items.values():
+        for ref in item['target_refs']:
+            stages.setdefault(ref, set()).add(item['stage'])
+    for item in items.values():
+        routes = item.get('repair_target_refs', [])
+        require(len(routes) == len(set(routes)), 'repair_route_duplicate')
+        if item['stage'] is not None:
+            require(not routes, 'repair_item_has_route')
+            continue
+        require(bool(routes), 'missing_repair_route')
+        for ref in routes:
+            require(ref in targets, 'repair_route_reference')
+            require(stages.get(ref) == {'exact', 'similar', 'generic'}, 'repair_route_incomplete')
+        require({targets[r]['course'] for r in routes} == set(item['courses']), 'repair_route_course')
     log = batch['review_log']
     for field in ['sampled_item_ids', 'disputed_item_ids']:
         require(len(log[field]) == len(set(log[field])) and set(log[field]) <= set(items), 'review_item_reference')
@@ -273,7 +297,7 @@ def check_import(payload, curriculum, today, approved_manifest_versions=()):
     if manifest is not None:
         require(manifest in approved_manifest_versions and manifest == curriculum['manifest_version'], 'manifest_not_approved')
         require(curriculum['status'] == 'approved' and curriculum['coverage_status'] == 'approved', 'manifest_not_approved')
-    known = {r['id']: r for r in curriculum['outcomes'] + curriculum['characters']}
+    known = {r['id']: r for r in curriculum['outcomes'] + curriculum['characters'] + curriculum.get('skill_targets', [])}
     for entry in entries:
         bound = {'character': 1, 'word': 8}.get(entry['target_kind'], 64)
         for field in ['target_value', 'observed_wrong_form']:
@@ -290,6 +314,7 @@ def check_import(payload, curriculum, today, approved_manifest_versions=()):
                 require(known[ref].get('character') == entry['target_value'], 'mapped_character_value')
             else:
                 require('character' not in known[ref], 'mapped_target_kind')
+                require(known[ref].get('kind', entry['target_kind']) == entry['target_kind'], 'mapped_target_kind')
 
 
 def check_attempt(event, item):

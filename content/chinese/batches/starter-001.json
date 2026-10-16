@@ -1,7 +1,7 @@
 {
   "schema_version": "chinese-content/1",
   "batch_id": "zh-starter-001",
-  "version": 5,
+  "version": 6,
   "curriculum_manifest_version": "zh-2024-p2p3-draft.1",
   "status": "author_checked_pending_independent_and_owner_review",
   "materials": [
@@ -297,7 +297,7 @@
     },
     {
       "id": "zh-m11",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_chinese",
         "p3_higher_chinese"
@@ -428,14 +428,14 @@
     },
     {
       "id": "zh-m16",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_chinese",
         "p3_higher_chinese"
       ],
       "kind": "cloze",
       "title": "做纸风车",
-      "body": "今天美术课，老师教我们做纸风车。我先把一张正方形的纸{{blank-1}}成四个三角形，再用剪刀沿着线剪开。接着，我把四个纸角都{{blank-2}}到中间，用胶水粘好。风车做好了！风一吹，风车就{{blank-3}}了起来。我{{blank-4}}地拿给妈妈看，妈妈{{blank-5}}我做得很好。",
+      "body": "今天美术课，老师教我们做纸风车。我先把一张正方形的纸沿着两条对角线对{{blank-1}}，压出折痕。再从四个角往中心剪，中间留一小块不剪。接着，我把每个三角形的一个角{{blank-2}}到中心，叠在一起，用一枚图钉把中心钉在一根小木棍上，不要钉得太紧。风车做好了！风一吹，风车就{{blank-3}}了起来。我{{blank-4}}地拿给妈妈看，妈妈{{blank-5}}我做得很好。",
       "question_ids": [
         "zh-m16.q1",
         "zh-m16.q2",
@@ -542,7 +542,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m01.q2",
@@ -587,7 +591,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m01.q3",
@@ -632,7 +640,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m01.q4",
@@ -677,7 +689,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m01.q5",
@@ -722,7 +738,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m02.q1",
@@ -767,7 +787,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.notice-info",
+        "zh.p2_higher_chinese.skill.notice-info"
+      ]
     },
     {
       "id": "zh-m02.q2",
@@ -812,7 +836,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.notice-info",
+        "zh.p2_higher_chinese.skill.notice-info"
+      ]
     },
     {
       "id": "zh-m02.q3",
@@ -857,7 +885,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.notice-info",
+        "zh.p2_higher_chinese.skill.notice-info"
+      ]
     },
     {
       "id": "zh-m02.q4",
@@ -902,7 +934,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.notice-info",
+        "zh.p2_higher_chinese.skill.notice-info"
+      ]
     },
     {
       "id": "zh-m02.q5",
@@ -947,7 +983,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.notice-info",
+        "zh.p2_higher_chinese.skill.notice-info"
+      ]
     },
     {
       "id": "zh-m03.q1",
@@ -992,7 +1032,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p2_chinese.char.u6674",
+        "zh.p2_higher_chinese.char.u6674"
+      ]
     },
     {
       "id": "zh-m03.q2",
@@ -1002,8 +1046,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.r-character",
-        "zh.p2_higher_chinese.r-character"
+        "zh.p2_chinese.lu-word-choice",
+        "zh.p2_higher_chinese.lu-word-choice"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -1037,7 +1081,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": "blank-2"
+      "blank_ref": "blank-2",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.word-choice",
+        "zh.p2_higher_chinese.skill.word-choice"
+      ]
     },
     {
       "id": "zh-m03.q3",
@@ -1047,8 +1095,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.r-character",
-        "zh.p2_higher_chinese.r-character"
+        "zh.p2_chinese.lu-word-choice",
+        "zh.p2_higher_chinese.lu-word-choice"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -1082,7 +1130,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": "blank-3"
+      "blank_ref": "blank-3",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.word-choice",
+        "zh.p2_higher_chinese.skill.word-choice"
+      ]
     },
     {
       "id": "zh-m03.q4",
@@ -1127,7 +1179,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": "blank-4"
+      "blank_ref": "blank-4",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.char-in-context",
+        "zh.p2_higher_chinese.skill.char-in-context"
+      ]
     },
     {
       "id": "zh-m03.q5",
@@ -1172,7 +1228,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": "blank-5"
+      "blank_ref": "blank-5",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.char-in-context",
+        "zh.p2_higher_chinese.skill.char-in-context"
+      ]
     },
     {
       "id": "zh-m04.q1",
@@ -1217,7 +1277,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m04.q2",
@@ -1262,7 +1326,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m04.q3",
@@ -1307,7 +1375,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m04.q4",
@@ -1352,7 +1424,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m04.q5",
@@ -1397,7 +1473,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m05.q1",
@@ -1442,7 +1522,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m05.q2",
@@ -1487,7 +1571,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m05.q3",
@@ -1532,7 +1620,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m05.q4",
@@ -1577,7 +1669,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m05.q5",
@@ -1622,7 +1718,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-p2-confusable-u5ea7.q1",
@@ -5148,10 +5248,13 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-measure-word",
+        "zh.p2_higher_chinese.lu-measure-word"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p2_chinese.skill.measure-word",
+        "zh.p2_higher_chinese.skill.measure-word"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "妈妈给我买了一{{blank-1}}故事书。",
@@ -5178,7 +5281,7 @@
       "explanation": "书用“本”来数：一本书。",
       "rationale": "量词选择：语言运用（待独立审核的语言运用细项）",
       "material_id": null,
-      "stage": null,
+      "stage": "exact",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -5198,10 +5301,13 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-measure-word",
+        "zh.p2_higher_chinese.lu-measure-word"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p2_chinese.skill.measure-word",
+        "zh.p2_higher_chinese.skill.measure-word"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "河里游着一{{blank-1}}小鱼。",
@@ -5228,7 +5334,7 @@
       "explanation": "鱼用“条”来数。",
       "rationale": "量词选择：语言运用（待独立审核的语言运用细项）",
       "material_id": null,
-      "stage": null,
+      "stage": "similar",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -5248,10 +5354,13 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-measure-word",
+        "zh.p2_higher_chinese.lu-measure-word"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p2_chinese.skill.measure-word",
+        "zh.p2_higher_chinese.skill.measure-word"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "请给我一{{blank-1}}白纸。",
@@ -5278,7 +5387,7 @@
       "explanation": "纸用“张”来数。",
       "rationale": "量词选择：语言运用（待独立审核的语言运用细项）",
       "material_id": null,
-      "stage": null,
+      "stage": "generic",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -5298,8 +5407,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-measure-word",
+        "zh.p2_higher_chinese.lu-measure-word"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -5338,7 +5447,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.measure-word",
+        "zh.p2_higher_chinese.skill.measure-word"
+      ]
     },
     {
       "id": "zh-p2-measure.q5",
@@ -5348,8 +5461,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-measure-word",
+        "zh.p2_higher_chinese.lu-measure-word"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -5388,7 +5501,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.measure-word",
+        "zh.p2_higher_chinese.skill.measure-word"
+      ]
     },
     {
       "id": "zh-p2-measure.q6",
@@ -5398,8 +5515,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-measure-word",
+        "zh.p2_higher_chinese.lu-measure-word"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -5438,7 +5555,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.measure-word",
+        "zh.p2_higher_chinese.skill.measure-word"
+      ]
     },
     {
       "id": "zh-p2-measure.q7",
@@ -5448,8 +5569,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-measure-word",
+        "zh.p2_higher_chinese.lu-measure-word"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -5488,7 +5609,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.measure-word",
+        "zh.p2_higher_chinese.skill.measure-word"
+      ]
     },
     {
       "id": "zh-p2-measure.q8",
@@ -5498,8 +5623,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-measure-word",
+        "zh.p2_higher_chinese.lu-measure-word"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -5538,7 +5663,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.measure-word",
+        "zh.p2_higher_chinese.skill.measure-word"
+      ]
     },
     {
       "id": "zh-p2-measure.q9",
@@ -5548,8 +5677,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-measure-word",
+        "zh.p2_higher_chinese.lu-measure-word"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -5588,7 +5717,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.measure-word",
+        "zh.p2_higher_chinese.skill.measure-word"
+      ]
     },
     {
       "id": "zh-p2-measure.q10",
@@ -5598,8 +5731,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-measure-word",
+        "zh.p2_higher_chinese.lu-measure-word"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -5638,7 +5771,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.measure-word",
+        "zh.p2_higher_chinese.skill.measure-word"
+      ]
     },
     {
       "id": "zh-p2-collocation.q1",
@@ -5648,10 +5785,13 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-collocation",
+        "zh.p2_higher_chinese.lu-collocation"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p2_chinese.skill.collocation",
+        "zh.p2_higher_chinese.skill.collocation"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "我们在草地上{{blank-1}}风筝。",
@@ -5678,7 +5818,7 @@
       "explanation": "风筝要“放”：放风筝。",
       "rationale": "词语搭配：语言运用（待独立审核的语言运用细项）",
       "material_id": null,
-      "stage": null,
+      "stage": "exact",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -5698,10 +5838,13 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-collocation",
+        "zh.p2_higher_chinese.lu-collocation"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p2_chinese.skill.collocation",
+        "zh.p2_higher_chinese.skill.collocation"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "妹妹在家里{{blank-1}}钢琴。",
@@ -5728,7 +5871,7 @@
       "explanation": "钢琴要“弹”：弹钢琴。",
       "rationale": "词语搭配：语言运用（待独立审核的语言运用细项）",
       "material_id": null,
-      "stage": null,
+      "stage": "similar",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -5748,10 +5891,13 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-collocation",
+        "zh.p2_higher_chinese.lu-collocation"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p2_chinese.skill.collocation",
+        "zh.p2_higher_chinese.skill.collocation"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "爸爸在球场上{{blank-1}}篮球。",
@@ -5778,7 +5924,7 @@
       "explanation": "篮球要“打”：打篮球。",
       "rationale": "词语搭配：语言运用（待独立审核的语言运用细项）",
       "material_id": null,
-      "stage": null,
+      "stage": "generic",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -5798,8 +5944,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-collocation",
+        "zh.p2_higher_chinese.lu-collocation"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -5838,7 +5984,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.collocation",
+        "zh.p2_higher_chinese.skill.collocation"
+      ]
     },
     {
       "id": "zh-p2-collocation.q5",
@@ -5848,8 +5998,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-collocation",
+        "zh.p2_higher_chinese.lu-collocation"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -5888,7 +6038,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.collocation",
+        "zh.p2_higher_chinese.skill.collocation"
+      ]
     },
     {
       "id": "zh-p2-collocation.q6",
@@ -5898,8 +6052,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-collocation",
+        "zh.p2_higher_chinese.lu-collocation"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -5938,7 +6092,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.collocation",
+        "zh.p2_higher_chinese.skill.collocation"
+      ]
     },
     {
       "id": "zh-p2-collocation.q7",
@@ -5948,8 +6106,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-collocation",
+        "zh.p2_higher_chinese.lu-collocation"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -5988,7 +6146,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.collocation",
+        "zh.p2_higher_chinese.skill.collocation"
+      ]
     },
     {
       "id": "zh-p2-collocation.q8",
@@ -5998,8 +6160,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-collocation",
+        "zh.p2_higher_chinese.lu-collocation"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -6038,7 +6200,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.collocation",
+        "zh.p2_higher_chinese.skill.collocation"
+      ]
     },
     {
       "id": "zh-p2-wordchoice.q1",
@@ -6048,10 +6214,13 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-word-choice",
+        "zh.p2_higher_chinese.lu-word-choice"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p2_chinese.skill.word-choice",
+        "zh.p2_higher_chinese.skill.word-choice"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "天气太{{blank-1}}了，我们都出了很多汗。",
@@ -6078,7 +6247,7 @@
       "explanation": "天气热会出汗。",
       "rationale": "词语选择：语言运用（待独立审核的语言运用细项）",
       "material_id": null,
-      "stage": null,
+      "stage": "exact",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -6098,10 +6267,13 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-word-choice",
+        "zh.p2_higher_chinese.lu-word-choice"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p2_chinese.skill.word-choice",
+        "zh.p2_higher_chinese.skill.word-choice"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "妹妹找不到妈妈，{{blank-1}}得哭了起来。",
@@ -6128,7 +6300,7 @@
       "explanation": "心里着急，“急得哭了”。",
       "rationale": "词语选择：语言运用（待独立审核的语言运用细项）",
       "material_id": null,
-      "stage": null,
+      "stage": "similar",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -6148,10 +6320,13 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-word-choice",
+        "zh.p2_higher_chinese.lu-word-choice"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p2_chinese.skill.word-choice",
+        "zh.p2_higher_chinese.skill.word-choice"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "这条路很{{blank-1}}，我们走了很久。",
@@ -6178,7 +6353,7 @@
       "explanation": "路长才要走很久。",
       "rationale": "词语选择：语言运用（待独立审核的语言运用细项）",
       "material_id": null,
-      "stage": null,
+      "stage": "generic",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -6198,8 +6373,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-word-choice",
+        "zh.p2_higher_chinese.lu-word-choice"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -6238,7 +6413,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.word-choice",
+        "zh.p2_higher_chinese.skill.word-choice"
+      ]
     },
     {
       "id": "zh-p2-wordchoice.q5",
@@ -6248,8 +6427,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-word-choice",
+        "zh.p2_higher_chinese.lu-word-choice"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -6288,7 +6467,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.word-choice",
+        "zh.p2_higher_chinese.skill.word-choice"
+      ]
     },
     {
       "id": "zh-p2-wordchoice.q6",
@@ -6298,8 +6481,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-word-choice",
+        "zh.p2_higher_chinese.lu-word-choice"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -6338,7 +6521,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.word-choice",
+        "zh.p2_higher_chinese.skill.word-choice"
+      ]
     },
     {
       "id": "zh-p2-wordchoice.q7",
@@ -6348,8 +6535,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-word-choice",
+        "zh.p2_higher_chinese.lu-word-choice"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -6388,7 +6575,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.word-choice",
+        "zh.p2_higher_chinese.skill.word-choice"
+      ]
     },
     {
       "id": "zh-p2-wordchoice.q8",
@@ -6398,8 +6589,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-word-choice",
+        "zh.p2_higher_chinese.lu-word-choice"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -6438,7 +6629,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.word-choice",
+        "zh.p2_higher_chinese.skill.word-choice"
+      ]
     },
     {
       "id": "zh-p2-order.q1",
@@ -6448,10 +6643,13 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-sentence",
-        "zh.p2_higher_chinese.w-sentence"
+        "zh.p2_chinese.lu-sentence-order",
+        "zh.p2_higher_chinese.lu-sentence-order"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p2_chinese.skill.sentence-order",
+        "zh.p2_higher_chinese.skill.sentence-order"
+      ],
       "family": "character",
       "format": "mcq_4plus",
       "stem": "哪个句子排列正确？（我 / 上学 / 每天 / 走路）",
@@ -6478,7 +6676,7 @@
       "explanation": "正确的句子是“我每天走路上学。”",
       "rationale": "句子组织：只评估选择，不评估书写",
       "material_id": null,
-      "stage": null,
+      "stage": "exact",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [],
@@ -6493,8 +6691,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-sentence",
-        "zh.p2_higher_chinese.w-sentence"
+        "zh.p2_chinese.lu-sentence-order",
+        "zh.p2_higher_chinese.lu-sentence-order"
       ],
       "target_refs": [],
       "family": "character",
@@ -6528,7 +6726,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.sentence-order",
+        "zh.p2_higher_chinese.skill.sentence-order"
+      ]
     },
     {
       "id": "zh-p2-order.q3",
@@ -6538,10 +6740,13 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-sentence",
-        "zh.p2_higher_chinese.w-sentence"
+        "zh.p2_chinese.lu-sentence-order",
+        "zh.p2_higher_chinese.lu-sentence-order"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p2_chinese.skill.sentence-order",
+        "zh.p2_higher_chinese.skill.sentence-order"
+      ],
       "family": "character",
       "format": "mcq_4plus",
       "stem": "哪个句子排列正确？（小狗 / 在草地上 / 开心地 / 跑）",
@@ -6568,7 +6773,7 @@
       "explanation": "“小狗开心地在草地上跑。”",
       "rationale": "句子组织：只评估选择，不评估书写",
       "material_id": null,
-      "stage": null,
+      "stage": "similar",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [],
@@ -6583,10 +6788,13 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-sentence",
-        "zh.p2_higher_chinese.w-sentence"
+        "zh.p2_chinese.lu-sentence-order",
+        "zh.p2_higher_chinese.lu-sentence-order"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p2_chinese.skill.sentence-order",
+        "zh.p2_higher_chinese.skill.sentence-order"
+      ],
       "family": "character",
       "format": "mcq_4plus",
       "stem": "哪个句子排列正确？（星期天 / 我们 / 去公园 / 玩）",
@@ -6613,7 +6821,7 @@
       "explanation": "“星期天我们去公园玩。”",
       "rationale": "句子组织：只评估选择，不评估书写",
       "material_id": null,
-      "stage": null,
+      "stage": "generic",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [],
@@ -6628,8 +6836,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-sentence",
-        "zh.p2_higher_chinese.w-sentence"
+        "zh.p2_chinese.lu-sentence-order",
+        "zh.p2_higher_chinese.lu-sentence-order"
       ],
       "target_refs": [],
       "family": "character",
@@ -6663,7 +6871,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.sentence-order",
+        "zh.p2_higher_chinese.skill.sentence-order"
+      ]
     },
     {
       "id": "zh-p2-order.q6",
@@ -6673,8 +6885,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-sentence",
-        "zh.p2_higher_chinese.w-sentence"
+        "zh.p2_chinese.lu-sentence-order",
+        "zh.p2_higher_chinese.lu-sentence-order"
       ],
       "target_refs": [],
       "family": "character",
@@ -6708,7 +6920,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.sentence-order",
+        "zh.p2_higher_chinese.skill.sentence-order"
+      ]
     },
     {
       "id": "zh-p2-punct.q1",
@@ -6721,7 +6937,10 @@
         "zh.p2_chinese.r-punctuation",
         "zh.p2_higher_chinese.r-punctuation"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p2_chinese.skill.punctuation",
+        "zh.p2_higher_chinese.skill.punctuation"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "选出正确的标点：你今天想去哪里{{blank-1}}",
@@ -6748,7 +6967,7 @@
       "explanation": "问句用问号“？”。",
       "rationale": "标点与句意",
       "material_id": null,
-      "stage": null,
+      "stage": "exact",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -6771,7 +6990,10 @@
         "zh.p2_chinese.r-punctuation",
         "zh.p2_higher_chinese.r-punctuation"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p2_chinese.skill.punctuation",
+        "zh.p2_higher_chinese.skill.punctuation"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "选出正确的标点：这里的风景真美{{blank-1}}",
@@ -6798,7 +7020,7 @@
       "explanation": "表示赞叹用感叹号“！”。",
       "rationale": "标点与句意",
       "material_id": null,
-      "stage": null,
+      "stage": "similar",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -6821,7 +7043,10 @@
         "zh.p2_chinese.r-punctuation",
         "zh.p2_higher_chinese.r-punctuation"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p2_chinese.skill.punctuation",
+        "zh.p2_higher_chinese.skill.punctuation"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "选出正确的标点：我喜欢苹果{{blank-1}}香蕉和葡萄。",
@@ -6848,7 +7073,7 @@
       "explanation": "并列的词语之间用顿号“、”。",
       "rationale": "标点与句意",
       "material_id": null,
-      "stage": null,
+      "stage": "generic",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -6908,7 +7133,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.punctuation",
+        "zh.p2_higher_chinese.skill.punctuation"
+      ]
     },
     {
       "id": "zh-m06.q1",
@@ -6953,7 +7182,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m06.q2",
@@ -6998,7 +7231,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m06.q3",
@@ -7043,7 +7280,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m06.q4",
@@ -7088,7 +7329,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m06.q5",
@@ -7133,7 +7378,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m07.q1",
@@ -7178,7 +7427,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m07.q2",
@@ -7223,7 +7476,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m07.q3",
@@ -7268,7 +7525,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m07.q4",
@@ -7313,7 +7574,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m07.q5",
@@ -7358,7 +7623,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m08.q1",
@@ -7403,7 +7672,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.notice-info",
+        "zh.p2_higher_chinese.skill.notice-info"
+      ]
     },
     {
       "id": "zh-m08.q2",
@@ -7448,7 +7721,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.notice-info",
+        "zh.p2_higher_chinese.skill.notice-info"
+      ]
     },
     {
       "id": "zh-m08.q3",
@@ -7493,7 +7770,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.notice-info",
+        "zh.p2_higher_chinese.skill.notice-info"
+      ]
     },
     {
       "id": "zh-m08.q4",
@@ -7538,7 +7819,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.notice-info",
+        "zh.p2_higher_chinese.skill.notice-info"
+      ]
     },
     {
       "id": "zh-m08.q5",
@@ -7583,7 +7868,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.notice-info",
+        "zh.p2_higher_chinese.skill.notice-info"
+      ]
     },
     {
       "id": "zh-m09.q1",
@@ -7628,7 +7917,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m09.q2",
@@ -7673,7 +7966,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m09.q3",
@@ -7718,7 +8015,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m09.q4",
@@ -7763,7 +8064,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m09.q5",
@@ -7808,7 +8113,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m18.q1",
@@ -7853,7 +8162,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.char-in-context",
+        "zh.p2_higher_chinese.skill.char-in-context"
+      ]
     },
     {
       "id": "zh-m18.q2",
@@ -7898,7 +8211,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": "blank-2"
+      "blank_ref": "blank-2",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.char-in-context",
+        "zh.p2_higher_chinese.skill.char-in-context"
+      ]
     },
     {
       "id": "zh-m18.q3",
@@ -7943,7 +8260,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": "blank-3"
+      "blank_ref": "blank-3",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.char-in-context",
+        "zh.p2_higher_chinese.skill.char-in-context"
+      ]
     },
     {
       "id": "zh-m18.q4",
@@ -7988,7 +8309,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": "blank-4"
+      "blank_ref": "blank-4",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.char-in-context",
+        "zh.p2_higher_chinese.skill.char-in-context"
+      ]
     },
     {
       "id": "zh-m18.q5",
@@ -7998,8 +8323,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.r-character",
-        "zh.p2_higher_chinese.r-character"
+        "zh.p2_chinese.lu-word-choice",
+        "zh.p2_higher_chinese.lu-word-choice"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -8033,7 +8358,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": "blank-5"
+      "blank_ref": "blank-5",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.word-choice",
+        "zh.p2_higher_chinese.skill.word-choice"
+      ]
     },
     {
       "id": "zh-p2-wordchoice2.q1",
@@ -8043,8 +8372,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-word-choice",
+        "zh.p2_higher_chinese.lu-word-choice"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -8083,7 +8412,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.word-choice",
+        "zh.p2_higher_chinese.skill.word-choice"
+      ]
     },
     {
       "id": "zh-p2-wordchoice2.q2",
@@ -8093,8 +8426,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-word-choice",
+        "zh.p2_higher_chinese.lu-word-choice"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -8133,7 +8466,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.word-choice",
+        "zh.p2_higher_chinese.skill.word-choice"
+      ]
     },
     {
       "id": "zh-p2-wordchoice2.q3",
@@ -8143,8 +8480,8 @@
         "p2_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p2_chinese.w-ideas",
-        "zh.p2_higher_chinese.w-ideas"
+        "zh.p2_chinese.lu-word-choice",
+        "zh.p2_higher_chinese.lu-word-choice"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -8183,7 +8520,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p2_chinese.skill.word-choice",
+        "zh.p2_higher_chinese.skill.word-choice"
+      ]
     },
     {
       "id": "zh-p3-confusable-u6e56.q1",
@@ -11850,10 +12191,13 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.lu-measure-word",
+        "zh.p3_higher_chinese.lu-measure-word"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p3_chinese.skill.measure-word",
+        "zh.p3_higher_chinese.skill.measure-word"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "墙上挂着一{{blank-1}}镜子。",
@@ -11880,7 +12224,7 @@
       "explanation": "镜子用“面”来数。",
       "rationale": "量词选择：语言运用（待独立审核的语言运用细项）",
       "material_id": null,
-      "stage": null,
+      "stage": "exact",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -11900,10 +12244,13 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.lu-measure-word",
+        "zh.p3_higher_chinese.lu-measure-word"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p3_chinese.skill.measure-word",
+        "zh.p3_higher_chinese.skill.measure-word"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "我买了一{{blank-1}}牙膏。",
@@ -11930,7 +12277,7 @@
       "explanation": "牙膏用“支”来数。",
       "rationale": "量词选择：语言运用（待独立审核的语言运用细项）",
       "material_id": null,
-      "stage": null,
+      "stage": "similar",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -11950,10 +12297,13 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.lu-measure-word",
+        "zh.p3_higher_chinese.lu-measure-word"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p3_chinese.skill.measure-word",
+        "zh.p3_higher_chinese.skill.measure-word"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "爷爷戴着一{{blank-1}}眼镜。",
@@ -11980,7 +12330,7 @@
       "explanation": "眼镜用“副”来数。",
       "rationale": "量词选择：语言运用（待独立审核的语言运用细项）",
       "material_id": null,
-      "stage": null,
+      "stage": "generic",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -12000,8 +12350,8 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.lu-measure-word",
+        "zh.p3_higher_chinese.lu-measure-word"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -12040,7 +12390,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.measure-word",
+        "zh.p3_higher_chinese.skill.measure-word"
+      ]
     },
     {
       "id": "zh-p3-measure.q5",
@@ -12050,8 +12404,8 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.lu-measure-word",
+        "zh.p3_higher_chinese.lu-measure-word"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -12090,7 +12444,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.measure-word",
+        "zh.p3_higher_chinese.skill.measure-word"
+      ]
     },
     {
       "id": "zh-p3-measure.q6",
@@ -12100,8 +12458,8 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.lu-measure-word",
+        "zh.p3_higher_chinese.lu-measure-word"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -12140,7 +12498,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.measure-word",
+        "zh.p3_higher_chinese.skill.measure-word"
+      ]
     },
     {
       "id": "zh-p3-measure.q7",
@@ -12150,8 +12512,8 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.lu-measure-word",
+        "zh.p3_higher_chinese.lu-measure-word"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -12190,7 +12552,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.measure-word",
+        "zh.p3_higher_chinese.skill.measure-word"
+      ]
     },
     {
       "id": "zh-p3-measure.q8",
@@ -12200,8 +12566,8 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.lu-measure-word",
+        "zh.p3_higher_chinese.lu-measure-word"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -12240,7 +12606,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.measure-word",
+        "zh.p3_higher_chinese.skill.measure-word"
+      ]
     },
     {
       "id": "zh-p3-collocation.q1",
@@ -12250,10 +12620,13 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.lu-collocation",
+        "zh.p3_higher_chinese.lu-collocation"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p3_chinese.skill.collocation",
+        "zh.p3_higher_chinese.skill.collocation"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "我报名{{blank-1}}了学校的歌唱比赛。",
@@ -12280,7 +12653,7 @@
       "explanation": "“参加比赛”表示加入比赛。",
       "rationale": "词语搭配：语言运用（待独立审核的语言运用细项）",
       "material_id": null,
-      "stage": null,
+      "stage": "exact",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -12300,10 +12673,13 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.lu-collocation",
+        "zh.p3_higher_chinese.lu-collocation"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p3_chinese.skill.collocation",
+        "zh.p3_higher_chinese.skill.collocation"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "老师带我们去{{blank-1}}博物馆。",
@@ -12330,7 +12706,7 @@
       "explanation": "“参观博物馆”表示去看展览。",
       "rationale": "词语搭配：语言运用（待独立审核的语言运用细项）",
       "material_id": null,
-      "stage": null,
+      "stage": "similar",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -12350,10 +12726,13 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.lu-collocation",
+        "zh.p3_higher_chinese.lu-collocation"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p3_chinese.skill.collocation",
+        "zh.p3_higher_chinese.skill.collocation"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "上课时，他举手{{blank-1}}老师的问题。",
@@ -12380,7 +12759,7 @@
       "explanation": "“回答问题”。",
       "rationale": "词语搭配：语言运用（待独立审核的语言运用细项）",
       "material_id": null,
-      "stage": null,
+      "stage": "generic",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -12400,8 +12779,8 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.lu-collocation",
+        "zh.p3_higher_chinese.lu-collocation"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -12440,7 +12819,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.collocation",
+        "zh.p3_higher_chinese.skill.collocation"
+      ]
     },
     {
       "id": "zh-p3-collocation.q5",
@@ -12450,8 +12833,8 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.lu-collocation",
+        "zh.p3_higher_chinese.lu-collocation"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -12490,7 +12873,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.collocation",
+        "zh.p3_higher_chinese.skill.collocation"
+      ]
     },
     {
       "id": "zh-p3-collocation.q6",
@@ -12500,8 +12887,8 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.lu-collocation",
+        "zh.p3_higher_chinese.lu-collocation"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -12540,7 +12927,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.collocation",
+        "zh.p3_higher_chinese.skill.collocation"
+      ]
     },
     {
       "id": "zh-p3-collocation.q7",
@@ -12550,8 +12941,8 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.lu-collocation",
+        "zh.p3_higher_chinese.lu-collocation"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -12590,7 +12981,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.collocation",
+        "zh.p3_higher_chinese.skill.collocation"
+      ]
     },
     {
       "id": "zh-p3-collocation.q8",
@@ -12600,8 +12995,8 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.lu-collocation",
+        "zh.p3_higher_chinese.lu-collocation"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -12640,7 +13035,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.collocation",
+        "zh.p3_higher_chinese.skill.collocation"
+      ]
     },
     {
       "id": "zh-p3-wordchoice.q1",
@@ -12650,10 +13049,13 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.r-word-context",
+        "zh.p3_higher_chinese.r-word-context"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p3_chinese.skill.word-context",
+        "zh.p3_higher_chinese.skill.word-context"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "这次考试他得了满分，大家都很{{blank-1}}他。",
@@ -12680,7 +13082,7 @@
       "explanation": "“佩服”表示觉得别人很了不起。",
       "rationale": "词语选择：语言运用（待独立审核的语言运用细项）",
       "material_id": null,
-      "stage": null,
+      "stage": "exact",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -12700,10 +13102,13 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.r-word-context",
+        "zh.p3_higher_chinese.r-word-context"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p3_chinese.skill.word-context",
+        "zh.p3_higher_chinese.skill.word-context"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "弟弟把房间弄得乱七八糟，妈妈很{{blank-1}}。",
@@ -12730,7 +13135,7 @@
       "explanation": "房间被弄乱，妈妈很生气。",
       "rationale": "词语选择：语言运用（待独立审核的语言运用细项）",
       "material_id": null,
-      "stage": null,
+      "stage": "similar",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -12750,10 +13155,13 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.r-word-context",
+        "zh.p3_higher_chinese.r-word-context"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p3_chinese.skill.word-context",
+        "zh.p3_higher_chinese.skill.word-context"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "这道数学题太{{blank-1}}了，我想了很久也不会做。",
@@ -12780,7 +13188,7 @@
       "explanation": "题目难才会想很久。",
       "rationale": "词语选择：语言运用（待独立审核的语言运用细项）",
       "material_id": null,
-      "stage": null,
+      "stage": "generic",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -12800,8 +13208,8 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.r-word-context",
+        "zh.p3_higher_chinese.r-word-context"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -12840,7 +13248,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.word-context",
+        "zh.p3_higher_chinese.skill.word-context"
+      ]
     },
     {
       "id": "zh-p3-wordchoice.q5",
@@ -12850,8 +13262,8 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.r-word-context",
+        "zh.p3_higher_chinese.r-word-context"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -12890,7 +13302,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.word-context",
+        "zh.p3_higher_chinese.skill.word-context"
+      ]
     },
     {
       "id": "zh-p3-wordchoice.q6",
@@ -12900,10 +13316,13 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.lu-connectives",
+        "zh.p3_higher_chinese.lu-connectives"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p3_chinese.skill.connectives",
+        "zh.p3_higher_chinese.skill.connectives"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "练习了很多次，我们班{{blank-1}}得了第一名。",
@@ -12930,7 +13349,7 @@
       "explanation": "“终于”表示经过努力后得到结果。",
       "rationale": "词语选择：语言运用（待独立审核的语言运用细项）",
       "material_id": null,
-      "stage": null,
+      "stage": "exact",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -12950,10 +13369,13 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.lu-connectives",
+        "zh.p3_higher_chinese.lu-connectives"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p3_chinese.skill.connectives",
+        "zh.p3_higher_chinese.skill.connectives"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "雨下得很大，{{blank-1}}我们还是去上学了。",
@@ -12980,7 +13402,7 @@
       "explanation": "前后意思相反用“但是”。",
       "rationale": "词语选择：语言运用（待独立审核的语言运用细项）",
       "material_id": null,
-      "stage": null,
+      "stage": "similar",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -13000,10 +13422,13 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.lu-connectives",
+        "zh.p3_higher_chinese.lu-connectives"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p3_chinese.skill.connectives",
+        "zh.p3_higher_chinese.skill.connectives"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "{{blank-1}}下大雨，所以比赛取消了。",
@@ -13030,7 +13455,7 @@
       "explanation": "“因为……所以……”说明原因和结果。",
       "rationale": "词语选择：语言运用（待独立审核的语言运用细项）",
       "material_id": null,
-      "stage": null,
+      "stage": "generic",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -13050,10 +13475,13 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-sentence",
-        "zh.p3_higher_chinese.w-sentence"
+        "zh.p3_chinese.lu-sentence-order",
+        "zh.p3_higher_chinese.lu-sentence-order"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p3_chinese.skill.sentence-order",
+        "zh.p3_higher_chinese.skill.sentence-order"
+      ],
       "family": "character",
       "format": "mcq_4plus",
       "stem": "哪个句子排列正确？（小鸟 / 在树上 / 快乐地 / 唱歌）",
@@ -13080,7 +13508,7 @@
       "explanation": "“小鸟在树上快乐地唱歌。”",
       "rationale": "句子组织与句式变换：只评估选择",
       "material_id": null,
-      "stage": null,
+      "stage": "exact",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [],
@@ -13095,10 +13523,13 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-sentence",
-        "zh.p3_higher_chinese.w-sentence"
+        "zh.p3_chinese.lu-sentence-order",
+        "zh.p3_higher_chinese.lu-sentence-order"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p3_chinese.skill.sentence-order",
+        "zh.p3_higher_chinese.skill.sentence-order"
+      ],
       "family": "character",
       "format": "mcq_4plus",
       "stem": "哪个句子排列正确？（我们 / 把 / 打扫干净 / 教室 / 了）",
@@ -13125,7 +13556,7 @@
       "explanation": "“我们把教室打扫干净了。”",
       "rationale": "句子组织与句式变换：只评估选择",
       "material_id": null,
-      "stage": null,
+      "stage": "similar",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [],
@@ -13140,10 +13571,13 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-sentence",
-        "zh.p3_higher_chinese.w-sentence"
+        "zh.p3_chinese.lu-sentence-order",
+        "zh.p3_higher_chinese.lu-sentence-order"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p3_chinese.skill.sentence-order",
+        "zh.p3_higher_chinese.skill.sentence-order"
+      ],
       "family": "character",
       "format": "mcq_4plus",
       "stem": "哪个句子排列正确？（因为 / 下大雨 / 运动会 / 改期了）",
@@ -13170,7 +13604,7 @@
       "explanation": "“因为下大雨，运动会改期了。”",
       "rationale": "句子组织与句式变换：只评估选择",
       "material_id": null,
-      "stage": null,
+      "stage": "generic",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [],
@@ -13185,10 +13619,13 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-sentence",
-        "zh.p3_higher_chinese.w-sentence"
+        "zh.p3_chinese.lu-sentence-transform",
+        "zh.p3_higher_chinese.lu-sentence-transform"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p3_chinese.skill.sentence-transform",
+        "zh.p3_higher_chinese.skill.sentence-transform"
+      ],
       "family": "character",
       "format": "mcq_4plus",
       "stem": "用“被”改写：“小猫打翻了花瓶。”",
@@ -13215,7 +13652,7 @@
       "explanation": "受到动作的是花瓶，所以“花瓶被小猫打翻了。”",
       "rationale": "句子组织与句式变换：只评估选择",
       "material_id": null,
-      "stage": null,
+      "stage": "exact",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [],
@@ -13230,10 +13667,13 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-sentence",
-        "zh.p3_higher_chinese.w-sentence"
+        "zh.p3_chinese.lu-sentence-transform",
+        "zh.p3_higher_chinese.lu-sentence-transform"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p3_chinese.skill.sentence-transform",
+        "zh.p3_higher_chinese.skill.sentence-transform"
+      ],
       "family": "character",
       "format": "mcq_4plus",
       "stem": "用“把”改写：“弟弟吃完了饼干。”",
@@ -13260,7 +13700,7 @@
       "explanation": "“弟弟把饼干吃完了。”",
       "rationale": "句子组织与句式变换：只评估选择",
       "material_id": null,
-      "stage": null,
+      "stage": "similar",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [],
@@ -13275,10 +13715,13 @@
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-sentence",
-        "zh.p3_higher_chinese.w-sentence"
+        "zh.p3_chinese.lu-sentence-transform",
+        "zh.p3_higher_chinese.lu-sentence-transform"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p3_chinese.skill.sentence-transform",
+        "zh.p3_higher_chinese.skill.sentence-transform"
+      ],
       "family": "character",
       "format": "mcq_4plus",
       "stem": "把“妈妈买了一个蛋糕。”改成问句，哪一句正确？",
@@ -13305,7 +13748,7 @@
       "explanation": "问买了什么东西：“妈妈买了什么？”",
       "rationale": "句子组织与句式变换：只评估选择",
       "material_id": null,
-      "stage": null,
+      "stage": "generic",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [],
@@ -13323,7 +13766,10 @@
         "zh.p3_chinese.r-punctuation",
         "zh.p3_higher_chinese.r-punctuation"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p3_chinese.skill.punctuation",
+        "zh.p3_higher_chinese.skill.punctuation"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "选出正确的标点：你喜欢吃苹果还是香蕉{{blank-1}}",
@@ -13350,7 +13796,7 @@
       "explanation": "问句用问号。",
       "rationale": "标点与句意",
       "material_id": null,
-      "stage": null,
+      "stage": "exact",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -13373,7 +13819,10 @@
         "zh.p3_chinese.r-punctuation",
         "zh.p3_higher_chinese.r-punctuation"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p3_chinese.skill.punctuation",
+        "zh.p3_higher_chinese.skill.punctuation"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "选出正确的标点：哇{{blank-1}}这里的风景真美！",
@@ -13400,7 +13849,7 @@
       "explanation": "表示强烈感情的叹词后面用感叹号。",
       "rationale": "标点与句意",
       "material_id": null,
-      "stage": null,
+      "stage": "similar",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -13423,7 +13872,10 @@
         "zh.p3_chinese.r-punctuation",
         "zh.p3_higher_chinese.r-punctuation"
       ],
-      "target_refs": [],
+      "target_refs": [
+        "zh.p3_chinese.skill.punctuation",
+        "zh.p3_higher_chinese.skill.punctuation"
+      ],
       "family": "cloze",
       "format": "mcq_4plus",
       "stem": "选出正确的标点：老师说{{blank-1}}“明天去郊游。”",
@@ -13450,7 +13902,7 @@
       "explanation": "引出说的话用冒号。",
       "rationale": "标点与句意",
       "material_id": null,
-      "stage": null,
+      "stage": "generic",
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [
@@ -13510,7 +13962,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.punctuation",
+        "zh.p3_higher_chinese.skill.punctuation"
+      ]
     },
     {
       "id": "zh-p3-punct.q5",
@@ -13560,7 +14016,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.punctuation",
+        "zh.p3_higher_chinese.skill.punctuation"
+      ]
     },
     {
       "id": "zh-p3-punct.q6",
@@ -13610,7 +14070,11 @@
         }
       ],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.punctuation",
+        "zh.p3_higher_chinese.skill.punctuation"
+      ]
     },
     {
       "id": "zh-m10.q1",
@@ -13655,7 +14119,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m10.q2",
@@ -13700,7 +14168,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m10.q3",
@@ -13745,7 +14217,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m10.q4",
@@ -13790,7 +14266,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m10.q5",
@@ -13835,52 +14315,60 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m11.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_chinese",
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.r-predict",
-        "zh.p3_higher_chinese.r-predict"
+        "zh.p3_chinese.r-explicit",
+        "zh.p3_higher_chinese.r-explicit"
       ],
       "target_refs": [],
       "family": "reading",
       "format": "mcq_4plus",
-      "stem": "看了题目《垃圾分类》，你猜这篇短文会讲什么？",
+      "stem": "短文说垃圾可以分成哪两类？",
       "options": [
         {
           "id": "opt-1",
-          "text": "怎样养小猫"
+          "text": "大的和小的"
         },
         {
           "id": "opt-2",
-          "text": "怎样学游泳"
+          "text": "可回收的和不可回收的"
         },
         {
           "id": "opt-3",
-          "text": "怎样做蛋糕"
+          "text": "新的和旧的"
         },
         {
           "id": "opt-4",
-          "text": "怎样把垃圾分开处理"
+          "text": "干的和湿的"
         }
       ],
-      "correct_option_id": "opt-4",
-      "hint": "题目里有哪些关键词？",
-      "explanation": "题目告诉我们短文和垃圾分类有关。",
-      "rationale": "只评估选择答案的能力；不推断独立书写或口语能力。",
+      "correct_option_id": "opt-2",
+      "hint": "读第一句。",
+      "explanation": "第一句写明垃圾可以分成可回收的和不可回收的。",
+      "rationale": "改为明示信息题：材料在答题前已全部显示，不能证明“根据题目预测”。",
       "material_id": "zh-m11",
       "stage": null,
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m11.q2",
@@ -13925,7 +14413,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m11.q3",
@@ -13970,7 +14462,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m11.q4",
@@ -14015,7 +14511,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m11.q5",
@@ -14060,7 +14560,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m12.q1",
@@ -14105,7 +14609,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m12.q2",
@@ -14150,7 +14658,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m12.q3",
@@ -14195,7 +14707,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m12.q4",
@@ -14240,7 +14756,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m12.q5",
@@ -14285,7 +14805,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m13.q1",
@@ -14330,7 +14854,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m13.q2",
@@ -14375,7 +14903,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m13.q3",
@@ -14420,7 +14952,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m13.q4",
@@ -14465,7 +15001,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m13.q5",
@@ -14510,7 +15050,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m14.q1",
@@ -14555,7 +15099,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m14.q2",
@@ -14600,7 +15148,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m14.q3",
@@ -14645,7 +15197,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m14.q4",
@@ -14690,7 +15246,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m14.q5",
@@ -14735,7 +15295,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ]
     },
     {
       "id": "zh-m15.q1",
@@ -14780,7 +15344,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.char-in-context",
+        "zh.p3_higher_chinese.skill.char-in-context"
+      ]
     },
     {
       "id": "zh-m15.q2",
@@ -14825,7 +15393,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": "blank-2"
+      "blank_ref": "blank-2",
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.char-in-context",
+        "zh.p3_higher_chinese.skill.char-in-context"
+      ]
     },
     {
       "id": "zh-m15.q3",
@@ -14870,7 +15442,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": "blank-3"
+      "blank_ref": "blank-3",
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.char-in-context",
+        "zh.p3_higher_chinese.skill.char-in-context"
+      ]
     },
     {
       "id": "zh-m15.q4",
@@ -14915,7 +15491,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": "blank-4"
+      "blank_ref": "blank-4",
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.char-in-context",
+        "zh.p3_higher_chinese.skill.char-in-context"
+      ]
     },
     {
       "id": "zh-m15.q5",
@@ -14960,18 +15540,22 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": "blank-5"
+      "blank_ref": "blank-5",
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.char-in-context",
+        "zh.p3_higher_chinese.skill.char-in-context"
+      ]
     },
     {
       "id": "zh-m16.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_chinese",
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.r-word-context",
+        "zh.p3_higher_chinese.r-word-context"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -14980,43 +15564,47 @@
       "options": [
         {
           "id": "opt-1",
-          "text": "拆"
-        },
-        {
-          "id": "opt-2",
-          "text": "吃"
-        },
-        {
-          "id": "opt-3",
           "text": "跳"
         },
         {
-          "id": "opt-4",
+          "id": "opt-2",
           "text": "折"
+        },
+        {
+          "id": "opt-3",
+          "text": "吃"
+        },
+        {
+          "id": "opt-4",
+          "text": "拆"
         }
       ],
-      "correct_option_id": "opt-4",
-      "hint": "把纸对着弯过来压平。",
-      "explanation": "把纸“折”成三角形。",
-      "rationale": "只评估选择答案的能力；不推断独立书写或口语能力。",
+      "correct_option_id": "opt-2",
+      "hint": "把纸对齐压出一条线，这个动作叫什么？",
+      "explanation": "“对折”是把纸对齐折起来，才能压出折痕。",
+      "rationale": "按修订后的正确制作过程选字词；五个空与材料一起修订。",
       "material_id": "zh-m16",
       "stage": null,
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": "blank-1"
+      "blank_ref": "blank-1",
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.char-in-context",
+        "zh.p3_higher_chinese.skill.char-in-context"
+      ]
     },
     {
       "id": "zh-m16.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_chinese",
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.r-word-context",
+        "zh.p3_higher_chinese.r-word-context"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -15025,43 +15613,47 @@
       "options": [
         {
           "id": "opt-1",
-          "text": "唱"
-        },
-        {
-          "id": "opt-2",
           "text": "跑"
         },
         {
+          "id": "opt-2",
+          "text": "拉"
+        },
+        {
           "id": "opt-3",
-          "text": "吃"
+          "text": "唱"
         },
         {
           "id": "opt-4",
-          "text": "拉"
+          "text": "吃"
         }
       ],
-      "correct_option_id": "opt-4",
-      "hint": "用手把纸角带到中间。",
-      "explanation": "用手“拉”到中间。",
-      "rationale": "只评估选择答案的能力；不推断独立书写或口语能力。",
+      "correct_option_id": "opt-2",
+      "hint": "要把纸角移到中心，用手怎么做？",
+      "explanation": "把纸角“拉”到中心，四个角才能叠在一起。",
+      "rationale": "按修订后的正确制作过程选字词；五个空与材料一起修订。",
       "material_id": "zh-m16",
       "stage": null,
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": "blank-2"
+      "blank_ref": "blank-2",
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.char-in-context",
+        "zh.p3_higher_chinese.skill.char-in-context"
+      ]
     },
     {
       "id": "zh-m16.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_chinese",
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.r-word-context",
+        "zh.p3_higher_chinese.r-word-context"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -15070,43 +15662,47 @@
       "options": [
         {
           "id": "opt-1",
-          "text": "软"
-        },
-        {
-          "id": "opt-2",
-          "text": "传"
-        },
-        {
-          "id": "opt-3",
           "text": "转"
         },
         {
-          "id": "opt-4",
+          "id": "opt-2",
           "text": "砖"
+        },
+        {
+          "id": "opt-3",
+          "text": "软"
+        },
+        {
+          "id": "opt-4",
+          "text": "传"
         }
       ],
-      "correct_option_id": "opt-3",
-      "hint": "风车被风一吹会怎样？",
-      "explanation": "风车会“转”起来。",
-      "rationale": "只评估选择答案的能力；不推断独立书写或口语能力。",
+      "correct_option_id": "opt-1",
+      "hint": "风车被风吹时会怎样动？",
+      "explanation": "风车被风吹，会一圈一圈地“转”起来。这几个字字形相近，要看部首和意思。",
+      "rationale": "按修订后的正确制作过程选字词；五个空与材料一起修订。",
       "material_id": "zh-m16",
       "stage": null,
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": "blank-3"
+      "blank_ref": "blank-3",
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.char-in-context",
+        "zh.p3_higher_chinese.skill.char-in-context"
+      ]
     },
     {
       "id": "zh-m16.q4",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_chinese",
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.r-word-context",
+        "zh.p3_higher_chinese.r-word-context"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -15115,43 +15711,47 @@
       "options": [
         {
           "id": "opt-1",
-          "text": "难过"
-        },
-        {
-          "id": "opt-2",
-          "text": "害怕"
-        },
-        {
-          "id": "opt-3",
           "text": "生气"
         },
         {
-          "id": "opt-4",
+          "id": "opt-2",
+          "text": "难过"
+        },
+        {
+          "id": "opt-3",
           "text": "高兴"
+        },
+        {
+          "id": "opt-4",
+          "text": "害怕"
         }
       ],
-      "correct_option_id": "opt-4",
-      "hint": "做好了风车，心情怎样？",
-      "explanation": "做好风车，我很高兴。",
-      "rationale": "只评估选择答案的能力；不推断独立书写或口语能力。",
+      "correct_option_id": "opt-3",
+      "hint": "风车做好了，“我”的心情会怎样？",
+      "explanation": "自己做好了风车，所以很高兴地拿给妈妈看。",
+      "rationale": "按修订后的正确制作过程选字词；五个空与材料一起修订。",
       "material_id": "zh-m16",
       "stage": null,
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": "blank-4"
+      "blank_ref": "blank-4",
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.word-context",
+        "zh.p3_higher_chinese.skill.word-context"
+      ]
     },
     {
       "id": "zh-m16.q5",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_chinese",
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.w-ideas",
-        "zh.p3_higher_chinese.w-ideas"
+        "zh.p3_chinese.r-word-context",
+        "zh.p3_higher_chinese.r-word-context"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -15160,7 +15760,7 @@
       "options": [
         {
           "id": "opt-1",
-          "text": "问"
+          "text": "叫"
         },
         {
           "id": "opt-2",
@@ -15168,24 +15768,28 @@
         },
         {
           "id": "opt-3",
-          "text": "叫"
+          "text": "骂"
         },
         {
           "id": "opt-4",
-          "text": "骂"
+          "text": "问"
         }
       ],
       "correct_option_id": "opt-2",
-      "hint": "妈妈说我做得很好。",
-      "explanation": "“夸”就是称赞。",
-      "rationale": "只评估选择答案的能力；不推断独立书写或口语能力。",
+      "hint": "妈妈说“我”做得很好，是在做什么？",
+      "explanation": "说别人做得好，就是“夸”别人。",
+      "rationale": "按修订后的正确制作过程选字词；五个空与材料一起修订。",
       "material_id": "zh-m16",
       "stage": null,
       "provenance": "original_generic_author_draft",
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": "blank-5"
+      "blank_ref": "blank-5",
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.char-in-context",
+        "zh.p3_higher_chinese.skill.char-in-context"
+      ]
     },
     {
       "id": "zh-m17.q1",
@@ -15230,7 +15834,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.notice-info",
+        "zh.p3_higher_chinese.skill.notice-info"
+      ]
     },
     {
       "id": "zh-m17.q2",
@@ -15275,7 +15883,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.notice-info",
+        "zh.p3_higher_chinese.skill.notice-info"
+      ]
     },
     {
       "id": "zh-m17.q3",
@@ -15320,7 +15932,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.notice-info",
+        "zh.p3_higher_chinese.skill.notice-info"
+      ]
     },
     {
       "id": "zh-m17.q4",
@@ -15365,7 +15981,11 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
-      "blank_ref": null
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.notice-info",
+        "zh.p3_higher_chinese.skill.notice-info"
+      ]
     },
     {
       "id": "zh-m17.q5",
@@ -15410,7 +16030,905 @@
       "asset_refs": [],
       "blanks": [],
       "annotations": [],
+      "blank_ref": null,
+      "repair_target_refs": [
+        "zh.p3_chinese.skill.notice-info",
+        "zh.p3_higher_chinese.skill.notice-info"
+      ]
+    },
+    {
+      "id": "zh-p2-read-repair.q1",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-explicit",
+        "zh.p2_higher_chinese.r-explicit"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ],
+      "family": "reading",
+      "format": "mcq_4plus",
+      "stem": "读一读：星期五下午，小林和爸爸去海边放风筝。风很大，他们的风筝飞得又高又远。\n小林和谁去海边？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "哥哥"
+        },
+        {
+          "id": "opt-2",
+          "text": "爸爸"
+        },
+        {
+          "id": "opt-3",
+          "text": "妈妈"
+        },
+        {
+          "id": "opt-4",
+          "text": "老师"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "找一找第一句里和小林一起去的人。",
+      "explanation": "第一句写明小林和爸爸去海边。",
+      "rationale": "只问短文中直接写出的信息；干扰项各改变一个细节。",
+      "material_id": null,
+      "stage": "exact",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
       "blank_ref": null
+    },
+    {
+      "id": "zh-p2-read-repair.q2",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-explicit",
+        "zh.p2_higher_chinese.r-explicit"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ],
+      "family": "reading",
+      "format": "mcq_4plus",
+      "stem": "读一读：小红每天早上七点起床。她先刷牙洗脸，再吃早饭，然后和哥哥一起走路上学。\n小红每天几点起床？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "六点"
+        },
+        {
+          "id": "opt-2",
+          "text": "八点"
+        },
+        {
+          "id": "opt-3",
+          "text": "九点"
+        },
+        {
+          "id": "opt-4",
+          "text": "七点"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "找一找“起床”前面的时间。",
+      "explanation": "第一句写明小红每天早上七点起床。",
+      "rationale": "只问短文中直接写出的信息；干扰项各改变一个细节。",
+      "material_id": null,
+      "stage": "similar",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
+    },
+    {
+      "id": "zh-p2-read-repair.q3",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-explicit",
+        "zh.p2_higher_chinese.r-explicit"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info"
+      ],
+      "family": "reading",
+      "format": "mcq_4plus",
+      "stem": "读一读：学校的花园里种了很多花，有红花、黄花，还有白花。放学后，同学们轮流去浇水。\n花园里有哪几种颜色的花？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "只有白色"
+        },
+        {
+          "id": "opt-2",
+          "text": "黄色和紫色"
+        },
+        {
+          "id": "opt-3",
+          "text": "红色、黄色和白色"
+        },
+        {
+          "id": "opt-4",
+          "text": "红色和蓝色"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "把短文里说到的颜色都找出来。",
+      "explanation": "短文写了红花、黄花和白花。",
+      "rationale": "只问短文中直接写出的信息；干扰项各改变一个细节。",
+      "material_id": null,
+      "stage": "generic",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
+    },
+    {
+      "id": "zh-p2-notice-repair.q1",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-explicit",
+        "zh.p2_higher_chinese.r-explicit"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.skill.notice-info",
+        "zh.p2_higher_chinese.skill.notice-info"
+      ],
+      "family": "visual_text",
+      "format": "mcq_4plus",
+      "stem": "读一读：【美术比赛】\n时间：五月八日上午九点\n地点：二楼美术室\n请自己带彩色笔。\n比赛在哪里举行？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "学校礼堂"
+        },
+        {
+          "id": "opt-2",
+          "text": "二楼美术室"
+        },
+        {
+          "id": "opt-3",
+          "text": "一楼美术室"
+        },
+        {
+          "id": "opt-4",
+          "text": "二楼音乐室"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "找一找“地点”这一行。",
+      "explanation": "通知写明地点是二楼美术室。",
+      "rationale": "只问通知中写明的信息；干扰项改变地点、物品或价钱。",
+      "material_id": null,
+      "stage": "exact",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
+    },
+    {
+      "id": "zh-p2-notice-repair.q2",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-explicit",
+        "zh.p2_higher_chinese.r-explicit"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.skill.notice-info",
+        "zh.p2_higher_chinese.skill.notice-info"
+      ],
+      "family": "visual_text",
+      "format": "mcq_4plus",
+      "stem": "读一读：【失物招领】\n捡到一个红色水壶。\n请到办公室找陈老师领取。\n要到哪里领取水壶？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "操场"
+        },
+        {
+          "id": "opt-2",
+          "text": "食堂"
+        },
+        {
+          "id": "opt-3",
+          "text": "办公室"
+        },
+        {
+          "id": "opt-4",
+          "text": "图书馆"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "读最后一行。",
+      "explanation": "通知请大家到办公室找陈老师领取。",
+      "rationale": "只问通知中写明的信息；干扰项改变地点、物品或价钱。",
+      "material_id": null,
+      "stage": "similar",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
+    },
+    {
+      "id": "zh-p2-notice-repair.q3",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-explicit",
+        "zh.p2_higher_chinese.r-explicit"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.skill.notice-info",
+        "zh.p2_higher_chinese.skill.notice-info"
+      ],
+      "family": "visual_text",
+      "format": "mcq_4plus",
+      "stem": "读一读：【食堂今日午餐】\n鸡饭：两元\n炒面：一元五角\n苹果：五角\n哪样东西最便宜？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "鸡饭"
+        },
+        {
+          "id": "opt-2",
+          "text": "苹果"
+        },
+        {
+          "id": "opt-3",
+          "text": "炒面"
+        },
+        {
+          "id": "opt-4",
+          "text": "三样一样便宜"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "比一比三样东西的价钱。",
+      "explanation": "苹果五角，比一元五角和两元都便宜。",
+      "rationale": "只问通知中写明的信息；干扰项改变地点、物品或价钱。",
+      "material_id": null,
+      "stage": "generic",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
+    },
+    {
+      "id": "zh-p2-charctx-repair.q1",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.skill.char-in-context",
+        "zh.p2_higher_chinese.skill.char-in-context"
+      ],
+      "family": "cloze",
+      "format": "mcq_4plus",
+      "stem": "天黑了，请把灯打{{blank-1}}。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "闭"
+        },
+        {
+          "id": "opt-2",
+          "text": "开"
+        },
+        {
+          "id": "opt-3",
+          "text": "门"
+        },
+        {
+          "id": "opt-4",
+          "text": "并"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "想一想，天黑了要让灯怎么样。",
+      "explanation": "“打开”灯，房间才会亮。",
+      "rationale": "根据句意选字；干扰项是形近或同部件的字。",
+      "material_id": null,
+      "stage": "exact",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-charctx-repair.q1"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-charctx-repair.q2",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.skill.char-in-context",
+        "zh.p2_higher_chinese.skill.char-in-context"
+      ],
+      "family": "cloze",
+      "format": "mcq_4plus",
+      "stem": "小狗在院子里跑来{{blank-1}}去。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "跑"
+        },
+        {
+          "id": "opt-2",
+          "text": "抱"
+        },
+        {
+          "id": "opt-3",
+          "text": "泡"
+        },
+        {
+          "id": "opt-4",
+          "text": "饱"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "“跑来……去”，前后用同一个字。",
+      "explanation": "“跑来跑去”是说小狗到处跑。",
+      "rationale": "根据句意选字；干扰项是形近或同部件的字。",
+      "material_id": null,
+      "stage": "similar",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-charctx-repair.q2"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-charctx-repair.q3",
+      "version": 1,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.skill.char-in-context",
+        "zh.p2_higher_chinese.skill.char-in-context"
+      ],
+      "family": "cloze",
+      "format": "mcq_4plus",
+      "stem": "妈妈给我买了一个新书{{blank-1}}。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "包"
+        },
+        {
+          "id": "opt-2",
+          "text": "抱"
+        },
+        {
+          "id": "opt-3",
+          "text": "跑"
+        },
+        {
+          "id": "opt-4",
+          "text": "饱"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "上学时用来装书的东西叫什么？",
+      "explanation": "装书的是“书包”。",
+      "rationale": "根据句意选字；干扰项是形近或同部件的字。",
+      "material_id": null,
+      "stage": "generic",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-charctx-repair.q3"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p3-read-repair.q1",
+      "version": 1,
+      "courses": [
+        "p3_chinese",
+        "p3_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p3_chinese.r-explicit",
+        "zh.p3_higher_chinese.r-explicit"
+      ],
+      "target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ],
+      "family": "reading",
+      "format": "mcq_4plus",
+      "stem": "读一读：一年一度的书展在星期六开幕。小华和同学一早就到了会场。他们先去童书区看漫画，然后去科学区买了一本介绍恐龙的书。\n小华在科学区买了什么书？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "介绍太空的书"
+        },
+        {
+          "id": "opt-2",
+          "text": "介绍恐龙的书"
+        },
+        {
+          "id": "opt-3",
+          "text": "漫画书"
+        },
+        {
+          "id": "opt-4",
+          "text": "故事书"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "找一找“科学区”后面写了什么。",
+      "explanation": "短文写明他们在科学区买了一本介绍恐龙的书。",
+      "rationale": "只问短文中直接写出的信息；干扰项各改变一个细节。",
+      "material_id": null,
+      "stage": "exact",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
+    },
+    {
+      "id": "zh-p3-read-repair.q2",
+      "version": 1,
+      "courses": [
+        "p3_chinese",
+        "p3_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p3_chinese.r-explicit",
+        "zh.p3_higher_chinese.r-explicit"
+      ],
+      "target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ],
+      "family": "reading",
+      "format": "mcq_4plus",
+      "stem": "读一读：这次远足，我们沿着河边走了两个小时。路上，老师教我们认识了三种不同的鸟，还提醒大家不要乱丢垃圾。\n老师提醒大家什么？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "不要大声说话"
+        },
+        {
+          "id": "opt-2",
+          "text": "要走快一点"
+        },
+        {
+          "id": "opt-3",
+          "text": "不要乱丢垃圾"
+        },
+        {
+          "id": "opt-4",
+          "text": "要多喝水"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "找一找“提醒”后面的话。",
+      "explanation": "短文写明老师提醒大家不要乱丢垃圾。",
+      "rationale": "只问短文中直接写出的信息；干扰项各改变一个细节。",
+      "material_id": null,
+      "stage": "similar",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
+    },
+    {
+      "id": "zh-p3-read-repair.q3",
+      "version": 1,
+      "courses": [
+        "p3_chinese",
+        "p3_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p3_chinese.r-explicit",
+        "zh.p3_higher_chinese.r-explicit"
+      ],
+      "target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info"
+      ],
+      "family": "reading",
+      "format": "mcq_4plus",
+      "stem": "读一读：哥哥参加了学校的乐队，他负责打鼓。每个星期二和星期四放学后，乐队都要练习一个半小时。\n乐队每次练习多长时间？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "一个半小时"
+        },
+        {
+          "id": "opt-2",
+          "text": "一个小时"
+        },
+        {
+          "id": "opt-3",
+          "text": "半个小时"
+        },
+        {
+          "id": "opt-4",
+          "text": "两个小时"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "找一找“练习”后面的时间。",
+      "explanation": "短文写明乐队每次练习一个半小时。",
+      "rationale": "只问短文中直接写出的信息；干扰项各改变一个细节。",
+      "material_id": null,
+      "stage": "generic",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
+    },
+    {
+      "id": "zh-p3-notice-repair.q1",
+      "version": 1,
+      "courses": [
+        "p3_chinese",
+        "p3_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p3_chinese.r-explicit",
+        "zh.p3_higher_chinese.r-explicit"
+      ],
+      "target_refs": [
+        "zh.p3_chinese.skill.notice-info",
+        "zh.p3_higher_chinese.skill.notice-info"
+      ],
+      "family": "visual_text",
+      "format": "mcq_4plus",
+      "stem": "读一读：【游泳池开放时间】\n星期二至星期日：上午八点到晚上九点\n星期一：休息\n十二岁以下儿童须由大人陪同。\n哪一天游泳池不开放？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "星期六"
+        },
+        {
+          "id": "opt-2",
+          "text": "星期日"
+        },
+        {
+          "id": "opt-3",
+          "text": "星期二"
+        },
+        {
+          "id": "opt-4",
+          "text": "星期一"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "找一找写着“休息”的那一天。",
+      "explanation": "告示写明星期一休息，所以那天不开放。",
+      "rationale": "只问通知中写明的信息；干扰项改变地点、物品或价钱。",
+      "material_id": null,
+      "stage": "exact",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
+    },
+    {
+      "id": "zh-p3-notice-repair.q2",
+      "version": 1,
+      "courses": [
+        "p3_chinese",
+        "p3_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p3_chinese.r-explicit",
+        "zh.p3_higher_chinese.r-explicit"
+      ],
+      "target_refs": [
+        "zh.p3_chinese.skill.notice-info",
+        "zh.p3_higher_chinese.skill.notice-info"
+      ],
+      "family": "visual_text",
+      "format": "mcq_4plus",
+      "stem": "读一读：【环保手工比赛】\n参加者：三年级学生\n作品要用旧报纸、旧瓶子等旧材料制作。\n交件日期：十月二十日以前\n作品要用什么材料制作？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "新买的彩纸"
+        },
+        {
+          "id": "opt-2",
+          "text": "布和珠子"
+        },
+        {
+          "id": "opt-3",
+          "text": "木头和铁"
+        },
+        {
+          "id": "opt-4",
+          "text": "旧报纸、旧瓶子等旧材料"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "找一找“材料”这两个字。",
+      "explanation": "告示写明作品要用旧报纸、旧瓶子等旧材料制作。",
+      "rationale": "只问通知中写明的信息；干扰项改变地点、物品或价钱。",
+      "material_id": null,
+      "stage": "similar",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
+    },
+    {
+      "id": "zh-p3-notice-repair.q3",
+      "version": 1,
+      "courses": [
+        "p3_chinese",
+        "p3_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p3_chinese.r-explicit",
+        "zh.p3_higher_chinese.r-explicit"
+      ],
+      "target_refs": [
+        "zh.p3_chinese.skill.notice-info",
+        "zh.p3_higher_chinese.skill.notice-info"
+      ],
+      "family": "visual_text",
+      "format": "mcq_4plus",
+      "stem": "读一读：【巴士车费】\n大人：一元五角\n小学生：五角\n小明（小学生）和妈妈一起坐巴士。\n他们一共要付多少钱？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "两元"
+        },
+        {
+          "id": "opt-2",
+          "text": "一元五角"
+        },
+        {
+          "id": "opt-3",
+          "text": "三元"
+        },
+        {
+          "id": "opt-4",
+          "text": "一元"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "先找出大人和小学生各要付多少钱。",
+      "explanation": "妈妈一元五角，小明五角，一共两元。",
+      "rationale": "只问通知中写明的信息；干扰项改变地点、物品或价钱。",
+      "material_id": null,
+      "stage": "generic",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [],
+      "annotations": [],
+      "blank_ref": null
+    },
+    {
+      "id": "zh-p3-charctx-repair.q1",
+      "version": 1,
+      "courses": [
+        "p3_chinese",
+        "p3_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p3_chinese.r-character",
+        "zh.p3_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p3_chinese.skill.char-in-context",
+        "zh.p3_higher_chinese.skill.char-in-context"
+      ],
+      "family": "cloze",
+      "format": "mcq_4plus",
+      "stem": "他做事很认真，从来不{{blank-1}}虎。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "马"
+        },
+        {
+          "id": "opt-2",
+          "text": "妈"
+        },
+        {
+          "id": "opt-3",
+          "text": "吗"
+        },
+        {
+          "id": "opt-4",
+          "text": "码"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "“不认真”可以说成哪个词？",
+      "explanation": "“马虎”是不认真的意思，句子说他从来不马虎。",
+      "rationale": "根据句意选字；干扰项是形近或同部件的字。",
+      "material_id": null,
+      "stage": "exact",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p3-charctx-repair.q1"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p3-charctx-repair.q2",
+      "version": 1,
+      "courses": [
+        "p3_chinese",
+        "p3_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p3_chinese.r-character",
+        "zh.p3_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p3_chinese.skill.char-in-context",
+        "zh.p3_higher_chinese.skill.char-in-context"
+      ],
+      "family": "cloze",
+      "format": "mcq_4plus",
+      "stem": "外面下大雨，我们只好在屋子里{{blank-1}}棋。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "上"
+        },
+        {
+          "id": "opt-2",
+          "text": "下"
+        },
+        {
+          "id": "opt-3",
+          "text": "卡"
+        },
+        {
+          "id": "opt-4",
+          "text": "不"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "玩棋的时候，我们说“……棋”。",
+      "explanation": "玩棋叫“下棋”。",
+      "rationale": "根据句意选字；干扰项是形近或同部件的字。",
+      "material_id": null,
+      "stage": "similar",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p3-charctx-repair.q2"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p3-charctx-repair.q3",
+      "version": 1,
+      "courses": [
+        "p3_chinese",
+        "p3_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p3_chinese.r-character",
+        "zh.p3_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p3_chinese.skill.char-in-context",
+        "zh.p3_higher_chinese.skill.char-in-context"
+      ],
+      "family": "cloze",
+      "format": "mcq_4plus",
+      "stem": "冬天，北方很冷，河面都结{{blank-1}}了。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "永"
+        },
+        {
+          "id": "opt-2",
+          "text": "求"
+        },
+        {
+          "id": "opt-3",
+          "text": "水"
+        },
+        {
+          "id": "opt-4",
+          "text": "冰"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "水很冷的时候会变成什么？",
+      "explanation": "水冷到一定程度会结冰。",
+      "rationale": "根据句意选字；干扰项是形近或同部件的字。",
+      "material_id": null,
+      "stage": "generic",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p3-charctx-repair.q3"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
     }
   ],
   "review_log": {
@@ -15421,7 +16939,8 @@
       "逐篇检查先答完整篇才提供反馈",
       "对照官方年级矩阵与字表",
       "核对原创内容与外部能力边界",
-      "2026-10-16 correction pass: revised disputed and related items; item versions incremented; revised IDs remain listed for independent re-review, not approved."
+      "2026-10-16 correction pass: revised disputed and related items; item versions incremented; revised IDs remain listed for independent re-review, not approved.",
+      "2026-10-16 audit-response revision (ZH1–ZH4): language-use leaves and the P3 matrix rows added; 75 language-use items remapped from w-ideas; word, language-point and reading-skill repair targets with complete pools in four new groups; every non-repair question declares repair_target_refs; zh-m16 rewritten as an accurate pinwheel process with its five blanks; zh-m11.q1 remapped to explicit retrieval. Mapping-only changes keep item versions; content changes increment them. All remain pending independent re-review."
     ],
     "independent_review": "changes_requested",
     "owner_signoff": "pending",
@@ -15718,6 +17237,152 @@
         "zh-p3-radical-u94f6.q1",
         "zh-p3-radical-u94f6.q2",
         "zh-p3-radical-u94f6.q3"
+      ]
+    },
+    {
+      "id": "zh-group-p2-language-use",
+      "version": 1,
+      "label_zh": "二年级语言运用组",
+      "label_en": "P2 language use",
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.skill.measure-word",
+        "zh.p2_higher_chinese.skill.measure-word",
+        "zh.p2_chinese.skill.collocation",
+        "zh.p2_higher_chinese.skill.collocation",
+        "zh.p2_chinese.skill.word-choice",
+        "zh.p2_higher_chinese.skill.word-choice",
+        "zh.p2_chinese.skill.sentence-order",
+        "zh.p2_higher_chinese.skill.sentence-order",
+        "zh.p2_chinese.skill.punctuation",
+        "zh.p2_higher_chinese.skill.punctuation"
+      ],
+      "item_ids": [
+        "zh-p2-measure.q1",
+        "zh-p2-measure.q2",
+        "zh-p2-measure.q3",
+        "zh-p2-collocation.q1",
+        "zh-p2-collocation.q2",
+        "zh-p2-collocation.q3",
+        "zh-p2-wordchoice.q1",
+        "zh-p2-wordchoice.q2",
+        "zh-p2-wordchoice.q3",
+        "zh-p2-order.q1",
+        "zh-p2-order.q3",
+        "zh-p2-order.q4",
+        "zh-p2-punct.q1",
+        "zh-p2-punct.q2",
+        "zh-p2-punct.q3"
+      ]
+    },
+    {
+      "id": "zh-group-p2-reading-skills",
+      "version": 1,
+      "label_zh": "二年级阅读与选字组",
+      "label_en": "P2 reading and character-in-context",
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.skill.explicit-info",
+        "zh.p2_higher_chinese.skill.explicit-info",
+        "zh.p2_chinese.skill.notice-info",
+        "zh.p2_higher_chinese.skill.notice-info",
+        "zh.p2_chinese.skill.char-in-context",
+        "zh.p2_higher_chinese.skill.char-in-context"
+      ],
+      "item_ids": [
+        "zh-p2-read-repair.q1",
+        "zh-p2-read-repair.q2",
+        "zh-p2-read-repair.q3",
+        "zh-p2-notice-repair.q1",
+        "zh-p2-notice-repair.q2",
+        "zh-p2-notice-repair.q3",
+        "zh-p2-charctx-repair.q1",
+        "zh-p2-charctx-repair.q2",
+        "zh-p2-charctx-repair.q3"
+      ]
+    },
+    {
+      "id": "zh-group-p3-language-use",
+      "version": 1,
+      "label_zh": "三年级语言运用组",
+      "label_en": "P3 language use",
+      "courses": [
+        "p3_chinese",
+        "p3_higher_chinese"
+      ],
+      "target_refs": [
+        "zh.p3_chinese.skill.measure-word",
+        "zh.p3_higher_chinese.skill.measure-word",
+        "zh.p3_chinese.skill.collocation",
+        "zh.p3_higher_chinese.skill.collocation",
+        "zh.p3_chinese.skill.word-context",
+        "zh.p3_higher_chinese.skill.word-context",
+        "zh.p3_chinese.skill.connectives",
+        "zh.p3_higher_chinese.skill.connectives",
+        "zh.p3_chinese.skill.sentence-order",
+        "zh.p3_higher_chinese.skill.sentence-order",
+        "zh.p3_chinese.skill.sentence-transform",
+        "zh.p3_higher_chinese.skill.sentence-transform",
+        "zh.p3_chinese.skill.punctuation",
+        "zh.p3_higher_chinese.skill.punctuation"
+      ],
+      "item_ids": [
+        "zh-p3-measure.q1",
+        "zh-p3-measure.q2",
+        "zh-p3-measure.q3",
+        "zh-p3-collocation.q1",
+        "zh-p3-collocation.q2",
+        "zh-p3-collocation.q3",
+        "zh-p3-wordchoice.q1",
+        "zh-p3-wordchoice.q2",
+        "zh-p3-wordchoice.q3",
+        "zh-p3-wordchoice.q6",
+        "zh-p3-wordchoice.q7",
+        "zh-p3-wordchoice.q8",
+        "zh-p3-sentence.q1",
+        "zh-p3-sentence.q2",
+        "zh-p3-sentence.q3",
+        "zh-p3-sentence.q4",
+        "zh-p3-sentence.q5",
+        "zh-p3-sentence.q6",
+        "zh-p3-punct.q1",
+        "zh-p3-punct.q2",
+        "zh-p3-punct.q3"
+      ]
+    },
+    {
+      "id": "zh-group-p3-reading-skills",
+      "version": 1,
+      "label_zh": "三年级阅读与选字组",
+      "label_en": "P3 reading and character-in-context",
+      "courses": [
+        "p3_chinese",
+        "p3_higher_chinese"
+      ],
+      "target_refs": [
+        "zh.p3_chinese.skill.explicit-info",
+        "zh.p3_higher_chinese.skill.explicit-info",
+        "zh.p3_chinese.skill.notice-info",
+        "zh.p3_higher_chinese.skill.notice-info",
+        "zh.p3_chinese.skill.char-in-context",
+        "zh.p3_higher_chinese.skill.char-in-context"
+      ],
+      "item_ids": [
+        "zh-p3-read-repair.q1",
+        "zh-p3-read-repair.q2",
+        "zh-p3-read-repair.q3",
+        "zh-p3-notice-repair.q1",
+        "zh-p3-notice-repair.q2",
+        "zh-p3-notice-repair.q3",
+        "zh-p3-charctx-repair.q1",
+        "zh-p3-charctx-repair.q2",
+        "zh-p3-charctx-repair.q3"
       ]
     }
   ]

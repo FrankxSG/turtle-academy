@@ -260,14 +260,14 @@ P2 HCL 2022 and P3 HCL 2022 were recovered from SGTestPaper after the first inde
 
 | Public source | Date evidence | What was actually retrieved | Use / limit | SHA-256 |
 | --- | --- | --- | --- | --- |
-| [chinese-2024](https://www.ezhishi.com/resources/magazine/answer/2024/xpy/xpy_4_answer.pdf) | 2024 issue04, printed on PDF | Public one-page answer sheet, P1/P2 CL/HCL | Visible section labels include P2 pinyin/character/punctuation and HCL classifiers/confusables. Full stems/images/passages not retrieved; cannot validate their keys from the answer sheet alone. | `4f15526123d18219a0963afc56f20eee7a43f133b8cfc482899b9986c5252c96` |
-| [chinese-2025](https://www.ezhishi.com/resources/magazine/answer/2025/xpy/xpy_18_answer.pdf) | 2025 issue18, printed on PDF | Public one-page answer sheet, P1/P2 CL/HCL | P2 vocabulary/sentence completion and HCL pinyin/character/confusable work. Confirms format variety only; no exercises copied. | `e9b75b3f4a310f0da60bd4cd55980d455c6b948614a258f96ed53afcfa652d82` |
-| [chinese-2026](https://www.ezhishi.com/resources/magazine/answer/2026/xpy/xpy_9_answer.pdf) | 2026 issue09, printed on PDF | Public one-page answer sheet, P1/P2 CL/HCL | P2 character discrimination/reading and HCL pinyin/vocabulary; includes model writing answers. Not evidence of the unseen question set’s correctness. | `d98a63142ae57b0d1c2e8ee3790584ec75640807d2b9edfc98042f1afcd022be` |
-| [chinese-p3-enrichment-2024](https://www.ezhishi.com/resources/magazine/answer/2024/xtd/xtd_4_answer.pdf) | 2024 issue04, printed on PDF | Public one-page answer sheet, P3/P4 CL/HCL | P3 CL character/vocabulary/reading labels and HCL picture words/character completion/paragraph ordering. Some native text encoding is damaged; section/issue labels are readable, unseen exercises are not audited. | `55abdff1d2b08ce9b3a2e877bd11d9b2963721f24ece53c1a70207a9d1883b58` |
-| [chinese-p3-enrichment-2025](https://www.ezhishi.com/resources/magazine/answer/2025/xtd/xtd_18_answer.pdf) | 2025 issue18, printed on PDF | Public one-page answer sheet, P3/P4 CL/HCL | P3 HCL word ordering and sentence completion; CL character/vocabulary/collocation/paragraph sequencing. Use format evidence only. | `94d6afb2b528c386caf849e7e9f7d8ad08017c4c954b012a31ae2edd51738aec` |
-| [chinese-p3-enrichment-2026](https://www.ezhishi.com/resources/magazine/answer/2026/xtd/xtd_9_answer.pdf) | 2026 issue09, printed on PDF | Public one-page answer sheet, P3/P4 CL/HCL | P3 HCL cloze and rewriting direct speech; CL picture words/collocation/paragraph ordering. Full questions remain unavailable in this retrieval. | `e9f3ec9286ef3549ba1c4f9d101865d3b248fff6404400a432917e0410b1def2` |
+| [chinese-2024](https://www.ezhishi.com/AssessmentMagazineSample.html) | 2024 issue04, printed on PDF | Public one-page answer sheet, P1/P2 CL/HCL | Visible section labels include P2 pinyin/character/punctuation and HCL classifiers/confusables. Full stems/images/passages not retrieved; cannot validate their keys from the answer sheet alone. | `4f15526123d18219a0963afc56f20eee7a43f133b8cfc482899b9986c5252c96` |
+| [chinese-2025](https://www.ezhishi.com/AssessmentMagazineSample.html) | 2025 issue18, printed on PDF | Public one-page answer sheet, P1/P2 CL/HCL | P2 vocabulary/sentence completion and HCL pinyin/character/confusable work. Confirms format variety only; no exercises copied. | `e9b75b3f4a310f0da60bd4cd55980d455c6b948614a258f96ed53afcfa652d82` |
+| [chinese-2026](https://www.ezhishi.com/AssessmentMagazineSample.html) | 2026 issue09, printed on PDF | Public one-page answer sheet, P1/P2 CL/HCL | P2 character discrimination/reading and HCL pinyin/vocabulary; includes model writing answers. Not evidence of the unseen question set’s correctness. | `d98a63142ae57b0d1c2e8ee3790584ec75640807d2b9edfc98042f1afcd022be` |
+| [chinese-p3-enrichment-2024](https://www.ezhishi.com/AssessmentMagazineSample.html) | 2024 issue04, printed on PDF | Public one-page answer sheet, P3/P4 CL/HCL | P3 CL character/vocabulary/reading labels and HCL picture words/character completion/paragraph ordering. Some native text encoding is damaged; section/issue labels are readable, unseen exercises are not audited. | `55abdff1d2b08ce9b3a2e877bd11d9b2963721f24ece53c1a70207a9d1883b58` |
+| [chinese-p3-enrichment-2025](https://www.ezhishi.com/AssessmentMagazineSample.html) | 2025 issue18, printed on PDF | Public one-page answer sheet, P3/P4 CL/HCL | P3 HCL word ordering and sentence completion; CL character/vocabulary/collocation/paragraph sequencing. Use format evidence only. | `94d6afb2b528c386caf849e7e9f7d8ad08017c4c954b012a31ae2edd51738aec` |
+| [chinese-p3-enrichment-2026](https://www.ezhishi.com/AssessmentMagazineSample.html) | 2026 issue09, printed on PDF | Public one-page answer sheet, P3/P4 CL/HCL | P3 HCL cloze and rewriting direct speech; CL picture words/collocation/paragraph ordering. Full questions remain unavailable in this retrieval. | `e9f3ec9286ef3549ba1c4f9d101865d3b248fff6404400a432917e0410b1def2` |
 
-These six dated answer PDFs are real retrieved enrichment material, **not six reviewed full magazines**. Their unseen distractors/passages/images are not audited, and model answers are not imported into the app. An additional public 2026 sample was retrieved separately, as recorded below.
+Citation revision (2026-10-16): these answer sheets are cited through the publisher’s public sample page, not direct file links; the issue number, year and SHA-256 identify each file examined. These six dated answer PDFs are real retrieved enrichment material, **not six reviewed full magazines**. Their unseen distractors/passages/images are not audited, and model answers are not imported into the app. An additional public 2026 sample was retrieved separately, as recorded below.
 
 ### Additional 2026 publisher samples with actual questions
 
@@ -277,13 +277,13 @@ Actual P2 CL page9 has pinyin completion, character discrimination and vocabular
 
 | Public sample image | SHA-256 |
 | --- | --- |
-| [xpy page1](https://www.ezhishi.com/resources/magazine/samples/magazine/xpy/pages/1.png) | `2877dec070923f2cad1b0889cda5ca4fdc584e1c0029aa3e7261b4d302125236` |
-| [xpy page9](https://www.ezhishi.com/resources/magazine/samples/magazine/xpy/pages/9.png) | `eeceb34b13b2a2b84f4f7f3cbe19b9b5155cb1a56b3668b19e48ab289090af84` |
-| [xpy page10](https://www.ezhishi.com/resources/magazine/samples/magazine/xpy/pages/10.png) | `88c54dd90f91b3b6063a3c568e23716d6eb1b1f90a8efae23eabf9a862885eb9` |
-| [xtd page1](https://www.ezhishi.com/resources/magazine/samples/magazine/xtd/pages/1.png) | `368f826048b134c1fb8bf8cf01fd4c51c7854dd9f8f0c21fb9fc7ddd6c536052` |
-| [xtd page6](https://www.ezhishi.com/resources/magazine/samples/magazine/xtd/pages/6.png) | `18b0e7e1d3af321deef99ad0e9a2e2f52ae94009ad2f1ed4c09f9dde85c5f6d8` |
-| [xtd page7](https://www.ezhishi.com/resources/magazine/samples/magazine/xtd/pages/7.png) | `5d842aa123a69def10fa17de611c5aa8f57ca97732c1c3eaf92ed8e3e6ca93f8` |
-| [xtd page8](https://www.ezhishi.com/resources/magazine/samples/magazine/xtd/pages/8.png) | `ae51a83c09d872e397be4a82b03111fc1dd3fa4987a456307a7216c6f96d9696` |
+| xpy page1 (via the [New Friends sample viewer](https://www.ezhishi.com/resources/magazine/samples/magazine/xpy/index.html)) | `2877dec070923f2cad1b0889cda5ca4fdc584e1c0029aa3e7261b4d302125236` |
+| xpy page9 (via the [New Friends sample viewer](https://www.ezhishi.com/resources/magazine/samples/magazine/xpy/index.html)) | `eeceb34b13b2a2b84f4f7f3cbe19b9b5155cb1a56b3668b19e48ab289090af84` |
+| xpy page10 (via the [New Friends sample viewer](https://www.ezhishi.com/resources/magazine/samples/magazine/xpy/index.html)) | `88c54dd90f91b3b6063a3c568e23716d6eb1b1f90a8efae23eabf9a862885eb9` |
+| xtd page1 (via the [New World sample viewer](https://www.ezhishi.com/resources/magazine/samples/magazine/xtd/index.html)) | `368f826048b134c1fb8bf8cf01fd4c51c7854dd9f8f0c21fb9fc7ddd6c536052` |
+| xtd page6 (via the [New World sample viewer](https://www.ezhishi.com/resources/magazine/samples/magazine/xtd/index.html)) | `18b0e7e1d3af321deef99ad0e9a2e2f52ae94009ad2f1ed4c09f9dde85c5f6d8` |
+| xtd page7 (via the [New World sample viewer](https://www.ezhishi.com/resources/magazine/samples/magazine/xtd/index.html)) | `5d842aa123a69def10fa17de611c5aa8f57ca97732c1c3eaf92ed8e3e6ca93f8` |
+| xtd page8 (via the [New World sample viewer](https://www.ezhishi.com/resources/magazine/samples/magazine/xtd/index.html)) | `ae51a83c09d872e397be4a82b03111fc1dd3fa4987a456307a7216c6f96d9696` |
 
 ## Originality, rights and reproducibility
 
