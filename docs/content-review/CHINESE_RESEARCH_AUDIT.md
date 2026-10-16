@@ -91,6 +91,8 @@ No defensible “full P2/P3 CL/HCL coverage” percentage is established by this
 
 ## Actual paper research, 2021–2026
 
+Citation revision (2026-10-16): third-party past papers are linked through public listing pages only. School/year/type, analysis pages and original file hashes still identify the copies examined; this citation format does not establish reuse rights.
+
 | Course | 2021 | 2022 | 2023 | 2024 | 2025 | 2026 |
 | --- | --- | --- | --- | --- | --- | --- |
 | p2 chinese | Retrieved | Retrieved¹ | Retrieved¹ | Retrieved¹ | Retrieved | Not retrieved |
@@ -105,7 +107,7 @@ P2 HCL 2022 and P3 HCL 2022 were recovered from SGTestPaper after the first inde
 ### p2_chinese-2021
 
 - Identity/date: Catalogued CL; internally Red Swastika P2 HCL, 2021.
-- Source: [public page/PDF](https://sgexam.com/subject/chinese/2021-p2-chinese-mini-test-1-to-4-red-swastika-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1GtzgJ5QUgys2cwrjeX0DygYugKvktx55&export=download); 26 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/chinese/2021-p2-chinese-mini-test-1-to-4-red-swastika-pdf/); 26 PDF pages.
 - Analysis page anchors: 1–5, 7, 13, 19. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: RECLASSIFY AS HCL. Four 高级华文 review covers contradict the CL category. Pinyin, confusables, collocation, cloze and sentence work; not CL 2021 evidence.
 - SHA-256: `368af3730e699ea317f627bb88825afb71ff1ccadaff8ee87c80d43f04f7e3d0`.
@@ -113,7 +115,7 @@ P2 HCL 2022 and P3 HCL 2022 were recovered from SGTestPaper after the first inde
 ### p2_chinese-2022
 
 - Identity/date: Rulang, CL SA2; catalogue 2022, answer sheet names school.
-- Source: [public page/PDF](https://sgexam.com/subject/chinese/2022-p2-chinese-semestral-assessment-2-rulang-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=164gd0Xu4usFQdlVzW4Oz-nfjlQuxNdE1&export=download); 12 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/chinese/2022-p2-chinese-semestral-assessment-2-rulang-pdf/); 12 PDF pages.
 - Analysis page anchors: 1, 3–10. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Pinyin, vocabulary and character writing; first reading has four questions, second six. Do not misattribute this file to ACS Primary.
 - SHA-256: `5b5fcb22039ce7edf93c553a15805af74e65c1647c30dc98658497a0e85e13cb`.
@@ -121,7 +123,7 @@ P2 HCL 2022 and P3 HCL 2022 were recovered from SGTestPaper after the first inde
 ### p2_chinese-2023
 
 - Identity/date: Nanyang as catalogued, CL practice; year not certified internally.
-- Source: [public page/PDF](https://sgexam.com/subject/chinese/2023-p2-chinese-comprehension-1-nanyang-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1m3NCufhyMaWI7wTvF5Rmf0wWvmMBnbxZ&export=download); 16 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/chinese/2023-p2-chinese-comprehension-1-nanyang-pdf/); 16 PDF pages.
 - Analysis page anchors: 1–10. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Pinyin, character selection/writing, vocabulary, sentence completion, cloze and reading. Selected and open responses both occur; five-question sets are one pattern.
 - SHA-256: `20c163a43384d6413fa48acec4cba930ee4a44d14000e8f0d102f1a050eb273d`.
@@ -129,7 +131,7 @@ P2 HCL 2022 and P3 HCL 2022 were recovered from SGTestPaper after the first inde
 ### p2_chinese-2024
 
 - Identity/date: Raffles Girls’, CL unit reviews; catalogue 2024.
-- Source: [public page/PDF](https://sgexam.com/subject/chinese/2024-p2-chinese-quiz-1_2_3-raffles-girls-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1qLEp9YtfPqwvNgvQUJlab6ZZJDJVPxcH&export=download); 20 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/chinese/2024-p2-chinese-quiz-1_2_3-raffles-girls-pdf/); 20 PDF pages.
 - Analysis page anchors: 1–12. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Character writing from pinyin, vocabulary and language-use reviews. Unit packets do not constitute complete curriculum evidence.
 - SHA-256: `ac25b4c38206325d321f1741882dcad659b35a227f424291f9bb8505222677d0`.
@@ -137,7 +139,7 @@ P2 HCL 2022 and P3 HCL 2022 were recovered from SGTestPaper after the first inde
 ### p2_chinese-2025
 
 - Identity/date: St Hilda’s, CL practice; cover 2025.
-- Source: [public page/PDF](https://sgexam.com/subject/chinese/2025-p2-chinese-practice-1-st-hilda-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1kdnuduC9WXnmZXejOvsRdHFerm5dfXq4&export=download); 12 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/chinese/2025-p2-chinese-practice-1-st-hilda-pdf/); 12 PDF pages.
 - Analysis page anchors: 1–5, 7–10. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Pinyin/pictures, collocation, vocabulary and character writing. Some abilities are intentionally outside the app’s recognition-only scoring.
 - SHA-256: `9ece590d950d01079aa0a2a3f7fca2cc9dbe3804db1e31aa4e9e9a058b4a4ec8`.
@@ -145,7 +147,7 @@ P2 HCL 2022 and P3 HCL 2022 were recovered from SGTestPaper after the first inde
 ### p3_chinese-2021
 
 - Identity/date: Henry Park, CL Term Review 2; cover 2021.
-- Source: [public page/PDF](https://sgexam.com/subject/chinese/2021-p3-chinese-weighted-assessment-2-henry-park-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1tFUK_xMZCnuxJ8hIsYGrEfBHeRmdpK1V&export=download); 12 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/chinese/2021-p3-chinese-weighted-assessment-2-henry-park-pdf/); 12 PDF pages.
 - Analysis page anchors: 1–7. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Character recognition, vocabulary, collocation and reading. Term scope explicitly limited to selected textbook lessons.
 - SHA-256: `01c16cae4481901d8bc9d4c25af4a2e038c7c7f89dd033994898b669c380e220`.
@@ -153,7 +155,7 @@ P2 HCL 2022 and P3 HCL 2022 were recovered from SGTestPaper after the first inde
 ### p3_chinese-2022
 
 - Identity/date: ACS Primary, CL EOY weighted assessment; catalogue 2022.
-- Source: [public page/PDF](https://sgexam.com/subject/chinese/2022-p3-chinese-semestral-assessment-2-acs-primary-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1EdU0hhQyTRWH-zUYQ0n7SEd-nR0rQRws&export=download); 10 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/chinese/2022-p3-chinese-semestral-assessment-2-acs-primary-pdf/); 10 PDF pages.
 - Analysis page anchors: 1, 4–7. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Vocabulary, modelling/expanding sentences and three-question open comprehension. School title and components are visible; not a whole-year national question template.
 - SHA-256: `7a2bb4edd695f4035b3360cf5e6416236d7f57d19b5a0552b3f0f395a6876846`.
@@ -161,7 +163,7 @@ P2 HCL 2022 and P3 HCL 2022 were recovered from SGTestPaper after the first inde
 ### p3_chinese-2023
 
 - Identity/date: ACS Primary, CL EOY; cover 2023.
-- Source: [public page/PDF](https://sgexam.com/subject/chinese/2023-p3-chinese-end-of-year-exam-acsp-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1C4XKYeRna53sUzbhxOEDXqmoPcD4t-6z&export=download); 16 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/chinese/2023-p3-chinese-end-of-year-exam-acsp-pdf/); 16 PDF pages.
 - Analysis page anchors: 1, 4–8, 10–12. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Vocabulary, picture words, collocation, word insertion, sentence combining and reading. Both comprehension and language-use repair pools are needed.
 - SHA-256: `67a7fa09d70560c2993c526e115839d3f0ed12e04bca009d7e56f0aebf62c99c`.
@@ -169,7 +171,7 @@ P2 HCL 2022 and P3 HCL 2022 were recovered from SGTestPaper after the first inde
 ### p3_chinese-2024
 
 - Identity/date: Henry Park as catalogued, CL EOY; cover 2024.
-- Source: [public page/PDF](https://sgexam.com/subject/chinese/2024-p3-chinese-end-of-year-exam-henry-park-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1oa0j0FTn78Mm2hNGS3PI7jHzpwpXiiX-&export=download); 15 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/chinese/2024-p3-chinese-end-of-year-exam-henry-park-pdf/); 15 PDF pages.
 - Analysis page anchors: 1, 3–6, 10–12. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Recognition, picture words, collocation, vocabulary and two comprehension materials, three numbered questions each.
 - SHA-256: `da2c4963634e54c578dd6206346785459d64dfeeaf09d7e7b0480343fe9a08f8`.
@@ -177,7 +179,7 @@ P2 HCL 2022 and P3 HCL 2022 were recovered from SGTestPaper after the first inde
 ### p3_chinese-2025
 
 - Identity/date: ACS Junior, CL EOY; cover 2025.
-- Source: [public page/PDF](https://sgexam.com/subject/chinese/2025-p3-chinese-end-of-year-exam-acs-junior-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1BQs1NivCny9d5jvmh5L58f_AtHDVrFEQ&export=download); 14 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/chinese/2025-p3-chinese-end-of-year-exam-acs-junior-pdf/); 14 PDF pages.
 - Analysis page anchors: 1, 7–12. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Expansion/combining sentences with connectors; comprehension one has three MCQs, comprehension two three open questions requiring evidence.
 - SHA-256: `ea300bcf5a68a5332666391baebc255f0d108bf598ed149bc43bfead0efc56a3`.
@@ -185,7 +187,7 @@ P2 HCL 2022 and P3 HCL 2022 were recovered from SGTestPaper after the first inde
 ### p2_higher_chinese-2021
 
 - Identity/date: Red Swastika, HCL topical review; cover 2021.
-- Source: [public page/PDF](https://sgexam.com/level/primary-2/2021-p2-higher-chinese-topical-revision-1-red-swastika-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1GVcsduT946SeJHHssSgtzHM2gkiwvbqF&export=download); 5 PDF pages.
+- Source: [public paper listing](https://sgexam.com/level/primary-2/2021-p2-higher-chinese-topical-revision-1-red-swastika-pdf/); 5 PDF pages.
 - Analysis page anchors: 1–5. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Same opening review as the misclassified CL packet, not an independent school sample. Collocation and reading, including a three-question set.
 - SHA-256: `469e549ba4a931fca4546a29da4f2bb364b23157f3e3a1c077bab37c5c522e64`.
@@ -193,7 +195,7 @@ P2 HCL 2022 and P3 HCL 2022 were recovered from SGTestPaper after the first inde
 ### p2_higher_chinese-2025
 
 - Identity/date: Nanyang, HCL checkpoints; cover 2025.
-- Source: [public page/PDF](https://sgexam.com/level/primary-2/2025-p2-higher-chinese-quiz-1-and-2-nanyang-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1IVBLADaNXLalQp4M1XkIqLw-GmGkKYkQ&export=download); 18 PDF pages.
+- Source: [public paper listing](https://sgexam.com/level/primary-2/2025-p2-higher-chinese-quiz-1-and-2-nanyang-pdf/); 18 PDF pages.
 - Analysis page anchors: 1–6, 8–13. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Character recognition, vocabulary/cloze, sentence completion, writing characters and reading; richer language work than a single confusable-character pool.
 - SHA-256: `02e7b9f508d6983134203de7af3f3d2e97f40da8f3345c802e82996c2eec549d`.
@@ -201,7 +203,7 @@ P2 HCL 2022 and P3 HCL 2022 were recovered from SGTestPaper after the first inde
 ### p3_higher_chinese-2021
 
 - Identity/date: Nan Hua, HCL EOY revision; cover 2021.
-- Source: [public page/PDF](https://sgexam.com/level/primary-3/2021-p3-higher-chinese-end-of-year-exam-nan-hua-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1kqKFSpk3K9G9BmGORIfva6tB-qMU46Zj&export=download); 15 PDF pages.
+- Source: [public paper listing](https://sgexam.com/level/primary-3/2021-p3-higher-chinese-end-of-year-exam-nan-hua-pdf/); 15 PDF pages.
 - Analysis page anchors: 1, 3, 5–7, 9–11. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Vocabulary/cloze/collocation, expansion and two readings, three and four numbered questions. Revision packet, not authenticated exam administration.
 - SHA-256: `afc7ac9ce41bcc058c65abeeef28130d994d8665c13a8908ff99579c88415943`.
@@ -209,7 +211,7 @@ P2 HCL 2022 and P3 HCL 2022 were recovered from SGTestPaper after the first inde
 ### p3_higher_chinese-2023
 
 - Identity/date: Catholic High, HCL; catalogue 2023.
-- Source: [public page/PDF](https://sgexam.com/level/primary-3/2023-p3-higher-chinese-end-of-year-exam-catholic-high-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1lFvNC0Hm3tf_IfPvjiW_QRm1z5Q46Rjp&export=download); 12 PDF pages.
+- Source: [public paper listing](https://sgexam.com/level/primary-3/2023-p3-higher-chinese-end-of-year-exam-catholic-high-pdf/); 12 PDF pages.
 - Analysis page anchors: 1, 4, 6, 8, 10. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Vocabulary, collocation, sentence sequencing and two three-question comprehension sets. App’s HCL mapping needs course-specific evidence, not duplicate counts.
 - SHA-256: `2e1461b664fe85123f851bf0e2e2fbf5ea6bbdb68690392e8ae1c1fee13de4e7`.
@@ -217,7 +219,7 @@ P2 HCL 2022 and P3 HCL 2022 were recovered from SGTestPaper after the first inde
 ### p3_higher_chinese-2024
 
 - Identity/date: Catholic High, HCL EOY; cover 2024.
-- Source: [public page/PDF](https://sgexam.com/level/primary-3/2024-p3-higher-chinese-end-of-year-exam-catholic-high-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1JzRdWWiX-xNd-xJXoTgohzON44D3ItVv&export=download); 18 PDF pages.
+- Source: [public paper listing](https://sgexam.com/level/primary-3/2024-p3-higher-chinese-end-of-year-exam-catholic-high-pdf/); 18 PDF pages.
 - Analysis page anchors: 1–3, 8–14. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Listening, vocabulary, reading, picture words, collocation, word insertion and paragraph ordering. Listening remains deferred in Pilot.
 - SHA-256: `d2ea06195be3eb7bf3e8e182ca1bad34cb512300135742878a795d18b811e306`.
@@ -225,7 +227,7 @@ P2 HCL 2022 and P3 HCL 2022 were recovered from SGTestPaper after the first inde
 ### p3_higher_chinese-2025
 
 - Identity/date: Ai Tong, HCL EOY; cover 2025.
-- Source: [public page/PDF](https://sgexam.com/level/primary-3/2025-p3-higher-chinese-end-of-year-exam-ai-tong-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=11IYp565mXp2lLjvA0jRl4QXXp7l1HW1O&export=download); 16 PDF pages.
+- Source: [public paper listing](https://sgexam.com/level/primary-3/2025-p3-higher-chinese-end-of-year-exam-ai-tong-pdf/); 16 PDF pages.
 - Analysis page anchors: 1, 3, 5, 7–14. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Paragraph writing, vocabulary, reading, picture words/collocation, sentence expansion/connectors and six-sentence paragraph ordering. Three open reading questions at the end include reasoning.
 - SHA-256: `9b6c24e53e60c41e3f41e20037de167e2e5a5560ca9f988c8cbdf76e782b8076`.
@@ -233,7 +235,7 @@ P2 HCL 2022 and P3 HCL 2022 were recovered from SGTestPaper after the first inde
 ### p2_chinese-2021-extra-rosyth
 
 - Identity/date: Rosyth, CL practices; internal 2021 cover on p9.
-- Source: [public page/PDF](https://sgexam.com/subject/chinese/2021-p2-chinese-practice-paper-1234-rosyth-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1eehTgL5PmBNxmoKEffhwXiaXfg4fOlUY&export=download); 18 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/chinese/2021-p2-chinese-practice-paper-1234-rosyth-pdf/); 18 PDF pages.
 - Analysis page anchors: 1–8, 9–15. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Pinyin, character choice, vocabulary, cloze, reading and picture sentences. Reading on pp13–14 has four questions; replaces the misclassified CL source.
 - SHA-256: `743379cda116ac9e606d6024748daaf50c27358a8654797c9c8f51b7afc57e38`.
@@ -241,7 +243,7 @@ P2 HCL 2022 and P3 HCL 2022 were recovered from SGTestPaper after the first inde
 ### p2_higher_chinese-2022-sgtestpaper
 
 - Identity/date: Red Swastika, HCL supplementary work; covers 2022.
-- Source: [public page/PDF](https://www.sgtestpaper.com/primary/test_papers_2022/primary_2_chinese/P2_HChinese_2022_RedSwastika_PT1_5_Paper.pdf); 22 PDF pages.
+- Source: [public paper listing](https://www.sgtestpaper.com/primary/download_2022/y22_P2_HChinese_RedSwastika_PT15_test_paper.html); 22 PDF pages.
 - Analysis page anchors: 1–20. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Five lesson packets: pinyin/confusables, vocabulary/collocation, four-blank cloze, ordering words, picture sentences and mixed selected/open reading. HCL coverage cannot be inferred from character totals alone.
 - SHA-256: `6921c06be4a4c9f9f13279ba86700ec9dc9b5ea11764899679efd72bdfe905a5`.
@@ -249,7 +251,7 @@ P2 HCL 2022 and P3 HCL 2022 were recovered from SGTestPaper after the first inde
 ### p3_higher_chinese-2022-sgtestpaper
 
 - Identity/date: Nan Hua, HCL EOY packet; catalogue 2022.
-- Source: [public page/PDF](https://www.sgtestpaper.com/primary/test_papers_2022/primary_3_chinese/P3_HChinese_2022_NanHua_EOY_Papers.pdf); 20 PDF pages.
+- Source: [public paper listing](https://www.sgtestpaper.com/primary/download_2022/y22_P3_Hchinese_NanHua_EOY_test_paper.html); 20 PDF pages.
 - Analysis page anchors: 1–3, 5–18. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Listening precedes paper two; character/vocabulary, four-blank cloze, collocation, sentence rewriting, paragraph ordering, three-question applied reading and four-question comprehension with evidence/prediction.
 - SHA-256: `7976f064fb6ef68771ccd68e17e583cebe744b3a1736db9b40fb90c419aa8c42`.
@@ -287,7 +289,7 @@ Actual P2 CL page9 has pinyin completion, character discrimination and vocabular
 
 The app content is labelled original author draft. A bounded exact-overlap check compared every app material body and question stem against the retrieved same-subject paper OCR/text: 19 text files, 24 consecutive Han characters. **No threshold-length exact match was found.** This can miss paraphrases, OCR errors, shorter copying, images and sources outside the sample. It is not proof of originality, permission or copyright clearance. Common grammar/number templates are not by themselves evidence of copying. Retain pending rights/independent review/owner sign-off until the project’s review gates are satisfied.
 
-Reproduce source identity by downloading the cited public URLs, running `sha256sum` on each PDF/HTML, and comparing the recorded hashes. For paper structure, extract native PDF text and OCR scans (PyMuPDF + Tesseract English / Simplified Chinese), then inspect the stated PDF pages and course/year covers visually where OCR is ambiguous. HTML hashes identify the fetched snapshot, not an immutable future webpage. The documented overlaps used only stems/material bodies, not keys/explanations or character catalogues. Source retrieval and OCR happened outside the public repository; no signed download tokens or private files are required to follow these citations.
+For past papers, start at the cited public listing, identify the recorded grade/course, year and assessment, and obtain the matching file under the host’s current access conditions. Compare its `sha256sum` with the recorded hash; a mismatch may mean the host replaced the file. Official and other source snapshots are likewise identified by their cited URLs and hashes. For paper structure, extract native PDF text and OCR scans (PyMuPDF + Tesseract English / Simplified Chinese), then inspect the stated PDF pages and course/year covers visually where OCR is ambiguous. HTML hashes identify the fetched snapshot, not an immutable future webpage. The documented overlaps used only stems/material bodies, not keys/explanations or character catalogues. Source retrieval and OCR happened outside the public repository; no signed download tokens or private files are required to follow these citations.
 
 ## Disposition and next revision
 
