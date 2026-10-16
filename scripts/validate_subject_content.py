@@ -34,6 +34,14 @@ FAMILIES = {
     'mathematics': {'concept', 'computation', 'word_problem', 'measurement', 'geometry', 'data'},
     'science': {'acquisition', 'concept', 'classification', 'process_skill', 'application'},
 }
+# Reviewed cross-family repair routes. A routed question may repair through a set of its own family,
+# or through one of these. Anything else (e.g. a cloze blank routed to an editing set) is rejected.
+# This blocks the known cross-skill pattern; same-family skill fit still needs human review.
+ROUTE_FAMILIES = {
+    'english': {'cloze': {'grammar', 'vocabulary', 'sentence_organisation'}},
+    'mathematics': {},
+    'science': {'acquisition': {'concept', 'classification', 'process_skill', 'application'}},
+}
 STATUSES = {'author_checked_pending_independent_and_owner_review',
             'independently_reviewed_pending_owner', 'approved', 'retired'}
 SVG_NS = '{http://www.w3.org/2000/svg}'
@@ -126,6 +134,10 @@ def check_curriculum(cur, subject):
             require(lf['scope'] in {'partial', 'external', 'deferred'}, 'production_leaf_in_app', where)
         leaves[lf['id']] = lf
     return sources, topics, leaves
+
+
+def route_compatible(subject, item_family, route_family):
+    return item_family == route_family or route_family in ROUTE_FAMILIES[subject].get(item_family, set())
 
 
 def check_svg(path, where):
@@ -264,6 +276,8 @@ def check_pool(pool, subject, cur, topics, leaves, base):
             require(rt in targets, 'repair_route_target', f"{it['id']} {rt}")
             route = targets[rt][0]
             require(topics[route['topic_ref']]['grade'] == topics[it['topic_ref']]['grade'], 'repair_route_grade', it['id'])
+            require(route_compatible(subject, it['family'], route['family']), 'repair_route_family',
+                    f"{it['id']} {it['family']} -> {route['family']} ({rt})")
             if use_leaves:
                 require(set(it['leaf_refs']) & set(route['leaf_refs']), 'repair_route_leaf', it['id'])
         if use_leaves and it['target_id'] is None:
