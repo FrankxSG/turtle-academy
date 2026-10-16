@@ -73,11 +73,10 @@ Local evidence (no services touched):
 
 ### 2026-10-16 review corrections (PR #19, ChatGPT review at `a352900`)
 
-All four findings are addressed on the same branch; the tested head is recorded on the PR.
+All four findings are addressed on the same branch. Tested code head: `c91be06`.
 - **Snapshot contract (P1):** `pilot-snapshot/1` now represents the recoverable engine state: structured ordered, matching and word-bank responses; presentations with roles; frozen task plans with `policy_version` and finalisation time; per-target aggregates; observation history with recurrence versus duplicate; assessed skill and error type; eligibility bounds; amendment lineage; checkpoint pending/delivered state. Still closed, bounded and free-text-free. A test proves the fixture populates every declared field and array; the database test round-trips it unchanged through `upload_snapshot` and the RLS read path. 34 shared rejection cases (was 23).
 - **Closed sign-up check (P1):** passes only on the documented refusal codes; invalid key, address, CAPTCHA, rate-limit, route and server errors are `INCONCLUSIVE` (exit 3). Tested by running the real script against a local mock Auth server.
 - **Google link check (P2):** `--expect refused` passes only on `signup_disabled`; cancellation, token-exchange and network failures are inconclusive, with negative tests.
 - **Sign-out (P2):** clears the client at once, overwrites the stored token if removal fails, and returns `storage_unavailable` when neither works, so callers cannot claim a durable sign-out; the reload boundary is tested. A throwing `localStorage` getter is tolerated.
 
-Local evidence for this round: `test_database.py` **18 pass** (PostgreSQL 16); client and owner-check suites **30 pass** (Node 22); strict type-check of the changed modules passes (global TypeScript 6); privacy guard passes. `npm ci` crashed in the authoring environment, so `npm run build` was not rerun here. Hosted owner checks remain **pending**.
-
+Local evidence for this round: `test_database.py` **18 pass** (PostgreSQL 16); client and owner-check suites **30 pass** (Node 22); strict type-check of the changed modules passes (global TypeScript 6); privacy guard passes. `npm ci` crashed in the authoring environment, so `npm run build` was not run locally; GitHub CI at `c91be06` passed `foundation` (`npm ci`, `npm audit`, `npm run build`, end-to-end tests), `db-contract` and `privacy-guard`. Hosted owner checks remain **pending**.
