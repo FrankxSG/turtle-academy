@@ -373,8 +373,13 @@ class DatabaseContract(unittest.TestCase):
                 waited = True
                 break
             time.sleep(0.05)
-        out_a, err_a = proc_a.communicate(timeout=20)
-        out_b, err_b = proc_b.communicate(timeout=20)
+        # stdin is already closed, so wait and read the (small) outputs directly; communicate()
+        # would try to flush the closed stdin on some Python versions.
+        def finish(proc):
+            proc.wait(timeout=20)
+            return proc.stdout.read(), proc.stderr.read()
+        out_a, err_a = finish(proc_a)
+        out_b, err_b = finish(proc_b)
         return waited, (proc_a.returncode, err_a), (proc_b.returncode, err_b)
 
     def test_concurrent_first_uploads_exactly_one_wins(self):
