@@ -331,13 +331,13 @@
     },
     {
       "id": "sc-p3-plant-cycles-timeline-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
       "kind": "teaching",
       "title": "Learn: recording a plant’s life cycle",
-      "body": "We can record when each stage appears: when the young plant appears, when the first flower opens and when the first fruit forms. Comparing records shows that different kinds of plants can take different lengths of time to go through the same stages.",
+      "body": "We can keep a record of when things are first seen: when the young plant appears, when the first flower opens and when the first fruit forms. Flowers and fruits grow on the adult plant. Comparing records shows that different kinds of plants can take different lengths of time to grow up, flower and produce fruits.",
       "question_ids": [
         "sc-p3-plant-cycles-timeline-learn.q1",
         "sc-p3-plant-cycles-timeline-learn.q2"
@@ -3902,7 +3902,7 @@
       ],
       "correct_option_id": "opt-2",
       "hint": "A young plant is small and has only a few leaves.",
-      "explanation": "Picture C shows a small plant with its first few leaves: the young plant. B is a seed, A is an adult plant and D has fruits.",
+      "explanation": "Picture C shows a small plant with its first few leaves: the young plant. B is a seed, A is an adult plant and D is an adult plant with fruits.",
       "material_id": null,
       "provenance": "original_generic_author_draft",
       "asset_ids": [
@@ -3914,7 +3914,7 @@
     },
     {
       "id": "sc-p3-plant-stages.q2",
-      "version": 2,
+      "version": 3,
       "courses": [
         "p3_science"
       ],
@@ -3923,7 +3923,7 @@
       "stage": "similar",
       "family": "concept",
       "format": "mcq_4plus",
-      "stem": "A small green tomato appears on a tomato plant where a flower used to be. Which stage of the plant does the tomato show?",
+      "stem": "A small green tomato appears on a tomato plant where a flower used to be. Which stage of its life cycle is the tomato plant in?",
       "options": [
         {
           "id": "opt-1",
@@ -3931,20 +3931,20 @@
         },
         {
           "id": "opt-2",
-          "text": "flower"
+          "text": "young plant"
         },
         {
           "id": "opt-3",
-          "text": "fruit"
+          "text": "adult plant"
         },
         {
           "id": "opt-4",
-          "text": "young plant"
+          "text": "fruit"
         }
       ],
       "correct_option_id": "opt-3",
-      "hint": "What forms where a flower was?",
-      "explanation": "The tomato is a fruit. Fruits form where the flowers were.",
+      "hint": "Which stage of a plant can grow flowers and fruits?",
+      "explanation": "Only an adult plant grows flowers and fruits, so the tomato plant is an adult plant. The tomato itself is a fruit: a part of the adult plant, not a stage of the life cycle.",
       "material_id": null,
       "provenance": "original_generic_author_draft",
       "leaf_refs": [
@@ -3995,7 +3995,7 @@
     },
     {
       "id": "sc-p3-plant-cycles-compare-learn.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
@@ -4004,11 +4004,11 @@
       "stage": null,
       "family": "acquisition",
       "format": "mcq_4plus",
-      "stem": "Which stage do a balsam plant and a mango tree both have?",
+      "stem": "What do a balsam plant and a mango tree both produce when they are adult plants?",
       "options": [
         {
           "id": "opt-1",
-          "text": "a tadpole stage"
+          "text": "tadpoles"
         },
         {
           "id": "opt-2",
@@ -4016,7 +4016,7 @@
         },
         {
           "id": "opt-3",
-          "text": "a pupa stage"
+          "text": "pupae"
         },
         {
           "id": "opt-4",
@@ -4153,7 +4153,7 @@
     },
     {
       "id": "sc-p3-plant-cycles-compare.q3",
-      "version": 2,
+      "version": 3,
       "courses": [
         "p3_science"
       ],
@@ -4162,7 +4162,7 @@
       "stage": "generic",
       "family": "concept",
       "format": "mcq_4plus",
-      "stem": "A chilli plant produced its first fruits 3 months after the seed was planted. Which stage came just before the fruits?",
+      "stem": "A chilli plant produced its first fruits 3 months after the seed was planted. What did the adult chilli plant produce just before the fruits?",
       "options": [
         {
           "id": "opt-1",
@@ -4170,15 +4170,15 @@
         },
         {
           "id": "opt-2",
-          "text": "young plant"
+          "text": "spores"
         },
         {
           "id": "opt-3",
-          "text": "seed"
+          "text": "seeds in the soil"
         },
         {
           "id": "opt-4",
-          "text": "spores"
+          "text": "cones"
         }
       ],
       "correct_option_id": "opt-1",
@@ -7593,7 +7593,7 @@
     },
     {
       "id": "sc-p3-plant-cycles-timeline-learn.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
@@ -7602,7 +7602,7 @@
       "stage": null,
       "family": "acquisition",
       "format": "mcq_4plus",
-      "stem": "Look at the record of a chilli plant. Which stage appeared last?",
+      "stem": "Look at the record of a chilli plant. Which of these appeared last?",
       "options": [
         {
           "id": "opt-1",
@@ -7832,7 +7832,7 @@
     },
     {
       "id": "sc-p3-card-timeline",
-      "version": 1,
+      "version": 2,
       "kind": "svg",
       "path": "assets/sc-p3-card-timeline.svg",
       "alt": "A table of when the young plant, first flower and first fruit appeared for plants A and B.",
@@ -7840,10 +7840,10 @@
     },
     {
       "id": "sc-p3-timeline-chilli",
-      "version": 1,
+      "version": 2,
       "kind": "svg",
       "path": "assets/sc-p3-timeline-chilli.svg",
-      "alt": "A table of the weeks in which three stages appeared for a chilli plant.",
+      "alt": "A table of the weeks in which the young plant, first flower and first fruit appeared for a chilli plant.",
       "provenance": "original_generic_author_draft"
     },
     {
@@ -7864,10 +7864,10 @@
     },
     {
       "id": "sc-p3-card-plant-stages",
-      "version": 1,
+      "version": 2,
       "kind": "svg",
       "path": "assets/sc-p3-card-plant-stages.svg",
-      "alt": "Pictures of a seed, a young plant, an adult plant, a plant with flowers and a plant with fruits.",
+      "alt": "Five pictures. A seed, then a young plant. Then a dashed box labelled adult plant holds three pictures of the adult plant: fully grown, with flowers, and with fruits.",
       "provenance": "original_generic_author_draft"
     },
     {
