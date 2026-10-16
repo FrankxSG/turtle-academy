@@ -1,7 +1,7 @@
 {
   "schema_version": "chinese-content/1",
   "batch_id": "zh-starter-001",
-  "version": 6,
+  "version": 7,
   "curriculum_manifest_version": "zh-2024-p2p3-draft.1",
   "status": "author_checked_pending_independent_and_owner_review",
   "materials": [
@@ -15548,7 +15548,7 @@
     },
     {
       "id": "zh-m16.q1",
-      "version": 2,
+      "version": 3,
       "courses": [
         "p3_chinese",
         "p3_higher_chinese"
@@ -15582,7 +15582,7 @@
       "correct_option_id": "opt-2",
       "hint": "把纸对齐压出一条线，这个动作叫什么？",
       "explanation": "“对折”是把纸对齐折起来，才能压出折痕。",
-      "rationale": "按修订后的正确制作过程选字词；五个空与材料一起修订。",
+      "rationale": "按句意选择合适的动词或形容词（词语在语境中的意思）；五个空与材料一起修订。",
       "material_id": "zh-m16",
       "stage": null,
       "provenance": "original_generic_author_draft",
@@ -15591,13 +15591,13 @@
       "annotations": [],
       "blank_ref": "blank-1",
       "repair_target_refs": [
-        "zh.p3_chinese.skill.char-in-context",
-        "zh.p3_higher_chinese.skill.char-in-context"
+        "zh.p3_chinese.skill.word-context",
+        "zh.p3_higher_chinese.skill.word-context"
       ]
     },
     {
       "id": "zh-m16.q2",
-      "version": 2,
+      "version": 3,
       "courses": [
         "p3_chinese",
         "p3_higher_chinese"
@@ -15631,7 +15631,7 @@
       "correct_option_id": "opt-2",
       "hint": "要把纸角移到中心，用手怎么做？",
       "explanation": "把纸角“拉”到中心，四个角才能叠在一起。",
-      "rationale": "按修订后的正确制作过程选字词；五个空与材料一起修订。",
+      "rationale": "按句意选择合适的动词或形容词（词语在语境中的意思）；五个空与材料一起修订。",
       "material_id": "zh-m16",
       "stage": null,
       "provenance": "original_generic_author_draft",
@@ -15640,20 +15640,20 @@
       "annotations": [],
       "blank_ref": "blank-2",
       "repair_target_refs": [
-        "zh.p3_chinese.skill.char-in-context",
-        "zh.p3_higher_chinese.skill.char-in-context"
+        "zh.p3_chinese.skill.word-context",
+        "zh.p3_higher_chinese.skill.word-context"
       ]
     },
     {
       "id": "zh-m16.q3",
-      "version": 2,
+      "version": 3,
       "courses": [
         "p3_chinese",
         "p3_higher_chinese"
       ],
       "outcome_refs": [
-        "zh.p3_chinese.r-word-context",
-        "zh.p3_higher_chinese.r-word-context"
+        "zh.p3_chinese.r-character",
+        "zh.p3_higher_chinese.r-character"
       ],
       "target_refs": [],
       "family": "cloze",
@@ -15680,7 +15680,7 @@
       "correct_option_id": "opt-1",
       "hint": "风车被风吹时会怎样动？",
       "explanation": "风车被风吹，会一圈一圈地“转”起来。这几个字字形相近，要看部首和意思。",
-      "rationale": "按修订后的正确制作过程选字词；五个空与材料一起修订。",
+      "rationale": "辨别形近字（转、砖、软、传），按句意选字；五个空与材料一起修订。",
       "material_id": "zh-m16",
       "stage": null,
       "provenance": "original_generic_author_draft",
@@ -15744,7 +15744,7 @@
     },
     {
       "id": "zh-m16.q5",
-      "version": 2,
+      "version": 3,
       "courses": [
         "p3_chinese",
         "p3_higher_chinese"
@@ -15778,7 +15778,7 @@
       "correct_option_id": "opt-2",
       "hint": "妈妈说“我”做得很好，是在做什么？",
       "explanation": "说别人做得好，就是“夸”别人。",
-      "rationale": "按修订后的正确制作过程选字词；五个空与材料一起修订。",
+      "rationale": "按句意选择合适的动词或形容词（词语在语境中的意思）；五个空与材料一起修订。",
       "material_id": "zh-m16",
       "stage": null,
       "provenance": "original_generic_author_draft",
@@ -15787,8 +15787,8 @@
       "annotations": [],
       "blank_ref": "blank-5",
       "repair_target_refs": [
-        "zh.p3_chinese.skill.char-in-context",
-        "zh.p3_higher_chinese.skill.char-in-context"
+        "zh.p3_chinese.skill.word-context",
+        "zh.p3_higher_chinese.skill.word-context"
       ]
     },
     {

@@ -160,6 +160,12 @@ def check_catalogue(curriculum, batch):
         require(row['course'] in curriculum['courses'], 'curriculum_course')
         require(row['outcome_ref'] in outcomes and outcomes[row['outcome_ref']]['course'] == row['course'], 'skill_target_outcome')
         require(outcomes[row['outcome_ref']]['scope'] in {'in_app', 'partial'}, 'skill_target_scope')
+        # kind=word is one concrete word; abilities never carry a word and are reported as abilities.
+        require((row['kind'] == 'word') == ('word' in row), 'skill_target_word_identity')
+    compat = set()
+    for row in curriculum.get('route_compatibility', []):
+        require(row['item_outcome'] in outcomes and row['target_ref'] in skills, 'route_compatibility_reference')
+        compat.add((row['item_outcome'], row['target_ref']))
     targets = {**targets, **skills}
     items, materials = unique(batch['items']), unique(batch['materials'])
     require(not (set(items) & set(materials)), 'duplicate_catalogue_id')
@@ -241,6 +247,14 @@ def check_catalogue(curriculum, batch):
             require(ref in targets, 'repair_route_reference')
             require(stages.get(ref) == {'exact', 'similar', 'generic'}, 'repair_route_incomplete')
         require({targets[r]['course'] for r in routes} == set(item['courses']), 'repair_route_course')
+        # The route must repair the skill the question assesses: the target sits under one of the
+        # question's outcomes (a character target under the course's character outcome), or the
+        # pair is a reviewed exception in route_compatibility.
+        for ref in routes:
+            target = targets[ref]
+            home = target.get('outcome_ref') or f"zh.{target['course']}.r-character"
+            require(home in item['outcome_refs'] or any((o, ref) in compat for o in item['outcome_refs']),
+                    'repair_route_skill')
     log = batch['review_log']
     for field in ['sampled_item_ids', 'disputed_item_ids']:
         require(len(log[field]) == len(set(log[field])) and set(log[field]) <= set(items), 'review_item_reference')
@@ -297,7 +311,9 @@ def check_import(payload, curriculum, today, approved_manifest_versions=()):
     if manifest is not None:
         require(manifest in approved_manifest_versions and manifest == curriculum['manifest_version'], 'manifest_not_approved')
         require(curriculum['status'] == 'approved' and curriculum['coverage_status'] == 'approved', 'manifest_not_approved')
-    known = {r['id']: r for r in curriculum['outcomes'] + curriculum['characters'] + curriculum.get('skill_targets', [])}
+    # Mapped entries must name an explicitly typed repair target: a character record or a skill
+    # target. A raw outcome is never a mapping target.
+    known = {r['id']: r for r in curriculum['characters'] + curriculum.get('skill_targets', [])}
     for entry in entries:
         bound = {'character': 1, 'word': 8}.get(entry['target_kind'], 64)
         for field in ['target_value', 'observed_wrong_form']:
@@ -306,15 +322,19 @@ def check_import(payload, curriculum, today, approved_manifest_versions=()):
         ref = entry['knowledge_point_ref']
         if entry['mapping_status'] == 'pending_content':
             require(ref is None, 'pending_ref_must_be_null')
+            continue
+        require(manifest is not None and ref in known, 'mapped_ref')
+        target = known[ref]
+        require(target['course'] == payload['course'], 'mapped_course')
+        if 'character' in target:
+            require(entry['target_kind'] == 'character', 'mapped_target_kind')
+            require(target['character'] == entry['target_value'], 'mapped_character_value')
+            require(entry['assessed_skill'] == 'character_recognition', 'mapped_assessed_skill')
         else:
-            require(manifest is not None and ref in known, 'mapped_ref')
-            require(known[ref]['course'] == payload['course'], 'mapped_course')
-            require(known[ref].get('scope', 'in_app') in {'in_app', 'partial'}, 'mapped_scope')
-            if entry['target_kind'] == 'character':
-                require(known[ref].get('character') == entry['target_value'], 'mapped_character_value')
-            else:
-                require('character' not in known[ref], 'mapped_target_kind')
-                require(known[ref].get('kind', entry['target_kind']) == entry['target_kind'], 'mapped_target_kind')
+            require(entry['target_kind'] == target['kind'], 'mapped_target_kind')
+            require(entry['assessed_skill'] == target['assessed_skill'], 'mapped_assessed_skill')
+            if target['kind'] == 'word':
+                require(entry['target_value'] == target['word'], 'mapped_word_value')
 
 
 def check_attempt(event, item):

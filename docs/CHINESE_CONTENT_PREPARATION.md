@@ -12,7 +12,7 @@ This is one review entry point for curriculum preparation and authoring contract
 | --- | --- | --- |
 | [Curriculum manifest](../content/chinese/curriculum.json) | Four course identities, official references, 124 course-specific outcome records (including language-use leaves), 36 word/language-point/reading-skill repair targets and 1,796 character records | Source-based working inventory; independent grade/denominator audit pending |
 | [Contract schema](../contracts/chinese/1.schema.json) | Curriculum, original catalogue, frozen synthetic task plan, minimal Chinese intake and answer-event shapes | Proposed engineering contract; no app integration |
-| [Starter batch](../content/chinese/batches/starter-001.json) | Version 6: 318 original items — 18 materials (reading, cloze, visual text; 90 questions), eight declared repair groups (45 character pools and 18 word/language-point/reading-skill pools; 189 questions) and 39 further language-use and punctuation practice items; every non-repair question declares a repair route | Author checked; independent review and owner sign-off pending |
+| [Starter batch](../content/chinese/batches/starter-001.json) | Version 7: 318 original items — 18 materials (reading, cloze, visual text; 90 questions), eight declared repair groups (45 character pools and 18 word/language-point/reading-skill pools; 189 questions) and 39 further language-use and punctuation practice items; every non-repair question declares a repair route | Author checked; independent review and owner sign-off pending |
 | [Task fixtures](../content/chinese/fixtures/) | Complete P2 examples for X=6, 10, 12 and 19 | Synthetic, deterministic validation examples; no learner data |
 | [Validator](../scripts/validate_chinese_content.py) and [boundary checks](../scripts/test_chinese_content_contracts.py) | Structural integrity and cross-file rejection cases | Standard-library authoring tools; not learning-engine implementation |
 
@@ -122,7 +122,7 @@ Review/rights/content/coverage states are controlled enums, separate from record
 
 Blanks and pinyin are structured: text contains `{{blank-1}}` or `{{pinyin-1}}`; each text owner declares its own `blanks` and `annotations`. A blank explicitly names its question ID; the question's `blank_ref` links back. Pinyin records hold `text` and `pinyin` separately. All placeholder IDs must occur exactly once in that owner's text, with no orphan annotation or question link. The later renderer must display blanks as answer slots, not literal tokens, and pinyin as an annotation beside its linked text. Do not parse full-width parentheses to infer purpose. The readable tables below substitute these declarations for review only, not an implementation of the app renderer.
 
-For pending intake, `knowledge_point_ref` is JSON null; an unknown cause is `unknown_cause`, not a guessed misconception. The validator enforces an empty list for `no_errors_found`; **parent verification is a separate app-owned preview/confirmation obligation**, absent from the external payload and not established by this check. `incomplete` is distinct and never means mistake-free. Character target/wrong-form values are limited to one code point; words to eight; other kinds to 64. A mapped character's value must equal the referenced character record and course; a word/language/reading target cannot borrow a character ID. Other semantic classifications still require human review. A known manifest string is not release authorization: mapped intake requires approved manifest/coverage state and an app-owned approved-version allowlist. That allowlist is empty for this proposal. `observed_wrong_form` stays device-local and must be absent from cloud snapshots. Privacy and actual parent verification remain required.
+For pending intake, `knowledge_point_ref` is JSON null; an unknown cause is `unknown_cause`, not a guessed misconception. The validator enforces an empty list for `no_errors_found`; **parent verification is a separate app-owned preview/confirmation obligation**, absent from the external payload and not established by this check. `incomplete` is distinct and never means mistake-free. Character target/wrong-form values are limited to one code point; words to eight; other kinds to 64. A mapped entry must name an explicitly typed repair target — a character record or a `skill_targets` record — never a raw outcome. A mapped character's value must equal the referenced character record and course, with `character_recognition` as the assessed skill. Any other entry must match the target's `kind` and reviewed `assessed_skill`; a `kind=word` target also carries its one concrete word, which must equal the value. A word/language/reading target cannot borrow a character ID. Other semantic classifications still require human review. A known manifest string is not release authorization: mapped intake requires approved manifest/coverage state and an app-owned approved-version allowlist. That allowlist is empty for this proposal. `observed_wrong_form` stays device-local and must be absent from cloud snapshots. Privacy and actual parent verification remain required.
 
 The material quota is intentionally a **minimum**, as required by Functional Design §3. No maximum material count or new workload cap is introduced here. X=6 with four complete materials can be structurally valid; that is not a recommendation to schedule unnecessary work. Planner workload suitability remains a later implementation/review concern. Source checks now enforce syllabus printed page = PDF page −2 and character source/course/grade pages (P2 3–4; P3 5–6). Every course listed by a targeted item must have a corresponding target reference, and each referenced target must have all three draft stages.
 
@@ -175,7 +175,7 @@ python3 -m unittest discover -s scripts -p test_chinese_content_contracts.py -v
 python3 scripts/privacy_guard.py
 ```
 
-Current authoring evidence: schema/reference/key checks and 22 boundary test methods pass (including whole-pool deletion and undeclared repair items); the optional PDF source audit reproduces all character records and counts. Additional rejection cases include nonpositive versions, stale item pins, ID/hash trailing newlines, inconsistent approval states, invalid review IDs, wrong grade/source pages, incomplete target course coverage, wrong mapped character values, broken blank/annotation links and a premature X=12 halfway boundary. Existing X/material/import/assistance checks remain. No app/browser/backend tests are claimed; application files and dependencies are unchanged.
+Current authoring evidence: schema/reference/key checks and 25 boundary test methods pass (including whole-pool deletion and undeclared repair items); the optional PDF source audit reproduces all character records and counts. Additional rejection cases include nonpositive versions, stale item pins, ID/hash trailing newlines, inconsistent approval states, invalid review IDs, wrong grade/source pages, incomplete target course coverage, wrong mapped character values, broken blank/annotation links and a premature X=12 halfway boundary. Existing X/material/import/assistance checks remain. No app/browser/backend tests are claimed; application files and dependencies are unchanged.
 
 Before building Chinese: approve the independently audited source map/leaf boundaries and contracts; complete content QA and private coverage/proceed gates; resolve the existing data-protection gates for real records. Then authorize a focused synthetic-only implementation slice separately. This preparation PR must remain draft until review is resolved, and must not merge or deploy without the owner's explicit authorization.
 
@@ -199,9 +199,20 @@ Responds to [CHINESE_RESEARCH_AUDIT.md](content-review/CHINESE_RESEARCH_AUDIT.md
 
 Citation follow-up (owner decision): the dated enrichment table and the 2026 sample images now cite the publisher's public sample and listing pages instead of direct PDF and PNG file links. Hashes and page numbers are kept.
 
+## Review response — 16 October 2026 (batch version 7)
+
+Responds to the independent re-review of `86bedc5`. Item content is unchanged except the four `zh-m16` cloze blanks' routes and outcome, whose versions increase (as do the synthetic plan pins).
+
+| Finding | Change | Still open |
+| --- | --- | --- |
+| **P1** mapped imports could use a raw outcome as a word target | `check_import` accepts only a character record or a skill target as `knowledge_point_ref`. Kind and assessed skill must match the target's reviewed values, and a `kind=word` target must carry the same concrete word. New negative tests cover the two review probes (`苹果` → reading outcome; `苹果` → collocation). | Word-level targets do not exist yet, so word imports stay `pending_content`. |
+| **P1** abilities typed as individual words | **Owner decision:** these are abilities. Collocation and word choice are now `language_point`; word in context and character in context are `reading_skill`. Every skill target declares its reviewed `assessed_skill`. Progress is reported for the ability (for example 根据句意选择词语), never as "紧张 repaired". `kind=word` is reserved for a future target with its own word and matching pool (`skill_target_word_identity`). | Ability-level reporting must be honoured by the engine and parent view when built. |
+| **P2** route guard did not check skill fit | Each route target must sit under one of the question's outcomes (a character target under the course's character outcome), or the pair must be listed in the new, reviewed `route_compatibility` list. The list is empty in this batch. The review's wrong-skill probe (explicit information → punctuation) is now a failing test case. Data fix: `zh-m16` blanks 1, 2 and 5 choose verbs or adjectives by meaning and now repair through word in context; blank 3 (转/砖/软/传, similar-looking characters) is retagged to the character outcome and keeps character in context. | Same-outcome fit is still a review judgement; the guard blocks only cross-outcome drift. |
+| **P2** tracked `__pycache__` files | Removed; Python caches are ignored. | — |
+
 ## 6. Starter content review
 
-Version 6. These are newly drafted generic examples, not extracted learner targets or copied passages. `[空n]` is a readable substitute for a linked blank token; annotation text and pinyin are combined for this review view only. App rendering remains unimplemented. "Repair route" names the repair pool a wrong first answer is sent to.
+Version 7. These are newly drafted generic examples, not extracted learner targets or copied passages. `[空n]` is a readable substitute for a linked blank token; annotation text and pinyin are combined for this review view only. App rendering remains unimplemented. "Repair route" names the repair pool a wrong first answer is sent to.
 
 ### Materials
 
@@ -446,11 +457,11 @@ Courses: p3_chinese, p3_higher_chinese. Kind: cloze.
 
 | ID / stage | Question and options | Key | Hint | Explanation | Repair route |
 | --- | --- | --- | --- | --- | --- |
-| zh-m16.q1 | 第1空选哪个字？<br>1 跳；2 折；3 吃；4 拆 | 折 | 把纸对齐压出一条线，这个动作叫什么？ | “对折”是把纸对齐折起来，才能压出折痕。 | 根据句意选字 |
-| zh-m16.q2 | 第2空选哪个字？<br>1 跑；2 拉；3 唱；4 吃 | 拉 | 要把纸角移到中心，用手怎么做？ | 把纸角“拉”到中心，四个角才能叠在一起。 | 根据句意选字 |
+| zh-m16.q1 | 第1空选哪个字？<br>1 跳；2 折；3 吃；4 拆 | 折 | 把纸对齐压出一条线，这个动作叫什么？ | “对折”是把纸对齐折起来，才能压出折痕。 | 根据语境理解和选择词语 |
+| zh-m16.q2 | 第2空选哪个字？<br>1 跑；2 拉；3 唱；4 吃 | 拉 | 要把纸角移到中心，用手怎么做？ | 把纸角“拉”到中心，四个角才能叠在一起。 | 根据语境理解和选择词语 |
 | zh-m16.q3 | 第3空选哪个字？<br>1 转；2 砖；3 软；4 传 | 转 | 风车被风吹时会怎样动？ | 风车被风吹，会一圈一圈地“转”起来。这几个字字形相近，要看部首和意思。 | 根据句意选字 |
 | zh-m16.q4 | 第4空选哪个词？<br>1 生气；2 难过；3 高兴；4 害怕 | 高兴 | 风车做好了，“我”的心情会怎样？ | 自己做好了风车，所以很高兴地拿给妈妈看。 | 根据语境理解和选择词语 |
-| zh-m16.q5 | 第5空选哪个字？<br>1 叫；2 夸；3 骂；4 问 | 夸 | 妈妈说“我”做得很好，是在做什么？ | 说别人做得好，就是“夸”别人。 | 根据句意选字 |
+| zh-m16.q5 | 第5空选哪个字？<br>1 叫；2 夸；3 骂；4 问 | 夸 | 妈妈说“我”做得很好，是在做什么？ | 说别人做得好，就是“夸”别人。 | 根据语境理解和选择词语 |
 
 #### zh-m17 · 图书馆借书须知
 

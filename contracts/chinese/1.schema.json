@@ -1043,6 +1043,34 @@
             "$ref": "#/$defs/skill_target"
           },
           "minItems": 0
+        },
+        "route_compatibility": {
+          "type": "array",
+          "maxItems": 200,
+          "items": {
+            "type": "object",
+            "properties": {
+              "item_outcome": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+              },
+              "target_ref": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+              },
+              "note": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+              }
+            },
+            "required": [
+              "item_outcome",
+              "target_ref",
+              "note"
+            ],
+            "additionalProperties": false
+          }
         }
       },
       "required": [
@@ -1200,6 +1228,20 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 200
+        },
+        "assessed_skill": {
+          "enum": [
+            "character_recognition",
+            "word_meaning",
+            "language_use",
+            "reading_information",
+            "sentence_organisation"
+          ]
+        },
+        "word": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 8
         }
       },
       "required": [
@@ -1207,7 +1249,8 @@
         "course",
         "outcome_ref",
         "kind",
-        "label_zh"
+        "label_zh",
+        "assessed_skill"
       ],
       "additionalProperties": false
     }

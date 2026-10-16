@@ -190,8 +190,74 @@ class Contracts(unittest.TestCase):
             with self.assertRaises(Invalid):
                 check_import(p, c, dt.date(2026, 10, 15), [c['manifest_version']])
         p['items'][0].update(target_value='晴', knowledge_point_ref='zh.p2_chinese.r-character')
-        with self.assertRaisesRegex(Invalid, 'mapped_character_value'):
+        with self.assertRaisesRegex(Invalid, 'mapped_ref'):
             check_import(p, c, dt.date(2026, 10, 15), [c['manifest_version']])
+        p['items'][0].update(knowledge_point_ref='zh.p2_chinese.char.u6674', assessed_skill='word_meaning')
+        with self.assertRaisesRegex(Invalid, 'mapped_assessed_skill'):
+            check_import(p, c, dt.date(2026, 10, 15), [c['manifest_version']])
+
+    def _approved_word_import(self, **entry):
+        c = copy.deepcopy(self.curriculum)
+        c.update(status='approved', coverage_status='approved')
+        p = copy.deepcopy(self.payload)
+        p['curriculum_manifest_version'] = c['manifest_version']
+        p['items'][0].update(mapping_status='mapped', **entry)
+        return p, c
+
+    def test_mapped_imports_need_a_typed_compatible_target(self):
+        today = dt.date(2026, 10, 15)
+        # Review probe: a raw reading outcome is not a word target.
+        p, c = self._approved_word_import(target_kind='word', target_value='苹果', assessed_skill='word_meaning',
+                                          knowledge_point_ref='zh.p2_chinese.r-explicit')
+        with self.assertRaisesRegex(Invalid, 'mapped_ref'):
+            check_import(p, c, today, [c['manifest_version']])
+        # Review probe: a word cannot map to an ability target.
+        p['items'][0]['knowledge_point_ref'] = 'zh.p2_chinese.skill.collocation'
+        with self.assertRaisesRegex(Invalid, 'mapped_target_kind'):
+            check_import(p, c, today, [c['manifest_version']])
+        # An ability import must match the target's reviewed assessed skill.
+        p['items'][0].update(target_kind='language_point', target_value='词语搭配', assessed_skill='word_meaning')
+        with self.assertRaisesRegex(Invalid, 'mapped_assessed_skill'):
+            check_import(p, c, today, [c['manifest_version']])
+        p['items'][0]['assessed_skill'] = 'language_use'
+        check_import(p, c, today, [c['manifest_version']])
+        # A concrete word target must carry, and match, its word.
+        c['skill_targets'].append({'id': 'zh.p2_chinese.word.synthetic', 'course': 'p2_chinese',
+                                   'outcome_ref': 'zh.p2_chinese.lu-word-choice', 'kind': 'word',
+                                   'assessed_skill': 'word_meaning', 'word': '紧张', 'label_zh': '紧张'})
+        p['items'][0].update(knowledge_point_ref='zh.p2_chinese.word.synthetic', target_kind='word',
+                             assessed_skill='word_meaning', target_value='苹果')
+        with self.assertRaisesRegex(Invalid, 'mapped_word_value'):
+            check_import(p, c, today, [c['manifest_version']])
+        p['items'][0]['target_value'] = '紧张'
+        check_import(p, c, today, [c['manifest_version']])
+
+    def test_skill_target_word_identity(self):
+        for mutate in [lambda t: t.update(kind='word'), lambda t: t.update(word='紧张')]:
+            c = copy.deepcopy(self.curriculum)
+            mutate(next(t for t in c['skill_targets'] if t['id'] == 'zh.p2_chinese.skill.word-choice'))
+            with self.subTest(), self.assertRaisesRegex(Invalid, 'skill_target_word_identity'):
+                check_catalogue(c, self.batch)
+
+    def test_repair_route_must_fit_the_assessed_skill(self):
+        # Review probe: explicit-information questions routed to punctuation targets.
+        b = copy.deepcopy(self.batch)
+        next(r for r in b['items'] if r['id'] == 'zh-m01.q1').update(
+            repair_target_refs=['zh.p2_chinese.skill.punctuation', 'zh.p2_higher_chinese.skill.punctuation'])
+        with self.assertRaisesRegex(Invalid, 'repair_route_skill'):
+            check_catalogue(self.curriculum, b)
+        # A reviewed exception makes that specific pair acceptable.
+        c = copy.deepcopy(self.curriculum)
+        c['route_compatibility'] = [
+            {'item_outcome': 'zh.p2_chinese.r-explicit', 'target_ref': 'zh.p2_chinese.skill.punctuation', 'note': 'synthetic test'},
+            {'item_outcome': 'zh.p2_higher_chinese.r-explicit', 'target_ref': 'zh.p2_higher_chinese.skill.punctuation', 'note': 'synthetic test'}]
+        check_catalogue(c, b)
+        # A character target needs a character-recognition question.
+        b = copy.deepcopy(self.batch)
+        next(r for r in b['items'] if r['id'] == 'zh-m01.q1').update(
+            repair_target_refs=['zh.p2_chinese.char.u6674', 'zh.p2_higher_chinese.char.u6674'])
+        with self.assertRaisesRegex(Invalid, 'repair_route_skill'):
+            check_catalogue(self.curriculum, b)
 
     def test_mid_material_halfway_waits_for_end(self):
         p = load(ROOT / 'content/chinese/fixtures/task-x12.json')
