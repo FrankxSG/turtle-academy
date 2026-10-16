@@ -85,6 +85,12 @@ Schools reference short daily practice and online platforms such as KooBits and 
 | Performance tasks, investigations, journals and explaining reasoning in words (`ma.p2.investigation`) | P2 | external | open | 0 | 0 |
 | Structured/long-answer questions with full written workings (`ma.p3.long-answer-workings`) | P3 | partial | locked | 0 | 0 |
 
+## Correction revision — 16 October 2026
+
+Batch version 2 corrects `ma-p2-fraction-subtract.q3`: both fractions now refer to the full tank, so the keyed 6/12 follows by like-fraction subtraction. Its hint and explanation use that same whole. The item version is incremented and remains listed for independent re-review. Counts remain P2 153/P3 150; every P3 topic remains locked. The separate time-curriculum gaps (P2 minute reading and P3 24-hour clock), official leaf audit and dated paper/enrichment evidence remain open; this item correction does not resolve those findings.
+
+These are proposed corrections, not independent approval. Existing task/history must retain earlier pinned versions; this authoring revision does not implement evidence migration or retroactive regrading.
+
 ## Validation
 
 ```sh

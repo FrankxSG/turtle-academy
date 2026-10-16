@@ -2,7 +2,7 @@
   "schema_version": "subject-content/1",
   "subject": "mathematics",
   "batch_id": "ma-pool-001",
-  "version": 1,
+  "version": 2,
   "manifest_version": "ma-2021-p2p3-draft.1",
   "status": "author_checked_pending_independent_and_owner_review",
   "materials": [],
@@ -4077,7 +4077,7 @@
     },
     {
       "id": "ma-p2-fraction-subtract.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_mathematics"
       ],
@@ -4086,7 +4086,7 @@
       "stage": "generic",
       "family": "computation",
       "format": "mcq_4plus",
-      "stem": "A tank was 11/12 full. 5/12 of the water was used. What fraction of the tank is full now?",
+      "stem": "A tank was 11/12 full. Water equal to 5/12 of the tank's full capacity was used. What fraction of the tank is full now?",
       "options": [
         {
           "id": "opt-1",
@@ -4106,8 +4106,8 @@
         }
       ],
       "correct_option_id": "opt-3",
-      "hint": "Used means take away.",
-      "explanation": "11/12 - 5/12 = 6/12.",
+      "hint": "Both fractions describe parts of the same full tank. Subtract the amount used.",
+      "explanation": "The full tank is the whole in both fractions: 11/12 - 5/12 = 6/12. The tank is now 6/12 full.",
       "material_id": null,
       "provenance": "original_generic_author_draft"
     },
@@ -10922,12 +10922,15 @@
       "Answer keys computed or checked by hand for every item",
       "Distractors model common errors (no regrouping, wrong unit, wrong operation)",
       "Hints do not state the answer",
-      "All content original; no past-paper question copied"
+      "All content original; no past-paper question copied",
+      "2026-10-16 correction pass: revised disputed and related items; item versions incremented; revised IDs remain listed for independent re-review, not approved."
     ],
-    "independent_review": "pending",
+    "independent_review": "changes_requested",
     "owner_signoff": "pending",
     "sampled_item_ids": [],
-    "disputed_item_ids": [],
+    "disputed_item_ids": [
+      "ma-p2-fraction-subtract.q3"
+    ],
     "rights_status": "original_draft_pending_owner_rights_review"
   }
 }
