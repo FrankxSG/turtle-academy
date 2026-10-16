@@ -1,0 +1,547 @@
+{
+  "schema_version": "subject-curriculum/1",
+  "subject": "mathematics",
+  "manifest_version": "ma-2021-p2p3-draft.1",
+  "status": "proposed_not_import_enabled",
+  "courses": [
+    "p2_mathematics",
+    "p3_mathematics"
+  ],
+  "sources": [
+    {
+      "id": "moe-ma-2021",
+      "kind": "moe_official",
+      "title": "MOE 2021 Primary Mathematics Syllabus P1-P6 (updated October 2025)",
+      "url": "https://www.moe.gov.sg/api/media/92bff26d-b2b4-4535-b868-b8415c744b91/2021-Primary-Mathematics-Syllabus-P1-to-P6-Updated-October-2025.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "Authoritative P2/P3 topic and outcome boundaries",
+      "note": "Official MOE file; direct retrieval was blocked from the authoring environment, so content was cross-checked against school documents that follow it. Verify against the PDF during inventory audit."
+    },
+    {
+      "id": "tnps-ma-p2-2026",
+      "kind": "school_public",
+      "title": "Tampines North Primary: P2 Mathematics Scheme of Work Outline 2026",
+      "url": "https://www.tampinesnorthpri.moe.edu.sg/files/MA_SOW_Outline_2026_P2.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "P2 topic list and teaching order by term"
+    },
+    {
+      "id": "pvps-ma-p2p3-2026",
+      "kind": "school_public",
+      "title": "Parkview Primary: 2026 P2 & P3 Mathematics Briefing",
+      "url": "https://parkviewpri.moe.edu.sg/files/2026%20MTP/2026_P2__P3_2026_Briefing_Math.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "P2 learning outcomes; P3 paper format (MCQ/SAQ/structured); common misconceptions (fractions ordering, word problems); problem-solving steps"
+    },
+    {
+      "id": "edgefield-p2-2025",
+      "kind": "school_public",
+      "title": "Edgefield Primary: 2025 P2 Learning Outcomes letter",
+      "url": "https://www.edgefieldpri.moe.edu.sg/files/2025_Assessment_Letter_to_Parents___P2_Learning_Outcomes.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "P2 learning outcomes per semester (Maths, English, Chinese); no weighted assessments at P2"
+    },
+    {
+      "id": "amkps-ma-p3-2026",
+      "kind": "school_public",
+      "title": "Ang Mo Kio Primary: 2026 P3 Mathematics parent briefing",
+      "url": "https://www.angmokiopri.moe.edu.sg/files/3__2026_P3_PTM_Mathematics.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "P3 topic list by term; EYE format; checking routine and model-drawing tips"
+    },
+    {
+      "id": "jwps-p3-2025",
+      "kind": "school_public",
+      "title": "Jurong West Primary: 2025 P3 Assessment Overview, Topics and Components",
+      "url": "https://www.jurongwestpri.moe.edu.sg/files/JWPS_2025_P3_Assessment_Overview__Topics_and_Components_.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "P3 chapter list and EOY component counts (MCQ 15 / SAQ 6 / LAQ 5)"
+    },
+    {
+      "id": "cedar-p3-2025",
+      "kind": "school_public",
+      "title": "Cedar Primary: P3 Curriculum Briefing 2025",
+      "url": "https://www.cedarpri.moe.edu.sg/files/Parent%20Engagement/2025%20P3%20Engagement/3__14_mar_p3_curriculum_briefing_2025.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "P3 topic strands and assessment weighting"
+    },
+    {
+      "id": "geniebook-p2-papers",
+      "kind": "past_paper_index",
+      "title": "Geniebook: Primary 2 sample papers index (2021-2023 listed)",
+      "url": "https://geniebook.com/exam-preparation/sample-papers/primary-2",
+      "accessed": "2026-10-16",
+      "used_for": "Format survey of P2 topical/holistic reviews; no questions copied",
+      "note": "Hosted papers have no stated reuse licence; used for format analysis only."
+    },
+    {
+      "id": "smiletutor-papers",
+      "kind": "past_paper_index",
+      "title": "SmileTutor: primary school exam papers index",
+      "url": "https://smiletutor.sg/free-test-papers-download/primary-school-exam-papers/",
+      "accessed": "2026-10-16",
+      "used_for": "Format survey of P2/P3 papers (2022 within range); no questions copied",
+      "note": "Site states copyright; used for format analysis only."
+    },
+    {
+      "id": "koobits-math",
+      "kind": "enrichment",
+      "title": "KooBits Math (Singapore primary maths practice platform)",
+      "url": "https://koobits.com/math",
+      "accessed": "2026-10-16",
+      "used_for": "Enrichment context: daily short practice, cited in school briefings (AMK 2026)"
+    },
+    {
+      "id": "moe-sls",
+      "kind": "enrichment",
+      "title": "MOE Student Learning Space (SLS)",
+      "url": "https://www.learning.moe.edu.sg/",
+      "accessed": "2026-10-16",
+      "used_for": "Enrichment context: school-assigned online practice referenced by AMK 2026 briefing"
+    }
+  ],
+  "topics": [
+    {
+      "id": "ma.p2.numbers-1000",
+      "course": "p2_mathematics",
+      "grade": "p2",
+      "strand": "Number and Algebra",
+      "label": "Numbers to 1000: place value, reading/writing, comparing, ordering, patterns",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-ma-2021",
+        "tnps-ma-p2-2026",
+        "pvps-ma-p2p3-2026",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "ma.p2.add-sub-1000",
+      "course": "p2_mathematics",
+      "grade": "p2",
+      "strand": "Number and Algebra",
+      "label": "Addition and subtraction within 1000, including regrouping and missing numbers",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-ma-2021",
+        "tnps-ma-p2-2026",
+        "pvps-ma-p2p3-2026",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "ma.p2.multiplication-division",
+      "course": "p2_mathematics",
+      "grade": "p2",
+      "strand": "Number and Algebra",
+      "label": "Multiplication and division: equal groups, repeated addition, sharing and grouping",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-ma-2021",
+        "tnps-ma-p2-2026",
+        "pvps-ma-p2p3-2026",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "ma.p2.tables-2-5-10",
+      "course": "p2_mathematics",
+      "grade": "p2",
+      "strand": "Number and Algebra",
+      "label": "Multiplication tables of 2, 5 and 10",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-ma-2021",
+        "tnps-ma-p2-2026",
+        "pvps-ma-p2p3-2026",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "ma.p2.tables-3-4",
+      "course": "p2_mathematics",
+      "grade": "p2",
+      "strand": "Number and Algebra",
+      "label": "Multiplication tables of 3 and 4",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-ma-2021",
+        "tnps-ma-p2-2026",
+        "pvps-ma-p2p3-2026",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "ma.p2.word-problems",
+      "course": "p2_mathematics",
+      "grade": "p2",
+      "strand": "Number and Algebra",
+      "label": "Word problems (up to 2 steps) for the four operations",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-ma-2021",
+        "tnps-ma-p2-2026",
+        "pvps-ma-p2p3-2026",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "ma.p2.fractions",
+      "course": "p2_mathematics",
+      "grade": "p2",
+      "strand": "Number and Algebra",
+      "label": "Fractions: part of a whole, comparing/ordering unit and like fractions, adding/subtracting like fractions within one whole",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-ma-2021",
+        "tnps-ma-p2-2026",
+        "pvps-ma-p2p3-2026",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "ma.p2.money",
+      "course": "p2_mathematics",
+      "grade": "p2",
+      "strand": "Measurement and Geometry",
+      "label": "Money: counting, decimal notation, adding/subtracting in dollars only or cents only",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-ma-2021",
+        "tnps-ma-p2-2026",
+        "pvps-ma-p2p3-2026",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "ma.p2.length",
+      "course": "p2_mathematics",
+      "grade": "p2",
+      "strand": "Measurement and Geometry",
+      "label": "Length in m and cm: measuring, comparing, word problems",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-ma-2021",
+        "tnps-ma-p2-2026",
+        "pvps-ma-p2p3-2026",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "ma.p2.mass",
+      "course": "p2_mathematics",
+      "grade": "p2",
+      "strand": "Measurement and Geometry",
+      "label": "Mass in kg and g: measuring, comparing, word problems",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-ma-2021",
+        "tnps-ma-p2-2026",
+        "pvps-ma-p2p3-2026",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "ma.p2.volume",
+      "course": "p2_mathematics",
+      "grade": "p2",
+      "strand": "Measurement and Geometry",
+      "label": "Volume of liquid in litres",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-ma-2021",
+        "tnps-ma-p2-2026",
+        "pvps-ma-p2p3-2026",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "ma.p2.time",
+      "course": "p2_mathematics",
+      "grade": "p2",
+      "strand": "Measurement and Geometry",
+      "label": "Time: telling time to 5 minutes, a.m./p.m., hours and minutes, duration",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-ma-2021",
+        "tnps-ma-p2-2026",
+        "pvps-ma-p2p3-2026",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "ma.p2.shapes",
+      "course": "p2_mathematics",
+      "grade": "p2",
+      "strand": "Measurement and Geometry",
+      "label": "2D shapes (incl. semicircle, quarter circle), 3D shapes, patterns, composing figures",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-ma-2021",
+        "tnps-ma-p2-2026",
+        "pvps-ma-p2p3-2026",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "ma.p2.picture-graphs",
+      "course": "p2_mathematics",
+      "grade": "p2",
+      "strand": "Statistics",
+      "label": "Picture graphs with scales",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-ma-2021",
+        "tnps-ma-p2-2026",
+        "pvps-ma-p2p3-2026",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "ma.p3.numbers-10000",
+      "course": "p3_mathematics",
+      "grade": "p3",
+      "strand": "Number and Algebra",
+      "label": "Numbers to 10 000: place value, comparing, ordering, patterns, odd and even",
+      "scope": "in_app",
+      "pilot": "locked",
+      "source_refs": [
+        "moe-ma-2021",
+        "amkps-ma-p3-2026",
+        "jwps-p3-2025",
+        "cedar-p3-2025"
+      ]
+    },
+    {
+      "id": "ma.p3.add-sub-10000",
+      "course": "p3_mathematics",
+      "grade": "p3",
+      "strand": "Number and Algebra",
+      "label": "Addition and subtraction within 10 000",
+      "scope": "in_app",
+      "pilot": "locked",
+      "source_refs": [
+        "moe-ma-2021",
+        "amkps-ma-p3-2026",
+        "jwps-p3-2025",
+        "cedar-p3-2025"
+      ]
+    },
+    {
+      "id": "ma.p3.tables-6-9",
+      "course": "p3_mathematics",
+      "grade": "p3",
+      "strand": "Number and Algebra",
+      "label": "Multiplication tables of 6, 7, 8 and 9 and related division",
+      "scope": "in_app",
+      "pilot": "locked",
+      "source_refs": [
+        "moe-ma-2021",
+        "amkps-ma-p3-2026",
+        "jwps-p3-2025",
+        "cedar-p3-2025"
+      ]
+    },
+    {
+      "id": "ma.p3.multiplication-division",
+      "course": "p3_mathematics",
+      "grade": "p3",
+      "strand": "Number and Algebra",
+      "label": "Multiplication and division up to 3 digits by 1 digit, with remainder",
+      "scope": "in_app",
+      "pilot": "locked",
+      "source_refs": [
+        "moe-ma-2021",
+        "amkps-ma-p3-2026",
+        "jwps-p3-2025",
+        "cedar-p3-2025"
+      ]
+    },
+    {
+      "id": "ma.p3.word-problems",
+      "course": "p3_mathematics",
+      "grade": "p3",
+      "strand": "Number and Algebra",
+      "label": "Word problems with the four operations, including comparison models",
+      "scope": "in_app",
+      "pilot": "locked",
+      "source_refs": [
+        "moe-ma-2021",
+        "amkps-ma-p3-2026",
+        "jwps-p3-2025",
+        "cedar-p3-2025"
+      ]
+    },
+    {
+      "id": "ma.p3.money",
+      "course": "p3_mathematics",
+      "grade": "p3",
+      "strand": "Number and Algebra",
+      "label": "Money in decimal notation: adding, subtracting, word problems",
+      "scope": "in_app",
+      "pilot": "locked",
+      "source_refs": [
+        "moe-ma-2021",
+        "amkps-ma-p3-2026",
+        "jwps-p3-2025",
+        "cedar-p3-2025"
+      ]
+    },
+    {
+      "id": "ma.p3.fractions",
+      "course": "p3_mathematics",
+      "grade": "p3",
+      "strand": "Number and Algebra",
+      "label": "Equivalent fractions; comparing/ordering unlike fractions; adding/subtracting related fractions within one whole",
+      "scope": "in_app",
+      "pilot": "locked",
+      "source_refs": [
+        "moe-ma-2021",
+        "amkps-ma-p3-2026",
+        "jwps-p3-2025",
+        "cedar-p3-2025"
+      ]
+    },
+    {
+      "id": "ma.p3.length-mass-volume",
+      "course": "p3_mathematics",
+      "grade": "p3",
+      "strand": "Measurement and Geometry",
+      "label": "Length (km, m, cm), mass (kg, g), volume (l, ml): compound units and conversion",
+      "scope": "in_app",
+      "pilot": "locked",
+      "source_refs": [
+        "moe-ma-2021",
+        "amkps-ma-p3-2026",
+        "jwps-p3-2025",
+        "cedar-p3-2025"
+      ]
+    },
+    {
+      "id": "ma.p3.time",
+      "course": "p3_mathematics",
+      "grade": "p3",
+      "strand": "Measurement and Geometry",
+      "label": "Time: seconds, duration, start and end times, conversion",
+      "scope": "in_app",
+      "pilot": "locked",
+      "source_refs": [
+        "moe-ma-2021",
+        "amkps-ma-p3-2026",
+        "jwps-p3-2025",
+        "cedar-p3-2025"
+      ]
+    },
+    {
+      "id": "ma.p3.area-perimeter",
+      "course": "p3_mathematics",
+      "grade": "p3",
+      "strand": "Measurement and Geometry",
+      "label": "Area and perimeter: square units, rectangles and squares",
+      "scope": "in_app",
+      "pilot": "locked",
+      "source_refs": [
+        "moe-ma-2021",
+        "amkps-ma-p3-2026",
+        "jwps-p3-2025",
+        "cedar-p3-2025"
+      ]
+    },
+    {
+      "id": "ma.p3.angles",
+      "course": "p3_mathematics",
+      "grade": "p3",
+      "strand": "Measurement and Geometry",
+      "label": "Angles: right angles, comparing angles",
+      "scope": "in_app",
+      "pilot": "locked",
+      "source_refs": [
+        "moe-ma-2021",
+        "amkps-ma-p3-2026",
+        "jwps-p3-2025",
+        "cedar-p3-2025"
+      ]
+    },
+    {
+      "id": "ma.p3.perpendicular-parallel",
+      "course": "p3_mathematics",
+      "grade": "p3",
+      "strand": "Measurement and Geometry",
+      "label": "Perpendicular and parallel lines",
+      "scope": "in_app",
+      "pilot": "locked",
+      "source_refs": [
+        "moe-ma-2021",
+        "amkps-ma-p3-2026",
+        "jwps-p3-2025",
+        "cedar-p3-2025"
+      ]
+    },
+    {
+      "id": "ma.p3.bar-graphs",
+      "course": "p3_mathematics",
+      "grade": "p3",
+      "strand": "Statistics",
+      "label": "Bar graphs: reading, interpreting, completing",
+      "scope": "in_app",
+      "pilot": "locked",
+      "source_refs": [
+        "moe-ma-2021",
+        "amkps-ma-p3-2026",
+        "jwps-p3-2025",
+        "cedar-p3-2025"
+      ]
+    },
+    {
+      "id": "ma.p2.investigation",
+      "course": "p2_mathematics",
+      "grade": "p2",
+      "strand": "Processes",
+      "label": "Performance tasks, investigations, journals and explaining reasoning in words",
+      "scope": "external",
+      "pilot": "open",
+      "source_refs": [
+        "moe-ma-2021",
+        "tnps-ma-p2-2026",
+        "pvps-ma-p2p3-2026",
+        "edgefield-p2-2025"
+      ],
+      "note": "Assessed by schools through performance/investigative tasks; not captured by objective selection."
+    },
+    {
+      "id": "ma.p3.long-answer-workings",
+      "course": "p3_mathematics",
+      "grade": "p3",
+      "strand": "Processes",
+      "label": "Structured/long-answer questions with full written workings",
+      "scope": "partial",
+      "pilot": "locked",
+      "source_refs": [
+        "moe-ma-2021",
+        "amkps-ma-p3-2026",
+        "jwps-p3-2025",
+        "cedar-p3-2025"
+      ],
+      "note": "The app checks only the final selected answer; method production is external."
+    }
+  ],
+  "limitations": [
+    "Topic boundaries follow school documents that implement the 2021 MOE syllabus; verify each against the official PDF before freezing IDs.",
+    "P3 Mathematics is locked in the Pilot app until the post-Pilot teaching flow exists.",
+    "Objective selection does not assess written workings or explanations."
+  ]
+}
