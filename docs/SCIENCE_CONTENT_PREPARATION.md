@@ -72,6 +72,12 @@ Schools encourage visits and hands-on programmes such as Science Centre Singapor
 | Practical test: observing, measuring, classifying with real materials (`sc.p3.practical`) | P3 | external | open | 0 | 0 |
 | P4 lower-block topics (plant and human systems, matter, light, heat) (`sc.p3.p4-topics`) | P3 | deferred | open | 0 | 0 |
 
+## Correction revision — 16 October 2026
+
+Batch version 2 corrects six items and two teaching cards. The flexibility question now supplies equal strip dimensions, the same load and measured bending without breakage; the conclusion no longer depends on which strip breaks first. Nickel/cobalt recall is removed from the teaching card and affected options. The induced-paper-clip acquisition question is replaced by an observed on/off electromagnet example; the related permanent-magnet distractor no longer relies on induction. These changes follow the exclusions on PDF p63 / printed p62 of the [official syllabus updated January 2026](https://www.moe.gov.sg/api/media/ba3562d3-5b31-4459-8693-45cde7b97273/Primary-Science-Syllabus-2023.pdf); electrical magnet-making remains included. A hint that directly named steel is also replaced. Revised item/material versions are incremented and revised item IDs remain listed for re-review. The explicit learning-unit/acquisition-to-repair links, prerequisite graph, observation activities/assets, complete curriculum/source audit and owner sign-off remain open.
+
+These are proposed corrections, not independent approval. Existing task/history must retain earlier pinned versions; this authoring revision does not implement evidence migration or retroactive regrading.
+
 ## Validation
 
 ```sh

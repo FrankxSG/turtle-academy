@@ -2,7 +2,7 @@
   "schema_version": "subject-content/1",
   "subject": "science",
   "batch_id": "sc-pool-001",
-  "version": 1,
+  "version": 2,
   "manifest_version": "sc-2023-p3-draft.1",
   "status": "author_checked_pending_independent_and_owner_review",
   "materials": [
@@ -372,13 +372,13 @@
     },
     {
       "id": "sc-p3-magnetic-materials-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
       "kind": "scenario",
       "title": "Learn: magnetic and non-magnetic materials",
-      "body": "Magnets attract magnetic materials such as iron, steel, nickel and cobalt. Magnets do not attract non-magnetic materials such as copper, aluminium, plastic, wood, glass and paper. Not all metals are magnetic.",
+      "body": "Magnets attract magnetic materials such as iron and steel. Magnets do not attract non-magnetic materials such as copper, aluminium, plastic, wood, glass and paper. Not all metals are magnetic.",
       "question_ids": [
         "sc-p3-magnetic-materials-learn.q1",
         "sc-p3-magnetic-materials-learn.q2"
@@ -484,13 +484,13 @@
     },
     {
       "id": "sc-p3-temporary-permanent-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
       "kind": "scenario",
       "title": "Learn: temporary and permanent magnets",
-      "body": "Permanent magnets keep their magnetism for a long time. Temporary magnets (such as an electromagnet, or an iron nail held against a magnet) lose their magnetism easily. Dropping or heating a magnet can make it weaker.",
+      "body": "Permanent magnets keep their magnetism for a long time. An electromagnet made with a soft iron core is a temporary magnet: it attracts steel when switched on and loses its magnetism when switched off. Dropping or heating a magnet can make it weaker.",
       "question_ids": [
         "sc-p3-temporary-permanent-learn.q1",
         "sc-p3-temporary-permanent-learn.q2"
@@ -2998,7 +2998,7 @@
     },
     {
       "id": "sc-p3-flexibility.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
@@ -3007,7 +3007,7 @@
       "stage": "generic",
       "family": "concept",
       "format": "mcq_4plus",
-      "stem": "Four strips are bent until they break. Strip W broke first. What does this show about W?",
+      "stem": "Four strips of different materials have the same length, width and thickness. Each is fixed at one end, with the same small weight hung from the other end. None breaks. W bends down 1 cm, X 3 cm, Y 4 cm and Z 5 cm. Which conclusion is supported?",
       "options": [
         {
           "id": "opt-1",
@@ -3027,8 +3027,8 @@
         }
       ],
       "correct_option_id": "opt-3",
-      "hint": "The less flexible a material is, the sooner it breaks when bent.",
-      "explanation": "Breaking first when bent means it is the least flexible.",
+      "hint": "Compare how far the strips bend under the same load.",
+      "explanation": "W bends the least under the same load. Of these equal-sized strips, W is the least flexible.",
       "material_id": null,
       "provenance": "original_generic_author_draft"
     },
@@ -5230,7 +5230,7 @@
     },
     {
       "id": "sc-p3-magnetic-materials-learn.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
@@ -5251,7 +5251,7 @@
         },
         {
           "id": "opt-3",
-          "text": "a nickel coin"
+          "text": "an iron washer"
         },
         {
           "id": "opt-4",
@@ -5266,7 +5266,7 @@
     },
     {
       "id": "sc-p3-magnetic-materials.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
@@ -5295,14 +5295,14 @@
         }
       ],
       "correct_option_id": "opt-3",
-      "hint": "Steel is made mostly of iron.",
+      "hint": "Some metals are magnetic, but not all metals are.",
       "explanation": "Steel is magnetic.",
       "material_id": null,
       "provenance": "original_generic_author_draft"
     },
     {
       "id": "sc-p3-magnetic-materials.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
@@ -5327,7 +5327,7 @@
         },
         {
           "id": "opt-4",
-          "text": "a nickel ring"
+          "text": "a steel nut"
         }
       ],
       "correct_option_id": "opt-2",
@@ -6670,7 +6670,7 @@
     },
     {
       "id": "sc-p3-temporary-permanent-learn.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
@@ -6679,28 +6679,28 @@
       "stage": null,
       "family": "acquisition",
       "format": "mcq_4plus",
-      "stem": "A paper clip hanging from a magnet can pick up another clip. When removed from the magnet, it drops the second clip. What kind of magnet was the first clip?",
+      "stem": "A scrapyard crane has an electromagnet. It picks up steel cans when switched on and releases them when switched off. Which description fits this magnet?",
       "options": [
         {
           "id": "opt-1",
-          "text": "not a magnet at any time"
+          "text": "It stays magnetic after it is switched off."
         },
         {
           "id": "opt-2",
-          "text": "an electromagnet"
+          "text": "It is a permanent magnet."
         },
         {
           "id": "opt-3",
-          "text": "a permanent magnet"
+          "text": "It cannot attract steel."
         },
         {
           "id": "opt-4",
-          "text": "a temporary magnet"
+          "text": "It is a temporary magnet."
         }
       ],
       "correct_option_id": "opt-4",
-      "hint": "It was a magnet only while touching the magnet.",
-      "explanation": "It became a temporary magnet while touching the magnet.",
+      "hint": "Think about what changes when the power is switched off.",
+      "explanation": "The electromagnet loses its magnetism when switched off, so it is a temporary magnet.",
       "material_id": "sc-p3-temporary-permanent-learn",
       "provenance": "original_generic_author_draft"
     },
@@ -6742,7 +6742,7 @@
     },
     {
       "id": "sc-p3-temporary-permanent.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
@@ -6755,7 +6755,7 @@
       "options": [
         {
           "id": "opt-1",
-          "text": "a nail stroked once"
+          "text": "a wooden ruler"
         },
         {
           "id": "opt-2",
@@ -6763,7 +6763,7 @@
         },
         {
           "id": "opt-3",
-          "text": "a paper clip touching a magnet"
+          "text": "an iron nail with no magnetism"
         },
         {
           "id": "opt-4",
@@ -6999,12 +6999,20 @@
       "Each knowledge point has a short teaching card, two distinct-context acquisition tests and a three-stage repair set",
       "Science facts checked against the 2023 syllabus topic scope as reported by school documents",
       "Distractors target documented misconceptions (attraction vs repulsion, all metals magnetic, light needed for germination)",
-      "All content original; no past-paper question copied"
+      "All content original; no past-paper question copied",
+      "2026-10-16 correction pass: revised disputed and related items; item versions incremented; revised IDs remain listed for independent re-review, not approved."
     ],
-    "independent_review": "pending",
+    "independent_review": "changes_requested",
     "owner_signoff": "pending",
     "sampled_item_ids": [],
-    "disputed_item_ids": [],
+    "disputed_item_ids": [
+      "sc-p3-flexibility.q3",
+      "sc-p3-magnetic-materials-learn.q2",
+      "sc-p3-magnetic-materials.q2",
+      "sc-p3-temporary-permanent-learn.q2",
+      "sc-p3-temporary-permanent.q2",
+      "sc-p3-magnetic-materials.q1"
+    ],
     "rights_status": "original_draft_pending_owner_rights_review"
   }
 }
