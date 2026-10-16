@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 453 226" width="453" height="226" role="img">
+<title>Whether the young looks like the adult.</title>
+<rect x="0" y="0" width="453" height="226" fill="#ffffff"/>
+<text x="226.5" y="26.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">Young and adult</text>
+<rect x="10" y="44" width="433" height="34" fill="#e4f2ee"/>
+<line x1="10.0" y1="44.0" x2="443.0" y2="44.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="78.0" x2="443.0" y2="78.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="112.0" x2="443.0" y2="112.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="146.0" x2="443.0" y2="146.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="180.0" x2="443.0" y2="180.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="214.0" x2="443.0" y2="214.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="44.0" x2="10.0" y2="214.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<text x="65.0" y="66.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f2933">Animal</text>
+<text x="65.0" y="100.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">cockroach</text>
+<text x="65.0" y="134.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">chicken</text>
+<text x="65.0" y="168.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">butterfly</text>
+<text x="65.0" y="202.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">frog</text>
+<line x1="120.0" y1="44.0" x2="120.0" y2="214.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<text x="175.0" y="66.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f2933">Young</text>
+<text x="175.0" y="100.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">nymph</text>
+<text x="175.0" y="134.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">chick</text>
+<text x="175.0" y="168.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">larva</text>
+<text x="175.0" y="202.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">tadpole</text>
+<line x1="230.0" y1="44.0" x2="230.0" y2="214.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<text x="336.5" y="66.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f2933">Looks like the adult?</text>
+<text x="336.5" y="100.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">Yes</text>
+<text x="336.5" y="134.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">Yes</text>
+<text x="336.5" y="168.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">No</text>
+<text x="336.5" y="202.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">No</text>
+<line x1="443.0" y1="44.0" x2="443.0" y2="214.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+</svg>

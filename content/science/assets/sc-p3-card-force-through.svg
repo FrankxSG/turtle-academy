@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 200" width="380" height="200" role="img">
+<title>A magnet under a wooden table top and a paper clip on top.</title>
+<rect x="0" y="0" width="380" height="200" fill="#ffffff"/>
+<rect x="40" y="90" width="300" height="18" fill="#d8b384" stroke="#1f2933" stroke-width="1.5"/>
+<text x="190.0" y="104.0" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" font-weight="normal" fill="#1f2933">thin wooden table top</text>
+<rect x="196" y="67" width="8" height="18" rx="4" fill="none" stroke="#7b8794" stroke-width="1.6" transform="rotate(90 200 76)"/>
+<rect x="150" y="116" width="50.0" height="24" fill="#d9534f" stroke="#1f2933" stroke-width="1.5"/>
+<rect x="200.0" y="116" width="50.0" height="24" fill="#3a7bd5" stroke="#1f2933" stroke-width="1.5"/>
+<text x="175.0" y="133.0" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" font-weight="bold" fill="#ffffff">N</text>
+<text x="225.0" y="133.0" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" font-weight="bold" fill="#ffffff">S</text>
+<line x1="160.0" y1="160.0" x2="240.0" y2="160.0" stroke="#7b8794" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="240.0" y1="160.0" x2="231.2" y2="164.8" stroke="#7b8794" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="240.0" y1="160.0" x2="231.2" y2="155.2" stroke="#7b8794" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="175.0" y1="60.0" x2="235.0" y2="60.0" stroke="#7b8794" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="235.0" y1="60.0" x2="226.2" y2="64.8" stroke="#7b8794" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="235.0" y1="60.0" x2="226.2" y2="55.2" stroke="#7b8794" stroke-width="2.2" stroke-linecap="round"/>
+<text x="190.0" y="182.0" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" font-weight="normal" fill="#7b8794">the magnet is moved under the table</text>
+<text x="200.0" y="46.0" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" font-weight="normal" fill="#7b8794">the paper clip on top moves too</text>
+</svg>

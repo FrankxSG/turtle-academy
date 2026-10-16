@@ -2,512 +2,620 @@
   "schema_version": "subject-content/1",
   "subject": "science",
   "batch_id": "sc-pool-001",
-  "version": 2,
+  "version": 3,
   "manifest_version": "sc-2023-p3-draft.1",
   "status": "author_checked_pending_independent_and_owner_review",
   "materials": [
     {
       "id": "sc-p3-needs-of-living-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: what living things need",
       "body": "Living things need food, water and air to stay alive. Plants make their own food using sunlight; animals eat plants or other animals. A non-living thing, such as a rock, does not need food, water or air.",
       "question_ids": [
         "sc-p3-needs-of-living-learn.q1",
         "sc-p3-needs-of-living-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-needs-of-living"
       ]
     },
     {
       "id": "sc-p3-growth-reproduction-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: living things grow and reproduce",
       "body": "Living things grow: a kitten becomes a cat and a seed becomes a plant. Living things reproduce: they make young ones of their own kind. Non-living things do not grow or reproduce by themselves.",
       "question_ids": [
         "sc-p3-growth-reproduction-learn.q1",
         "sc-p3-growth-reproduction-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-growth-reproduction"
       ]
     },
     {
       "id": "sc-p3-respond-changes-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: living things respond to changes",
       "body": "Living things respond to changes around them. A cat runs away from a loud noise. The leaves of a touch-me-not (mimosa) plant fold when touched. A plant on a window ledge bends towards the light.",
       "question_ids": [
         "sc-p3-respond-changes-learn.q1",
         "sc-p3-respond-changes-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-respond-changes"
       ]
     },
     {
       "id": "sc-p3-classify-living-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: deciding if something is living",
       "body": "To decide whether something is living, check the characteristics: it needs food, water and air; it grows; it reproduces; it responds to changes. Something must have all of these to be living. Fire can \"grow\" and needs air, but it does not reproduce like living things or need food and water, so it is non-living. A seed is living: it can grow into a new plant.",
       "question_ids": [
         "sc-p3-classify-living-learn.q1",
         "sc-p3-classify-living-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-classify-living"
       ]
     },
     {
       "id": "sc-p3-flowering-nonflowering-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: flowering and non-flowering plants",
       "body": "Plants can be grouped into flowering and non-flowering plants. Flowering plants (for example rose, hibiscus, rice, mango) produce flowers, and many form fruits with seeds. Non-flowering plants such as ferns and mosses do not produce flowers; they reproduce from spores.",
       "question_ids": [
         "sc-p3-flowering-nonflowering-learn.q1",
         "sc-p3-flowering-nonflowering-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-flowering-nonflowering"
       ]
     },
     {
       "id": "sc-p3-mammals-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: mammals",
       "body": "Mammals have hair or fur on their bodies. Most mammals give birth to young ones alive, and all mammals feed their young with milk. Examples: dog, cat, human, whale, bat.",
       "question_ids": [
         "sc-p3-mammals-learn.q1",
         "sc-p3-mammals-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-mammals"
       ]
     },
     {
       "id": "sc-p3-birds-fish-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: birds and fish",
       "body": "Birds have feathers, a beak and two wings, and lay eggs with hard shells. Not all birds can fly (a penguin cannot). Fish live in water, breathe with gills, have fins and most have scales.",
       "question_ids": [
         "sc-p3-birds-fish-learn.q1",
         "sc-p3-birds-fish-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-birds-fish"
       ]
     },
     {
       "id": "sc-p3-insects-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: insects",
       "body": "Insects have three body parts (head, thorax and abdomen) and six legs. Many have wings and feelers. Ants, butterflies, beetles and grasshoppers are insects. A spider has eight legs and two body parts, so it is not an insect.",
       "question_ids": [
         "sc-p3-insects-learn.q1",
         "sc-p3-insects-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-insects"
       ]
     },
     {
       "id": "sc-p3-amphibians-reptiles-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: amphibians and reptiles",
       "body": "Amphibians (frogs, toads) have moist, smooth skin and lay soft eggs in water; their young live in water. Reptiles (lizards, snakes, crocodiles, turtles) have dry, scaly skin and most lay eggs with leathery shells on land.",
       "question_ids": [
         "sc-p3-amphibians-reptiles-learn.q1",
         "sc-p3-amphibians-reptiles-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-amphibians-reptiles"
       ]
     },
     {
       "id": "sc-p3-fungi-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: fungi",
       "body": "Fungi are living things that are neither plants nor animals. Examples are mushrooms, bread mould and yeast. Fungi cannot make their own food; they feed on dead or rotting things. Many reproduce from spores. They grow well in warm, damp places.",
       "question_ids": [
         "sc-p3-fungi-learn.q1",
         "sc-p3-fungi-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-fungi"
       ]
     },
     {
       "id": "sc-p3-bacteria-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: bacteria",
       "body": "Bacteria are tiny living things that can only be seen with a microscope. Some bacteria are useful, for example in making yoghurt. Some are harmful and can cause illness or make food go bad. Washing hands helps to remove harmful bacteria.",
       "question_ids": [
         "sc-p3-bacteria-learn.q1",
         "sc-p3-bacteria-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-bacteria"
       ]
     },
     {
       "id": "sc-p3-material-types-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: common materials",
       "body": "Objects are made of materials such as wood, metal, plastic, glass, ceramic, rubber and fabric. One object can be made of more than one material: a pencil has wood, graphite and sometimes a rubber eraser.",
       "question_ids": [
         "sc-p3-material-types-learn.q1",
         "sc-p3-material-types-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-material-types"
       ]
     },
     {
-      "id": "sc-p3-strength-hardness-learn",
+      "id": "sc-p3-strength-learn",
       "version": 1,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
-      "title": "Learn: strength and hardness",
-      "body": "Strength is how much load a material can hold before it breaks. Hardness is how difficult it is to scratch a material. A harder material can scratch a softer one. Metal is strong and hard; plastic is usually less hard than metal.",
+      "kind": "teaching",
+      "title": "Learn: strength of materials",
+      "body": "Strength is how much load a material can hold before it breaks. To compare strength fairly, use strips of the same size and add weights one at a time until each strip breaks. The strip that holds the most weights before breaking is the strongest.",
       "question_ids": [
-        "sc-p3-strength-hardness-learn.q1",
-        "sc-p3-strength-hardness-learn.q2"
+        "sc-p3-strength-learn.q1",
+        "sc-p3-strength-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-strength"
       ]
     },
     {
       "id": "sc-p3-flexibility-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: flexibility",
       "body": "A flexible material can bend without breaking. Rubber and fabric are flexible. Glass and ceramic are not flexible: they break if bent.",
       "question_ids": [
         "sc-p3-flexibility-learn.q1",
         "sc-p3-flexibility-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-flexibility"
       ]
     },
     {
       "id": "sc-p3-waterproof-absorbent-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: waterproof and absorbent materials",
       "body": "A waterproof material does not let water pass through (plastic, rubber, metal, glass). An absorbent material soaks up water (cotton, paper towel, sponge).",
       "question_ids": [
         "sc-p3-waterproof-absorbent-learn.q1",
         "sc-p3-waterproof-absorbent-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-waterproof-absorbent"
       ]
     },
     {
       "id": "sc-p3-transparency-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: allowing light through",
       "body": "Some materials allow most light to pass through (clear glass, clear plastic). Some allow some light through (tracing paper, frosted glass). Some do not allow light through (wood, metal, cardboard).",
       "question_ids": [
         "sc-p3-transparency-learn.q1",
         "sc-p3-transparency-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-transparency"
       ]
     },
     {
       "id": "sc-p3-float-sink-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: floating and sinking",
       "body": "Some objects float on water and some sink. A cork, a wooden block and many plastic toys float. A metal key and a stone sink. Whether something floats depends on the material and the shape of the object.",
       "question_ids": [
         "sc-p3-float-sink-learn.q1",
         "sc-p3-float-sink-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-float-sink"
       ]
     },
     {
       "id": "sc-p3-plant-stages-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: stages of a flowering plant",
-      "body": "A flowering plant grows from a seed. The seed germinates into a seedling, which grows into a young plant and then an adult plant. The adult plant produces flowers, the flowers become fruits, and the fruits contain seeds that can grow into new plants.",
+      "body": "A flowering plant grows from a seed into a young plant and then an adult plant. A very young plant with its first leaves is sometimes called a seedling; it is an early young plant, not a separate stage. The adult plant produces flowers, and fruits with seeds form where the flowers were. The seeds can grow into new plants.",
       "question_ids": [
         "sc-p3-plant-stages-learn.q1",
         "sc-p3-plant-stages-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-plant-stages"
       ]
     },
     {
-      "id": "sc-p3-germination-learn",
+      "id": "sc-p3-plant-growth-observe-learn",
       "version": 1,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
-      "title": "Learn: what seeds need to germinate",
-      "body": "Seeds need water, air and warmth to germinate. They do not need light or soil to start germinating, because the seed has stored food. Green bean seeds on damp cotton wool in a warm place will germinate.",
+      "kind": "teaching",
+      "title": "Learn: observing a plant grow",
+      "body": "We can observe a plant as it grows from a young plant into an adult plant. We measure its height and count its leaves every few days, and record the results in a table or graph. A growing plant usually gets taller and grows more leaves.",
       "question_ids": [
-        "sc-p3-germination-learn.q1",
-        "sc-p3-germination-learn.q2"
+        "sc-p3-plant-growth-observe-learn.q1",
+        "sc-p3-plant-growth-observe-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-growth"
       ]
     },
     {
-      "id": "sc-p3-seed-parts-learn",
+      "id": "sc-p3-plant-cycles-timeline-learn",
       "version": 1,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
-      "title": "Learn: inside a germinating seed",
-      "body": "A seed has a seed coat that protects it and seed leaves that store food. When a seed germinates, the young root comes out first and grows downwards; then the young shoot grows upwards.",
+      "kind": "teaching",
+      "title": "Learn: recording a plant’s life cycle",
+      "body": "We can record when each stage appears: when the young plant appears, when the first flower opens and when the first fruit forms. Comparing records shows that different kinds of plants can take different lengths of time to go through the same stages.",
       "question_ids": [
-        "sc-p3-seed-parts-learn.q1",
-        "sc-p3-seed-parts-learn.q2"
+        "sc-p3-plant-cycles-timeline-learn.q1",
+        "sc-p3-plant-cycles-timeline-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-timeline"
       ]
     },
     {
       "id": "sc-p3-plant-cycles-compare-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: comparing plant life cycles",
       "body": "Different flowering plants have the same stages, but the time taken can differ. A balsam plant may complete its life cycle in a few months; a mango tree takes years to produce fruits. Plants that reproduce from spores, like ferns, have a different life cycle.",
       "question_ids": [
         "sc-p3-plant-cycles-compare-learn.q1",
         "sc-p3-plant-cycles-compare-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-plant-cycles-compare"
       ]
     },
     {
       "id": "sc-p3-four-stage-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: four-stage life cycles",
       "body": "Some animals have four stages in their life cycle: egg → larva → pupa → adult. A butterfly is an example: the larva is a caterpillar and the pupa is a chrysalis. Mosquitoes and beetles also have four stages. The young looks very different from the adult.",
       "question_ids": [
         "sc-p3-four-stage-learn.q1",
         "sc-p3-four-stage-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-four-stage"
       ]
     },
     {
       "id": "sc-p3-three-stage-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: three-stage life cycles",
       "body": "Some animals have three stages: egg → young → adult. A cockroach and a grasshopper have egg → nymph → adult; the nymph looks like a small adult without wings. A chicken has egg → chick → adult.",
       "question_ids": [
         "sc-p3-three-stage-learn.q1",
         "sc-p3-three-stage-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-three-stage"
       ]
     },
     {
       "id": "sc-p3-frog-cycle-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: the life cycle of a frog",
       "body": "A frog has the life cycle egg → tadpole → young frog → adult frog. Tadpoles live in water and breathe with gills. As they grow, they grow legs and lose their tails; young frogs can then live on land.",
       "question_ids": [
         "sc-p3-frog-cycle-learn.q1",
         "sc-p3-frog-cycle-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-frog-cycle"
       ]
     },
     {
       "id": "sc-p3-mosquito-control-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: mosquitoes and stagnant water",
       "body": "Mosquitoes lay eggs in stagnant (still) water. The larvae and pupae live in the water. Removing stagnant water from flowerpot plates, pails and drains stops mosquitoes from completing their life cycle and helps to prevent dengue.",
       "question_ids": [
         "sc-p3-mosquito-control-learn.q1",
         "sc-p3-mosquito-control-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-mosquito-control"
       ]
     },
     {
       "id": "sc-p3-young-like-adult-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: does the young look like the adult?",
       "body": "In some life cycles the young looks like the adult (cockroach nymph, chick). In others the young looks very different (butterfly larva, mosquito larva, tadpole). Animals with a pupa stage have young that look very different from the adult.",
       "question_ids": [
         "sc-p3-young-like-adult-learn.q1",
         "sc-p3-young-like-adult-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-young-like-adult"
       ]
     },
     {
       "id": "sc-p3-magnetic-materials-learn",
-      "version": 2,
+      "version": 3,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: magnetic and non-magnetic materials",
       "body": "Magnets attract magnetic materials such as iron and steel. Magnets do not attract non-magnetic materials such as copper, aluminium, plastic, wood, glass and paper. Not all metals are magnetic.",
       "question_ids": [
         "sc-p3-magnetic-materials-learn.q1",
         "sc-p3-magnetic-materials-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-magnetic-materials"
       ]
     },
     {
       "id": "sc-p3-poles-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: the poles of a magnet",
       "body": "Every magnet has two poles, a north pole (N) and a south pole (S). The magnetic force is strongest at the poles. If a bar magnet is dipped into paper clips, most clips stick near its two ends.",
       "question_ids": [
         "sc-p3-poles-learn.q1",
         "sc-p3-poles-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-poles"
       ]
     },
     {
       "id": "sc-p3-attract-repel-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: like and unlike poles",
       "body": "Unlike poles attract: N and S pull towards each other. Like poles repel: N and N, or S and S, push each other away.",
       "question_ids": [
         "sc-p3-attract-repel-learn.q1",
         "sc-p3-attract-repel-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-attract-repel"
       ]
     },
     {
       "id": "sc-p3-test-magnet-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: how to tell if something is a magnet",
       "body": "A magnet attracts magnetic materials, so attraction alone does not prove that an object is a magnet: an iron bar is attracted too. Only repulsion proves it: if an object repels a magnet, the object must be a magnet.",
       "question_ids": [
         "sc-p3-test-magnet-learn.q1",
         "sc-p3-test-magnet-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-test-magnet"
       ]
     },
     {
       "id": "sc-p3-force-through-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: magnetic force through materials",
       "body": "Magnetic force can act through non-magnetic materials such as paper, plastic, glass and water. A magnet under a table can move a paper clip on top of the table.",
       "question_ids": [
         "sc-p3-force-through-learn.q1",
         "sc-p3-force-through-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-force-through"
       ]
     },
     {
       "id": "sc-p3-north-south-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: a freely suspended magnet",
       "body": "A bar magnet hung freely from a string comes to rest pointing in the north-south direction. Its north pole points north. A compass needle is a small magnet that works in this way.",
       "question_ids": [
         "sc-p3-north-south-learn.q1",
         "sc-p3-north-south-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-north-south"
       ]
     },
     {
       "id": "sc-p3-stroke-method-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: making a magnet by stroking",
       "body": "A magnet can be made by stroking a steel or iron object with one pole of a magnet, in the same direction, many times. Lift the magnet away at the end of each stroke. More strokes usually make a stronger magnet. Only magnetic materials can be made into magnets.",
       "question_ids": [
         "sc-p3-stroke-method-learn.q1",
         "sc-p3-stroke-method-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-stroke-method"
       ]
     },
     {
       "id": "sc-p3-electrical-method-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: making an electromagnet",
       "body": "A magnet can also be made using electricity: wind insulated wire around an iron nail and connect it to a battery. The nail becomes a magnet only while the current flows; this is an electromagnet. More turns of wire or more batteries make it stronger.",
       "question_ids": [
         "sc-p3-electrical-method-learn.q1",
         "sc-p3-electrical-method-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-electrical-method"
       ]
     },
     {
       "id": "sc-p3-temporary-permanent-learn",
-      "version": 2,
+      "version": 3,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: temporary and permanent magnets",
       "body": "Permanent magnets keep their magnetism for a long time. An electromagnet made with a soft iron core is a temporary magnet: it attracts steel when switched on and loses its magnetism when switched off. Dropping or heating a magnet can make it weaker.",
       "question_ids": [
         "sc-p3-temporary-permanent-learn.q1",
         "sc-p3-temporary-permanent-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-temporary-permanent"
       ]
     },
     {
       "id": "sc-p3-uses-learn",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
-      "kind": "scenario",
+      "kind": "teaching",
       "title": "Learn: uses of magnets",
       "body": "Magnets are used in daily life: fridge door seals, magnetic cupboard catches, compasses, pencil-case clasps, magnetic toys and sorting steel cans from aluminium cans for recycling.",
       "question_ids": [
         "sc-p3-uses-learn.q1",
         "sc-p3-uses-learn.q2"
+      ],
+      "asset_ids": [
+        "sc-p3-card-uses"
       ]
     }
   ],
@@ -546,7 +654,11 @@
       "hint": "Which one is living?",
       "explanation": "A goldfish is living, so it needs food, water and air.",
       "material_id": "sc-p3-needs-of-living-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.needs-of-living",
+      "leaf_refs": [
+        "sc.p3.leaf.needs-of-living"
+      ]
     },
     {
       "id": "sc-p3-needs-of-living-learn.q2",
@@ -582,7 +694,11 @@
       "hint": "Think about what all living things need.",
       "explanation": "Plants need air to stay alive, so it will die.",
       "material_id": "sc-p3-needs-of-living-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.needs-of-living",
+      "leaf_refs": [
+        "sc.p3.leaf.needs-of-living"
+      ]
     },
     {
       "id": "sc-p3-needs-of-living.q1",
@@ -618,7 +734,10 @@
       "hint": "Living things need three main things to survive.",
       "explanation": "Living things need food, water and air. Sand is not a need.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.needs-of-living"
+      ]
     },
     {
       "id": "sc-p3-needs-of-living.q2",
@@ -654,7 +773,10 @@
       "hint": "Water is one of the needs of all living things.",
       "explanation": "Without water the hamster cannot stay alive.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.needs-of-living"
+      ]
     },
     {
       "id": "sc-p3-needs-of-living.q3",
@@ -690,7 +812,10 @@
       "hint": "What was missing?",
       "explanation": "The plant lacked water, showing plants need water to survive.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.needs-of-living"
+      ]
     },
     {
       "id": "sc-p3-growth-reproduction-learn.q1",
@@ -726,7 +851,11 @@
       "hint": "Which change happens only to living things?",
       "explanation": "Growing is a characteristic of living things.",
       "material_id": "sc-p3-growth-reproduction-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.growth-reproduction",
+      "leaf_refs": [
+        "sc.p3.leaf.growth-reproduction"
+      ]
     },
     {
       "id": "sc-p3-growth-reproduction-learn.q2",
@@ -762,7 +891,11 @@
       "hint": "The hen makes young of its own kind.",
       "explanation": "Making young ones is reproduction.",
       "material_id": "sc-p3-growth-reproduction-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.growth-reproduction",
+      "leaf_refs": [
+        "sc.p3.leaf.growth-reproduction"
+      ]
     },
     {
       "id": "sc-p3-growth-reproduction.q1",
@@ -798,7 +931,10 @@
       "hint": "Think of something true for both plants and animals.",
       "explanation": "All living things reproduce. Not all can fly or have legs, and only plants make food.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.growth-reproduction"
+      ]
     },
     {
       "id": "sc-p3-growth-reproduction.q2",
@@ -834,7 +970,10 @@
       "hint": "Does the balloon grow by itself?",
       "explanation": "The balloon does not grow by itself or reproduce, so it is non-living.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.growth-reproduction"
+      ]
     },
     {
       "id": "sc-p3-growth-reproduction.q3",
@@ -870,7 +1009,10 @@
       "hint": "Taller, then seeds for new plants.",
       "explanation": "Growing taller is growth; seeds make new plants, which is reproduction.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.growth-reproduction"
+      ]
     },
     {
       "id": "sc-p3-respond-changes-learn.q1",
@@ -906,7 +1048,11 @@
       "hint": "The plant reacted to being touched.",
       "explanation": "Folding when touched is a response to change.",
       "material_id": "sc-p3-respond-changes-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.respond-changes",
+      "leaf_refs": [
+        "sc.p3.leaf.respond-changes"
+      ]
     },
     {
       "id": "sc-p3-respond-changes-learn.q2",
@@ -942,7 +1088,11 @@
       "hint": "Which one involves a living thing?",
       "explanation": "The dog reacts to a stranger: a response by a living thing.",
       "material_id": "sc-p3-respond-changes-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.respond-changes",
+      "leaf_refs": [
+        "sc.p3.leaf.respond-changes"
+      ]
     },
     {
       "id": "sc-p3-respond-changes.q1",
@@ -978,7 +1128,10 @@
       "hint": "What comes in through a window?",
       "explanation": "The plant responds to light by growing towards it.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.respond-changes"
+      ]
     },
     {
       "id": "sc-p3-respond-changes.q2",
@@ -1014,7 +1167,10 @@
       "hint": "What happened just before it pulled in?",
       "explanation": "Pulling in when touched is a response to a change.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.respond-changes"
+      ]
     },
     {
       "id": "sc-p3-respond-changes.q3",
@@ -1050,7 +1206,10 @@
       "hint": "Something around the plant changed.",
       "explanation": "The change from light to dark caused a response.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.respond-changes"
+      ]
     },
     {
       "id": "sc-p3-classify-living-learn.q1",
@@ -1086,7 +1245,11 @@
       "hint": "Which can grow into a new plant?",
       "explanation": "A seed is living because it can grow into a new plant.",
       "material_id": "sc-p3-classify-living-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.classify-living",
+      "leaf_refs": [
+        "sc.p3.leaf.classify-living"
+      ]
     },
     {
       "id": "sc-p3-classify-living-learn.q2",
@@ -1122,7 +1285,11 @@
       "hint": "Check all the characteristics, not just two.",
       "explanation": "A living thing must have all the characteristics. Fire does not.",
       "material_id": "sc-p3-classify-living-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.classify-living",
+      "leaf_refs": [
+        "sc.p3.leaf.classify-living"
+      ]
     },
     {
       "id": "sc-p3-classify-living.q1",
@@ -1158,7 +1325,10 @@
       "hint": "Check each item in the group.",
       "explanation": "A mushroom (fungus), a fern (plant) and an ant (animal) are all living.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.classify-living"
+      ]
     },
     {
       "id": "sc-p3-classify-living.q2",
@@ -1194,7 +1364,10 @@
       "hint": "Remove any group that has a living thing.",
       "explanation": "Water, sand and a battery are all non-living.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.classify-living"
+      ]
     },
     {
       "id": "sc-p3-classify-living.q3",
@@ -1230,11 +1403,14 @@
       "hint": "Moving and making sounds is not enough.",
       "explanation": "The robot does not grow or reproduce, so it is non-living.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.classify-living"
+      ]
     },
     {
       "id": "sc-p3-flowering-nonflowering-learn.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
@@ -1243,30 +1419,37 @@
       "stage": null,
       "family": "acquisition",
       "format": "mcq_4plus",
-      "stem": "Which plant is a non-flowering plant?",
+      "stem": "Look at the table. Which plant is a non-flowering plant?",
       "options": [
         {
           "id": "opt-1",
-          "text": "fern"
+          "text": "C"
         },
         {
           "id": "opt-2",
-          "text": "mango tree"
+          "text": "B"
         },
         {
           "id": "opt-3",
-          "text": "rice plant"
+          "text": "D"
         },
         {
           "id": "opt-4",
-          "text": "hibiscus"
+          "text": "A"
         }
       ],
-      "correct_option_id": "opt-1",
-      "hint": "Which one reproduces from spores?",
-      "explanation": "A fern does not produce flowers; it reproduces from spores.",
+      "correct_option_id": "opt-2",
+      "hint": "A non-flowering plant has no flowers and reproduces from spores.",
+      "explanation": "Plant B has no flowers or fruits and has spore cases under its leaves, so it is a non-flowering plant.",
       "material_id": "sc-p3-flowering-nonflowering-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "asset_ids": [
+        "sc-p3-flowering-table"
+      ],
+      "repair_target_id": "sc.p3.flowering-nonflowering",
+      "leaf_refs": [
+        "sc.p3.leaf.flowering-nonflowering"
+      ]
     },
     {
       "id": "sc-p3-flowering-nonflowering-learn.q2",
@@ -1302,11 +1485,15 @@
       "hint": "It has no flowers, so it has no seeds from fruits.",
       "explanation": "Mosses are non-flowering plants that reproduce from spores.",
       "material_id": "sc-p3-flowering-nonflowering-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.flowering-nonflowering",
+      "leaf_refs": [
+        "sc.p3.leaf.flowering-nonflowering"
+      ]
     },
     {
       "id": "sc-p3-flowering-nonflowering.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
@@ -1315,30 +1502,33 @@
       "stage": "exact",
       "family": "classification",
       "format": "mcq_4plus",
-      "stem": "Which plant produces flowers?",
+      "stem": "Plant K never produces flowers and has spore cases under its leaves. Plant L produces flowers and fruits. Which statement is correct?",
       "options": [
         {
           "id": "opt-1",
-          "text": "mushroom"
+          "text": "Both are flowering plants."
         },
         {
           "id": "opt-2",
-          "text": "moss"
+          "text": "Both are non-flowering plants."
         },
         {
           "id": "opt-3",
-          "text": "fern"
+          "text": "K is a flowering plant and L is a non-flowering plant."
         },
         {
           "id": "opt-4",
-          "text": "sunflower"
+          "text": "L is a flowering plant and K is a non-flowering plant."
         }
       ],
       "correct_option_id": "opt-4",
-      "hint": "Its name gives a clue.",
-      "explanation": "A sunflower is a flowering plant. A mushroom is not a plant at all.",
+      "hint": "Use what you can observe on each plant.",
+      "explanation": "L produces flowers, so it is a flowering plant. K has no flowers and reproduces from spores, so it is a non-flowering plant.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.flowering-nonflowering"
+      ]
     },
     {
       "id": "sc-p3-flowering-nonflowering.q2",
@@ -1374,7 +1564,10 @@
       "hint": "Non-flowering plants such as ferns have these under their leaves.",
       "explanation": "Ferns carry spores in small cases under their leaves.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.flowering-nonflowering"
+      ]
     },
     {
       "id": "sc-p3-flowering-nonflowering.q3",
@@ -1410,11 +1603,14 @@
       "hint": "Fruits come from flowers.",
       "explanation": "Fruits develop from flowers, so it is a flowering plant.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.flowering-nonflowering"
+      ]
     },
     {
       "id": "sc-p3-mammals-learn.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
@@ -1423,30 +1619,37 @@
       "stage": null,
       "family": "acquisition",
       "format": "mcq_4plus",
-      "stem": "Which animal is a mammal?",
+      "stem": "Look at the table. Which animal is a mammal?",
       "options": [
         {
           "id": "opt-1",
-          "text": "penguin"
+          "text": "S"
         },
         {
           "id": "opt-2",
-          "text": "whale"
+          "text": "P"
         },
         {
           "id": "opt-3",
-          "text": "crocodile"
+          "text": "R"
         },
         {
           "id": "opt-4",
-          "text": "shark"
+          "text": "Q"
         }
       ],
-      "correct_option_id": "opt-2",
-      "hint": "Which one feeds its young with milk?",
-      "explanation": "A whale feeds its young with milk and is a mammal, even though it lives in the sea.",
+      "correct_option_id": "opt-4",
+      "hint": "Find the animal that feeds its young with milk.",
+      "explanation": "Q has hair, gives birth to live young and feeds its young with milk, so it is a mammal.",
       "material_id": "sc-p3-mammals-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "asset_ids": [
+        "sc-p3-mammal-table"
+      ],
+      "repair_target_id": "sc.p3.mammals",
+      "leaf_refs": [
+        "sc.p3.leaf.mammals"
+      ]
     },
     {
       "id": "sc-p3-mammals-learn.q2",
@@ -1482,7 +1685,11 @@
       "hint": "Birds can fly too. Look for a mammal feature.",
       "explanation": "Fur and feeding young with milk are mammal features.",
       "material_id": "sc-p3-mammals-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.mammals",
+      "leaf_refs": [
+        "sc.p3.leaf.mammals"
+      ]
     },
     {
       "id": "sc-p3-mammals.q1",
@@ -1518,7 +1725,10 @@
       "hint": "Think of how a mother dog feeds her puppies.",
       "explanation": "All mammals feed their young with milk.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.mammals"
+      ]
     },
     {
       "id": "sc-p3-mammals.q2",
@@ -1554,7 +1764,10 @@
       "hint": "Feeding young with milk is the key feature.",
       "explanation": "Dolphins feed their young with milk, so they are mammals.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.mammals"
+      ]
     },
     {
       "id": "sc-p3-mammals.q3",
@@ -1590,7 +1803,10 @@
       "hint": "Fur is a clue.",
       "explanation": "Fur and giving birth to young alive are mammal features.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.mammals"
+      ]
     },
     {
       "id": "sc-p3-birds-fish-learn.q1",
@@ -1626,7 +1842,11 @@
       "hint": "A penguin is a bird but cannot fly.",
       "explanation": "All birds have feathers; not all birds can fly.",
       "material_id": "sc-p3-birds-fish-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.birds-fish",
+      "leaf_refs": [
+        "sc.p3.leaf.birds-fish"
+      ]
     },
     {
       "id": "sc-p3-birds-fish-learn.q2",
@@ -1662,11 +1882,15 @@
       "hint": "Which group uses gills?",
       "explanation": "Fins and gills are features of fish.",
       "material_id": "sc-p3-birds-fish-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.birds-fish",
+      "leaf_refs": [
+        "sc.p3.leaf.birds-fish"
+      ]
     },
     {
       "id": "sc-p3-birds-fish.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
@@ -1675,30 +1899,36 @@
       "stage": "exact",
       "family": "classification",
       "format": "mcq_4plus",
-      "stem": "Which animal is a bird?",
+      "stem": "Look at the table. Which animal is a bird?",
       "options": [
         {
           "id": "opt-1",
-          "text": "ostrich"
+          "text": "K"
         },
         {
           "id": "opt-2",
-          "text": "butterfly"
+          "text": "L"
         },
         {
           "id": "opt-3",
-          "text": "bat"
+          "text": "M"
         },
         {
           "id": "opt-4",
-          "text": "flying fish"
+          "text": "J"
         }
       ],
-      "correct_option_id": "opt-1",
+      "correct_option_id": "opt-4",
       "hint": "Look for feathers and a beak.",
-      "explanation": "An ostrich has feathers and a beak, so it is a bird, even though it cannot fly.",
+      "explanation": "J has feathers and a beak and lays eggs, so it is a bird. K has fins and gills, L has fur and M has dry scales.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "asset_ids": [
+        "sc-p3-bird-table"
+      ],
+      "leaf_refs": [
+        "sc.p3.leaf.birds-fish"
+      ]
     },
     {
       "id": "sc-p3-birds-fish.q2",
@@ -1734,7 +1964,10 @@
       "hint": "Look at the openings at the side of a fish's head.",
       "explanation": "Fish breathe using gills.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.birds-fish"
+      ]
     },
     {
       "id": "sc-p3-birds-fish.q3",
@@ -1770,7 +2003,10 @@
       "hint": "Use bird features, not where it lives.",
       "explanation": "Feathers, a beak and laying eggs make a penguin a bird.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.birds-fish"
+      ]
     },
     {
       "id": "sc-p3-insects-learn.q1",
@@ -1806,7 +2042,11 @@
       "hint": "Count the legs of an ant.",
       "explanation": "All insects have six legs.",
       "material_id": "sc-p3-insects-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.insects",
+      "leaf_refs": [
+        "sc.p3.leaf.insects"
+      ]
     },
     {
       "id": "sc-p3-insects-learn.q2",
@@ -1842,11 +2082,15 @@
       "hint": "Count its legs.",
       "explanation": "Insects have six legs; a spider has eight.",
       "material_id": "sc-p3-insects-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.insects",
+      "leaf_refs": [
+        "sc.p3.leaf.insects"
+      ]
     },
     {
       "id": "sc-p3-insects.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
@@ -1855,30 +2099,36 @@
       "stage": "exact",
       "family": "classification",
       "format": "mcq_4plus",
-      "stem": "Which animal is an insect?",
+      "stem": "Look at the table. Which animal is an insect?",
       "options": [
         {
           "id": "opt-1",
-          "text": "spider"
+          "text": "Z"
         },
         {
           "id": "opt-2",
-          "text": "grasshopper"
+          "text": "W"
         },
         {
           "id": "opt-3",
-          "text": "centipede"
+          "text": "X"
         },
         {
           "id": "opt-4",
-          "text": "earthworm"
+          "text": "Y"
         }
       ],
-      "correct_option_id": "opt-2",
-      "hint": "Look for six legs and three body parts.",
-      "explanation": "A grasshopper has six legs and three body parts.",
+      "correct_option_id": "opt-3",
+      "hint": "Insects have a certain number of body parts and legs.",
+      "explanation": "X has 3 body parts and 6 legs, so it is an insect. W has 8 legs, Y has many legs and Z has no legs.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "asset_ids": [
+        "sc-p3-insect-table"
+      ],
+      "leaf_refs": [
+        "sc.p3.leaf.insects"
+      ]
     },
     {
       "id": "sc-p3-insects.q2",
@@ -1914,7 +2164,10 @@
       "hint": "Six legs is the key.",
       "explanation": "Three body parts and six legs show it is an insect.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.insects"
+      ]
     },
     {
       "id": "sc-p3-insects.q3",
@@ -1950,11 +2203,14 @@
       "hint": "Count the legs.",
       "explanation": "With 8 legs, it is not an insect.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.insects"
+      ]
     },
     {
       "id": "sc-p3-amphibians-reptiles-learn.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
@@ -1963,30 +2219,37 @@
       "stage": null,
       "family": "acquisition",
       "format": "mcq_4plus",
-      "stem": "Which animal is a reptile?",
+      "stem": "Look at the table. Which animal is a reptile?",
       "options": [
         {
           "id": "opt-1",
-          "text": "frog"
+          "text": "F"
         },
         {
           "id": "opt-2",
-          "text": "toad"
+          "text": "H"
         },
         {
           "id": "opt-3",
-          "text": "lizard"
+          "text": "G"
         },
         {
           "id": "opt-4",
-          "text": "whale"
+          "text": "E"
         }
       ],
-      "correct_option_id": "opt-3",
-      "hint": "Look for dry, scaly skin.",
-      "explanation": "A lizard has dry, scaly skin, so it is a reptile.",
+      "correct_option_id": "opt-1",
+      "hint": "Look for dry, scaly skin and eggs laid on land.",
+      "explanation": "F has dry, scaly skin and lays eggs on land, so it is a reptile. E is an amphibian.",
       "material_id": "sc-p3-amphibians-reptiles-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "asset_ids": [
+        "sc-p3-reptile-table"
+      ],
+      "repair_target_id": "sc.p3.amphibians-reptiles",
+      "leaf_refs": [
+        "sc.p3.leaf.amphibians-reptiles"
+      ]
     },
     {
       "id": "sc-p3-amphibians-reptiles-learn.q2",
@@ -2022,7 +2285,11 @@
       "hint": "Moist skin and eggs in water are clues.",
       "explanation": "Frogs are amphibians.",
       "material_id": "sc-p3-amphibians-reptiles-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.amphibians-reptiles",
+      "leaf_refs": [
+        "sc.p3.leaf.amphibians-reptiles"
+      ]
     },
     {
       "id": "sc-p3-amphibians-reptiles.q1",
@@ -2058,7 +2325,10 @@
       "hint": "Think of a crocodile.",
       "explanation": "Reptiles have dry, scaly skin.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.amphibians-reptiles"
+      ]
     },
     {
       "id": "sc-p3-amphibians-reptiles.q2",
@@ -2094,7 +2364,10 @@
       "hint": "Think about where tadpoles swim.",
       "explanation": "Frogs lay their eggs in water.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.amphibians-reptiles"
+      ]
     },
     {
       "id": "sc-p3-amphibians-reptiles.q3",
@@ -2130,11 +2403,14 @@
       "hint": "Dry, scaly skin is a clue.",
       "explanation": "Dry, scaly skin and eggs laid on land show it is a reptile.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.amphibians-reptiles"
+      ]
     },
     {
       "id": "sc-p3-fungi-learn.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
@@ -2143,30 +2419,37 @@
       "stage": null,
       "family": "acquisition",
       "format": "mcq_4plus",
-      "stem": "Which is a fungus?",
+      "stem": "Look at the table. Which living thing is most likely a fungus?",
       "options": [
         {
           "id": "opt-1",
-          "text": "fern"
+          "text": "W"
         },
         {
           "id": "opt-2",
-          "text": "moss"
+          "text": "T"
         },
         {
           "id": "opt-3",
-          "text": "grass"
+          "text": "V"
         },
         {
           "id": "opt-4",
-          "text": "mushroom"
+          "text": "U"
         }
       ],
       "correct_option_id": "opt-4",
-      "hint": "Which one cannot make its own food?",
-      "explanation": "A mushroom is a fungus. Ferns, moss and grass are plants.",
+      "hint": "A fungus is not green and cannot make its own food.",
+      "explanation": "U is not green, cannot make its own food and grows on a rotting log, so it is most likely a fungus.",
       "material_id": "sc-p3-fungi-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "asset_ids": [
+        "sc-p3-fungus-table"
+      ],
+      "repair_target_id": "sc.p3.fungi",
+      "leaf_refs": [
+        "sc.p3.leaf.fungi"
+      ]
     },
     {
       "id": "sc-p3-fungi-learn.q2",
@@ -2202,7 +2485,11 @@
       "hint": "It grew on food in a warm, damp place.",
       "explanation": "Bread mould is a fungus.",
       "material_id": "sc-p3-fungi-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.fungi",
+      "leaf_refs": [
+        "sc.p3.leaf.fungi"
+      ]
     },
     {
       "id": "sc-p3-fungi.q1",
@@ -2238,7 +2525,10 @@
       "hint": "Fungi are not green plants.",
       "explanation": "Fungi cannot make food; they feed on dead or rotting matter.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.fungi"
+      ]
     },
     {
       "id": "sc-p3-fungi.q2",
@@ -2274,7 +2564,10 @@
       "hint": "Fungi like warmth and moisture.",
       "explanation": "Fungi grow well in warm, damp places.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.fungi"
+      ]
     },
     {
       "id": "sc-p3-fungi.q3",
@@ -2310,7 +2603,10 @@
       "hint": "What can plants do that fungi cannot?",
       "explanation": "Plants make their own food; fungi cannot.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.fungi"
+      ]
     },
     {
       "id": "sc-p3-bacteria-learn.q1",
@@ -2346,7 +2642,11 @@
       "hint": "Bacteria are very tiny.",
       "explanation": "Bacteria are too small to see without a microscope.",
       "material_id": "sc-p3-bacteria-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.bacteria",
+      "leaf_refs": [
+        "sc.p3.leaf.bacteria"
+      ]
     },
     {
       "id": "sc-p3-bacteria-learn.q2",
@@ -2382,7 +2682,11 @@
       "hint": "Look for a helpful use.",
       "explanation": "Some bacteria help to turn milk into yoghurt.",
       "material_id": "sc-p3-bacteria-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.bacteria",
+      "leaf_refs": [
+        "sc.p3.leaf.bacteria"
+      ]
     },
     {
       "id": "sc-p3-bacteria.q1",
@@ -2418,7 +2722,10 @@
       "hint": "Some tiny living things on hands can make us ill.",
       "explanation": "Washing removes harmful bacteria.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.bacteria"
+      ]
     },
     {
       "id": "sc-p3-bacteria.q2",
@@ -2454,7 +2761,10 @@
       "hint": "Tiny living things grow in food.",
       "explanation": "Bacteria growing in the milk made it go sour.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.bacteria"
+      ]
     },
     {
       "id": "sc-p3-bacteria.q3",
@@ -2490,7 +2800,10 @@
       "hint": "Think of yoghurt and of illness.",
       "explanation": "Bacteria can be both useful and harmful.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.bacteria"
+      ]
     },
     {
       "id": "sc-p3-material-types-learn.q1",
@@ -2526,7 +2839,11 @@
       "hint": "Think of cutlery at home.",
       "explanation": "Shiny, hard spoons are usually made of metal.",
       "material_id": "sc-p3-material-types-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.material-types",
+      "leaf_refs": [
+        "sc.p3.leaf.material-types"
+      ]
     },
     {
       "id": "sc-p3-material-types-learn.q2",
@@ -2562,7 +2879,11 @@
       "hint": "Which one lets you see through it?",
       "explanation": "Window panes are usually made of glass.",
       "material_id": "sc-p3-material-types-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.material-types",
+      "leaf_refs": [
+        "sc.p3.leaf.material-types"
+      ]
     },
     {
       "id": "sc-p3-material-types.q1",
@@ -2598,7 +2919,10 @@
       "hint": "Its name is a clue.",
       "explanation": "Rubber bands are made of rubber.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.material-types"
+      ]
     },
     {
       "id": "sc-p3-material-types.q2",
@@ -2634,7 +2958,10 @@
       "hint": "Think of a mug from the kitchen.",
       "explanation": "Ceramic cups are hard, break easily and do not let light through.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.material-types"
+      ]
     },
     {
       "id": "sc-p3-material-types.q3",
@@ -2670,187 +2997,10 @@
       "hint": "Count the different materials named.",
       "explanation": "Fabric, metal and wood: 3 materials.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
-    },
-    {
-      "id": "sc-p3-strength-hardness-learn.q1",
-      "version": 1,
-      "courses": [
-        "p3_science"
-      ],
-      "topic_ref": "sc.p3.materials",
-      "target_id": null,
-      "stage": null,
-      "family": "acquisition",
-      "format": "mcq_4plus",
-      "stem": "Which material is used for bridges because it is strong?",
-      "options": [
-        {
-          "id": "opt-1",
-          "text": "cotton"
-        },
-        {
-          "id": "opt-2",
-          "text": "steel (a metal)"
-        },
-        {
-          "id": "opt-3",
-          "text": "paper"
-        },
-        {
-          "id": "opt-4",
-          "text": "jelly"
-        }
-      ],
-      "correct_option_id": "opt-2",
-      "hint": "A bridge must hold heavy loads.",
-      "explanation": "Steel is strong and can hold heavy loads.",
-      "material_id": "sc-p3-strength-hardness-learn",
-      "provenance": "original_generic_author_draft"
-    },
-    {
-      "id": "sc-p3-strength-hardness-learn.q2",
-      "version": 1,
-      "courses": [
-        "p3_science"
-      ],
-      "topic_ref": "sc.p3.materials",
-      "target_id": null,
-      "stage": null,
-      "family": "acquisition",
-      "format": "mcq_4plus",
-      "stem": "Ali scratched block A with block B and a mark appeared on block A. What can he conclude?",
-      "options": [
-        {
-          "id": "opt-1",
-          "text": "Both are soft."
-        },
-        {
-          "id": "opt-2",
-          "text": "B is harder than A."
-        },
-        {
-          "id": "opt-3",
-          "text": "A is harder than B."
-        },
-        {
-          "id": "opt-4",
-          "text": "A and B are equally hard."
-        }
-      ],
-      "correct_option_id": "opt-2",
-      "hint": "The harder material scratches the softer one.",
-      "explanation": "Since B scratched A, B is harder.",
-      "material_id": "sc-p3-strength-hardness-learn",
-      "provenance": "original_generic_author_draft"
-    },
-    {
-      "id": "sc-p3-strength-hardness.q1",
-      "version": 1,
-      "courses": [
-        "p3_science"
-      ],
-      "topic_ref": "sc.p3.materials",
-      "target_id": "sc.p3.strength-hardness",
-      "stage": "exact",
-      "family": "concept",
-      "format": "mcq_4plus",
-      "stem": "Which property tells us how difficult it is to scratch a material?",
-      "options": [
-        {
-          "id": "opt-1",
-          "text": "transparency"
-        },
-        {
-          "id": "opt-2",
-          "text": "hardness"
-        },
-        {
-          "id": "opt-3",
-          "text": "colour"
-        },
-        {
-          "id": "opt-4",
-          "text": "flexibility"
-        }
-      ],
-      "correct_option_id": "opt-2",
-      "hint": "Think of scratching with a nail.",
-      "explanation": "Hardness is how difficult a material is to scratch.",
-      "material_id": null,
-      "provenance": "original_generic_author_draft"
-    },
-    {
-      "id": "sc-p3-strength-hardness.q2",
-      "version": 1,
-      "courses": [
-        "p3_science"
-      ],
-      "topic_ref": "sc.p3.materials",
-      "target_id": "sc.p3.strength-hardness",
-      "stage": "similar",
-      "family": "concept",
-      "format": "mcq_4plus",
-      "stem": "Strips of different materials of the same size are loaded with weights until they break. What property is being tested?",
-      "options": [
-        {
-          "id": "opt-1",
-          "text": "hardness"
-        },
-        {
-          "id": "opt-2",
-          "text": "strength"
-        },
-        {
-          "id": "opt-3",
-          "text": "transparency"
-        },
-        {
-          "id": "opt-4",
-          "text": "ability to float"
-        }
-      ],
-      "correct_option_id": "opt-2",
-      "hint": "Loads are added until the material breaks.",
-      "explanation": "Strength is how much load a material can hold before breaking.",
-      "material_id": null,
-      "provenance": "original_generic_author_draft"
-    },
-    {
-      "id": "sc-p3-strength-hardness.q3",
-      "version": 1,
-      "courses": [
-        "p3_science"
-      ],
-      "topic_ref": "sc.p3.materials",
-      "target_id": "sc.p3.strength-hardness",
-      "stage": "generic",
-      "family": "concept",
-      "format": "mcq_4plus",
-      "stem": "Why is a cutting board in a kitchen often made of hard wood or plastic and not of soft sponge?",
-      "options": [
-        {
-          "id": "opt-1",
-          "text": "It needs to be hard so knives do not cut through easily."
-        },
-        {
-          "id": "opt-2",
-          "text": "It needs to be stretchy."
-        },
-        {
-          "id": "opt-3",
-          "text": "It needs to be see-through."
-        },
-        {
-          "id": "opt-4",
-          "text": "It needs to float."
-        }
-      ],
-      "correct_option_id": "opt-1",
-      "hint": "What happens when a knife presses on it?",
-      "explanation": "A hard material resists cuts from knives.",
-      "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.material-types"
+      ]
     },
     {
       "id": "sc-p3-flexibility-learn.q1",
@@ -2886,11 +3036,15 @@
       "hint": "Which can bend and not break?",
       "explanation": "Rubber can bend easily without breaking.",
       "material_id": "sc-p3-flexibility-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.flexibility",
+      "leaf_refs": [
+        "sc.p3.leaf.flexibility"
+      ]
     },
     {
       "id": "sc-p3-flexibility-learn.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
@@ -2903,7 +3057,7 @@
       "options": [
         {
           "id": "opt-1",
-          "text": "hardness"
+          "text": "transparency"
         },
         {
           "id": "opt-2",
@@ -2911,18 +3065,22 @@
         },
         {
           "id": "opt-3",
-          "text": "transparency"
+          "text": "magnetism"
         },
         {
           "id": "opt-4",
-          "text": "magnetism"
+          "text": "strength"
         }
       ],
       "correct_option_id": "opt-2",
       "hint": "It bends easily.",
-      "explanation": "Bending without breaking is flexibility.",
+      "explanation": "The hose can bend without breaking, so it is flexible.",
       "material_id": "sc-p3-flexibility-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.flexibility",
+      "leaf_refs": [
+        "sc.p3.leaf.flexibility"
+      ]
     },
     {
       "id": "sc-p3-flexibility.q1",
@@ -2958,7 +3116,10 @@
       "hint": "The cap must stretch over the head and keep water out.",
       "explanation": "Flexible, waterproof rubber fits snugly and keeps water out.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.flexibility"
+      ]
     },
     {
       "id": "sc-p3-flexibility.q2",
@@ -2994,7 +3155,10 @@
       "hint": "Which material is not flexible?",
       "explanation": "Glass is not flexible and breaks when bent.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.flexibility"
+      ]
     },
     {
       "id": "sc-p3-flexibility.q3",
@@ -3030,7 +3194,10 @@
       "hint": "Compare how far the strips bend under the same load.",
       "explanation": "W bends the least under the same load. Of these equal-sized strips, W is the least flexible.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.flexibility"
+      ]
     },
     {
       "id": "sc-p3-waterproof-absorbent-learn.q1",
@@ -3066,7 +3233,11 @@
       "hint": "A raincoat must stop water getting through.",
       "explanation": "Plastic is waterproof.",
       "material_id": "sc-p3-waterproof-absorbent-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.waterproof-absorbent",
+      "leaf_refs": [
+        "sc.p3.leaf.waterproof-absorbent"
+      ]
     },
     {
       "id": "sc-p3-waterproof-absorbent-learn.q2",
@@ -3102,7 +3273,11 @@
       "hint": "A towel must soak up water.",
       "explanation": "Cotton is absorbent.",
       "material_id": "sc-p3-waterproof-absorbent-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.waterproof-absorbent",
+      "leaf_refs": [
+        "sc.p3.leaf.waterproof-absorbent"
+      ]
     },
     {
       "id": "sc-p3-waterproof-absorbent.q1",
@@ -3138,7 +3313,10 @@
       "hint": "Which one soaks up water?",
       "explanation": "Paper towels absorb water.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.waterproof-absorbent"
+      ]
     },
     {
       "id": "sc-p3-waterproof-absorbent.q2",
@@ -3174,7 +3352,10 @@
       "hint": "Choose the one that soaks up water.",
       "explanation": "A sponge absorbs water well.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.waterproof-absorbent"
+      ]
     },
     {
       "id": "sc-p3-waterproof-absorbent.q3",
@@ -3210,7 +3391,10 @@
       "hint": "What happens to paper in rain?",
       "explanation": "Paper absorbs water and tears; the coated fabric is waterproof.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.waterproof-absorbent"
+      ]
     },
     {
       "id": "sc-p3-transparency-learn.q1",
@@ -3246,7 +3430,11 @@
       "hint": "You can see clearly through it.",
       "explanation": "Clear glass lets most light pass through.",
       "material_id": "sc-p3-transparency-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.transparency",
+      "leaf_refs": [
+        "sc.p3.leaf.transparency"
+      ]
     },
     {
       "id": "sc-p3-transparency-learn.q2",
@@ -3282,7 +3470,11 @@
       "hint": "Light is needed, but privacy too.",
       "explanation": "Frosted glass lets some light through and gives privacy.",
       "material_id": "sc-p3-transparency-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.transparency",
+      "leaf_refs": [
+        "sc.p3.leaf.transparency"
+      ]
     },
     {
       "id": "sc-p3-transparency.q1",
@@ -3318,7 +3510,10 @@
       "hint": "Which one is not see-through at all?",
       "explanation": "Wood blocks light.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.transparency"
+      ]
     },
     {
       "id": "sc-p3-transparency.q2",
@@ -3354,7 +3549,10 @@
       "hint": "Some light reached the wall.",
       "explanation": "Dim light means some, but not all, light passed through.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.transparency"
+      ]
     },
     {
       "id": "sc-p3-transparency.q3",
@@ -3390,7 +3588,10 @@
       "hint": "You need to see inside.",
       "explanation": "Clear glass lets light through so the cake can be seen.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.transparency"
+      ]
     },
     {
       "id": "sc-p3-float-sink-learn.q1",
@@ -3426,7 +3627,11 @@
       "hint": "Think of corks bobbing on water.",
       "explanation": "A cork floats.",
       "material_id": "sc-p3-float-sink-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.float-sink",
+      "leaf_refs": [
+        "sc.p3.leaf.float-sink"
+      ]
     },
     {
       "id": "sc-p3-float-sink-learn.q2",
@@ -3462,7 +3667,11 @@
       "hint": "Think about metal and wood in water.",
       "explanation": "Steel nails sink; wood floats.",
       "material_id": "sc-p3-float-sink-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.float-sink",
+      "leaf_refs": [
+        "sc.p3.leaf.float-sink"
+      ]
     },
     {
       "id": "sc-p3-float-sink.q1",
@@ -3498,7 +3707,10 @@
       "hint": "A life jacket must keep you up.",
       "explanation": "Foam floats and keeps a swimmer up.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.float-sink"
+      ]
     },
     {
       "id": "sc-p3-float-sink.q2",
@@ -3534,7 +3746,10 @@
       "hint": "Which one sinks?",
       "explanation": "Stone sinks, so it is the worst choice.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.float-sink"
+      ]
     },
     {
       "id": "sc-p3-float-sink.q3",
@@ -3570,11 +3785,14 @@
       "hint": "Compare what was inside the bottle.",
       "explanation": "Replacing the air inside with water made it sink.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.float-sink"
+      ]
     },
     {
       "id": "sc-p3-plant-stages-learn.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
@@ -3583,34 +3801,38 @@
       "stage": null,
       "family": "acquisition",
       "format": "mcq_4plus",
-      "stem": "What is the correct order of the life cycle of a flowering plant?",
+      "stem": "What is the correct order of these stages in the life cycle of a flowering plant?",
       "options": [
         {
           "id": "opt-1",
-          "text": "seed → adult plant → seedling → young plant"
+          "text": "seed → adult plant → young plant"
         },
         {
           "id": "opt-2",
-          "text": "seed → seedling → young plant → adult plant"
+          "text": "seed → young plant → adult plant"
         },
         {
           "id": "opt-3",
-          "text": "seedling → seed → adult plant → young plant"
+          "text": "adult plant → young plant → seed"
         },
         {
           "id": "opt-4",
-          "text": "adult plant → seed → young plant → seedling"
+          "text": "young plant → seed → adult plant"
         }
       ],
       "correct_option_id": "opt-2",
-      "hint": "Start with the stage that is planted in soil.",
-      "explanation": "A seed germinates into a seedling, then a young plant, then an adult plant.",
+      "hint": "Start with what is planted in the soil.",
+      "explanation": "A seed grows into a young plant, which grows into an adult plant.",
       "material_id": "sc-p3-plant-stages-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.plant-stages",
+      "leaf_refs": [
+        "sc.p3.leaf.plant-stages"
+      ]
     },
     {
       "id": "sc-p3-plant-stages-learn.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
@@ -3619,34 +3841,38 @@
       "stage": null,
       "family": "acquisition",
       "format": "mcq_4plus",
-      "stem": "Where are new seeds formed in a flowering plant?",
+      "stem": "Ali cuts open a ripe papaya. What does he find inside that can grow into new papaya plants?",
       "options": [
         {
           "id": "opt-1",
-          "text": "inside the stem"
+          "text": "seeds"
         },
         {
           "id": "opt-2",
-          "text": "inside the roots"
+          "text": "flowers"
         },
         {
           "id": "opt-3",
-          "text": "inside the leaves"
+          "text": "roots"
         },
         {
           "id": "opt-4",
-          "text": "inside the fruits"
+          "text": "leaves"
         }
       ],
-      "correct_option_id": "opt-4",
-      "hint": "What do you find when you cut open a papaya?",
-      "explanation": "Seeds are formed inside fruits.",
+      "correct_option_id": "opt-1",
+      "hint": "Look at the black parts inside the fruit.",
+      "explanation": "The seeds inside the fruit can grow into new plants.",
       "material_id": "sc-p3-plant-stages-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.plant-stages",
+      "leaf_refs": [
+        "sc.p3.leaf.plant-stages"
+      ]
     },
     {
       "id": "sc-p3-plant-stages.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
@@ -3655,34 +3881,40 @@
       "stage": "exact",
       "family": "concept",
       "format": "mcq_4plus",
-      "stem": "Which stage comes right after a seed germinates?",
+      "stem": "The pictures show a plant at different stages. Which picture shows the young plant?",
       "options": [
         {
           "id": "opt-1",
-          "text": "fruit"
+          "text": "B"
         },
         {
           "id": "opt-2",
-          "text": "seedling"
+          "text": "C"
         },
         {
           "id": "opt-3",
-          "text": "flower"
+          "text": "A"
         },
         {
           "id": "opt-4",
-          "text": "adult plant"
+          "text": "D"
         }
       ],
       "correct_option_id": "opt-2",
-      "hint": "It is a very young plant with its first leaves.",
-      "explanation": "After germination, the seed becomes a seedling.",
+      "hint": "A young plant is small and has only a few leaves.",
+      "explanation": "Picture C shows a small plant with its first few leaves: the young plant. B is a seed, A is an adult plant and D has fruits.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "asset_ids": [
+        "sc-p3-stages-young"
+      ],
+      "leaf_refs": [
+        "sc.p3.leaf.plant-stages"
+      ]
     },
     {
       "id": "sc-p3-plant-stages.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
@@ -3691,426 +3923,75 @@
       "stage": "similar",
       "family": "concept",
       "format": "mcq_4plus",
-      "stem": "A flower falls off a tomato plant and a small green tomato appears. What is this stage?",
+      "stem": "A small green tomato appears on a tomato plant where a flower used to be. Which stage of the plant does the tomato show?",
       "options": [
         {
           "id": "opt-1",
-          "text": "the seed germinating"
+          "text": "seed"
         },
         {
           "id": "opt-2",
-          "text": "the flower becoming a fruit"
+          "text": "flower"
         },
         {
           "id": "opt-3",
-          "text": "the plant dying"
+          "text": "fruit"
         },
         {
           "id": "opt-4",
-          "text": "the root growing"
-        }
-      ],
-      "correct_option_id": "opt-2",
-      "hint": "Fruits come from flowers.",
-      "explanation": "The flower develops into a fruit.",
-      "material_id": null,
-      "provenance": "original_generic_author_draft"
-    },
-    {
-      "id": "sc-p3-plant-stages.q3",
-      "version": 1,
-      "courses": [
-        "p3_science"
-      ],
-      "topic_ref": "sc.p3.plant-life-cycle",
-      "target_id": "sc.p3.plant-stages",
-      "stage": "generic",
-      "family": "concept",
-      "format": "mcq_4plus",
-      "stem": "A papaya fruit is cut open and many black seeds are found. Why are seeds important to the plant?",
-      "options": [
-        {
-          "id": "opt-1",
-          "text": "They are not important."
-        },
-        {
-          "id": "opt-2",
-          "text": "They keep the fruit cold."
-        },
-        {
-          "id": "opt-3",
-          "text": "They make the fruit sweet."
-        },
-        {
-          "id": "opt-4",
-          "text": "They can grow into new plants."
-        }
-      ],
-      "correct_option_id": "opt-4",
-      "hint": "Think about how plants reproduce.",
-      "explanation": "Seeds grow into new plants, continuing the life cycle.",
-      "material_id": null,
-      "provenance": "original_generic_author_draft"
-    },
-    {
-      "id": "sc-p3-germination-learn.q1",
-      "version": 1,
-      "courses": [
-        "p3_science"
-      ],
-      "topic_ref": "sc.p3.plant-life-cycle",
-      "target_id": null,
-      "stage": null,
-      "family": "acquisition",
-      "format": "mcq_4plus",
-      "stem": "Which set of conditions is needed for seeds to germinate?",
-      "options": [
-        {
-          "id": "opt-1",
-          "text": "soil, light and water"
-        },
-        {
-          "id": "opt-2",
-          "text": "water, air and warmth"
-        },
-        {
-          "id": "opt-3",
-          "text": "light, sand and cold"
-        },
-        {
-          "id": "opt-4",
-          "text": "soil only"
-        }
-      ],
-      "correct_option_id": "opt-2",
-      "hint": "Seeds can germinate on damp cotton wool.",
-      "explanation": "Seeds need water, air and warmth to germinate.",
-      "material_id": "sc-p3-germination-learn",
-      "provenance": "original_generic_author_draft"
-    },
-    {
-      "id": "sc-p3-germination-learn.q2",
-      "version": 1,
-      "courses": [
-        "p3_science"
-      ],
-      "topic_ref": "sc.p3.plant-life-cycle",
-      "target_id": null,
-      "stage": null,
-      "family": "acquisition",
-      "format": "mcq_4plus",
-      "stem": "Green bean seeds are placed on dry cotton wool in a warm room. They do not germinate. What is missing?",
-      "options": [
-        {
-          "id": "opt-1",
-          "text": "air"
-        },
-        {
-          "id": "opt-2",
-          "text": "water"
-        },
-        {
-          "id": "opt-3",
-          "text": "light"
-        },
-        {
-          "id": "opt-4",
-          "text": "soil"
-        }
-      ],
-      "correct_option_id": "opt-2",
-      "hint": "Look at the word \"dry\".",
-      "explanation": "Without water, seeds cannot germinate.",
-      "material_id": "sc-p3-germination-learn",
-      "provenance": "original_generic_author_draft"
-    },
-    {
-      "id": "sc-p3-germination.q1",
-      "version": 1,
-      "courses": [
-        "p3_science"
-      ],
-      "topic_ref": "sc.p3.plant-life-cycle",
-      "target_id": "sc.p3.germination",
-      "stage": "exact",
-      "family": "process_skill",
-      "format": "mcq_4plus",
-      "stem": "Seeds on damp cotton wool in a dark cupboard germinate. What does this show?",
-      "options": [
-        {
-          "id": "opt-1",
-          "text": "Soil is needed for germination."
-        },
-        {
-          "id": "opt-2",
-          "text": "Light is needed for germination."
-        },
-        {
-          "id": "opt-3",
-          "text": "Light is not needed for germination."
-        },
-        {
-          "id": "opt-4",
-          "text": "Seeds need cold to germinate."
+          "text": "young plant"
         }
       ],
       "correct_option_id": "opt-3",
-      "hint": "Was there light in the cupboard?",
-      "explanation": "They germinated in the dark, so light is not needed.",
+      "hint": "What forms where a flower was?",
+      "explanation": "The tomato is a fruit. Fruits form where the flowers were.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.plant-stages"
+      ]
     },
     {
-      "id": "sc-p3-germination.q2",
-      "version": 1,
+      "id": "sc-p3-plant-stages.q3",
+      "version": 2,
       "courses": [
         "p3_science"
       ],
       "topic_ref": "sc.p3.plant-life-cycle",
-      "target_id": "sc.p3.germination",
-      "stage": "similar",
-      "family": "process_skill",
-      "format": "mcq_4plus",
-      "stem": "Why can a seed germinate even without soil?",
-      "options": [
-        {
-          "id": "opt-1",
-          "text": "It eats insects."
-        },
-        {
-          "id": "opt-2",
-          "text": "It makes food from soil."
-        },
-        {
-          "id": "opt-3",
-          "text": "It gets food from light."
-        },
-        {
-          "id": "opt-4",
-          "text": "It has stored food inside it."
-        }
-      ],
-      "correct_option_id": "opt-4",
-      "hint": "Where does a young seedling get food before its leaves open?",
-      "explanation": "The seed leaves store food for the young plant.",
-      "material_id": null,
-      "provenance": "original_generic_author_draft"
-    },
-    {
-      "id": "sc-p3-germination.q3",
-      "version": 1,
-      "courses": [
-        "p3_science"
-      ],
-      "topic_ref": "sc.p3.plant-life-cycle",
-      "target_id": "sc.p3.germination",
-      "stage": "generic",
-      "family": "process_skill",
-      "format": "mcq_4plus",
-      "stem": "Ali places seeds in two dishes with damp cotton wool. Dish A is in a fridge; Dish B is in a warm room. Only Dish B germinates. What does this show?",
-      "options": [
-        {
-          "id": "opt-1",
-          "text": "Seeds need warmth to germinate."
-        },
-        {
-          "id": "opt-2",
-          "text": "Seeds need light to germinate."
-        },
-        {
-          "id": "opt-3",
-          "text": "Seeds do not need water."
-        },
-        {
-          "id": "opt-4",
-          "text": "Seeds need soil to germinate."
-        }
-      ],
-      "correct_option_id": "opt-1",
-      "hint": "What is different between the two dishes?",
-      "explanation": "Only temperature differed, so warmth is needed.",
-      "material_id": null,
-      "provenance": "original_generic_author_draft"
-    },
-    {
-      "id": "sc-p3-seed-parts-learn.q1",
-      "version": 1,
-      "courses": [
-        "p3_science"
-      ],
-      "topic_ref": "sc.p3.plant-life-cycle",
-      "target_id": null,
-      "stage": null,
-      "family": "acquisition",
-      "format": "mcq_4plus",
-      "stem": "What comes out of a germinating seed first?",
-      "options": [
-        {
-          "id": "opt-1",
-          "text": "the fruit"
-        },
-        {
-          "id": "opt-2",
-          "text": "the young root"
-        },
-        {
-          "id": "opt-3",
-          "text": "the young shoot"
-        },
-        {
-          "id": "opt-4",
-          "text": "the flower"
-        }
-      ],
-      "correct_option_id": "opt-2",
-      "hint": "It anchors the seedling and takes in water.",
-      "explanation": "The young root appears first.",
-      "material_id": "sc-p3-seed-parts-learn",
-      "provenance": "original_generic_author_draft"
-    },
-    {
-      "id": "sc-p3-seed-parts-learn.q2",
-      "version": 1,
-      "courses": [
-        "p3_science"
-      ],
-      "topic_ref": "sc.p3.plant-life-cycle",
-      "target_id": null,
-      "stage": null,
-      "family": "acquisition",
-      "format": "mcq_4plus",
-      "stem": "What is the job of the seed coat?",
-      "options": [
-        {
-          "id": "opt-1",
-          "text": "to make food from light"
-        },
-        {
-          "id": "opt-2",
-          "text": "to take in water from soil"
-        },
-        {
-          "id": "opt-3",
-          "text": "to attract insects"
-        },
-        {
-          "id": "opt-4",
-          "text": "to protect the seed"
-        }
-      ],
-      "correct_option_id": "opt-4",
-      "hint": "It is the outer covering.",
-      "explanation": "The seed coat protects the parts inside.",
-      "material_id": "sc-p3-seed-parts-learn",
-      "provenance": "original_generic_author_draft"
-    },
-    {
-      "id": "sc-p3-seed-parts.q1",
-      "version": 1,
-      "courses": [
-        "p3_science"
-      ],
-      "topic_ref": "sc.p3.plant-life-cycle",
-      "target_id": "sc.p3.seed-parts",
-      "stage": "exact",
-      "family": "concept",
-      "format": "mcq_4plus",
-      "stem": "What do the seed leaves of a green bean seedling provide?",
-      "options": [
-        {
-          "id": "opt-1",
-          "text": "stored food for the young plant"
-        },
-        {
-          "id": "opt-2",
-          "text": "colour for the flower"
-        },
-        {
-          "id": "opt-3",
-          "text": "protection from insects"
-        },
-        {
-          "id": "opt-4",
-          "text": "water from the air"
-        }
-      ],
-      "correct_option_id": "opt-1",
-      "hint": "Before its true leaves can make food, the seedling uses this.",
-      "explanation": "Seed leaves store food for the young plant.",
-      "material_id": null,
-      "provenance": "original_generic_author_draft"
-    },
-    {
-      "id": "sc-p3-seed-parts.q2",
-      "version": 1,
-      "courses": [
-        "p3_science"
-      ],
-      "topic_ref": "sc.p3.plant-life-cycle",
-      "target_id": "sc.p3.seed-parts",
-      "stage": "similar",
-      "family": "concept",
-      "format": "mcq_4plus",
-      "stem": "In which direction does the young root grow?",
-      "options": [
-        {
-          "id": "opt-1",
-          "text": "towards the light"
-        },
-        {
-          "id": "opt-2",
-          "text": "sideways only"
-        },
-        {
-          "id": "opt-3",
-          "text": "upwards"
-        },
-        {
-          "id": "opt-4",
-          "text": "downwards"
-        }
-      ],
-      "correct_option_id": "opt-4",
-      "hint": "Roots grow into the soil.",
-      "explanation": "The young root grows downwards.",
-      "material_id": null,
-      "provenance": "original_generic_author_draft"
-    },
-    {
-      "id": "sc-p3-seed-parts.q3",
-      "version": 1,
-      "courses": [
-        "p3_science"
-      ],
-      "topic_ref": "sc.p3.plant-life-cycle",
-      "target_id": "sc.p3.seed-parts",
+      "target_id": "sc.p3.plant-stages",
       "stage": "generic",
       "family": "concept",
       "format": "mcq_4plus",
-      "stem": "The seed leaves of a seedling shrink as it grows. Why?",
+      "stem": "Which order shows the life cycle of the plant correctly?",
       "options": [
         {
           "id": "opt-1",
-          "text": "They turn into roots."
+          "text": "P → Q → R"
         },
         {
           "id": "opt-2",
-          "text": "They are eaten by the soil."
+          "text": "Q → R → P"
         },
         {
           "id": "opt-3",
-          "text": "They are blown away."
+          "text": "R → P → Q"
         },
         {
           "id": "opt-4",
-          "text": "The stored food is used up by the growing plant."
+          "text": "R → Q → P"
         }
       ],
-      "correct_option_id": "opt-4",
-      "hint": "What is stored in seed leaves?",
-      "explanation": "The young plant uses up the food stored in them.",
+      "correct_option_id": "opt-3",
+      "hint": "Start with the stage that is put into the soil.",
+      "explanation": "R is a seed, P is a young plant and Q is an adult plant with fruits, so the order is R → P → Q.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "asset_ids": [
+        "sc-p3-stages-order"
+      ],
+      "leaf_refs": [
+        "sc.p3.leaf.plant-stages"
+      ]
     },
     {
       "id": "sc-p3-plant-cycles-compare-learn.q1",
@@ -4146,7 +4027,11 @@
       "hint": "Both are flowering plants.",
       "explanation": "Both are flowering plants, so both produce flowers and fruits.",
       "material_id": "sc-p3-plant-cycles-compare-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.plant-cycles-compare",
+      "leaf_refs": [
+        "sc.p3.leaf.plant-cycles-compare"
+      ]
     },
     {
       "id": "sc-p3-plant-cycles-compare-learn.q2",
@@ -4182,7 +4067,11 @@
       "hint": "Compare how long each takes.",
       "explanation": "Balsam completes its life cycle in months; mango takes years.",
       "material_id": "sc-p3-plant-cycles-compare-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.plant-cycles-compare",
+      "leaf_refs": [
+        "sc.p3.leaf.plant-cycles-compare"
+      ]
     },
     {
       "id": "sc-p3-plant-cycles-compare.q1",
@@ -4218,7 +4107,10 @@
       "hint": "Which one reproduces from spores?",
       "explanation": "Ferns reproduce from spores, not seeds.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.plant-cycles-compare"
+      ]
     },
     {
       "id": "sc-p3-plant-cycles-compare.q2",
@@ -4254,11 +4146,14 @@
       "hint": "Compare balsam and mango.",
       "explanation": "Same stages, different durations.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.plant-cycles-compare"
+      ]
     },
     {
       "id": "sc-p3-plant-cycles-compare.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_science"
       ],
@@ -4271,26 +4166,29 @@
       "options": [
         {
           "id": "opt-1",
-          "text": "seedling"
-        },
-        {
-          "id": "opt-2",
           "text": "flowers"
         },
         {
+          "id": "opt-2",
+          "text": "young plant"
+        },
+        {
           "id": "opt-3",
-          "text": "spores"
+          "text": "seed"
         },
         {
           "id": "opt-4",
-          "text": "seed"
+          "text": "spores"
         }
       ],
-      "correct_option_id": "opt-2",
-      "hint": "Fruits develop from something.",
-      "explanation": "Fruits develop from flowers.",
+      "correct_option_id": "opt-1",
+      "hint": "Fruits form where something else was before.",
+      "explanation": "Fruits form where the flowers were, so the flowers came just before the fruits.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.plant-cycles-compare"
+      ]
     },
     {
       "id": "sc-p3-four-stage-learn.q1",
@@ -4326,7 +4224,11 @@
       "hint": "The caterpillar comes before the chrysalis.",
       "explanation": "Egg, larva (caterpillar), pupa (chrysalis), adult.",
       "material_id": "sc-p3-four-stage-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.four-stage",
+      "leaf_refs": [
+        "sc.p3.leaf.four-stage"
+      ]
     },
     {
       "id": "sc-p3-four-stage-learn.q2",
@@ -4362,7 +4264,11 @@
       "hint": "Caterpillars are hungry eaters.",
       "explanation": "The larva (caterpillar) feeds on leaves.",
       "material_id": "sc-p3-four-stage-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.four-stage",
+      "leaf_refs": [
+        "sc.p3.leaf.four-stage"
+      ]
     },
     {
       "id": "sc-p3-four-stage.q1",
@@ -4398,7 +4304,10 @@
       "hint": "It is the hard case where the change happens.",
       "explanation": "A butterfly's pupa is called a chrysalis.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.four-stage"
+      ]
     },
     {
       "id": "sc-p3-four-stage.q2",
@@ -4434,7 +4343,10 @@
       "hint": "Look for a larva and a pupa stage.",
       "explanation": "Mosquitoes go through egg, larva, pupa and adult.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.four-stage"
+      ]
     },
     {
       "id": "sc-p3-four-stage.q3",
@@ -4470,7 +4382,10 @@
       "hint": "In a four-stage life cycle, the worm-like young is the...",
       "explanation": "The worm-like young of a beetle is the larva.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.four-stage"
+      ]
     },
     {
       "id": "sc-p3-three-stage-learn.q1",
@@ -4506,7 +4421,11 @@
       "hint": "It looks like a small adult without wings.",
       "explanation": "A young cockroach is a nymph.",
       "material_id": "sc-p3-three-stage-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.three-stage",
+      "leaf_refs": [
+        "sc.p3.leaf.three-stage"
+      ]
     },
     {
       "id": "sc-p3-three-stage-learn.q2",
@@ -4542,7 +4461,11 @@
       "hint": "It has no pupa stage.",
       "explanation": "A grasshopper goes through egg, nymph and adult.",
       "material_id": "sc-p3-three-stage-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.three-stage",
+      "leaf_refs": [
+        "sc.p3.leaf.three-stage"
+      ]
     },
     {
       "id": "sc-p3-three-stage.q1",
@@ -4578,7 +4501,10 @@
       "hint": "The nymph looks like a small adult.",
       "explanation": "A nymph is smaller and has no wings.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.three-stage"
+      ]
     },
     {
       "id": "sc-p3-three-stage.q2",
@@ -4614,7 +4540,10 @@
       "hint": "Which one has no larva or pupa?",
       "explanation": "A chicken goes egg → chick → adult.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.three-stage"
+      ]
     },
     {
       "id": "sc-p3-three-stage.q3",
@@ -4650,7 +4579,10 @@
       "hint": "There is no pupa stage when the young already looks like the adult.",
       "explanation": "Egg, nymph, adult: three stages.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.three-stage"
+      ]
     },
     {
       "id": "sc-p3-frog-cycle-learn.q1",
@@ -4686,7 +4618,11 @@
       "hint": "It lives in water and has a tail.",
       "explanation": "A tadpole hatches from a frog's egg.",
       "material_id": "sc-p3-frog-cycle-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.frog-cycle",
+      "leaf_refs": [
+        "sc.p3.leaf.frog-cycle"
+      ]
     },
     {
       "id": "sc-p3-frog-cycle-learn.q2",
@@ -4722,7 +4658,11 @@
       "hint": "Adult frogs do not have tails.",
       "explanation": "The tail shortens and disappears.",
       "material_id": "sc-p3-frog-cycle-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.frog-cycle",
+      "leaf_refs": [
+        "sc.p3.leaf.frog-cycle"
+      ]
     },
     {
       "id": "sc-p3-frog-cycle.q1",
@@ -4758,7 +4698,10 @@
       "hint": "The tadpole comes before the frog with legs.",
       "explanation": "Egg, tadpole, young frog, adult frog.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.frog-cycle"
+      ]
     },
     {
       "id": "sc-p3-frog-cycle.q2",
@@ -4794,7 +4737,10 @@
       "hint": "They have tails for swimming.",
       "explanation": "Tadpoles live in water.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.frog-cycle"
+      ]
     },
     {
       "id": "sc-p3-frog-cycle.q3",
@@ -4830,7 +4776,10 @@
       "hint": "What does a frog look like before it has legs?",
       "explanation": "Before growing legs, it was a tadpole.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.frog-cycle"
+      ]
     },
     {
       "id": "sc-p3-mosquito-control-learn.q1",
@@ -4866,7 +4815,11 @@
       "hint": "Their larvae live in water.",
       "explanation": "Mosquitoes lay eggs in stagnant water.",
       "material_id": "sc-p3-mosquito-control-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.mosquito-control",
+      "leaf_refs": [
+        "sc.p3.leaf.mosquito-control"
+      ]
     },
     {
       "id": "sc-p3-mosquito-control-learn.q2",
@@ -4902,7 +4855,11 @@
       "hint": "Think about where mosquitoes lay eggs.",
       "explanation": "Removing stagnant water stops mosquitoes breeding.",
       "material_id": "sc-p3-mosquito-control-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.mosquito-control",
+      "leaf_refs": [
+        "sc.p3.leaf.mosquito-control"
+      ]
     },
     {
       "id": "sc-p3-mosquito-control.q1",
@@ -4938,7 +4895,10 @@
       "hint": "The adult flies; the young stages need water.",
       "explanation": "Mosquito larvae and pupae live in water.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.mosquito-control"
+      ]
     },
     {
       "id": "sc-p3-mosquito-control.q2",
@@ -4974,7 +4934,10 @@
       "hint": "Stop mosquitoes from breeding.",
       "explanation": "Removing stagnant water prevents mosquito breeding.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.mosquito-control"
+      ]
     },
     {
       "id": "sc-p3-mosquito-control.q3",
@@ -5010,7 +4973,10 @@
       "hint": "Which insect breeds in still water?",
       "explanation": "Mosquito larvae wriggle in stagnant water.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.mosquito-control"
+      ]
     },
     {
       "id": "sc-p3-young-like-adult-learn.q1",
@@ -5046,7 +5012,11 @@
       "hint": "Which young has the same body shape as the adult?",
       "explanation": "A cockroach nymph looks like a small adult without wings.",
       "material_id": "sc-p3-young-like-adult-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.young-like-adult",
+      "leaf_refs": [
+        "sc.p3.leaf.young-like-adult"
+      ]
     },
     {
       "id": "sc-p3-young-like-adult-learn.q2",
@@ -5082,7 +5052,11 @@
       "hint": "Think of the animal that later forms a chrysalis.",
       "explanation": "A caterpillar looks very different from a butterfly.",
       "material_id": "sc-p3-young-like-adult-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.young-like-adult",
+      "leaf_refs": [
+        "sc.p3.leaf.young-like-adult"
+      ]
     },
     {
       "id": "sc-p3-young-like-adult.q1",
@@ -5118,7 +5092,10 @@
       "hint": "Think of the butterfly.",
       "explanation": "Young with a pupa stage look very different from the adult.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.young-like-adult"
+      ]
     },
     {
       "id": "sc-p3-young-like-adult.q2",
@@ -5154,7 +5131,10 @@
       "hint": "Caterpillars and tadpoles.",
       "explanation": "Caterpillars and tadpoles look very different from their adults.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.young-like-adult"
+      ]
     },
     {
       "id": "sc-p3-young-like-adult.q3",
@@ -5190,7 +5170,10 @@
       "hint": "Which young lives in water?",
       "explanation": "A tadpole lives in water and grows into a hopping frog.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.young-like-adult"
+      ]
     },
     {
       "id": "sc-p3-magnetic-materials-learn.q1",
@@ -5226,7 +5209,11 @@
       "hint": "Which metal is magnetic?",
       "explanation": "Iron is a magnetic material.",
       "material_id": "sc-p3-magnetic-materials-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.magnetic-materials",
+      "leaf_refs": [
+        "sc.p3.leaf.magnetic-materials"
+      ]
     },
     {
       "id": "sc-p3-magnetic-materials-learn.q2",
@@ -5262,7 +5249,11 @@
       "hint": "Find a metal that is not magnetic.",
       "explanation": "Aluminium is a metal but is not magnetic.",
       "material_id": "sc-p3-magnetic-materials-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.magnetic-materials",
+      "leaf_refs": [
+        "sc.p3.leaf.magnetic-materials"
+      ]
     },
     {
       "id": "sc-p3-magnetic-materials.q1",
@@ -5298,7 +5289,10 @@
       "hint": "Some metals are magnetic, but not all metals are.",
       "explanation": "Steel is magnetic.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.magnetic-materials"
+      ]
     },
     {
       "id": "sc-p3-magnetic-materials.q2",
@@ -5334,7 +5328,10 @@
       "hint": "Which material is non-magnetic?",
       "explanation": "Copper is non-magnetic, so it stays behind.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.magnetic-materials"
+      ]
     },
     {
       "id": "sc-p3-magnetic-materials.q3",
@@ -5370,7 +5367,10 @@
       "hint": "What are pins usually made of?",
       "explanation": "Steel pins are attracted to the magnet.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.magnetic-materials"
+      ]
     },
     {
       "id": "sc-p3-poles-learn.q1",
@@ -5406,7 +5406,11 @@
       "hint": "Where do most paper clips stick?",
       "explanation": "The force is strongest at the poles.",
       "material_id": "sc-p3-poles-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.poles",
+      "leaf_refs": [
+        "sc.p3.leaf.poles"
+      ]
     },
     {
       "id": "sc-p3-poles-learn.q2",
@@ -5442,7 +5446,11 @@
       "hint": "Think about the poles.",
       "explanation": "Most filings collect at the poles, at both ends.",
       "material_id": "sc-p3-poles-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.poles",
+      "leaf_refs": [
+        "sc.p3.leaf.poles"
+      ]
     },
     {
       "id": "sc-p3-poles.q1",
@@ -5478,7 +5486,10 @@
       "hint": "One is north, one is south.",
       "explanation": "A magnet has a north pole and a south pole.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.poles"
+      ]
     },
     {
       "id": "sc-p3-poles.q2",
@@ -5514,7 +5525,10 @@
       "hint": "The force is strongest at the poles.",
       "explanation": "Most pins stick where the poles are, at the flat faces.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.poles"
+      ]
     },
     {
       "id": "sc-p3-poles.q3",
@@ -5550,7 +5564,10 @@
       "hint": "Every magnet has two poles.",
       "explanation": "Each piece becomes a magnet with its own N and S poles.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.poles"
+      ]
     },
     {
       "id": "sc-p3-attract-repel-learn.q1",
@@ -5586,7 +5603,11 @@
       "hint": "Unlike poles...",
       "explanation": "Unlike poles attract.",
       "material_id": "sc-p3-attract-repel-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.attract-repel",
+      "leaf_refs": [
+        "sc.p3.leaf.attract-repel"
+      ]
     },
     {
       "id": "sc-p3-attract-repel-learn.q2",
@@ -5622,7 +5643,11 @@
       "hint": "Like poles repel.",
       "explanation": "Like poles, such as S and S, repel.",
       "material_id": "sc-p3-attract-repel-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.attract-repel",
+      "leaf_refs": [
+        "sc.p3.leaf.attract-repel"
+      ]
     },
     {
       "id": "sc-p3-attract-repel.q1",
@@ -5658,7 +5683,10 @@
       "hint": "Like poles...",
       "explanation": "Like poles repel: N and N.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.attract-repel"
+      ]
     },
     {
       "id": "sc-p3-attract-repel.q2",
@@ -5694,7 +5722,10 @@
       "hint": "Something is pushing the top magnet up.",
       "explanation": "Facing like poles repel, holding the top magnet up.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.attract-repel"
+      ]
     },
     {
       "id": "sc-p3-attract-repel.q3",
@@ -5730,7 +5761,10 @@
       "hint": "Unlike poles attract.",
       "explanation": "A north pole attracts a south pole, so X is S.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.attract-repel"
+      ]
     },
     {
       "id": "sc-p3-test-magnet-learn.q1",
@@ -5766,7 +5800,11 @@
       "hint": "Can an iron bar repel a magnet?",
       "explanation": "Only a magnet can repel a magnet.",
       "material_id": "sc-p3-test-magnet-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.test-magnet",
+      "leaf_refs": [
+        "sc.p3.leaf.test-magnet"
+      ]
     },
     {
       "id": "sc-p3-test-magnet-learn.q2",
@@ -5802,7 +5840,11 @@
       "hint": "A magnet would repel one of the poles.",
       "explanation": "Being attracted to both poles means Y is magnetic, not a magnet.",
       "material_id": "sc-p3-test-magnet-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.test-magnet",
+      "leaf_refs": [
+        "sc.p3.leaf.test-magnet"
+      ]
     },
     {
       "id": "sc-p3-test-magnet.q1",
@@ -5838,7 +5880,10 @@
       "hint": "Think of an iron nail.",
       "explanation": "Iron is attracted to magnets but is not a magnet.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.test-magnet"
+      ]
     },
     {
       "id": "sc-p3-test-magnet.q2",
@@ -5874,7 +5919,10 @@
       "hint": "Look for repulsion.",
       "explanation": "Only rod A shows repulsion.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.test-magnet"
+      ]
     },
     {
       "id": "sc-p3-test-magnet.q3",
@@ -5910,7 +5958,10 @@
       "hint": "A magnet shows repulsion with like poles.",
       "explanation": "Checking for repulsion confirms whether it is a magnet.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.test-magnet"
+      ]
     },
     {
       "id": "sc-p3-force-through-learn.q1",
@@ -5946,7 +5997,11 @@
       "hint": "The table is between them.",
       "explanation": "The magnetic force acted through the non-magnetic wood.",
       "material_id": "sc-p3-force-through-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.force-through",
+      "leaf_refs": [
+        "sc.p3.leaf.force-through"
+      ]
     },
     {
       "id": "sc-p3-force-through-learn.q2",
@@ -5982,7 +6037,11 @@
       "hint": "What is between the magnet and the clip?",
       "explanation": "The force acted through glass and water.",
       "material_id": "sc-p3-force-through-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.force-through",
+      "leaf_refs": [
+        "sc.p3.leaf.force-through"
+      ]
     },
     {
       "id": "sc-p3-force-through.q1",
@@ -6018,7 +6077,10 @@
       "hint": "Think of fridge magnets holding notes.",
       "explanation": "Fridge magnets hold paper because the force acts through paper.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.force-through"
+      ]
     },
     {
       "id": "sc-p3-force-through.q2",
@@ -6054,7 +6116,10 @@
       "hint": "Is paper magnetic?",
       "explanation": "The force passes through the paper to the steel door.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.force-through"
+      ]
     },
     {
       "id": "sc-p3-force-through.q3",
@@ -6090,7 +6155,10 @@
       "hint": "More sheets means the magnet is further away.",
       "explanation": "The force weakens as the distance increases.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.force-through"
+      ]
     },
     {
       "id": "sc-p3-north-south-learn.q1",
@@ -6126,7 +6194,11 @@
       "hint": "This is how a compass works.",
       "explanation": "A freely suspended magnet points north-south.",
       "material_id": "sc-p3-north-south-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.north-south",
+      "leaf_refs": [
+        "sc.p3.leaf.north-south"
+      ]
     },
     {
       "id": "sc-p3-north-south-learn.q2",
@@ -6162,7 +6234,11 @@
       "hint": "What kind of object behaves like a hanging bar magnet?",
       "explanation": "A compass needle is a magnet, so it points north-south.",
       "material_id": "sc-p3-north-south-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.north-south",
+      "leaf_refs": [
+        "sc.p3.leaf.north-south"
+      ]
     },
     {
       "id": "sc-p3-north-south.q1",
@@ -6198,7 +6274,10 @@
       "hint": "The poles are named after this.",
       "explanation": "The north pole points north.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.north-south"
+      ]
     },
     {
       "id": "sc-p3-north-south.q2",
@@ -6234,7 +6313,10 @@
       "hint": "A magnet would always stop north-south.",
       "explanation": "Not settling north-south shows it is not a magnet.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.north-south"
+      ]
     },
     {
       "id": "sc-p3-north-south.q3",
@@ -6270,7 +6352,10 @@
       "hint": "The needle is a magnet.",
       "explanation": "The compass needle points north-south, showing direction.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.north-south"
+      ]
     },
     {
       "id": "sc-p3-stroke-method-learn.q1",
@@ -6306,7 +6391,11 @@
       "hint": "Only magnetic materials can become magnets.",
       "explanation": "Steel is magnetic, so it can be magnetised.",
       "material_id": "sc-p3-stroke-method-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.stroke-method",
+      "leaf_refs": [
+        "sc.p3.leaf.stroke-method"
+      ]
     },
     {
       "id": "sc-p3-stroke-method-learn.q2",
@@ -6342,7 +6431,11 @@
       "hint": "The strokes must all go the same way.",
       "explanation": "Stroke with one pole in one direction many times.",
       "material_id": "sc-p3-stroke-method-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.stroke-method",
+      "leaf_refs": [
+        "sc.p3.leaf.stroke-method"
+      ]
     },
     {
       "id": "sc-p3-stroke-method.q1",
@@ -6378,7 +6471,10 @@
       "hint": "Which materials can become magnets?",
       "explanation": "Only magnetic materials can be magnetised.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.stroke-method"
+      ]
     },
     {
       "id": "sc-p3-stroke-method.q2",
@@ -6414,7 +6510,10 @@
       "hint": "More strokes...",
       "explanation": "More strokes usually make a stronger magnet.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.stroke-method"
+      ]
     },
     {
       "id": "sc-p3-stroke-method.q3",
@@ -6450,7 +6549,10 @@
       "hint": "The direction of stroking matters.",
       "explanation": "Strokes must be in one direction only.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.stroke-method"
+      ]
     },
     {
       "id": "sc-p3-electrical-method-learn.q1",
@@ -6486,7 +6588,11 @@
       "hint": "Electricity must flow around a magnetic material.",
       "explanation": "A coil of wire around an iron nail connected to a battery makes an electromagnet.",
       "material_id": "sc-p3-electrical-method-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.electrical-method",
+      "leaf_refs": [
+        "sc.p3.leaf.electrical-method"
+      ]
     },
     {
       "id": "sc-p3-electrical-method-learn.q2",
@@ -6522,7 +6628,11 @@
       "hint": "It works only while current flows.",
       "explanation": "An electromagnet works only while current flows.",
       "material_id": "sc-p3-electrical-method-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.electrical-method",
+      "leaf_refs": [
+        "sc.p3.leaf.electrical-method"
+      ]
     },
     {
       "id": "sc-p3-electrical-method.q1",
@@ -6558,7 +6668,10 @@
       "hint": "Think about the coil.",
       "explanation": "More turns of wire make it stronger.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.electrical-method"
+      ]
     },
     {
       "id": "sc-p3-electrical-method.q2",
@@ -6594,7 +6707,10 @@
       "hint": "Which material can become a magnet?",
       "explanation": "Iron can be magnetised; wood cannot.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.electrical-method"
+      ]
     },
     {
       "id": "sc-p3-electrical-method.q3",
@@ -6630,7 +6746,10 @@
       "hint": "Think about letting go of the load.",
       "explanation": "Switching off the current releases the load.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.electrical-method"
+      ]
     },
     {
       "id": "sc-p3-temporary-permanent-learn.q1",
@@ -6666,7 +6785,11 @@
       "hint": "Which one stops working when switched off?",
       "explanation": "An electromagnet is a temporary magnet.",
       "material_id": "sc-p3-temporary-permanent-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.temporary-permanent",
+      "leaf_refs": [
+        "sc.p3.leaf.temporary-permanent"
+      ]
     },
     {
       "id": "sc-p3-temporary-permanent-learn.q2",
@@ -6702,7 +6825,11 @@
       "hint": "Think about what changes when the power is switched off.",
       "explanation": "The electromagnet loses its magnetism when switched off, so it is a temporary magnet.",
       "material_id": "sc-p3-temporary-permanent-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.temporary-permanent",
+      "leaf_refs": [
+        "sc.p3.leaf.temporary-permanent"
+      ]
     },
     {
       "id": "sc-p3-temporary-permanent.q1",
@@ -6738,7 +6865,10 @@
       "hint": "Rough handling affects magnets.",
       "explanation": "Dropping a magnet can weaken it.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.temporary-permanent"
+      ]
     },
     {
       "id": "sc-p3-temporary-permanent.q2",
@@ -6774,7 +6904,10 @@
       "hint": "Which keeps its magnetism for a long time?",
       "explanation": "Fridge magnets are permanent magnets.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.temporary-permanent"
+      ]
     },
     {
       "id": "sc-p3-temporary-permanent.q3",
@@ -6810,7 +6943,10 @@
       "hint": "Think about what weakens magnets.",
       "explanation": "Heating can weaken a magnet.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.temporary-permanent"
+      ]
     },
     {
       "id": "sc-p3-uses-learn.q1",
@@ -6846,7 +6982,11 @@
       "hint": "The seal sticks to the steel body.",
       "explanation": "Magnetic strips in the seal hold the door closed.",
       "material_id": "sc-p3-uses-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.uses",
+      "leaf_refs": [
+        "sc.p3.leaf.uses"
+      ]
     },
     {
       "id": "sc-p3-uses-learn.q2",
@@ -6882,7 +7022,11 @@
       "hint": "Which metal is magnetic?",
       "explanation": "Steel cans are attracted to a magnet; aluminium cans are not.",
       "material_id": "sc-p3-uses-learn",
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.uses",
+      "leaf_refs": [
+        "sc.p3.leaf.uses"
+      ]
     },
     {
       "id": "sc-p3-uses.q1",
@@ -6918,7 +7062,10 @@
       "hint": "It shows direction.",
       "explanation": "A compass needle is a magnet.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.uses"
+      ]
     },
     {
       "id": "sc-p3-uses.q2",
@@ -6954,7 +7101,10 @@
       "hint": "The plate is steel.",
       "explanation": "The magnet attracts the steel plate.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.uses"
+      ]
     },
     {
       "id": "sc-p3-uses.q3",
@@ -6990,7 +7140,622 @@
       "hint": "Like poles...",
       "explanation": "Facing like poles repel, so the carriages push apart.",
       "material_id": null,
-      "provenance": "original_generic_author_draft"
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.uses"
+      ]
+    },
+    {
+      "id": "sc-p3-strength-learn.q1",
+      "version": 1,
+      "courses": [
+        "p3_science"
+      ],
+      "topic_ref": "sc.p3.materials",
+      "target_id": null,
+      "stage": null,
+      "family": "acquisition",
+      "format": "mcq_4plus",
+      "stem": "Which material is used for bridges because it is strong?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "jelly"
+        },
+        {
+          "id": "opt-2",
+          "text": "cotton"
+        },
+        {
+          "id": "opt-3",
+          "text": "paper"
+        },
+        {
+          "id": "opt-4",
+          "text": "steel (a metal)"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "A bridge must hold heavy loads.",
+      "explanation": "Steel can hold very heavy loads without breaking, so it is strong enough for bridges.",
+      "material_id": "sc-p3-strength-learn",
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.strength",
+      "leaf_refs": [
+        "sc.p3.leaf.strength"
+      ]
+    },
+    {
+      "id": "sc-p3-strength-learn.q2",
+      "version": 1,
+      "courses": [
+        "p3_science"
+      ],
+      "topic_ref": "sc.p3.materials",
+      "target_id": null,
+      "stage": null,
+      "family": "acquisition",
+      "format": "mcq_4plus",
+      "stem": "Why must the strips in a strength test all be the same size?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "So that the strips break at the same time."
+        },
+        {
+          "id": "opt-2",
+          "text": "So that the strips look nice."
+        },
+        {
+          "id": "opt-3",
+          "text": "So that the strips float."
+        },
+        {
+          "id": "opt-4",
+          "text": "So that the test is fair and only the material is different."
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "In a fair test, only one thing is changed.",
+      "explanation": "If the strips were different sizes, a thicker strip might hold more weights because of its size, not its material.",
+      "material_id": "sc-p3-strength-learn",
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.strength",
+      "leaf_refs": [
+        "sc.p3.leaf.strength"
+      ]
+    },
+    {
+      "id": "sc-p3-strength.q1",
+      "version": 1,
+      "courses": [
+        "p3_science"
+      ],
+      "topic_ref": "sc.p3.materials",
+      "target_id": "sc.p3.strength",
+      "stage": "exact",
+      "family": "process_skill",
+      "format": "mcq_4plus",
+      "stem": "Which property tells us how much load a material can hold before it breaks?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "transparency"
+        },
+        {
+          "id": "opt-2",
+          "text": "strength"
+        },
+        {
+          "id": "opt-3",
+          "text": "flexibility"
+        },
+        {
+          "id": "opt-4",
+          "text": "ability to float"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "Think of weights being added until something snaps.",
+      "explanation": "Strength is how much load a material can hold before it breaks.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.strength"
+      ]
+    },
+    {
+      "id": "sc-p3-strength.q2",
+      "version": 1,
+      "courses": [
+        "p3_science"
+      ],
+      "topic_ref": "sc.p3.materials",
+      "target_id": "sc.p3.strength",
+      "stage": "similar",
+      "family": "process_skill",
+      "format": "mcq_4plus",
+      "stem": "Strips of different materials of the same size are loaded with weights until they break. What property is being tested?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "transparency"
+        },
+        {
+          "id": "opt-2",
+          "text": "flexibility"
+        },
+        {
+          "id": "opt-3",
+          "text": "strength"
+        },
+        {
+          "id": "opt-4",
+          "text": "ability to float"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "Loads are added until the material breaks.",
+      "explanation": "Adding loads until a strip breaks tests how strong each material is.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.strength"
+      ]
+    },
+    {
+      "id": "sc-p3-strength.q3",
+      "version": 1,
+      "courses": [
+        "p3_science"
+      ],
+      "topic_ref": "sc.p3.materials",
+      "target_id": "sc.p3.strength",
+      "stage": "generic",
+      "family": "process_skill",
+      "format": "mcq_4plus",
+      "stem": "A shelf must hold heavy books. Look at the results. Which material is best for the shelf?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "material K"
+        },
+        {
+          "id": "opt-2",
+          "text": "They are all the same."
+        },
+        {
+          "id": "opt-3",
+          "text": "material M"
+        },
+        {
+          "id": "opt-4",
+          "text": "material L"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "Which strip held the most weights before breaking?",
+      "explanation": "Material L held 9 weights before breaking, more than K (4) or M (6), so it is the strongest.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "asset_ids": [
+        "sc-p3-strength-shelf"
+      ],
+      "leaf_refs": [
+        "sc.p3.leaf.strength"
+      ]
+    },
+    {
+      "id": "sc-p3-plant-growth-observe-learn.q1",
+      "version": 1,
+      "courses": [
+        "p3_science"
+      ],
+      "topic_ref": "sc.p3.plant-life-cycle",
+      "target_id": null,
+      "stage": null,
+      "family": "acquisition",
+      "format": "mcq_4plus",
+      "stem": "Look at the graph in the card. How much did the plant grow from Week 1 to Week 5?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "18 cm"
+        },
+        {
+          "id": "opt-2",
+          "text": "20 cm"
+        },
+        {
+          "id": "opt-3",
+          "text": "2 cm"
+        },
+        {
+          "id": "opt-4",
+          "text": "16 cm"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "Read the height in Week 1 and in Week 5, then find the difference.",
+      "explanation": "The plant was 2 cm tall in Week 1 and 18 cm in Week 5. 18 − 2 = 16 cm.",
+      "material_id": "sc-p3-plant-growth-observe-learn",
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.plant-growth-observe",
+      "leaf_refs": [
+        "sc.p3.leaf.plant-growth-observe"
+      ]
+    },
+    {
+      "id": "sc-p3-plant-growth-observe-learn.q2",
+      "version": 1,
+      "courses": [
+        "p3_science"
+      ],
+      "topic_ref": "sc.p3.plant-life-cycle",
+      "target_id": null,
+      "stage": null,
+      "family": "acquisition",
+      "format": "mcq_4plus",
+      "stem": "Ali counted the leaves on his plant and recorded them. What does his record show?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "The number of leaves stayed the same."
+        },
+        {
+          "id": "opt-2",
+          "text": "The plant stopped growing."
+        },
+        {
+          "id": "opt-3",
+          "text": "The number of leaves increased as the plant grew."
+        },
+        {
+          "id": "opt-4",
+          "text": "The number of leaves decreased."
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "Compare the first and last counts.",
+      "explanation": "The plant had 2 leaves on Day 3, 5 on Day 10 and 9 on Day 17, so the number of leaves increased.",
+      "material_id": "sc-p3-plant-growth-observe-learn",
+      "provenance": "original_generic_author_draft",
+      "asset_ids": [
+        "sc-p3-growth-leaves"
+      ],
+      "repair_target_id": "sc.p3.plant-growth-observe",
+      "leaf_refs": [
+        "sc.p3.leaf.plant-growth-observe"
+      ]
+    },
+    {
+      "id": "sc-p3-plant-growth-observe.q1",
+      "version": 1,
+      "courses": [
+        "p3_science"
+      ],
+      "topic_ref": "sc.p3.plant-life-cycle",
+      "target_id": "sc.p3.plant-growth-observe",
+      "stage": "exact",
+      "family": "process_skill",
+      "format": "mcq_4plus",
+      "stem": "Between which two weeks did the plant grow the most?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "Week 1 and Week 2"
+        },
+        {
+          "id": "opt-2",
+          "text": "Week 3 and Week 4"
+        },
+        {
+          "id": "opt-3",
+          "text": "It grew the same amount each week."
+        },
+        {
+          "id": "opt-4",
+          "text": "Week 2 and Week 3"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "Work out how much it grew between each pair of weeks.",
+      "explanation": "Week 1→2: 4 cm. Week 2→3: 5 cm. Week 3→4: 4 cm. It grew the most between Week 2 and Week 3.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "asset_ids": [
+        "sc-p3-growth-weeks"
+      ],
+      "leaf_refs": [
+        "sc.p3.leaf.plant-growth-observe"
+      ]
+    },
+    {
+      "id": "sc-p3-plant-growth-observe.q2",
+      "version": 1,
+      "courses": [
+        "p3_science"
+      ],
+      "topic_ref": "sc.p3.plant-life-cycle",
+      "target_id": "sc.p3.plant-growth-observe",
+      "stage": "similar",
+      "family": "process_skill",
+      "format": "mcq_4plus",
+      "stem": "Which plant grew more in 14 days?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "Neither plant grew."
+        },
+        {
+          "id": "opt-2",
+          "text": "They grew the same amount."
+        },
+        {
+          "id": "opt-3",
+          "text": "Plant B"
+        },
+        {
+          "id": "opt-4",
+          "text": "Plant A"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "Find how much each plant grew, not which one is taller.",
+      "explanation": "Plant A grew 15 − 4 = 11 cm. Plant B grew 9 − 5 = 4 cm. Plant A grew more.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "asset_ids": [
+        "sc-p3-growth-two"
+      ],
+      "leaf_refs": [
+        "sc.p3.leaf.plant-growth-observe"
+      ]
+    },
+    {
+      "id": "sc-p3-plant-growth-observe.q3",
+      "version": 1,
+      "courses": [
+        "p3_science"
+      ],
+      "topic_ref": "sc.p3.plant-life-cycle",
+      "target_id": "sc.p3.plant-growth-observe",
+      "stage": "generic",
+      "family": "process_skill",
+      "format": "mcq_4plus",
+      "stem": "Siti wants to find out how her plant changes as it grows. What should she do?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "Look at it once and guess."
+        },
+        {
+          "id": "opt-2",
+          "text": "Pull it out every day to look at the roots."
+        },
+        {
+          "id": "opt-3",
+          "text": "Paint its leaves a different colour."
+        },
+        {
+          "id": "opt-4",
+          "text": "Measure its height and count its leaves every few days, and record the results."
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "Good observations are repeated and written down.",
+      "explanation": "Measuring and counting every few days, and recording the results, shows how the plant changes without harming it.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.plant-growth-observe"
+      ]
+    },
+    {
+      "id": "sc-p3-plant-cycles-timeline-learn.q1",
+      "version": 1,
+      "courses": [
+        "p3_science"
+      ],
+      "topic_ref": "sc.p3.plant-life-cycle",
+      "target_id": null,
+      "stage": null,
+      "family": "acquisition",
+      "format": "mcq_4plus",
+      "stem": "Look at the record in the card. Which plant had its first flower earlier?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "Plant B"
+        },
+        {
+          "id": "opt-2",
+          "text": "Both at the same time"
+        },
+        {
+          "id": "opt-3",
+          "text": "Plant A"
+        },
+        {
+          "id": "opt-4",
+          "text": "Neither plant flowered"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "Compare the weeks in the \"First flower\" column.",
+      "explanation": "Plant A flowered in Week 6 and Plant B in Week 10, so Plant A flowered earlier.",
+      "material_id": "sc-p3-plant-cycles-timeline-learn",
+      "provenance": "original_generic_author_draft",
+      "repair_target_id": "sc.p3.plant-cycles-timeline",
+      "leaf_refs": [
+        "sc.p3.leaf.plant-cycles-timeline"
+      ]
+    },
+    {
+      "id": "sc-p3-plant-cycles-timeline-learn.q2",
+      "version": 1,
+      "courses": [
+        "p3_science"
+      ],
+      "topic_ref": "sc.p3.plant-life-cycle",
+      "target_id": null,
+      "stage": null,
+      "family": "acquisition",
+      "format": "mcq_4plus",
+      "stem": "Look at the record of a chilli plant. Which stage appeared last?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "none of the stages"
+        },
+        {
+          "id": "opt-2",
+          "text": "the first fruit"
+        },
+        {
+          "id": "opt-3",
+          "text": "the first flower"
+        },
+        {
+          "id": "opt-4",
+          "text": "the young plant"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "Find the latest week in the record.",
+      "explanation": "The first fruit appeared in Week 11, after the young plant (Week 2) and the first flower (Week 9).",
+      "material_id": "sc-p3-plant-cycles-timeline-learn",
+      "provenance": "original_generic_author_draft",
+      "asset_ids": [
+        "sc-p3-timeline-chilli"
+      ],
+      "repair_target_id": "sc.p3.plant-cycles-timeline",
+      "leaf_refs": [
+        "sc.p3.leaf.plant-cycles-timeline"
+      ]
+    },
+    {
+      "id": "sc-p3-plant-cycles-timeline.q1",
+      "version": 1,
+      "courses": [
+        "p3_science"
+      ],
+      "topic_ref": "sc.p3.plant-life-cycle",
+      "target_id": "sc.p3.plant-cycles-timeline",
+      "stage": "exact",
+      "family": "process_skill",
+      "format": "mcq_4plus",
+      "stem": "Which plant produced fruits first?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "Plant P"
+        },
+        {
+          "id": "opt-2",
+          "text": "Both at the same time"
+        },
+        {
+          "id": "opt-3",
+          "text": "Neither plant"
+        },
+        {
+          "id": "opt-4",
+          "text": "Plant Q"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "Compare the weeks for the first fruit.",
+      "explanation": "Plant P produced its first fruit in Week 7 and Plant Q in Week 12, so Plant P was first.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "asset_ids": [
+        "sc-p3-timeline-pq"
+      ],
+      "leaf_refs": [
+        "sc.p3.leaf.plant-cycles-timeline"
+      ]
+    },
+    {
+      "id": "sc-p3-plant-cycles-timeline.q2",
+      "version": 1,
+      "courses": [
+        "p3_science"
+      ],
+      "topic_ref": "sc.p3.plant-life-cycle",
+      "target_id": "sc.p3.plant-cycles-timeline",
+      "stage": "similar",
+      "family": "process_skill",
+      "format": "mcq_4plus",
+      "stem": "How many weeks after the first flower did the first fruit form?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "13 weeks"
+        },
+        {
+          "id": "opt-2",
+          "text": "3 weeks"
+        },
+        {
+          "id": "opt-3",
+          "text": "8 weeks"
+        },
+        {
+          "id": "opt-4",
+          "text": "5 weeks"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "Find the difference between the two weeks.",
+      "explanation": "The first flower opened in Week 5 and the first fruit formed in Week 8. 8 − 5 = 3 weeks.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "asset_ids": [
+        "sc-p3-timeline-gap"
+      ],
+      "leaf_refs": [
+        "sc.p3.leaf.plant-cycles-timeline"
+      ]
+    },
+    {
+      "id": "sc-p3-plant-cycles-timeline.q3",
+      "version": 1,
+      "courses": [
+        "p3_science"
+      ],
+      "topic_ref": "sc.p3.plant-life-cycle",
+      "target_id": "sc.p3.plant-cycles-timeline",
+      "stage": "generic",
+      "family": "process_skill",
+      "format": "mcq_4plus",
+      "stem": "Two different kinds of plants are planted on the same day. Ali says they will flower in the same week. What do life-cycle records usually show?",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "All plants flower in the same week."
+        },
+        {
+          "id": "opt-2",
+          "text": "Different kinds of plants can take different lengths of time."
+        },
+        {
+          "id": "opt-3",
+          "text": "Only the taller plant can flower."
+        },
+        {
+          "id": "opt-4",
+          "text": "Plants planted on the same day never flower."
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "Look back at the records of Plant A and Plant B.",
+      "explanation": "Records of different plants show the same stages happening at different times, so they may not flower in the same week.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "sc.p3.leaf.plant-cycles-timeline"
+      ]
     }
   ],
   "review_log": {
@@ -7000,7 +7765,8 @@
       "Science facts checked against the 2023 syllabus topic scope as reported by school documents",
       "Distractors target documented misconceptions (attraction vs repulsion, all metals magnetic, light needed for germination)",
       "All content original; no past-paper question copied",
-      "2026-10-16 correction pass: revised disputed and related items; item versions incremented; revised IDs remain listed for independent re-review, not approved."
+      "2026-10-16 correction pass: revised disputed and related items; item versions incremented; revised IDs remain listed for independent re-review, not approved.",
+      "2026-10-16 revision (PR #14 audit SC1–SC4): replaced germination and seed-part knowledge points (P5) with observing plant growth and recording plant life cycles; replaced the mixed strength/hardness point with strength only; clarified seedling as an early young plant; added an observation diagram or table to every teaching card; rewrote classification items to use observable features; added knowledge points, acquisition repair routes, prerequisites and a leaf map. Revised items have version + 1 and remain pending independent re-review."
     ],
     "independent_review": "changes_requested",
     "owner_signoff": "pending",
@@ -7014,5 +7780,1019 @@
       "sc-p3-magnetic-materials.q1"
     ],
     "rights_status": "original_draft_pending_owner_rights_review"
-  }
+  },
+  "assets": [
+    {
+      "id": "sc-p3-card-strength",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-strength.svg",
+      "alt": "A strip on two supports with a weight hanging from its middle, and a list of results for three strips.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-strength-shelf",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-strength-shelf.svg",
+      "alt": "A table of strength test results for materials K, L and M.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-growth",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-growth.svg",
+      "alt": "A bar graph of the height of a plant over five weeks.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-growth-leaves",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-growth-leaves.svg",
+      "alt": "A table of the number of leaves on a plant on three days.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-growth-weeks",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-growth-weeks.svg",
+      "alt": "A bar graph of the height of a plant over four weeks.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-growth-two",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-growth-two.svg",
+      "alt": "A table of the heights of two plants on Day 1 and Day 14.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-timeline",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-timeline.svg",
+      "alt": "A table of when the young plant, first flower and first fruit appeared for plants A and B.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-timeline-chilli",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-timeline-chilli.svg",
+      "alt": "A table of the weeks in which three stages appeared for a chilli plant.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-timeline-pq",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-timeline-pq.svg",
+      "alt": "A table of the first flower and first fruit of plants P and Q.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-timeline-gap",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-timeline-gap.svg",
+      "alt": "A table of the weeks of the first flower and first fruit.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-plant-stages",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-plant-stages.svg",
+      "alt": "Pictures of a seed, a young plant, an adult plant, a plant with flowers and a plant with fruits.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-stages-young",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-stages-young.svg",
+      "alt": "Four pictures of a plant at different stages, labelled A to D.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-stages-order",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-stages-order.svg",
+      "alt": "Three pictures of a plant at different stages, labelled P, Q and R.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-mammal-table",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-mammal-table.svg",
+      "alt": "A table of the body covering, young and feeding of animals P, Q, R and S.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-bird-table",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-bird-table.svg",
+      "alt": "A table of the body covering and other features of animals J, K, L and M.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-insect-table",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-insect-table.svg",
+      "alt": "A table of the number of body parts and legs of animals W, X, Y and Z.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-reptile-table",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-reptile-table.svg",
+      "alt": "A table of the skin and young of animals E, F, G and H.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-flowering-table",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-flowering-table.svg",
+      "alt": "A table of observations of flowers, fruits and spore cases on plants A to D.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-fungus-table",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-fungus-table.svg",
+      "alt": "A table of observations of living things T, U, V and W.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-needs-of-living",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-needs-of-living.svg",
+      "alt": "A table showing whether four things need water, air and food.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-growth-reproduction",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-growth-reproduction.svg",
+      "alt": "A table showing whether four things grow and make young of their own kind.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-respond-changes",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-respond-changes.svg",
+      "alt": "A table of three changes and how a living thing responds to each.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-classify-living",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-classify-living.svg",
+      "alt": "A checklist of the characteristics of living things for four things.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-flowering-nonflowering",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-flowering-nonflowering.svg",
+      "alt": "A table of flowers, fruits and spores for four plants.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-mammals",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-mammals.svg",
+      "alt": "A table of features of three mammals.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-birds-fish",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-birds-fish.svg",
+      "alt": "A table comparing features of birds and fish.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-insects",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-insects.svg",
+      "alt": "Body plans of an insect and a spider, seen from above.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-amphibians-reptiles",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-amphibians-reptiles.svg",
+      "alt": "A table comparing features of amphibians and reptiles.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-fungi",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-fungi.svg",
+      "alt": "A table comparing how a fern, a mushroom and bread mould get food.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-bacteria",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-bacteria.svg",
+      "alt": "A table of useful and harmful bacteria and how they are seen.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-material-types",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-material-types.svg",
+      "alt": "A table of four objects and their materials.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-flexibility",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-flexibility.svg",
+      "alt": "Three strips fixed at one end, each with the same weight, bending by different amounts.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-waterproof-absorbent",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-waterproof-absorbent.svg",
+      "alt": "A drop of water on a plastic sheet and on a paper towel.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-transparency",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-transparency.svg",
+      "alt": "A torch shining at clear glass, tracing paper and wood, with the light reaching a wall behind.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-float-sink",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-float-sink.svg",
+      "alt": "A tank of water with a cork, a key, a wooden block and a stone in it.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-plant-cycles-compare",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-plant-cycles-compare.svg",
+      "alt": "A table comparing how three plants grow and how long they take to produce fruits.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-four-stage",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-four-stage.svg",
+      "alt": "A cycle diagram of four stages in the life cycle of a butterfly.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-three-stage",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-three-stage.svg",
+      "alt": "A cycle diagram of three stages in the life cycle of a cockroach.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-frog-cycle",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-frog-cycle.svg",
+      "alt": "A cycle diagram of four stages in the life cycle of a frog, with the stages that live in water shaded.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-mosquito-control",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-mosquito-control.svg",
+      "alt": "A cycle diagram of the life cycle of a mosquito, with the stages that live in water shaded.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-young-like-adult",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-young-like-adult.svg",
+      "alt": "A table showing whether the young of four animals look like the adult.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-magnetic-materials",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-magnetic-materials.svg",
+      "alt": "A table of five objects, their materials and whether a magnet attracts them.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-poles",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-poles.svg",
+      "alt": "A bar magnet with paper clips hanging from it.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-attract-repel",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-attract-repel.svg",
+      "alt": "Two pairs of bar magnets, with arrows showing whether they pull together or push apart.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-test-magnet",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-test-magnet.svg",
+      "alt": "A table of how three rods behave near each pole of a magnet.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-force-through",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-force-through.svg",
+      "alt": "A magnet under a wooden table top and a paper clip on top of the table.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-north-south",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-north-south.svg",
+      "alt": "A bar magnet hanging freely from a string, with compass directions.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-stroke-method",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-stroke-method.svg",
+      "alt": "A magnet stroking a steel bar, with arrows showing the strokes.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-electrical-method",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-electrical-method.svg",
+      "alt": "Insulated wire coiled round an iron nail and connected to a battery, with paper clips near the nail.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-temporary-permanent",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-temporary-permanent.svg",
+      "alt": "A table comparing an electromagnet and a fridge magnet.",
+      "provenance": "original_generic_author_draft"
+    },
+    {
+      "id": "sc-p3-card-uses",
+      "version": 1,
+      "kind": "svg",
+      "path": "assets/sc-p3-card-uses.svg",
+      "alt": "A table of four uses of magnets and the property each uses.",
+      "provenance": "original_generic_author_draft"
+    }
+  ],
+  "knowledge_points": [
+    {
+      "id": "sc.p3.kp.needs-of-living",
+      "version": 1,
+      "topic_ref": "sc.p3.living-nonliving",
+      "leaf_refs": [
+        "sc.p3.leaf.needs-of-living"
+      ],
+      "teaching_material_id": "sc-p3-needs-of-living-learn",
+      "acquisition_item_ids": [
+        "sc-p3-needs-of-living-learn.q1",
+        "sc-p3-needs-of-living-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.needs-of-living",
+      "prerequisite_ids": []
+    },
+    {
+      "id": "sc.p3.kp.growth-reproduction",
+      "version": 1,
+      "topic_ref": "sc.p3.living-nonliving",
+      "leaf_refs": [
+        "sc.p3.leaf.growth-reproduction"
+      ],
+      "teaching_material_id": "sc-p3-growth-reproduction-learn",
+      "acquisition_item_ids": [
+        "sc-p3-growth-reproduction-learn.q1",
+        "sc-p3-growth-reproduction-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.growth-reproduction",
+      "prerequisite_ids": []
+    },
+    {
+      "id": "sc.p3.kp.respond-changes",
+      "version": 1,
+      "topic_ref": "sc.p3.living-nonliving",
+      "leaf_refs": [
+        "sc.p3.leaf.respond-changes"
+      ],
+      "teaching_material_id": "sc-p3-respond-changes-learn",
+      "acquisition_item_ids": [
+        "sc-p3-respond-changes-learn.q1",
+        "sc-p3-respond-changes-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.respond-changes",
+      "prerequisite_ids": []
+    },
+    {
+      "id": "sc.p3.kp.classify-living",
+      "version": 1,
+      "topic_ref": "sc.p3.living-nonliving",
+      "leaf_refs": [
+        "sc.p3.leaf.classify-living"
+      ],
+      "teaching_material_id": "sc-p3-classify-living-learn",
+      "acquisition_item_ids": [
+        "sc-p3-classify-living-learn.q1",
+        "sc-p3-classify-living-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.classify-living",
+      "prerequisite_ids": [
+        "sc.p3.kp.needs-of-living",
+        "sc.p3.kp.growth-reproduction",
+        "sc.p3.kp.respond-changes"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.flowering-nonflowering",
+      "version": 1,
+      "topic_ref": "sc.p3.classification",
+      "leaf_refs": [
+        "sc.p3.leaf.flowering-nonflowering"
+      ],
+      "teaching_material_id": "sc-p3-flowering-nonflowering-learn",
+      "acquisition_item_ids": [
+        "sc-p3-flowering-nonflowering-learn.q1",
+        "sc-p3-flowering-nonflowering-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.flowering-nonflowering",
+      "prerequisite_ids": [
+        "sc.p3.kp.classify-living"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.mammals",
+      "version": 1,
+      "topic_ref": "sc.p3.classification",
+      "leaf_refs": [
+        "sc.p3.leaf.mammals"
+      ],
+      "teaching_material_id": "sc-p3-mammals-learn",
+      "acquisition_item_ids": [
+        "sc-p3-mammals-learn.q1",
+        "sc-p3-mammals-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.mammals",
+      "prerequisite_ids": [
+        "sc.p3.kp.classify-living"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.birds-fish",
+      "version": 1,
+      "topic_ref": "sc.p3.classification",
+      "leaf_refs": [
+        "sc.p3.leaf.birds-fish"
+      ],
+      "teaching_material_id": "sc-p3-birds-fish-learn",
+      "acquisition_item_ids": [
+        "sc-p3-birds-fish-learn.q1",
+        "sc-p3-birds-fish-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.birds-fish",
+      "prerequisite_ids": [
+        "sc.p3.kp.classify-living"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.insects",
+      "version": 1,
+      "topic_ref": "sc.p3.classification",
+      "leaf_refs": [
+        "sc.p3.leaf.insects"
+      ],
+      "teaching_material_id": "sc-p3-insects-learn",
+      "acquisition_item_ids": [
+        "sc-p3-insects-learn.q1",
+        "sc-p3-insects-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.insects",
+      "prerequisite_ids": [
+        "sc.p3.kp.classify-living"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.amphibians-reptiles",
+      "version": 1,
+      "topic_ref": "sc.p3.classification",
+      "leaf_refs": [
+        "sc.p3.leaf.amphibians-reptiles"
+      ],
+      "teaching_material_id": "sc-p3-amphibians-reptiles-learn",
+      "acquisition_item_ids": [
+        "sc-p3-amphibians-reptiles-learn.q1",
+        "sc-p3-amphibians-reptiles-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.amphibians-reptiles",
+      "prerequisite_ids": [
+        "sc.p3.kp.classify-living"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.fungi",
+      "version": 1,
+      "topic_ref": "sc.p3.classification",
+      "leaf_refs": [
+        "sc.p3.leaf.fungi"
+      ],
+      "teaching_material_id": "sc-p3-fungi-learn",
+      "acquisition_item_ids": [
+        "sc-p3-fungi-learn.q1",
+        "sc-p3-fungi-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.fungi",
+      "prerequisite_ids": [
+        "sc.p3.kp.classify-living"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.bacteria",
+      "version": 1,
+      "topic_ref": "sc.p3.classification",
+      "leaf_refs": [
+        "sc.p3.leaf.bacteria"
+      ],
+      "teaching_material_id": "sc-p3-bacteria-learn",
+      "acquisition_item_ids": [
+        "sc-p3-bacteria-learn.q1",
+        "sc-p3-bacteria-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.bacteria",
+      "prerequisite_ids": [
+        "sc.p3.kp.classify-living"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.material-types",
+      "version": 1,
+      "topic_ref": "sc.p3.materials",
+      "leaf_refs": [
+        "sc.p3.leaf.material-types"
+      ],
+      "teaching_material_id": "sc-p3-material-types-learn",
+      "acquisition_item_ids": [
+        "sc-p3-material-types-learn.q1",
+        "sc-p3-material-types-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.material-types",
+      "prerequisite_ids": []
+    },
+    {
+      "id": "sc.p3.kp.strength",
+      "version": 1,
+      "topic_ref": "sc.p3.materials",
+      "leaf_refs": [
+        "sc.p3.leaf.strength"
+      ],
+      "teaching_material_id": "sc-p3-strength-learn",
+      "acquisition_item_ids": [
+        "sc-p3-strength-learn.q1",
+        "sc-p3-strength-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.strength",
+      "prerequisite_ids": [
+        "sc.p3.kp.material-types"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.flexibility",
+      "version": 1,
+      "topic_ref": "sc.p3.materials",
+      "leaf_refs": [
+        "sc.p3.leaf.flexibility"
+      ],
+      "teaching_material_id": "sc-p3-flexibility-learn",
+      "acquisition_item_ids": [
+        "sc-p3-flexibility-learn.q1",
+        "sc-p3-flexibility-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.flexibility",
+      "prerequisite_ids": [
+        "sc.p3.kp.material-types"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.waterproof-absorbent",
+      "version": 1,
+      "topic_ref": "sc.p3.materials",
+      "leaf_refs": [
+        "sc.p3.leaf.waterproof-absorbent"
+      ],
+      "teaching_material_id": "sc-p3-waterproof-absorbent-learn",
+      "acquisition_item_ids": [
+        "sc-p3-waterproof-absorbent-learn.q1",
+        "sc-p3-waterproof-absorbent-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.waterproof-absorbent",
+      "prerequisite_ids": [
+        "sc.p3.kp.material-types"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.transparency",
+      "version": 1,
+      "topic_ref": "sc.p3.materials",
+      "leaf_refs": [
+        "sc.p3.leaf.transparency"
+      ],
+      "teaching_material_id": "sc-p3-transparency-learn",
+      "acquisition_item_ids": [
+        "sc-p3-transparency-learn.q1",
+        "sc-p3-transparency-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.transparency",
+      "prerequisite_ids": [
+        "sc.p3.kp.material-types"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.float-sink",
+      "version": 1,
+      "topic_ref": "sc.p3.materials",
+      "leaf_refs": [
+        "sc.p3.leaf.float-sink"
+      ],
+      "teaching_material_id": "sc-p3-float-sink-learn",
+      "acquisition_item_ids": [
+        "sc-p3-float-sink-learn.q1",
+        "sc-p3-float-sink-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.float-sink",
+      "prerequisite_ids": [
+        "sc.p3.kp.material-types"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.plant-stages",
+      "version": 1,
+      "topic_ref": "sc.p3.plant-life-cycle",
+      "leaf_refs": [
+        "sc.p3.leaf.plant-stages"
+      ],
+      "teaching_material_id": "sc-p3-plant-stages-learn",
+      "acquisition_item_ids": [
+        "sc-p3-plant-stages-learn.q1",
+        "sc-p3-plant-stages-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.plant-stages",
+      "prerequisite_ids": []
+    },
+    {
+      "id": "sc.p3.kp.plant-growth-observe",
+      "version": 1,
+      "topic_ref": "sc.p3.plant-life-cycle",
+      "leaf_refs": [
+        "sc.p3.leaf.plant-growth-observe"
+      ],
+      "teaching_material_id": "sc-p3-plant-growth-observe-learn",
+      "acquisition_item_ids": [
+        "sc-p3-plant-growth-observe-learn.q1",
+        "sc-p3-plant-growth-observe-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.plant-growth-observe",
+      "prerequisite_ids": [
+        "sc.p3.kp.plant-stages"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.plant-cycles-timeline",
+      "version": 1,
+      "topic_ref": "sc.p3.plant-life-cycle",
+      "leaf_refs": [
+        "sc.p3.leaf.plant-cycles-timeline"
+      ],
+      "teaching_material_id": "sc-p3-plant-cycles-timeline-learn",
+      "acquisition_item_ids": [
+        "sc-p3-plant-cycles-timeline-learn.q1",
+        "sc-p3-plant-cycles-timeline-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.plant-cycles-timeline",
+      "prerequisite_ids": [
+        "sc.p3.kp.plant-stages"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.plant-cycles-compare",
+      "version": 1,
+      "topic_ref": "sc.p3.plant-life-cycle",
+      "leaf_refs": [
+        "sc.p3.leaf.plant-cycles-compare"
+      ],
+      "teaching_material_id": "sc-p3-plant-cycles-compare-learn",
+      "acquisition_item_ids": [
+        "sc-p3-plant-cycles-compare-learn.q1",
+        "sc-p3-plant-cycles-compare-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.plant-cycles-compare",
+      "prerequisite_ids": [
+        "sc.p3.kp.plant-stages",
+        "sc.p3.kp.flowering-nonflowering"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.four-stage",
+      "version": 1,
+      "topic_ref": "sc.p3.animal-life-cycle",
+      "leaf_refs": [
+        "sc.p3.leaf.four-stage"
+      ],
+      "teaching_material_id": "sc-p3-four-stage-learn",
+      "acquisition_item_ids": [
+        "sc-p3-four-stage-learn.q1",
+        "sc-p3-four-stage-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.four-stage",
+      "prerequisite_ids": []
+    },
+    {
+      "id": "sc.p3.kp.three-stage",
+      "version": 1,
+      "topic_ref": "sc.p3.animal-life-cycle",
+      "leaf_refs": [
+        "sc.p3.leaf.three-stage"
+      ],
+      "teaching_material_id": "sc-p3-three-stage-learn",
+      "acquisition_item_ids": [
+        "sc-p3-three-stage-learn.q1",
+        "sc-p3-three-stage-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.three-stage",
+      "prerequisite_ids": []
+    },
+    {
+      "id": "sc.p3.kp.frog-cycle",
+      "version": 1,
+      "topic_ref": "sc.p3.animal-life-cycle",
+      "leaf_refs": [
+        "sc.p3.leaf.frog-cycle"
+      ],
+      "teaching_material_id": "sc-p3-frog-cycle-learn",
+      "acquisition_item_ids": [
+        "sc-p3-frog-cycle-learn.q1",
+        "sc-p3-frog-cycle-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.frog-cycle",
+      "prerequisite_ids": []
+    },
+    {
+      "id": "sc.p3.kp.mosquito-control",
+      "version": 1,
+      "topic_ref": "sc.p3.animal-life-cycle",
+      "leaf_refs": [
+        "sc.p3.leaf.mosquito-control"
+      ],
+      "teaching_material_id": "sc-p3-mosquito-control-learn",
+      "acquisition_item_ids": [
+        "sc-p3-mosquito-control-learn.q1",
+        "sc-p3-mosquito-control-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.mosquito-control",
+      "prerequisite_ids": [
+        "sc.p3.kp.four-stage"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.young-like-adult",
+      "version": 1,
+      "topic_ref": "sc.p3.animal-life-cycle",
+      "leaf_refs": [
+        "sc.p3.leaf.young-like-adult"
+      ],
+      "teaching_material_id": "sc-p3-young-like-adult-learn",
+      "acquisition_item_ids": [
+        "sc-p3-young-like-adult-learn.q1",
+        "sc-p3-young-like-adult-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.young-like-adult",
+      "prerequisite_ids": [
+        "sc.p3.kp.four-stage",
+        "sc.p3.kp.three-stage",
+        "sc.p3.kp.frog-cycle"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.magnetic-materials",
+      "version": 1,
+      "topic_ref": "sc.p3.magnets-properties",
+      "leaf_refs": [
+        "sc.p3.leaf.magnetic-materials"
+      ],
+      "teaching_material_id": "sc-p3-magnetic-materials-learn",
+      "acquisition_item_ids": [
+        "sc-p3-magnetic-materials-learn.q1",
+        "sc-p3-magnetic-materials-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.magnetic-materials",
+      "prerequisite_ids": []
+    },
+    {
+      "id": "sc.p3.kp.poles",
+      "version": 1,
+      "topic_ref": "sc.p3.magnets-properties",
+      "leaf_refs": [
+        "sc.p3.leaf.poles"
+      ],
+      "teaching_material_id": "sc-p3-poles-learn",
+      "acquisition_item_ids": [
+        "sc-p3-poles-learn.q1",
+        "sc-p3-poles-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.poles",
+      "prerequisite_ids": [
+        "sc.p3.kp.magnetic-materials"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.attract-repel",
+      "version": 1,
+      "topic_ref": "sc.p3.magnets-properties",
+      "leaf_refs": [
+        "sc.p3.leaf.attract-repel"
+      ],
+      "teaching_material_id": "sc-p3-attract-repel-learn",
+      "acquisition_item_ids": [
+        "sc-p3-attract-repel-learn.q1",
+        "sc-p3-attract-repel-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.attract-repel",
+      "prerequisite_ids": [
+        "sc.p3.kp.poles"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.test-magnet",
+      "version": 1,
+      "topic_ref": "sc.p3.magnets-properties",
+      "leaf_refs": [
+        "sc.p3.leaf.test-magnet"
+      ],
+      "teaching_material_id": "sc-p3-test-magnet-learn",
+      "acquisition_item_ids": [
+        "sc-p3-test-magnet-learn.q1",
+        "sc-p3-test-magnet-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.test-magnet",
+      "prerequisite_ids": [
+        "sc.p3.kp.attract-repel"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.force-through",
+      "version": 1,
+      "topic_ref": "sc.p3.magnets-properties",
+      "leaf_refs": [
+        "sc.p3.leaf.force-through"
+      ],
+      "teaching_material_id": "sc-p3-force-through-learn",
+      "acquisition_item_ids": [
+        "sc-p3-force-through-learn.q1",
+        "sc-p3-force-through-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.force-through",
+      "prerequisite_ids": [
+        "sc.p3.kp.magnetic-materials"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.north-south",
+      "version": 1,
+      "topic_ref": "sc.p3.magnets-properties",
+      "leaf_refs": [
+        "sc.p3.leaf.north-south"
+      ],
+      "teaching_material_id": "sc-p3-north-south-learn",
+      "acquisition_item_ids": [
+        "sc-p3-north-south-learn.q1",
+        "sc-p3-north-south-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.north-south",
+      "prerequisite_ids": [
+        "sc.p3.kp.poles"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.stroke-method",
+      "version": 1,
+      "topic_ref": "sc.p3.making-magnets",
+      "leaf_refs": [
+        "sc.p3.leaf.stroke-method"
+      ],
+      "teaching_material_id": "sc-p3-stroke-method-learn",
+      "acquisition_item_ids": [
+        "sc-p3-stroke-method-learn.q1",
+        "sc-p3-stroke-method-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.stroke-method",
+      "prerequisite_ids": [
+        "sc.p3.kp.magnetic-materials",
+        "sc.p3.kp.poles"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.electrical-method",
+      "version": 1,
+      "topic_ref": "sc.p3.making-magnets",
+      "leaf_refs": [
+        "sc.p3.leaf.electrical-method"
+      ],
+      "teaching_material_id": "sc-p3-electrical-method-learn",
+      "acquisition_item_ids": [
+        "sc-p3-electrical-method-learn.q1",
+        "sc-p3-electrical-method-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.electrical-method",
+      "prerequisite_ids": [
+        "sc.p3.kp.magnetic-materials"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.temporary-permanent",
+      "version": 1,
+      "topic_ref": "sc.p3.making-magnets",
+      "leaf_refs": [
+        "sc.p3.leaf.temporary-permanent"
+      ],
+      "teaching_material_id": "sc-p3-temporary-permanent-learn",
+      "acquisition_item_ids": [
+        "sc-p3-temporary-permanent-learn.q1",
+        "sc-p3-temporary-permanent-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.temporary-permanent",
+      "prerequisite_ids": [
+        "sc.p3.kp.stroke-method",
+        "sc.p3.kp.electrical-method"
+      ]
+    },
+    {
+      "id": "sc.p3.kp.uses",
+      "version": 1,
+      "topic_ref": "sc.p3.making-magnets",
+      "leaf_refs": [
+        "sc.p3.leaf.uses"
+      ],
+      "teaching_material_id": "sc-p3-uses-learn",
+      "acquisition_item_ids": [
+        "sc-p3-uses-learn.q1",
+        "sc-p3-uses-learn.q2"
+      ],
+      "repair_target_id": "sc.p3.uses",
+      "prerequisite_ids": [
+        "sc.p3.kp.attract-repel",
+        "sc.p3.kp.magnetic-materials"
+      ]
+    }
+  ]
 }

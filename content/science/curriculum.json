@@ -121,14 +121,15 @@
         "rivervale-sc-p34-2025",
         "tnps-sc-p3-2026",
         "cedar-p3-2025"
-      ]
+      ],
+      "note": "Classify from observable features in tables and pictures; recall of individual species is not required."
     },
     {
       "id": "sc.p3.materials",
       "course": "p3_science",
       "grade": "p3",
       "strand": "Diversity",
-      "label": "Diversity of materials: types and properties (strength, hardness, flexibility, waterproof, transparency, floating)",
+      "label": "Diversity of materials: types and properties (strength, flexibility, waterproof/absorbent, allowing light through, floating and sinking)",
       "scope": "in_app",
       "pilot": "open",
       "source_refs": [
@@ -144,7 +145,7 @@
       "course": "p3_science",
       "grade": "p3",
       "strand": "Cycles",
-      "label": "Life cycles of plants: stages, germination conditions, seed parts",
+      "label": "Life cycles of plants: observing and comparing stages (seed, young plant, adult plant, flowers, fruits)",
       "scope": "in_app",
       "pilot": "open",
       "source_refs": [
@@ -153,7 +154,8 @@
         "rivervale-sc-p34-2025",
         "tnps-sc-p3-2026",
         "cedar-p3-2025"
-      ]
+      ],
+      "note": "Germination conditions and seed parts are P5 under the current syllabus and are not assessed here."
     },
     {
       "id": "sc.p3.animal-life-cycle",
@@ -261,7 +263,505 @@
   ],
   "limitations": [
     "Primary Science starts at P3; there is no P2 Science course.",
-    "Pilot release: first two topics (living/non-living, classification) at the 75% guideline; the other five unlock in syllabus order.",
-    "Topic placement follows school documents implementing the 2023 syllabus; some schools teach magnets in P4. Verify against the official PDF."
+    "Pilot release: first two topics (living/non-living, classification) at the 75% guideline, computed only from reviewed leaves; the other five unlock in syllabus order.",
+    "Leaves are an author working map (one per knowledge point plus deferred/external leaves) and need independent page verification before any coverage figure is computed.",
+    "Teaching cards use static observation diagrams and tables; short animations named in the design are not yet authored.",
+    "Some schools assess magnets in P4; the syllabus places making magnets by stroking and by electricity in P3 (PDF p63)."
+  ],
+  "leaves": [
+    {
+      "id": "sc.p3.leaf.classify-living",
+      "topic_ref": "sc.p3.living-nonliving",
+      "label": "Deciding if something is living",
+      "assessed_ability": "Recognise and apply the idea in a new context",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF pp39–40"
+    },
+    {
+      "id": "sc.p3.leaf.growth-reproduction",
+      "topic_ref": "sc.p3.living-nonliving",
+      "label": "Living things grow and reproduce",
+      "assessed_ability": "Recognise and apply the idea in a new context",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF pp39–40"
+    },
+    {
+      "id": "sc.p3.leaf.needs-of-living",
+      "topic_ref": "sc.p3.living-nonliving",
+      "label": "What living things need",
+      "assessed_ability": "Recognise and apply the idea in a new context",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF pp39–40"
+    },
+    {
+      "id": "sc.p3.leaf.respond-changes",
+      "topic_ref": "sc.p3.living-nonliving",
+      "label": "Living things respond to changes",
+      "assessed_ability": "Recognise and apply the idea in a new context",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF pp39–40"
+    },
+    {
+      "id": "sc.p3.leaf.amphibians-reptiles",
+      "topic_ref": "sc.p3.classification",
+      "label": "Amphibians and reptiles",
+      "assessed_ability": "Classify using observable features",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF pp39–40; recall of individual species not required (p39)"
+    },
+    {
+      "id": "sc.p3.leaf.bacteria",
+      "topic_ref": "sc.p3.classification",
+      "label": "Bacteria",
+      "assessed_ability": "Classify using observable features",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF pp39–40; recall of individual species not required (p39)"
+    },
+    {
+      "id": "sc.p3.leaf.birds-fish",
+      "topic_ref": "sc.p3.classification",
+      "label": "Birds and fish",
+      "assessed_ability": "Classify using observable features",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF pp39–40; recall of individual species not required (p39)"
+    },
+    {
+      "id": "sc.p3.leaf.flowering-nonflowering",
+      "topic_ref": "sc.p3.classification",
+      "label": "Flowering and non-flowering plants",
+      "assessed_ability": "Classify using observable features",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF pp39–40; recall of individual species not required (p39)"
+    },
+    {
+      "id": "sc.p3.leaf.fungi",
+      "topic_ref": "sc.p3.classification",
+      "label": "Fungi",
+      "assessed_ability": "Classify using observable features",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF pp39–40; recall of individual species not required (p39)"
+    },
+    {
+      "id": "sc.p3.leaf.insects",
+      "topic_ref": "sc.p3.classification",
+      "label": "Insects",
+      "assessed_ability": "Classify using observable features",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF pp39–40; recall of individual species not required (p39)"
+    },
+    {
+      "id": "sc.p3.leaf.mammals",
+      "topic_ref": "sc.p3.classification",
+      "label": "Mammals",
+      "assessed_ability": "Classify using observable features",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF pp39–40; recall of individual species not required (p39)"
+    },
+    {
+      "id": "sc.p3.leaf.flexibility",
+      "topic_ref": "sc.p3.materials",
+      "label": "Flexibility",
+      "assessed_ability": "Recognise and apply the idea in a new context",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF pp40–41"
+    },
+    {
+      "id": "sc.p3.leaf.float-sink",
+      "topic_ref": "sc.p3.materials",
+      "label": "Floating and sinking",
+      "assessed_ability": "Recognise and apply the idea in a new context",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF pp40–41"
+    },
+    {
+      "id": "sc.p3.leaf.material-types",
+      "topic_ref": "sc.p3.materials",
+      "label": "Common materials",
+      "assessed_ability": "Recognise and apply the idea in a new context",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF pp40–41"
+    },
+    {
+      "id": "sc.p3.leaf.strength",
+      "topic_ref": "sc.p3.materials",
+      "label": "Strength of materials",
+      "assessed_ability": "Observe, measure and compare using a record or a simple fair test",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF pp40–41"
+    },
+    {
+      "id": "sc.p3.leaf.transparency",
+      "topic_ref": "sc.p3.materials",
+      "label": "Allowing light through",
+      "assessed_ability": "Recognise and apply the idea in a new context",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF pp40–41"
+    },
+    {
+      "id": "sc.p3.leaf.waterproof-absorbent",
+      "topic_ref": "sc.p3.materials",
+      "label": "Waterproof and absorbent materials",
+      "assessed_ability": "Recognise and apply the idea in a new context",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF pp40–41"
+    },
+    {
+      "id": "sc.p3.leaf.hardness",
+      "topic_ref": "sc.p3.materials",
+      "label": "Hardness of materials",
+      "assessed_ability": "Compare materials by how easily they are scratched",
+      "representation": "text",
+      "scope": "deferred",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF pp40–41 (not in the listed P3 properties)",
+      "note": "Not a required P3 property; no hardness items remain in the pool."
+    },
+    {
+      "id": "sc.p3.leaf.plant-cycles-compare",
+      "topic_ref": "sc.p3.plant-life-cycle",
+      "label": "Comparing plant life cycles",
+      "assessed_ability": "Recognise and apply the idea in a new context",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF p43"
+    },
+    {
+      "id": "sc.p3.leaf.plant-cycles-timeline",
+      "topic_ref": "sc.p3.plant-life-cycle",
+      "label": "Recording a plant’s life cycle",
+      "assessed_ability": "Observe, measure and compare using a record or a simple fair test",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF p43"
+    },
+    {
+      "id": "sc.p3.leaf.plant-growth-observe",
+      "topic_ref": "sc.p3.plant-life-cycle",
+      "label": "Observing a plant grow",
+      "assessed_ability": "Observe, measure and compare using a record or a simple fair test",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF p43"
+    },
+    {
+      "id": "sc.p3.leaf.plant-stages",
+      "topic_ref": "sc.p3.plant-life-cycle",
+      "label": "Stages of a flowering plant",
+      "assessed_ability": "Recognise and apply the idea in a new context",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF p43"
+    },
+    {
+      "id": "sc.p3.leaf.germination-reproduction",
+      "topic_ref": "sc.p3.plant-life-cycle",
+      "label": "Germination conditions, seed parts and plant reproduction processes",
+      "assessed_ability": "Explain conditions for germination and the role of seed parts",
+      "representation": "text",
+      "scope": "deferred",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF p43 (P3 observes stages only); PDF p44 (P5 reproduction)",
+      "note": "P5 content under the current syllabus; removed from the P3 pool in batch version 3."
+    },
+    {
+      "id": "sc.p3.leaf.four-stage",
+      "topic_ref": "sc.p3.animal-life-cycle",
+      "label": "Four-stage life cycles",
+      "assessed_ability": "Recognise and apply the idea in a new context",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF p43"
+    },
+    {
+      "id": "sc.p3.leaf.frog-cycle",
+      "topic_ref": "sc.p3.animal-life-cycle",
+      "label": "The life cycle of a frog",
+      "assessed_ability": "Recognise and apply the idea in a new context",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF p43"
+    },
+    {
+      "id": "sc.p3.leaf.mosquito-control",
+      "topic_ref": "sc.p3.animal-life-cycle",
+      "label": "Mosquitoes and stagnant water",
+      "assessed_ability": "Recognise and apply the idea in a new context",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF p43"
+    },
+    {
+      "id": "sc.p3.leaf.three-stage",
+      "topic_ref": "sc.p3.animal-life-cycle",
+      "label": "Three-stage life cycles",
+      "assessed_ability": "Recognise and apply the idea in a new context",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF p43"
+    },
+    {
+      "id": "sc.p3.leaf.young-like-adult",
+      "topic_ref": "sc.p3.animal-life-cycle",
+      "label": "Does the young look like the adult?",
+      "assessed_ability": "Recognise and apply the idea in a new context",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF p43"
+    },
+    {
+      "id": "sc.p3.leaf.attract-repel",
+      "topic_ref": "sc.p3.magnets-properties",
+      "label": "Like and unlike poles",
+      "assessed_ability": "Recognise and apply the idea in a new context",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF p63"
+    },
+    {
+      "id": "sc.p3.leaf.force-through",
+      "topic_ref": "sc.p3.magnets-properties",
+      "label": "Magnetic force through materials",
+      "assessed_ability": "Observe, measure and compare using a record or a simple fair test",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF p63"
+    },
+    {
+      "id": "sc.p3.leaf.magnetic-materials",
+      "topic_ref": "sc.p3.magnets-properties",
+      "label": "Magnetic and non-magnetic materials",
+      "assessed_ability": "Recognise and apply the idea in a new context",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF p63"
+    },
+    {
+      "id": "sc.p3.leaf.north-south",
+      "topic_ref": "sc.p3.magnets-properties",
+      "label": "A freely suspended magnet",
+      "assessed_ability": "Recognise and apply the idea in a new context",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF p63"
+    },
+    {
+      "id": "sc.p3.leaf.poles",
+      "topic_ref": "sc.p3.magnets-properties",
+      "label": "The poles of a magnet",
+      "assessed_ability": "Recognise and apply the idea in a new context",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF p63"
+    },
+    {
+      "id": "sc.p3.leaf.test-magnet",
+      "topic_ref": "sc.p3.magnets-properties",
+      "label": "How to tell if something is a magnet",
+      "assessed_ability": "Observe, measure and compare using a record or a simple fair test",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF p63"
+    },
+    {
+      "id": "sc.p3.leaf.electrical-method",
+      "topic_ref": "sc.p3.making-magnets",
+      "label": "Making an electromagnet",
+      "assessed_ability": "Recognise and apply the idea in a new context",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF p63"
+    },
+    {
+      "id": "sc.p3.leaf.stroke-method",
+      "topic_ref": "sc.p3.making-magnets",
+      "label": "Making a magnet by stroking",
+      "assessed_ability": "Observe, measure and compare using a record or a simple fair test",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF p63"
+    },
+    {
+      "id": "sc.p3.leaf.temporary-permanent",
+      "topic_ref": "sc.p3.making-magnets",
+      "label": "Temporary and permanent magnets",
+      "assessed_ability": "Recognise and apply the idea in a new context",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF p63"
+    },
+    {
+      "id": "sc.p3.leaf.uses",
+      "topic_ref": "sc.p3.making-magnets",
+      "label": "Uses of magnets",
+      "assessed_ability": "Recognise and apply the idea in a new context",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) PDF p63"
+    },
+    {
+      "id": "sc.p3.leaf.open-ended-cer",
+      "topic_ref": "sc.p3.open-ended-cer",
+      "label": "Written explanations using claim, evidence and reasoning",
+      "assessed_ability": "Write an explanation",
+      "representation": "production",
+      "scope": "external",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) practices sections"
+    },
+    {
+      "id": "sc.p3.leaf.practical",
+      "topic_ref": "sc.p3.practical",
+      "label": "Hands-on observing, measuring and classifying",
+      "assessed_ability": "Carry out a practical investigation",
+      "representation": "production",
+      "scope": "external",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) practices sections"
+    },
+    {
+      "id": "sc.p3.leaf.p4-topics",
+      "topic_ref": "sc.p3.p4-topics",
+      "label": "P4 lower-block topics",
+      "assessed_ability": "Later-grade outcomes",
+      "representation": "text",
+      "scope": "deferred",
+      "source_refs": [
+        "moe-sc-2023"
+      ],
+      "source_pages": "MOE Primary Science 2023 (updated Jan 2026) P4 pages"
+    }
   ]
 }

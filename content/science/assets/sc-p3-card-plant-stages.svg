@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 150" width="550" height="150" role="img">
+<title>Pictures of a plant at different stages.</title>
+<rect x="0" y="0" width="550" height="150" fill="#ffffff"/>
+<rect x="9.0" y="103.0" width="92" height="12" fill="#a07850"/>
+<ellipse cx="55.0" cy="97.0" rx="11" ry="7" fill="#d8b384" stroke="#1f2933" stroke-width="1.5"/>
+<text x="55.0" y="140.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">seed</text>
+<rect x="119.0" y="103.0" width="92" height="12" fill="#a07850"/>
+<line x1="165.0" y1="103.0" x2="165.0" y2="73.0" stroke="#4c9f70" stroke-width="3" stroke-linecap="round"/>
+<ellipse cx="155.0" cy="71.0" rx="11" ry="5" fill="#4c9f70"/>
+<ellipse cx="175.0" cy="71.0" rx="11" ry="5" fill="#4c9f70"/>
+<text x="165.0" y="140.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">young plant</text>
+<rect x="229.0" y="103.0" width="92" height="12" fill="#a07850"/>
+<line x1="275.0" y1="103.0" x2="275.0" y2="35.0" stroke="#4c9f70" stroke-width="3.5" stroke-linecap="round"/>
+<ellipse cx="288.0" cy="89.0" rx="13" ry="5" fill="#4c9f70"/>
+<ellipse cx="262.0" cy="75.0" rx="13" ry="5" fill="#4c9f70"/>
+<ellipse cx="288.0" cy="61.0" rx="13" ry="5" fill="#4c9f70"/>
+<ellipse cx="262.0" cy="49.0" rx="13" ry="5" fill="#4c9f70"/>
+<text x="275.0" y="140.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">adult plant</text>
+<rect x="339.0" y="103.0" width="92" height="12" fill="#a07850"/>
+<line x1="385.0" y1="103.0" x2="385.0" y2="35.0" stroke="#4c9f70" stroke-width="3.5" stroke-linecap="round"/>
+<ellipse cx="398.0" cy="89.0" rx="13" ry="5" fill="#4c9f70"/>
+<ellipse cx="372.0" cy="75.0" rx="13" ry="5" fill="#4c9f70"/>
+<ellipse cx="398.0" cy="61.0" rx="13" ry="5" fill="#4c9f70"/>
+<ellipse cx="372.0" cy="49.0" rx="13" ry="5" fill="#4c9f70"/>
+<circle cx="385.0" cy="21.0" r="6" fill="#f6c177" stroke="#1f2933" stroke-width="1"/>
+<circle cx="392.6" cy="26.5" r="6" fill="#f6c177" stroke="#1f2933" stroke-width="1"/>
+<circle cx="389.7" cy="35.5" r="6" fill="#f6c177" stroke="#1f2933" stroke-width="1"/>
+<circle cx="380.3" cy="35.5" r="6" fill="#f6c177" stroke="#1f2933" stroke-width="1"/>
+<circle cx="377.4" cy="26.5" r="6" fill="#f6c177" stroke="#1f2933" stroke-width="1"/>
+<circle cx="385.0" cy="29.0" r="4" fill="#e8a33d"/>
+<text x="385.0" y="140.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">flowers</text>
+<rect x="449.0" y="103.0" width="92" height="12" fill="#a07850"/>
+<line x1="495.0" y1="103.0" x2="495.0" y2="35.0" stroke="#4c9f70" stroke-width="3.5" stroke-linecap="round"/>
+<ellipse cx="508.0" cy="89.0" rx="13" ry="5" fill="#4c9f70"/>
+<ellipse cx="482.0" cy="75.0" rx="13" ry="5" fill="#4c9f70"/>
+<ellipse cx="508.0" cy="61.0" rx="13" ry="5" fill="#4c9f70"/>
+<ellipse cx="482.0" cy="49.0" rx="13" ry="5" fill="#4c9f70"/>
+<circle cx="495.0" cy="29.0" r="9" fill="#d9534f" stroke="#1f2933" stroke-width="1"/>
+<text x="495.0" y="140.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">fruits</text>
+</svg>

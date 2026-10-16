@@ -8,9 +8,10 @@ Original P3 Science content for the public (generic) version of Turtle Academy, 
 
 ## 1. What is in this pool
 
-- `content/science/curriculum.json`: 10 topic records with scope (in-app / partial / external / deferred), Pilot status and cited sources.
-- `content/science/pool-001.json`: 180 original questions (P3 180), 36 materials, 36 three-stage repair sets (exact → similar → generic).
-- `scripts/validate_subject_content.py`: structural checks (unique IDs, answer key present, 4+ distinct options, topic and source references, complete repair sets, material membership, hints that do not state the answer).
+- `content/science/curriculum.json`: 10 topic records with scope and Pilot status, 41 leaf records (assessed ability, representation, scope, MOE page reference) and cited sources.
+- `content/science/pool-001.json` (batch version 3): 180 original questions (P3 180), 36 materials, 36 three-stage repair sets (exact → similar → generic), 72 non-repair questions with a declared repair route, 36 knowledge points.
+- `content/science/assets/`: 51 original SVG diagrams referenced by items or materials (no scripts, links, images or external references; titles and alt text describe the picture without giving the answer).
+- `scripts/validate_subject_content.py`: structural checks (IDs, keys, 4+ distinct options, topic/source/leaf references, complete repair sets with one leaf mapping, repair routes for every non-repair question when leaves are declared, diagrams present for visual leaves, knowledge-point links and acyclic prerequisites, SVG safety, hints that do not state the answer).
 
 Every question is newly written for this project. No question, passage or figure was copied from any past paper, school document or commercial resource. Status: **author-checked, pending independent review and owner sign-off**; not a content release.
 
@@ -53,7 +54,7 @@ SmileTutor lists P3 Science papers, with 2022 the only year in range (`smiletuto
 
 - Attraction does not prove an object is a magnet; only repulsion does (`junyuan-sc-p3-2026`, `bpps-sc-p3-2026`) — dedicated knowledge point `test-magnet`.
 - "All metals are magnetic" (aluminium and copper distractors).
-- Light or soil being needed for germination; fire or robots being living; bats and whales not being mammals; spiders being insects; penguins not being birds.
+- Fire or robots being living; bats and whales not being mammals; spiders being insects; penguins not being birds.
 
 ## 7. Enrichment context (2024-2026)
 
@@ -61,24 +62,35 @@ Schools encourage visits and hands-on programmes such as Science Centre Singapor
 
 ## Topic coverage in this pool
 
-| Topic | Grade | Scope | Pilot | Repair sets | Questions |
-| --- | --- | --- | --- | ---: | ---: |
-| Diversity of living and non-living things: characteristics of living things (`sc.p3.living-nonliving`) | P3 | in_app | open | 4 | 20 |
-| Classification of living things: plants (flowering/non-flowering), animals, fungi, bacteria (`sc.p3.classification`) | P3 | in_app | open | 7 | 35 |
-| Diversity of materials: types and properties (strength, hardness, flexibility, waterproof, transparency, floating) (`sc.p3.materials`) | P3 | in_app | open | 6 | 30 |
-| Life cycles of plants: stages, germination conditions, seed parts (`sc.p3.plant-life-cycle`) | P3 | in_app | open | 4 | 20 |
-| Life cycles of animals: three- and four-stage cycles, frog, mosquito control (`sc.p3.animal-life-cycle`) | P3 | in_app | open | 5 | 25 |
-| Properties of magnets: magnetic materials, poles, attraction and repulsion, force through materials (`sc.p3.magnets-properties`) | P3 | in_app | open | 6 | 30 |
-| Making and using magnets: stroke and electrical methods, temporary/permanent magnets, uses (`sc.p3.making-magnets`) | P3 | in_app | open | 4 | 20 |
-| Open-ended explanations using claim, evidence and reasoning (`sc.p3.open-ended-cer`) | P3 | external | open | 0 | 0 |
-| Practical test: observing, measuring, classifying with real materials (`sc.p3.practical`) | P3 | external | open | 0 | 0 |
-| P4 lower-block topics (plant and human systems, matter, light, heat) (`sc.p3.p4-topics`) | P3 | deferred | open | 0 | 0 |
+| Topic | Grade | Scope | Pilot | Leaves | Repair sets | Questions |
+| --- | --- | --- | --- | ---: | ---: | ---: |
+| Diversity of living and non-living things: characteristics of living things (`sc.p3.living-nonliving`) | P3 | in_app | open | 4 | 4 | 20 |
+| Classification of living things: plants (flowering/non-flowering), animals, fungi, bacteria (`sc.p3.classification`) | P3 | in_app | open | 7 | 7 | 35 |
+| Diversity of materials: types and properties (strength, flexibility, waterproof/absorbent, allowing light through, floating and sinking) (`sc.p3.materials`) | P3 | in_app | open | 7 | 6 | 30 |
+| Life cycles of plants: observing and comparing stages (seed, young plant, adult plant, flowers, fruits) (`sc.p3.plant-life-cycle`) | P3 | in_app | open | 5 | 4 | 20 |
+| Life cycles of animals: three- and four-stage cycles, frog, mosquito control (`sc.p3.animal-life-cycle`) | P3 | in_app | open | 5 | 5 | 25 |
+| Properties of magnets: magnetic materials, poles, attraction and repulsion, force through materials (`sc.p3.magnets-properties`) | P3 | in_app | open | 6 | 6 | 30 |
+| Making and using magnets: stroke and electrical methods, temporary/permanent magnets, uses (`sc.p3.making-magnets`) | P3 | in_app | open | 4 | 4 | 20 |
+| Open-ended explanations using claim, evidence and reasoning (`sc.p3.open-ended-cer`) | P3 | external | open | 1 | 0 | 0 |
+| Practical test: observing, measuring, classifying with real materials (`sc.p3.practical`) | P3 | external | open | 1 | 0 | 0 |
+| P4 lower-block topics (plant and human systems, matter, light, heat) (`sc.p3.p4-topics`) | P3 | deferred | open | 1 | 0 | 0 |
 
 ## Correction revision — 16 October 2026
 
 Batch version 2 corrects six items and two teaching cards. The flexibility question now supplies equal strip dimensions, the same load and measured bending without breakage; the conclusion no longer depends on which strip breaks first. Nickel/cobalt recall is removed from the teaching card and affected options. The induced-paper-clip acquisition question is replaced by an observed on/off electromagnet example; the related permanent-magnet distractor no longer relies on induction. These changes follow the exclusions on PDF p63 / printed p62 of the [official syllabus updated January 2026](https://www.moe.gov.sg/api/media/ba3562d3-5b31-4459-8693-45cde7b97273/Primary-Science-Syllabus-2023.pdf); electrical magnet-making remains included. A hint that directly named steel is also replaced. Revised item/material versions are incremented and revised item IDs remain listed for re-review. The explicit learning-unit/acquisition-to-repair links, prerequisite graph, observation activities/assets, complete curriculum/source audit and owner sign-off remain open.
 
 These are proposed corrections, not independent approval. Existing task/history must retain earlier pinned versions; this authoring revision does not implement evidence migration or retroactive regrading.
+
+## Audit-response revision — 16 October 2026 (batch version 3)
+
+Responds to [SCIENCE_RESEARCH_AUDIT.md](content-review/SCIENCE_RESEARCH_AUDIT.md) SC1–SC4. Author revision only: every revised or new item is pending independent re-review and owner sign-off. Counts are unchanged at 180 questions and 36 knowledge points.
+
+| Finding | Change in this batch | Still open |
+| --- | --- | --- |
+| **SC1** germination and seed parts (P5) | Owner decision: replace. The `germination` and `seed-parts` knowledge points (10 questions and 2 cards) are removed. They are replaced by two P3 observation points: `plant-growth-observe` (reading height and leaf records) and `plant-cycles-timeline` (comparing when stages appear). The plant-stages card now treats a seedling as an early young plant, uses the three broad stages and is observation-based. Two remaining distractors that used P5 or non-core terms were replaced. A `deferred` leaf records the P5 content. | Independent review of the new items |
+| **SC2** hardness | Owner decision: replace. `strength-hardness` becomes `strength` (card, 2 acquisition tests and 3 repair items). All test strength through a fair, same-size strip test. A `deferred` leaf records hardness as outside the listed P3 properties. | — |
+| **SC3** observation, links and prerequisites | Every one of the 36 teaching cards (now `kind: teaching`) has an original observation diagram or table: feature tables, life-cycle diagrams, insect and spider body plans, plant stages, and strength, bending, water, light, floating and magnet set-ups. Seven classification items that relied on recalling a named species now ask learners to classify from a feature table. `knowledge_points` link each card to its two acquisition tests, its repair target and its prerequisites (acyclic, checked by the validator). Every acquisition item has a `repair_target_id`. | Short animations are still not authored. The diagrams need an independent visual check. |
+| **SC4** release denominator | `curriculum.json` has one leaf per knowledge point, plus deferred or external leaves (germination/reproduction, hardness, written CER, practical, P4). The first two topics have 4 + 7 in-app leaves. Magnet making by stroking and by electricity stays in P3 (PDF p63). | This is an author working map. It needs independent page verification before the 75% guideline is computed. |
 
 ## Validation
 
