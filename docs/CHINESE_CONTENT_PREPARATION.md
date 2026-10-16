@@ -10,7 +10,7 @@ This is one review entry point for curriculum preparation and authoring contract
 | --- | --- | --- |
 | [Curriculum manifest](../content/chinese/curriculum.json) | Four course identities, official references, 104 course-specific outcome records and 1,796 character records | Source-based working inventory; independent grade/denominator audit pending |
 | [Contract schema](../contracts/chinese/1.schema.json) | Curriculum, original catalogue, frozen synthetic task plan, minimal Chinese intake and answer-event shapes | Proposed engineering contract; no app integration |
-| [Starter batch](../content/chinese/batches/starter-001.json) | Five original materials, 25 material questions and nine short repair questions | Author checked; independent review and owner sign-off pending |
+| [Starter batch](../content/chinese/batches/starter-001.json) | Five original materials, 25 material questions and one P2 look-alike/sound-alike character group (12 repair pools, 36 questions) | Author checked; independent review and owner sign-off pending |
 | [Task fixtures](../content/chinese/fixtures/) | Complete P2 examples for X=6, 10, 12 and 19 | Synthetic, deterministic validation examples; no learner data |
 | [Validator](../scripts/validate_chinese_content.py) and [boundary checks](../scripts/test_chinese_content_contracts.py) | Structural integrity and cross-file rejection cases | Standard-library authoring tools; not learning-engine implementation |
 
@@ -83,7 +83,7 @@ Private worksheet review informs the comparison of exercise formats with the off
 
 Before building the real importer, complete the private target-to-available-content comparison and record the owner's proceed decision under the existing Issue #3 gates. This draft does not satisfy that gate by publishing private evidence.
 
-Starter selection provenance: 座、晴、住 were selected as generic character/meaning examples from the official P2 recognition list (PDF page 3 for each course), not extracted from a private learner-error list. The author had already viewed private material, so this is not a blind selection and does not certify absence of coincidental overlap. No public target is presented as evidence that a particular learner made that mistake. No private scan or private error list is a public content source.
+Repair content is published as complete curriculum-level groups named by topic, authored together, per the Pilot Scope §4 rule. The starter group is "P2 look-alike and sound-alike characters": twelve characters from the official P2 recognition list, each contrasted with common look-alike or sound-alike distractors. Public groups are generic curriculum content; no public target, group composition or publication timing is evidence of any learner's errors. No private scan or private error list is a public content source.
 
 ## 3. Proposed engineering contracts
 
@@ -138,9 +138,13 @@ These general-practice fixtures test material/count contracts, not simulated lea
 
 No percentage is claimed. The release denominator is the independently verified, approved P2 **in-app scoped leaf inventory for each course**, with partially assessed capabilities explicitly bounded. Review must decide whether each proposed leaf needs finer splitting and reconcile character-specific mappings with skill leaves without double counting. Keep character inventory completion visible separately; adding hundreds of character records must not conceal missing reading or language capabilities. P3 general practice has separate available-content accounting; its imports remain deferred.
 
-A covered mapping needs reviewed questions for its required stages, valid keys/help, suitable objective interactions, rights/QA sign-off and usable offline assets. Empty leaves remain in the denominator. A single general passage item does not make an entire reading outcome covered. The first batch has only three complete draft character repair pools per P2 course; it is not a 75% release bank. No fixed per-stage authoring quota is introduced.
+**Owner decision (2026-10-16) — coverage counting:** the 75% guideline is measured against **finer skill leaves**, not the current broad rows. Before freezing IDs, the independent source audit must (1) split broad in-app/partial leaves (for example character form/meaning, punctuation/sentence meaning, explicit-information retrieval) into separately reviewable leaves, and (2) add explicit **language-use leaves** — classifiers (量词), collocation (搭配), sentence patterns (句型) and word choice — each mapped to a verified syllabus page rather than folded into character recognition. **Character-group coverage is reported separately alongside** the skill percentage, never merged into it. New leaves need real source page references from the official PDFs; none are invented in this revision.
 
-Author review checked keys against each stimulus, plausible single-answer interpretation, hint-before-retry ordering, explanations, basic readability and source applicability. All four options are visible for inspection below. The supplied changes-requested review covered the review document, schemas, validator and three initial fixtures, but explicitly excluded the raw data, test file and full source audit. It is not full content agreement or owner sign-off. Version 2 removes author scoping notes from child explanations, simplifies vocabulary, changes the general 晴 cloze to 放晴 while retaining a different 晴天 repair context, and replaces the disputed 座位/坐位 item with 这座桥. No dictionary/educator ruling about the removed wording is claimed; its replacement remains flagged for revision review. No artwork/audio assets are used. Rights evidence is original authoring, with final owner rights review pending; official sources establish curriculum facts and do not license copied school questions.
+A covered mapping needs reviewed questions for its required stages, valid keys/help, suitable objective interactions, rights/QA sign-off and usable offline assets. Empty leaves remain in the denominator. A single general passage item does not make an entire reading outcome covered. The first batch has one complete draft character group (twelve repair pools) per P2 course; it is not a 75% release bank. No fixed per-stage authoring quota is introduced.
+
+Author review checked keys against each stimulus, plausible single-answer interpretation, hint-before-retry ordering, explanations, basic readability and source applicability. All four options are visible for inspection below. The supplied changes-requested review covered the review document, schemas, validator and three initial fixtures, but explicitly excluded the raw data, test file and full source audit. It is not full content agreement or owner sign-off. Version 2 removes author scoping notes from child explanations, simplifies vocabulary, changes the general 晴 cloze to 放晴 while retaining a different 晴天 repair context, and replaces the disputed 座位/坐位 item with 这座桥. No dictionary/educator ruling about the removed wording is claimed; its replacement remains flagged for revision review. Version 3 (owner-directed review revision) replaces the three standalone repair pools with one twelve-character P2 look-alike/sound-alike group renamed by topic (`zh-p2-confusable-*`); gives the 晴 related-use item a new 晴朗 context so it no longer duplicates the 放晴 general cloze; removes the 座 cue from a 住 item; replaces 按住 with 抓住 and 一楼小室 with 一楼活动室; and uses look-alike distractors (永/木/禾) for the 水 cloze. The 这座桥 item stays flagged for owner resolution (reviewer view: standard classifier use). No artwork/audio assets are used.
+
+**Rights check pending:** `curriculum.json` reproduces the official P2/P3 character lists in full as data (1,796 records with page references). The lists are largely factual, but whether publishing them in full in a public repository is acceptable needs an explicit owner rights decision before merge; alternatives are publishing counts, IDs and page references only, or keeping the full lists in private preparation. Rights evidence is original authoring, with final owner rights review pending; official sources establish curriculum facts and do not license copied school questions.
 
 Review sequence: independently review the revised source/content; resolve every disputed/ambiguous item (qualified educator if the owner cannot resolve it); record the random 20% sample of AI-agreed items and its outcomes; owner signs off the batch. There is no recorded AI-agreed pool yet, so sampled IDs are currently empty. Record actual IDs/outcomes in the batch log after that review, not invented approvals. Target-device glyph/readability and offline rendering QA wait for a later authorized UI build.
 
@@ -160,7 +164,7 @@ Before building Chinese: approve the independently audited source map/leaf bound
 
 ## 6. Starter content review
 
-Version 2. These are newly drafted generic examples, not extracted learner targets or copied passages. `[空1]` is a readable substitute for a linked blank token; annotation text and pinyin are combined for this review view only. App rendering remains unimplemented.
+Version 3. These are newly drafted generic examples, not extracted learner targets or copied passages. `[空n]` is a readable substitute for a linked blank token; annotation text and pinyin are combined for this review view only. App rendering remains unimplemented.
 
 ### zh-m01 · 种豆子
 
@@ -182,7 +186,7 @@ Courses: p2_chinese, p2_higher_chinese.
 
 > 【图书角通知】
 > 星期三下午三点，图书角开放。
-> 地点：一楼小室。
+> 地点：一楼活动室。
 > 请带借书卡，每人可借两本书。
 > 请在下个星期三还书。
 
@@ -190,7 +194,7 @@ Courses: p2_chinese, p2_higher_chinese.
 | --- | --- | --- | --- | --- |
 | zh-m02.q1 | 图书角哪一天开放？<br>1 星期一；2 星期二；3 星期三；4 星期四 | 星期三 | 看通知中的开放时间。 | 通知写明星期三开放。 |
 | zh-m02.q2 | 图书角几点开放？<br>1 上午三点；2 下午三点；3 下午四点；4 上午四点 | 下午三点 | 注意“上午”和“下午”。 | 通知写明下午三点。 |
-| zh-m02.q3 | 图书角在哪里？<br>1 一楼小室；2 二楼小室；3 一楼大室；4 二楼大室 | 一楼小室 | 找“地点”一栏。 | 地点一栏写的是一楼小室。 |
+| zh-m02.q3 | 图书角在哪里？<br>1 一楼活动室；2 二楼活动室；3 一楼音乐室；4 二楼音乐室 | 一楼活动室 | 找“地点”一栏。 | 地点一栏写的是一楼活动室。 |
 | zh-m02.q4 | 借书时要带什么？<br>1 水杯；2 画纸；3 球；4 借书卡 | 借书卡 | 找“请带”后面的东西。 | 通知要求带借书卡。 |
 | zh-m02.q5 | 每人可借几本书？<br>1 一本；2 两本；3 三本；4 四本 | 两本 | 找“每人可借”后面的数目。 | 通知写明每人可借两本书。 |
 
@@ -205,7 +209,7 @@ Courses: p2_chinese, p2_higher_chinese.
 | zh-m03.q1 | 第1空选哪个字？<br>1 晴；2 睛；3 请；4 情 | 晴 | 这里写的是雨后的天气。 | “放晴”是说天不再下雨，太阳出来了。 |
 | zh-m03.q2 | 第2空选哪个词？<br>1 写字；2 洗澡；3 唱歌；4 看书 | 唱歌 | 看看做这个动作的是谁。 | 这段话写小鸟在树上唱歌。 |
 | zh-m03.q3 | 第3空选哪个词？<br>1 游泳；2 走路；3 睡觉；4 吃饭 | 走路 | 留意“小路”和后面的“走累了”。 | 小路和“走累了”告诉我们，这里应选“走路”。 |
-| zh-m03.q4 | 第4空选哪个字？<br>1 沙；2 风；3 石；4 水 | 水 | 想想“喝了几口”后面可以接什么。 | 水可以喝，另外三个选项不合适。 |
+| zh-m03.q4 | 第4空选哪个字？<br>1 永；2 水；3 木；4 禾 | 水 | 想想“喝了几口”后面可以接什么。 | “水”可以喝。“永”和“水”样子很像，要看清楚。 |
 | zh-m03.q5 | 第5空选哪个字？<br>1 桶；2 桥；3 床；4 窗 | 桶 | 想想放垃圾的容器叫什么。 | 空瓶要放进垃圾桶，这里选“桶”。 |
 
 ### zh-m04 · 找雨伞
@@ -236,18 +240,45 @@ Courses: p3_chinese, p3_higher_chinese.
 | zh-m05.q4 | 他们加了几块硬纸板？<br>1 一块；2 三块；3 四块；4 两块 | 两块 | 找“硬纸板”前面的数目。 | 他们加了两块硬纸板。 |
 | zh-m05.q5 | 较重的书后来放在哪里？<br>1 盒子旁边；2 下面；3 上面；4 桌子底下 | 下面 | 找“较重的书”后面的地方。 | 文中写明把较重的书放在下面。 |
 
-### Short character repair pools
+### P2 look-alike and sound-alike character group
 
-Each pool has one targeted item, one related use and one broader application. This small supply demonstrates mappings; it is not evidence of varied production-bank capacity. All questions are 4+ option recognition, not independent spelling or handwriting.
+One curriculum-level group of twelve P2 recognition-list characters, authored together. Each pool has one targeted item, one related use and one broader application. All questions are 4+ option recognition, not independent spelling or handwriting. Courses: p2_chinese, p2_higher_chinese.
 
 | ID / stage | Question and options | Key | Hint | Explanation |
 | --- | --- | --- | --- | --- |
-| zh-short-u5ea7.q1 / exact | 一[空1]大山<br>1 座；2 坐；3 作；4 做 | 座 | 想一想，表示山的数量时用哪个字？ | “一座大山”用“座”表示山的数量。 |
-| zh-short-u5ea7.q2 / similar | 这[空1]桥很长。<br>1 坐；2 作；3 座；4 做 | 座 | 这里要选表示桥的数量的字。 | 说一座桥、这座桥，都用“座”。 |
-| zh-short-u5ea7.q3 / generic | 车上没有空[空1]了，只能站着。<br>1 做；2 座；3 作；4 坐 | 座 | 这里缺的是表示可以坐下的位置的字。 | 可以坐下的位置是“座”。有空座，才有地方坐。 |
-| zh-short-u6674.q1 / exact | 天空没有云，今天是[空1]天。<br>1 睛；2 情；3 请；4 晴 | 晴 | 想一想，哪个字用来写天气？ | 没有云、天气好，可以说“晴天”。 |
-| zh-short-u6674.q2 / similar | 雨停了，天也放[空1]了。<br>1 晴；2 请；3 情；4 睛 | 晴 | 看看哪个字与天气有关。 | “放晴”表示雨后天空变晴。 |
-| zh-short-u6674.q3 / generic | 天气预报 (yù bào)说，明天[空1]，可以到公园走走。<br>1 请；2 睛；3 晴；4 情 | 晴 | 注意“天气预报”。 | 这里说的是明天的天气，应选“晴”。 |
-| zh-short-u4f4f.q1 / exact | 我[空1]在这座组 (zǔ)屋。<br>1 往；2 住；3 主；4 注 | 住 | 这里说的是居住的地方。 | “住在”表示居住在某个地方。 |
-| zh-short-u4f4f.q2 / similar | 出门时，我记[空1]了妈妈的话。<br>1 主；2 往；3 注；4 住 | 住 | 这里要组成表示牢记的词。 | “记住”表示把事情牢牢记在心里。 |
-| zh-short-u4f4f.q3 / generic | 风太大了，请把门按[空1]，别让它关上。<br>1 住；2 注；3 往；4 主 | 住 | 这里表示保持门的位置。 | “按住”表示用力按着，让它保持原来的位置。 |
+| zh-p2-confusable-u5ea7.q1 / exact | 一[空1]大山<br>1 座；2 坐；3 作；4 做 | 座 | 想一想，表示山的数量时用哪个字？ | “一座大山”用“座”表示山的数量。 |
+| zh-p2-confusable-u5ea7.q2 / similar | 这[空1]桥很长。<br>1 坐；2 作；3 座；4 做 | 座 | 这里要选表示桥的数量的字。 | 说一座桥、这座桥，都用“座”。 |
+| zh-p2-confusable-u5ea7.q3 / generic | 车上没有空[空1]了，只能站着。<br>1 做；2 座；3 作；4 坐 | 座 | 这里缺的是表示可以坐下的位置的字。 | 可以坐下的位置是“座”。有空座，才有地方坐。 |
+| zh-p2-confusable-u6674.q1 / exact | 天空没有云，今天是[空1]天。<br>1 睛；2 情；3 请；4 晴 | 晴 | 想一想，哪个字用来写天气？ | 没有云、天气好，可以说“晴天”。 |
+| zh-p2-confusable-u6674.q2 / similar | 今天天气[空1]朗，我们去海边玩。<br>1 晴；2 请；3 情；4 睛 | 晴 | 看看哪个字和天气有关。 | “晴朗”表示天上没有云，阳光很好。 |
+| zh-p2-confusable-u6674.q3 / generic | 天气预报 (yù bào)说，明天[空1]，可以到公园走走。<br>1 请；2 睛；3 晴；4 情 | 晴 | 注意“天气预报”。 | 这里说的是明天的天气，应选“晴”。 |
+| zh-p2-confusable-u4f4f.q1 / exact | 我们一家人[空1]在组 (zǔ)屋里。<br>1 往；2 住；3 主；4 注 | 住 | 这里说的是居住的地方。 | “住在”表示居住在某个地方。 |
+| zh-p2-confusable-u4f4f.q2 / similar | 出门时，我记[空1]了妈妈的话。<br>1 主；2 往；3 注；4 住 | 住 | 这里要组成表示牢记的词。 | “记住”表示把事情牢牢记在心里。 |
+| zh-p2-confusable-u4f4f.q3 / generic | 上车后，请抓[空1]扶手。<br>1 住；2 注；3 往；4 主 | 住 | 想一想，“抓”后面加哪个字，表示拿着不放开？ | “抓住”表示用手牢牢拿着，不放开。 |
+| zh-p2-confusable-u6e05.q1 / exact | 河水很[空1]，可以看见小鱼。<br>1 请；2 清；3 情；4 晴 | 清 | 想一想，哪个字和水有关？ | “清”有三点水。“水很清”就是水很干净，能看到底。 |
+| zh-p2-confusable-u6e05.q2 / similar | 老师讲得很[空1]楚，我们都听懂了。<br>1 晴；2 情；3 清；4 请 | 清 | 这里要组成一个表示明白、不模糊的词。 | “清楚”表示明白、不模糊。 |
+| zh-p2-confusable-u6e05.q3 / generic | 吃饭前，我用[空1]水把手洗干净。<br>1 情；2 清；3 请；4 晴 | 清 | 想想洗手用的是什么样的水。 | “清水”是干净的水。“清”有三点水，和水有关。 |
+| zh-p2-confusable-u5df2.q1 / exact | 我[空1]经做完功课了。<br>1 己；2 已；3 以；4 乙 | 已 | 这里说的是事情做完了。 | “已经”表示事情做完了。“已”的左上角封了一半，“自己”的“己”不封口。 |
+| zh-p2-confusable-u5df2.q2 / similar | 天[空1]经黑了，我们回家吧。<br>1 以；2 己；3 已；4 乙 | 已 | 想一想，表示事情已经发生的词怎么写？ | “已经”表示事情已经发生了。 |
+| zh-p2-confusable-u5df2.q3 / generic | 我们到的时候，电影[空1]经开始了。<br>1 乙；2 以；3 己；4 已 | 已 | 电影是在我们到之前开始的。 | 电影在我们到之前就开始了，所以用“已经”。 |
+| zh-p2-confusable-u5356.q1 / exact | 小贩在路边[空1]水果，一个苹果一块钱。<br>1 买；2 卖；3 实；4 读 | 卖 | 小贩把水果给别人，还收钱。 | 把东西给别人、收钱是“卖”；付钱拿东西是“买”。“卖”比“买”上面多一个“十”。 |
+| zh-p2-confusable-u5356.q2 / similar | 小贩大声叫：“[空1]西瓜啦，又大又甜！”<br>1 实；2 买；3 卖；4 读 | 卖 | 小贩想让别人来买他的西瓜。 | 小贩是在“卖”西瓜，想请别人来买。 |
+| zh-p2-confusable-u5356.q3 / generic | 姐姐把旧玩具[空1]了，得到十块钱。<br>1 卖；2 读；3 买；4 实 | 卖 | 想一想，得到钱的人是在买还是卖？ | 把东西给别人、得到钱，是“卖”。 |
+| zh-p2-confusable-u5019.q1 / exact | 放学的时[空1]，下起了大雨。<br>1 侯；2 候；3 猴；4 喉 | 候 | 这里要组成表示时间的词。 | “时候”表示时间。“候”中间有一短竖，“侯”没有。 |
+| zh-p2-confusable-u5019.q2 / similar | 我们在车站等[空1]巴士。<br>1 猴；2 侯；3 候；4 喉 | 候 | 这里要组成一个和“等”意思差不多的词。 | “等候”就是等。“候”中间有一短竖。 |
+| zh-p2-confusable-u5019.q3 / generic | 见到老师，我们要向老师问[空1]。<br>1 候；2 侯；3 猴；4 喉 | 候 | 这里说的是见面时打招呼。 | “问候”是见面时向别人打招呼、表示关心。 |
+| zh-p2-confusable-u6839.q1 / exact | 我用一[空1]绳子跳绳。<br>1 跟；2 根；3 很；4 银 | 根 | 这里要选一个数东西的字。 | 长长的东西可以用“一根”来数。“根”是木字旁。 |
+| zh-p2-confusable-u6839.q2 / similar | 大树的[空1]长在泥土里。<br>1 很；2 跟；3 银；4 根 | 根 | 想想大树哪一部分在泥土下面。 | 树在泥土下面的部分叫“根”。“根”是木字旁，和树木有关。 |
+| zh-p2-confusable-u6839.q3 / generic | 桌上有三[空1]筷子。<br>1 根；2 跟；3 很；4 恨 | 根 | 想一想，筷子可以怎么数？ | 细长的东西可以用“根”来数，比如一根筷子。 |
+| zh-p2-confusable-u64cd.q1 / exact | 早上，我们在礼堂做早[空1]。<br>1 澡；2 操；3 燥；4 躁 | 操 | 想一想，早上大家一起做的运动叫什么？ | “早操”是早上做的运动。做操要用手，所以“操”是提手旁。 |
+| zh-p2-confusable-u64cd.q2 / similar | 下课了，同学们在[空1]场上跑步。<br>1 澡；2 燥；3 操；4 躁 | 操 | 想一想，学校里跑步的地方叫什么？ | “操场”是学校里运动的地方，写“操”。 |
+| zh-p2-confusable-u64cd.q3 / generic | 姐姐喜欢学体[空1]，她会翻跟头。<br>1 躁；2 操；3 澡；4 燥 | 操 | 这里说的是一种运动。 | “体操”是一种运动。“操”是提手旁，和用手做动作有关。 |
+| zh-p2-confusable-u4e4c.q1 / exact | 天上飘来一片[空1]云，快要下雨了。<br>1 鸟；2 乌；3 马；4 岛 | 乌 | 想一想，快下雨时，云是什么颜色？ | “乌云”是黑色的云。“乌”比“鸟”少一点。 |
+| zh-p2-confusable-u4e4c.q2 / similar | 树上有一只[空1]鸦 (yā)。<br>1 鸟；2 马；3 乌；4 岛 | 乌 | 这是一种黑色的鸟的名字。 | “乌鸦”是一种全身黑色的鸟，写“乌”，没有那一点。 |
+| zh-p2-confusable-u4e4c.q3 / generic | 她的头发[空1]黑发亮。<br>1 岛；2 乌；3 鸟；4 马 | 乌 | 这里要组成一个表示很黑的词。 | “乌黑”就是很黑。 |
+| zh-p2-confusable-u6e34.q1 / exact | 跑完步，我口[空1]了，想喝水。<br>1 喝；2 渴；3 揭；4 歇 | 渴 | 想一想，想喝水时是什么感觉？ | 想喝水的感觉叫“口渴”。“渴”是三点水，因为身体缺水。 |
+| zh-p2-confusable-u6e34.q2 / similar | 很久没下雨，小树也[空1]得低下了头。<br>1 歇；2 喝；3 渴；4 揭 | 渴 | 小树很久没有喝到水了。 | 小树缺水，所以说它“渴”了。 |
+| zh-p2-confusable-u6e34.q3 / generic | 小狗[空1]了，我给它倒了一碗水。<br>1 渴；2 揭；3 喝；4 歇 | 渴 | 为什么要给小狗倒水？ | 小狗想喝水，是因为它“渴”了。 |
+| zh-p2-confusable-u4f4e.q1 / exact | 这张桌子太[空1]了，弟弟要弯着腰写字。<br>1 底；2 低；3 抵；4 纸 | 低 | 想一想“高”的反义词。 | “低”和“高”意思相反。“低”是单人旁，“底”的上面是“广”字头。 |
+| zh-p2-confusable-u4f4e.q2 / similar | 说话时，请[空1]声一点，别吵醒弟弟。<br>1 纸；2 底；3 低；4 抵 | 低 | 这里要组成表示声音小的词。 | “低声”就是声音小一点。 |
+| zh-p2-confusable-u4f4e.q3 / generic | 小鸟飞得很[空1]，快碰到草地了。<br>1 抵；2 纸；3 底；4 低 | 低 | 快碰到草地，说明小鸟飞得高还是不高？ | 离地面很近，说明飞得“低”。 |

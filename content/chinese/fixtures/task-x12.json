@@ -2,7 +2,7 @@
   "schema_version": "chinese-task-plan/1",
   "plan_id": "zh-fixture-x12",
   "content_batch_id": "zh-starter-001",
-  "content_version": 2,
+  "content_version": 3,
   "manifest_version": "zh-2024-p2p3-draft.1",
   "course": "p2_chinese",
   "x": 12,
@@ -63,7 +63,7 @@
     },
     {
       "item_id": "zh-m02.q3",
-      "item_version": 2,
+      "item_version": 3,
       "role": "general",
       "target_ref": null,
       "starting_stage": null
@@ -105,7 +105,7 @@
     },
     {
       "item_id": "zh-m03.q4",
-      "item_version": 2,
+      "item_version": 3,
       "role": "general",
       "target_ref": null,
       "starting_stage": null

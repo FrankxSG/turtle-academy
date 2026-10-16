@@ -42,7 +42,7 @@ class Contracts(unittest.TestCase):
 
     def test_materials_cannot_be_interleaved_with_short_items(self):
         p = copy.deepcopy(self.plan)
-        p['slots'].insert(1, {'item_id': 'zh-short-u5ea7.q1', 'item_version': 2,
+        p['slots'].insert(1, {'item_id': 'zh-p2-confusable-u5ea7.q1', 'item_version': 3,
                               'role': 'repair', 'target_ref': 'zh.p2_chinese.char.u5ea7',
                               'starting_stage': 'exact'})
         p.update(planned_main_count=11, halfway_count=6)
@@ -62,7 +62,7 @@ class Contracts(unittest.TestCase):
                 check_catalogue(self.curriculum, b)
 
     def test_missing_repair_stage(self):
-        self.batch['items'] = [r for r in self.batch['items'] if r['id'] != 'zh-short-u5ea7.q3']
+        self.batch['items'] = [r for r in self.batch['items'] if r['id'] != 'zh-p2-confusable-u5ea7.q3']
         with self.assertRaisesRegex(Invalid, 'incomplete_repair_pool'):
             check_catalogue(self.curriculum, self.batch)
 

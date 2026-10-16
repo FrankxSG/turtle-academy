@@ -1,7 +1,7 @@
 {
   "schema_version": "chinese-content/1",
   "batch_id": "zh-starter-001",
-  "version": 2,
+  "version": 3,
   "curriculum_manifest_version": "zh-2024-p2p3-draft.1",
   "status": "author_checked_pending_independent_and_owner_review",
   "materials": [
@@ -29,14 +29,14 @@
     },
     {
       "id": "zh-m02",
-      "version": 2,
+      "version": 3,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
       ],
       "kind": "visual_text",
       "title": "图书角通知",
-      "body": "【图书角通知】\n星期三下午三点，图书角开放。\n地点：一楼小室。\n请带借书卡，每人可借两本书。\n请在下个星期三还书。",
+      "body": "【图书角通知】\n星期三下午三点，图书角开放。\n地点：一楼活动室。\n请带借书卡，每人可借两本书。\n请在下个星期三还书。",
       "question_ids": [
         "zh-m02.q1",
         "zh-m02.q2",
@@ -461,7 +461,7 @@
     },
     {
       "id": "zh-m02.q3",
-      "version": 2,
+      "version": 3,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -477,24 +477,24 @@
       "options": [
         {
           "id": "opt-1",
-          "text": "一楼小室"
+          "text": "一楼活动室"
         },
         {
           "id": "opt-2",
-          "text": "二楼小室"
+          "text": "二楼活动室"
         },
         {
           "id": "opt-3",
-          "text": "一楼大室"
+          "text": "一楼音乐室"
         },
         {
           "id": "opt-4",
-          "text": "二楼大室"
+          "text": "二楼音乐室"
         }
       ],
       "correct_option_id": "opt-1",
       "hint": "找“地点”一栏。",
-      "explanation": "地点一栏写的是一楼小室。",
+      "explanation": "地点一栏写的是一楼活动室。",
       "rationale": "按材料中明示的信息选择，干扰项分别改变一个信息。",
       "material_id": "zh-m02",
       "stage": null,
@@ -731,7 +731,7 @@
     },
     {
       "id": "zh-m03.q4",
-      "version": 2,
+      "version": 3,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -747,24 +747,24 @@
       "options": [
         {
           "id": "opt-1",
-          "text": "沙"
+          "text": "永"
         },
         {
           "id": "opt-2",
-          "text": "风"
+          "text": "水"
         },
         {
           "id": "opt-3",
-          "text": "石"
+          "text": "木"
         },
         {
           "id": "opt-4",
-          "text": "水"
+          "text": "禾"
         }
       ],
-      "correct_option_id": "opt-4",
+      "correct_option_id": "opt-2",
       "hint": "想想“喝了几口”后面可以接什么。",
-      "explanation": "水可以喝，另外三个选项不合适。",
+      "explanation": "“水”可以喝。“永”和“水”样子很像，要看清楚。",
       "rationale": "只评估选择答案的能力，不推断独立书写能力。 订正只解释答案；课程范围和评估限制留在作者说明中。",
       "material_id": "zh-m03",
       "stage": null,
@@ -1270,8 +1270,8 @@
       "blank_ref": null
     },
     {
-      "id": "zh-short-u5ea7.q1",
-      "version": 2,
+      "id": "zh-p2-confusable-u5ea7.q1",
+      "version": 3,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -1308,7 +1308,7 @@
       "correct_option_id": "opt-1",
       "hint": "想一想，表示山的数量时用哪个字？",
       "explanation": "“一座大山”用“座”表示山的数量。",
-      "rationale": "辨认“座”在不同用法中的字形与字义；只评估辨认，不评估手写。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“座”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
       "material_id": null,
       "stage": "exact",
       "provenance": "original_generic_author_draft",
@@ -1316,15 +1316,15 @@
       "blanks": [
         {
           "id": "blank-1",
-          "question_id": "zh-short-u5ea7.q1"
+          "question_id": "zh-p2-confusable-u5ea7.q1"
         }
       ],
       "annotations": [],
       "blank_ref": "blank-1"
     },
     {
-      "id": "zh-short-u5ea7.q2",
-      "version": 2,
+      "id": "zh-p2-confusable-u5ea7.q2",
+      "version": 3,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -1361,7 +1361,7 @@
       "correct_option_id": "opt-3",
       "hint": "这里要选表示桥的数量的字。",
       "explanation": "说一座桥、这座桥，都用“座”。",
-      "rationale": "用桥的数量表达辨认“座”；撤掉可能引起词形变体争议的旧题，不裁定词典变体。只评估辨认。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“座”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
       "material_id": null,
       "stage": "similar",
       "provenance": "original_generic_author_draft",
@@ -1369,15 +1369,15 @@
       "blanks": [
         {
           "id": "blank-1",
-          "question_id": "zh-short-u5ea7.q2"
+          "question_id": "zh-p2-confusable-u5ea7.q2"
         }
       ],
       "annotations": [],
       "blank_ref": "blank-1"
     },
     {
-      "id": "zh-short-u5ea7.q3",
-      "version": 2,
+      "id": "zh-p2-confusable-u5ea7.q3",
+      "version": 3,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -1414,7 +1414,7 @@
       "correct_option_id": "opt-2",
       "hint": "这里缺的是表示可以坐下的位置的字。",
       "explanation": "可以坐下的位置是“座”。有空座，才有地方坐。",
-      "rationale": "辨认“座”在不同用法中的字形与字义；只评估辨认，不评估手写。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“座”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
       "material_id": null,
       "stage": "generic",
       "provenance": "original_generic_author_draft",
@@ -1422,15 +1422,15 @@
       "blanks": [
         {
           "id": "blank-1",
-          "question_id": "zh-short-u5ea7.q3"
+          "question_id": "zh-p2-confusable-u5ea7.q3"
         }
       ],
       "annotations": [],
       "blank_ref": "blank-1"
     },
     {
-      "id": "zh-short-u6674.q1",
-      "version": 2,
+      "id": "zh-p2-confusable-u6674.q1",
+      "version": 3,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -1467,7 +1467,7 @@
       "correct_option_id": "opt-4",
       "hint": "想一想，哪个字用来写天气？",
       "explanation": "没有云、天气好，可以说“晴天”。",
-      "rationale": "辨认“晴”在不同用法中的字形与字义；只评估辨认，不评估手写。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“晴”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
       "material_id": null,
       "stage": "exact",
       "provenance": "original_generic_author_draft",
@@ -1475,15 +1475,15 @@
       "blanks": [
         {
           "id": "blank-1",
-          "question_id": "zh-short-u6674.q1"
+          "question_id": "zh-p2-confusable-u6674.q1"
         }
       ],
       "annotations": [],
       "blank_ref": "blank-1"
     },
     {
-      "id": "zh-short-u6674.q2",
-      "version": 2,
+      "id": "zh-p2-confusable-u6674.q2",
+      "version": 3,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -1498,7 +1498,7 @@
       ],
       "family": "character",
       "format": "mcq_4plus",
-      "stem": "雨停了，天也放{{blank-1}}了。",
+      "stem": "今天天气{{blank-1}}朗，我们去海边玩。",
       "options": [
         {
           "id": "opt-1",
@@ -1518,9 +1518,9 @@
         }
       ],
       "correct_option_id": "opt-1",
-      "hint": "看看哪个字与天气有关。",
-      "explanation": "“放晴”表示雨后天空变晴。",
-      "rationale": "辨认“晴”在不同用法中的字形与字义；只评估辨认，不评估手写。",
+      "hint": "看看哪个字和天气有关。",
+      "explanation": "“晴朗”表示天上没有云，阳光很好。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“晴”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
       "material_id": null,
       "stage": "similar",
       "provenance": "original_generic_author_draft",
@@ -1528,15 +1528,15 @@
       "blanks": [
         {
           "id": "blank-1",
-          "question_id": "zh-short-u6674.q2"
+          "question_id": "zh-p2-confusable-u6674.q2"
         }
       ],
       "annotations": [],
       "blank_ref": "blank-1"
     },
     {
-      "id": "zh-short-u6674.q3",
-      "version": 2,
+      "id": "zh-p2-confusable-u6674.q3",
+      "version": 3,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -1573,7 +1573,7 @@
       "correct_option_id": "opt-3",
       "hint": "注意“天气预报”。",
       "explanation": "这里说的是明天的天气，应选“晴”。",
-      "rationale": "辨认“晴”在不同用法中的字形与字义；只评估辨认，不评估手写。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“晴”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
       "material_id": null,
       "stage": "generic",
       "provenance": "original_generic_author_draft",
@@ -1581,7 +1581,7 @@
       "blanks": [
         {
           "id": "blank-1",
-          "question_id": "zh-short-u6674.q3"
+          "question_id": "zh-p2-confusable-u6674.q3"
         }
       ],
       "annotations": [
@@ -1594,8 +1594,8 @@
       "blank_ref": "blank-1"
     },
     {
-      "id": "zh-short-u4f4f.q1",
-      "version": 2,
+      "id": "zh-p2-confusable-u4f4f.q1",
+      "version": 3,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -1610,7 +1610,7 @@
       ],
       "family": "character",
       "format": "mcq_4plus",
-      "stem": "我{{blank-1}}在这座{{pinyin-1}}屋。",
+      "stem": "我们一家人{{blank-1}}在{{pinyin-1}}屋里。",
       "options": [
         {
           "id": "opt-1",
@@ -1632,7 +1632,7 @@
       "correct_option_id": "opt-2",
       "hint": "这里说的是居住的地方。",
       "explanation": "“住在”表示居住在某个地方。",
-      "rationale": "辨认“住”在不同用法中的字形与字义；只评估辨认，不评估手写。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“住”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
       "material_id": null,
       "stage": "exact",
       "provenance": "original_generic_author_draft",
@@ -1640,7 +1640,7 @@
       "blanks": [
         {
           "id": "blank-1",
-          "question_id": "zh-short-u4f4f.q1"
+          "question_id": "zh-p2-confusable-u4f4f.q1"
         }
       ],
       "annotations": [
@@ -1653,8 +1653,8 @@
       "blank_ref": "blank-1"
     },
     {
-      "id": "zh-short-u4f4f.q2",
-      "version": 2,
+      "id": "zh-p2-confusable-u4f4f.q2",
+      "version": 3,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -1691,7 +1691,7 @@
       "correct_option_id": "opt-4",
       "hint": "这里要组成表示牢记的词。",
       "explanation": "“记住”表示把事情牢牢记在心里。",
-      "rationale": "辨认“住”在不同用法中的字形与字义；只评估辨认，不评估手写。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“住”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
       "material_id": null,
       "stage": "similar",
       "provenance": "original_generic_author_draft",
@@ -1699,15 +1699,15 @@
       "blanks": [
         {
           "id": "blank-1",
-          "question_id": "zh-short-u4f4f.q2"
+          "question_id": "zh-p2-confusable-u4f4f.q2"
         }
       ],
       "annotations": [],
       "blank_ref": "blank-1"
     },
     {
-      "id": "zh-short-u4f4f.q3",
-      "version": 2,
+      "id": "zh-p2-confusable-u4f4f.q3",
+      "version": 3,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -1722,7 +1722,7 @@
       ],
       "family": "character",
       "format": "mcq_4plus",
-      "stem": "风太大了，请把门按{{blank-1}}，别让它关上。",
+      "stem": "上车后，请抓{{blank-1}}扶手。",
       "options": [
         {
           "id": "opt-1",
@@ -1742,9 +1742,9 @@
         }
       ],
       "correct_option_id": "opt-1",
-      "hint": "这里表示保持门的位置。",
-      "explanation": "“按住”表示用力按着，让它保持原来的位置。",
-      "rationale": "辨认“住”在不同用法中的字形与字义；只评估辨认，不评估手写。",
+      "hint": "想一想，“抓”后面加哪个字，表示拿着不放开？",
+      "explanation": "“抓住”表示用手牢牢拿着，不放开。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“住”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
       "material_id": null,
       "stage": "generic",
       "provenance": "original_generic_author_draft",
@@ -1752,7 +1752,1444 @@
       "blanks": [
         {
           "id": "blank-1",
-          "question_id": "zh-short-u4f4f.q3"
+          "question_id": "zh-p2-confusable-u4f4f.q3"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u6e05.q1",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u6e05",
+        "zh.p2_higher_chinese.char.u6e05"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "河水很{{blank-1}}，可以看见小鱼。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "请"
+        },
+        {
+          "id": "opt-2",
+          "text": "清"
+        },
+        {
+          "id": "opt-3",
+          "text": "情"
+        },
+        {
+          "id": "opt-4",
+          "text": "晴"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "想一想，哪个字和水有关？",
+      "explanation": "“清”有三点水。“水很清”就是水很干净，能看到底。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“清”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "exact",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u6e05.q1"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u6e05.q2",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u6e05",
+        "zh.p2_higher_chinese.char.u6e05"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "老师讲得很{{blank-1}}楚，我们都听懂了。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "晴"
+        },
+        {
+          "id": "opt-2",
+          "text": "情"
+        },
+        {
+          "id": "opt-3",
+          "text": "清"
+        },
+        {
+          "id": "opt-4",
+          "text": "请"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "这里要组成一个表示明白、不模糊的词。",
+      "explanation": "“清楚”表示明白、不模糊。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“清”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "similar",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u6e05.q2"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u6e05.q3",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u6e05",
+        "zh.p2_higher_chinese.char.u6e05"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "吃饭前，我用{{blank-1}}水把手洗干净。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "情"
+        },
+        {
+          "id": "opt-2",
+          "text": "清"
+        },
+        {
+          "id": "opt-3",
+          "text": "请"
+        },
+        {
+          "id": "opt-4",
+          "text": "晴"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "想想洗手用的是什么样的水。",
+      "explanation": "“清水”是干净的水。“清”有三点水，和水有关。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“清”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "generic",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u6e05.q3"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u5df2.q1",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u5df2",
+        "zh.p2_higher_chinese.char.u5df2"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "我{{blank-1}}经做完功课了。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "己"
+        },
+        {
+          "id": "opt-2",
+          "text": "已"
+        },
+        {
+          "id": "opt-3",
+          "text": "以"
+        },
+        {
+          "id": "opt-4",
+          "text": "乙"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "这里说的是事情做完了。",
+      "explanation": "“已经”表示事情做完了。“已”的左上角封了一半，“自己”的“己”不封口。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“已”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "exact",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u5df2.q1"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u5df2.q2",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u5df2",
+        "zh.p2_higher_chinese.char.u5df2"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "天{{blank-1}}经黑了，我们回家吧。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "以"
+        },
+        {
+          "id": "opt-2",
+          "text": "己"
+        },
+        {
+          "id": "opt-3",
+          "text": "已"
+        },
+        {
+          "id": "opt-4",
+          "text": "乙"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "想一想，表示事情已经发生的词怎么写？",
+      "explanation": "“已经”表示事情已经发生了。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“已”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "similar",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u5df2.q2"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u5df2.q3",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u5df2",
+        "zh.p2_higher_chinese.char.u5df2"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "我们到的时候，电影{{blank-1}}经开始了。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "乙"
+        },
+        {
+          "id": "opt-2",
+          "text": "以"
+        },
+        {
+          "id": "opt-3",
+          "text": "己"
+        },
+        {
+          "id": "opt-4",
+          "text": "已"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "电影是在我们到之前开始的。",
+      "explanation": "电影在我们到之前就开始了，所以用“已经”。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“已”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "generic",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u5df2.q3"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u5356.q1",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u5356",
+        "zh.p2_higher_chinese.char.u5356"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "小贩在路边{{blank-1}}水果，一个苹果一块钱。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "买"
+        },
+        {
+          "id": "opt-2",
+          "text": "卖"
+        },
+        {
+          "id": "opt-3",
+          "text": "实"
+        },
+        {
+          "id": "opt-4",
+          "text": "读"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "小贩把水果给别人，还收钱。",
+      "explanation": "把东西给别人、收钱是“卖”；付钱拿东西是“买”。“卖”比“买”上面多一个“十”。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“卖”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "exact",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u5356.q1"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u5356.q2",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u5356",
+        "zh.p2_higher_chinese.char.u5356"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "小贩大声叫：“{{blank-1}}西瓜啦，又大又甜！”",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "实"
+        },
+        {
+          "id": "opt-2",
+          "text": "买"
+        },
+        {
+          "id": "opt-3",
+          "text": "卖"
+        },
+        {
+          "id": "opt-4",
+          "text": "读"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "小贩想让别人来买他的西瓜。",
+      "explanation": "小贩是在“卖”西瓜，想请别人来买。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“卖”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "similar",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u5356.q2"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u5356.q3",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u5356",
+        "zh.p2_higher_chinese.char.u5356"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "姐姐把旧玩具{{blank-1}}了，得到十块钱。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "卖"
+        },
+        {
+          "id": "opt-2",
+          "text": "读"
+        },
+        {
+          "id": "opt-3",
+          "text": "买"
+        },
+        {
+          "id": "opt-4",
+          "text": "实"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "想一想，得到钱的人是在买还是卖？",
+      "explanation": "把东西给别人、得到钱，是“卖”。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“卖”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "generic",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u5356.q3"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u5019.q1",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u5019",
+        "zh.p2_higher_chinese.char.u5019"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "放学的时{{blank-1}}，下起了大雨。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "侯"
+        },
+        {
+          "id": "opt-2",
+          "text": "候"
+        },
+        {
+          "id": "opt-3",
+          "text": "猴"
+        },
+        {
+          "id": "opt-4",
+          "text": "喉"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "这里要组成表示时间的词。",
+      "explanation": "“时候”表示时间。“候”中间有一短竖，“侯”没有。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“候”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "exact",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u5019.q1"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u5019.q2",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u5019",
+        "zh.p2_higher_chinese.char.u5019"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "我们在车站等{{blank-1}}巴士。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "猴"
+        },
+        {
+          "id": "opt-2",
+          "text": "侯"
+        },
+        {
+          "id": "opt-3",
+          "text": "候"
+        },
+        {
+          "id": "opt-4",
+          "text": "喉"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "这里要组成一个和“等”意思差不多的词。",
+      "explanation": "“等候”就是等。“候”中间有一短竖。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“候”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "similar",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u5019.q2"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u5019.q3",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u5019",
+        "zh.p2_higher_chinese.char.u5019"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "见到老师，我们要向老师问{{blank-1}}。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "候"
+        },
+        {
+          "id": "opt-2",
+          "text": "侯"
+        },
+        {
+          "id": "opt-3",
+          "text": "猴"
+        },
+        {
+          "id": "opt-4",
+          "text": "喉"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "这里说的是见面时打招呼。",
+      "explanation": "“问候”是见面时向别人打招呼、表示关心。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“候”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "generic",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u5019.q3"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u6839.q1",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u6839",
+        "zh.p2_higher_chinese.char.u6839"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "我用一{{blank-1}}绳子跳绳。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "跟"
+        },
+        {
+          "id": "opt-2",
+          "text": "根"
+        },
+        {
+          "id": "opt-3",
+          "text": "很"
+        },
+        {
+          "id": "opt-4",
+          "text": "银"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "这里要选一个数东西的字。",
+      "explanation": "长长的东西可以用“一根”来数。“根”是木字旁。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“根”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "exact",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u6839.q1"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u6839.q2",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u6839",
+        "zh.p2_higher_chinese.char.u6839"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "大树的{{blank-1}}长在泥土里。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "很"
+        },
+        {
+          "id": "opt-2",
+          "text": "跟"
+        },
+        {
+          "id": "opt-3",
+          "text": "银"
+        },
+        {
+          "id": "opt-4",
+          "text": "根"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "想想大树哪一部分在泥土下面。",
+      "explanation": "树在泥土下面的部分叫“根”。“根”是木字旁，和树木有关。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“根”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "similar",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u6839.q2"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u6839.q3",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u6839",
+        "zh.p2_higher_chinese.char.u6839"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "桌上有三{{blank-1}}筷子。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "根"
+        },
+        {
+          "id": "opt-2",
+          "text": "跟"
+        },
+        {
+          "id": "opt-3",
+          "text": "很"
+        },
+        {
+          "id": "opt-4",
+          "text": "恨"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "想一想，筷子可以怎么数？",
+      "explanation": "细长的东西可以用“根”来数，比如一根筷子。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“根”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "generic",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u6839.q3"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u64cd.q1",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u64cd",
+        "zh.p2_higher_chinese.char.u64cd"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "早上，我们在礼堂做早{{blank-1}}。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "澡"
+        },
+        {
+          "id": "opt-2",
+          "text": "操"
+        },
+        {
+          "id": "opt-3",
+          "text": "燥"
+        },
+        {
+          "id": "opt-4",
+          "text": "躁"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "想一想，早上大家一起做的运动叫什么？",
+      "explanation": "“早操”是早上做的运动。做操要用手，所以“操”是提手旁。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“操”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "exact",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u64cd.q1"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u64cd.q2",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u64cd",
+        "zh.p2_higher_chinese.char.u64cd"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "下课了，同学们在{{blank-1}}场上跑步。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "澡"
+        },
+        {
+          "id": "opt-2",
+          "text": "燥"
+        },
+        {
+          "id": "opt-3",
+          "text": "操"
+        },
+        {
+          "id": "opt-4",
+          "text": "躁"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "想一想，学校里跑步的地方叫什么？",
+      "explanation": "“操场”是学校里运动的地方，写“操”。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“操”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "similar",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u64cd.q2"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u64cd.q3",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u64cd",
+        "zh.p2_higher_chinese.char.u64cd"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "姐姐喜欢学体{{blank-1}}，她会翻跟头。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "躁"
+        },
+        {
+          "id": "opt-2",
+          "text": "操"
+        },
+        {
+          "id": "opt-3",
+          "text": "澡"
+        },
+        {
+          "id": "opt-4",
+          "text": "燥"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "这里说的是一种运动。",
+      "explanation": "“体操”是一种运动。“操”是提手旁，和用手做动作有关。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“操”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "generic",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u64cd.q3"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u4e4c.q1",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u4e4c",
+        "zh.p2_higher_chinese.char.u4e4c"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "天上飘来一片{{blank-1}}云，快要下雨了。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "鸟"
+        },
+        {
+          "id": "opt-2",
+          "text": "乌"
+        },
+        {
+          "id": "opt-3",
+          "text": "马"
+        },
+        {
+          "id": "opt-4",
+          "text": "岛"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "想一想，快下雨时，云是什么颜色？",
+      "explanation": "“乌云”是黑色的云。“乌”比“鸟”少一点。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“乌”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "exact",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u4e4c.q1"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u4e4c.q2",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u4e4c",
+        "zh.p2_higher_chinese.char.u4e4c"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "树上有一只{{blank-1}}{{pinyin-1}}。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "鸟"
+        },
+        {
+          "id": "opt-2",
+          "text": "马"
+        },
+        {
+          "id": "opt-3",
+          "text": "乌"
+        },
+        {
+          "id": "opt-4",
+          "text": "岛"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "这是一种黑色的鸟的名字。",
+      "explanation": "“乌鸦”是一种全身黑色的鸟，写“乌”，没有那一点。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“乌”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "similar",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u4e4c.q2"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "pinyin-1",
+          "text": "鸦",
+          "pinyin": "yā"
+        }
+      ],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u4e4c.q3",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u4e4c",
+        "zh.p2_higher_chinese.char.u4e4c"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "她的头发{{blank-1}}黑发亮。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "岛"
+        },
+        {
+          "id": "opt-2",
+          "text": "乌"
+        },
+        {
+          "id": "opt-3",
+          "text": "鸟"
+        },
+        {
+          "id": "opt-4",
+          "text": "马"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "这里要组成一个表示很黑的词。",
+      "explanation": "“乌黑”就是很黑。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“乌”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "generic",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u4e4c.q3"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u6e34.q1",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u6e34",
+        "zh.p2_higher_chinese.char.u6e34"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "跑完步，我口{{blank-1}}了，想喝水。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "喝"
+        },
+        {
+          "id": "opt-2",
+          "text": "渴"
+        },
+        {
+          "id": "opt-3",
+          "text": "揭"
+        },
+        {
+          "id": "opt-4",
+          "text": "歇"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "想一想，想喝水时是什么感觉？",
+      "explanation": "想喝水的感觉叫“口渴”。“渴”是三点水，因为身体缺水。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“渴”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "exact",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u6e34.q1"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u6e34.q2",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u6e34",
+        "zh.p2_higher_chinese.char.u6e34"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "很久没下雨，小树也{{blank-1}}得低下了头。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "歇"
+        },
+        {
+          "id": "opt-2",
+          "text": "喝"
+        },
+        {
+          "id": "opt-3",
+          "text": "渴"
+        },
+        {
+          "id": "opt-4",
+          "text": "揭"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "小树很久没有喝到水了。",
+      "explanation": "小树缺水，所以说它“渴”了。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“渴”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "similar",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u6e34.q2"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u6e34.q3",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u6e34",
+        "zh.p2_higher_chinese.char.u6e34"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "小狗{{blank-1}}了，我给它倒了一碗水。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "渴"
+        },
+        {
+          "id": "opt-2",
+          "text": "揭"
+        },
+        {
+          "id": "opt-3",
+          "text": "喝"
+        },
+        {
+          "id": "opt-4",
+          "text": "歇"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "为什么要给小狗倒水？",
+      "explanation": "小狗想喝水，是因为它“渴”了。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“渴”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "generic",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u6e34.q3"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u4f4e.q1",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u4f4e",
+        "zh.p2_higher_chinese.char.u4f4e"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "这张桌子太{{blank-1}}了，弟弟要弯着腰写字。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "底"
+        },
+        {
+          "id": "opt-2",
+          "text": "低"
+        },
+        {
+          "id": "opt-3",
+          "text": "抵"
+        },
+        {
+          "id": "opt-4",
+          "text": "纸"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "想一想“高”的反义词。",
+      "explanation": "“低”和“高”意思相反。“低”是单人旁，“底”的上面是“广”字头。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“低”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "exact",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u4f4e.q1"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u4f4e.q2",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u4f4e",
+        "zh.p2_higher_chinese.char.u4f4e"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "说话时，请{{blank-1}}声一点，别吵醒弟弟。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "纸"
+        },
+        {
+          "id": "opt-2",
+          "text": "底"
+        },
+        {
+          "id": "opt-3",
+          "text": "低"
+        },
+        {
+          "id": "opt-4",
+          "text": "抵"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "这里要组成表示声音小的词。",
+      "explanation": "“低声”就是声音小一点。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“低”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "similar",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u4f4e.q2"
+        }
+      ],
+      "annotations": [],
+      "blank_ref": "blank-1"
+    },
+    {
+      "id": "zh-p2-confusable-u4f4e.q3",
+      "version": 3,
+      "courses": [
+        "p2_chinese",
+        "p2_higher_chinese"
+      ],
+      "outcome_refs": [
+        "zh.p2_chinese.r-character",
+        "zh.p2_higher_chinese.r-character"
+      ],
+      "target_refs": [
+        "zh.p2_chinese.char.u4f4e",
+        "zh.p2_higher_chinese.char.u4f4e"
+      ],
+      "family": "character",
+      "format": "mcq_4plus",
+      "stem": "小鸟飞得很{{blank-1}}，快碰到草地了。",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "抵"
+        },
+        {
+          "id": "opt-2",
+          "text": "纸"
+        },
+        {
+          "id": "opt-3",
+          "text": "底"
+        },
+        {
+          "id": "opt-4",
+          "text": "低"
+        }
+      ],
+      "correct_option_id": "opt-4",
+      "hint": "快碰到草地，说明小鸟飞得高还是不高？",
+      "explanation": "离地面很近，说明飞得“低”。",
+      "rationale": "二年级形近字与同音字辨析组：辨认“低”与形近、同音字的字形和字义；只评估辨认，不评估手写。",
+      "material_id": null,
+      "stage": "generic",
+      "provenance": "original_generic_author_draft",
+      "asset_refs": [],
+      "blanks": [
+        {
+          "id": "blank-1",
+          "question_id": "zh-p2-confusable-u4f4e.q3"
         }
       ],
       "annotations": [],
@@ -1772,7 +3209,7 @@
     "owner_signoff": "pending",
     "sampled_item_ids": [],
     "disputed_item_ids": [
-      "zh-short-u5ea7.q2"
+      "zh-p2-confusable-u5ea7.q2"
     ],
     "rights_status": "original_draft_pending_owner_rights_review",
     "artwork": "none"
