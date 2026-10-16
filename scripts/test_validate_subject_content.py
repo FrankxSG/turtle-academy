@@ -2,6 +2,7 @@
 
 Run: python3 scripts/test_validate_subject_content.py
 """
+import json
 import pathlib
 import sys
 import tempfile
@@ -48,6 +49,31 @@ class SvgGuard(unittest.TestCase):
 
     def test_rejects_xml_stylesheet_instruction(self):
         self.assertEqual(svg_result(prefix='<?xml-stylesheet href="//example.invalid/x.css"?>'), 'asset_css_import')
+
+
+class RouteGuard(unittest.TestCase):
+    def test_cross_family_routes(self):
+        self.assertTrue(v.route_compatible('english', 'cloze', 'grammar'))
+        self.assertTrue(v.route_compatible('english', 'comprehension', 'comprehension'))
+        # Review finding on #15: grammar-cloze blanks were routed to an editing set.
+        self.assertFalse(v.route_compatible('english', 'cloze', 'editing'))
+        self.assertFalse(v.route_compatible('english', 'comprehension', 'grammar'))
+        self.assertFalse(v.route_compatible('mathematics', 'word_problem', 'computation'))
+        self.assertTrue(v.route_compatible('science', 'acquisition', 'concept'))
+
+    def test_pinned_reviewed_routes(self):
+        # Reviewed routes that must not silently drift back (skipped where the subject is absent).
+        pinned = {
+            ('english', 'el-p3-cloze-robot.q2'): 'el.p3.object-pronoun',
+            ('english', 'el-p3-cloze-robot.q3'): 'el.p3.and-but-or',
+        }
+        for (subject, qid), target in pinned.items():
+            path = v.ROOT / 'content' / subject / 'pool-001.json'
+            if not path.exists():
+                continue
+            items = {i['id']: i for i in json.loads(path.read_text(encoding='utf-8'))['items']}
+            with self.subTest(qid):
+                self.assertEqual(items[qid].get('repair_target_id'), target)
 
 
 if __name__ == '__main__':

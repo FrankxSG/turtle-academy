@@ -414,7 +414,7 @@
       "course": "p3_english",
       "grade": "p3",
       "strand": "Grammar",
-      "label": "Reflexive pronouns and relative pronouns who/which/whose",
+      "label": "Pronouns: object pronouns referring back, reflexive pronouns, relative pronouns who/which/whose",
       "scope": "in_app",
       "pilot": "open",
       "source_refs": [
@@ -444,7 +444,7 @@
       "course": "p3_english",
       "grade": "p3",
       "strand": "Grammar",
-      "label": "Conjunctions: although, when/while/before/after, if/unless",
+      "label": "Conjunctions: and/but/or, although, when/while/before/after, if/unless",
       "scope": "in_app",
       "pilot": "open",
       "source_refs": [
@@ -1344,6 +1344,18 @@
       "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
     },
     {
+      "id": "el.p3.leaf.object-pronoun-reference",
+      "topic_ref": "el.p3.pronouns",
+      "label": "Object pronoun referring back to a noun",
+      "assessed_ability": "Choose the pronoun that matches the noun it stands for, after a verb (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
       "id": "el.p3.leaf.preposition-movement",
       "topic_ref": "el.p3.prepositions",
       "label": "Preposition movement",
@@ -1396,6 +1408,18 @@
       "topic_ref": "el.p3.conjunctions",
       "label": "When while before",
       "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.and-but-or",
+      "topic_ref": "el.p3.conjunctions",
+      "label": "And, but, or in longer sentences",
+      "assessed_ability": "Choose and/but/or to add, contrast or give a choice (recognition)",
       "representation": "text",
       "scope": "in_app",
       "source_refs": [

@@ -7910,6 +7910,123 @@
       ]
     },
     {
+      "id": "el-p3-object-pronoun.q1",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.pronouns",
+      "target_id": "el.p3.object-pronoun",
+      "stage": "exact",
+      "family": "grammar",
+      "format": "mcq_4plus",
+      "stem": "Mei found three shells on the beach and put ______ in her bag.",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "them"
+        },
+        {
+          "id": "opt-2",
+          "text": "they"
+        },
+        {
+          "id": "opt-3",
+          "text": "it"
+        },
+        {
+          "id": "opt-4",
+          "text": "their"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "What did she put in her bag? The shells.",
+      "explanation": "\"Them\" stands for the three shells and comes after the verb \"put\".",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.object-pronoun-reference"
+      ]
+    },
+    {
+      "id": "el-p3-object-pronoun.q2",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.pronouns",
+      "target_id": "el.p3.object-pronoun",
+      "stage": "similar",
+      "family": "grammar",
+      "format": "mcq_4plus",
+      "stem": "The teacher gave out the worksheets and asked us to read ______ carefully.",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "they"
+        },
+        {
+          "id": "opt-2",
+          "text": "them"
+        },
+        {
+          "id": "opt-3",
+          "text": "their"
+        },
+        {
+          "id": "opt-4",
+          "text": "it"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "What did we have to read? More than one worksheet.",
+      "explanation": "\"Them\" stands for the worksheets. \"They\" cannot come after \"read\".",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.object-pronoun-reference"
+      ]
+    },
+    {
+      "id": "el-p3-object-pronoun.q3",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.pronouns",
+      "target_id": "el.p3.object-pronoun",
+      "stage": "generic",
+      "family": "grammar",
+      "format": "mcq_4plus",
+      "stem": "Grandpa could not find his watch, so we helped him look for ______.",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "them"
+        },
+        {
+          "id": "opt-2",
+          "text": "its"
+        },
+        {
+          "id": "opt-3",
+          "text": "it"
+        },
+        {
+          "id": "opt-4",
+          "text": "they"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "How many watches are there?",
+      "explanation": "\"It\" stands for one thing, the watch, and comes after \"look for\".",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.object-pronoun-reference"
+      ]
+    },
+    {
       "id": "el-p3-preposition-movement.q1",
       "version": 2,
       "courses": [
@@ -8375,6 +8492,123 @@
       "provenance": "original_generic_author_draft",
       "leaf_refs": [
         "el.p3.leaf.when-while-before"
+      ]
+    },
+    {
+      "id": "el-p3-and-but-or.q1",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.conjunctions",
+      "target_id": "el.p3.and-but-or",
+      "stage": "exact",
+      "family": "grammar",
+      "format": "mcq_4plus",
+      "stem": "Siti opened the box ______ took out a puzzle.",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "but"
+        },
+        {
+          "id": "opt-2",
+          "text": "or"
+        },
+        {
+          "id": "opt-3",
+          "text": "and"
+        },
+        {
+          "id": "opt-4",
+          "text": "unless"
+        }
+      ],
+      "correct_option_id": "opt-3",
+      "hint": "She did one thing, then another.",
+      "explanation": "\"And\" joins two actions that happen one after the other.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.and-but-or"
+      ]
+    },
+    {
+      "id": "el-p3-and-but-or.q2",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.conjunctions",
+      "target_id": "el.p3.and-but-or",
+      "stage": "similar",
+      "family": "grammar",
+      "format": "mcq_4plus",
+      "stem": "Ken wanted to play outside, ______ it was raining heavily.",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "and"
+        },
+        {
+          "id": "opt-2",
+          "text": "but"
+        },
+        {
+          "id": "opt-3",
+          "text": "or"
+        },
+        {
+          "id": "opt-4",
+          "text": "so"
+        }
+      ],
+      "correct_option_id": "opt-2",
+      "hint": "Did the rain help Ken or stop him?",
+      "explanation": "\"But\" shows a contrast: Ken wanted to go out, but the rain stopped him.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.and-but-or"
+      ]
+    },
+    {
+      "id": "el-p3-and-but-or.q3",
+      "version": 1,
+      "courses": [
+        "p3_english"
+      ],
+      "topic_ref": "el.p3.conjunctions",
+      "target_id": "el.p3.and-but-or",
+      "stage": "generic",
+      "family": "grammar",
+      "format": "mcq_4plus",
+      "stem": "You may choose the red cap ______ the blue cap, but not both.",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "or"
+        },
+        {
+          "id": "opt-2",
+          "text": "and"
+        },
+        {
+          "id": "opt-3",
+          "text": "but"
+        },
+        {
+          "id": "opt-4",
+          "text": "so"
+        }
+      ],
+      "correct_option_id": "opt-1",
+      "hint": "You can have only one of them.",
+      "explanation": "\"Or\" gives a choice between two things.",
+      "material_id": null,
+      "provenance": "original_generic_author_draft",
+      "leaf_refs": [
+        "el.p3.leaf.and-but-or"
       ]
     },
     {
@@ -11876,7 +12110,7 @@
     },
     {
       "id": "el-p3-cloze-robot.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_english"
       ],
@@ -11909,14 +12143,14 @@
       "explanation": "\"Them\" refers to the blocks.",
       "material_id": "el-p3-cloze-robot",
       "provenance": "original_generic_author_draft",
-      "repair_target_id": "el.p3.edit-grammar",
+      "repair_target_id": "el.p3.object-pronoun",
       "leaf_refs": [
-        "el.p3.leaf.edit-grammar"
+        "el.p3.leaf.object-pronoun-reference"
       ]
     },
     {
       "id": "el-p3-cloze-robot.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_english"
       ],
@@ -11949,9 +12183,9 @@
       "explanation": "\"And\" joins two actions.",
       "material_id": "el-p3-cloze-robot",
       "provenance": "original_generic_author_draft",
-      "repair_target_id": "el.p3.edit-grammar",
+      "repair_target_id": "el.p3.and-but-or",
       "leaf_refs": [
-        "el.p3.leaf.edit-grammar"
+        "el.p3.leaf.and-but-or"
       ]
     },
     {

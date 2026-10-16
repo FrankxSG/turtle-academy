@@ -378,7 +378,7 @@ Generated from `content/english/pool-001.json`; edit the JSON, not this file. Ke
 | el-p3-sva-together.q2 / similar (v1) | A box of crayons ______ on the table.<br>1 were; 2 is; 3 are; 4 have | is | What is on the table: the box or the crayons? | The subject is "a box", so "is". | `el.p3.leaf.sva-together`<br>target `el.p3.sva-together` |
 | el-p3-sva-together.q3 / generic (v1) | The children in the hall ______ singing.<br>1 is; 2 was; 3 has; 4 are | are | Who is singing? | The subject "children" is plural: "are". | `el.p3.leaf.sva-together`<br>target `el.p3.sva-together` |
 
-## P3 · Reflexive pronouns and relative pronouns who/which/whose (`el.p3.pronouns`)
+## P3 · Pronouns: object pronouns referring back, reflexive pronouns, relative pronouns who/which/whose (`el.p3.pronouns`)
 
 | ID / stage | Question and options | Key | Hint | Explanation | Leaf → repair route |
 | --- | --- | --- | --- | --- | --- |
@@ -388,6 +388,9 @@ Generated from `content/english/pool-001.json`; edit the JSON, not this file. Ke
 | el-p3-relative-who-which.q1 / exact (v1) | The girl ______ won the race is my cousin.<br>1 which; 2 whom; 3 who; 4 whose | who | It refers to a person. | Use "who" for people. | `el.p3.leaf.relative-who-which`<br>target `el.p3.relative-who-which` |
 | el-p3-relative-who-which.q2 / similar (v1) | This is the bag ______ I bought yesterday.<br>1 who; 2 which; 3 whose; 4 whom | which | It refers to a thing. | Use "which" for things. | `el.p3.leaf.relative-who-which`<br>target `el.p3.relative-who-which` |
 | el-p3-relative-who-which.q3 / generic (v1) | The man ______ car was stolen called the police.<br>1 whose; 2 who; 3 which; 4 whom | whose | The car belongs to the man. | "Whose" shows belonging. | `el.p3.leaf.relative-who-which`<br>target `el.p3.relative-who-which` |
+| el-p3-object-pronoun.q1 / exact (v1) | Mei found three shells on the beach and put ______ in her bag.<br>1 them; 2 they; 3 it; 4 their | them | What did she put in her bag? The shells. | "Them" stands for the three shells and comes after the verb "put". | `el.p3.leaf.object-pronoun-reference`<br>target `el.p3.object-pronoun` |
+| el-p3-object-pronoun.q2 / similar (v1) | The teacher gave out the worksheets and asked us to read ______ carefully.<br>1 they; 2 them; 3 their; 4 it | them | What did we have to read? More than one worksheet. | "Them" stands for the worksheets. "They" cannot come after "read". | `el.p3.leaf.object-pronoun-reference`<br>target `el.p3.object-pronoun` |
+| el-p3-object-pronoun.q3 / generic (v1) | Grandpa could not find his watch, so we helped him look for ______.<br>1 them; 2 its; 3 it; 4 they | it | How many watches are there? | "It" stands for one thing, the watch, and comes after "look for". | `el.p3.leaf.object-pronoun-reference`<br>target `el.p3.object-pronoun` |
 
 ## P3 · Prepositions of movement and fixed preposition phrases (`el.p3.prepositions`)
 
@@ -400,7 +403,7 @@ Generated from `content/english/pool-001.json`; edit the JSON, not this file. Ke
 | el-p3-preposition-phrases.q2 / similar (v1) | Mei is good ______ drawing.<br>1 for; 2 on; 3 in; 4 at | at | Fixed phrase: good ___ something. | We say "good at". | `el.p3.leaf.preposition-phrases`<br>target `el.p3.preposition-phrases` |
 | el-p3-preposition-phrases.q3 / generic (v2) | The children were excited ______ the school camp.<br>1 between; 2 about; 3 into; 4 under | about | Fixed phrase: excited ___ something. | We say "excited about". | `el.p3.leaf.preposition-phrases`<br>target `el.p3.preposition-phrases` |
 
-## P3 · Conjunctions: although, when/while/before/after, if/unless (`el.p3.conjunctions`)
+## P3 · Conjunctions: and/but/or, although, when/while/before/after, if/unless (`el.p3.conjunctions`)
 
 | ID / stage | Question and options | Key | Hint | Explanation | Leaf → repair route |
 | --- | --- | --- | --- | --- | --- |
@@ -410,6 +413,9 @@ Generated from `content/english/pool-001.json`; edit the JSON, not this file. Ke
 | el-p3-when-while-before.q1 / exact (v2) | Wash your hands ______ you eat, so that germs do not get onto your food.<br>1 after; 2 unless; 3 before; 4 while | before | Which must happen first to keep germs off your food? | To keep germs off your food, you wash your hands first, before you eat. | `el.p3.leaf.when-while-before`<br>target `el.p3.when-while-before` |
 | el-p3-when-while-before.q2 / similar (v2) | The phone rang ______ I was still in the shower, so I missed the call.<br>1 while; 2 so; 3 before; 4 unless | while | The two things happened at the same time. | "Still in the shower" tells us the call came during the shower, so "while" is correct. | `el.p3.leaf.when-while-before`<br>target `el.p3.when-while-before` |
 | el-p3-when-while-before.q3 / generic (v2) | We went home ______ the movie ended, so we did not miss the ending.<br>1 while; 2 before; 3 although; 4 after | after | They saw the ending. Which happened first? | They did not miss the ending, so the movie ended first and they went home after it. | `el.p3.leaf.when-while-before`<br>target `el.p3.when-while-before` |
+| el-p3-and-but-or.q1 / exact (v1) | Siti opened the box ______ took out a puzzle.<br>1 but; 2 or; 3 and; 4 unless | and | She did one thing, then another. | "And" joins two actions that happen one after the other. | `el.p3.leaf.and-but-or`<br>target `el.p3.and-but-or` |
+| el-p3-and-but-or.q2 / similar (v1) | Ken wanted to play outside, ______ it was raining heavily.<br>1 and; 2 but; 3 or; 4 so | but | Did the rain help Ken or stop him? | "But" shows a contrast: Ken wanted to go out, but the rain stopped him. | `el.p3.leaf.and-but-or`<br>target `el.p3.and-but-or` |
+| el-p3-and-but-or.q3 / generic (v1) | You may choose the red cap ______ the blue cap, but not both.<br>1 or; 2 and; 3 but; 4 so | or | You can have only one of them. | "Or" gives a choice between two things. | `el.p3.leaf.and-but-or`<br>target `el.p3.and-but-or` |
 | el-p3-unless-if.q1 / exact (v1) | You will be late ______ you hurry.<br>1 because; 2 and; 3 unless; 4 if | unless | It means "if you do not". | "Unless" means "if not". | `el.p3.leaf.unless-if`<br>target `el.p3.unless-if` |
 | el-p3-unless-if.q2 / similar (v1) | ______ you water the plant, it will grow well.<br>1 But; 2 Although; 3 If; 4 Unless | If | Watering leads to growing. | "If" gives a condition. | `el.p3.leaf.unless-if`<br>target `el.p3.unless-if` |
 | el-p3-unless-if.q3 / generic (v1) | The dog will not bite ______ you pull its tail.<br>1 because; 2 if; 3 so; 4 unless | unless | It bites only if its tail is pulled. | "Unless" means "except if". | `el.p3.leaf.unless-if`<br>target `el.p3.unless-if` |
@@ -589,8 +595,8 @@ Generated from `content/english/pool-001.json`; edit the JSON, not this file. Ke
 | el-p3-cloze-camp.q4 (v1) | (4)<br>1 Unless; 2 So; 3 Although; 4 Because | Although | Rain, yet they stayed dry. | "Although" shows contrast. | `el.p3.leaf.although`<br>repairs via `el.p3.although` |
 | el-p3-cloze-camp.q5 (v1) | (5)<br>1 whose; 2 who; 3 whom; 4 which | who | It refers to the teacher. | Use "who" for a person. | `el.p3.leaf.relative-who-which`<br>repairs via `el.p3.relative-who-which` |
 | el-p3-cloze-robot.q1 (v1) | (1)<br>1 has work; 2 works; 3 worked; 4 working | worked | The story is told in the past. | Past tense: "worked". | `el.p3.leaf.tense-consistency`<br>repairs via `el.p3.tense-consistency` |
-| el-p3-cloze-robot.q2 (v1) | (2)<br>1 them; 2 they; 3 it; 4 their | them | What did it place? The blocks. | "Them" refers to the blocks. | `el.p3.leaf.edit-grammar`<br>repairs via `el.p3.edit-grammar` |
-| el-p3-cloze-robot.q3 (v1) | (3)<br>1 unless; 2 but; 3 and; 4 or | and | Two actions in sequence. | "And" joins two actions. | `el.p3.leaf.edit-grammar`<br>repairs via `el.p3.edit-grammar` |
+| el-p3-cloze-robot.q2 (v2) | (2)<br>1 them; 2 they; 3 it; 4 their | them | What did it place? The blocks. | "Them" refers to the blocks. | `el.p3.leaf.object-pronoun-reference`<br>repairs via `el.p3.object-pronoun` |
+| el-p3-cloze-robot.q3 (v2) | (3)<br>1 unless; 2 but; 3 and; 4 or | and | Two actions in sequence. | "And" joins two actions. | `el.p3.leaf.and-but-or`<br>repairs via `el.p3.and-but-or` |
 | el-p3-cloze-robot.q4 (v1) | (4)<br>1 more faster; 2 fastest; 3 faster; 4 fast | faster | Compared with before. | "Faster" compares two times. | `el.p3.leaf.comparative-more-most`<br>repairs via `el.p3.comparative-more-most` |
 | el-p3-cloze-robot.q5 (v1) | (5)<br>1 proudly; 2 proud; 3 prouder than; 4 pride | proud | After "felt very", use an adjective. | "Proud" is the adjective. | `el.p3.leaf.vocab-word-form`<br>repairs via `el.p3.vocab-word-form` |
 
