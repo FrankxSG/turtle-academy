@@ -67,6 +67,8 @@ Current MOE core and observable practices are the acceptance authority. Broad ar
 
 ## Actual paper research, 2021–2026
 
+Citation revision (2026-10-16): third-party past papers are linked through public listing pages only. School/year/type, analysis pages and original file hashes still identify the copies examined; this citation format does not establish reuse rights.
+
 | Course | 2021 | 2022 | 2023 | 2024 | 2025 | 2026 |
 | --- | --- | --- | --- | --- | --- | --- |
 | p3 science | Retrieved | Retrieved | Retrieved | Retrieved¹ | Retrieved | Not retrieved |
@@ -78,7 +80,7 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p3_science-2021
 
 - Identity/date: ACS Junior, BA2; cover 2021.
-- Source: [public page/PDF](https://sgexam.com/subject/science/2021-p3-science-bite-sized-assessment-2-acsj-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1cXFvDa4GLIIG6hkD84nyFjhlg_YD8fig&export=download); 13 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/science/2021-p3-science-bite-sized-assessment-2-acsj-pdf/); 13 PDF pages.
 - Analysis page anchors: 1–2, 8, 10. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Classification, fungi/bacteria and mould investigation; a short assessment cannot represent the whole P3 programme.
 - SHA-256: `62a7c43f943fff96c31567bda65f4e04607481eb352ede938c7f3f314d6aad3c`.
@@ -86,7 +88,7 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p3_science-2022
 
 - Identity/date: ACS Primary, SA2; cover 2022.
-- Source: [public page/PDF](https://sgexam.com/subject/science/2022-p3-science-semestral-assessment-2-acs-primary-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1WqLW2bfzA4SN8Bn23tIw-Xl0vFTdMfsW&export=download); 34 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/science/2022-p3-science-semestral-assessment-2-acs-primary-pdf/); 34 PDF pages.
 - Analysis page anchors: 1–2, 7–9, 13–16, 24. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Classification, material-property tables and magnet testing. Human/plant systems also occur under an earlier cohort: exclude these from the current P3 denominator.
 - SHA-256: `f3da7c5b89aa8119c282fd64bb27e127b0e6ef4a0460330284535dcf687bd881`.
@@ -94,7 +96,7 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p3_science-2023
 
 - Identity/date: ACS Primary, EOY; cover 2023.
-- Source: [public page/PDF](https://sgexam.com/subject/science/2023-p3-science-end-of-year-exam-acsp-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1iXC_I8meiICCrm64LbFl0QsvABZ_8t1G&export=download); 32 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/science/2023-p3-science-end-of-year-exam-acsp-pdf/); 32 PDF pages.
 - Analysis page anchors: 1, 5, 7–8, 11–12, 22, 24. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Flowcharts, life-cycle comparisons, property decision trees and fair tests. Diagrams/data drive the reasoning; merely recalling labels is narrower.
 - SHA-256: `fe6dad03f3e5f5b0402d05f28aee57b19db1a931f0ffa2ec74e450de0c63a342`.
@@ -102,7 +104,7 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p3_science-2024
 
 - Identity/date: ACS Junior, BA2; catalogue 2024.
-- Source: [public page/PDF](https://sgexam.com/subject/science/2024-p3-science-bite-sized-assessment-2-acs-junior-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=14Du2ui2IKyVkgcjGn2w4RVcywbOQUZCE&export=download); 15 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/science/2024-p3-science-bite-sized-assessment-2-acs-junior-pdf/); 15 PDF pages.
 - Analysis page anchors: 1–10. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Classification and investigation questions; cover does not establish the printed year. Additional EOY source below gives broader corroboration.
 - SHA-256: `928650e704ade1634b50c0fc3bed7fdf89b55ce1b536a08951de75baf5ede53f`.
@@ -110,7 +112,7 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p3_science-2025
 
 - Identity/date: ACS Junior as catalogued, EOY; cover 2025.
-- Source: [public page/PDF](https://sgexam.com/subject/science/2025-p3-science-end-of-year-exam-acs-junior-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1SYQm-6g673IOIDezwSNSL0m31qSjIRtx&export=download); 30 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/science/2025-p3-science-end-of-year-exam-acs-junior-pdf/); 30 PDF pages.
 - Analysis page anchors: 1, 3, 6, 9–14, 18, 22. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Classification charts, controlled comparisons, material data and electromagnet tests. Also includes germination conditions beyond the current MOE P3 core; an exam does not override the official grade boundary.
 - SHA-256: `5949c6a037929fc94b47b8a42c5c752f5bde66e08c1e4f47e651e33c67473e0b`.
@@ -118,7 +120,7 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p3_science-2025-extra-tao-nan
 
 - Identity/date: Tao Nan, EOY; cover 2025.
-- Source: [public page/PDF](https://sgexam.com/subject/science/2025-p3-science-end-of-year-exam-tao-nan-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1hm92zpeXvYdEYYLQ8cSkknXnb-6qXe4e&export=download); 34 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/science/2025-p3-science-end-of-year-exam-tao-nan-pdf/); 34 PDF pages.
 - Analysis page anchors: 1, 3, 5, 7–8, 18–29. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: 18 MCQs plus structured questions 19–26; controlled living-needs tests, feature tables, life-cycle diagrams, magnetic strength and waterproofing fair tests. Distinguish observing growth from teaching reproduction processes.
 - SHA-256: `ab6e21803d77c00aa438cd8d33787c6c885c964f109c041b70a92f242e853939`.
@@ -126,14 +128,14 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p3_science-2024-extra-catholic-high
 
 - Identity/date: Catholic High, EOY; cover 2024.
-- Source: [public page/PDF](https://sgexam.com/subject/science/2024-p3-science-end-of-year-exam-catholic-high-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=19BYvSN2BbLLAO1xhO0oPMZfDTZjkJlgv&export=download); 32 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/science/2024-p3-science-end-of-year-exam-catholic-high-pdf/); 32 PDF pages.
 - Analysis page anchors: 1, 3–17, 19–29. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: 24 MCQs and ten structured questions: observable-feature classification, materials/load tests, cycle diagrams and magnet strength. PDF p24 asks for a conclusion from an experimental table; p29 electrical magnets.
 - SHA-256: `0866dd7c9866e23635f1425c4b38c2e452c0949af66b54000eb54bb9dd23c091`.
 
 ### Second-host 2022 bundle — science
 
-[SmileTutor public PDF](https://smiletutor.sg/wp-content/uploads/2024/01/P3_Science_2022.pdf): 448 pages downloaded; **only PDF pp1–8 inspected/OCR processed**. The first packet is ACS Junior BA3. PDF pp3–8 show material classification, property choices for purpose, a flowchart and matching practical tests to properties. This corroborates the need for observations/representations, not only explanation paragraphs.
+[SmileTutor public listing](https://smiletutor.sg/free-test-papers-download/primary-school-exam-papers/): 448 pages downloaded; **only PDF pp1–8 inspected/OCR processed**. The first packet is ACS Junior BA3. PDF pp3–8 show material classification, property choices for purpose, a flowchart and matching practical tests to properties. This corroborates the need for observations/representations, not only explanation paragraphs.
 
 SHA-256: `59e712a1a6d28ba5fc01be937fac0bf248981faf03cbfaca7ea2008a8e3ec735`. Full bundle content/keys were not audited.
 
@@ -151,7 +153,7 @@ Additional 2025 public teaching was read through indexed page text: [The Pique L
 
 The app content is labelled original author draft. A bounded exact-overlap check compared every app material body and question stem against the retrieved same-subject paper OCR/text: 8 text files, 12 consecutive alphabetic words, case/punctuation normalised. **No threshold-length exact match was found.** This can miss paraphrases, OCR errors, shorter copying, images and sources outside the sample. It is not proof of originality, permission or copyright clearance. Common grammar/number templates are not by themselves evidence of copying. Retain pending rights/independent review/owner sign-off until the project’s review gates are satisfied.
 
-Reproduce source identity by downloading the cited public URLs, running `sha256sum` on each PDF/HTML, and comparing the recorded hashes. For paper structure, extract native PDF text and OCR scans (PyMuPDF + Tesseract English / Simplified Chinese), then inspect the stated PDF pages and course/year covers visually where OCR is ambiguous. HTML hashes identify the fetched snapshot, not an immutable future webpage. The documented overlaps used only stems/material bodies, not keys/explanations or character catalogues. Source retrieval and OCR happened outside the public repository; no signed download tokens or private files are required to follow these citations.
+For past papers, start at the cited public listing, identify the recorded grade/course, year and assessment, and obtain the matching file under the host’s current access conditions. Compare its `sha256sum` with the recorded hash; a mismatch may mean the host replaced the file. Official and other source snapshots are likewise identified by their cited URLs and hashes. For paper structure, extract native PDF text and OCR scans (PyMuPDF + Tesseract English / Simplified Chinese), then inspect the stated PDF pages and course/year covers visually where OCR is ambiguous. HTML hashes identify the fetched snapshot, not an immutable future webpage. The documented overlaps used only stems/material bodies, not keys/explanations or character catalogues. Source retrieval and OCR happened outside the public repository; no signed download tokens or private files are required to follow these citations.
 
 ## Disposition and next revision
 
