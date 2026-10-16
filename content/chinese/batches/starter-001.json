@@ -1,7 +1,7 @@
 {
   "schema_version": "chinese-content/1",
   "batch_id": "zh-starter-001",
-  "version": 4,
+  "version": 5,
   "curriculum_manifest_version": "zh-2024-p2p3-draft.1",
   "status": "author_checked_pending_independent_and_owner_review",
   "materials": [
@@ -5992,7 +5992,7 @@
     },
     {
       "id": "zh-p2-collocation.q8",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -6004,7 +6004,7 @@
       "target_refs": [],
       "family": "cloze",
       "format": "mcq_4plus",
-      "stem": "哥哥在河边{{blank-1}}鱼。",
+      "stem": "哥哥拿着鱼竿在河边{{blank-1}}鱼。",
       "options": [
         {
           "id": "opt-1",
@@ -6024,8 +6024,8 @@
         }
       ],
       "correct_option_id": "opt-1",
-      "hint": "用鱼竿等鱼上钩。",
-      "explanation": "用鱼竿“钓鱼”。",
+      "hint": "想一想用鱼竿做什么。",
+      "explanation": "哥哥用鱼竿钓鱼，所以选“钓”。",
       "rationale": "词语搭配：语言运用（待独立审核的语言运用细项）",
       "material_id": null,
       "stage": null,
@@ -6487,7 +6487,7 @@
     },
     {
       "id": "zh-p2-order.q2",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -6503,7 +6503,7 @@
       "options": [
         {
           "id": "opt-1",
-          "text": "妈妈在厨房正做饭。"
+          "text": "妈妈正在做饭厨房。"
         },
         {
           "id": "opt-2",
@@ -6519,8 +6519,8 @@
         }
       ],
       "correct_option_id": "opt-4",
-      "hint": "“正”要放在“在”的前面。",
-      "explanation": "“妈妈正在厨房做饭。”",
+      "hint": "先找出谁在做什么，再看看地点放在哪里。",
+      "explanation": "妈妈在厨房里做饭，所以选“妈妈正在厨房做饭。”",
       "rationale": "句子组织：只评估选择，不评估书写",
       "material_id": null,
       "stage": null,
@@ -7317,7 +7317,7 @@
     },
     {
       "id": "zh-m07.q5",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -7329,28 +7329,28 @@
       "target_refs": [],
       "family": "reading",
       "format": "mcq_4plus",
-      "stem": "这个故事告诉我们什么？",
+      "stem": "下大雨时，小蚂蚁们已经住进了哪里？",
       "options": [
         {
           "id": "opt-1",
-          "text": "大家要互相帮助"
+          "text": "新家"
         },
         {
           "id": "opt-2",
-          "text": "蚂蚁不喜欢搬家"
+          "text": "河里"
         },
         {
           "id": "opt-3",
-          "text": "下雨天要多吃饼干"
+          "text": "树顶"
         },
         {
           "id": "opt-4",
-          "text": "下雨时不能出门"
+          "text": "饼干下面"
         }
       ],
       "correct_option_id": "opt-1",
-      "hint": "想一想故事里蚂蚁们是怎样做的。",
-      "explanation": "蚂蚁们互相帮忙，及时搬好了家。",
+      "hint": "再读故事的最后一句。",
+      "explanation": "最后一句说，蚂蚁们已经住进了新家。",
       "rationale": "只评估选择答案的能力；不推断独立书写或口语能力。",
       "material_id": "zh-m07",
       "stage": null,
@@ -12844,7 +12844,7 @@
     },
     {
       "id": "zh-p3-wordchoice.q5",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_chinese",
         "p3_higher_chinese"
@@ -12856,7 +12856,7 @@
       "target_refs": [],
       "family": "cloze",
       "format": "mcq_4plus",
-      "stem": "小明{{blank-1}}地向老师承认了错误。",
+      "stem": "哪个词的意思是“说实话，不说谎”？小明{{blank-1}}地向老师承认了错误。",
       "options": [
         {
           "id": "opt-1",
@@ -12876,9 +12876,9 @@
         }
       ],
       "correct_option_id": "opt-2",
-      "hint": "承认错误需要什么品质？",
-      "explanation": "诚实地承认错误。",
-      "rationale": "词语选择：语言运用（待独立审核的语言运用细项）",
+      "hint": "找表示不说假话的词。",
+      "explanation": "小明没有说假话，是诚实地承认错误。",
+      "rationale": "词语选择：根据明示词义选词，不把害怕或生气认定为不能伴随承认错误。",
       "material_id": null,
       "stage": null,
       "provenance": "original_generic_author_draft",
@@ -13794,7 +13794,7 @@
     },
     {
       "id": "zh-m10.q5",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_chinese",
         "p3_higher_chinese"
@@ -13806,28 +13806,28 @@
       "target_refs": [],
       "family": "reading",
       "format": "mcq_4plus",
-      "stem": "从故事中可以看出小熊是怎样的？",
+      "stem": "第二天，面包店里有什么变化？",
       "options": [
         {
           "id": "opt-1",
-          "text": "很懒惰"
+          "text": "面包全都不见了"
         },
         {
           "id": "opt-2",
-          "text": "不爱说话"
+          "text": "店里没有客人"
         },
         {
           "id": "opt-3",
-          "text": "很骄傲"
+          "text": "店搬到了路口"
         },
         {
           "id": "opt-4",
-          "text": "肯想办法"
+          "text": "店里挤满了客人"
         }
       ],
       "correct_option_id": "opt-4",
-      "hint": "遇到问题时它怎么做？",
-      "explanation": "小熊遇到问题会去问、去想办法。",
+      "hint": "找一找写“第二天”的那一句。",
+      "explanation": "最后一句说，第二天店里挤满了客人。",
       "rationale": "只评估选择答案的能力；不推断独立书写或口语能力。",
       "material_id": "zh-m10",
       "stage": null,
@@ -14244,7 +14244,7 @@
     },
     {
       "id": "zh-m12.q5",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_chinese",
         "p3_higher_chinese"
@@ -14256,28 +14256,28 @@
       "target_refs": [],
       "family": "reading",
       "format": "mcq_4plus",
-      "stem": "从短文看，小美是一个怎样的人？",
+      "stem": "小美戴着什么样的眼镜？",
       "options": [
         {
           "id": "opt-1",
-          "text": "很粗心"
+          "text": "方方的眼镜"
         },
         {
           "id": "opt-2",
-          "text": "乐于助人"
+          "text": "圆圆的眼镜"
         },
         {
           "id": "opt-3",
-          "text": "很自私"
+          "text": "红色的太阳眼镜"
         },
         {
           "id": "opt-4",
-          "text": "很胆小"
+          "text": "没有镜片的眼镜"
         }
       ],
       "correct_option_id": "opt-2",
-      "hint": "她做了哪些事帮助“我”？",
-      "explanation": "小美帮我捡铅笔、教我做题，乐于助人。",
+      "hint": "再读写小美样子的那一句。",
+      "explanation": "短文说，小美戴着一副圆圆的眼镜。",
       "rationale": "只评估选择答案的能力；不推断独立书写或口语能力。",
       "material_id": "zh-m12",
       "stage": null,
@@ -14694,7 +14694,7 @@
     },
     {
       "id": "zh-m14.q5",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p3_chinese",
         "p3_higher_chinese"
@@ -14706,28 +14706,28 @@
       "target_refs": [],
       "family": "reading",
       "format": "mcq_4plus",
-      "stem": "这个故事告诉我们什么？",
+      "stem": "妈妈叫小鸟张开什么？",
       "options": [
         {
           "id": "opt-1",
-          "text": "傍晚不能出门"
+          "text": "嘴巴"
         },
         {
           "id": "opt-2",
-          "text": "不怕失败，多试几次就会成功"
+          "text": "翅膀"
         },
         {
           "id": "opt-3",
-          "text": "摔倒了就要放弃"
+          "text": "尾巴"
         },
         {
           "id": "opt-4",
-          "text": "小鸟不应该学飞"
+          "text": "爪子"
         }
       ],
       "correct_option_id": "opt-2",
-      "hint": "想一想小鸟是怎样学会飞的。",
-      "explanation": "小鸟不怕摔，一次次地试，终于成功。",
+      "hint": "再读妈妈对小鸟说的话。",
+      "explanation": "妈妈说：“张开翅膀，用力拍！”",
       "rationale": "只评估选择答案的能力；不推断独立书写或口语能力。",
       "material_id": "zh-m14",
       "stage": null,
@@ -15420,13 +15420,21 @@
       "检查提示不直接给出答案",
       "逐篇检查先答完整篇才提供反馈",
       "对照官方年级矩阵与字表",
-      "核对原创内容与外部能力边界"
+      "核对原创内容与外部能力边界",
+      "2026-10-16 correction pass: revised disputed and related items; item versions incremented; revised IDs remain listed for independent re-review, not approved."
     ],
     "independent_review": "changes_requested",
     "owner_signoff": "pending",
     "sampled_item_ids": [],
     "disputed_item_ids": [
-      "zh-p2-confusable-u5ea7.q2"
+      "zh-p2-confusable-u5ea7.q2",
+      "zh-p2-order.q2",
+      "zh-p2-collocation.q8",
+      "zh-p3-wordchoice.q5",
+      "zh-m07.q5",
+      "zh-m10.q5",
+      "zh-m12.q5",
+      "zh-m14.q5"
     ],
     "rights_status": "original_draft_pending_owner_rights_review",
     "artwork": "none"

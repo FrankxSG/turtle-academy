@@ -10,7 +10,7 @@ This is one review entry point for curriculum preparation and authoring contract
 | --- | --- | --- |
 | [Curriculum manifest](../content/chinese/curriculum.json) | Four course identities, official references, 104 course-specific outcome records and 1,796 character records | Source-based working inventory; independent grade/denominator audit pending |
 | [Contract schema](../contracts/chinese/1.schema.json) | Curriculum, original catalogue, frozen synthetic task plan, minimal Chinese intake and answer-event shapes | Proposed engineering contract; no app integration |
-| [Starter batch](../content/chinese/batches/starter-001.json) | Version 4: 300 original items (P2 150, P3 150) — 18 materials (reading, cloze, visual text; 90 questions), four declared repair groups (45 three-stage pools, 135 questions) and 75 language-use and punctuation practice items | Author checked; independent review and owner sign-off pending |
+| [Starter batch](../content/chinese/batches/starter-001.json) | Version 5: 300 original items (P2 150, P3 150) — 18 materials (reading, cloze, visual text; 90 questions), four declared repair groups (45 three-stage pools, 135 questions) and 75 language-use and punctuation practice items | Author checked; independent review and owner sign-off pending |
 | [Task fixtures](../content/chinese/fixtures/) | Complete P2 examples for X=6, 10, 12 and 19 | Synthetic, deterministic validation examples; no learner data |
 | [Validator](../scripts/validate_chinese_content.py) and [boundary checks](../scripts/test_chinese_content_contracts.py) | Structural integrity and cross-file rejection cases | Standard-library authoring tools; not learning-engine implementation |
 
@@ -177,9 +177,16 @@ Current authoring evidence: schema/reference/key checks and 20 boundary test met
 
 Before building Chinese: approve the independently audited source map/leaf boundaries and contracts; complete content QA and private coverage/proceed gates; resolve the existing data-protection gates for real records. Then authorize a focused synthetic-only implementation slice separately. This preparation PR must remain draft until review is resolved, and must not merge or deploy without the owner's explicit authorization.
 
+## Correction revision — 16 October 2026
+
+Version 5 corrects seven items: sentence order, the fishing stimulus, explicit honesty vocabulary and four reading questions. The reading replacements assess information stated in the passages rather than inferring a moral or character trait under an explicit-retrieval mapping. Revised item versions are incremented; all four synthetic plans now pin batch version 5. The MOE character inventory and course mappings are unchanged. Revised IDs remain in `review_log.disputed_item_ids` for independent re-review; the older outstanding dispute is retained. Source-year evidence, the finer skill denominator, language-use repair mappings and owner sign-off remain open.
+
+These are proposed corrections, not independent approval. Existing task/history must retain earlier pinned versions; this authoring revision does not implement evidence migration or retroactive regrading.
+
+
 ## 6. Starter content review
 
-Version 4. These are newly drafted generic examples, not extracted learner targets or copied passages. `[空n]` is a readable substitute for a linked blank token; annotation text and pinyin are combined for this review view only. App rendering remains unimplemented.
+Version 5. These are newly drafted generic examples, not extracted learner targets or copied passages. `[空n]` is a readable substitute for a linked blank token; annotation text and pinyin are combined for this review view only. App rendering remains unimplemented.
 
 ### Materials
 
@@ -283,7 +290,7 @@ Courses: p2_chinese, p2_higher_chinese. Kind: reading.
 | zh-m07.q2 | 蚂蚁们往哪里搬？<br>1 往低处搬；2 往河里搬；3 往高处搬；4 往树洞里搬 | 往高处搬 | 找“往”后面的词。 | 蚂蚁们往高处搬。 |
 | zh-m07.q3 | 小蚂蚁搬不动什么？<br>1 一块大饼干；2 一片叶子；3 一点面包屑；4 一粒米 | 一块大饼干 | 找“搬不动”。 | 小蚂蚁搬不动一块大饼干。 |
 | zh-m07.q4 | 谁来帮小蚂蚁？<br>1 一只小鸟；2 蚂蚁妈妈；3 没有人；4 旁边的两只蚂蚁 | 旁边的两只蚂蚁 | 找“帮忙”前面的词。 | 旁边的两只蚂蚁马上过来帮忙。 |
-| zh-m07.q5 | 这个故事告诉我们什么？<br>1 大家要互相帮助；2 蚂蚁不喜欢搬家；3 下雨天要多吃饼干；4 下雨时不能出门 | 大家要互相帮助 | 想一想故事里蚂蚁们是怎样做的。 | 蚂蚁们互相帮忙，及时搬好了家。 |
+| zh-m07.q5 | 下大雨时，小蚂蚁们已经住进了哪里？<br>1 新家；2 河里；3 树顶；4 饼干下面 | 新家 | 再读故事的最后一句。 | 最后一句说，蚂蚁们已经住进了新家。 |
 
 #### zh-m08 · 游泳班报名
 
@@ -344,7 +351,7 @@ Courses: p3_chinese, p3_higher_chinese. Kind: reading.
 | zh-m10.q2 | 第一天为什么来买面包的动物很少？<br>1 价钱太贵；2 店在树林深处，大家找不到；3 那天下大雨；4 面包不好吃 | 店在树林深处，大家找不到 | 猫头鹰说了什么？ | 猫头鹰说店在树林深处，大家都找不到。 |
 | zh-m10.q3 | 小熊去问谁？<br>1 小兔；2 猫头鹰；3 狐狸；4 大象 | 猫头鹰 | 找“去问”。 | 小熊去问猫头鹰。 |
 | zh-m10.q4 | 小熊想到了什么办法？<br>1 挂牌子，还送面包给大家试吃；2 把面包卖得更贵；3 搬到河边；4 把店关了 | 挂牌子，还送面包给大家试吃 | 找“小熊想了想”后面的话。 | 它挂了牌子，还送面包试吃。 |
-| zh-m10.q5 | 从故事中可以看出小熊是怎样的？<br>1 很懒惰；2 不爱说话；3 很骄傲；4 肯想办法 | 肯想办法 | 遇到问题时它怎么做？ | 小熊遇到问题会去问、去想办法。 |
+| zh-m10.q5 | 第二天，面包店里有什么变化？<br>1 面包全都不见了；2 店里没有客人；3 店搬到了路口；4 店里挤满了客人 | 店里挤满了客人 | 找一找写“第二天”的那一句。 | 最后一句说，第二天店里挤满了客人。 |
 
 #### zh-m11 · 垃圾分类
 
@@ -372,7 +379,7 @@ Courses: p3_chinese, p3_higher_chinese. Kind: reading.
 | zh-m12.q2 | 下课时，小美常常做什么？<br>1 在操场打球；2 在图书角看书；3 在食堂吃东西；4 在课室睡觉 | 在图书角看书 | 找“每次下课”。 | 每次下课她都在图书角看书。 |
 | zh-m12.q3 | 我的铅笔盒掉了，小美怎么做？<br>1 马上蹲下来帮我捡铅笔；2 去告诉老师；3 走开了；4 笑我不小心 | 马上蹲下来帮我捡铅笔 | 找“有一次”那几句。 | 小美马上蹲下来帮我捡。 |
 | zh-m12.q4 | 小美还常常帮我做什么？<br>1 教我做数学题；2 帮我写作文；3 帮我买午餐；4 帮我打扫课室 | 教我做数学题 | 找“她还常常”。 | 她常常教我做数学题。 |
-| zh-m12.q5 | 从短文看，小美是一个怎样的人？<br>1 很粗心；2 乐于助人；3 很自私；4 很胆小 | 乐于助人 | 她做了哪些事帮助“我”？ | 小美帮我捡铅笔、教我做题，乐于助人。 |
+| zh-m12.q5 | 小美戴着什么样的眼镜？<br>1 方方的眼镜；2 圆圆的眼镜；3 红色的太阳眼镜；4 没有镜片的眼镜 | 圆圆的眼镜 | 再读写小美样子的那一句。 | 短文说，小美戴着一副圆圆的眼镜。 |
 
 #### zh-m13 · 中秋节
 
@@ -400,7 +407,7 @@ Courses: p3_chinese, p3_higher_chinese. Kind: reading.
 | zh-m14.q2 | 小鸟站在树枝上时，心里觉得怎样？<br>1 很生气；2 有点害怕；3 非常开心；4 很想睡觉 | 有点害怕 | 找“心里”。 | 它心里有点害怕。 |
 | zh-m14.q3 | 小鸟摔到草地上以后，怎么做？<br>1 在草地上睡觉；2 爬起来再飞；3 不再学飞；4 哭着回家 | 爬起来再飞 | 找“它没有哭”。 | 它爬起来又飞了一次、两次。 |
 | zh-m14.q4 | 小鸟什么时候终于飞上天空？<br>1 半夜；2 早上；3 傍晚；4 中午 | 傍晚 | 找“终于”。 | 到了傍晚，它终于飞上了天空。 |
-| zh-m14.q5 | 这个故事告诉我们什么？<br>1 傍晚不能出门；2 不怕失败，多试几次就会成功；3 摔倒了就要放弃；4 小鸟不应该学飞 | 不怕失败，多试几次就会成功 | 想一想小鸟是怎样学会飞的。 | 小鸟不怕摔，一次次地试，终于成功。 |
+| zh-m14.q5 | 妈妈叫小鸟张开什么？<br>1 嘴巴；2 翅膀；3 尾巴；4 爪子 | 翅膀 | 再读妈妈对小鸟说的话。 | 妈妈说：“张开翅膀，用力拍！” |
 
 #### zh-m15 · 去动物园
 
@@ -635,7 +642,7 @@ Courses: p3_chinese, p3_higher_chinese. 8 pools, authored together as one curric
 | zh-p2-collocation.q5 | 我每天早上都[空1]牙。<br>1 踢；2 放；3 打；4 刷 | 刷 | 用牙刷做的事。 | 用牙刷“刷牙”。 |
 | zh-p2-collocation.q6 | 老师在白板上[空1]字。<br>1 放；2 弹；3 写；4 踢 | 写 | 用笔做的事。 | 用笔“写字”。 |
 | zh-p2-collocation.q7 | 音乐课上，我们一起[空1]歌。<br>1 唱；2 放；3 踢；4 打 | 唱 | 用声音做的事。 | 用嘴“唱歌”。 |
-| zh-p2-collocation.q8 | 哥哥在河边[空1]鱼。<br>1 钓；2 放；3 踢；4 弹 | 钓 | 用鱼竿等鱼上钩。 | 用鱼竿“钓鱼”。 |
+| zh-p2-collocation.q8 | 哥哥拿着鱼竿在河边[空1]鱼。<br>1 钓；2 放；3 踢；4 弹 | 钓 | 想一想用鱼竿做什么。 | 哥哥用鱼竿钓鱼，所以选“钓”。 |
 | zh-p2-wordchoice.q1 | 天气太[空1]了，我们都出了很多汗。<br>1 热；2 黑；3 亮；4 冷 | 热 | 出汗是因为什么？ | 天气热会出汗。 |
 | zh-p2-wordchoice.q2 | 妹妹找不到妈妈，[空1]得哭了起来。<br>1 高；2 急；3 笑；4 饱 | 急 | 找不到妈妈时心里会怎样？ | 心里着急，“急得哭了”。 |
 | zh-p2-wordchoice.q3 | 这条路很[空1]，我们走了很久。<br>1 短；2 长；3 新；4 甜 | 长 | 走了很久说明路怎么样？ | 路长才要走很久。 |
@@ -645,7 +652,7 @@ Courses: p3_chinese, p3_higher_chinese. 8 pools, authored together as one curric
 | zh-p2-wordchoice.q7 | 这个西瓜又大又[空1]。<br>1 辣；2 苦；3 甜；4 臭 | 甜 | 好吃的西瓜是什么味道？ | 西瓜又大又甜。 |
 | zh-p2-wordchoice.q8 | 下雨了，地上很[空1]，走路要小心。<br>1 干；2 热；3 湿；4 亮 | 湿 | 下雨后地上会怎样？ | 下雨后地上是湿的。 |
 | zh-p2-order.q1 | 哪个句子排列正确？（我 / 上学 / 每天 / 走路）<br>1 每天走路我上学。；2 我每天走路上学。；3 走路我每天上学。；4 我上学每天走路。 | 我每天走路上学。 | 先说谁，再说什么时候，最后说做什么。 | 正确的句子是“我每天走路上学。” |
-| zh-p2-order.q2 | 哪个句子排列正确？（妈妈 / 在厨房 / 做饭 / 正）<br>1 妈妈在厨房正做饭。；2 在厨房妈妈做饭正。；3 正妈妈在厨房做饭。；4 妈妈正在厨房做饭。 | 妈妈正在厨房做饭。 | “正”要放在“在”的前面。 | “妈妈正在厨房做饭。” |
+| zh-p2-order.q2 | 哪个句子排列正确？（妈妈 / 在厨房 / 做饭 / 正）<br>1 妈妈正在做饭厨房。；2 在厨房妈妈做饭正。；3 正妈妈在厨房做饭。；4 妈妈正在厨房做饭。 | 妈妈正在厨房做饭。 | 先找出谁在做什么，再看看地点放在哪里。 | 妈妈在厨房里做饭，所以选“妈妈正在厨房做饭。” |
 | zh-p2-order.q3 | 哪个句子排列正确？（小狗 / 在草地上 / 开心地 / 跑）<br>1 小狗在草地上跑开心地。；2 开心地小狗跑在草地上。；3 在草地上小狗跑开心地。；4 小狗开心地在草地上跑。 | 小狗开心地在草地上跑。 | “开心地”要放在动作前面。 | “小狗开心地在草地上跑。” |
 | zh-p2-order.q4 | 哪个句子排列正确？（星期天 / 我们 / 去公园 / 玩）<br>1 星期天我们去公园玩。；2 玩星期天我们去公园。；3 我们去公园星期天玩。；4 去公园玩我们星期天。 | 星期天我们去公园玩。 | 时间可以放在句子开头。 | “星期天我们去公园玩。” |
 | zh-p2-order.q5 | 哪个句子排列正确？（老师 / 讲故事 / 给我们 / 听）<br>1 老师给我们听讲故事。；2 讲故事老师听给我们。；3 给我们老师听讲故事。；4 老师讲故事给我们听。 | 老师讲故事给我们听。 | 谁做了什么，给谁听？ | “老师讲故事给我们听。” |
@@ -677,7 +684,7 @@ Courses: p3_chinese, p3_higher_chinese. 8 pools, authored together as one curric
 | zh-p3-wordchoice.q2 | 弟弟把房间弄得乱七八糟，妈妈很[空1]。<br>1 感谢；2 骄傲；3 生气；4 开心 | 生气 | 房间被弄乱了，妈妈会有什么感觉？ | 房间被弄乱，妈妈很生气。 |
 | zh-p3-wordchoice.q3 | 这道数学题太[空1]了，我想了很久也不会做。<br>1 容易；2 快；3 简单；4 难 | 难 | 想了很久也不会做，说明题目怎样？ | 题目难才会想很久。 |
 | zh-p3-wordchoice.q4 | 他做事很[空1]，从来不会忘记带东西。<br>1 随便；2 马虎；3 细心；4 粗心 | 细心 | 从不忘记东西的人是怎样的？ | 细心的人不会忘记东西。 |
-| zh-p3-wordchoice.q5 | 小明[空1]地向老师承认了错误。<br>1 生气；2 诚实；3 骄傲；4 害怕 | 诚实 | 承认错误需要什么品质？ | 诚实地承认错误。 |
+| zh-p3-wordchoice.q5 | 哪个词的意思是“说实话，不说谎”？小明[空1]地向老师承认了错误。<br>1 生气；2 诚实；3 骄傲；4 害怕 | 诚实 | 找表示不说假话的词。 | 小明没有说假话，是诚实地承认错误。 |
 | zh-p3-wordchoice.q6 | 练习了很多次，我们班[空1]得了第一名。<br>1 从来；2 不但；3 终于；4 虽然 | 终于 | 经过很多努力后的结果。 | “终于”表示经过努力后得到结果。 |
 | zh-p3-wordchoice.q7 | 雨下得很大，[空1]我们还是去上学了。<br>1 因为；2 而且；3 但是；4 所以 | 但是 | 前后意思相反。 | 前后意思相反用“但是”。 |
 | zh-p3-wordchoice.q8 | [空1]下大雨，所以比赛取消了。<br>1 虽然；2 如果；3 但是；4 因为 | 因为 | 后面有“所以”。 | “因为……所以……”说明原因和结果。 |
