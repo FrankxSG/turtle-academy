@@ -90,6 +90,8 @@ This is a broad-strand cross-check, not a substitute for the finer leaf inventor
 
 ## Actual paper research, 2021–2026
 
+Citation revision (2026-10-16): third-party past papers are linked through public listing pages only. School/year/type, analysis pages and original file hashes still identify the copies examined; this citation format does not establish reuse rights.
+
 | Course | 2021 | 2022 | 2023 | 2024 | 2025 | 2026 |
 | --- | --- | --- | --- | --- | --- | --- |
 | p2 maths | Retrieved | Retrieved | Retrieved | Retrieved¹ | Retrieved | Not retrieved |
@@ -102,7 +104,7 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p2_maths-2021
 
 - Identity/date: ACS Junior, non-weighted BA2; cover 2021.
-- Source: [public page/PDF](https://sgexam.com/subject/maths/2021-p2-maths-bite-sized-assessment-2-acsj-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1S-1P424aEeytLdbFSOlbPm3oItkbSQKs&export=download); 9 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/maths/2021-p2-maths-bite-sized-assessment-2-acsj-pdf/); 9 PDF pages.
 - Analysis page anchors: 1–2, 4, 7. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Multiplication/division and addition/subtraction word problems; MCQ and short/structured responses. Assessment is a subset of yearly scope.
 - SHA-256: `530607f50707ed0c48b72ed851a5452473028856d8b0cee11c2f2d1f4616cf54`.
@@ -110,7 +112,7 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p2_maths-2022
 
 - Identity/date: Tao Nan, Review 2; cover and answer-sheet 2022.
-- Source: [public page/PDF](https://sgexam.com/subject/maths/2022-p2-maths-holistic-assessment-2-tao-nan-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=14i91pMC7RhyswvnKU9_TjDid3nBq27X4&export=download); 16 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/maths/2022-p2-maths-holistic-assessment-2-tao-nan-pdf/); 16 PDF pages.
 - Analysis page anchors: 1–2, 5–7, 11–16. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Selected/short responses, scaled measurement, time and multi-step problems. Answer sheet names Tao Nan; not Raffles Girls’. Public scans are not authenticated school releases.
 - SHA-256: `c7b50e8bd60a952b3295416e47649966afa70681fc5bbc3610545e00ceefef83`.
@@ -118,7 +120,7 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p2_maths-2023
 
 - Identity/date: Pei Hwa Presbyterian, SA2; catalogue 2023.
-- Source: [public page/PDF](https://sgexam.com/subject/maths/2023-p2-maths-semestral-assessment-2-pei-hwa-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1RfcYxVlqAOJBUyl3N9Ut2uN6fRtkKYqV&export=download); 24 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/maths/2023-p2-maths-semestral-assessment-2-pei-hwa-pdf/); 24 PDF pages.
 - Analysis page anchors: 1, 3–9, 15–20. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: MCQ, short responses and structured word problems; models and diagrams are substantive stimuli, not optional decoration.
 - SHA-256: `95b189f233ae4b8e2fc2aa7d0b453c41399e7d1171c15ee627700f513defc3b1`.
@@ -126,7 +128,7 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p2_maths-2024
 
 - Identity/date: Raffles Girls’, supplementary worksheets; catalogue 2024.
-- Source: [public page/PDF](https://sgexam.com/subject/maths/2024-p2-maths-quiz-1-and-2-raffles-girls-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=14VMC9hQCG-cKSfA94bcb5Xuqz4dDxtuL&export=download); 28 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/maths/2024-p2-maths-quiz-1-and-2-raffles-girls-pdf/); 28 PDF pages.
 - Analysis page anchors: 1–4, 9–12. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Cover is a volume worksheet, not the advertised quiz cover. No internal year established; use as format evidence only, not a certified 2024 exam.
 - SHA-256: `14b23a1c7e3a49276f0d03c4b00ef33002eaac4dbd2ef60c8ae150975d106acb`.
@@ -134,7 +136,7 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p2_maths-2025
 
 - Identity/date: Henry Park, Quiz 2; cover 2025.
-- Source: [public page/PDF](https://sgexam.com/subject/maths/2025-p2-maths-quiz-2-henry-park-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=13-aZ_F01IotxDhCbcfuJqzLwVh6J-9hh&export=download); 12 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/maths/2025-p2-maths-quiz-2-henry-park-pdf/); 12 PDF pages.
 - Analysis page anchors: 1–8. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Multiplication/division representations, missing quantities and word problems; mixed selected/short responses. This single quiz cannot establish all P2 outcomes.
 - SHA-256: `c2e299d5765d3748e6593f92b70b79baf31935b3fb654a23e48acd1d85d4faa8`.
@@ -142,7 +144,7 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p3_maths-2021
 
 - Identity/date: ACS Junior, BA2; cover 2021.
-- Source: [public page/PDF](https://sgexam.com/subject/maths/2021-p3-maths-bite-sized-assessment-2-acsj-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1DydJ7Tc1dMUQtlBURhShYp5U1D69pJl4&export=download); 9 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/maths/2021-p3-maths-bite-sized-assessment-2-acsj-pdf/); 9 PDF pages.
 - Analysis page anchors: 1–7. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Short assessment combining MCQ, short answers and structured problems; not complete yearly coverage.
 - SHA-256: `38343744049dd69d2e44c3ef9fdab1c5cd2b6b819a35b1ef58cf59a19a46edaa`.
@@ -150,7 +152,7 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p3_maths-2022
 
 - Identity/date: ACS Junior, SA2; cover 2022.
-- Source: [public page/PDF](https://sgexam.com/subject/maths/2022-p3-maths-semestral-assessment-2-acs-junior-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=17arCse_isM-xcSt4r8bk-ki-K_LSUJKQ&export=download); 26 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/maths/2022-p3-maths-semestral-assessment-2-acs-junior-pdf/); 26 PDF pages.
 - Analysis page anchors: 1, 3–10, 18–22. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: MCQ and short/structured responses across number, measurement and problem solving; visual representations recur.
 - SHA-256: `6832cf8b120645a6aff53844e14c60def0c2c1602f6df5ea1e7948416e10cf6c`.
@@ -158,7 +160,7 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p3_maths-2023
 
 - Identity/date: ACS Primary, EOY; cover 2023.
-- Source: [public page/PDF](https://sgexam.com/subject/maths/2023-p3-maths-end-of-year-exam-acsp-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1Xc1LABmHSIYYe84mutsSlAqDz26DPnxt&export=download); 26 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/maths/2023-p3-maths-end-of-year-exam-acsp-pdf/); 26 PDF pages.
 - Analysis page anchors: 1, 3, 9, 18–21. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: MCQ, short answers and structured problems; course-level labels alone do not prove the current leaf-outcome inventory.
 - SHA-256: `217f1207a1110dc57f27ebbd7ff3016cc02268359beb5528f260d07a2bc1f218`.
@@ -166,7 +168,7 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p3_maths-2024
 
 - Identity/date: ACS Junior, BA2; catalogue 2024.
-- Source: [public page/PDF](https://sgexam.com/subject/maths/2024-p3-maths-bite-sized-assessment-2-acs-junior-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1JzoT2Qp1CBS0B7xgVYy_NPkyRKAZd1fn&export=download); 11 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/maths/2024-p3-maths-bite-sized-assessment-2-acs-junior-pdf/); 11 PDF pages.
 - Analysis page anchors: 1–8. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: Cover has no legible printed year. Thirteen-question assessment, not a full syllabus census; retain advertised-year uncertainty.
 - SHA-256: `a3ad73ba7df759bb139f79f0d6ee438b7e878ed772e90448cb83e6662fe183cb`.
@@ -174,7 +176,7 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p3_maths-2025
 
 - Identity/date: ACS Junior as catalogued, EOY; cover 2025.
-- Source: [public page/PDF](https://sgexam.com/subject/maths/2025-p3-maths-end-of-year-exam-acs-junior-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1n-axBZ_3st7xl-CHDkDVHlwi-A6AuGWS&export=download); 20 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/maths/2025-p3-maths-end-of-year-exam-acs-junior-pdf/); 20 PDF pages.
 - Analysis page anchors: 1, 4, 10, 14. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: PDF p4 Q4 uses 24-hour time; p10 Q19 requires a parallel line through a point. Geometry, clock and graph interpretation need actual representations in the app.
 - SHA-256: `deb8c632c9ff8116f340b212aecc86e60119f6c0515da1891b69a5a995f592f8`.
@@ -182,14 +184,14 @@ SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-h
 ### p3_maths-2025-extra-tao-nan
 
 - Identity/date: Tao Nan, EOY; cover 2025.
-- Source: [public page/PDF](https://sgexam.com/subject/maths/2025-p3-maths-end-of-year-exam-tao-nan-pdf/); [retrieved PDF](https://drive.usercontent.google.com/download?id=1ZF87MRvp5HOwDe0lRz_N6Hh3_9vFaRpc&export=download); 16 PDF pages.
+- Source: [public paper listing](https://sgexam.com/subject/maths/2025-p3-maths-end-of-year-exam-tao-nan-pdf/); 16 PDF pages.
 - Analysis page anchors: 1–13. All pages were text/OCR processed; these are the principal sections examined, not a claim that every external answer key was independently marked.
 - Finding: 25 questions: 10 MCQ, 10 short, five structured. Scales, angles, parallel-line drawing, equivalent fractions, duration and composite area/perimeter provide independent corroboration.
 - SHA-256: `cd6117a595870657771b785fea3b1890c40d7da3e6d5541450747f975e0c4f79`.
 
 ### Second-host 2022 bundle — mathematics
 
-[SmileTutor public PDF](https://smiletutor.sg/wp-content/uploads/2023/10/P2_Math_2022.pdf): 53 pages downloaded; **only PDF pp1–8 inspected/OCR processed**. The first packet is Maha Bodhi Review 1. PDF pp3–8 show place value, missing numbers, model choice, cube counting and structured comparison problems. Distinguish reading a supplied model from calculating values disclosed in prose.
+[SmileTutor public listing](https://smiletutor.sg/free-test-papers-download/primary-school-exam-papers/): 53 pages downloaded; **only PDF pp1–8 inspected/OCR processed**. The first packet is Maha Bodhi Review 1. PDF pp3–8 show place value, missing numbers, model choice, cube counting and structured comparison problems. Distinguish reading a supplied model from calculating values disclosed in prose.
 
 SHA-256: `cffdaa012c6840dab0e1efbdf387384ee5832c4c3ccfc6780f0a985f23ec6d0d`. Full bundle content/keys were not audited.
 
@@ -207,7 +209,7 @@ Rejected as current-scope authority: [Gifted Questions P2 page](https://www.gift
 
 The app content is labelled original author draft. A bounded exact-overlap check compared every app material body and question stem against the retrieved same-subject paper OCR/text: 12 text files, 12 consecutive alphabetic words, case/punctuation normalised. **No threshold-length exact match was found.** This can miss paraphrases, OCR errors, shorter copying, images and sources outside the sample. It is not proof of originality, permission or copyright clearance. Common grammar/number templates are not by themselves evidence of copying. Retain pending rights/independent review/owner sign-off until the project’s review gates are satisfied.
 
-Reproduce source identity by downloading the cited public URLs, running `sha256sum` on each PDF/HTML, and comparing the recorded hashes. For paper structure, extract native PDF text and OCR scans (PyMuPDF + Tesseract English / Simplified Chinese), then inspect the stated PDF pages and course/year covers visually where OCR is ambiguous. HTML hashes identify the fetched snapshot, not an immutable future webpage. The documented overlaps used only stems/material bodies, not keys/explanations or character catalogues. Source retrieval and OCR happened outside the public repository; no signed download tokens or private files are required to follow these citations.
+For past papers, start at the cited public listing, identify the recorded grade/course, year and assessment, and obtain the matching file under the host’s current access conditions. Compare its `sha256sum` with the recorded hash; a mismatch may mean the host replaced the file. Official and other source snapshots are likewise identified by their cited URLs and hashes. For paper structure, extract native PDF text and OCR scans (PyMuPDF + Tesseract English / Simplified Chinese), then inspect the stated PDF pages and course/year covers visually where OCR is ambiguous. HTML hashes identify the fetched snapshot, not an immutable future webpage. The documented overlaps used only stems/material bodies, not keys/explanations or character catalogues. Source retrieval and OCR happened outside the public repository; no signed download tokens or private files are required to follow these citations.
 
 ## Disposition and next revision
 
