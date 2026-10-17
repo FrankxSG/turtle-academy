@@ -2,8 +2,8 @@
   "schema_version": "chinese-task-plan/1",
   "plan_id": "zh-fixture-x19",
   "content_batch_id": "zh-starter-001",
-  "content_version": 7,
-  "manifest_version": "zh-2024-p2p3-draft.1",
+  "content_version": 8,
+  "manifest_version": "zh-2024-p2p3-draft.2",
   "course": "p2_chinese",
   "x": 19,
   "material_ids": [
