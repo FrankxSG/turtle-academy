@@ -102,3 +102,13 @@ Validation of the correction: 39 client/owner-check tests, repository TypeScript
 ### 2026-10-17 review of the pending-Google correction (`d75d89d..e3d2dd8`)
 
 No blocking findings. The verifier is cleared on sign-out (empty-value overwrite when removal fails; an empty verifier can never be exchanged), and the identity generation now also covers PKCE generation. Each of four deliberate weakenings (skipping the verifier cleanup, the PKCE generation check, the overwrite fallback, or reporting a stuck verifier) fails at least one regression test, and a reload after the overwrite fallback was confirmed not to complete a stale callback. Local evidence: `test_database.py` **19 pass** (PostgreSQL 16); client and owner-check suites **39 pass** (Node 22); strict type-check of the changed modules, privacy guard and `git diff --check` pass. The build is evidenced by GitHub CI on the pushed head.
+
+## 2026-10-17 Pilot learning engine (Issue #17, synthetic only)
+
+Branch `claude/pilot-learning-engine`, based on `main` at `266a2ba`, PR #20. Adds the on-device engine (`src/engine/`), the catalogue adapter (`src/catalogue/`) and a separate Dexie learner store (`turtle-academy-pilot-v1`; the guest database is never changed). Synthetic fixtures only, under `tests/engine/`. No backend calls, uploads or real data. Design and engineering proposals: `src/engine/README.md`.
+
+Evidence at tested code head `70c1eaf`:
+- `npm run test:engine` (`node --test tests/engine/*.test.ts`): **51 pass** locally (Node 22). It covers the #17 acceptance cases: F01–F19, F21, F22, F24, F25, F27, F29, F32, F36–F40, legacy guest isolation, and a populated snapshot that passes the #16 validator pinned to `pilot-snapshot/1`.
+- Strict type check of the engine, catalogue, snapshot and test modules passes locally (TypeScript 6). Twenty of 22 deliberate rule weakenings fail at least one test; the two others are redundant second guards (see PR #20).
+- GitHub CI at `70c1eaf`: `foundation` passed (`npm ci`, `npm audit`, `npm run build` including the TypeScript 7 type check of the Dexie store, and the end-to-end tests); `engine` and `privacy-guard` passed.
+- Not yet executed: the Dexie store against IndexedDB (needs a pinned `fake-indexeddb` lockfile change or a browser test), and browser or service-worker update acceptance.
