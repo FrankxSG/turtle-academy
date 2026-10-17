@@ -35,6 +35,22 @@ export function Parent({
   const zh = language === 'zh'
   const engine = runtime.engine
   const tr = (en: string, cn: string) => (zh ? cn : en)
+  const reasons: Record<string, string> = {
+    full: tr('Full task completed', '已完成整次练习'),
+    shortened_no_eligible_content: tr(
+      'No more eligible questions were available',
+      '没有更多符合条件的题目',
+    ),
+    zero_eligible: tr(
+      'No eligible questions were available',
+      '没有可用的符合条件题目',
+    ),
+    replacements_exhausted: tr(
+      'No suitable replacement questions remained',
+      '没有合适的替换题目',
+    ),
+    in_progress: tr('In progress', '进行中'),
+  }
   async function verify() {
     const entered = pin
     setPin('')
@@ -228,6 +244,14 @@ export function Parent({
           </div>
           <section className="summary">
             <h2>{tr('Practice summary', '练习记录')}</h2>
+            {engine.state.completions
+              .filter((c) => c.task_id === null)
+              .map((c) => (
+                <p key={`${c.subject}:${c.local_date}`}>
+                  {names[language][c.subject]} · {c.local_date}:{' '}
+                  {reasons[c.reason]}
+                </p>
+              ))}
             <p>
               {tr(
                 'Measured active time excludes pause, background time and gaps of two minutes or more. Teaching counts; planned workload is not a measured duration.',
@@ -277,8 +301,12 @@ export function Parent({
                 </summary>
                 <p>
                   {tr('Completion reason: ', '结束原因：')}
-                  {engine.state.completions.find((c) => c.task_id === t.id)
-                    ?.reason ?? 'in_progress'}
+                  {
+                    reasons[
+                      engine.state.completions.find((c) => c.task_id === t.id)
+                        ?.reason ?? 'in_progress'
+                    ]
+                  }
                 </p>
                 <ol>
                   {engine.state.presentations
@@ -309,7 +337,6 @@ export function Parent({
                                 {e.correct
                                   ? tr('correct', '正确')
                                   : tr('needs correction', '需订正')}{' '}
-                                · {e.assistance}
                               </li>
                             ))}
                         </ul>

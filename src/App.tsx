@@ -525,7 +525,7 @@ export function App() {
               >
                 <img src="/turtle.svg" alt="" />
                 <p className="eyebrow">
-                  {tr('A MOMENT WITH MOSS', '小岛来信')} · {checkpoint.kind}
+                  {tr('A MOMENT WITH MOSS', '小岛来信')}
                 </p>
                 <h1>
                   {checkpoint.story_seq < stories.en.length
@@ -561,7 +561,12 @@ export function App() {
           <p>
             {online ? tr('Online', '在线') : tr('Offline', '离线')} ·{' '}
             {shellReady
-              ? tr('Ready for an offline adventure', '应用已缓存，可离线打开')
+              ? entry === 'ready'
+                ? tr('Ready for an offline adventure', '应用已缓存，可离线打开')
+                : tr(
+                    'App cached; first setup still needs internet',
+                    '应用已缓存，首次设置仍需联网',
+                  )
               : tr('Preparing the offline app…', '正在准备离线应用…')}
           </p>
           <p>

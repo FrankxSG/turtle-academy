@@ -8,7 +8,8 @@ export default defineConfig({
   reporter: process.env.CI ? [['list'], ['github']] : 'list',
   use: { browserName: 'chromium' },
   projects: [
-    { name: 'app', testIgnore: '**/trials/**', use: { baseURL: 'http://127.0.0.1:4173', serviceWorkers: 'allow' } },
+    // Node's native suites have dedicated commands; don't import/run them again during browser collection.
+    { name: 'app', testIgnore: ['**/trials/**', '**/engine/**', '**/ui/**'], use: { baseURL: 'http://127.0.0.1:4173', serviceWorkers: 'allow' } },
     // Trials build only (Issue #8): served separately so it never shares the app's origin or cache.
     { name: 'trials', testMatch: 'trials/**/*.spec.ts', use: { baseURL: 'http://127.0.0.1:4174', serviceWorkers: 'allow' } },
   ],

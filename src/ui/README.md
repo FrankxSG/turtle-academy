@@ -16,6 +16,7 @@ Use Node 22.21.1 and the locked dependencies. For the mocked browser suite, buil
 VITE_SUPABASE_URL=http://127.0.0.1:4173 VITE_SUPABASE_ANON_KEY=synthetic-test-only npm run build
 npm run test:e2e
 npm run test:engine
+npm run test:ui
 python3 scripts/privacy_guard.py
 ```
 

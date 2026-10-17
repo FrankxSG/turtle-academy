@@ -45,10 +45,7 @@ export function Hub({
         </div>
         <span className="date-pill">{status.date}</span>
       </section>
-      <section
-        className="hub-map"
-        aria-label={zh ? '可探索的小岛' : 'Explorable island'}
-      >
+      <section className="hub-map" aria-label={zh ? '小岛中心' : 'Island hub'}>
         <div className="island-path" aria-hidden="true" />
         <span className="map-tree tree-one" aria-hidden="true">
           ♣
@@ -61,9 +58,13 @@ export function Hub({
           onClick={() => {
             move(25, 45)
             setDialogue(
-              zh
-                ? '图书馆里，每个问题都值得慢慢想。'
-                : 'The library keeps a place for every curious question.',
+              !status.explorationUnlocked
+                ? zh
+                  ? '先完成今天的练习，再来探索图书馆吧。'
+                  : 'Finish today’s trails, then explore the library.'
+                : zh
+                  ? '图书馆里，每个问题都值得慢慢想。'
+                  : 'The library keeps a place for every curious question.',
             )
           }}
           aria-label={zh ? '走到图书馆' : 'Walk to the library'}
@@ -75,9 +76,13 @@ export function Hub({
           onClick={() => {
             move(75, 70)
             setDialogue(
-              zh
-                ? '池塘很安静。看看水面的波纹。'
-                : 'A quiet pond. Watch the ripples for a moment.',
+              !status.explorationUnlocked
+                ? zh
+                  ? '先完成今天的练习，再来池塘发现新事物吧。'
+                  : 'Finish today’s trails, then discover more at the pond.'
+                : zh
+                  ? '池塘很安静。看看水面的波纹。'
+                  : 'A quiet pond. Watch the ripples for a moment.',
             )
           }}
           aria-label={zh ? '走到池塘' : 'Walk to the pond'}
@@ -173,8 +178,14 @@ export function Hub({
                     ? '今天已完成'
                     : 'Complete today'
                   : task
-                    ? `${remaining} ${zh ? '题待完成' : 'questions remaining'}`
-                    : `${zh ? '至少' : 'At least'} ${remaining} ${zh ? '题 · 语言材料可能更多' : 'questions · language materials may add more'}`}
+                    ? remaining > 0
+                      ? `${remaining} ${zh ? '题待完成' : 'questions remaining'}`
+                      : zh
+                        ? '继续完成反馈与订正'
+                        : 'Finish feedback and corrections'
+                    : s === 'chinese' || s === 'english'
+                      ? `${zh ? '至少' : 'At least'} ${remaining} ${zh ? '题 · 完整材料可能增加题数' : 'questions · whole materials may add more'}`
+                      : `${remaining} ${zh ? '题计划练习' : 'planned questions'}`}
               </p>
               <button disabled={busy || status.rest} onClick={() => start(s)}>
                 {complete

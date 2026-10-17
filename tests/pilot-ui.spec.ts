@@ -104,6 +104,8 @@ for (const order of [
     await expect(
       page.getByRole('button', { name: 'Explore the island' }),
     ).toBeDisabled()
+    await page.getByRole('button', { name: 'Walk to the pond' }).click()
+    await expect(page.locator('.speech')).toContainText('Finish today’s trails')
     const content: string[] = []
     for (const [index, subject] of order.entries()) {
       await page.getByRole('button', { name: `Start ${subject}` }).click()
@@ -120,6 +122,8 @@ for (const order of [
     await expect(
       page.getByRole('button', { name: 'Explore the island' }),
     ).toBeEnabled()
+    await page.getByRole('button', { name: 'Walk to the pond' }).click()
+    await expect(page.locator('.speech')).toContainText('A quiet pond')
     expect(
       content.filter((s) => s.includes('Moss finds a tiny lantern')).length,
     ).toBe(1)
@@ -147,12 +151,12 @@ test('combined checkpoint occurs once at the final material boundary', async ({
   await page.getByRole('button', { name: 'Start English' }).click()
   const seen = await finish(page)
   expect(seen.length).toBe(1)
-  expect(seen[0]).toContain('combined')
   await page.reload()
   const story = (await state(page)).records.find(
     (r) => r.table === 'story',
   ).value
   expect(story.checkpoints.length).toBe(1)
+  expect(story.checkpoints[0].kind).toBe('combined')
 })
 
 test('rest preserves an unfinished task and gives no completion/story credit; tomorrow resumes', async ({
