@@ -118,3 +118,10 @@ python3 scripts/privacy_guard.py
 ```
 
 Passing validation proves structure only. Remaining before release: independent review of every item, random 20% sample of agreed items, owner batch sign-off, verification of topic boundaries against the official MOE syllabus PDF, and the existing Pilot coverage, data-protection and device gates. No learner data is used or implied by any item.
+
+## Re-review corrections — 17 October 2026
+
+Responds to the independent re-review of `280dd4d`. No questions or diagrams changed.
+- **Shared SVG guard.** Attribute values are now checked after XML decoding. Encoded `url(` and `https`, protocol-relative values, `data:` and CSS escapes are rejected, while same-file `url(#id)` stays allowed (the re-review accepted that policy). The re-review's encoded probes are failing tests. The validator and tests are identical in #13, #14 and #15.
+
+Still open: the MA3 source-complete inventory, deferred to the next round. That includes the known gap in mental addition and subtraction of two 2-digit numbers, which will be filled with new questions. Also open: item QA, the 20% sample and owner sign-off. P3 Mathematics stays locked in the Pilot.

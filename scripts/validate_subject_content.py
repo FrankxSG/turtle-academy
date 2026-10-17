@@ -140,6 +140,19 @@ def route_compatible(subject, item_family, route_family):
     return item_family == route_family or route_family in ROUTE_FAMILIES[subject].get(item_family, set())
 
 
+def check_svg_value(value, where):
+    """Checks one attribute value AFTER XML decoding, so character references such as &#117;rl(
+    cannot hide a reference from the raw-source checks above."""
+    low = value.lower()
+    # No drawing attribute needs a backslash; refusing it rules out CSS escapes such as \75 rl(.
+    require('\\' not in value, 'asset_css_escape', where)
+    require('url(' not in LOCAL_URL.sub('', low), 'asset_external_url', where)
+    require('@import' not in low and 'expression(' not in low, 'asset_css_import', where)
+    require('javascript:' not in low and 'http:' not in low and 'https:' not in low and 'data:' not in low,
+            'asset_external_reference', where)
+    require(not low.strip().startswith('//'), 'asset_protocol_relative', where)
+
+
 def check_svg(path, where):
     require(path.is_file(), 'asset_missing', where)
     raw = path.read_text(encoding='utf-8')
@@ -163,8 +176,9 @@ def check_svg(path, where):
     for el in root.iter():
         tag = el.tag.replace(SVG_NS, '')
         require(tag not in SVG_FORBIDDEN, 'asset_forbidden_element', f'{where} <{tag}>')
-        for attr in el.attrib:
+        for attr, value in el.attrib.items():
             require('href' not in attr, 'asset_href', where)
+            check_svg_value(value, f'{where} <{tag} {attr}>')
     titles = [el for el in root if el.tag == SVG_NS + 'title']
     require(titles and (titles[0].text or '').strip(), 'asset_title', where)
 
