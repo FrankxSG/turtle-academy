@@ -21,7 +21,7 @@ Every question is single-answer multiple choice with four options. Matching, ord
 
 | Measure | Value |
 | --- | --- |
-| Approved leaf coverage | 0/16 — leaf denominator not approved; zh-starter-002: independent review not passed; zh-starter-002: owner sign-off pending; zh-starter-002: rights not cleared; zh-starter-002: open disputes |
+| Approved leaf coverage | 0/16 — leaf denominator not approved; zh-starter-002: independent review not passed; zh-starter-002: owner sign-off pending; zh-starter-002: rights not cleared |
 | Leaves authored with general practice and a complete repair route | 13/16 (81%) |
 | Leaves with some items but no complete route or no general practice | 0 |
 | Empty in-scope leaves (stay in the denominator) | 3 |
@@ -54,7 +54,7 @@ Every question is single-answer multiple choice with four options. Matching, ord
 
 | Measure | Value |
 | --- | --- |
-| Approved leaf coverage | 0/16 — leaf denominator not approved; zh-starter-002: independent review not passed; zh-starter-002: owner sign-off pending; zh-starter-002: rights not cleared; zh-starter-002: open disputes |
+| Approved leaf coverage | 0/16 — leaf denominator not approved; zh-starter-002: independent review not passed; zh-starter-002: owner sign-off pending; zh-starter-002: rights not cleared |
 | Leaves authored with general practice and a complete repair route | 13/16 (81%) |
 | Leaves with some items but no complete route or no general practice | 0 |
 | Empty in-scope leaves (stay in the denominator) | 3 |
@@ -91,7 +91,7 @@ P3 general practice is unlocked from the first Chinese release using reviewed av
 
 | Measure | Value |
 | --- | --- |
-| Approved leaf coverage | 0/20 — leaf denominator not approved; zh-starter-002: independent review not passed; zh-starter-002: owner sign-off pending; zh-starter-002: rights not cleared; zh-starter-002: open disputes |
+| Approved leaf coverage | 0/20 — leaf denominator not approved; zh-starter-002: independent review not passed; zh-starter-002: owner sign-off pending; zh-starter-002: rights not cleared |
 | Leaves authored with general practice and a complete repair route | 7/20 (35%) |
 | Leaves with some items but no complete route or no general practice | 4 |
 | Empty in-scope leaves (stay in the denominator) | 9 |
@@ -130,7 +130,7 @@ P3 general practice is unlocked from the first Chinese release using reviewed av
 
 | Measure | Value |
 | --- | --- |
-| Approved leaf coverage | 0/21 — leaf denominator not approved; zh-starter-002: independent review not passed; zh-starter-002: owner sign-off pending; zh-starter-002: rights not cleared; zh-starter-002: open disputes |
+| Approved leaf coverage | 0/21 — leaf denominator not approved; zh-starter-002: independent review not passed; zh-starter-002: owner sign-off pending; zh-starter-002: rights not cleared |
 | Leaves authored with general practice and a complete repair route | 7/21 (33%) |
 | Leaves with some items but no complete route or no general practice | 4 |
 | Empty in-scope leaves (stay in the denominator) | 10 |

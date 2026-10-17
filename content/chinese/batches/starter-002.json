@@ -2089,7 +2089,8 @@
    "Sources: P2 school exercise formats were reviewed privately to choose question types. No worksheet, textbook or past-paper wording, answer or learner information is used. As with every public group, the targets are generic curriculum content, not a record of any learner's errors.",
    "Disputed for the owner: four tone-mark placement items (zh-p2-sound2.q2, .q3, -repair.q2, -repair.q3) — whether telling correctly marked pinyin from wrongly marked pinyin is in P2 scope.",
    "Owner sample: 7 of 34 undisputed items, ceil(N/5), random.Random('zh-starter-002-v1-owner-sample-2026-10-18').sample(pool, ceil(len(pool)/5)) over batch order, pool excluding the disputed items.",
-   "Pending: independent cross-review (ChatGPT), owner review of the disputes and sample, rights review."
+   "Owner decision 2026-10-18: all four tone-mark placement items kept as written; disputes cleared. The owner sample was drawn while they were disputed, so its pool stays the 34 items listed in the review pack.",
+   "Pending: independent cross-review (ChatGPT), owner review of the sample, rights review."
   ],
   "independent_review": "pending",
   "owner_signoff": "pending",
@@ -2102,12 +2103,7 @@
    "zh-p2-reason-repair.q1",
    "zh-p2-reason-repair.q2"
   ],
-  "disputed_item_ids": [
-   "zh-p2-sound2.q2",
-   "zh-p2-sound2.q3",
-   "zh-p2-sound2-repair.q2",
-   "zh-p2-sound2-repair.q3"
-  ],
+  "disputed_item_ids": [],
   "rights_status": "original_draft_pending_owner_rights_review",
   "artwork": "none"
  }

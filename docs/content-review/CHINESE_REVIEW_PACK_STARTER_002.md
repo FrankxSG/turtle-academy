@@ -7,7 +7,7 @@ Every question is single-answer multiple choice with four options. `[空1]` mark
 ## What to review
 
 - **ChatGPT (independent cross-review):** all 38 items and the material, against the common and Chinese authoring skills. Corrections go back to Claude for re-review, as in PR 23.
-- **Owner:** the 4 disputed items and the 7 sampled items below. Anything else the owner wants to look at is welcome.
+- **Owner:** the 7 sampled items below. The 4 disputed items were decided on 2026-10-18.
 
 | Set | Items | Leaf | Repair group |
 | --- | ---: | --- | --- |
@@ -16,25 +16,26 @@ Every question is single-answer multiple choice with four options. `[空1]` mark
 | 二年级词语运用组（二） | 8 | `lu-word-choice` | `zh-group-p2-language-use-2` |
 | 二年级阅读组（二）：把原因找全 | 7 | `r-explicit` | `zh-group-p2-reading-skills-2` |
 
-## Disputed — owner decision
+## Disputes — decided 2026-10-18: kept as written
 
-Tone-mark placement (声调写在哪个字母上). These four items ask the child to pick the correctly written pinyin of a known character, where one distractor puts the tone mark on the wrong letter (for example zoǔ for zǒu). The syllabus P2 row for 字音 covers reading characters with pinyin; it does not say whether telling correct from incorrect tone-mark placement belongs to P2. Accept, change or remove. If the two repair items are removed, the 字音 pool in this batch needs two replacement items before it is complete.
+Tone-mark placement (声调写在哪个字母上). These four items ask the child to pick the correctly written pinyin of a known character, where one distractor puts the tone mark on the wrong letter (for example zoǔ for zǒu). The syllabus P2 row for 字音 covers reading characters with pinyin; it does not say whether telling correct from incorrect tone-mark placement belongs to P2. The owner kept all four as written.
 
 | ID / version / stage | Question and options | Key | Hint | Explanation | Repair route |
 | --- | --- | --- | --- | --- | --- |
-| zh-p2-sound2.q2 v1 / general **(disputed)** | “走路”的“走”，哪一个拼音写对了？<br>1 zoǔ；2 zuǒ；3 zǒu；4 zòu | zǒu | 看一看声调写在哪个字母上面。 | “走”读 zǒu，第三声。ou 在一起时，声调写在 o 上面。zuǒ 是“左”的读音。 | 字音（字与拼音） |
-| zh-p2-sound2.q3 v1 / general **(disputed)** | “就”的拼音，哪一个写对了？<br>1 jiū；2 jìu；3 qiù；4 jiù | jiù | 看一看声母，再看一看声调写在哪个字母上面。 | “就”读 jiù，第四声。iu 在一起时，声调写在 u 上面。 | 字音（字与拼音） |
-| zh-p2-sound2-repair.q2 v1 / similar **(disputed)** | “牛”的拼音，哪一个写对了？<br>1 níu；2 niú；3 nóu；4 niǔ | niú | 看一看声调写在哪个字母上面。 | “牛”读 niú，第二声。iu 在一起时，声调写在 u 上面。 | zh.p2_chinese.skill.char-sound; zh.p2_higher_chinese.skill.char-sound |
-| zh-p2-sound2-repair.q3 v1 / generic **(disputed)** | “手”的拼音，哪一个写对了？<br>1 shoǔ；2 sǒu；3 shǔ；4 shǒu | shǒu | 先看声母，再看声调写在哪个字母上面。 | “手”读 shǒu，第三声。ou 在一起时，声调写在 o 上面。 | zh.p2_chinese.skill.char-sound; zh.p2_higher_chinese.skill.char-sound |
+| zh-p2-sound2.q2 v1 / general **(kept by owner)** | “走路”的“走”，哪一个拼音写对了？<br>1 zoǔ；2 zuǒ；3 zǒu；4 zòu | zǒu | 看一看声调写在哪个字母上面。 | “走”读 zǒu，第三声。ou 在一起时，声调写在 o 上面。zuǒ 是“左”的读音。 | 字音（字与拼音） |
+| zh-p2-sound2.q3 v1 / general **(kept by owner)** | “就”的拼音，哪一个写对了？<br>1 jiū；2 jìu；3 qiù；4 jiù | jiù | 看一看声母，再看一看声调写在哪个字母上面。 | “就”读 jiù，第四声。iu 在一起时，声调写在 u 上面。 | 字音（字与拼音） |
+| zh-p2-sound2-repair.q2 v1 / similar **(kept by owner)** | “牛”的拼音，哪一个写对了？<br>1 níu；2 niú；3 nóu；4 niǔ | niú | 看一看声调写在哪个字母上面。 | “牛”读 niú，第二声。iu 在一起时，声调写在 u 上面。 | zh.p2_chinese.skill.char-sound; zh.p2_higher_chinese.skill.char-sound |
+| zh-p2-sound2-repair.q3 v1 / generic **(kept by owner)** | “手”的拼音，哪一个写对了？<br>1 shoǔ；2 sǒu；3 shǔ；4 shǒu | shǒu | 先看声母，再看声调写在哪个字母上面。 | “手”读 shǒu，第三声。ou 在一起时，声调写在 o 上面。 | zh.p2_chinese.skill.char-sound; zh.p2_higher_chinese.skill.char-sound |
 
 ## Owner sample
 
-7 of 34 undisputed items. Reproduce:
+7 of 34 items undisputed at the draw. Reproduce:
 
 ```python
 import json, math, random
 b = json.load(open('content/chinese/batches/starter-002.json'))
-pool = [i['id'] for i in b['items'] if i['id'] not in b['review_log']['disputed_item_ids']]
+disputed_at_draw = {'zh-p2-sound2.q2', 'zh-p2-sound2.q3', 'zh-p2-sound2-repair.q2', 'zh-p2-sound2-repair.q3'}
+pool = [i['id'] for i in b['items'] if i['id'] not in disputed_at_draw]
 picked = set(random.Random('zh-starter-002-v1-owner-sample-2026-10-18').sample(pool, math.ceil(len(pool) / 5)))
 assert [i for i in pool if i in picked] == b['review_log']['sampled_item_ids']
 ```
@@ -76,13 +77,13 @@ assert [i for i in pool if i in picked] == b['review_log']['sampled_item_ids']
 | ID / version / stage | Question and options | Key | Hint | Explanation | Repair route |
 | --- | --- | --- | --- | --- | --- |
 | zh-p2-sound2.q1 v1 / general | “前面”的“前”怎么读？<br>1 xián；2 qián；3 qiǎn；4 jiàn | qián | “前”的声母和“七”一样。再想一想，是第几声？ | “前”读 qián，声母是 q，第二声。 | 字音（字与拼音） |
-| zh-p2-sound2.q2 v1 / general **(disputed)** | “走路”的“走”，哪一个拼音写对了？<br>1 zoǔ；2 zuǒ；3 zǒu；4 zòu | zǒu | 看一看声调写在哪个字母上面。 | “走”读 zǒu，第三声。ou 在一起时，声调写在 o 上面。zuǒ 是“左”的读音。 | 字音（字与拼音） |
-| zh-p2-sound2.q3 v1 / general **(disputed)** | “就”的拼音，哪一个写对了？<br>1 jiū；2 jìu；3 qiù；4 jiù | jiù | 看一看声母，再看一看声调写在哪个字母上面。 | “就”读 jiù，第四声。iu 在一起时，声调写在 u 上面。 | 字音（字与拼音） |
+| zh-p2-sound2.q2 v1 / general **(kept by owner)** | “走路”的“走”，哪一个拼音写对了？<br>1 zoǔ；2 zuǒ；3 zǒu；4 zòu | zǒu | 看一看声调写在哪个字母上面。 | “走”读 zǒu，第三声。ou 在一起时，声调写在 o 上面。zuǒ 是“左”的读音。 | 字音（字与拼音） |
+| zh-p2-sound2.q3 v1 / general **(kept by owner)** | “就”的拼音，哪一个写对了？<br>1 jiū；2 jìu；3 qiù；4 jiù | jiù | 看一看声母，再看一看声调写在哪个字母上面。 | “就”读 jiù，第四声。iu 在一起时，声调写在 u 上面。 | 字音（字与拼音） |
 | zh-p2-sound2.q4 v1 / general | “树上结出了很多果子”里的“结”怎么读？<br>1 jié；2 jiē；3 jiě；4 qiē | jiē | “结”有两个读音。想一想，长出果子的“结”读哪一个？ | 长出果子的“结”读 jiē，第一声。“结”在别的地方还可以读 jié。 | 字音（字与拼音） |
 | zh-p2-sound2.q5 v1 / general | “小狗”的“狗”怎么读？<br>1 gōu；2 kǒu；3 gòu；4 gǒu | gǒu | 先看声母，再看声调。 | “狗”读 gǒu，第三声。kǒu 是“口”的读音。 | 字音（字与拼音） |
 | zh-p2-sound2-repair.q1 v1 / exact | 拼音“qián”是哪个字？<br>1 前；2 见；3 全；4 先 | 前 | 小声读一读每个字，再看声母和声调。 | “前”读 qián。“见”读 jiàn，“全”读 quán，“先”读 xiān。 | zh.p2_chinese.skill.char-sound; zh.p2_higher_chinese.skill.char-sound |
-| zh-p2-sound2-repair.q2 v1 / similar **(disputed)** | “牛”的拼音，哪一个写对了？<br>1 níu；2 niú；3 nóu；4 niǔ | niú | 看一看声调写在哪个字母上面。 | “牛”读 niú，第二声。iu 在一起时，声调写在 u 上面。 | zh.p2_chinese.skill.char-sound; zh.p2_higher_chinese.skill.char-sound |
-| zh-p2-sound2-repair.q3 v1 / generic **(disputed)** | “手”的拼音，哪一个写对了？<br>1 shoǔ；2 sǒu；3 shǔ；4 shǒu | shǒu | 先看声母，再看声调写在哪个字母上面。 | “手”读 shǒu，第三声。ou 在一起时，声调写在 o 上面。 | zh.p2_chinese.skill.char-sound; zh.p2_higher_chinese.skill.char-sound |
+| zh-p2-sound2-repair.q2 v1 / similar **(kept by owner)** | “牛”的拼音，哪一个写对了？<br>1 níu；2 niú；3 nóu；4 niǔ | niú | 看一看声调写在哪个字母上面。 | “牛”读 niú，第二声。iu 在一起时，声调写在 u 上面。 | zh.p2_chinese.skill.char-sound; zh.p2_higher_chinese.skill.char-sound |
+| zh-p2-sound2-repair.q3 v1 / generic **(kept by owner)** | “手”的拼音，哪一个写对了？<br>1 shoǔ；2 sǒu；3 shǔ；4 shǒu | shǒu | 先看声母，再看声调写在哪个字母上面。 | “手”读 shǒu，第三声。ou 在一起时，声调写在 o 上面。 | zh.p2_chinese.skill.char-sound; zh.p2_higher_chinese.skill.char-sound |
 
 ### 二年级词语运用组（二）
 
@@ -121,4 +122,5 @@ Material **zh-m20 · 回家的路上** (v1, reading). All first answers are coll
 - Sources: P2 school exercise formats were reviewed privately to choose question types. No worksheet, textbook or past-paper wording, answer or learner information is used. As with every public group, the targets are generic curriculum content, not a record of any learner's errors.
 - Disputed for the owner: four tone-mark placement items (zh-p2-sound2.q2, .q3, -repair.q2, -repair.q3) — whether telling correctly marked pinyin from wrongly marked pinyin is in P2 scope.
 - Owner sample: 7 of 34 undisputed items, ceil(N/5), random.Random('zh-starter-002-v1-owner-sample-2026-10-18').sample(pool, ceil(len(pool)/5)) over batch order, pool excluding the disputed items.
-- Pending: independent cross-review (ChatGPT), owner review of the disputes and sample, rights review.
+- Owner decision 2026-10-18: all four tone-mark placement items kept as written; disputes cleared. The owner sample was drawn while they were disputed, so its pool stays the 34 items listed in the review pack.
+- Pending: independent cross-review (ChatGPT), owner review of the sample, rights review.
