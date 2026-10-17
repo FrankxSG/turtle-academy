@@ -110,8 +110,16 @@ class Cluster:
                                 text=True), '\\set VERBOSITY verbose\n' + script
 
 
-def as_role(sql, role='authenticated', sub=None):
-    claims = json.dumps({'sub': sub, 'role': role} if sub else {'role': role})
+def sign_in_age(seconds, method='password'):
+    """An `amr` claim as Supabase Auth issues it, for a sign-in `seconds` ago."""
+    return [{'method': method, 'timestamp': int(time.time()) - seconds}]
+
+
+def as_role(sql, role='authenticated', sub=None, amr='fresh'):
+    claims = {'sub': sub, 'role': role} if sub else {'role': role}
+    if sub and amr is not None:
+        claims['amr'] = sign_in_age(10) if amr == 'fresh' else amr
+    claims = json.dumps(claims)
     return ('begin;\n'
             f'set local role {role};\n'
             '\\o /dev/null\n'
@@ -176,10 +184,10 @@ class DatabaseContract(unittest.TestCase):
         doc.update(changes)
         return doc
 
-    def upload(self, sub, child, op, base, payload, role='authenticated'):
+    def upload(self, sub, child, op, base, payload, role='authenticated', amr='fresh'):
         rows = self.db.run(as_role(
             f'select snapshot_id, snapshot_seq, replayed from public.upload_snapshot('
-            f"'{child}'::uuid, '{op}'::uuid, {nullable_uuid(base)}, {lit(payload)}::jsonb);", role, sub))
+            f"'{child}'::uuid, '{op}'::uuid, {nullable_uuid(base)}, {lit(payload)}::jsonb);", role, sub, amr))
         sid, seq, replayed = rows[0]
         return sid, int(seq), replayed == 't'
 
@@ -302,6 +310,25 @@ class DatabaseContract(unittest.TestCase):
         self.assertDbError('PT409', self.upload, self.parent_a, child, uuid.uuid4(), sb, self.payload(child))
         self.assertEqual(self.head(child), (s2, 2))
         self.assertEqual(self.count(child), 2)
+
+    def test_first_snapshot_requires_recent_sign_in(self):
+        # Pilot Scope section 3, no-cloud-head exception: starting a new history needs reauthentication.
+        child = self.fresh_child()
+        stale = sign_in_age(600)
+        for amr in (None, [], stale, sign_in_age(10, 'anonymous'), [{'method': 'password', 'timestamp': 'now'}]):
+            with self.subTest(amr=amr):
+                err = self.assertDbError('PT403', self.upload, self.parent_a, child, uuid.uuid4(), None, self.payload(child), 'authenticated', amr)
+                self.assertEqual(err.message, 'reauthentication_required')
+        self.assertEqual(self.count(child), 0)
+        self.assertEqual(self.head(child), (None, 0))
+        # A recent password or Google sign-in starts the history.
+        op = uuid.uuid4()
+        p1 = self.payload(child)
+        s1, _, _ = self.upload(self.parent_a, child, op, None, p1, 'authenticated', sign_in_age(60, 'oauth'))
+        # Later uploads on the committed head, and a lost-response retry of the first, do not need it.
+        self.assertEqual(self.upload(self.parent_a, child, op, None, p1, 'authenticated', stale), (s1, 1, True))
+        s2, seq2, _ = self.upload(self.parent_a, child, uuid.uuid4(), s1, self.payload(child, app_version='0.3.0'), 'authenticated', stale)
+        self.assertEqual(self.head(child), (s2, seq2))
 
     def test_retry_identity(self):
         child = self.fresh_child()

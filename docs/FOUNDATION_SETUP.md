@@ -80,3 +80,7 @@ All four findings are addressed on the same branch. Tested code head: `c91be06`.
 - **Sign-out (P2):** clears the client at once, overwrites the stored token if removal fails, and returns `storage_unavailable` when neither works, so callers cannot claim a durable sign-out; the reload boundary is tested. A throwing `localStorage` getter is tolerated.
 
 Local evidence for this round: `test_database.py` **18 pass** (PostgreSQL 16); client and owner-check suites **30 pass** (Node 22); strict type-check of the changed modules passes (global TypeScript 6); privacy guard passes. `npm ci` crashed in the authoring environment, so `npm run build` was not run locally; GitHub CI at `c91be06` passed `foundation` (`npm ci`, `npm audit`, `npm run build`, end-to-end tests), `db-contract` and `privacy-guard`. Hosted owner checks remain **pending**.
+
+### 2026-10-17 owner decision: first backup needs a recent sign-in
+
+Owner decision (2026-10-17): the database enforces the Pilot Scope §3 reauthentication rule for the no-cloud-head exception, not only the later backup screens. `upload_snapshot` accepts a base-less first snapshot only if the token's `amr` records a password or Google (`oauth`) sign-in within the last 5 minutes; otherwise `PT403 reauthentication_required`, with nothing written. Refreshing a token keeps the original sign-in time, so an old session does not qualify. Later uploads on the head and identical retries of the first are unaffected. Local evidence: `test_database.py` **19 pass**; removing the check makes the new test fail.

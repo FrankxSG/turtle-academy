@@ -227,6 +227,25 @@ $$;
 revoke all on function private.snapshot_schema(), private.snapshot_node_valid(jsonb, jsonb, jsonb, integer),
   private.assert_snapshot_valid(jsonb, uuid) from public, anon, authenticated;
 
+-- Pilot Scope section 3, no-cloud-head exception: a new first snapshot needs parent
+-- reauthentication. True only if the caller's token records a password or Google (oauth) sign-in
+-- within the last p_max_age_seconds. Token refreshes keep the original sign-in time, so an old
+-- session that was merely refreshed does not count.
+create function private.recently_authenticated(p_max_age_seconds integer) returns boolean
+language sql stable set search_path = '' as $$
+  with claims as (
+    select nullif(current_setting('request.jwt.claims', true), '')::jsonb as c
+  )
+  select coalesce((
+    select max((e ->> 'timestamp')::numeric)
+    from claims, jsonb_array_elements(
+      case when jsonb_typeof(claims.c -> 'amr') = 'array' then claims.c -> 'amr' else '[]'::jsonb end) e
+    where e ->> 'method' in ('password', 'oauth') and jsonb_typeof(e -> 'timestamp') = 'number'
+  ) >= extract(epoch from now()) - p_max_age_seconds, false)
+$$;
+
+revoke all on function private.recently_authenticated(integer) from public, anon, authenticated, service_role;
+
 -- ---------------------------------------------------------------------------------------------
 -- The only client write path. Retry identity = child + operation id + identical request
 -- (base + payload). Stale bases are rejected; nothing is ever overwritten.
@@ -278,6 +297,10 @@ begin
     -- No committed head: only a base-less first snapshot is allowed.
     if p_base_snapshot_id is not null then
       raise exception 'stale_base' using errcode = 'PT409';
+    end if;
+    -- Starting a new history requires a parent sign-in within the last 5 minutes.
+    if not private.recently_authenticated(300) then
+      raise exception 'reauthentication_required' using errcode = 'PT403';
     end if;
   elsif p_base_snapshot_id is distinct from v_head.head_snapshot_id then
     raise exception 'stale_base' using errcode = 'PT409';
