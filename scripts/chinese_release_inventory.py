@@ -33,7 +33,6 @@ def load():
 
 
 def analyse(curriculum, batch):
-    outcomes = {o['id']: o for o in curriculum['outcomes']}
     skills = {s['id']: s for s in curriculum['skill_targets']}
     chars = {c['id']: c for c in curriculum['characters']}
     items = batch['items']
@@ -41,11 +40,6 @@ def analyse(curriculum, batch):
     for item in items:
         for ref in item['target_refs']:
             stage_items[ref][item['stage']].append(item['id'])
-
-    def home(target_id):
-        if target_id in skills:
-            return skills[target_id]['outcome_ref']
-        return None  # character targets: decided by the repair items' own outcomes
 
     courses = {}
     for course in curriculum['courses']:
@@ -58,8 +52,16 @@ def analyse(curriculum, batch):
             targets = sorted({r for i in repair for r in i['target_refs'] if r.split('.')[1] == course})
             targets += sorted(t for t, s in skills.items()
                               if s['outcome_ref'] == lid and t not in targets and t in stage_items)
-            complete = [t for t in targets if set(stage_items[t]) == STAGES]
-            stock = min((len(stage_items[t][s]) for t in complete for s in STAGES), default=0)
+            # A target can appear under multiple leaves. Do not assemble a leaf's
+            # route from stages authored only for a different assessed outcome.
+            leaf_stages = defaultdict(lambda: defaultdict(list))
+            for item in repair:
+                for target in item['target_refs']:
+                    if target in targets:
+                        leaf_stages[target][item['stage']].append(item['id'])
+            complete = [t for t in targets if STAGES <= set(leaf_stages[t])]
+            route_stock = {t: min(len(leaf_stages[t][s]) for s in STAGES) for t in complete}
+            stock = min(route_stock.values(), default=0)
             if leaf['scope'] not in {'in_app', 'partial'}:
                 status = leaf['scope']
             elif complete and general:
@@ -70,6 +72,7 @@ def analyse(curriculum, batch):
                 status = 'empty'
             rows.append({'leaf': leaf, 'general': len(general), 'repair': len(repair),
                          'targets': targets, 'complete': complete, 'stock': stock,
+                         'route_stock': route_stock,
                          'skill_targets': [t for t in complete if t in skills],
                          'char_targets': [t for t in complete if t in chars], 'status': status})
         mats = [m for m in batch['materials'] if course in m['courses']]
@@ -133,7 +136,8 @@ def course_section(course, data, p3=False):
         f"| Character group coverage, reported separately | {pct(data['char_targets'], data['char_union'])} of the grade's list characters have a complete repair pool |",
         f"| Questions tagged to this course | {len(data['items'])} ({data['course_only_items']} only for this course) |",
         f"| Whole materials | {len(data['materials'])} (" + ', '.join(f'{k} {v}' for k, v in sorted(mats.items())) +
-        f"); at X={DEFAULT_X} a task uses ≥{per_day}, so about {len(data['materials']) // per_day} days before a material repeats |",
+        f"); at X={DEFAULT_X} a task uses ≥{per_day}: at most {len(data['materials']) // per_day} "
+        'complete tasks without material reuse, from the material quota alone; eligibility and rotation not simulated |',
         f"| Interaction formats | " + ', '.join(f'{k} {v}' for k, v in data['formats'].items()) + ' |',
         '',
     ]
@@ -162,10 +166,10 @@ def missing_section(courses):
               'A route with one item per stage has no spare question: a child who fails a stage meets the '
               'same question again on a later day, and every delayed check reuses the one generic item. Reuse '
               'is allowed but recorded as repeated exposure, never as new-context evidence.', '',
-              '| Course | Complete routes | Of which one item per stage |', '| --- | ---: | ---: |']
+              '| Course | Complete routes | Of which at least one stage has only one item |', '| --- | ---: | ---: |']
     for course, data in courses.items():
         routes = {t for r in data['rows'] for t in r['complete']}
-        thin = {t for r in data['rows'] for t in r['complete'] if r['stock'] <= THIN_STOCK}
+        thin = {t for r in data['rows'] for t, stock in r['route_stock'].items() if stock <= THIN_STOCK}
         lines.append(f'| {course} | {len(routes)} | {len(thin)} |')
     return lines + ['']
 

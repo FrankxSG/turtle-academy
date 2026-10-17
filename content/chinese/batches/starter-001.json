@@ -1,7 +1,7 @@
 {
   "schema_version": "chinese-content/1",
   "batch_id": "zh-starter-001",
-  "version": 8,
+  "version": 9,
   "curriculum_manifest_version": "zh-2024-p2p3-draft.2",
   "status": "author_checked_pending_independent_and_owner_review",
   "materials": [
@@ -8920,7 +8920,7 @@
     },
     {
       "id": "zh-p2-sound.q5",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -8952,7 +8952,7 @@
         }
       ],
       "correct_option_id": "opt-2",
-      "hint": "这几个字右边都一样，看看拼音的声母。",
+      "hint": "轻声读一读每个字，再比较声母和声调。",
       "explanation": "“跑”读 pǎo。“抱”读 bào，“泡”读 pào，“饱”读 bǎo。",
       "rationale": "选出与字对应的拼音或与拼音对应的字；只评估书面拼音辨认，不评估口语发音。",
       "material_id": null,
@@ -9018,7 +9018,7 @@
     },
     {
       "id": "zh-p2-sound.q7",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -9051,7 +9051,7 @@
       ],
       "correct_option_id": "opt-3",
       "hint": "这个字和眼睛有关。",
-      "explanation": "“看”读 kàn。“着”读 zhe，“手”读 shǒu，“目”读 mù。",
+      "explanation": "“看”读 kàn。“手”读 shǒu，“目”读 mù。“着”有不同读音，如“看着”的 zhe、“睡着”的 zháo，都不是 kàn。",
       "rationale": "选出与字对应的拼音或与拼音对应的字；只评估书面拼音辨认，不评估口语发音。",
       "material_id": null,
       "stage": null,
@@ -9174,7 +9174,7 @@
     },
     {
       "id": "zh-p2-card-repair.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -9189,7 +9189,7 @@
       ],
       "family": "visual_text",
       "format": "mcq_4plus",
-      "stem": "写一张生日卡送给好朋友，卡的最下面要写什么？",
+      "stem": "写生日卡时，写上自己的名字和日期，主要是让朋友知道什么？",
       "options": [
         {
           "id": "opt-1",
@@ -9197,21 +9197,21 @@
         },
         {
           "id": "opt-2",
-          "text": "收卡的人"
+          "text": "礼物的价钱"
         },
         {
           "id": "opt-3",
-          "text": "一句问好的话"
+          "text": "学校的地址"
         },
         {
           "id": "opt-4",
-          "text": "写卡的人和日期"
+          "text": "谁写的、哪一天写的"
         }
       ],
       "correct_option_id": "opt-4",
-      "hint": "收到卡的人怎样知道这张卡是谁、在哪一天写的？",
-      "explanation": "卡的最下面写上写卡的人和日期，收卡的人就知道是谁送的。",
-      "rationale": "认识贺卡的格式：最后写写卡的人和日期。",
+      "hint": "想一想，名字和日期分别告诉别人什么。",
+      "explanation": "名字告诉朋友是谁写的，日期告诉朋友是哪一天写的。",
+      "rationale": "认识贺卡署名和日期的作用；不把一种排版当作所有贺卡必须采用的格式。",
       "material_id": null,
       "stage": "generic",
       "provenance": "original_generic_author_draft",
@@ -9758,7 +9758,7 @@
     },
     {
       "id": "zh-p2-meaning.q4",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -9782,7 +9782,7 @@
         },
         {
           "id": "opt-3",
-          "text": "天上没有云，太阳出来了"
+          "text": "天空明亮，云很少或没有云"
         },
         {
           "id": "opt-4",
@@ -9790,8 +9790,8 @@
         }
       ],
       "correct_option_id": "opt-3",
-      "hint": "晴天的时候可以去公园玩。哪一个是好天气？",
-      "explanation": "“晴天”是天上没有云、太阳出来的天气。",
+      "hint": "想想晴天和阴天、雨天有什么不同。",
+      "explanation": "“晴”表示天空明亮，云很少或没有云；晴天也可能有少量的云。",
       "rationale": "选出字在常用词语中的意思；只评估理解，不评估书写或造句。",
       "material_id": null,
       "stage": null,
@@ -9903,7 +9903,7 @@
     },
     {
       "id": "zh-p2-radmeaning-repair.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -9922,7 +9922,7 @@
       "options": [
         {
           "id": "opt-1",
-          "text": "女孩子"
+          "text": "女的家人"
         },
         {
           "id": "opt-2",
@@ -9939,7 +9939,7 @@
       ],
       "correct_option_id": "opt-1",
       "hint": "这三个字说的都是家里的什么人？",
-      "explanation": "“妈、姐、妹”都是女字旁，说的都是女的家人。",
+      "explanation": "“妈、姐、妹”都是女字旁，都表示女的家人。",
       "rationale": "根据常见偏旁推想字和什么有关；干扰项字形或读音相近。",
       "material_id": null,
       "stage": "generic",
@@ -9957,7 +9957,7 @@
     },
     {
       "id": "zh-p2-radmeaning.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -9969,7 +9969,7 @@
       "target_refs": [],
       "family": "character",
       "format": "mcq_4plus",
-      "stem": "下面哪个字和说话有关？",
+      "stem": "看看偏旁，下面哪个字和说话有关？",
       "options": [
         {
           "id": "opt-1",
@@ -9977,7 +9977,7 @@
         },
         {
           "id": "opt-2",
-          "text": "舌"
+          "text": "恬"
         },
         {
           "id": "opt-3",
@@ -10104,7 +10104,7 @@
     },
     {
       "id": "zh-p2-radmeaning.q4",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -10116,7 +10116,7 @@
       "target_refs": [],
       "family": "character",
       "format": "mcq_4plus",
-      "stem": "“吃、喝、唱”都有口字旁。它们都和什么有关？",
+      "stem": "“吃、喝、唱”的左边都一样。它们都和什么有关？",
       "options": [
         {
           "id": "opt-1",
@@ -10249,7 +10249,7 @@
     },
     {
       "id": "zh-p2-punctread-repair.q3",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -10264,7 +10264,7 @@
       ],
       "family": "character",
       "format": "mcq_4plus",
-      "stem": "哪一句说话的人很高兴？",
+      "stem": "哪一句读起来语气更强？",
       "options": [
         {
           "id": "opt-1",
@@ -10284,8 +10284,8 @@
         }
       ],
       "correct_option_id": "opt-3",
-      "hint": "哪个标点可以表示心里很高兴？",
-      "explanation": "感叹号“！”可以表示很高兴。问号是在问人，句号只是说一件事。",
+      "hint": "比较句子最后的标点，想想读的时候语气有什么不同。",
+      "explanation": "“妈妈回来了！”用感叹号，读起来语气更强。感叹号可以表示高兴、惊讶等不同感情，不能只凭它判断心情。",
       "rationale": "借助句末或句中的标点理解句子在做什么；不要求学生自己使用标点。",
       "material_id": null,
       "stage": "generic",
@@ -10297,7 +10297,7 @@
     },
     {
       "id": "zh-p2-punctread.q1",
-      "version": 1,
+      "version": 2,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -10341,7 +10341,7 @@
         {
           "id": "pinyin-1",
           "text": "冒号",
-          "pinyin": "máo hào"
+          "pinyin": "mào hào"
         }
       ],
       "blank_ref": null,
@@ -15227,7 +15227,7 @@
     },
     {
       "id": "zh-p3-wordchoice.q5",
-      "version": 3,
+      "version": 4,
       "courses": [
         "p3_chinese",
         "p3_higher_chinese"
@@ -15239,7 +15239,7 @@
       "target_refs": [],
       "family": "cloze",
       "format": "mcq_4plus",
-      "stem": "小明没有说谎，{{blank-1}}地向老师承认了错误。",
+      "stem": "小明从来不说谎，大家都说他是个{{blank-1}}的孩子。",
       "options": [
         {
           "id": "opt-1",
@@ -15260,7 +15260,7 @@
       ],
       "correct_option_id": "opt-2",
       "hint": "不说谎、说实话的人是怎样的？",
-      "explanation": "不说谎、说实话就是“诚实”。小明诚实地承认了错误。",
+      "explanation": "从来不说谎、总是说实话，是“诚实”的表现。这里用“诚实”形容小明。",
       "rationale": "词语选择：根据明示词义选词，不把害怕或生气认定为不能伴随承认错误。",
       "material_id": null,
       "stage": null,
@@ -18912,63 +18912,80 @@
       "核对原创内容与外部能力边界",
       "2026-10-16 correction pass: revised disputed and related items; item versions incremented; revised IDs remain listed for independent re-review, not approved.",
       "2026-10-16 audit-response revision (ZH1–ZH4): language-use leaves and the P3 matrix rows added; 75 language-use items remapped from w-ideas; word, language-point and reading-skill repair targets with complete pools in four new groups; every non-repair question declares repair_target_refs; zh-m16 rewritten as an accurate pinwheel process with its five blanks; zh-m11.q1 remapped to explicit retrieval. Mapping-only changes keep item versions; content changes increment them. All remain pending independent re-review.",
-      "2026-10-17 release-inventory pass (batch v8, manifest draft.2): Claude reviewed all 318 v7 items. Of these, 293 were drafted by Claude, so this pass is an author recheck for them, not independent AI cross-review. Corrections: answer leak (zh-m12.q5), double-cue stem, penguin hint, stem containing its key, brand-neutral wording, four calculation questions changed to explicit retrieval, 33 hints that named the only option with the radical, 10 P2 instructions reworded within the P1-P2 character lists. Mapping: punctuation choice to w-punctuation; notice/visual-text retrieval to r-explicit-practical. New: 字音 leaf with 10 items (zh-group-p2-pinyin) and a P2 card-format route with the zh-m19 生日卡 material (8 items); 字义, 偏旁表义 and 借助标点理解 routes with general practice (21 items). New items await independent cross-review; sampled IDs are drawn from unchanged agreed items only; outcomes pending owner."
+      "2026-10-17 release-inventory pass (batch v8, manifest draft.2): Claude reviewed all 318 v7 items. Of these, 293 were drafted by Claude, so this pass is an author recheck for them, not independent AI cross-review. Corrections: answer leak (zh-m12.q5), double-cue stem, penguin hint, stem containing its key, brand-neutral wording, four calculation questions changed to explicit retrieval, 33 hints that named the only option with the radical, 10 P2 instructions reworded within the P1-P2 character lists. Mapping: punctuation choice to w-punctuation; notice/visual-text retrieval to r-explicit-practical. New: 字音 leaf with 10 items (zh-group-p2-pinyin) and a P2 card-format route with the zh-m19 生日卡 material (8 items); 字义, 偏旁表义 and 借助标点理解 routes with general practice (21 items). New items await independent cross-review; sampled IDs are drawn from unchanged agreed items only; outcomes pending owner.",
+      "2026-10-17 ChatGPT review of input head 9d4357a: desk-checked all 357 items and 19 materials, keys/options/hints/explanations and mapped response demands. This is cross-review for Claude-authored content and an author recheck for the 25 originally ChatGPT-drafted items (previous Claude cross-review retained). Ten item corrections in v9 now require Claude re-review and owner disposition; independent_review stays changes_requested. Source hashes match the private register; the saved syllabus text does not preserve the coloured grade matrix and live MOE access was challenged, so no complete page/grade audit is claimed. No rights or owner approval is inferred.",
+      "v9 owner sample: 67 of 333 AI-agreed unchanged items, ceil(N/5), random.Random('zh-starter-001-v9-owner-sample-2026-10-17').sample over batch order; every outstanding or v9-revised item excluded. v8 sample is historical, not carried forward as approval. Owner outcomes pending."
     ],
     "independent_review": "changes_requested",
     "owner_signoff": "pending",
     "sampled_item_ids": [
-      "zh-m02.q2",
-      "zh-m02.q3",
-      "zh-m05.q3",
-      "zh-p2-confusable-u5ea7.q3",
+      "zh-m02.q1",
+      "zh-m03.q2",
+      "zh-m03.q4",
+      "zh-p2-confusable-u5ea7.q2",
       "zh-p2-confusable-u6674.q1",
-      "zh-p2-confusable-u5df2.q1",
-      "zh-p2-confusable-u64cd.q3",
-      "zh-p2-confusable-u4e4c.q3",
-      "zh-p2-radical-u63a8.q2",
-      "zh-p2-radical-u6c60.q1",
-      "zh-p2-radical-u6697.q2",
-      "zh-p2-measure.q1",
-      "zh-p2-measure.q3",
-      "zh-p2-collocation.q6",
-      "zh-p2-collocation.q7",
+      "zh-p2-confusable-u5df2.q2",
+      "zh-p2-confusable-u5356.q3",
+      "zh-p2-confusable-u6839.q2",
+      "zh-p2-confusable-u64cd.q1",
+      "zh-p2-confusable-u64cd.q2",
+      "zh-p2-radical-u5439.q3",
+      "zh-p2-radical-u7092.q3",
+      "zh-p2-radical-u6c60.q3",
+      "zh-p2-radical-u7761.q3",
+      "zh-p2-measure.q8",
+      "zh-p2-collocation.q5",
+      "zh-p2-wordchoice.q3",
+      "zh-p2-wordchoice.q4",
+      "zh-p2-wordchoice.q5",
       "zh-p2-wordchoice.q7",
-      "zh-m06.q2",
+      "zh-p2-punct.q3",
       "zh-m06.q3",
-      "zh-m06.q4",
-      "zh-m07.q1",
-      "zh-m07.q2",
       "zh-m07.q4",
+      "zh-m08.q1",
+      "zh-m09.q2",
       "zh-m18.q3",
+      "zh-m18.q5",
+      "zh-p2-wordchoice2.q1",
+      "zh-p2-sound.q1",
+      "zh-p2-sound.q2",
+      "zh-m19.q1",
+      "zh-m19.q2",
+      "zh-m19.q5",
+      "zh-p2-radmeaning-repair.q1",
+      "zh-p2-radmeaning-repair.q2",
+      "zh-p2-punctread.q2",
+      "zh-p2-punctread.q3",
+      "zh-p3-confusable-u7bee.q2",
+      "zh-p3-confusable-u7ba1.q1",
       "zh-p3-confusable-u7ba1.q3",
       "zh-p3-confusable-u72fc.q1",
-      "zh-p3-confusable-u6162.q3",
+      "zh-p3-confusable-u9493.q1",
+      "zh-p3-confusable-u9493.q2",
+      "zh-p3-confusable-u9493.q3",
+      "zh-p3-confusable-u8eba.q3",
+      "zh-p3-confusable-u788e.q2",
+      "zh-p3-confusable-u62ab.q3",
       "zh-p3-radical-u8e29.q2",
-      "zh-p3-radical-u642c.q3",
-      "zh-p3-radical-u88d9.q3",
-      "zh-p3-radical-u817f.q2",
-      "zh-p3-radical-u949f.q3",
-      "zh-p3-measure.q7",
-      "zh-p3-collocation.q2",
-      "zh-p3-collocation.q4",
-      "zh-p3-collocation.q7",
-      "zh-p3-wordchoice.q1",
+      "zh-p3-radical-u8e29.q3",
+      "zh-p3-radical-u642c.q2",
+      "zh-p3-collocation.q1",
+      "zh-p3-collocation.q5",
+      "zh-p3-collocation.q6",
       "zh-p3-wordchoice.q3",
-      "zh-p3-sentence.q3",
-      "zh-p3-sentence.q4",
-      "zh-p3-sentence.q6",
-      "zh-p3-punct.q6",
-      "zh-m11.q4",
-      "zh-m13.q2",
-      "zh-m13.q4",
-      "zh-m14.q1",
-      "zh-m15.q2",
-      "zh-m17.q2",
-      "zh-m17.q3",
-      "zh-m17.q4",
-      "zh-p2-charctx-repair.q3",
-      "zh-p3-read-repair.q2",
-      "zh-p3-charctx-repair.q1"
+      "zh-p3-sentence.q5",
+      "zh-p3-punct.q1",
+      "zh-m10.q2",
+      "zh-m10.q4",
+      "zh-m11.q1",
+      "zh-m13.q1",
+      "zh-m14.q3",
+      "zh-m14.q4",
+      "zh-m15.q3",
+      "zh-m16.q3",
+      "zh-p2-read-repair.q1",
+      "zh-p2-read-repair.q3",
+      "zh-p3-read-repair.q2"
     ],
     "disputed_item_ids": [
       "zh-p2-order.q2",
@@ -18985,7 +19002,16 @@
       "zh-m08.q3",
       "zh-m17.q5",
       "zh-p2-notice-repair.q3",
-      "zh-p3-notice-repair.q3"
+      "zh-p3-notice-repair.q3",
+      "zh-p2-punctread.q1",
+      "zh-p2-radmeaning.q1",
+      "zh-p2-radmeaning.q4",
+      "zh-p2-radmeaning-repair.q3",
+      "zh-p2-punctread-repair.q3",
+      "zh-p2-card-repair.q3",
+      "zh-p2-meaning.q4",
+      "zh-p2-sound.q5",
+      "zh-p2-sound.q7"
     ],
     "rights_status": "original_draft_pending_owner_rights_review",
     "artwork": "none"

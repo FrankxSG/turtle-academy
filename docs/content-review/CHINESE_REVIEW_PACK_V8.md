@@ -1,5 +1,9 @@
 # Chinese review pack — batch zh-starter-001 v8
 
+**Historical snapshot:** current review uses [v9](CHINESE_REVIEW_PACK_V9.md). Its old draw and item versions are retained for provenance only; no owner approval is implied.
+
+**Historical snapshot:** current review uses [v9](CHINESE_REVIEW_PACK_V9.md). Its old draw and item versions are retained for provenance only; no owner approval is implied.
+
 Manifest `zh-2024-p2p3-draft.2`. Owner review under [CONTENT_QA](../CONTENT_QA.md): every disputed item, plus a random 1-in-5 sample of AI-agreed items. Generic original content only; no learner data.
 
 ## Review provenance
@@ -549,3 +553,4 @@ New material `zh-m19` 生日卡: 【生日贺卡(hè kǎ)】 / 亲爱的小美�
 ## Sign-off record
 
 Owner decisions and the batch sign-off are recorded on the tracking PR, then copied into `review_log` in a follow-up commit. This file is not a record of approval.
+
