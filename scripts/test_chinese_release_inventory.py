@@ -9,11 +9,21 @@ class Inventory(unittest.TestCase):
     def setUp(self):
         self.curriculum, self.batch = load()
 
+    def single_route(self, target):
+        """Keep one item per stage for a target, so a test does not depend on today's stock."""
+        kept = set()
+        for item in list(self.batch['items']):
+            if target in item['target_refs']:
+                if item['stage'] in kept:
+                    self.batch['items'].remove(item)
+                kept.add(item['stage'])
+
     def row(self, data, leaf):
         return next(r for r in data['p2_chinese']['rows']
                     if r['leaf']['id'] == 'zh.p2_chinese.' + leaf)
 
     def test_stages_from_another_leaf_cannot_complete_a_route(self):
+        self.single_route('zh.p2_chinese.skill.char-sound')
         item = next(i for i in self.batch['items'] if i['id'] == 'zh-p2-sound-repair.q3')
         item['outcome_refs'] = ['zh.p2_chinese.r-character', 'zh.p2_higher_chinese.r-character']
         data = analyse(self.curriculum, self.batch)
@@ -23,6 +33,10 @@ class Inventory(unittest.TestCase):
 
     def test_one_thin_route_does_not_make_every_route_in_its_leaf_thin(self):
         target = 'zh.p2_chinese.char.u5ea7'
+        self.single_route(target)
+        before = analyse(self.curriculum, self.batch)
+        thin_before = {t for r in before['p2_chinese']['rows'] for t, stock in r['route_stock'].items() if stock <= 1}
+        self.assertIn(target, thin_before)
         for item in list(self.batch['items']):
             if target in item['target_refs']:
                 duplicate = copy.deepcopy(item)
@@ -34,10 +48,11 @@ class Inventory(unittest.TestCase):
         self.assertEqual(row['stock'], 1)
         routes = {t for r in data['p2_chinese']['rows'] for t in r['complete']}
         report = '\n'.join(missing_section(data))
-        # Only the duplicated route gains spare stock; every other route stays thin.
-        self.assertIn(f'| p2_chinese | {len(routes)} | {len(routes) - 1} |', report)
+        # Only the duplicated route gains spare stock; every other thin route stays thin.
+        self.assertIn(f'| p2_chinese | {len(routes)} | {len(thin_before) - 1} |', report)
 
     def test_missing_stage_is_reported_with_no_complete_route(self):
+        self.single_route('zh.p2_chinese.skill.char-sound')
         self.batch['items'] = [i for i in self.batch['items'] if i['id'] != 'zh-p2-sound-repair.q3']
         row = self.row(analyse(self.curriculum, self.batch), 'r-char-sound')
         self.assertEqual(row['stock'], 0)
@@ -51,13 +66,26 @@ class Inventory(unittest.TestCase):
         self.assertIn('eligibility and rotation not simulated', section)
 
     def test_approval_note_names_open_gates(self):
-        from chinese_release_inventory import approval_note
-        log = self.batch['review_log']
-        log.update(independent_review='changes_requested', owner_signoff='approved', rights_status='cleared', disputed_item_ids=[])
-        note = approval_note(self.curriculum, self.batch)
+        from chinese_release_inventory import approval_note, catalogue
+        one = copy.deepcopy(self.batch['batches'][0])
+        one['review_log'].update(independent_review='changes_requested', owner_signoff='approved',
+                                 rights_status='cleared', disputed_item_ids=[])
+        note = approval_note(self.curriculum, catalogue([one]))
         self.assertIn('independent review not passed', note)
         self.assertNotIn('owner sign-off pending', note)
         self.assertNotIn('rights', note)
+
+    def test_each_batch_reports_its_own_gates(self):
+        from chinese_release_inventory import approval_note, catalogue
+        done, pending = copy.deepcopy(self.batch['batches'][0]), copy.deepcopy(self.batch['batches'][0])
+        done['review_log'].update(independent_review='passed', owner_signoff='approved', rights_status='cleared',
+                                  disputed_item_ids=[])
+        done['batch_id'], pending['batch_id'] = 'zh-test-done', 'zh-test-pending'
+        pending['review_log'].update(independent_review='pending', owner_signoff='pending',
+                                     rights_status='original_draft_pending_owner_rights_review')
+        note = approval_note(self.curriculum, catalogue([done, pending]))
+        self.assertIn('zh-test-pending: owner sign-off pending', note)
+        self.assertNotIn('zh-test-done', note)
 
 
 if __name__ == '__main__':

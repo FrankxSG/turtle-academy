@@ -39,6 +39,15 @@ Check references: plain numbers are the common checks in [question-authoring](..
 | --- | --- | --- |
 | `chinese-question-authoring` ZH1 | Required every instruction *and passage* character to be on the cumulative list. Most of the bank's passages use common words beyond the lists, so the rule taught a convention as a requirement | A skill's own rules need check 4 too. ZH1 now separates tested characters, instruction words and passage vocabulary |
 
+## Found while drafting zh-starter-002
+
+| File | What was wrong | Lesson |
+| --- | --- | --- |
+| Batch layout | Batch v10 was approved, so adding 38 new items to it would have put unseen items under the owner's approval | New content goes in a new batch with its own review state (common skill, "Review and hand-over") |
+| `starter-002.json` | Three new IDs (`zh-p2-wordchoice2.q1`–`q3`) already existed in `starter-001`; nothing checked IDs across files | The validator now checks every batch and rejects an ID used in two batches |
+| Draft hints and explanations | 表示, 意思, 领着, 剩 and 通 were beyond the P1–P2 lists in text the child reads | Run the character-list check on hints and explanations as well as stems and options (ZH1) |
+| Inventory tests | Three tests assumed one item per stage, so new stock broke them | Tests build the stock they need instead of relying on today's catalogue (Reports) |
+
 ## Root causes in Claude's process
 
 The fixes for these are the "How to work" steps in the common skill.

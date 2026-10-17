@@ -51,6 +51,7 @@ Run these on the rendered question. Subject skills add checks; they may say how 
 - Record who drafted each item and who reviewed it.
 - Cross-review runs both ways: the reviewer's corrections get the same checks as the original.
 - Any change to an item removes it from the agreed sample pool. Prefer refining items already disputed; if a pooled item must change, redraw the sample with a recorded seed before the owner starts.
+- Never add items to an approved batch: its approval covers only the items the owner saw. Put new content in a new batch with its own review state, and keep IDs unique across batches ([case](../chinese-question-authoring/references/pr23-lessons.md#found-while-drafting-zh-starter-002)).
 - An AI recommendation is never an owner decision. Leave owner, rights and independent-review states unchanged until the decision is recorded.
 - In the hand-over comment, list which questions were read rendered, which checks were run, and what remains unverified.
 
