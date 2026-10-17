@@ -12,7 +12,7 @@ Runs entirely on the device with no backend calls. Authority: Pilot Functional D
 | `engine.ts` | Task flow, first response → hint/retry → correction, flags, story checkpoints, active time, local saving. |
 | `persistence.ts` | Ordered, idempotent mutations, the save-failure queue and an in-memory store for tests. The Dexie store is in `src/storage.ts`. |
 | `snapshot.ts` | Local-only export validated by the #16 validator; nothing is uploaded. |
-| `legacy.ts` | Read-only inspection of the old guest checkpoint, which never becomes child evidence. |
+| `legacy.ts` | Inspection of the old guest checkpoint, which never becomes child evidence. The native reader in `src/storage.ts` never creates, upgrades or writes the guest database. |
 | `../catalogue/adapter.ts` | The content interface, versioned releases and objective judging. |
 
 ## Engineering proposals for review
@@ -21,13 +21,15 @@ Runs entirely on the device with no backend calls. Authority: Pilot Functional D
 - **Low-option evidence.** Partial low-option successes carry across tasks at the same stage until a wrong first response clears them. A low success can combine with whole-task successes for the threshold.
 - **Short repair slots.** Each repair target gets two short slots (Mathematics and Science), resolved when shown. A slot falls back to another eligible target, then to general practice, then it is skipped (shortened completion).
 - **Novel context.** A presentation is novel when neither the item nor another item of the same context was answered before for that target. Flagged, unanswered presentations don't count.
-- **Flags.** An open or disabled flag excludes evidence from every presentation of that item version for this child. A parent restore re-includes them, except the replaced presentation itself.
+- **Flags.** An open or disabled flag excludes evidence from every presentation of that item version for this child. A parent restore re-includes them, except the replaced presentation itself. The same rule applies to app-caught mistakes: each observation records its source presentation (`batch_ref`) and task (`instance_ref`), and a target whose only observations come from invalid questions is not planned.
+- **Late suspensions.** A suspended version is never served from a frozen plan. An unshown or unanswered presentation is replaced in place (inside its material, so feedback stays withheld); an answered one stays counted as done work, with its evidence excluded.
+- **Same-day app errors** are all stored; repeats are labelled `duplicate` and collapse to one observation per day in the reducer.
 - **Completion date.** A task's daily credit goes to the learning date on which it finalises. An optional extra task on an already-credited day earns no story checkpoint.
 - **Science acquisition targets** are private target records with `error_type: none` and no observations. They are not mistakes.
 
 ## Known limits
 
-- The Dexie store (`src/storage.ts`) is verified only by type-checking and build in CI. Its IndexedDB behaviour needs `fake-indexeddb` or a browser test, added with a lockfile change once a session has npm access.
+- The Dexie store and the legacy guest boundary are exercised on real IndexedDB in Chromium by `tests/storage.spec.ts` (run in the Foundation workflow). Other browsers, in particular iPad Safari, are covered by real-device acceptance, not here.
 - Snapshot `target_aggregates` and `eligibility` are recomputed caches. A short-route aggregate keeps at most two clearances, so a task spanning midnight that clears a third stage after midnight drops that entry from the cache, not from the events.
 - Engine tests do not prove browser or service-worker update behaviour (F29 covers content pinning only).
 - Out of scope here: UI (#18), paste-in import and parent amendment replay (F20, F23, F34), cloud upload, and real content or learner data.
