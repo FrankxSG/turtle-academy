@@ -21,10 +21,10 @@ Every question is single-answer multiple choice with four options. Matching, ord
 
 | Measure | Value |
 | --- | --- |
-| Approved leaf coverage | 0/17 — leaf denominator not approved; zh-starter-002: independent review not passed; zh-starter-002: owner sign-off pending; zh-starter-002: rights not cleared; zh-starter-002: open disputes |
-| Leaves authored with general practice and a complete repair route | 13/17 (76%) |
+| Approved leaf coverage | 0/16 — leaf denominator not approved; zh-starter-002: independent review not passed; zh-starter-002: owner sign-off pending; zh-starter-002: rights not cleared; zh-starter-002: open disputes |
+| Leaves authored with general practice and a complete repair route | 13/16 (81%) |
 | Leaves with some items but no complete route or no general practice | 0 |
-| Empty in-scope leaves (stay in the denominator) | 4 |
+| Empty in-scope leaves (stay in the denominator) | 3 |
 | Out-of-app leaves, not in the denominator | context_only 2, deferred 3, external 9 |
 | Character group coverage, reported separately | 27/477 (6%) of the grade's list characters have a complete repair pool |
 | Questions tagged to this course | 236 (0 only for this course) |
@@ -42,7 +42,6 @@ Every question is single-answer multiple choice with four options. Matching, ord
 | `r-explicit` | 从短文中找出具体信息 | in_app | 29 | 29 | 6 | 1 | 2 | authored |
 | `r-explicit-practical` | 从通知、告示等生活语料中找出具体信息 | in_app | 29 | 10 | 3 | 1 | 1 (thin) | authored |
 | `r-tools` | 使用阅读辅助工具 | partial | 29 | 0 | 0 | 0 | – | empty |
-| `w-ideas` | 选择与积累表达素材 | partial | 30 | 0 | 0 | 0 | – | empty |
 | `w-sentence` | 完整句子组织 | partial | 31 | 0 | 0 | 0 | – | empty |
 | `lu-measure-word` | 量词运用 | in_app | 31 | 7 | 3 | 1 | 1 (thin) | authored |
 | `lu-collocation` | 词语搭配 | in_app | 31 | 5 | 3 | 1 | 1 (thin) | authored |
@@ -55,10 +54,10 @@ Every question is single-answer multiple choice with four options. Matching, ord
 
 | Measure | Value |
 | --- | --- |
-| Approved leaf coverage | 0/17 — leaf denominator not approved; zh-starter-002: independent review not passed; zh-starter-002: owner sign-off pending; zh-starter-002: rights not cleared; zh-starter-002: open disputes |
-| Leaves authored with general practice and a complete repair route | 13/17 (76%) |
+| Approved leaf coverage | 0/16 — leaf denominator not approved; zh-starter-002: independent review not passed; zh-starter-002: owner sign-off pending; zh-starter-002: rights not cleared; zh-starter-002: open disputes |
+| Leaves authored with general practice and a complete repair route | 13/16 (81%) |
 | Leaves with some items but no complete route or no general practice | 0 |
-| Empty in-scope leaves (stay in the denominator) | 4 |
+| Empty in-scope leaves (stay in the denominator) | 3 |
 | Out-of-app leaves, not in the denominator | context_only 2, deferred 3, external 10 |
 | Character group coverage, reported separately | 27/468 (6%) of the grade's list characters have a complete repair pool |
 | Questions tagged to this course | 236 (0 only for this course) |
@@ -76,7 +75,6 @@ Every question is single-answer multiple choice with four options. Matching, ord
 | `r-explicit` | 从短文中找出具体信息 | in_app | 29 | 29 | 6 | 1 | 2 | authored |
 | `r-explicit-practical` | 从通知、告示等生活语料中找出具体信息 | in_app | 29 | 10 | 3 | 1 | 1 (thin) | authored |
 | `r-tools` | 使用阅读辅助工具 | partial | 29 | 0 | 0 | 0 | – | empty |
-| `w-ideas` | 选择与积累表达素材 | partial | 30 | 0 | 0 | 0 | – | empty |
 | `w-sentence` | 完整句子组织 | partial | 31 | 0 | 0 | 0 | – | empty |
 | `lu-measure-word` | 量词运用 | in_app | 31 | 7 | 3 | 1 | 1 (thin) | authored |
 | `lu-collocation` | 词语搭配 | in_app | 31 | 5 | 3 | 1 | 1 (thin) | authored |
@@ -93,10 +91,10 @@ P3 general practice is unlocked from the first Chinese release using reviewed av
 
 | Measure | Value |
 | --- | --- |
-| Approved leaf coverage | 0/21 — leaf denominator not approved; zh-starter-002: independent review not passed; zh-starter-002: owner sign-off pending; zh-starter-002: rights not cleared; zh-starter-002: open disputes |
-| Leaves authored with general practice and a complete repair route | 7/21 (33%) |
+| Approved leaf coverage | 0/20 — leaf denominator not approved; zh-starter-002: independent review not passed; zh-starter-002: owner sign-off pending; zh-starter-002: rights not cleared; zh-starter-002: open disputes |
+| Leaves authored with general practice and a complete repair route | 7/20 (35%) |
 | Leaves with some items but no complete route or no general practice | 4 |
-| Empty in-scope leaves (stay in the denominator) | 10 |
+| Empty in-scope leaves (stay in the denominator) | 9 |
 | Out-of-app leaves, not in the denominator | context_only 2, deferred 3, external 10 |
 | Character group coverage, reported separately | 23/430 (5%) of the grade's list characters have a complete repair pool |
 | Questions tagged to this course | 159 (0 only for this course) |
@@ -116,7 +114,6 @@ P3 general practice is unlocked from the first Chinese release using reviewed av
 | `r-predict` | 从标题和图像作预测 | in_app | 29 | 0 | 0 | 0 | – | empty |
 | `r-word-context` | 根据语境理解字词和句子 | in_app | 29 | 6 | 3 | 1 | 1 (thin) | authored |
 | `r-tools` | 使用阅读辅助工具 | partial | 29 | 0 | 0 | 0 | – | empty |
-| `w-ideas` | 选择与积累表达素材 | partial | 30 | 0 | 0 | 0 | – | empty |
 | `w-sentence` | 完整句子组织 | partial | 31 | 0 | 0 | 0 | – | empty |
 | `lu-measure-word` | 量词运用 | in_app | 31 | 5 | 3 | 1 | 1 (thin) | authored |
 | `lu-collocation` | 词语搭配 | in_app | 31 | 5 | 3 | 1 | 1 (thin) | authored |
@@ -133,10 +130,10 @@ P3 general practice is unlocked from the first Chinese release using reviewed av
 
 | Measure | Value |
 | --- | --- |
-| Approved leaf coverage | 0/22 — leaf denominator not approved; zh-starter-002: independent review not passed; zh-starter-002: owner sign-off pending; zh-starter-002: rights not cleared; zh-starter-002: open disputes |
-| Leaves authored with general practice and a complete repair route | 7/22 (32%) |
+| Approved leaf coverage | 0/21 — leaf denominator not approved; zh-starter-002: independent review not passed; zh-starter-002: owner sign-off pending; zh-starter-002: rights not cleared; zh-starter-002: open disputes |
+| Leaves authored with general practice and a complete repair route | 7/21 (33%) |
 | Leaves with some items but no complete route or no general practice | 4 |
-| Empty in-scope leaves (stay in the denominator) | 11 |
+| Empty in-scope leaves (stay in the denominator) | 10 |
 | Out-of-app leaves, not in the denominator | context_only 2, deferred 3, external 10 |
 | Character group coverage, reported separately | 23/421 (5%) of the grade's list characters have a complete repair pool |
 | Questions tagged to this course | 159 (0 only for this course) |
@@ -157,7 +154,6 @@ P3 general practice is unlocked from the first Chinese release using reviewed av
 | `r-word-context` | 根据语境理解字词和句子 | in_app | 29 | 6 | 3 | 1 | 1 (thin) | authored |
 | `r-infer-cause` | 根据起因和过程推断发展 | in_app | 29 | 0 | 0 | 0 | – | empty |
 | `r-tools` | 使用阅读辅助工具 | partial | 29 | 0 | 0 | 0 | – | empty |
-| `w-ideas` | 选择与积累表达素材 | partial | 30 | 0 | 0 | 0 | – | empty |
 | `w-sentence` | 完整句子组织 | partial | 31 | 0 | 0 | 0 | – | empty |
 | `lu-measure-word` | 量词运用 | in_app | 31 | 5 | 3 | 1 | 1 (thin) | authored |
 | `lu-collocation` | 词语搭配 | in_app | 31 | 5 | 3 | 1 | 1 (thin) | authored |
@@ -176,11 +172,9 @@ Each row is an in-scope leaf that cannot yet count as covered. P2 rows count tow
 | --- | --- | --- | --- | --- |
 | p2_chinese | `r-support` | 借助图文和拼音理解 | empty | general-practice items; a complete exact/similar/generic repair route |
 | p2_chinese | `r-tools` | 使用阅读辅助工具 | empty | general-practice items; a complete exact/similar/generic repair route |
-| p2_chinese | `w-ideas` | 选择与积累表达素材 | empty | general-practice items; a complete exact/similar/generic repair route |
 | p2_chinese | `w-sentence` | 完整句子组织 | empty | general-practice items; a complete exact/similar/generic repair route |
 | p2_higher_chinese | `r-support` | 借助图文和拼音理解 | empty | general-practice items; a complete exact/similar/generic repair route |
 | p2_higher_chinese | `r-tools` | 使用阅读辅助工具 | empty | general-practice items; a complete exact/similar/generic repair route |
-| p2_higher_chinese | `w-ideas` | 选择与积累表达素材 | empty | general-practice items; a complete exact/similar/generic repair route |
 | p2_higher_chinese | `w-sentence` | 完整句子组织 | empty | general-practice items; a complete exact/similar/generic repair route |
 | p3_chinese | `r-char-sound` | 辨识字音（字与拼音、多音字） | empty | general-practice items; a complete exact/similar/generic repair route |
 | p3_chinese | `r-char-meaning` | 理解字义（字在词语中的意思） | empty | general-practice items; a complete exact/similar/generic repair route |
@@ -189,7 +183,6 @@ Each row is an in-scope leaf that cannot yet count as covered. P2 rows count tow
 | p3_chinese | `r-support` | 借助图文和拼音理解 | empty | general-practice items; a complete exact/similar/generic repair route |
 | p3_chinese | `r-predict` | 从标题和图像作预测 | empty | general-practice items; a complete exact/similar/generic repair route |
 | p3_chinese | `r-tools` | 使用阅读辅助工具 | empty | general-practice items; a complete exact/similar/generic repair route |
-| p3_chinese | `w-ideas` | 选择与积累表达素材 | empty | general-practice items; a complete exact/similar/generic repair route |
 | p3_chinese | `w-sentence` | 完整句子组织 | empty | general-practice items; a complete exact/similar/generic repair route |
 | p3_chinese | `lu-sentence-order` | 排列词语成句 | partial | general-practice items |
 | p3_chinese | `lu-connectives` | 关联词与句间关系 | partial | general-practice items |
@@ -204,7 +197,6 @@ Each row is an in-scope leaf that cannot yet count as covered. P2 rows count tow
 | p3_higher_chinese | `r-predict` | 从标题和图像作预测 | empty | general-practice items; a complete exact/similar/generic repair route |
 | p3_higher_chinese | `r-infer-cause` | 根据起因和过程推断发展 | empty | general-practice items; a complete exact/similar/generic repair route |
 | p3_higher_chinese | `r-tools` | 使用阅读辅助工具 | empty | general-practice items; a complete exact/similar/generic repair route |
-| p3_higher_chinese | `w-ideas` | 选择与积累表达素材 | empty | general-practice items; a complete exact/similar/generic repair route |
 | p3_higher_chinese | `w-sentence` | 完整句子组织 | empty | general-practice items; a complete exact/similar/generic repair route |
 | p3_higher_chinese | `lu-sentence-order` | 排列词语成句 | partial | general-practice items |
 | p3_higher_chinese | `lu-connectives` | 关联词与句间关系 | partial | general-practice items |
