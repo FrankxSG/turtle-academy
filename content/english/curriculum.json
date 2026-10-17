@@ -1,0 +1,1804 @@
+{
+  "schema_version": "subject-curriculum/1",
+  "subject": "english",
+  "manifest_version": "el-2020-p2p3-draft.1",
+  "status": "proposed_not_import_enabled",
+  "courses": [
+    "p2_english",
+    "p3_english"
+  ],
+  "sources": [
+    {
+      "id": "moe-el-2020",
+      "kind": "moe_official",
+      "title": "MOE English Language Syllabus 2020 (Primary)",
+      "url": "https://www.moe.gov.sg/-/media/files/primary/2020-english-language-primary.ashx",
+      "accessed": "2026-10-16",
+      "used_for": "Authoritative areas of language learning and grammar/vocabulary scope",
+      "note": "Official MOE file; direct retrieval was blocked from the authoring environment, so content was cross-checked against school documents that follow it. Verify against the PDF during inventory audit."
+    },
+    {
+      "id": "acs-el",
+      "kind": "school_public",
+      "title": "ACS (Primary): English Language curriculum page",
+      "url": "https://www.acspri.moe.edu.sg/our-curriculum/english-language/",
+      "accessed": "2026-10-16",
+      "used_for": "STELLAR approach context"
+    },
+    {
+      "id": "shuqun-el-p2-2025",
+      "kind": "school_public",
+      "title": "Shuqun Primary: P2 English Handbook 2025",
+      "url": "https://shuqunpri.moe.edu.sg/files/P2_English_Handbook_2025.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "P2 grammar items by STELLAR unit (nouns, determiners, verbs, SVA, conjunctions, adverbs, prepositions, punctuation, sentence types); comprehension skills"
+    },
+    {
+      "id": "yuhua-el-p2-2025",
+      "kind": "school_public",
+      "title": "Yuhua Primary: 2025 P2 Parents Engagement Handouts (EL)",
+      "url": "https://yuhuapri.moe.edu.sg/files/2025_P2_Parents_Engagement_Handouts_EL.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "P2 reading outcomes and holistic assessment"
+    },
+    {
+      "id": "edgefield-p2-2025",
+      "kind": "school_public",
+      "title": "Edgefield Primary: 2025 P2 Learning Outcomes letter",
+      "url": "https://www.edgefieldpri.moe.edu.sg/files/2025_Assessment_Letter_to_Parents___P2_Learning_Outcomes.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "P2 English learning outcomes (tenses, connectors, sequencing)"
+    },
+    {
+      "id": "cedar-p3-2025",
+      "kind": "school_public",
+      "title": "Cedar Primary: P3 Curriculum Briefing 2025",
+      "url": "https://www.cedarpri.moe.edu.sg/files/Parent%20Engagement/2025%20P3%20Engagement/3__14_mar_p3_curriculum_briefing_2025.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "P3 EL paper format: grammar, vocabulary, punctuation, visual text MCQ; grammar cloze, editing, sentence combining, comprehension"
+    },
+    {
+      "id": "jwps-p3-2025",
+      "kind": "school_public",
+      "title": "Jurong West Primary: 2025 P3 Assessment Overview, Topics and Components",
+      "url": "https://www.jurongwestpri.moe.edu.sg/files/JWPS_2025_P3_Assessment_Overview__Topics_and_Components_.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "P3 EL component counts (vocabulary 6, grammar 8, grammar cloze 8, editing 4, comprehension cloze 4, sentence combining 4)"
+    },
+    {
+      "id": "eliaspark-el-p3",
+      "kind": "school_public",
+      "title": "Elias Park Primary: P3 to P6 English Language Assessment Formats",
+      "url": "https://www.eliasparkpri.moe.edu.sg/files/P3_to_P6_English_Language_Assessment_Formats_.pdf",
+      "accessed": "2026-10-16",
+      "used_for": "P3 grammar cloze focus (pronouns, subject-verb agreement), passage lengths"
+    },
+    {
+      "id": "geniebook-p2-papers",
+      "kind": "past_paper_index",
+      "title": "Geniebook: Primary 2 sample papers index (2021-2023 listed)",
+      "url": "https://geniebook.com/exam-preparation/sample-papers/primary-2",
+      "accessed": "2026-10-16",
+      "used_for": "Format survey of P2 English practice/SA papers; no questions copied",
+      "note": "No stated reuse licence; format analysis only."
+    },
+    {
+      "id": "smiletutor-papers",
+      "kind": "past_paper_index",
+      "title": "SmileTutor: primary school exam papers index",
+      "url": "https://smiletutor.sg/free-test-papers-download/primary-school-exam-papers/",
+      "accessed": "2026-10-16",
+      "used_for": "Format survey of P2/P3 English papers (2022 within range); no questions copied",
+      "note": "Site states copyright; format analysis only."
+    },
+    {
+      "id": "nlb-booklists",
+      "kind": "enrichment",
+      "title": "National Library Board: primary school book recommendations",
+      "url": "https://www.nlb.gov.sg/main/site/discovereads/children/reading-recommendations/booklists",
+      "accessed": "2026-10-16",
+      "used_for": "Enrichment context: extensive reading"
+    },
+    {
+      "id": "cdac-kidsread",
+      "kind": "enrichment",
+      "title": "CDAC: kidsREAD reading programme",
+      "url": "https://cdac.org.sg/kidsread",
+      "accessed": "2026-10-16",
+      "used_for": "Enrichment context: reading support programme"
+    }
+  ],
+  "topics": [
+    {
+      "id": "el.p2.nouns",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Grammar",
+      "label": "Nouns and noun phrases: plurals (regular, -es, -ies, -ves, irregular), collective and uncountable nouns",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.determiners",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Grammar",
+      "label": "Determiners: a/an, this/that/these/those, some/any",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.verbs",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Grammar",
+      "label": "Verbs and verb phrases: simple present, simple past (regular/irregular), present continuous",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.sva",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Grammar",
+      "label": "Subject-verb agreement: is/are, has/have, verb -s",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.pronouns",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Grammar",
+      "label": "Pronouns: subject, object and possessive",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.adjectives-adverbs",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Grammar",
+      "label": "Adjectives (incl. -er/-est) and -ly adverbs",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.prepositions",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Grammar",
+      "label": "Prepositions of place and time",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.conjunctions",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Grammar",
+      "label": "Conjunctions: and, but, or, because, so",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.punctuation",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Grammar",
+      "label": "Punctuation: capitals, full stops, question and exclamation marks, commas in lists",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.sentence-types",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Grammar",
+      "label": "Sentence types: statement, question, command, exclamation",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.vocabulary",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Vocabulary",
+      "label": "Vocabulary: synonyms, antonyms, context, word groups, compound words, contractions",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.spelling-editing",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Spelling and editing",
+      "label": "Spelling (incl. common homophones) and editing for grammar (recognition only)",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.sentence-organisation",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Writing foundations",
+      "label": "Word order and sequencing events",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.writing-foundations",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Writing foundations",
+      "label": "Connectors, sensory details and showing feelings (selection, not free writing)",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.comprehension",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Reading",
+      "label": "Short-passage comprehension: details, sequence, vocabulary in context, feelings, simple inference",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.grammar-cloze",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Grammar",
+      "label": "Grammar cloze passages",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.vocab-cloze",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Vocabulary",
+      "label": "Vocabulary cloze passages",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p2.visual-text",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Reading",
+      "label": "Visual text comprehension: posters, menus, notices",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ]
+    },
+    {
+      "id": "el.p3.tenses",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Grammar",
+      "label": "Tenses: past continuous, future with will, irregular past, tense consistency",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.sva",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Grammar",
+      "label": "Subject-verb agreement: each/everyone/neither, there is/are, intervening phrases",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.pronouns",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Grammar",
+      "label": "Pronouns: object pronouns referring back, reflexive pronouns, relative pronouns who/which/whose",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.prepositions",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Grammar",
+      "label": "Prepositions of movement and fixed preposition phrases",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.conjunctions",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Grammar",
+      "label": "Conjunctions: and/but/or, although, when/while/before/after, if/unless",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.adjectives-adverbs",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Grammar",
+      "label": "Comparatives/superlatives (more/most, irregular), quantifiers, adverbs of frequency",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.punctuation",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Grammar",
+      "label": "Apostrophes for possession, speech marks, commas after clauses",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.vocabulary",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Vocabulary",
+      "label": "Vocabulary: synonyms, antonyms, context, phrasal verbs, word forms, simple idioms",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.editing",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Spelling and editing",
+      "label": "Editing for spelling, grammar and homophones (recognition only)",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.synthesis",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Sentence combining",
+      "label": "Sentence combining with because/so, although, who/which, before/after, either/neither",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.comprehension",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Reading",
+      "label": "Passage comprehension: details, reasons, inference, character traits, main message",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.grammar-cloze",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Grammar",
+      "label": "Grammar cloze passages",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.comprehension-cloze",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Reading",
+      "label": "Comprehension cloze passages (no helping words in school papers; options used in app)",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p3.visual-text",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Reading",
+      "label": "Visual text comprehension: leaflets and notices",
+      "scope": "in_app",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ]
+    },
+    {
+      "id": "el.p2.oral",
+      "course": "p2_english",
+      "grade": "p2",
+      "strand": "Speaking",
+      "label": "Reading aloud and picture/stimulus-based conversation",
+      "scope": "external",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "shuqun-el-p2-2025",
+        "yuhua-el-p2-2025",
+        "edgefield-p2-2025"
+      ],
+      "note": "Oral practice stays outside the app."
+    },
+    {
+      "id": "el.p3.composition",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Writing",
+      "label": "Guided composition (3-picture series, at least 80-100 words)",
+      "scope": "external",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ],
+      "note": "Full writing stays outside the app."
+    },
+    {
+      "id": "el.p3.listening",
+      "course": "p3_english",
+      "grade": "p3",
+      "strand": "Listening",
+      "label": "Listening comprehension",
+      "scope": "deferred",
+      "pilot": "open",
+      "source_refs": [
+        "moe-el-2020",
+        "cedar-p3-2025",
+        "jwps-p3-2025",
+        "eliaspark-el-p3"
+      ],
+      "note": "Listening is deferred in the Pilot."
+    }
+  ],
+  "limitations": [
+    "The per-year grammar and vocabulary list is a working inventory drawn from school documents and papers; the MOE syllabus gives progressing capabilities and lower/middle primary bands, not an official per-year checklist.",
+    "Leaves are an author working map (one per repair target plus partial/external/deferred leaves) and need independent verification before any coverage figure is computed.",
+    "Choice-based editing, spelling and synthesis are narrower than independent production; production leaves are marked partial.",
+    "Reading materials are a starting sample of genres; they do not cover every reading genre or multimodal feature.",
+    "Oral and composition are external; listening is deferred."
+  ],
+  "leaves": [
+    {
+      "id": "el.p2.leaf.collective-uncountable",
+      "topic_ref": "el.p2.nouns",
+      "label": "Collective uncountable",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.plural-irregular",
+      "topic_ref": "el.p2.nouns",
+      "label": "Plural irregular",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.plural-s-es",
+      "topic_ref": "el.p2.nouns",
+      "label": "Plural s es",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.plural-y",
+      "topic_ref": "el.p2.nouns",
+      "label": "Plural y",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.a-an",
+      "topic_ref": "el.p2.determiners",
+      "label": "A an",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.some-any",
+      "topic_ref": "el.p2.determiners",
+      "label": "Some any",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.this-these",
+      "topic_ref": "el.p2.determiners",
+      "label": "This these",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.present-continuous",
+      "topic_ref": "el.p2.verbs",
+      "label": "Present continuous",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.simple-past-irregular",
+      "topic_ref": "el.p2.verbs",
+      "label": "Simple past irregular",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.simple-past-regular",
+      "topic_ref": "el.p2.verbs",
+      "label": "Simple past regular",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.simple-present",
+      "topic_ref": "el.p2.verbs",
+      "label": "Simple present",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.sva-has-have",
+      "topic_ref": "el.p2.sva",
+      "label": "Sva has have",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.sva-is-are",
+      "topic_ref": "el.p2.sva",
+      "label": "Sva is are",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.sva-verb-s",
+      "topic_ref": "el.p2.sva",
+      "label": "Sva verb s",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.possessive-pronoun",
+      "topic_ref": "el.p2.pronouns",
+      "label": "Possessive pronoun",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.subject-object-pronoun",
+      "topic_ref": "el.p2.pronouns",
+      "label": "Subject object pronoun",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.adjective-choice",
+      "topic_ref": "el.p2.adjectives-adverbs",
+      "label": "Adjective choice",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.adverb-ly",
+      "topic_ref": "el.p2.adjectives-adverbs",
+      "label": "Adverb ly",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.comparative",
+      "topic_ref": "el.p2.adjectives-adverbs",
+      "label": "Comparative",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.preposition-place",
+      "topic_ref": "el.p2.prepositions",
+      "label": "Preposition place",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.preposition-time",
+      "topic_ref": "el.p2.prepositions",
+      "label": "Preposition time",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.and-but-or",
+      "topic_ref": "el.p2.conjunctions",
+      "label": "And but or",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.because-so",
+      "topic_ref": "el.p2.conjunctions",
+      "label": "Because so",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.capitals-full-stops",
+      "topic_ref": "el.p2.punctuation",
+      "label": "Capitals full stops",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.commas-lists",
+      "topic_ref": "el.p2.punctuation",
+      "label": "Commas lists",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.question-exclamation",
+      "topic_ref": "el.p2.punctuation",
+      "label": "Question exclamation",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.sentence-type",
+      "topic_ref": "el.p2.sentence-types",
+      "label": "Sentence type",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.vocab-compound",
+      "topic_ref": "el.p2.vocabulary",
+      "label": "Vocab compound",
+      "assessed_ability": "Understand and choose words in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p30 (vocabulary) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.vocab-context",
+      "topic_ref": "el.p2.vocabulary",
+      "label": "Vocab context",
+      "assessed_ability": "Understand and choose words in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p30 (vocabulary) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.vocab-contractions",
+      "topic_ref": "el.p2.vocabulary",
+      "label": "Vocab contractions",
+      "assessed_ability": "Understand and choose words in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p30 (vocabulary) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.vocab-meaning",
+      "topic_ref": "el.p2.vocabulary",
+      "label": "Vocab meaning",
+      "assessed_ability": "Understand and choose words in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p30 (vocabulary) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.vocab-opposite",
+      "topic_ref": "el.p2.vocabulary",
+      "label": "Vocab opposite",
+      "assessed_ability": "Understand and choose words in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p30 (vocabulary) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.vocab-word-family",
+      "topic_ref": "el.p2.vocabulary",
+      "label": "Vocab word family",
+      "assessed_ability": "Understand and choose words in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p30 (vocabulary) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.edit-grammar",
+      "topic_ref": "el.p2.spelling-editing",
+      "label": "Edit grammar",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.spell-common",
+      "topic_ref": "el.p2.spelling-editing",
+      "label": "Spell common",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.spell-homophones",
+      "topic_ref": "el.p2.spelling-editing",
+      "label": "Spell homophones",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.spelling-production",
+      "topic_ref": "el.p2.spelling-editing",
+      "label": "Spelling words independently",
+      "assessed_ability": "Spell words without options",
+      "representation": "production",
+      "scope": "partial",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p26 (writing and representing)",
+      "note": "In-app items choose the correct spelling; independent spelling is not assessed."
+    },
+    {
+      "id": "el.p2.leaf.sequence-events",
+      "topic_ref": "el.p2.sentence-organisation",
+      "label": "Sequence events",
+      "assessed_ability": "Recognise well-formed sentences and ideas (selection, not production)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p26 (writing and representing) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.word-order",
+      "topic_ref": "el.p2.sentence-organisation",
+      "label": "Word order",
+      "assessed_ability": "Recognise well-formed sentences and ideas (selection, not production)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p26 (writing and representing) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.connectors",
+      "topic_ref": "el.p2.writing-foundations",
+      "label": "Connectors",
+      "assessed_ability": "Recognise well-formed sentences and ideas (selection, not production)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p26 (writing and representing) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.feelings",
+      "topic_ref": "el.p2.writing-foundations",
+      "label": "Feelings",
+      "assessed_ability": "Recognise well-formed sentences and ideas (selection, not production)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p26 (writing and representing) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.sense-details",
+      "topic_ref": "el.p2.writing-foundations",
+      "label": "Sense details",
+      "assessed_ability": "Recognise well-formed sentences and ideas (selection, not production)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p26 (writing and representing) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.read-detail",
+      "topic_ref": "el.p2.comprehension",
+      "label": "Read detail",
+      "assessed_ability": "Read and view a text to find, link or infer information",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p22 (reading and viewing) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.read-feelings",
+      "topic_ref": "el.p2.comprehension",
+      "label": "Read feelings",
+      "assessed_ability": "Read and view a text to find, link or infer information",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p22 (reading and viewing) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.read-reason",
+      "topic_ref": "el.p2.comprehension",
+      "label": "Read reason",
+      "assessed_ability": "Read and view a text to find, link or infer information",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p22 (reading and viewing) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.read-sequence",
+      "topic_ref": "el.p2.comprehension",
+      "label": "Read sequence",
+      "assessed_ability": "Read and view a text to find, link or infer information",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p22 (reading and viewing) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.read-word-meaning",
+      "topic_ref": "el.p2.comprehension",
+      "label": "Read word meaning",
+      "assessed_ability": "Read and view a text to find, link or infer information",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p22 (reading and viewing) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.visual-find",
+      "topic_ref": "el.p2.visual-text",
+      "label": "Visual find",
+      "assessed_ability": "Read and view a text to find, link or infer information",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p22 (reading and viewing) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.visual-use",
+      "topic_ref": "el.p2.visual-text",
+      "label": "Visual use",
+      "assessed_ability": "Read and view a text to find, link or infer information",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p22 (reading and viewing) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.future-will",
+      "topic_ref": "el.p3.tenses",
+      "label": "Future will",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.irregular-past",
+      "topic_ref": "el.p3.tenses",
+      "label": "Irregular past",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.past-continuous",
+      "topic_ref": "el.p3.tenses",
+      "label": "Past continuous",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.tense-consistency",
+      "topic_ref": "el.p3.tenses",
+      "label": "Tense consistency",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.sva-each-everyone",
+      "topic_ref": "el.p3.sva",
+      "label": "Sva each everyone",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.sva-there",
+      "topic_ref": "el.p3.sva",
+      "label": "Sva there",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.sva-together",
+      "topic_ref": "el.p3.sva",
+      "label": "Sva together",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.reflexive",
+      "topic_ref": "el.p3.pronouns",
+      "label": "Reflexive",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.relative-who-which",
+      "topic_ref": "el.p3.pronouns",
+      "label": "Relative who which",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.object-pronoun-reference",
+      "topic_ref": "el.p3.pronouns",
+      "label": "Object pronoun referring back to a noun",
+      "assessed_ability": "Choose the pronoun that matches the noun it stands for, after a verb (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.preposition-movement",
+      "topic_ref": "el.p3.prepositions",
+      "label": "Preposition movement",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.preposition-phrases",
+      "topic_ref": "el.p3.prepositions",
+      "label": "Preposition phrases",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.although",
+      "topic_ref": "el.p3.conjunctions",
+      "label": "Although",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.unless-if",
+      "topic_ref": "el.p3.conjunctions",
+      "label": "Unless if",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.when-while-before",
+      "topic_ref": "el.p3.conjunctions",
+      "label": "When while before",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.and-but-or",
+      "topic_ref": "el.p3.conjunctions",
+      "label": "And, but, or in longer sentences",
+      "assessed_ability": "Choose and/but/or to add, contrast or give a choice (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.adverb-frequency",
+      "topic_ref": "el.p3.adjectives-adverbs",
+      "label": "Adverb frequency",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.comparative-more-most",
+      "topic_ref": "el.p3.adjectives-adverbs",
+      "label": "Comparative more most",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.quantifiers",
+      "topic_ref": "el.p3.adjectives-adverbs",
+      "label": "Quantifiers",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.apostrophe-possession",
+      "topic_ref": "el.p3.punctuation",
+      "label": "Apostrophe possession",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.commas-clauses",
+      "topic_ref": "el.p3.punctuation",
+      "label": "Commas clauses",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.speech-marks",
+      "topic_ref": "el.p3.punctuation",
+      "label": "Speech marks",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.vocab-antonym",
+      "topic_ref": "el.p3.vocabulary",
+      "label": "Vocab antonym",
+      "assessed_ability": "Understand and choose words in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p30 (vocabulary) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.vocab-context",
+      "topic_ref": "el.p3.vocabulary",
+      "label": "Vocab context",
+      "assessed_ability": "Understand and choose words in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p30 (vocabulary) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.vocab-idiom-simple",
+      "topic_ref": "el.p3.vocabulary",
+      "label": "Vocab idiom simple",
+      "assessed_ability": "Understand and choose words in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p30 (vocabulary) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.vocab-phrasal",
+      "topic_ref": "el.p3.vocabulary",
+      "label": "Vocab phrasal",
+      "assessed_ability": "Understand and choose words in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p30 (vocabulary) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.vocab-synonym",
+      "topic_ref": "el.p3.vocabulary",
+      "label": "Vocab synonym",
+      "assessed_ability": "Understand and choose words in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p30 (vocabulary) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.vocab-word-form",
+      "topic_ref": "el.p3.vocabulary",
+      "label": "Vocab word form",
+      "assessed_ability": "Understand and choose words in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p30 (vocabulary) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.edit-grammar",
+      "topic_ref": "el.p3.editing",
+      "label": "Edit grammar",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.edit-homophone",
+      "topic_ref": "el.p3.editing",
+      "label": "Edit homophone",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.edit-spelling",
+      "topic_ref": "el.p3.editing",
+      "label": "Edit spelling",
+      "assessed_ability": "Choose the correct form in context (recognition)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p28 (grammar) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.combine-although",
+      "topic_ref": "el.p3.synthesis",
+      "label": "Combine although",
+      "assessed_ability": "Recognise well-formed sentences and ideas (selection, not production)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p26 (writing and representing) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.combine-because",
+      "topic_ref": "el.p3.synthesis",
+      "label": "Combine because",
+      "assessed_ability": "Recognise well-formed sentences and ideas (selection, not production)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p26 (writing and representing) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.combine-before-after",
+      "topic_ref": "el.p3.synthesis",
+      "label": "Combine before after",
+      "assessed_ability": "Recognise well-formed sentences and ideas (selection, not production)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p26 (writing and representing) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.combine-either-neither",
+      "topic_ref": "el.p3.synthesis",
+      "label": "Combine either neither",
+      "assessed_ability": "Recognise well-formed sentences and ideas (selection, not production)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p26 (writing and representing) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.combine-who-which",
+      "topic_ref": "el.p3.synthesis",
+      "label": "Combine who which",
+      "assessed_ability": "Recognise well-formed sentences and ideas (selection, not production)",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p26 (writing and representing) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.sentence-production",
+      "topic_ref": "el.p3.synthesis",
+      "label": "Writing combined sentences independently",
+      "assessed_ability": "Write a combined sentence",
+      "representation": "production",
+      "scope": "partial",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p26 (writing and representing)",
+      "note": "In-app synthesis items choose the best combined sentence; writing it is not assessed."
+    },
+    {
+      "id": "el.p3.leaf.read-character",
+      "topic_ref": "el.p3.comprehension",
+      "label": "Read character",
+      "assessed_ability": "Read and view a text to find, link or infer information",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p22 (reading and viewing) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.read-detail",
+      "topic_ref": "el.p3.comprehension",
+      "label": "Read detail",
+      "assessed_ability": "Read and view a text to find, link or infer information",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p22 (reading and viewing) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.read-inference",
+      "topic_ref": "el.p3.comprehension",
+      "label": "Read inference",
+      "assessed_ability": "Read and view a text to find, link or infer information",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p22 (reading and viewing) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.read-main-message",
+      "topic_ref": "el.p3.comprehension",
+      "label": "Read main message",
+      "assessed_ability": "Read and view a text to find, link or infer information",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p22 (reading and viewing) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.read-reason",
+      "topic_ref": "el.p3.comprehension",
+      "label": "Read reason",
+      "assessed_ability": "Read and view a text to find, link or infer information",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p22 (reading and viewing) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.visual-apply",
+      "topic_ref": "el.p3.visual-text",
+      "label": "Visual apply",
+      "assessed_ability": "Read and view a text to find, link or infer information",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p22 (reading and viewing) (lower primary band)"
+    },
+    {
+      "id": "el.p3.leaf.visual-find",
+      "topic_ref": "el.p3.visual-text",
+      "label": "Visual find",
+      "assessed_ability": "Read and view a text to find, link or infer information",
+      "representation": "text",
+      "scope": "in_app",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p22 (reading and viewing) (lower primary band)"
+    },
+    {
+      "id": "el.p2.leaf.oral",
+      "topic_ref": "el.p2.oral",
+      "label": "Reading aloud and stimulus-based conversation",
+      "assessed_ability": "Speak and read aloud",
+      "representation": "production",
+      "scope": "external",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) speaking and representing"
+    },
+    {
+      "id": "el.p3.leaf.composition",
+      "topic_ref": "el.p3.composition",
+      "label": "Guided composition",
+      "assessed_ability": "Write a composition",
+      "representation": "production",
+      "scope": "external",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) p26 (writing and representing)"
+    },
+    {
+      "id": "el.p3.leaf.listening",
+      "topic_ref": "el.p3.listening",
+      "label": "Listening comprehension",
+      "assessed_ability": "Listen and respond",
+      "representation": "text",
+      "scope": "deferred",
+      "source_refs": [
+        "moe-el-2020"
+      ],
+      "source_pages": "MOE English Language Syllabus 2020 (Primary) listening and viewing"
+    }
+  ]
+}

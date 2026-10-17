@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 240" width="460" height="240" role="img">
+<title>SCHOOL FUN FAIR!</title>
+<rect x="0" y="0" width="460" height="240" fill="#ffffff"/>
+<rect x="8" y="8" width="444" height="224" rx="14" fill="#ffffff" stroke="#1f2933" stroke-width="3"/>
+<rect x="8" y="8" width="444" height="52" rx="14" fill="#f6c177"/>
+<rect x="8" y="40" width="444" height="20" fill="#f6c177"/>
+<text x="230.0" y="42.0" font-family="Arial, Helvetica, sans-serif" font-size="20" text-anchor="middle" font-weight="bold" fill="#1f2933">SCHOOL FUN FAIR!</text>
+<text x="230.0" y="92.0" font-family="Arial, Helvetica, sans-serif" font-size="16" text-anchor="middle" font-weight="bold" fill="#1f2933">Saturday, 15 November</text>
+<text x="230.0" y="122.0" font-family="Arial, Helvetica, sans-serif" font-size="16" text-anchor="middle" font-weight="normal" fill="#1f2933">9 a.m. to 1 p.m. · School Hall</text>
+<text x="230.0" y="152.0" font-family="Arial, Helvetica, sans-serif" font-size="16" text-anchor="middle" font-weight="normal" fill="#1f2933">Games • Food stalls • Face painting</text>
+<text x="230.0" y="182.0" font-family="Arial, Helvetica, sans-serif" font-size="16" text-anchor="middle" font-weight="bold" fill="#1f2933">Tickets: $1 each (buy at the General Office)</text>
+<text x="230.0" y="212.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#7b8794">All money raised goes to the school library.</text>
+</svg>
