@@ -11,6 +11,9 @@ on:
       - 'tests/pilot-ui.spec.ts'
       - 'tests/parent/**'
       - 'tests/helpers/**'
+      - 'tests/ui/**'
+      - 'package.json'
+      - 'package-lock.json'
       - '.github/workflows/foundation.yml'
   workflow_dispatch:
 permissions:
@@ -32,6 +35,7 @@ jobs:
           node-version-file: .nvmrc
       - name: Install locked dependencies
         run: npm ci
+      - run: npm run test:ui
       - run: npm audit --audit-level=high
       # Public synthetic endpoint, intercepted by Playwright; never a hosted project or credential.
       - run: npm run build
@@ -40,3 +44,11 @@ jobs:
           VITE_SUPABASE_ANON_KEY: synthetic-test-only
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
+      - name: Save synthetic UI images for visual review
+        if: success() && github.event_name == 'pull_request'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: synthetic-ui-review
+          path: test-results/ui-review/*.png
+          retention-days: 1
+          if-no-files-found: error

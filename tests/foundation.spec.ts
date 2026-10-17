@@ -1,19 +1,34 @@
 import { expect, test } from '@playwright/test'
 import { setup, state, answer, parent } from './helpers/pilot'
 
-test('initialized practice survives expired-session offline reload and offline writes', async ({ page, context }) => {
-  const errors: string[] = []; page.on('pageerror', (e) => errors.push(e.message))
+test('initialized practice survives expired-session offline reload and offline writes', async ({
+  page,
+  context,
+}) => {
+  const errors: string[] = []
+  page.on('pageerror', (e) => errors.push(e.message))
   await setup(page, context)
-  await expect(page.getByText('Ready for an offline adventure', { exact: false })).toBeVisible()
+  await expect(
+    page.getByText('Ready for an offline adventure', { exact: false }),
+  ).toBeVisible()
   await page.waitForFunction(() => !!navigator.serviceWorker.controller)
   await page.getByRole('button', { name: 'Start Chinese' }).click()
   await answer(page)
-  await page.evaluate(() => { const key = 'ta.auth.session.v1'; const session = JSON.parse(localStorage.getItem(key)!); session.expiresAt = 0; localStorage.setItem(key, JSON.stringify(session)) })
+  await page.evaluate(() => {
+    const key = 'ta.auth.session.v1'
+    const session = JSON.parse(localStorage.getItem(key)!)
+    session.expiresAt = 0
+    localStorage.setItem(key, JSON.stringify(session))
+  })
   let authRequests = 0
-  page.on('request', (req) => { if (req.url().includes('/auth/v1/')) authRequests++ })
+  page.on('request', (req) => {
+    if (req.url().includes('/auth/v1/')) authRequests++
+  })
   await context.setOffline(true)
   await page.reload()
-  await expect(page.getByRole('button', { name: 'Resume Chinese' })).toBeVisible()
+  await expect(
+    page.getByRole('button', { name: 'Resume Chinese' }),
+  ).toBeVisible()
   await page.getByRole('button', { name: 'Resume Chinese' }).click()
   await answer(page)
   await parent(page)
@@ -28,34 +43,77 @@ test('initialized practice survives expired-session offline reload and offline w
   expect(errors).toEqual([])
 })
 
-for (const viewport of [{ width: 1024, height: 768 }, { width: 844, height: 390 }, { width: 390, height: 844 }]) {
-  test(`no horizontal overflow in hub, practice and parent at ${viewport.width}x${viewport.height}`, async ({ page, context }) => {
+for (const viewport of [
+  { width: 1024, height: 768 },
+  { width: 844, height: 390 },
+  { width: 390, height: 844 },
+]) {
+  test(`no horizontal overflow in hub, practice and parent at ${viewport.width}x${viewport.height}`, async ({
+    page,
+    context,
+  }) => {
     await page.setViewportSize(viewport)
     await setup(page, context)
     for (const screen of ['hub', 'practice', 'parent']) {
-      if (screen === 'practice') await page.getByRole('button', { name: 'Start Chinese' }).click()
+      if (screen === 'practice')
+        await page.getByRole('button', { name: 'Start Chinese' }).click()
       if (screen === 'parent') await parent(page)
-      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+      expect(
+        await page.evaluate(
+          () => document.documentElement.scrollWidth <= innerWidth,
+        ),
+      ).toBe(true)
+      // Synthetic screens after setup/unlock only; never capture a credential or PIN entry screen.
+      if (viewport.width === 1024)
+        await page.screenshot({
+          path: `test-results/ui-review/${screen}.png`,
+          fullPage: true,
+        })
     }
   })
 }
 
-test('first use needs online sign-in and offers no Guest or signup', async ({ page, context }) => {
+test('first use needs online sign-in and offers no Guest or signup', async ({
+  page,
+  context,
+}) => {
   await page.goto('/')
   await page.waitForFunction(() => !!navigator.serviceWorker.controller)
-  await context.setOffline(true); await page.reload()
-  await expect(page.getByRole('button', { name: 'Sign in', exact: true })).toBeDisabled()
-  await expect(page.getByRole('button', { name: /Guest|sign.?up/i })).toHaveCount(0)
+  await context.setOffline(true)
+  await page.reload()
+  await expect(
+    page.getByRole('button', { name: 'Sign in', exact: true }),
+  ).toBeDisabled()
+  await expect(
+    page.getByRole('button', { name: /Guest|sign.?up/i }),
+  ).toHaveCount(0)
   await expect(page.getByText(/First setup needs internet/)).toBeVisible()
 })
 
-for (const deny of ['property', 'open']) test(`browser storage denial (${deny}) never claims saved progress`, async ({ page, context }) => {
-  await setup(page, context)
-  await page.addInitScript((mode) => {
-    if (mode === 'property') Object.defineProperty(window, 'indexedDB', { configurable: true, get() { throw new Error('Synthetic denial') } })
-    else IDBFactory.prototype.open = function () { throw new DOMException('Synthetic denial', 'SecurityError') }
-  }, deny)
-  await page.reload()
-  await expect(page.getByRole('alert')).toContainText('could not open your saved progress')
-  await expect(page.getByRole('button', { name: 'Start Chinese' })).toHaveCount(0)
-})
+for (const deny of ['property', 'open'])
+  test(`browser storage denial (${deny}) never claims saved progress`, async ({
+    page,
+    context,
+  }) => {
+    await setup(page, context)
+    await page.addInitScript((mode) => {
+      if (mode === 'property')
+        Object.defineProperty(window, 'indexedDB', {
+          configurable: true,
+          get() {
+            throw new Error('Synthetic denial')
+          },
+        })
+      else
+        IDBFactory.prototype.open = function () {
+          throw new DOMException('Synthetic denial', 'SecurityError')
+        }
+    }, deny)
+    await page.reload()
+    await expect(page.getByRole('alert')).toContainText(
+      'could not open your saved progress',
+    )
+    await expect(
+      page.getByRole('button', { name: 'Start Chinese' }),
+    ).toHaveCount(0)
+  })

@@ -1,44 +1,71 @@
 import { expect, test } from '@playwright/test'
 import { answer, finish, parent, setup, state } from './helpers/pilot'
 
-test('whole-material first answers precede feedback; assistance/corrections and safe checkpoints survive reload', async ({ page, context }) => {
+test('whole-material first answers precede feedback; assistance/corrections and safe checkpoints survive reload', async ({
+  page,
+  context,
+}) => {
   await setup(page, context)
-  await parent(page); await page.getByLabel('Chinese X').selectOption('6'); await page.getByRole('button', { name: 'Exit and lock' }).click()
+  await parent(page)
+  await page.getByLabel('Chinese X').selectOption('6')
+  await page.getByRole('button', { name: 'Exit and lock' }).click()
   await page.getByRole('button', { name: 'Start Chinese' }).click()
   await expect(page.locator('.material ol li')).toHaveCount(3)
   await answer(page, true)
   await expect(page.locator('.hint, .material-feedback')).toHaveCount(0)
   await page.reload()
   await page.getByRole('button', { name: 'Resume Chinese' }).click()
-  await answer(page); await answer(page)
+  await answer(page)
+  await answer(page)
   await expect(page.getByText('Hint', { exact: true })).toBeVisible()
-  await expect(page.getByRole('region', { name: 'Story checkpoint' })).toHaveCount(0)
-  await page.reload(); await page.getByRole('button', { name: 'Resume Chinese' }).click()
+  await expect(
+    page.getByRole('region', { name: 'Story checkpoint' }),
+  ).toHaveCount(0)
+  await page.reload()
+  await page.getByRole('button', { name: 'Resume Chinese' }).click()
   await expect(page.getByText('Hint', { exact: true })).toBeVisible()
   await answer(page, true)
-  await expect(page.getByText('Supported correction', { exact: true })).toBeVisible()
-  await page.reload(); await page.getByRole('button', { name: 'Resume Chinese' }).click()
-  await expect(page.getByText('Supported correction', { exact: true })).toBeVisible()
+  await expect(
+    page.getByText('Supported correction', { exact: true }),
+  ).toBeVisible()
+  await page.reload()
+  await page.getByRole('button', { name: 'Resume Chinese' }).click()
+  await expect(
+    page.getByText('Supported correction', { exact: true }),
+  ).toBeVisible()
   await answer(page)
-  await expect(page.getByRole('region', { name: 'Story checkpoint' })).toBeVisible()
-  expect((await state(page)).events.filter((e) => e.phase === 'first').length).toBe(3)
-  await page.reload(); await page.getByRole('button', { name: 'Resume Chinese' }).click()
-  await expect(page.getByRole('region', { name: 'Story checkpoint' })).toHaveCount(0)
+  await expect(
+    page.getByRole('region', { name: 'Story checkpoint' }),
+  ).toBeVisible()
+  expect(
+    (await state(page)).events.filter((e) => e.phase === 'first').length,
+  ).toBe(3)
+  await page.reload()
+  await page.getByRole('button', { name: 'Resume Chinese' }).click()
+  await expect(
+    page.getByRole('region', { name: 'Story checkpoint' }),
+  ).toHaveCount(0)
   await finish(page)
   const stored = await state(page)
   const story = stored.records.find((r) => r.table === 'story').value
   expect(story.checkpoints.length).toBe(2)
   expect(story.checkpoints.every((c) => c.state === 'delivered')).toBe(true)
-  await page.getByRole('button', { name: 'Return to the island' }).click(); await parent(page)
+  await page.getByRole('button', { name: 'Return to the island' }).click()
+  await parent(page)
   await page.locator('.summary details summary').first().click()
   await expect(page.getByText(/First answer:/).first()).toBeVisible()
   await expect(page.getByText(/Hint-assisted retry:/)).toBeVisible()
   await expect(page.getByText(/Supported correction:/)).toBeVisible()
 })
 
-test('all objective formats work with click controls and no answer keyboard; academic language stays fixed', async ({ page, context }) => {
+test('all objective formats work with click controls and no answer keyboard; academic language stays fixed', async ({
+  page,
+  context,
+}) => {
   await setup(page, context)
-  await parent(page); await page.getByLabel('Chinese X').selectOption('6'); await page.getByRole('button', { name: 'Exit and lock' }).click()
+  await parent(page)
+  await page.getByLabel('Chinese X').selectOption('6')
+  await page.getByRole('button', { name: 'Exit and lock' }).click()
   await page.getByRole('button', { name: 'Start Chinese' }).click()
   const original = await page.locator('.question-card h2').innerText()
   await page.getByRole('button', { name: '中文', exact: true }).click()
@@ -46,36 +73,62 @@ test('all objective formats work with click controls and no answer keyboard; aca
   await page.getByRole('button', { name: 'English', exact: true }).click()
   await finish(page)
   const stored = await state(page)
-  expect(new Set(stored.events.map((e) => e.response.kind))).toEqual(new Set(['single', 'word_bank', 'ordered', 'matching']))
+  expect(new Set(stored.events.map((e) => e.response.kind))).toEqual(
+    new Set(['single', 'word_bank', 'ordered', 'matching']),
+  )
   expect(stored.events.every((e) => e.correct)).toBe(true)
   await page.getByRole('button', { name: 'Return to the island' }).click()
   await page.getByRole('button', { name: 'Start Mathematics' }).click()
   const en = await page.locator('.question-card h2').innerText()
   await page.getByRole('button', { name: '中文', exact: true }).click()
   await expect(page.locator('.question-card h2')).toHaveText(en)
-  await expect(page.locator('.practice input, .practice textarea')).toHaveCount(0)
+  await expect(page.locator('.practice input, .practice textarea')).toHaveCount(
+    0,
+  )
 })
 
-for (const order of [['Chinese', 'Science', 'Mathematics', 'English'], ['English', 'Mathematics', 'Chinese', 'Science']]) {
-  test(`one finite adventure and exploration gate: ${order.join(' → ')}`, async ({ page, context }) => {
+for (const order of [
+  ['Chinese', 'Science', 'Mathematics', 'English'],
+  ['English', 'Mathematics', 'Chinese', 'Science'],
+]) {
+  test(`one finite adventure and exploration gate: ${order.join(' → ')}`, async ({
+    page,
+    context,
+  }) => {
     test.setTimeout(90_000)
-    await setup(page, context); await parent(page)
-    for (const subject of order) await page.getByLabel(`${subject} X`).selectOption('6')
+    await setup(page, context)
+    await parent(page)
+    for (const subject of order)
+      await page.getByLabel(`${subject} X`).selectOption('6')
     await page.getByRole('button', { name: 'Exit and lock' }).click()
-    await expect(page.getByRole('button', { name: 'Explore the island' })).toBeDisabled()
+    await expect(
+      page.getByRole('button', { name: 'Explore the island' }),
+    ).toBeDisabled()
     const content: string[] = []
     for (const [index, subject] of order.entries()) {
       await page.getByRole('button', { name: `Start ${subject}` }).click()
-      content.push(...await finish(page))
-      await expect(page.getByText(/overall score|accuracy|percent correct/i)).toHaveCount(0)
+      content.push(...(await finish(page)))
+      await expect(
+        page.getByText(/overall score|accuracy|percent correct/i),
+      ).toHaveCount(0)
       await page.getByRole('button', { name: 'Return to the island' }).click()
-      if (index < 3) await expect(page.getByRole('button', { name: 'Explore the island' })).toBeDisabled()
+      if (index < 3)
+        await expect(
+          page.getByRole('button', { name: 'Explore the island' }),
+        ).toBeDisabled()
     }
-    await expect(page.getByRole('button', { name: 'Explore the island' })).toBeEnabled()
-    expect(content.filter((s) => s.includes('Moss finds a tiny lantern')).length).toBe(1)
+    await expect(
+      page.getByRole('button', { name: 'Explore the island' }),
+    ).toBeEnabled()
+    expect(
+      content.filter((s) => s.includes('Moss finds a tiny lantern')).length,
+    ).toBe(1)
     expect(content.some((s) => s.includes('A visit from Moss'))).toBe(true)
-    const story = (await state(page)).records.find((r) => r.table === 'story').value
-    expect(story.ended).toBe(true); expect(story.world_flags).toContain('lantern-lit')
+    const story = (await state(page)).records.find(
+      (r) => r.table === 'story',
+    ).value
+    expect(story.ended).toBe(true)
+    expect(story.world_flags).toContain('lantern_lit')
     await page.reload()
     await expect(page.getByLabel('Lit lantern')).toBeVisible()
     await page.getByRole('button', { name: 'Talk to Moss' }).click()
@@ -83,78 +136,152 @@ for (const order of [['Chinese', 'Science', 'Mathematics', 'English'], ['English
   })
 }
 
-test('combined checkpoint occurs once at the final material boundary', async ({ page, context }) => {
-  await setup(page, context); await parent(page)
-  await page.getByLabel('English X').selectOption('6'); await page.getByRole('button', { name: 'Exit and lock' }).click()
-  await page.getByRole('button', { name: 'Start English' }).click(); const seen = await finish(page)
-  expect(seen.length).toBe(1); expect(seen[0]).toContain('combined')
+test('combined checkpoint occurs once at the final material boundary', async ({
+  page,
+  context,
+}) => {
+  await setup(page, context)
+  await parent(page)
+  await page.getByLabel('English X').selectOption('6')
+  await page.getByRole('button', { name: 'Exit and lock' }).click()
+  await page.getByRole('button', { name: 'Start English' }).click()
+  const seen = await finish(page)
+  expect(seen.length).toBe(1)
+  expect(seen[0]).toContain('combined')
   await page.reload()
-  const story = (await state(page)).records.find((r) => r.table === 'story').value
+  const story = (await state(page)).records.find(
+    (r) => r.table === 'story',
+  ).value
   expect(story.checkpoints.length).toBe(1)
 })
 
-test('rest preserves an unfinished task and gives no completion/story credit; tomorrow resumes', async ({ page, context }) => {
+test('rest preserves an unfinished task and gives no completion/story credit; tomorrow resumes', async ({
+  page,
+  context,
+}) => {
   await page.clock.install({ time: new Date('2027-03-01T10:00:00+08:00') })
-  await setup(page, context); await page.getByRole('button', { name: 'Start Chinese' }).click(); await answer(page)
-  await parent(page); await page.getByRole('button', { name: 'Today is a rest day' }).click(); await page.getByRole('button', { name: 'Exit and lock' }).click()
-  await expect(page.getByRole('button', { name: 'Explore the island' })).toBeEnabled()
-  await expect(page.getByRole('button', { name: 'Resume Chinese' })).toBeDisabled()
+  await setup(page, context)
+  await page.getByRole('button', { name: 'Start Chinese' }).click()
+  await answer(page)
+  await parent(page)
+  await page.getByRole('button', { name: 'Today is a rest day' }).click()
+  await page.getByRole('button', { name: 'Exit and lock' }).click()
+  await expect(
+    page.getByRole('button', { name: 'Explore the island' }),
+  ).toBeEnabled()
+  await expect(
+    page.getByRole('button', { name: 'Resume Chinese' }),
+  ).toBeDisabled()
   const before = await state(page)
-  expect(before.records.filter((r) => r.table === 'completions')).toHaveLength(0)
-  expect(before.records.find((r) => r.table === 'story').value.checkpoints).toHaveLength(0)
-  await page.clock.setSystemTime(new Date('2027-03-02T10:00:00+08:00')); await page.reload()
-  await page.getByRole('button', { name: 'Resume Chinese' }).click(); await finish(page)
+  expect(before.records.filter((r) => r.table === 'completions')).toHaveLength(
+    0,
+  )
+  expect(
+    before.records.find((r) => r.table === 'story').value.checkpoints,
+  ).toHaveLength(0)
+  await page.clock.setSystemTime(new Date('2027-03-02T10:00:00+08:00'))
+  await page.reload()
+  await page.getByRole('button', { name: 'Resume Chinese' }).click()
+  await finish(page)
   const after = await state(page)
   expect(after.records.filter((r) => r.table === 'tasks')).toHaveLength(1)
-  expect(after.records.find((r) => r.table === 'completions').value.local_date).toBe('2027-03-02')
+  expect(
+    after.records.find((r) => r.table === 'completions').value.local_date,
+  ).toBe('2027-03-02')
 })
 
-test('local save failure warns, allows continuation and retries without duplicating answers', async ({ page, context }) => {
-  await setup(page, context); await page.getByRole('button', { name: 'Start Chinese' }).click()
+test('local save failure warns, allows continuation and retries without duplicating answers', async ({
+  page,
+  context,
+}) => {
+  await setup(page, context)
+  await page.getByRole('button', { name: 'Start Chinese' }).click()
   await page.evaluate(() => {
-    const original = IDBDatabase.prototype.transaction
-    ;(globalThis as any).restoreSyntheticTransactions = () => { IDBDatabase.prototype.transaction = original }
-    IDBDatabase.prototype.transaction = function (...args: any[]) {
-      if (this.name.startsWith('turtle-academy-synthetic-') && args[1] === 'readwrite') throw new DOMException('Synthetic failure', 'QuotaExceededError')
+    // Dexie caches the transaction method at open. Inject at the actual write entry point.
+    const original = IDBObjectStore.prototype.put
+    ;(globalThis as any).restoreSyntheticTransactions = () => {
+      IDBObjectStore.prototype.put = original
+    }
+    IDBObjectStore.prototype.put = function (...args: any[]) {
+      if (this.transaction.db.name.startsWith('turtle-academy-synthetic-'))
+        throw new DOMException('Synthetic failure', 'QuotaExceededError')
       return original.apply(this, args as any)
     }
   })
   await answer(page)
-  await expect(page.getByRole('alert')).toContainText('Some changes are not saved')
-  await expect(page.getByRole('alert')).toContainText('Reloading, closing or termination may lose')
+  await expect(page.getByRole('alert')).toContainText(
+    'Some changes are not saved',
+  )
+  await expect(page.getByRole('alert')).toContainText(
+    'Reloading, closing or termination may lose',
+  )
   await answer(page)
   await page.evaluate(() => (globalThis as any).restoreSyntheticTransactions())
   await page.getByRole('button', { name: 'Retry local save' }).click()
   await expect(page.getByRole('alert')).toHaveCount(0)
-  await page.reload(); const stored = await state(page)
+  await page.reload()
+  const stored = await state(page)
   expect(stored.events.length).toBe(2)
   expect(new Set(stored.events.map((e) => e.id)).size).toBe(2)
 })
 
-test('measured time stops in the background and across idle gaps; settings freeze for an active task', async ({ page, context }) => {
+test('measured time stops in the background and across idle gaps; settings freeze for an active task', async ({
+  page,
+  context,
+}) => {
   await page.clock.install({ time: new Date('2027-03-01T10:00:00+08:00') })
-  await setup(page, context); await page.getByRole('button', { name: 'Start Mathematics' }).click()
-  await page.clock.fastForward(30_000); await answer(page)
-  await page.evaluate(() => { Object.defineProperty(document, 'hidden', { configurable: true, value: true }); document.dispatchEvent(new Event('visibilitychange')) })
+  await setup(page, context)
+  await page.getByRole('button', { name: 'Start Mathematics' }).click()
+  await page.clock.fastForward(30_000)
+  await answer(page)
+  await page.evaluate(() => {
+    Object.defineProperty(document, 'hidden', {
+      configurable: true,
+      value: true,
+    })
+    document.dispatchEvent(new Event('visibilitychange'))
+  })
   await page.clock.fastForward(60_000)
-  await page.evaluate(() => { Object.defineProperty(document, 'hidden', { configurable: true, value: false }); document.dispatchEvent(new Event('visibilitychange')) })
-  await page.clock.fastForward(10_000); await answer(page)
-  await page.clock.fastForward(130_000); await answer(page)
+  await page.evaluate(() => {
+    Object.defineProperty(document, 'hidden', {
+      configurable: true,
+      value: false,
+    })
+    document.dispatchEvent(new Event('visibilitychange'))
+  })
+  await page.clock.fastForward(10_000)
+  await answer(page)
+  await page.clock.fastForward(130_000)
+  await answer(page)
   await parent(page)
   await expect(page.getByTestId('time-mathematics')).toHaveText('40')
   await page.getByLabel('Mathematics X').selectOption('6')
-  await page.getByLabel('Timezone', { exact: true }).fill('Pacific/Kiritimati'); await page.getByRole('button', { name: 'Save timezone' }).click()
+  await page.getByLabel('Timezone', { exact: true }).fill('Pacific/Kiritimati')
+  await page.getByRole('button', { name: 'Save timezone' }).click()
   await page.getByRole('button', { name: 'Exit and lock' }).click()
   await page.getByRole('button', { name: 'Resume Mathematics' }).click()
-  await expect(page.getByText('3 / 10 questions answered', { exact: true })).toBeVisible()
+  await expect(
+    page.getByText('3 / 10 questions answered', { exact: true }),
+  ).toBeVisible()
   const stored = await state(page)
-  expect(stored.records.find((r) => r.table === 'settings').value.subjects.find((s) => s.subject === 'mathematics').x).toBe(6)
+  expect(
+    stored.records
+      .find((r) => r.table === 'settings')
+      .value.subjects.find((s) => s.subject === 'mathematics').x,
+  ).toBe(6)
 })
 
-test('a second tab cannot write the same working copy', async ({ page, context }) => {
+test('a second tab cannot write the same working copy', async ({
+  page,
+  context,
+}) => {
   await setup(page, context)
-  const second = await context.newPage(); await second.goto('/')
+  const second = await context.newPage()
+  await second.goto('/')
   await expect(second.getByRole('alert')).toContainText('open in another tab')
-  await page.close(); await second.reload()
-  await expect(second.getByRole('button', { name: 'Start Chinese' })).toBeVisible()
+  await page.close()
+  await second.reload()
+  await expect(
+    second.getByRole('button', { name: 'Start Chinese' }),
+  ).toBeVisible()
 })

@@ -16,6 +16,7 @@
     "build:trials": "tsc --noEmit && vite build --config vite.trials.config.ts",
     "preview:trials": "vite preview --config vite.trials.config.ts --host 127.0.0.1",
     "test:e2e": "playwright test",
+    "test:ui": "node --experimental-strip-types --test tests/ui/*.test.ts",
     "test:engine": "node --experimental-strip-types --test tests/engine/*.test.ts"
   },
   "dependencies": {
