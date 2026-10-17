@@ -3,7 +3,7 @@
 import { itemIn, judge, type CatalogueItem, type CatalogueRegistry, type CatalogueRelease } from '../catalogue/adapter.ts'
 import { isValidTimezone, learningDate } from './calendar.ts'
 import { derive, type Derived } from './evidence.ts'
-import { nothingEligible, planTask, resolveShortSlot, type PlanContext } from './planner.ts'
+import { nothingEligible, planTask, resolveShortSlot, usableItem, usableVersion, type PlanContext } from './planner.ts'
 import type { Mutation, Put, RecordStore, SaveStatus, Table } from './persistence.ts'
 import { WriteQueue } from './persistence.ts'
 import { halfwayOf, IDLE_AFTER_SECONDS, isLanguage, isValidX, POLICY_VERSION, SUBJECTS } from './policy.ts'
@@ -215,8 +215,10 @@ export class LearningEngine {
       && p.status !== 'flagged_replaced' && p.status !== 'invalidated') ?? null
   }
 
-  private flaggedAt(task: Task, position: number): boolean {
-    return this.state.presentations.some((p) => p.task_id === task.id && p.position === position && p.status === 'flagged_replaced')
+  /** A slot whose earlier presentation was flagged or invalidated needs a replacement (or is exhausted). */
+  private replacedAt(task: Task, position: number): boolean {
+    return this.state.presentations.some((p) => p.task_id === task.id && p.position === position
+      && (p.status === 'flagged_replaced' || p.status === 'invalidated'))
   }
 
   private firstOf(p: Presentation) { return this.state.events.find((e) => e.presentation_id === p.id && e.phase === 'first') ?? null }
@@ -255,7 +257,7 @@ export class LearningEngine {
       .map((p) => release.items.find((i) => i.id === p.item_id)?.context_ref))
     const p: Presentation = {
       id: this.newId(), task_id: task.id, position: s.position, item_id: item.id, item_version: item.version, role,
-      material_ref: role === 'material_question' ? s.material_ref : null,
+      material_ref: s.kind === 'material_question' ? s.material_ref : null,
       target_ref: pr ? pr.target.id : null, stage: pr ? pr.stage : null, format_class: item.format_class,
       first_response_eligible: s.counts_toward_x, prior_exposures: exposure?.times ?? 0,
       novel_context: !seenContexts.has(item.context_ref) && !answeredItem,
@@ -271,20 +273,28 @@ export class LearningEngine {
   /** Ensure a slot has a presentation, creating it or a replacement. Null when the slot cannot be filled. */
   private ensure(task: Task, s: PlanSlot): Presentation | null {
     const existing = this.active(task, s.position)
-    if (existing) return existing
+    if (existing) {
+      // Suspensions can arrive after the plan was frozen or the question was shown (a flag elsewhere, or a
+      // parent decision). An unanswered presentation of a now-suspended version is withdrawn and replaced;
+      // an answered one stays as done work (its evidence is excluded by the reducer).
+      const stillUsable = usableVersion(this.state, existing.item_id, existing.item_version)
+      if (stillUsable || this.firstOf(existing) !== null) return existing
+      existing.status = 'invalidated'
+      this.changed()
+    }
     const release = this.release(task)
-    const flagged = this.flaggedAt(task, s.position)
-    if (s.kind === 'material_question' && !flagged && s.item_id) {
+    let replacing = this.replacedAt(task, s.position)
+    if (s.kind === 'material_question' && !replacing && s.item_id) {
       const item = itemIn(release, s.item_id)
-      return this.present(task, s, item, 'material_question', s.target_ref)
+      if (usableItem(this.state, item)) return this.present(task, s, item, 'material_question', s.target_ref)
+      replacing = true
     }
     const ctx = this.ctx(task.subject, release, task.x)
-    const resolved = resolveShortSlot(ctx, task, s, flagged ? new Set() : this.wholeTaskTargets(task))
+    const resolved = resolveShortSlot(ctx, task, s, this.wholeTaskTargets(task))
     if (!resolved) return null
-    const role: Role = flagged ? 'replacement' : resolved.role
-    const p = this.present(task, s, resolved.item, role, resolved.target?.target.id ?? null)
-    if (flagged && s.kind === 'material_question') p.material_ref = null
-    return p
+    // A replacement inside a material keeps the material boundary: feedback stays withheld until every
+    // first response in that material is in, and its target keeps whole-task aggregation.
+    return this.present(task, s, resolved.item, replacing ? 'replacement' : resolved.role, resolved.target?.target.id ?? null)
   }
 
   /** Formal first responses that count toward X (excludes flagged, invalidated, teaching and corrections). */
@@ -391,7 +401,7 @@ export class LearningEngine {
     const correct = judge(item, response)
     this.record(p, 'first', 'none', response, correct)
     p.status = 'answered'
-    if (!correct && p.target_ref === null && p.first_response_eligible) this.bankGeneralError(task, item, response)
+    if (!correct && p.target_ref === null && p.first_response_eligible) this.bankGeneralError(task, p, item, response)
     const saved = await this.flush()
     if (p.material_ref !== null) return { correct: null, next: 'continue', saved }
     return { correct, next: correct ? 'continue' : 'retry', saved }
@@ -430,27 +440,30 @@ export class LearningEngine {
   }
 
   /** General-practice first wrong responses enter the private bank automatically (internal source app_practice). */
-  private bankGeneralError(task: Task, item: CatalogueItem, response: Response) {
+  private bankGeneralError(task: Task, p: Presentation, item: CatalogueItem, response: Response) {
+    if (item.course === 'p3_mathematics') return
     const date = this.today()
     const chosen = response.option_ids.find((o) => !item.key.option_ids.includes(o))
     const errorType = (chosen && item.error_types?.[chosen]) || 'unknown_cause'
-    if (item.course === 'p3_mathematics') return
     const existing = this.state.targets.find((t) => t.status === 'active' && t.subject === item.subject && t.course === item.course
       && t.knowledge_point_ref === item.knowledge_point_ref && t.assessed_skill === item.assessed_skill && t.error_type === errorType)
-    const obs = (recurrence: 'first' | 'independent') => ({
+    // Provenance: instance_ref is the task, batch_ref the presentation that produced the observation, so the
+    // reducer can drop it when that question is flagged or suspended and restore it on a parent decision.
+    // Every app error is recorded; same-day repeats are labelled duplicates and collapse to one observation
+    // in the reducer, so flagging one answer never silently loses another legitimate one.
+    const sameDay = existing?.observations.some((o) => o.source_type === 'app_practice' && o.observed_on === date && !o.invalidated) ?? false
+    const obs = {
       id: this.newId(), source_type: 'app_practice' as const, observed_on: date, recorded_on: date, instance_ref: task.id,
-      batch_ref: null, recurrence, invalidated: false,
-    })
+      batch_ref: p.id, recurrence: (existing ? (sameDay ? 'duplicate' : 'independent') : 'first') as 'first' | 'independent' | 'duplicate', invalidated: false,
+    }
     if (existing) {
-      // Same-day app repeats are one observation; a different calendar day is an independent recurrence.
-      if (existing.observations.some((o) => o.source_type === 'app_practice' && o.observed_on === date && !o.invalidated)) return
-      existing.observations.push(obs('independent'))
+      existing.observations.push(obs)
     } else {
       const kp = this.release(task).knowledge_points.find((k) => k.ref === item.knowledge_point_ref)
       const target: Target = {
         id: this.newId(), subject: item.subject, course: item.course, target_kind: kp?.target_kind ?? 'language_point',
         knowledge_point_ref: item.knowledge_point_ref, target_value: null, assessed_skill: item.assessed_skill, error_type: errorType,
-        mapping_status: 'mapped', verification: 'verified', status: 'active', verified_at: null, replaces: null, observations: [obs('first')],
+        mapping_status: 'mapped', verification: 'verified', status: 'active', verified_at: null, replaces: null, observations: [obs],
       }
       this.state.targets.push(target)
     }
@@ -537,7 +550,7 @@ export class LearningEngine {
     const date = this.today()
     const answered = this.answeredCount(task)
     const formalPlanned = task.plan.slots.filter((s) => s.counts_toward_x).length
-    const exhausted = task.plan.slots.some((s) => this.flaggedAt(task, s.position) && this.active(task, s.position) === null)
+    const exhausted = task.plan.slots.some((s) => this.replacedAt(task, s.position) && this.active(task, s.position) === null)
     const reason: Completion['reason'] = exhausted ? 'replacements_exhausted' : answered < formalPlanned ? 'shortened_no_eligible_content' : 'full'
     const credit = !this.dailyCreditTakenElsewhere(task, date)
     if (credit && answered > 0) {

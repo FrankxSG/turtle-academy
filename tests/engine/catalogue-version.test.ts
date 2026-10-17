@@ -25,6 +25,6 @@ test('F29: loader and reader references cannot mutate installed catalogue conten
   original.items[0].key.option_ids = ['b']
   const read = registry.release('mathematics', 'syn-1')
   assert.deepEqual(read.items[0].key.option_ids, ['a'])
-  read.items[0].key.option_ids = ['c']
+  assert.throws(() => { read.items[0].key.option_ids = ['c'] }, TypeError, 'installed content is read-only')
   assert.deepEqual(registry.release('mathematics', 'syn-1').items[0].key.option_ids, ['a'])
 })

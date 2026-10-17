@@ -1,7 +1,7 @@
 import Dexie, { type EntityTable, type Table, liveQuery } from 'dexie'
 import type { Mutation, RecordStore, StoredRecords, Put } from './engine/persistence.ts'
 import type { AnswerEvent } from './engine/types.ts'
-import type { LegacyMarker, LegacyReader, MarkerStore } from './engine/legacy.ts'
+import { inspectLegacy, type LegacyMarker, type LegacyReader, type MarkerStore } from './engine/legacy.ts'
 
 export type SampleAnswer = 'turtle' | 'stone' | 'chair'
 export interface GuestCheckpoint {
@@ -99,9 +99,60 @@ export class DexieRecordStore implements RecordStore, MarkerStore {
   }
 }
 
-/** Read-only view of the guest checkpoint for the legacy inspection. */
-export const legacyGuestReader: LegacyReader = {
-  async readSample() {
-    return db.checkpoints.get('sample')
-  },
+export const GUEST_DB_NAME = 'turtle-academy-guest-v1'
+
+/**
+ * Read-only view of the legacy guest checkpoint through the native IndexedDB API.
+ * It opens without a version, so an existing database is never upgraded; if the database does not exist,
+ * the creation is aborted, so inspection never creates it; it only ever starts readonly transactions.
+ * A database with an unexpected layout is reported as such and left exactly as it is.
+ */
+export function makeLegacyGuestReader(name = GUEST_DB_NAME, idb: IDBFactory = indexedDB): LegacyReader {
+  return {
+    readSample: () => new Promise<unknown>((resolve, reject) => {
+      let absent = false
+      const req = idb.open(name)
+      req.onupgradeneeded = () => {
+        absent = true
+        req.transaction?.abort()
+      }
+      req.onerror = (e) => {
+        if (absent) {
+          e.preventDefault()
+          resolve(undefined)
+        } else reject(req.error)
+      }
+      req.onblocked = () => reject(new Error('legacy database blocked'))
+      req.onsuccess = () => {
+        const legacy = req.result
+        const done = (fn: () => void) => { legacy.close(); fn() }
+        try {
+          if (!legacy.objectStoreNames.contains('checkpoints')) {
+            done(() => resolve({ unexpected_layout: true }))
+            return
+          }
+          const get = legacy.transaction('checkpoints', 'readonly').objectStore('checkpoints').get('sample')
+          get.onsuccess = () => done(() => resolve(get.result))
+          get.onerror = () => done(() => reject(get.error))
+        } catch (e) {
+          done(() => reject(e))
+        }
+      }
+    }),
+  }
+}
+
+/** Kept for callers that use the default guest database. */
+export const legacyGuestReader: LegacyReader = { readSample: () => makeLegacyGuestReader().readSample() }
+
+/**
+ * Pilot startup: open (or create) the learner database and record, once, what legacy guest data exists.
+ * Idempotent across restarts; an interrupted run simply repeats on the next start.
+ */
+export async function startPilotStorage(now: string, name = PILOT_DB_NAME, legacyName = GUEST_DB_NAME) {
+  const pilot = openPilotDb(name)
+  await pilot.open()
+  const store = new DexieRecordStore(pilot)
+  const marker = await inspectLegacy(makeLegacyGuestReader(legacyName), store, now)
+  return { store, marker, close: () => pilot.close() }
 }

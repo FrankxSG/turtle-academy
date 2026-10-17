@@ -39,6 +39,12 @@ export function suspendedSet(state: EngineState): { versions: Set<string>; items
   return { versions, items }
 }
 
+/** Is this exact item version still free of any child suspension? */
+export function usableVersion(state: EngineState, itemId: string, version: number): boolean {
+  const s = suspendedSet(state)
+  return !s.items.has(itemId) && !s.versions.has(key(itemId, version))
+}
+
 export function usableItem(state: EngineState, item: CatalogueItem): boolean {
   const s = suspendedSet(state)
   return isPractisable(item.course) && !s.items.has(item.id) && !s.versions.has(key(item.id, item.version))
@@ -288,4 +294,3 @@ export function nothingEligible(ctx: PlanContext, plan: PlanResult): boolean {
   if (plan.slots.some((s) => s.role !== 'general_practice')) return false
   return generalItems(ctx, null).length === 0
 }
-

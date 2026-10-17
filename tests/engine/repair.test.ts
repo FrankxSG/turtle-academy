@@ -46,7 +46,9 @@ test('F21: same-day repeats are one observation; a different day is an independe
   const opt = await h.engine.startOrResume('mathematics', { optional: true })
   if (opt.kind !== 'task') throw new Error('expected task')
   await runTask(h.engine, opt.task.id, (s) => s.item.knowledge_point_ref !== 'ma-kp1' || s.presentation.role !== 'general_practice')
-  assert.equal(h.engine.state.targets.find((t) => t.id === target.id)?.observations.length, 1)
+  const sameDay = h.engine.state.targets.find((t) => t.id === target.id)?.observations ?? []
+  assert.equal(sameDay.filter((o) => o.recurrence !== 'duplicate').length, 1, 'same-day repeats are one observation')
+  assert.equal(progressOf(h.engine, target.id).lastIndependentObservationOn, '2027-03-01')
   h.clock.sgt('2027-03-02')
   const t2 = await startTask(h.engine, 'mathematics')
   await runTask(h.engine, t2.id, (s) => !(s.presentation.role === 'general_practice' && s.item.knowledge_point_ref === 'ma-kp1'))

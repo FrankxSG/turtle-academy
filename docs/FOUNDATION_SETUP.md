@@ -120,5 +120,3 @@ Reviewed against `main` at `266a2ba`. Fixed F29 catalogue version pinning: confl
 Remaining blockers recorded on PR #20: general-practice mistake observations survive flagging of their source question; frozen material plans can serve an item version suspended after planning; and Issue #17 AC1 still lacks executable IndexedDB transaction/restart tests. These are not accepted limitations or merge approval.
 
 Review environment: Node 24.21.0; dependency installation and local app build unavailable. Focused catalogue/story suite: 14 pass. Broader engine results and CI for the resulting head are recorded on the PR. Local source materialization omits the release content directory, so its release-path isolation test requires CI's complete checkout. Existing head `3ca9a0e` has successful Learning engine and Privacy guard CI. No backend, deployment, real content release or real learner data action.
-
-

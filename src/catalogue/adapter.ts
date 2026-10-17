@@ -111,7 +111,7 @@ export class CatalogueRegistry {
     const previous = this.releases.get(key)
     // A task pins this identity, including its answer keys. Updates need a new version.
     if (previous && JSON.stringify(previous) !== JSON.stringify(release)) return { ok: false, reason: 'version_conflict' }
-    this.releases.set(key, structuredClone(release))
+    this.releases.set(key, deepFreeze(structuredClone(release)))
     this.currentBySubject.set(release.subject, release.version)
     return { ok: true }
   }
@@ -133,14 +133,23 @@ export class CatalogueRegistry {
   release(subject: Subject, version: string): CatalogueRelease {
     const r = this.releases.get(`${subject}@${version}`)
     if (!r) throw new Error(`catalogue ${subject}@${version} unavailable`)
-    // Callers must not mutate the release behind an already frozen task.
-    return structuredClone(r)
+    // Stored releases are deep-frozen copies: callers can read them without a per-call clone, and a
+    // mutation attempt throws instead of changing content behind an already frozen task.
+    return r
   }
 
   current(subject: Subject): CatalogueRelease | null {
     const v = this.currentVersion(subject)
     return v === null ? null : this.release(subject, v)
   }
+}
+
+function deepFreeze<T>(value: T): T {
+  if (value !== null && typeof value === 'object' && !Object.isFrozen(value)) {
+    Object.freeze(value)
+    for (const v of Object.values(value as Record<string, unknown>)) deepFreeze(v)
+  }
+  return value
 }
 
 export function itemIn(release: CatalogueRelease, id: string): CatalogueItem {
@@ -161,4 +170,3 @@ export function judge(item: CatalogueItem, response: Response): boolean {
   }
   return same(item.key.option_ids, response.option_ids)
 }
-

@@ -112,8 +112,21 @@ export function derive(state: EngineState): Derived {
     aggregates.set(taskId, list)
   }
 
+  const presentationById = new Map(state.presentations.map((p) => [p.id, p]))
+  /** An app-caught observation counts only while the question that produced it is valid evidence. */
+  const effectiveObservation = (o: Target['observations'][number]): boolean => {
+    if (o.invalidated) return false
+    if (o.source_type !== 'app_practice' || o.batch_ref === null) return true
+    const p = presentationById.get(o.batch_ref)
+    return p !== undefined && p.status !== 'flagged_replaced' && p.status !== 'invalidated' && !excluded.has(`${p.item_id}@${p.item_version}`)
+  }
+
   for (const target of state.targets) {
     if (target.status !== 'active') continue
+    // A target that exists only because of app-caught errors is no mistake at all once none of those
+    // observations is valid (for example, its question was flagged). It stays as a record, never planned.
+    const observations = target.observations.filter(effectiveObservation)
+    if (target.observations.length > 0 && observations.length === 0) continue
     const pr = fresh(target)
     progress.set(target.id, pr)
     const ps = byTarget.get(target.id) ?? []
@@ -133,13 +146,17 @@ export function derive(state: EngineState): Derived {
         }
       }
     }
-    for (const o of target.observations) {
-      if (o.invalidated || o.source_type !== 'app_practice' || o.recurrence === 'duplicate') continue
-      steps.push({ kind: 'observation', t: finalTime(o.instance_ref), seq: seq++, taskId: o.instance_ref, recurrence: o.recurrence, on: o.observed_on })
-      if (o.recurrence === 'independent' || o.recurrence === 'first') {
-        pr.lastIndependentObservationOn = pr.lastIndependentObservationOn === null || o.observed_on > pr.lastIndependentObservationOn
-          ? o.observed_on : pr.lastIndependentObservationOn
-      }
+    // App-caught observations: one per calendar day (same-day repeats collapse), the earliest valid one is the
+    // target's first; stored recurrence labels are recomputed here, so flags and restores replay correctly.
+    const seenDays = new Set<string>()
+    const appObs = observations.filter((o) => o.source_type === 'app_practice')
+      .sort((a, b) => a.observed_on.localeCompare(b.observed_on) || finalTime(a.instance_ref) - finalTime(b.instance_ref))
+    for (const o of appObs) {
+      if (seenDays.has(o.observed_on)) continue
+      const recurrence = seenDays.size === 0 ? 'first' : 'independent'
+      seenDays.add(o.observed_on)
+      steps.push({ kind: 'observation', t: finalTime(o.instance_ref), seq: seq++, taskId: o.instance_ref, recurrence, on: o.observed_on })
+      if (pr.lastIndependentObservationOn === null || o.observed_on > pr.lastIndependentObservationOn) pr.lastIndependentObservationOn = o.observed_on
     }
     steps.sort((a, b) => a.t - b.t || a.seq - b.seq)
 
