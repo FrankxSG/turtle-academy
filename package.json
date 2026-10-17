@@ -15,7 +15,8 @@
     "dev:trials": "vite --config vite.trials.config.ts --host 127.0.0.1",
     "build:trials": "tsc --noEmit && vite build --config vite.trials.config.ts",
     "preview:trials": "vite preview --config vite.trials.config.ts --host 127.0.0.1",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:engine": "node --experimental-strip-types --test tests/engine/*.test.ts"
   },
   "dependencies": {
     "dexie": "4.4.6",

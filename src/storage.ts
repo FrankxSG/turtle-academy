@@ -1,4 +1,7 @@
-import Dexie, { type EntityTable, liveQuery } from 'dexie'
+import Dexie, { type EntityTable, type Table, liveQuery } from 'dexie'
+import type { Mutation, RecordStore, StoredRecords, Put } from './engine/persistence.ts'
+import type { AnswerEvent } from './engine/types.ts'
+import type { LegacyMarker, LegacyReader, MarkerStore } from './engine/legacy.ts'
 
 export type SampleAnswer = 'turtle' | 'stone' | 'chair'
 export interface GuestCheckpoint {
@@ -39,4 +42,66 @@ export async function saveSampleAnswer(answer: SampleAnswer) {
 export async function openGuestStorage() {
   // liveQuery does not emit errors when IndexedDB is missing; open explicitly first.
   await db.open()
+}
+
+// ---------------------------------------------------------------------------------------------------
+// Pilot learner store (Issue #17). A separate database: the guest database above is never upgraded,
+// modified or deleted by the Pilot, and its contents never become child evidence (src/engine/legacy.ts).
+// Records are keyed puts; answer events are add-only; every mutation is applied at most once.
+
+export const PILOT_DB_NAME = 'turtle-academy-pilot-v1'
+
+type PilotDb = Dexie & {
+  records: Table<Put, [string, string]>
+  events: EntityTable<AnswerEvent, 'id'>
+  mutations: EntityTable<{ id: string; order: number }, 'id'>
+  legacy: EntityTable<LegacyMarker & { id: 'guest' }, 'id'>
+}
+
+export function openPilotDb(name = PILOT_DB_NAME): PilotDb {
+  const pilot = new Dexie(name) as PilotDb
+  pilot.version(1).stores({ records: '[table+key]', events: 'id', mutations: 'id', legacy: 'id' })
+  return pilot
+}
+
+export class DexieRecordStore implements RecordStore, MarkerStore {
+  private readonly pilot: PilotDb
+  constructor(pilot: PilotDb) {
+    this.pilot = pilot
+  }
+
+  async commit(m: Mutation): Promise<void> {
+    const { records, events, mutations } = this.pilot
+    await this.pilot.transaction('rw', records, events, mutations, async () => {
+      if (await mutations.get(m.id)) return
+      if (m.puts.length > 0) await records.bulkPut(m.puts)
+      for (const e of m.events) {
+        const existing = await events.get(e.id)
+        if (existing && JSON.stringify(existing) !== JSON.stringify(e)) throw new Error('append-only event conflict')
+        if (!existing) await events.add(e)
+      }
+      await mutations.put({ id: m.id, order: m.order })
+    })
+  }
+
+  async load(): Promise<StoredRecords> {
+    return { records: await this.pilot.records.toArray(), events: await this.pilot.events.toArray() }
+  }
+
+  async getMarker(): Promise<LegacyMarker | undefined> {
+    const row = await this.pilot.legacy.get('guest')
+    if (!row) return undefined
+    return { status: row.status, first_seen_at: row.first_seen_at, migrated: false }
+  }
+
+  async putMarker(m: LegacyMarker): Promise<void> {
+    await this.pilot.legacy.put({ id: 'guest', ...m })
+  }
+}
+
+/** Read-only view of the guest checkpoint for the legacy inspection. */
+export const legacyGuestReader: LegacyReader = {
+  async readSample() {
+    return db.checkpoints.get('sample')
+  },
 }
