@@ -1,17 +1,44 @@
-## Change
+<!--
+Follow docs/AI_COLLABORATION.md.
+Title: type: user-facing description (optional scope only when useful).
+Types: feat, fix, improve, refactor, docs, chore, content (lesson/curriculum data, e.g. content(chinese):), trial (separate trial/demo features).
+For fixes, describe the symptom and trigger rather than the code-level change.
+Add a visible Closes #<issue-number> or Related: #<issue-number> when applicable.
+For fork PRs, keep Allow edits from maintainers enabled when available.
+-->
 
 Owner (Claude or ChatGPT) and reviewer (the other):  
 Issue:  
 Touches (files or folders):  
 Depends on (PRs):  
 
+## What Problem This Solves
 
-Describe the concrete problem and resulting behavior.
+<!-- One short sentence naming the affected workflow and concrete need.
+For fixes: "Fixes: <what goes wrong> when <trigger or condition>." -->
 
-## Validation
+## User Impact
+
+<!-- State what users, operators or developers can now do or expect.
+For internal-only changes, say there is no user-visible change.
+Keep risks, breaking changes, migrations and required actions visible here. -->
+
+## Why This Change Was Made
+
+<!-- Briefly explain how the approach addresses the problem and any material tradeoff.
+Keep file lists and detailed root-cause analysis in the diff or optional details.
+Do not hide risks or required actions in details. -->
+
+## Evidence
 
 Tested SHA and checks/results (reuse existing links where valid):  
 Unverified behavior or checks intentionally omitted and why:  
+
+<!-- Summarize useful proof and meaningful gaps rather than restating the diff.
+For visible UI changes, include inspected screenshots of the affected states in
+both the PR and chat, following docs/AI_COLLABORATION.md.
+Use synthetic data only. Screenshots supplement behavior tests.
+Link longer output or place it in optional details. -->
 
 ## Integration
 
