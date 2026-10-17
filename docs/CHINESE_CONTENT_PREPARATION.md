@@ -227,7 +227,7 @@ Validation: `python3 scripts/validate_chinese_content.py`, the contract tests, `
 
 ## Current review — batch version 10
 
-Before drafting or reviewing Chinese items, use the [Chinese question authoring skill](../skills/chinese-question-authoring/SKILL.md). Its [PR 23 case log](../skills/chinese-question-authoring/references/pr23-lessons.md) records each error found in cross-review, its cause and the check that now catches it.
+Before drafting or reviewing Chinese items, read the common [question authoring skill](../skills/question-authoring/SKILL.md), then the [Chinese layer](../skills/chinese-question-authoring/SKILL.md) on top of it. The [PR 23 case log](../skills/chinese-question-authoring/references/pr23-lessons.md) records each error found in cross-review, its cause and the check that now catches it.
 
 See [review pack v10](content-review/CHINESE_REVIEW_PACK_V10.md) for the ten item corrections, all 24 pending owner dispositions, the reproducible 67-of-333 owner sample and complete material context. ChatGPT desk-reviewed the 357-item v8 input; its own ten edits require Claude re-review. Source fingerprints match the register, but the independent visual grade audit, denominator approval, rights clearance and owner sign-off remain open. The earlier v8 pack and prior disposition above are historical evidence, not approval of this head.
 

@@ -1,50 +1,47 @@
 ---
 name: chinese-question-authoring
-description: Use when drafting, revising or reviewing Turtle Academy Chinese objective questions, repair pools or coverage reports, or when cross-reviewing another assistant's Chinese content. Gives the per-item checks that caught real errors in PR 23, so they are run before review rather than found in it.
+description: Use for Turtle Academy Chinese and Higher Chinese questions, repair pools and coverage reports, together with the common question-authoring skill. Adds Chinese checks for character lists, pinyin, radicals and leaf mapping.
 ---
 
-# Chinese question authoring and review
+# Chinese question authoring — on top of the common skill
 
-This skill is for any assistant or person writing or reviewing Chinese content in `content/chinese/`. It does not replace [CONTENT_QA](../../docs/CONTENT_QA.md) or the [preparation record](../../docs/CHINESE_CONTENT_PREPARATION.md); it is the working checklist that applies them to one question at a time.
+**Read [question-authoring](../question-authoring/SKILL.md) first.** Its working method and its checks 1–11 apply to every Chinese item. This file adds Chinese-specific checks (ZH1–ZH5) and says how some common checks apply in Chinese. It never removes a common check.
 
-It exists because a draft that passed every structural check still had a wrong pinyin tone, a second defensible answer, a hint that gave away the key and three over-narrow definitions. The cross-review in PR 23 found them; [the case log](references/pr23-lessons.md) records each one, why it happened and which check below now catches it.
+Sources: [preparation record](../../docs/CHINESE_CONTENT_PREPARATION.md), [CONTENT_QA](../../docs/CONTENT_QA.md), the curriculum manifest in `content/chinese/curriculum.json`. Evidence for every rule here is in the [PR 23 case log](references/pr23-lessons.md).
 
-## Why structural checks are not enough
+## How common checks apply in Chinese
 
-`validate_chinese_content.py`, the contract tests and a character-list script check shape, links, keys that exist and characters that appear in the official lists. None of them reads the question the way a P2 child does. Every error in the case log passed all of them. Run the checks below on **every** item, including items you wrote minutes ago in the same pass. In PR 23 the same defect class was fixed in 33 old hints and then reintroduced in new items, because the fix was applied as a batch edit, not as a check.
+| Common check | In Chinese |
+| --- | --- |
+| 1 Read it as the child | Use the cumulative character lists (ZH1). |
+| 3 Authoritative source | Use a standard dictionary sense. 晴 allows a few clouds, so 没有云 is wrong. |
+| 4 Convention, not rule | ！ shows strong feeling or emphasis, not happiness. A card's name and date tell the reader who wrote it and when; they are not "always at the bottom". |
+| 5 Answer not in stem or hint | Includes the answer's character inside the stem (跑来（　）去 with 跑 as key) and the name of a radical only the key has (ZH3). |
+| 6 Questions in one material | `zh-m12`: an option in question 1 (戴着圆眼镜) answered question 5. |
+| 7 Hint matches the difference | 轻声 means "softly" and is also the neutral tone; in a tone question say 小声读. |
+| 8 Verify against a source | Pinyin and readings (ZH2). |
+| 9 Map to the demand | See ZH4. |
 
-## Per-item checks
+## Chinese checks
 
-Do these on the rendered question (blanks and pinyin expanded), not on JSON.
+**ZH1 — Character lists.** Every instruction character and every tested character should be on the grade's cumulative official list: P1–P2 for P2 items, P1–P3 for P3 items. State the bound per item. Annotate harder words with pinyin only when the pinyin does not reveal the answer. A *tested* character outside the bound is an owner decision, not an author's call; add it to the dispute list.
 
-1. **Read it as the child.** Read the stem, then each option, aloud in your head. Is every instruction character on the grade's cumulative list (P1–P2 for P2), or annotated with pinyin that does not reveal the answer?
-2. **Substitute every distractor.** Put each wrong option into the blank or answer the stem with it. If any one is grammatical *and* defensible from the stem, the item has two answers. Test meaning, not only form: 舌 is not a 言字旁 character, but it is related to speaking, so "哪个字和说话有关" had two answers.
-3. **Check the key against a dictionary sense, not a child-friendly paraphrase.** A simplified key must stay true. 晴 allows a few clouds, so "没有云" is wrong. 女字旁 relates to women and girls, so neither 女孩子 (leaves out 妈) nor 女的家人 (only family) is right. Find one counter-example from a familiar word before accepting a category.
-4. **Do not turn a convention into a rule.** A punctuation mark, a card layout or a word choice is often typical, not required. ！ shows strong feeling or emphasis, not happiness. A name and date tell the reader who wrote the card and when; they are not "always at the bottom". Ask: would a teacher mark a different but correct child answer wrong because of this key?
-5. **The stem and hint must not contain the answer or its giveaway feature.** Search the stem and hint for the key text, the key character, and the name of any radical or component that only the key has (口字旁 when 口 is the key; 足字旁 when only 踢 has 足; 跑来（　）去 with 跑 as the key). A hint may name the meaning the radical carries ("哪个偏旁和脚有关？"); it may not name the radical.
-6. **Check other questions in the same material.** First answers for a whole material are collected before feedback, so an option in question 1 can answer question 5 (戴着圆眼镜 in `zh-m12`). Read every key in a material together.
-7. **Match the hint to what actually separates the options.** If options differ in initials and tones, a hint about initials alone misleads. Avoid words that are also technical terms in the skill being tested: 轻声 means "softly" and also the neutral tone, so "轻声读" is confusing in a tone question; say 小声读.
-8. **Verify every pinyin syllable and tone.** Never type pinyin from memory and move on. Check each annotation and pinyin option against a dictionary (or a pinyin library where one installs, then still check heteronyms by hand). 冒号 is mào hào, not máo hào. For a polyphonic character (着, 长, 还, 乐, 好), never present one reading as *the* reading; say which word the reading belongs to.
-9. **Map to the demand, not the topic.** A question that needs a calculation or comparison (lesson length, a two-day fine, cheapest item, total fare) is not explicit retrieval; applying information is a later-grade leaf. A punctuation *choice* is writing (`w-punctuation`); reading *through* punctuation is `r-punctuation`. If the demand belongs to a leaf outside the course, rewrite the question rather than remap it.
-10. **Keep the key from standing out.** Make options similar in length and specificity. A key that is the longest, most qualified option is a test-taking cue.
-11. **Use neutral, original names.** No franchise characters (超人 → 演员), no worksheet or textbook wording.
+**ZH2 — Pinyin and readings.** Check every pinyin syllable and tone in annotations and options against a dictionary before hand-over (a pinyin library can help where it installs; still check readings that depend on the word by hand). 冒号 is mào hào. For a character with more than one reading (着, 长, 还, 乐, 好), never present one reading as *the* reading; name the word it belongs to. Pinyin items assess written pinyin recognition only, not speaking or listening.
 
-## Reports and scripts
+**ZH3 — Radicals and components.**
+- A hint may name the meaning a radical carries (哪个偏旁和脚有关？). It may not name the radical when only the key has it (选足字旁的字).
+- Distractors that share a component with the key can still match the stem's meaning: 舌 sits inside 活, 适 and 话, and is itself related to speaking.
+- A category answer must fit every example and the radical's general meaning. 女字旁 relates to women and girls, so 女孩子 (leaves out 妈) and 女的家人 (only family) are both wrong.
 
-- Add a regression test for each counting rule before trusting a report. In PR 23 the inventory assembled one route from stages tagged to different leaves and marked a whole leaf thin because one route was thin; both looked plausible in the output.
-- Tests must derive expected numbers from the data or the fixture they build, never from today's totals; a hard-coded `35 | 34` breaks the first time content is added.
-- State only what the code computes. "At most N complete tasks without reusing a material" is computed; "about N days before a material repeats" is a scheduling prediction the code does not make.
-- After changing data, search the docs for every count and version you changed (`grep -n "Version [0-9]\|materials" docs/`) and update them in the same commit.
+**ZH4 — Leaf mapping.**
+- Choosing a punctuation mark is writing (`w-punctuation`). Understanding a sentence through its punctuation is reading (`r-punctuation`).
+- Explicit retrieval asks only for what the text states. Calculating a duration, a fine or a total, or comparing prices, applies information, which is a later-grade row of the matrix (syllabus PDF p29).
+- Language-use items map to their language-use leaf, not to writing ideas.
+- Shared CL/HCL items show availability, not HCL depth; no HCL coverage claim rests on a shared item.
 
-## Review process
+**ZH5 — Original and local.** Use generic Singapore contexts (组屋, 巴士, 食堂) and original passages. Never adapt school worksheet, textbook or past-paper wording; papers inform question types only.
 
-- Say who drafted each item and who reviewed it. An author's own recheck is not independent cross-review; record it as a recheck.
-- Do not draft new content and review old content in one undivided pass. Draft, then review the new items with this checklist as strictly as the old ones, then hand them to the other assistant.
-- Cross-review runs both ways. The reviewer's corrections need the same checks: in PR 23 a correct fix for 女孩子 (女的家人) still narrowed the category, and a correct fix for the ！ item compared four sentences with 更强 instead of 最强.
-- Any change to an item moves it out of the agreed sample pool. Prefer refining items already in the dispute list; if a pooled item must change, redraw the sample with a recorded seed before the owner starts.
-- An AI recommendation is never an owner decision. Leave `owner_signoff`, `rights_status` and `independent_review` as they are until the actual decision is recorded.
-
-## Checks to run before handing over
+## Chinese commands before hand-over
 
 ```sh
 python3 scripts/validate_chinese_content.py
@@ -54,4 +51,8 @@ python3 scripts/privacy_guard.py
 git diff --check
 ```
 
-Then the per-item checks above on every new or changed item, read in rendered form, and one note per item in the review pack saying what was checked.
+Then list every pinyin syllable in new or changed items and confirm each against the dictionary (ZH2), and record in the hand-over comment which items were read rendered.
+
+## Updating this skill
+
+Chinese-only lessons go here as ZH6 onwards, with a case-log entry. A lesson that would apply in other subjects goes in [question-authoring](../question-authoring/SKILL.md) instead.
