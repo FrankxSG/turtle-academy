@@ -1,0 +1,37 @@
+name: Database contract
+on:
+  pull_request:
+    paths:
+      - 'supabase/**'
+      - 'src/auth/**'
+      - 'src/snapshot/**'
+      - 'scripts/check-hosted-auth.mjs'
+      - 'scripts/check-google-link.mjs'
+      - 'scripts/lib/**'
+      - '.github/workflows/db-contract.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: db-contract-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  db-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version-file: .nvmrc
+      # Synthetic-only: a throwaway local PostgreSQL cluster, no services, secrets or network.
+      # On failure, the last lines are also emitted as an annotation so they are readable from the checks API.
+      - run: |
+          set -o pipefail
+          if ! python3 supabase/tests/test_database.py -v 2>&1 | tee db-test.log; then
+            tail -n 40 db-test.log | python3 -c "import sys; t=sys.stdin.read(); print('::error title=db-contract::' + t.replace('%','%25').replace('\r','').replace('\n','%0A'))"
+            exit 1
+          fi
+      - run: node --experimental-strip-types --test supabase/tests/client/*.test.mjs

@@ -1,0 +1,353 @@
+{
+  "id": "pilot-snapshot/1",
+  "note": "Closed allow-list for child-scoped backup snapshots (Pilot Scope section 3; Learning Engine sections 2 and 6). Every object is closed: unknown keys are rejected. Free text is not representable; strings are enums, opaque IDs, controlled taxonomy tokens, dates or bounded target values. The snapshot carries the recoverable source state (targets with observation history, presentations, attempts with structured responses, frozen task plans and aggregates, eligibility bounds, amendments, checkpoint delivery); stages, due dates and unlocks are derived from it by the engine. The same descriptor is embedded in the database migration and checked for parity by tests.",
+  "defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,127}$" },
+    "nullable_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.:-]{0,127}$", "nullable": true },
+    "token": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,47}$" },
+    "nullable_token": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,47}$", "nullable": true },
+    "uuid": { "type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$" },
+    "nullable_uuid": { "type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", "nullable": true },
+    "date": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+    "nullable_date": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$", "nullable": true },
+    "datetime": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]{1,6})?(Z|[+-][0-9]{2}:[0-9]{2})$" },
+    "nullable_datetime": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]{1,6})?(Z|[+-][0-9]{2}:[0-9]{2})$", "nullable": true },
+    "timezone": { "type": "string", "pattern": "^[A-Za-z_]{1,32}(/[A-Za-z0-9_+-]{1,32}){0,2}$" },
+    "subject": { "type": "string", "enum": ["chinese", "english", "mathematics", "science"] },
+    "course": { "type": "string", "enum": ["p2_chinese", "p2_higher_chinese", "p3_chinese", "p3_higher_chinese", "p2_english", "p3_english", "p2_mathematics", "p3_science"] },
+    "count": { "type": "integer", "minimum": 0, "maximum": 100000 },
+    "position": { "type": "integer", "minimum": 0, "maximum": 200 },
+    "item_version": { "type": "integer", "minimum": 1, "maximum": 100000 },
+    "nullable_item_version": { "type": "integer", "minimum": 1, "maximum": 100000, "nullable": true },
+    "x": { "type": "integer", "minimum": 6, "maximum": 19 },
+    "stage": { "type": "string", "enum": ["acquisition", "exact", "similar", "generic", "delayed_review"] },
+    "nullable_stage": { "type": "string", "enum": ["acquisition", "exact", "similar", "generic", "delayed_review"], "nullable": true },
+    "role": { "type": "string", "enum": ["material_question", "repair", "delayed_review", "general_practice", "acquisition_test", "replacement"] },
+    "format_class": { "type": "string", "enum": ["high_option", "low_option"] },
+    "id_list": { "type": "array", "maxItems": 60, "items": { "$ref": "id" } }
+  },
+  "root": {
+    "type": "object",
+    "required": ["schema_version", "child_ref", "created_at", "app_version", "content_versions", "settings", "targets", "presentations", "events", "tasks", "eligibility", "amendments", "completions", "rest_days", "story", "flags", "suspensions", "exposure", "calendar_guards", "pending_upload"],
+    "properties": {
+      "schema_version": { "type": "string", "enum": ["pilot-snapshot/1"] },
+      "child_ref": { "$ref": "uuid" },
+      "created_at": { "$ref": "datetime" },
+      "app_version": { "type": "string", "pattern": "^[0-9]{1,4}\\.[0-9]{1,4}\\.[0-9]{1,4}$" },
+      "content_versions": {
+        "type": "array", "maxItems": 16,
+        "items": { "type": "object", "required": ["subject", "catalogue_version", "manifest_version"], "properties": { "subject": { "$ref": "subject" }, "catalogue_version": { "$ref": "id" }, "manifest_version": { "$ref": "nullable_id" } } }
+      },
+      "settings": {
+        "type": "object",
+        "required": ["timezone", "timezone_history", "ui_language", "subjects"],
+        "properties": {
+          "timezone": { "$ref": "timezone" },
+          "timezone_history": {
+            "type": "array", "maxItems": 200,
+            "items": { "type": "object", "required": ["from_timezone", "timezone", "changed_at"], "properties": { "from_timezone": { "$ref": "timezone" }, "timezone": { "$ref": "timezone" }, "changed_at": { "$ref": "datetime" } } }
+          },
+          "ui_language": { "type": "string", "enum": ["zh", "en"] },
+          "subjects": {
+            "type": "array", "maxItems": 4,
+            "items": { "type": "object", "required": ["subject", "x", "changed_at"], "properties": { "subject": { "$ref": "subject" }, "x": { "$ref": "x" }, "changed_at": { "$ref": "nullable_datetime" } } }
+          }
+        }
+      },
+      "targets": {
+        "type": "array", "maxItems": 5000,
+        "items": {
+          "type": "object",
+          "required": ["id", "subject", "course", "target_kind", "knowledge_point_ref", "target_value", "assessed_skill", "error_type", "mapping_status", "verification", "status", "verified_at", "replaces", "observations"],
+          "properties": {
+            "id": { "$ref": "id" },
+            "subject": { "$ref": "subject" },
+            "course": { "$ref": "course" },
+            "target_kind": { "type": "string", "enum": ["character", "word", "language_point", "reading_skill", "science_concept", "math_relationship", "math_method", "vocabulary", "grammar"] },
+            "knowledge_point_ref": { "$ref": "nullable_id" },
+            "target_value": { "type": "string", "pattern": "^[A-Za-z0-9\\u3400-\\u4dbf\\u4e00-\\u9fff' -]{1,24}$", "nullable": true },
+            "assessed_skill": { "$ref": "nullable_token" },
+            "error_type": { "$ref": "token" },
+            "mapping_status": { "type": "string", "enum": ["mapped", "pending_content"] },
+            "verification": { "type": "string", "enum": ["verified", "uncertain"] },
+            "status": { "type": "string", "enum": ["active", "superseded", "invalidated"] },
+            "verified_at": { "$ref": "nullable_datetime" },
+            "replaces": { "$ref": "nullable_id" },
+            "observations": {
+              "type": "array", "maxItems": 500,
+              "items": {
+                "type": "object",
+                "required": ["id", "source_type", "observed_on", "recorded_on", "instance_ref", "batch_ref", "recurrence", "invalidated"],
+                "properties": {
+                  "id": { "$ref": "id" },
+                  "source_type": { "type": "string", "enum": ["schoolwork", "home_practice", "external_assessment", "other_reviewed_work", "app_practice"] },
+                  "observed_on": { "$ref": "date" },
+                  "recorded_on": { "$ref": "date" },
+                  "instance_ref": { "$ref": "id" },
+                  "batch_ref": { "$ref": "nullable_id" },
+                  "recurrence": { "type": "string", "enum": ["first", "independent", "duplicate"] },
+                  "invalidated": { "type": "boolean" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "presentations": {
+        "type": "array", "maxItems": 20000,
+        "items": {
+          "type": "object",
+          "required": ["id", "task_id", "position", "item_id", "item_version", "role", "material_ref", "target_ref", "stage", "format_class", "first_response_eligible", "prior_exposures", "novel_context", "presented_at", "status"],
+          "properties": {
+            "id": { "$ref": "id" },
+            "task_id": { "$ref": "id" },
+            "position": { "$ref": "position" },
+            "item_id": { "$ref": "id" },
+            "item_version": { "$ref": "item_version" },
+            "role": { "$ref": "role" },
+            "material_ref": { "$ref": "nullable_id" },
+            "target_ref": { "$ref": "nullable_id" },
+            "stage": { "$ref": "nullable_stage" },
+            "format_class": { "$ref": "format_class" },
+            "first_response_eligible": { "type": "boolean" },
+            "prior_exposures": { "$ref": "count" },
+            "novel_context": { "type": "boolean" },
+            "presented_at": { "$ref": "datetime" },
+            "status": { "type": "string", "enum": ["presented", "answered", "corrected", "flagged_replaced", "invalidated"] }
+          }
+        }
+      },
+      "events": {
+        "type": "array", "maxItems": 40000,
+        "items": {
+          "type": "object",
+          "required": ["id", "presentation_id", "local_seq", "phase", "assistance", "response", "correct", "at"],
+          "properties": {
+            "id": { "$ref": "id" },
+            "presentation_id": { "$ref": "id" },
+            "local_seq": { "type": "integer", "minimum": 0, "maximum": 10000000 },
+            "phase": { "type": "string", "enum": ["first", "retry", "correction"] },
+            "assistance": { "type": "string", "enum": ["none", "hint", "worked_steps", "answer_and_explanation"] },
+            "response": {
+              "type": "object",
+              "required": ["kind", "option_ids", "pairs"],
+              "properties": {
+                "kind": { "type": "string", "enum": ["single", "ordered", "matching", "word_bank"] },
+                "option_ids": { "type": "array", "maxItems": 16, "items": { "$ref": "id" } },
+                "pairs": {
+                  "type": "array", "maxItems": 16,
+                  "items": { "type": "object", "required": ["left", "right"], "properties": { "left": { "$ref": "id" }, "right": { "$ref": "id" } } }
+                }
+              }
+            },
+            "correct": { "type": "boolean" },
+            "at": { "$ref": "datetime" }
+          }
+        }
+      },
+      "tasks": {
+        "type": "array", "maxItems": 5000,
+        "items": {
+          "type": "object",
+          "required": ["id", "subject", "local_date", "created_at", "finalised_at", "x", "policy_version", "content_version", "status", "plan", "planned_total", "cursor", "active_seconds", "activity", "target_aggregates"],
+          "properties": {
+            "id": { "$ref": "id" },
+            "subject": { "$ref": "subject" },
+            "local_date": { "$ref": "date" },
+            "created_at": { "$ref": "datetime" },
+            "finalised_at": { "$ref": "nullable_datetime" },
+            "x": { "$ref": "x" },
+            "policy_version": { "$ref": "id" },
+            "content_version": { "$ref": "id" },
+            "status": { "type": "string", "enum": ["active", "paused", "finalised"] },
+            "plan": {
+              "type": "object",
+              "required": ["materials", "slots"],
+              "properties": {
+                "materials": {
+                  "type": "array", "maxItems": 8,
+                  "items": {
+                    "type": "object",
+                    "required": ["material_ref", "material_version", "family", "question_count"],
+                    "properties": {
+                      "material_ref": { "$ref": "id" },
+                      "material_version": { "$ref": "item_version" },
+                      "family": { "$ref": "token" },
+                      "question_count": { "type": "integer", "minimum": 1, "maximum": 40 }
+                    }
+                  }
+                },
+                "slots": {
+                  "type": "array", "maxItems": 100,
+                  "items": {
+                    "type": "object",
+                    "required": ["position", "kind", "material_ref", "item_id", "item_version", "role", "target_ref", "stage", "counts_toward_x"],
+                    "properties": {
+                      "position": { "$ref": "position" },
+                      "kind": { "type": "string", "enum": ["material_question", "short", "teaching"] },
+                      "material_ref": { "$ref": "nullable_id" },
+                      "item_id": { "$ref": "nullable_id" },
+                      "item_version": { "$ref": "nullable_item_version" },
+                      "role": { "type": "string", "enum": ["material_question", "repair", "delayed_review", "general_practice", "acquisition_test", "replacement", "teaching"] },
+                      "target_ref": { "$ref": "nullable_id" },
+                      "stage": { "$ref": "nullable_stage" },
+                      "counts_toward_x": { "type": "boolean" }
+                    }
+                  }
+                }
+              }
+            },
+            "planned_total": { "type": "integer", "minimum": 0, "maximum": 100 },
+            "cursor": { "type": "integer", "minimum": 0, "maximum": 100 },
+            "active_seconds": { "type": "integer", "minimum": 0, "maximum": 86400 },
+            "activity": {
+              "type": "array", "maxItems": 2000,
+              "items": { "type": "object", "required": ["state", "at"], "properties": { "state": { "type": "string", "enum": ["active", "paused", "backgrounded", "idle", "closed"] }, "at": { "$ref": "datetime" } } }
+            },
+            "target_aggregates": {
+              "type": "array", "maxItems": 100,
+              "items": {
+                "type": "object",
+                "required": ["target_ref", "route", "starting_stage", "related_presentation_ids", "high_option_success_ids", "low_option_success_ids", "any_first_wrong", "clearances", "outcome", "final_stage_not_before"],
+                "properties": {
+                  "target_ref": { "$ref": "id" },
+                  "route": { "type": "string", "enum": ["short_only", "whole_task"] },
+                  "starting_stage": { "$ref": "stage" },
+                  "related_presentation_ids": { "$ref": "id_list" },
+                  "high_option_success_ids": { "$ref": "id_list" },
+                  "low_option_success_ids": { "$ref": "id_list" },
+                  "any_first_wrong": { "type": "boolean" },
+                  "clearances": {
+                    "type": "array", "maxItems": 2,
+                    "items": { "type": "object", "required": ["stage", "cleared_on"], "properties": { "stage": { "$ref": "stage" }, "cleared_on": { "$ref": "date" } } }
+                  },
+                  "outcome": { "type": "string", "enum": ["pending", "advanced", "retained"] },
+                  "final_stage_not_before": { "$ref": "nullable_date" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "eligibility": {
+        "type": "array", "maxItems": 10000,
+        "items": {
+          "type": "object",
+          "required": ["target_ref", "not_before", "reason", "source_task_id"],
+          "properties": {
+            "target_ref": { "$ref": "id" },
+            "not_before": { "$ref": "date" },
+            "reason": { "type": "string", "enum": ["import_next_day", "app_target_next_task", "failure_cooldown", "final_stage_gate", "review_due"] },
+            "source_task_id": { "$ref": "nullable_id" }
+          }
+        }
+      },
+      "amendments": {
+        "type": "array", "maxItems": 2000,
+        "items": {
+          "type": "object",
+          "required": ["id", "at", "actor", "kind", "refs", "replacement_ref", "reason", "reducer_revision"],
+          "properties": {
+            "id": { "$ref": "id" },
+            "at": { "$ref": "datetime" },
+            "actor": { "type": "string", "enum": ["parent"] },
+            "kind": { "type": "string", "enum": ["amend_target", "invalidate_target", "invalidate_observation", "invalidate_presentation", "restore_item", "disable_item"] },
+            "refs": { "type": "array", "maxItems": 50, "items": { "$ref": "id" } },
+            "replacement_ref": { "$ref": "nullable_id" },
+            "reason": { "type": "string", "enum": ["wrong_target", "wrong_skill", "wrong_error_type", "wrong_date", "duplicate", "question_problem", "not_a_mistake"] },
+            "reducer_revision": { "type": "integer", "minimum": 1, "maximum": 100000 }
+          }
+        }
+      },
+      "completions": {
+        "type": "array", "maxItems": 5000,
+        "items": {
+          "type": "object",
+          "required": ["subject", "local_date", "task_id", "reason", "answered"],
+          "properties": {
+            "subject": { "$ref": "subject" },
+            "local_date": { "$ref": "date" },
+            "task_id": { "$ref": "nullable_id" },
+            "reason": { "type": "string", "enum": ["full", "shortened_no_eligible_content", "zero_eligible", "replacements_exhausted"] },
+            "answered": { "type": "integer", "minimum": 0, "maximum": 100 }
+          }
+        }
+      },
+      "rest_days": { "type": "array", "maxItems": 3700, "items": { "$ref": "date" } },
+      "story": {
+        "type": "object",
+        "required": ["checkpoints", "next_story_seq", "chapter", "world_flags", "ended"],
+        "properties": {
+          "checkpoints": {
+            "type": "array", "maxItems": 10000,
+            "items": {
+              "type": "object",
+              "required": ["id", "task_id", "kind", "local_date", "story_seq", "state", "delivered_at"],
+              "properties": {
+                "id": { "$ref": "id" },
+                "task_id": { "$ref": "nullable_id" },
+                "kind": { "type": "string", "enum": ["halfway", "completion", "combined", "exploration"] },
+                "local_date": { "$ref": "date" },
+                "story_seq": { "type": "integer", "minimum": 0, "maximum": 100000 },
+                "state": { "type": "string", "enum": ["pending", "delivered"] },
+                "delivered_at": { "$ref": "nullable_datetime" }
+              }
+            }
+          },
+          "next_story_seq": { "type": "integer", "minimum": 0, "maximum": 100000 },
+          "chapter": { "type": "integer", "minimum": 0, "maximum": 10000 },
+          "world_flags": { "type": "array", "maxItems": 500, "items": { "$ref": "token" } },
+          "ended": { "type": "boolean" }
+        }
+      },
+      "flags": {
+        "type": "array", "maxItems": 2000,
+        "items": {
+          "type": "object",
+          "required": ["presentation_id", "item_id", "item_version", "reason", "flagged_at", "status", "decided_at"],
+          "properties": {
+            "presentation_id": { "$ref": "nullable_id" },
+            "item_id": { "$ref": "id" },
+            "item_version": { "$ref": "item_version" },
+            "reason": { "type": "string", "enum": ["answer_looks_wrong", "question_unclear", "too_hard", "other"] },
+            "flagged_at": { "$ref": "datetime" },
+            "status": { "type": "string", "enum": ["open", "restored", "disabled"] },
+            "decided_at": { "$ref": "nullable_datetime" }
+          }
+        }
+      },
+      "suspensions": {
+        "type": "array", "maxItems": 2000,
+        "items": {
+          "type": "object",
+          "required": ["item_id", "item_version", "scope", "since", "restored_at"],
+          "properties": {
+            "item_id": { "$ref": "id" },
+            "item_version": { "$ref": "nullable_item_version" },
+            "scope": { "type": "string", "enum": ["child", "version"] },
+            "since": { "$ref": "datetime" },
+            "restored_at": { "$ref": "nullable_datetime" }
+          }
+        }
+      },
+      "exposure": {
+        "type": "array", "maxItems": 20000,
+        "items": {
+          "type": "object",
+          "required": ["item_id", "first_presented_on", "last_presented_on", "times"],
+          "properties": { "item_id": { "$ref": "id" }, "first_presented_on": { "$ref": "date" }, "last_presented_on": { "$ref": "date" }, "times": { "$ref": "count" } }
+        }
+      },
+      "calendar_guards": {
+        "type": "object",
+        "required": ["last_finalised_date", "last_timezone_change_at", "max_local_date_seen"],
+        "properties": { "last_finalised_date": { "$ref": "nullable_date" }, "last_timezone_change_at": { "$ref": "nullable_datetime" }, "max_local_date_seen": { "$ref": "nullable_date" } }
+      },
+      "pending_upload": {
+        "type": "object", "nullable": true,
+        "required": ["operation_id", "base_snapshot_id", "queued_at"],
+        "properties": { "operation_id": { "$ref": "uuid" }, "base_snapshot_id": { "$ref": "nullable_uuid" }, "queued_at": { "$ref": "datetime" } }
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 # Foundation setup register
 
-Updated: 2026-10-11. Implementation evidence only; architecture and feature decisions remain in their authoritative documents.
+Updated: 2026-10-16. Implementation evidence only; architecture and feature decisions remain in their authoritative documents.
 
 This repository is public (since 2026-10-10). Record evidence here without account names, project identifiers, regions, dashboard URLs, environment variable values or anything about real learners.
 
@@ -58,3 +58,47 @@ Owner approved documentation-only changes in Issue #3, not backend, code or depl
 ## 2026-10-15 documentation alignment
 
 The consolidated decision revision changes scope, per-subject X, evidence rules, PIN and snapshot allowlist requirements only. No application, service configuration or infrastructure verification is delivered. Private wrong forms and PIN/hash are excluded from snapshots; security/data-protection/safety-copy gates remain open. Preserve the dated foundation test evidence above.
+
+## 2026-10-16 Pilot identity and snapshot contract (Issue #16, synthetic only)
+
+Branch `claude/pilot-identity-foundation`, based on `main` at `dc3ed51`. This adds the first Supabase migration (family/parent/child ownership, read-only RLS for clients, the guarded `upload_snapshot` function, a server-side closed snapshot allow-list and owner-only provisioning). It also adds the client snapshot validator and the email/password-only sign-in module. See `supabase/README.md`.
+
+Local evidence (no services touched):
+- `python3 supabase/tests/test_database.py`: **17 tests pass** on a throwaway PostgreSQL 16 cluster running the Supabase role/auth stub. The tests run as `anon`/`authenticated`/`service_role`, never as the owner. They cover read isolation, denied direct writes and ownership bypasses, spoofed children, the linear head, retry identity, minimisation (23 shared rejection cases), size limits, and two genuinely concurrent races on separate connections.
+- Mutation check: seven deliberate weakenings of the migration (no row lock, service-role upload, open membership reads, no child binding, open objects, leftover insert grant, no stale-base check) were each caught.
+- `node --experimental-strip-types --test supabase/tests/client/client.test.mjs`: **12 tests pass**. The client validator agrees with the server on every shared fixture. The auth module has no sign-up or anonymous path, and its Google sign-in (PKCE) is off by default and refuses to start or complete until switched on after the owner's staging link test (`scripts/check-google-link.mjs`).
+- The new client modules type-check under strict settings. The repository's own `npm run build` is not rerun here because package installation was unavailable in the authoring environment. The new PR workflow `Database contract` runs both suites in CI.
+
+**Pending owner steps:** closed sign-up and anonymous sign-in in the hosted Auth settings, applying the migration to the test project, `scripts/check-hosted-auth.mjs` results, and synthetic provisioning. Until the owner records these here (pass/fail only, no identifiers), nothing about the hosted project is verified. No real learner record may be stored until the data-protection gate (Technical Decisions §9) is resolved.
+
+### 2026-10-16 review corrections (PR #19, ChatGPT review at `a352900`)
+
+All four findings are addressed on the same branch. Tested code head: `c91be06`.
+- **Snapshot contract (P1):** `pilot-snapshot/1` now represents the recoverable engine state: structured ordered, matching and word-bank responses; presentations with roles; frozen task plans with `policy_version` and finalisation time; per-target aggregates; observation history with recurrence versus duplicate; assessed skill and error type; eligibility bounds; amendment lineage; checkpoint pending/delivered state. Still closed, bounded and free-text-free. A test proves the fixture populates every declared field and array; the database test round-trips it unchanged through `upload_snapshot` and the RLS read path. 34 shared rejection cases (was 23).
+- **Closed sign-up check (P1):** passes only on the documented refusal codes; invalid key, address, CAPTCHA, rate-limit, route and server errors are `INCONCLUSIVE` (exit 3). Tested by running the real script against a local mock Auth server.
+- **Google link check (P2):** `--expect refused` passes only on `signup_disabled`; cancellation, token-exchange and network failures are inconclusive, with negative tests.
+- **Sign-out (P2):** clears the client at once, overwrites the stored token if removal fails, and returns `storage_unavailable` when neither works, so callers cannot claim a durable sign-out; the reload boundary is tested. A throwing `localStorage` getter is tolerated.
+
+Local evidence for this round: `test_database.py` **18 pass** (PostgreSQL 16); client and owner-check suites **30 pass** (Node 22); strict type-check of the changed modules passes (global TypeScript 6); privacy guard passes. `npm ci` crashed in the authoring environment, so `npm run build` was not run locally; GitHub CI at `c91be06` passed `foundation` (`npm ci`, `npm audit`, `npm run build`, end-to-end tests), `db-contract` and `privacy-guard`. Hosted owner checks remain **pending**.
+
+### 2026-10-17 owner decision: first backup needs a recent sign-in
+
+Owner decision (2026-10-17): the database enforces the Pilot Scope §3 reauthentication rule for the no-cloud-head exception, not only the later backup screens. `upload_snapshot` accepts a base-less first snapshot only if the token's `amr` records a password or Google (`oauth`) sign-in within the last 5 minutes; otherwise `PT403 reauthentication_required`, with nothing written. Refreshing a token keeps the original sign-in time, so an old session does not qualify. Later uploads on the head and identical retries of the first are unaffected. Local evidence: `test_database.py` **19 pass**; removing the check makes the new test fail.
+
+### 2026-10-17 re-review correction (PR #19, ChatGPT re-review at `ef5f129`)
+
+- **Sign-in/refresh race after sign-out (P2):** the auth client keeps an identity generation. Sign-out and every sign-in start advance it, and a successful sign-in advances it again. A sign-in, Google completion or refresh that answers late is `superseded`: its tokens are neither stored nor returned, and its session is revoked on the server best effort (`scope=local`, so other sessions are untouched). Deterministic deferred-response tests cover refresh → sign-out → late success (memory, storage and a reloaded client stay signed out; a later sign-in still works), late password and PKCE completions, and an old refresh against a newer sign-in in both completion orders. Each of four deliberate weakenings of the guard was caught by these tests.
+
+Local evidence for this round (on top of the recent-sign-in change): `test_database.py` **19 pass** (PostgreSQL 16); client and owner-check suites **36 pass** (Node 22); strict type-check of the changed modules passes (TypeScript 6); privacy guard and `git diff --check` pass. The build is evidenced by GitHub CI on the pushed head. Hosted owner checks remain **pending**.
+
+### 2026-10-17 ChatGPT review and pending-Google cancellation fix
+
+Reviewed `d75d89d`, including the recent-authentication requirement for a first snapshot and the identity-generation race fix. The prior late-refresh finding is resolved. Independently checked successful Database contract CI run `38986828246` and Foundation run `38986879839` (including build and e2e) at that head. The new first-snapshot SQL and its tests are unchanged by this correction; local PostgreSQL is unavailable in the review environment, so database evidence is CI-only.
+
+An additional synthetic reproduction found that start-Google → sign-out → delayed OAuth callback could still sign in, because the PKCE verifier remained stored. The review correction clears that verifier on sign-out (with overwrite fallback and an explicit storage failure result) and guards asynchronous PKCE generation with the identity generation. Three regression tests cover a callback after logout/reload, logout during verifier generation, and failed verifier removal/overwrite. A deliberate new Google flow remains available.
+
+Validation of the correction: 39 client/owner-check tests, repository TypeScript check, tracked-file privacy guard and whitespace checks pass locally (Node 24.19; CI supplies Node 22 validation). No dependency, workflow, schema or backend changes. Hosted Auth/Google checks remain pending owner. No merge or deployment authorization is inferred.
+
+### 2026-10-17 review of the pending-Google correction (`d75d89d..e3d2dd8`)
+
+No blocking findings. The verifier is cleared on sign-out (empty-value overwrite when removal fails; an empty verifier can never be exchanged), and the identity generation now also covers PKCE generation. Each of four deliberate weakenings (skipping the verifier cleanup, the PKCE generation check, the overwrite fallback, or reporting a stuck verifier) fails at least one regression test, and a reload after the overwrite fallback was confirmed not to complete a stale callback. Local evidence: `test_database.py` **19 pass** (PostgreSQL 16); client and owner-check suites **39 pass** (Node 22); strict type-check of the changed modules, privacy guard and `git diff --check` pass. The build is evidenced by GitHub CI on the pushed head.
