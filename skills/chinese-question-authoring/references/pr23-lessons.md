@@ -50,6 +50,19 @@ Check references: plain numbers are the common checks in [question-authoring](..
 
 ## Root causes in Claude's process
 
+### Second-batch cross-review — 2026-10-18
+
+ChatGPT read all 38 `zh-starter-002` v1 questions and `zh-m20` at `619c7c3`. All keys were correct; six items needed revision. ChatGPT's v2 corrections require Claude re-review.
+
+| Items | Finding and correction | Existing check |
+| --- | --- | --- |
+| `zh-m20.q2`, `zh-p2-reason-repair.q1`–`.q3` | The key was uniquely longest in every question, including all three repair stages. This was disclosed as a limitation but allowed a length-only strategy to pass the whole sequence. V2 uses similarly sized partial reasons and unsupported details; wrong options can also have two clauses. Disclosure does not resolve an assessment shortcut. | 2, 5, 10 |
+| `zh-p2-confusable2-u8bb0.q3` | “写下来，不会忘” conflated recording with remembering and promised an outcome. V2 says the words are written down and can be read again. | 3, 4 |
+| `zh-p2-wordchoice-b.q2` | “欺负就是对别人不好” was too broad to distinguish deliberate mistreatment from accidents. V2 gives deliberate hurtful actions as examples. | 3 |
+| Owner review provenance | Two revised items had already been sampled and accepted at v1. Keep those acceptances with v1; queue the v2 versions for a new decision. Draw the new sample from the 32 unchanged agreed items and retain both recipes. | Review and hand-over |
+
+Source checks used dictionary entries for the tested senses and pinyin readings. The corrected reason questions retain explicit retrieval as their response demand; inventing a plausible but unsupported reason remains wrong. The current review pack lists the six revisions and exact sample history.
+
 The fixes for these are the "How to work" steps in the common skill.
 
 1. **Bulk authoring by script.** Items were generated in Python and validated structurally. They were not re-read rendered, one at a time, as a child would see them. (How to work 1–2)
