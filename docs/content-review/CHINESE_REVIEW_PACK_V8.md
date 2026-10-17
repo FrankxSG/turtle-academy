@@ -551,4 +551,3 @@ New material `zh-m19` 生日卡: 【生日贺卡(hè kǎ)】 / 亲爱的小美�
 ## Sign-off record
 
 Owner decisions and the batch sign-off are recorded on the tracking PR, then copied into `review_log` in a follow-up commit. This file is not a record of approval.
-

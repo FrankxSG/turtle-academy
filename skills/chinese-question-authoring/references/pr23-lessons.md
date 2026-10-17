@@ -33,6 +33,12 @@ Check references: plain numbers are the common checks in [question-authoring](..
 | `zh-p2-sound.q5` | New hint used 轻声读, which is also the neutral-tone term; now 小声读 | Avoid everyday words that are technical terms in the skill tested (7) |
 | `test_chinese_release_inventory.py` | Hard-coded route totals; now derived from the data | Tests must survive new content |
 
+## Found in Claude's self-check of the skills
+
+| File | What was wrong | Lesson |
+| --- | --- | --- |
+| `chinese-question-authoring` ZH1 | Required every instruction *and passage* character to be on the cumulative list. Most of the bank's passages use common words beyond the lists, so the rule taught a convention as a requirement | A skill's own rules need check 4 too. ZH1 now separates tested characters, instruction words and passage vocabulary |
+
 ## Root causes in Claude's process
 
 The fixes for these are the "How to work" steps in the common skill.

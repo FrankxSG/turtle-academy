@@ -24,7 +24,10 @@ Sources: [preparation record](../../docs/CHINESE_CONTENT_PREPARATION.md), [CONTE
 
 ## Chinese checks
 
-**ZH1 — Character lists.** Every instruction character and every tested character should be on the grade's cumulative official list: P1–P2 for P2 items, P1–P3 for P3 items. State the bound per item. Annotate harder words with pinyin only when the pinyin does not reveal the answer. A *tested* character outside the bound is an owner decision, not an author's call; add it to the dispute list.
+**ZH1 — Character lists.** The bound is the grade's cumulative official list: P1–P2 for P2 items, P1–P3 for P3 items. State it per item.
+- A *tested* character (the answer in a character, cloze or radical item) outside the bound is an owner decision, not an author's call; add it to the dispute list.
+- Instruction words (the part of the stem that tells the child what to do) stay within the bound, or carry pinyin that does not reveal the answer.
+- Passage and context vocabulary may go beyond the lists when the context makes it clear, as real texts do. Do not rewrite passages only to fit the lists; flag a beyond-list word only when the child needs it to answer.
 
 **ZH2 — Pinyin and readings.** Check every pinyin syllable and tone in annotations and options against a dictionary before hand-over (a pinyin library can help where it installs; still check readings that depend on the word by hand). 冒号 is mào hào. For a character with more than one reading (着, 长, 还, 乐, 好), never present one reading as *the* reading; name the word it belongs to. Pinyin items assess written pinyin recognition only, not speaking or listening.
 
