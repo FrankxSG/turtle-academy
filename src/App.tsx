@@ -1,157 +1,595 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRegisterSW } from 'virtual:pwa-register/react'
-import { openGuestStorage, observeCheckpoint, saveSampleAnswer, type GuestCheckpoint, type SampleAnswer } from './storage'
+import { createAuthClient, readAuthConfig } from './auth/client.ts'
+import type { Step } from './engine/engine.ts'
+import type { Checkpoint, Response, Subject } from './engine/types.ts'
+import { Hub } from './hub/Hub.tsx'
+import {
+  identityKey,
+  initializeDevice,
+  isInitialized,
+  validPin,
+} from './parent/device.ts'
+import { Parent } from './parent/Parent.tsx'
+import type { SaveStatus } from './engine/persistence.ts'
+import { openRuntime, type Runtime } from './ui/runtime.ts'
+import { Practice } from './ui/Practice.tsx'
+import type { Language } from './ui/development.ts'
+import { stories, deliverStory, canPresentStory } from './ui/story.ts'
 
-const answers: { value: SampleAnswer; icon: string; label: string }[] = [
-  { value: 'turtle', icon: '🐢', label: 'A turtle' },
-  { value: 'stone', icon: '🪨', label: 'A stone' },
-  { value: 'chair', icon: '🪑', label: 'A chair' },
-]
+const config = readAuthConfig(import.meta.env)
+type Entry = 'loading' | 'login' | 'setup' | 'ready'
 
 export function App() {
-  const [checkpoint, setCheckpoint] = useState<GuestCheckpoint | null>(null)
-  const [storageError, setStorageError] = useState(false)
-  const [saveError, setSaveError] = useState(false)
-  const [saving, setSaving] = useState(false)
-  const [exploring, setExploring] = useState(false)
+  const [auth] = useState(() => createAuthClient(config))
+  const [entry, setEntry] = useState<Entry>('loading')
+  const [id, setId] = useState('')
+  const [runtime, setRuntime] = useState<Runtime | null>(null)
+  const runtimeRef = useRef<Runtime | null>(null)
+  const [language, setLanguage] = useState<Language>('en')
+  const [view, setView] = useState<'hub' | 'practice' | 'parent'>('hub')
+  const [unlocked, setUnlocked] = useState(false)
+  const [step, setStep] = useState<Step | null>(null)
+  const [checkpoint, setCheckpoint] = useState<Checkpoint | null>(null)
+  const [busy, setBusy] = useState(false)
+  const running = useRef(false)
+  const [error, setError] = useState('')
+  const [save, setSave] = useState<SaveStatus | null>(null)
+  const [, redraw] = useState(0)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [pin, setPin] = useState('')
+  const [confirmPin, setConfirmPin] = useState('')
+  const [timezone, setTimezone] = useState('Asia/Singapore')
   const [online, setOnline] = useState(navigator.onLine)
   const [shellReady, setShellReady] = useState(false)
-  const [workerError, setWorkerError] = useState(false)
   const {
-    offlineReady: [offlineReady],
     needRefresh: [needRefresh],
     updateServiceWorker,
   } = useRegisterSW({
-    onRegisterError: () => setWorkerError(true),
-    onRegisteredSW: (_url, registration) => { if (registration?.active) setShellReady(true) },
+    onRegisteredSW: () => {
+      void navigator.serviceWorker.ready.then(() => setShellReady(true))
+    },
   })
+  const zh = language === 'zh'
+  const tr = (en: string, cn: string) => (zh ? cn : en)
 
+  async function load(key: string, zone: string) {
+    const r = await openRuntime(key, zone)
+    runtimeRef.current = r
+    setRuntime(r)
+    setLanguage(r.engine.state.settings.ui_language)
+    setEntry('ready')
+    setSave(r.writer.status())
+  }
   useEffect(() => {
-    if ('serviceWorker' in navigator) void navigator.serviceWorker.ready.then(() => setShellReady(true))
-    let cancelled = false
-    let unsubscribe = () => {}
-    void openGuestStorage().then(() => {
-      if (cancelled) return
-      const subscription = observeCheckpoint().subscribe({
-        next: (value) => { setCheckpoint(value); setStorageError(false) },
-        error: () => setStorageError(true),
-      })
-      unsubscribe = () => subscription.unsubscribe()
-    }).catch(() => { if (!cancelled) setStorageError(true) })
+    let alive = true
+    void (async () => {
+      try {
+        const session = auth.getStoredSession()
+        const key = session ? await identityKey(session.userId) : null
+        if (!alive) return
+        if (key && (await isInitialized(key))) {
+          if (!alive) return
+          // No expiry check, network request or refresh gate for initialized local practice.
+          const r = await openRuntime(key, 'Asia/Singapore')
+          if (!alive) {
+            r.close()
+            return
+          }
+          runtimeRef.current = r
+          setRuntime(r)
+          setId(key)
+          setEntry('ready')
+          setLanguage(r.engine.state.settings.ui_language)
+          setSave(r.writer.status())
+        } else if (alive) setEntry('login')
+      } catch (e) {
+        if (alive) {
+          setEntry('login')
+          setError(
+            e instanceof Error && e.message === 'practice_open_in_another_tab'
+              ? 'This practice is open in another tab. Close it there, then reload.'
+              : 'This browser could not open your saved progress. Allow local storage and reload; existing records have not been replaced.',
+          )
+        }
+      }
+    })()
     const connected = () => setOnline(navigator.onLine)
     window.addEventListener('online', connected)
     window.addEventListener('offline', connected)
     return () => {
-      cancelled = true
-      unsubscribe()
+      alive = false
+      runtimeRef.current?.close()
+      runtimeRef.current = null
       window.removeEventListener('online', connected)
       window.removeEventListener('offline', connected)
     }
-  }, [])
+  }, [auth])
 
-  async function answer(value: SampleAnswer) {
-    if (saving || !checkpoint || storageError) return
-    setSaving(true); setSaveError(false)
-    try { await saveSampleAnswer(value) }
-    catch { setSaveError(true) }
-    finally { setSaving(false) }
+  useEffect(() => runtime?.writer.onStatus(setSave), [runtime])
+  useEffect(() => {
+    if (!runtime) return
+    const activeTask = () =>
+      view === 'practice' && step && !checkpoint && step.kind !== 'done'
+        ? step.taskId
+        : null
+    const visible = () => {
+      setUnlocked(false)
+      const task = activeTask()
+      if (document.hidden) {
+        if (task) void runtime.engine.background(task)
+      } else {
+        void runtime.writer.onForeground()
+        if (task) void runtime.engine.resume(task)
+      }
+    }
+    const touch = () => {
+      const task = activeTask()
+      if (!document.hidden && task) runtime.engine.touch(task)
+    }
+    const leave = () => {
+      const task = activeTask()
+      if (task) void runtime.engine.background(task)
+    }
+    document.addEventListener('visibilitychange', visible)
+    document.addEventListener('pointerdown', touch)
+    document.addEventListener('keydown', touch)
+    window.addEventListener('pagehide', leave)
+    // Persist accumulated interaction time without manufacturing new activity while idle.
+    const timer = setInterval(() => {
+      if (!document.hidden && activeTask()) void runtime.engine.flush()
+    }, 15_000)
+    return () => {
+      document.removeEventListener('visibilitychange', visible)
+      document.removeEventListener('pointerdown', touch)
+      document.removeEventListener('keydown', touch)
+      window.removeEventListener('pagehide', leave)
+      clearInterval(timer)
+    }
+  }, [runtime, view, step, checkpoint])
+
+  async function work(fn: () => Promise<unknown>) {
+    if (running.current) return
+    running.current = true
+    setBusy(true)
+    setError('')
+    try {
+      await fn()
+      redraw((n) => n + 1)
+    } catch (e) {
+      const code = e instanceof Error ? e.message : ''
+      setError(
+        code.startsWith('reset_requires_')
+          ? tr(
+              'The action could not finish. Try again. Online PIN reset needs the same account’s valid password; failed verification leaves your PIN unchanged.',
+              '操作未完成，请重试。在线重设需使用同一账户的有效密码，验证失败时原有 PIN 保持不变。',
+            )
+          : code === 'sign_in_failed'
+            ? tr(
+                'Sign-in failed. Check your account details and connection, then try again.',
+                '登录失败，请检查账户信息和网络后重试。',
+              )
+            : code === 'online_setup_required'
+              ? tr(
+                  'Connect to the internet to finish the first setup.',
+                  '请连接网络以完成首次设置。',
+                )
+              : e instanceof RangeError
+                ? tr(
+                    'Use a valid timezone, such as Asia/Singapore.',
+                    '请输入有效时区，例如 Asia/Singapore。',
+                  )
+                : tr(
+                    'This change could not be saved securely. Please try again. Existing records have not been erased.',
+                    '无法安全保存这次更改，请重试。原有记录没有被清除。',
+                  ),
+      )
+    } finally {
+      running.current = false
+      setBusy(false)
+    }
   }
 
-  const lastAnswer = checkpoint?.lastAnswer
+  async function advance(taskId: string) {
+    const r = runtimeRef.current!
+    const next = await r.engine.next(taskId)
+    setStep(next)
+    const pending = r.engine.pendingCheckpoints()[0]
+    if (
+      pending &&
+      canPresentStory(r.engine, next) &&
+      !r.writer.status().warning
+    ) {
+      if (next.kind !== 'done') await r.engine.pause(taskId)
+      // Persist delivered state BEFORE presenting a checkpoint, so reload cannot replay it.
+      await deliverStory(r.engine, pending)
+      // Present even if this delivery write failed: it is already marked delivered and queued, so
+      // skipping the card would lose the scene once saving recovers. The save warning discloses
+      // that a reload before recovery may show it again.
+      setCheckpoint({ ...pending })
+    }
+  }
+  async function login() {
+    const secret = password
+    setPassword('')
+    await work(async () => {
+      if (!navigator.onLine) throw new Error('online_setup_required')
+      const result = await auth.signInWithPassword(email, secret)
+      if (!result.ok) throw new Error('sign_in_failed')
+      const key = await identityKey(result.session.userId)
+      setId(key)
+      setEmail('')
+      if (await isInitialized(key)) await load(key, timezone)
+      else setEntry('setup')
+    })
+  }
+  async function setup() {
+    const chosen = pin
+    setPin('')
+    setConfirmPin('')
+    await work(async () => {
+      if (!navigator.onLine) throw new Error('online_setup_required')
+      new Intl.DateTimeFormat('en', { timeZone: timezone }).format()
+      await initializeDevice(id, chosen)
+      await load(id, timezone)
+      runtimeRef.current!.engine.state.settings.ui_language = language
+      await runtimeRef.current!.engine.flush()
+      setLanguage(language)
+    })
+  }
+  function start(subject: Subject) {
+    void work(async () => {
+      if (runtime!.engine.dailyStatus().rest) return
+      const result = await runtime!.engine.startOrResume(subject, {
+        optional: true,
+      })
+      if (result.kind === 'task') {
+        setView('practice')
+        await advance(result.task.id)
+      }
+    })
+  }
+  function submit(response: Response) {
+    void work(async () => {
+      if (!step || step.kind !== 'question') return
+      const e = runtime!.engine
+      if (step.awaiting === 'first')
+        await e.answer(step.presentation.id, response)
+      else if (step.awaiting === 'retry')
+        await e.retry(step.presentation.id, response)
+      else await e.correct(step.presentation.id, response)
+      await advance(step.taskId)
+    })
+  }
+  function pause() {
+    void work(async () => {
+      if (step?.kind !== 'done' && step)
+        await runtime!.engine.pause(step.taskId)
+      setView('hub')
+      setStep(null)
+      setCheckpoint(null)
+    })
+  }
+  function parent() {
+    void work(async () => {
+      if (view === 'practice' && step && step.kind !== 'done')
+        await runtime!.engine.pause(step.taskId)
+      setUnlocked(false)
+      setCheckpoint(null)
+      setView('parent')
+    })
+  }
+  function toggle() {
+    void work(async () => {
+      const next = zh ? 'en' : 'zh'
+      if (runtime) {
+        runtime.engine.state.settings.ui_language = next
+        await runtime.engine.flush()
+      }
+      setLanguage(next)
+    })
+  }
+
   return (
     <div className="app">
       <header className="header">
-        <a href="/" className="brand" aria-label="Turtle Academy home">
-          <img src="/turtle.svg" alt="" width="44" height="44" />
+        <a className="brand" href="/" aria-label="Turtle Academy home">
+          <img src="/turtle.svg" alt="" width="42" height="42" />
           <span>Turtle Academy</span>
         </a>
-        <span className="guest">Guest adventure</span>
+        <nav aria-label={tr('Main navigation', '主导航')}>
+          <button disabled={busy} onClick={toggle}>
+            {zh ? 'English' : '中文'}
+          </button>
+          {entry === 'ready' && (
+            <button disabled={busy} onClick={parent}>
+              {tr('Parent area', '家长区')}
+            </button>
+          )}
+        </nav>
       </header>
       <main>
-        <section className="welcome" aria-labelledby="welcome-title">
-          <div>
-            <p className="eyebrow">A WORLD OF LITTLE DISCOVERIES</p>
-            <h1 id="welcome-title">Let curiosity<br />lead the way.</h1>
-            <p className="intro">Look closely. Ask a question. Discover something new.</p>
+        <div className="preview-banner">
+          {tr(
+            'Development preview · synthetic content only · no subject is released',
+            '开发预览 · 仅限模拟内容 · 所有科目均未发布',
+          )}
+        </div>
+        {error && (
+          <p role="alert" className="error">
+            {error}
+          </p>
+        )}
+        {save?.warning && (
+          <div className="error" role="alert">
+            <strong>
+              {tr('Some changes are not saved.', '部分更改尚未保存。')}
+            </strong>{' '}
+            {tr(
+              'Reloading, closing or termination may lose these changes. You may continue with this warning; the app retries while open.',
+              '刷新、关闭或系统终止应用可能丢失这些更改。可在警告下继续，应用会自动重试。',
+            )}
+            <button
+              disabled={busy}
+              onClick={() =>
+                void work(async () => {
+                  await runtime!.writer.onForeground()
+                })
+              }
+            >
+              {tr('Retry local save', '重试本地保存')}
+            </button>
           </div>
-          <div className="welcome-art" aria-hidden="true">
-            <span className="spark spark-one">✦</span>
-            <img src="/turtle.svg" alt="" />
-            <span className="spark spark-two">✧</span>
-          </div>
-        </section>
-
-        <section className="worlds" aria-label="Learning worlds">
-          <article className="world science">
-            <span className="world-icon" aria-hidden="true">🌿</span>
-            <p className="eyebrow">SCIENCE WORLD</p>
-            <h2>The Discovery Trail</h2>
-            <p>A small first adventure in living things.</p>
-            <button className="primary" onClick={() => setExploring(true)}>Explore Science <span aria-hidden="true">→</span></button>
-          </article>
-          <article className="world chinese">
-            <span className="world-icon character" aria-hidden="true">字</span>
-            <p className="eyebrow">CHINESE WORLD</p>
-            <h2>The Character Garden</h2>
-            <p>A place for words, writing and careful practice.</p>
-            <span className="coming">Adventures coming later</span>
-          </article>
-        </section>
-
-        {exploring && (
-          <section className="question" aria-labelledby="question-title">
-            <p className="eyebrow">FIRST DISCOVERY · LIVING THINGS</p>
-            <h2 id="question-title">Which one is living?</h2>
-            <p>Think about what it needs and how it changes as it grows.</p>
-            <div className="answers">
-              {answers.map((item) => (
-                <button key={item.value} disabled={saving || !checkpoint || storageError}
-                  onClick={() => void answer(item.value)} aria-label={item.label}>
-                  <span aria-hidden="true">{item.icon}</span>{item.label}
-                </button>
-              ))}
-            </div>
-            <div className="feedback" aria-live="polite" role="status">
-              {saving ? 'Saving your discovery…' : saveError
-                ? 'Your answer could not be saved. Please try again.'
-                : lastAnswer === 'turtle'
-                  ? 'Yes! A turtle is living. It needs food, water and air, and it grows.'
-                  : lastAnswer
-                    ? 'Look again: a stone and a chair do not grow or need food, water and air. Try the turtle.'
-                    : 'Take your time. There is no timer.'}
-            </div>
+        )}
+        {entry === 'loading' && (
+          <p role="status">
+            {tr('Opening this device’s records…', '正在打开本设备记录…')}
+          </p>
+        )}
+        {entry === 'login' && (
+          <section className="entry-card">
+            <p className="eyebrow">{tr('PARENT SETUP', '家长首次设置')}</p>
+            <h1>
+              {tr(
+                'Your island adventure begins here.',
+                '小岛上的冒险，从这里开始。',
+              )}
+            </h1>
+            <p>
+              {tr(
+                'First setup needs internet. Sign in with a pre-provisioned parent account, using synthetic data only.',
+                '首次设置需联网。请用预先配置的家长账户登录，只使用模拟数据。',
+              )}
+            </p>
+            {!config && (
+              <p role="status">
+                {tr(
+                  'Sign-in is not configured. The developer must configure the synthetic test environment.',
+                  '尚未配置登录服务，请由开发者配置测试环境。',
+                )}
+              </p>
+            )}
+            <form
+              onSubmit={(ev) => {
+                ev.preventDefault()
+                void login()
+              }}
+            >
+              <label>
+                {tr('Parent email', '家长邮箱')}
+                <input
+                  type="email"
+                  autoComplete="username"
+                  value={email}
+                  onChange={(ev) => setEmail(ev.target.value)}
+                  required
+                />
+              </label>
+              <label>
+                {tr('Password', '密码')}
+                <input
+                  type="password"
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={(ev) => setPassword(ev.target.value)}
+                  required
+                />
+              </label>
+              <button className="primary" disabled={busy || !online || !config}>
+                {tr('Sign in', '登录')}
+              </button>
+            </form>
           </section>
         )}
-
-        <aside className="travel-note" aria-label="Adventure availability">
-          <span aria-hidden="true">✦</span>
-          <div>
-            <strong>{workerError ? 'Offline download is unavailable'
-              : (offlineReady || shellReady) ? 'Ready for an offline adventure'
-                : 'Preparing your offline adventure'}</strong>
-            <p>{workerError ? 'You can continue online. Try reopening when your connection is available.'
-              : (offlineReady || shellReady) ? 'This first discovery can travel with you, even without internet.'
-                : 'Keep this page open online while the first discovery downloads.'}</p>
-          </div>
-          <span className="connection">{online ? 'Online' : 'Offline'}</span>
-        </aside>
-
-        {needRefresh && (
-          <div className="update-note" role="status">
-            <span>A new adventure update is ready.</span>
-            <button disabled={saving || storageError || saveError}
-              onClick={() => void updateServiceWorker(true)}>Update when ready</button>
-          </div>
+        {entry === 'setup' && (
+          <section className="entry-card">
+            <h1>{tr('Set up this device', '设置本设备')}</h1>
+            <p>
+              {tr(
+                'Choose a 4–6 digit PIN for routine local parent controls. It does not encrypt records or provide server authorization.',
+                '设置 4–6 位 PIN，只用于本设备的日常家长控制。PIN 不加密记录，也不提供服务器授权。',
+              )}
+            </p>
+            <form
+              onSubmit={(ev) => {
+                ev.preventDefault()
+                void setup()
+              }}
+            >
+              <label>
+                {tr('Choose PIN', '设置 PIN')}
+                <input
+                  type="password"
+                  inputMode="numeric"
+                  autoComplete="off"
+                  value={pin}
+                  maxLength={6}
+                  onChange={(ev) => setPin(ev.target.value)}
+                  required
+                />
+              </label>
+              <label>
+                {tr('Confirm PIN', '再次输入 PIN')}
+                <input
+                  type="password"
+                  inputMode="numeric"
+                  autoComplete="off"
+                  value={confirmPin}
+                  maxLength={6}
+                  onChange={(ev) => setConfirmPin(ev.target.value)}
+                  required
+                />
+              </label>
+              <label>
+                {tr('Timezone', '时区')}
+                <input
+                  value={timezone}
+                  onChange={(ev) => setTimezone(ev.target.value)}
+                  required
+                />
+              </label>
+              <button
+                className="primary"
+                disabled={
+                  busy || !online || !validPin(pin) || pin !== confirmPin
+                }
+              >
+                {tr('Open the island', '打开小岛')}
+              </button>
+            </form>
+          </section>
         )}
-        <footer className="footer">
-          <p>This early preview includes one Science discovery. More adventures are still being prepared.</p>
-          <p role={storageError || saveError ? 'alert' : undefined}>
-            {storageError ? 'This browser could not open your saved progress. Try again in a browser that allows local storage.'
-              : saveError ? 'Your latest answer has not been saved.'
-                : checkpoint ? 'Saved on this device · ' + checkpoint.attempts + ' discovery attempts'
-                  : 'Opening your saved progress…'}
+        {runtime && entry === 'ready' && (
+          <>
+            {view === 'hub' && (
+              <Hub
+                engine={runtime.engine}
+                language={language}
+                busy={busy}
+                start={start}
+              />
+            )}
+            {view === 'parent' && (
+              <Parent
+                id={id}
+                runtime={runtime}
+                language={language}
+                unlocked={unlocked}
+                unlock={() => setUnlocked(true)}
+                close={() => {
+                  setUnlocked(false)
+                  setView('hub')
+                  setStep(null)
+                }}
+                work={work}
+                busy={busy}
+                freshAuth={() =>
+                  createAuthClient(config, {
+                    storage: null,
+                    fetch: (input, init) =>
+                      fetch(
+                        String(input).endsWith('/auth/v1/logout')
+                          ? `${input}?scope=local`
+                          : input,
+                        init,
+                      ),
+                  })
+                }
+              />
+            )}
+            {view === 'practice' && step && !checkpoint && (
+              <Practice
+                engine={runtime.engine}
+                step={step}
+                language={language}
+                busy={busy}
+                submit={submit}
+                teaching={() =>
+                  void work(async () => {
+                    await runtime.engine.completeTeaching(step.taskId)
+                    await advance(step.taskId)
+                  })
+                }
+                pause={pause}
+                flag={() =>
+                  void work(async () => {
+                    if (step.kind === 'question') {
+                      await runtime.engine.flag(
+                        step.presentation.id,
+                        'question_unclear',
+                      )
+                      await advance(step.taskId)
+                    }
+                  })
+                }
+              />
+            )}
+            {checkpoint && (
+              <section
+                className="story-card"
+                aria-label={tr('Story checkpoint', '故事片段')}
+              >
+                <img src="/turtle.svg" alt="" />
+                <p className="eyebrow">
+                  {tr('A MOMENT WITH MOSS', '小岛来信')}
+                </p>
+                <h1>
+                  {checkpoint.story_seq < stories.en.length
+                    ? tr('The little lantern', '小灯的故事')
+                    : tr('A visit from Moss', '小海龟来访')}
+                </h1>
+                <p>
+                  {stories[language][checkpoint.story_seq] ??
+                    tr(
+                      'Moss rests beside the glowing lantern. There is always something small to notice here.',
+                      '小海龟坐在明亮的小灯旁，等你一起看看今天的小岛。',
+                    )}
+                </p>
+                <button
+                  disabled={busy}
+                  className="primary"
+                  onClick={() =>
+                    void work(async () => {
+                      setCheckpoint(null)
+                      if (step && step.kind !== 'done')
+                        await runtime.engine.resume(step.taskId)
+                      if (step) await advance(step.taskId)
+                    })
+                  }
+                >
+                  {tr('Continue', '继续')}
+                </button>
+              </section>
+            )}
+          </>
+        )}
+        <footer>
+          <p>
+            {online ? tr('Online', '在线') : tr('Offline', '离线')} ·{' '}
+            {shellReady
+              ? entry === 'ready'
+                ? tr('Ready for an offline adventure', '应用已缓存，可离线打开')
+                : tr(
+                    'App cached; first setup still needs internet',
+                    '应用已缓存，首次设置仍需联网',
+                  )
+              : tr('Preparing the offline app…', '正在准备离线应用…')}
           </p>
-          <p>Guest progress stays on this device and can be lost if browser data is cleared.</p>
+          <p>
+            {tr(
+              'Records stay on this device. No cloud backup. Browser storage clearing or eviction can lose records.',
+              '记录仅在本设备，没有云端备份。清除或回收浏览器存储可能丢失记录。',
+            )}
+          </p>
+          {needRefresh && (
+            <button
+              disabled={busy || view !== 'hub' || !!save?.warning}
+              onClick={() => void updateServiceWorker(true)}
+            >
+              {tr('Update app when ready', '更新应用')}
+            </button>
+          )}
         </footer>
       </main>
     </div>

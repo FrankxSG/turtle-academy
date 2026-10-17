@@ -1,5 +1,22 @@
 name: Foundation checks
 on:
+  pull_request:
+    paths:
+      - 'src/App.tsx'
+      - 'src/styles.css'
+      - 'src/ui/**'
+      - 'src/hub/**'
+      - 'src/parent/**'
+      - 'tests/foundation.spec.ts'
+      - 'tests/pilot-ui.spec.ts'
+      - 'tests/parent/**'
+      - 'tests/helpers/**'
+      - 'tests/browser/**'
+      - 'tests/ui/**'
+      - 'playwright.config.ts'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/foundation.yml'
   workflow_dispatch:
 permissions:
   contents: read
@@ -20,7 +37,20 @@ jobs:
           node-version-file: .nvmrc
       - name: Install locked dependencies
         run: npm ci
+      - run: npm run test:ui
       - run: npm audit --audit-level=high
+      # Public synthetic endpoint, intercepted by Playwright; never a hosted project or credential.
       - run: npm run build
+        env:
+          VITE_SUPABASE_URL: http://127.0.0.1:4173
+          VITE_SUPABASE_ANON_KEY: synthetic-test-only
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
+      - name: Save synthetic UI images for visual review
+        if: success() && github.event_name == 'pull_request'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: synthetic-ui-review
+          path: test-results/ui-review/*.png
+          retention-days: 1
+          if-no-files-found: error
