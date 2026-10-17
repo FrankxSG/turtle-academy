@@ -3,7 +3,7 @@
 import { itemIn, judge, type CatalogueItem, type CatalogueRegistry, type CatalogueRelease } from '../catalogue/adapter.ts'
 import { isValidTimezone, learningDate } from './calendar.ts'
 import { derive, type Derived } from './evidence.ts'
-import { nothingEligible, planTask, resolveShortSlot, usableItem, usableVersion, type PlanContext } from './planner.ts'
+import { compatibleItem, nothingEligible, planTask, resolveShortSlot, usableItem, usableVersion, type PlanContext } from './planner.ts'
 import type { Mutation, Put, RecordStore, SaveStatus, Table } from './persistence.ts'
 import { WriteQueue } from './persistence.ts'
 import { halfwayOf, IDLE_AFTER_SECONDS, isLanguage, isValidX, POLICY_VERSION, SUBJECTS } from './policy.ts'
@@ -246,7 +246,9 @@ export class LearningEngine {
     const now = this.deps.now()
     const date = this.today()
     const d = this.derived()
-    const pr = targetRef ? d.progress.get(targetRef) : undefined
+    // Re-check compatibility when shown: an incompatible question is general practice for this target.
+    const candidate = targetRef ? d.progress.get(targetRef) : undefined
+    const pr = candidate && compatibleItem(candidate.target, candidate.stage, item) ? candidate : undefined
     const exposure = this.state.exposure.find((e) => e.item_id === item.id)
     const release = this.release(task)
     // Novel context: neither this item nor another item of the same context was answered before for this
@@ -431,12 +433,25 @@ export class LearningEngine {
     return { correct: judge(item, response), next: 'continue', saved }
   }
 
+  /**
+   * True while any still-answerable question in the material lacks its first response. Each slot is
+   * ensured first (shown, replaced, or found impossible to fill), so a withdrawn slot with no remaining
+   * replacement never holds back help for the surviving answers.
+   */
   private materialHasUnansweredFirst(task: Task, materialRef: string): boolean {
     return task.plan.slots.some((s) => {
       if (s.material_ref !== materialRef || s.kind !== 'material_question') return false
-      const p = this.active(task, s.position)
-      return p === null || this.firstOf(p) === null
+      const p = this.ensure(task, s)
+      return p !== null && this.firstOf(p) === null
     })
+  }
+
+  /** A formal slot that was withdrawn (flagged, invalidated or suspended after planning) and has no replacement. */
+  private exhausted(task: Task, s: PlanSlot): boolean {
+    if (!s.counts_toward_x || this.active(task, s.position) !== null) return false
+    if (this.replacedAt(task, s.position)) return true
+    return s.kind === 'material_question' && s.item_id !== null && s.item_version !== null
+      && !usableVersion(this.state, s.item_id, s.item_version)
   }
 
   /** General-practice first wrong responses enter the private bank automatically (internal source app_practice). */
@@ -550,7 +565,7 @@ export class LearningEngine {
     const date = this.today()
     const answered = this.answeredCount(task)
     const formalPlanned = task.plan.slots.filter((s) => s.counts_toward_x).length
-    const exhausted = task.plan.slots.some((s) => this.replacedAt(task, s.position) && this.active(task, s.position) === null)
+    const exhausted = task.plan.slots.some((s) => this.exhausted(task, s))
     const reason: Completion['reason'] = exhausted ? 'replacements_exhausted' : answered < formalPlanned ? 'shortened_no_eligible_content' : 'full'
     const credit = !this.dailyCreditTakenElsewhere(task, date)
     if (credit && answered > 0) {

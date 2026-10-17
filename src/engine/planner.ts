@@ -71,13 +71,29 @@ function byFreshness(state: EngineState, items: CatalogueItem[]): CatalogueItem[
   return [...items].sort((a, b) => (lastPresented(state, a.id) ?? '').localeCompare(lastPresented(state, b.id) ?? '') || a.id.localeCompare(b.id))
 }
 
+/** The ladder pool that assesses a stage (delayed checks use the generic transfer pool). */
+export function poolForStage(stage: Stage): Pool | null {
+  if (stage === 'exact' || stage === 'similar' || stage === 'generic' || stage === 'acquisition') return stage
+  if (stage === 'delayed_review') return 'generic'
+  return null
+}
+
+/**
+ * The one compatibility rule for crediting a question to a target (material coverage, attachment, short
+ * repair and replacements): same subject, course and knowledge point, the same assessed skill (a missing
+ * skill on either side matches only a missing skill, never acts as a wildcard), and a pool for the stage.
+ */
+export function compatibleItem(target: Target, stage: Stage, item: CatalogueItem): boolean {
+  const pool = poolForStage(stage)
+  return pool !== null && item.subject === target.subject && item.course === target.course
+    && item.knowledge_point_ref === target.knowledge_point_ref && item.assessed_skill === target.assessed_skill
+    && item.pools.includes(pool)
+}
+
 export function itemsForStage(ctx: PlanContext, pr: TargetProgress, task: Task | null): CatalogueItem[] {
-  const pool: Pool = pr.stage === 'delayed_review' ? 'generic' : (pr.stage as Pool)
   const inTask = new Set(task ? ctx.state.presentations.filter((p) => p.task_id === task.id).map((p) => p.item_id) : [])
-  const skill = pr.target.assessed_skill
-  const candidates = ctx.release.items.filter((i) => i.knowledge_point_ref === pr.target.knowledge_point_ref
-    && i.pools.includes(pool) && i.material_ref === null && usableItem(ctx.state, i) && !inTask.has(i.id)
-    && !pr.lowSuccessItems.includes(i.id) && (skill === null || i.assessed_skill === null || i.assessed_skill === skill))
+  const candidates = ctx.release.items.filter((i) => i.material_ref === null && compatibleItem(pr.target, pr.stage, i)
+    && usableItem(ctx.state, i) && !inTask.has(i.id) && !pr.lowSuccessItems.includes(i.id))
   return byFreshness(ctx.state, candidates)
 }
 
@@ -156,7 +172,7 @@ export function planTask(ctx: PlanContext): PlanResult {
     const usableMaterials = release.materials.filter((m) => isPractisable(m.course)
       && m.question_ids.every((q) => { const i = itemById.get(q); return i !== undefined && usableItem(state, i) }))
     const coverOf = (m: (typeof usableMaterials)[number]) => prescribed.filter((pr) =>
-      m.question_ids.some((q) => itemById.get(q)?.knowledge_point_ref === pr.target.knowledge_point_ref))
+      m.question_ids.some((q) => { const i = itemById.get(q); return i !== undefined && compatibleItem(pr.target, pr.stage, i) }))
     const previous = [...state.tasks].filter((t) => t.subject === ctx.subject).pop()
     const recentFamilies = new Set(previous?.plan.materials.map((m) => m.family) ?? [])
     const freshness = (m: (typeof usableMaterials)[number]) => m.question_ids.map((q) => lastPresented(state, q) ?? '').sort().pop() ?? ''
@@ -190,7 +206,7 @@ export function planTask(ctx: PlanContext): PlanResult {
       materials.push({ material_ref: m.ref, material_version: m.version, family: m.family, question_count: m.question_ids.length })
       for (const q of m.question_ids) {
         const item = itemById.get(q) as CatalogueItem
-        const pr = prescribed.find((p) => p.target.knowledge_point_ref === item.knowledge_point_ref && covered.has(p.target.id))
+        const pr = prescribed.find((p) => covered.has(p.target.id) && compatibleItem(p.target, p.stage, item))
         slots.push(slot(slots.length, 'material_question', 'material_question', {
           material_ref: m.ref, item_id: item.id, item_version: item.version,
           target_ref: pr?.target.id ?? null, stage: pr?.stage ?? null,
