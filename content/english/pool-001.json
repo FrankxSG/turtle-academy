@@ -2,7 +2,7 @@
   "schema_version": "subject-content/1",
   "subject": "english",
   "batch_id": "el-pool-001",
-  "version": 3,
+  "version": 4,
   "manifest_version": "el-2020-p2p3-draft.1",
   "status": "author_checked_pending_independent_and_owner_review",
   "materials": [
@@ -14635,7 +14635,8 @@
       "Hints point to the rule or evidence without stating the answer",
       "No past-paper, STELLAR or commercial text copied",
       "2026-10-16 correction pass: revised disputed and related items; item versions incremented; revised IDs remain listed for independent re-review, not approved.",
-      "2026-10-16 revision (PR #15 audit EL1–EL4): resolved the time-conjunction, there-is/are and although ambiguities with determining context; added 14 reading/visual-text skill targets with 42 new mini-passage repair items; routed every material question to a skill, grammar or vocabulary repair target; drew the four visual texts as notices; added a leaf map. Revised items have version + 1 and remain pending independent re-review."
+      "2026-10-16 revision (PR #15 audit EL1–EL4): resolved the time-conjunction, there-is/are and although ambiguities with determining context; added 14 reading/visual-text skill targets with 42 new mini-passage repair items; routed every material question to a skill, grammar or vocabulary repair target; drew the four visual texts as notices; added a leaf map. Revised items have version + 1 and remain pending independent re-review.",
+      "2026-10-17 revision (PR #15 re-review of 710c0a1): pool version 4, because the previous round added two P3 repair sets and rerouted two robot-cloze blanks without raising the pool version. Item versions were already incremented."
     ],
     "independent_review": "changes_requested",
     "owner_signoff": "pending",

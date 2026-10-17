@@ -42,10 +42,22 @@ class SvgGuard(unittest.TestCase):
             'href': '<rect href="#g"/>',
             'feImage': '<filter id="f"><feImage/></filter>',
             'event handler': '<rect onload="x()"/>',
+            # Review of 280dd4d: character references decode to url() only after XML parsing.
+            'encoded url in fill': '<rect width="5" height="5" fill="&#117;rl(//example.invalid/p.svg#g)"/>',
+            'encoded url in style': '<rect width="5" height="5" style="fill:&#117;rl(//example.invalid/p.svg#g)"/>',
+            'hex-encoded url': '<rect fill="&#x75;&#x72;&#x6c;(other.svg#x)"/>',
+            'encoded protocol-relative value': '<rect src="&#47;&#47;example.invalid/x"/>',
+            'encoded https': '<rect fill="&#104;ttps://example.invalid/x"/>',
+            'css escape in style': '<rect style="fill:\\75 rl(//example.invalid/p.svg#g)"/>',
+            'data uri': '<rect fill="data:image/svg+xml,x"/>',
         }
         for name, extra in cases.items():
             with self.subTest(name):
                 self.assertNotEqual(svg_result(extra), 'ok')
+
+    def test_encoded_local_url_still_allowed(self):
+        # Decoding must not over-block: an encoded same-file reference is still a same-file reference.
+        self.assertEqual(svg_result('<rect width="5" height="5" fill="&#117;rl(#g)"/>'), 'ok')
 
     def test_rejects_xml_stylesheet_instruction(self):
         self.assertEqual(svg_result(prefix='<?xml-stylesheet href="//example.invalid/x.css"?>'), 'asset_css_import')

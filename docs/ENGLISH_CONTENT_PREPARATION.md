@@ -9,7 +9,7 @@ Original P2 and P3 English questions and passages for the public (generic) versi
 ## 1. What is in this pool
 
 - `content/english/curriculum.json`: 35 topic records with scope and Pilot status, 94 leaf records (assessed ability, representation, scope, MOE page reference) and cited sources.
-- `content/english/pool-001.json` (batch version 3): 358 original questions (P2 187, P3 171), 19 materials, 89 three-stage repair sets (exact → similar → generic), 91 non-repair questions with a declared repair route.
+- `content/english/pool-001.json` (batch version 4): 364 original questions (P2 187, P3 177), 19 materials, 91 three-stage repair sets (exact → similar → generic), 91 non-repair questions with a declared repair route.
 - `content/english/assets/`: 4 original SVG diagrams referenced by items or materials (no scripts, links, images or external references; titles and alt text describe the picture without giving the answer).
 - `scripts/validate_subject_content.py`: structural checks (IDs, keys, 4+ distinct options, topic/source/leaf references, complete repair sets with one leaf mapping, repair routes for every non-repair question when leaves are declared, diagrams present for visual leaves, knowledge-point links and acyclic prerequisites, SVG safety, hints that do not state the answer).
 
@@ -119,3 +119,11 @@ python3 scripts/privacy_guard.py
 ```
 
 Passing validation proves structure only. Remaining before release: independent review of every item, random 20% sample of agreed items, owner batch sign-off, verification of topic boundaries against the official MOE syllabus PDF, and the existing Pilot coverage, data-protection and device gates. No learner data is used or implied by any item.
+
+## Re-review corrections — 17 October 2026 (batch version 4)
+
+Responds to the independent re-review of `710c0a1`, which closed the robot-cloze route finding and accepted the six new questions, the volunteer "so" route and and/but/or as P3 reinforcement.
+- **Pool version 4.** The previous round added the `el.p3.object-pronoun` and `el.p3.and-but-or` repair sets and rerouted two blanks, but did not raise the pool version. Item versions were already incremented. The inventory line above now shows the current counts.
+- **Shared SVG guard.** Attribute values are now checked after XML decoding. Encoded `url(` and `https`, protocol-relative values, `data:` and CSS escapes are rejected, while same-file `url(#id)` stays allowed. The re-review's encoded probes are failing tests.
+
+Still open: the source-complete inventory (deferred to the next round), item QA, the 20% sample and owner sign-off.
