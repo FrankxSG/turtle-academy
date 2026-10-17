@@ -1,6 +1,8 @@
 # Chinese curriculum, contracts and first content batch
 
-Independent public-source research and current content findings: [research audit](content-review/CHINESE_RESEARCH_AUDIT.md) (2026-10-16; changes required). This evidence supplements the authoring source register and does not approve the batch.
+Independent public-source research and original findings: [research audit](content-review/CHINESE_RESEARCH_AUDIT.md) (2026-10-16). The review disposition below records subsequent corrections; the historical audit remains evidence, not batch approval.
+
+**Review disposition — 17 October 2026:** Independent re-review of `a02199b` closed the raw-outcome import, word/ability identity, repair-route compatibility and tracked-bytecode findings. The windmill retagging and empty compatibility list are accepted for this batch. The 25 contract tests and catalogue validator pass. The material counts below have been reconciled with the catalogue. No open blocker from that targeted revision remains for merging this preparation work; this is not owner merge authorization or approved content for shipping. The source-complete curriculum denominator, full item QA, owner disputed-item review/random 20% sample, batch sign-off and rights review remain pending. Ability reporting must not claim a specific word was repaired; unmatched word imports remain pending. Existing private-data and release gates are unchanged.
 
 **Review proposal · 15 October 2026 · Issue #10**
 
@@ -16,7 +18,7 @@ This is one review entry point for curriculum preparation and authoring contract
 | [Task fixtures](../content/chinese/fixtures/) | Complete P2 examples for X=6, 10, 12 and 19 | Synthetic, deterministic validation examples; no learner data |
 | [Validator](../scripts/validate_chinese_content.py) and [boundary checks](../scripts/test_chinese_content_contracts.py) | Structural integrity and cross-file rejection cases | Standard-library authoring tools; not learning-engine implementation |
 
-The starter contains four P2 materials (two readings, one notice and one cloze), usable by both P2 courses subject to their own QA. One additional P3 reading is a sample for both P3 courses, not a complete P3 daily task or release bank. Shared course labels mean candidate applicability, not identical course coverage or an HCL-specific depth claim.
+The starter contains nine P2 materials (five readings, two visual texts and two cloze passages) and nine P3 materials (six readings, one visual text and two cloze passages). Each grade's materials are shared by Chinese and Higher Chinese subject to course-specific QA. This is an authored inventory, not an approved daily-task supply or release bank. Shared course labels mean candidate applicability, not identical course coverage or an HCL-specific depth claim.
 
 ## 2. Official source baseline
 
