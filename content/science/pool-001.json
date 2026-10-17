@@ -2,7 +2,7 @@
   "schema_version": "subject-content/1",
   "subject": "science",
   "batch_id": "sc-pool-001",
-  "version": 3,
+  "version": 4,
   "manifest_version": "sc-2023-p3-draft.1",
   "status": "author_checked_pending_independent_and_owner_review",
   "materials": [
@@ -3872,7 +3872,7 @@
     },
     {
       "id": "sc-p3-plant-stages.q1",
-      "version": 2,
+      "version": 3,
       "courses": [
         "p3_science"
       ],
@@ -7593,7 +7593,7 @@
     },
     {
       "id": "sc-p3-plant-cycles-timeline-learn.q2",
-      "version": 2,
+      "version": 3,
       "courses": [
         "p3_science"
       ],
@@ -7606,7 +7606,7 @@
       "options": [
         {
           "id": "opt-1",
-          "text": "none of the stages"
+          "text": "none of these"
         },
         {
           "id": "opt-2",
@@ -7766,7 +7766,8 @@
       "Distractors target documented misconceptions (attraction vs repulsion, all metals magnetic, light needed for germination)",
       "All content original; no past-paper question copied",
       "2026-10-16 correction pass: revised disputed and related items; item versions incremented; revised IDs remain listed for independent re-review, not approved.",
-      "2026-10-16 revision (PR #14 audit SC1–SC4): replaced germination and seed-part knowledge points (P5) with observing plant growth and recording plant life cycles; replaced the mixed strength/hardness point with strength only; clarified seedling as an early young plant; added an observation diagram or table to every teaching card; rewrote classification items to use observable features; added knowledge points, acquisition repair routes, prerequisites and a leaf map. Revised items have version + 1 and remain pending independent re-review."
+      "2026-10-16 revision (PR #14 audit SC1–SC4): replaced germination and seed-part knowledge points (P5) with observing plant growth and recording plant life cycles; replaced the mixed strength/hardness point with strength only; clarified seedling as an early young plant; added an observation diagram or table to every teaching card; rewrote classification items to use observable features; added knowledge points, acquisition repair routes, prerequisites and a leaf map. Revised items have version + 1 and remain pending independent re-review.",
+      "2026-10-17 revision (PR #14 re-review of 7889eb3): version identities corrected. sc-p3-plant-stages.q1 v3 (explanation changed in the previous round), sc-p3-card-fungi asset v2 (food cell corrected), sc-p3-plant-cycles-timeline-learn.q2 v3 ('none of these' replaces 'none of the stages'); pool version 4."
     ],
     "independent_review": "changes_requested",
     "owner_signoff": "pending",
@@ -8008,7 +8009,7 @@
     },
     {
       "id": "sc-p3-card-fungi",
-      "version": 1,
+      "version": 2,
       "kind": "svg",
       "path": "assets/sc-p3-card-fungi.svg",
       "alt": "A table comparing how a fern, a mushroom and bread mould get food.",

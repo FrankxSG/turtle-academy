@@ -9,7 +9,7 @@ Original P3 Science content for the public (generic) version of Turtle Academy, 
 ## 1. What is in this pool
 
 - `content/science/curriculum.json`: 10 topic records with scope and Pilot status, 41 leaf records (assessed ability, representation, scope, MOE page reference) and cited sources.
-- `content/science/pool-001.json` (batch version 3): 180 original questions (P3 180), 36 materials, 36 three-stage repair sets (exact → similar → generic), 72 non-repair questions with a declared repair route, 36 knowledge points.
+- `content/science/pool-001.json` (batch version 4): 180 original questions (P3 180), 36 materials, 36 three-stage repair sets (exact → similar → generic), 72 non-repair questions with a declared repair route, 36 knowledge points.
 - `content/science/assets/`: 51 original SVG diagrams referenced by items or materials (no scripts, links, images or external references; titles and alt text describe the picture without giving the answer).
 - `scripts/validate_subject_content.py`: structural checks (IDs, keys, 4+ distinct options, topic/source/leaf references, complete repair sets with one leaf mapping, repair routes for every non-repair question when leaves are declared, diagrams present for visual leaves, knowledge-point links and acyclic prerequisites, SVG safety, hints that do not state the answer).
 
@@ -100,3 +100,12 @@ python3 scripts/privacy_guard.py
 ```
 
 Passing validation proves structure only. Remaining before release: independent review of every item, random 20% sample of agreed items, owner batch sign-off, verification of topic boundaries against the official MOE syllabus PDF, and the existing Pilot coverage, data-protection and device gates. No learner data is used or implied by any item.
+
+## Re-review corrections — 17 October 2026 (batch version 4)
+
+Responds to the independent re-review of `7889eb3`, which accepted the fungi, plant-stage and related wording fixes.
+- **Version identities.** Every changed record now has a new version. `sc-p3-plant-stages.q1` is v3, because its explanation changed in the previous round. The corrected fungi card asset is v2. `sc-p3-plant-cycles-timeline-learn.q2` is v3. The pool is version 4.
+- **Wording.** The timeline question's last option now reads "none of these", matching its observation wording.
+- **Shared SVG guard.** Attribute values are now checked after XML decoding. Encoded `url(` and `https`, protocol-relative values, `data:` and CSS escapes are rejected, while same-file `url(#id)` stays allowed. The re-review's encoded probes are failing tests.
+
+Still open: the source-complete inventory (deferred to the next round), item QA, the 20% sample and owner sign-off.
