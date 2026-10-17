@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 140" width="480" height="140" role="img">
+<title>Four angles labelled A to D.</title>
+<rect x="0" y="0" width="480" height="140" fill="#ffffff"/>
+<line x1="34.0" y1="80.7" x2="86.0" y2="80.7" stroke="#1f2933" stroke-width="3" stroke-linecap="round"/>
+<line x1="34.0" y1="80.7" x2="73.8" y2="47.3" stroke="#1f2933" stroke-width="3" stroke-linecap="round"/>
+<path d="M52.0 80.71247785185002 A18 18 0 0 0 47.8 69.1" fill="none" stroke="#7b8794" stroke-width="1.5"/>
+<text x="60.0" y="130.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">A</text>
+<line x1="154.0" y1="90.0" x2="206.0" y2="90.0" stroke="#1f2933" stroke-width="3" stroke-linecap="round"/>
+<line x1="154.0" y1="90.0" x2="154.0" y2="38.0" stroke="#1f2933" stroke-width="3" stroke-linecap="round"/>
+<path d="M172.0 90.0 A18 18 0 0 0 154.0 72.0" fill="none" stroke="#7b8794" stroke-width="1.5"/>
+<text x="180.0" y="130.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">B</text>
+<line x1="290.7" y1="83.9" x2="342.7" y2="83.9" stroke="#1f2933" stroke-width="3" stroke-linecap="round"/>
+<line x1="290.7" y1="83.9" x2="257.3" y2="44.1" stroke="#1f2933" stroke-width="3" stroke-linecap="round"/>
+<path d="M308.71247785185005 83.91715552109343 A18 18 0 0 0 279.1 70.1" fill="none" stroke="#7b8794" stroke-width="1.5"/>
+<text x="300.0" y="130.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">C</text>
+<line x1="418.4" y1="72.9" x2="470.4" y2="72.9" stroke="#1f2933" stroke-width="3" stroke-linecap="round"/>
+<line x1="418.4" y1="72.9" x2="369.6" y2="55.1" stroke="#1f2933" stroke-width="3" stroke-linecap="round"/>
+<path d="M436.4320081404336 72.89252372646739 A18 18 0 0 0 401.5 66.7" fill="none" stroke="#7b8794" stroke-width="1.5"/>
+<text x="420.0" y="130.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">D</text>
+</svg>

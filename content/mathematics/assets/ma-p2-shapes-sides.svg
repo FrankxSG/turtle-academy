@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 140" width="480" height="140" role="img">
+<title>Four flat shapes labelled A to D.</title>
+<rect x="0" y="0" width="480" height="140" fill="#ffffff"/>
+<polygon points="60.0,24.0 104.0,98.0 16.0,98.0" fill="#9fd3c7" stroke="#1f2933" stroke-width="2"/>
+<text x="60.0" y="130.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">A</text>
+<rect x="132.0" y="36.0" width="96" height="56" fill="#9fd3c7" stroke="#1f2933" stroke-width="2"/>
+<text x="180.0" y="130.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">B</text>
+<polygon points="300.0,22.0 339.9,51.0 324.7,98.0 275.3,98.0 260.1,51.0" fill="#9fd3c7" stroke="#1f2933" stroke-width="2"/>
+<text x="300.0" y="130.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">C</text>
+<polygon points="420.0,22.0 456.4,43.0 456.4,85.0 420.0,106.0 383.6,85.0 383.6,43.0" fill="#9fd3c7" stroke="#1f2933" stroke-width="2"/>
+<text x="420.0" y="130.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">D</text>
+</svg>

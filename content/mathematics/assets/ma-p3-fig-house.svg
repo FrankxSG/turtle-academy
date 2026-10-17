@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 232 286" width="232" height="286" role="img">
+<title>A figure made from a square and a triangle.</title>
+<rect x="0" y="0" width="232" height="286" fill="#ffffff"/>
+<polygon points="62.0,134.0 116.0,62.0 170.0,134.0 170.0,224.0 62.0,224.0" fill="#9fd3c7" stroke="#1f2933" stroke-width="2.5"/>
+<line x1="62.0" y1="134.0" x2="170.0" y2="134.0" stroke="#1f2933" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="6 4"/>
+</svg>

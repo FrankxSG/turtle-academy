@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 140" width="480" height="140" role="img">
+<title>Four bars with one part of each shaded.</title>
+<rect x="0" y="0" width="480" height="140" fill="#ffffff"/>
+<rect x="10.0" y="44.0" width="50.0" height="40" fill="#9fd3c7" stroke="#1f2933" stroke-width="2"/>
+<rect x="60.0" y="44.0" width="50.0" height="40" fill="#ffffff" stroke="#1f2933" stroke-width="2"/>
+<text x="60.0" y="130.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">A</text>
+<rect x="130.0" y="44.0" width="70.0" height="40" fill="#9fd3c7" stroke="#1f2933" stroke-width="2"/>
+<rect x="200.0" y="44.0" width="30.0" height="40" fill="#ffffff" stroke="#1f2933" stroke-width="2"/>
+<text x="180.0" y="130.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">B</text>
+<rect x="250.0" y="44.0" width="33.3" height="40" fill="#9fd3c7" stroke="#1f2933" stroke-width="2"/>
+<rect x="283.3" y="44.0" width="33.3" height="40" fill="#ffffff" stroke="#1f2933" stroke-width="2"/>
+<rect x="316.7" y="44.0" width="33.3" height="40" fill="#ffffff" stroke="#1f2933" stroke-width="2"/>
+<text x="300.0" y="130.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">C</text>
+<rect x="370.0" y="44.0" width="25.0" height="40" fill="#9fd3c7" stroke="#1f2933" stroke-width="2"/>
+<rect x="395.0" y="44.0" width="25.0" height="40" fill="#ffffff" stroke="#1f2933" stroke-width="2"/>
+<rect x="420.0" y="44.0" width="25.0" height="40" fill="#ffffff" stroke="#1f2933" stroke-width="2"/>
+<rect x="445.0" y="44.0" width="25.0" height="40" fill="#ffffff" stroke="#1f2933" stroke-width="2"/>
+<text x="420.0" y="130.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">D</text>
+</svg>

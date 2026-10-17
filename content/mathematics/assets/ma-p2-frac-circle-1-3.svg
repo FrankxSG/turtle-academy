@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" width="200" height="150" role="img">
+<title>A circle divided into equal parts, one shaded.</title>
+<rect x="0" y="0" width="200" height="150" fill="#ffffff"/>
+<path d="M100.0 75.0 L100.0 27.0 A48 48 0 0 1 141.6 99.0 Z" fill="#9fd3c7" stroke="#1f2933" stroke-width="2"/>
+<path d="M100.0 75.0 L141.6 99.0 A48 48 0 0 1 58.4 99.0 Z" fill="#ffffff" stroke="#1f2933" stroke-width="2"/>
+<path d="M100.0 75.0 L58.4 99.0 A48 48 0 0 1 100.0 27.0 Z" fill="#ffffff" stroke="#1f2933" stroke-width="2"/>
+</svg>

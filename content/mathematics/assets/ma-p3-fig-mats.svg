@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 328 260" width="328" height="260" role="img">
+<title>Three equal rectangles side by side.</title>
+<rect x="0" y="0" width="328" height="260" fill="#ffffff"/>
+<polygon points="62.0,62.0 266.0,62.0 266.0,198.0 62.0,198.0" fill="#9fd3c7" stroke="#1f2933" stroke-width="2.5"/>
+<line x1="130.0" y1="62.0" x2="130.0" y2="198.0" stroke="#1f2933" stroke-width="1.6" stroke-linecap="round"/>
+<line x1="198.0" y1="62.0" x2="198.0" y2="198.0" stroke="#1f2933" stroke-width="1.6" stroke-linecap="round"/>
+<text x="96.0" y="50.0" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" font-weight="bold" fill="#1f2933">2 m</text>
+<text x="164.0" y="50.0" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" font-weight="bold" fill="#1f2933">2 m</text>
+<text x="232.0" y="50.0" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" font-weight="bold" fill="#1f2933">2 m</text>
+<text x="31.4" y="135.0" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" font-weight="bold" fill="#1f2933">4 m</text>
+</svg>

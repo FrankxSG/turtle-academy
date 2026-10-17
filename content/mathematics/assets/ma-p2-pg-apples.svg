@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 214" width="320" height="214" role="img">
+<title>A picture graph with a key.</title>
+<rect x="0" y="0" width="320" height="214" fill="#ffffff"/>
+<text x="160.0" y="26.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">Apples in baskets</text>
+<line x1="10.0" y1="71.0" x2="310.0" y2="71.0" stroke="#cbd2d9" stroke-width="0.8" stroke-linecap="round"/>
+<text x="98.0" y="58.0" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="end" font-weight="normal" fill="#1f2933">Basket A</text>
+<rect x="115.0" y="43" width="20" height="20" fill="#9fd3c7" stroke="#1f2933" stroke-width="1"/>
+<rect x="145.0" y="43" width="20" height="20" fill="#9fd3c7" stroke="#1f2933" stroke-width="1"/>
+<rect x="175.0" y="43" width="20" height="20" fill="#9fd3c7" stroke="#1f2933" stroke-width="1"/>
+<rect x="205.0" y="43" width="20" height="20" fill="#9fd3c7" stroke="#1f2933" stroke-width="1"/>
+<rect x="235.0" y="43" width="20" height="20" fill="#9fd3c7" stroke="#1f2933" stroke-width="1"/>
+<line x1="10.0" y1="109.0" x2="310.0" y2="109.0" stroke="#cbd2d9" stroke-width="0.8" stroke-linecap="round"/>
+<text x="98.0" y="96.0" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="end" font-weight="normal" fill="#1f2933">Basket B</text>
+<rect x="115.0" y="81" width="20" height="20" fill="#9fd3c7" stroke="#1f2933" stroke-width="1"/>
+<rect x="145.0" y="81" width="20" height="20" fill="#9fd3c7" stroke="#1f2933" stroke-width="1"/>
+<line x1="10.0" y1="147.0" x2="310.0" y2="147.0" stroke="#cbd2d9" stroke-width="0.8" stroke-linecap="round"/>
+<text x="98.0" y="134.0" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="end" font-weight="normal" fill="#1f2933">Basket C</text>
+<rect x="115.0" y="119" width="20" height="20" fill="#9fd3c7" stroke="#1f2933" stroke-width="1"/>
+<rect x="145.0" y="119" width="20" height="20" fill="#9fd3c7" stroke="#1f2933" stroke-width="1"/>
+<rect x="175.0" y="119" width="20" height="20" fill="#9fd3c7" stroke="#1f2933" stroke-width="1"/>
+<rect x="205.0" y="119" width="20" height="20" fill="#9fd3c7" stroke="#1f2933" stroke-width="1"/>
+<rect x="20" y="168" width="20" height="20" fill="#9fd3c7" stroke="#1f2933" stroke-width="1"/>
+<text x="48.0" y="183.0" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="start" font-weight="normal" fill="#1f2933">stands for 3 apples</text>
+</svg>

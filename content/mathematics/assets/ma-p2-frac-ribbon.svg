@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 150" width="220" height="150" role="img">
+<title>A ribbon divided into equal parts, one shaded.</title>
+<rect x="0" y="0" width="220" height="150" fill="#ffffff"/>
+<rect x="60.0" y="55.0" width="20.0" height="40" fill="#9fd3c7" stroke="#1f2933" stroke-width="2"/>
+<rect x="80.0" y="55.0" width="20.0" height="40" fill="#ffffff" stroke="#1f2933" stroke-width="2"/>
+<rect x="100.0" y="55.0" width="20.0" height="40" fill="#ffffff" stroke="#1f2933" stroke-width="2"/>
+<rect x="120.0" y="55.0" width="20.0" height="40" fill="#ffffff" stroke="#1f2933" stroke-width="2"/>
+<rect x="140.0" y="55.0" width="20.0" height="40" fill="#ffffff" stroke="#1f2933" stroke-width="2"/>
+</svg>

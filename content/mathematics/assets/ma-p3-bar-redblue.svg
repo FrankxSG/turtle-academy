@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 326 326" width="326" height="326" role="img">
+<title>A bar graph with a vertical scale.</title>
+<rect x="0" y="0" width="326" height="326" fill="#ffffff"/>
+<text x="163.0" y="24.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">Favourite colour</text>
+<line x1="64.0" y1="264.0" x2="306.0" y2="264.0" stroke="#cbd2d9" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="58.0" y1="264.0" x2="64.0" y2="264.0" stroke="#1f2933" stroke-width="1.5" stroke-linecap="round"/>
+<text x="54.0" y="269.0" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="end" font-weight="normal" fill="#1f2933">0</text>
+<line x1="64.0" y1="232.6" x2="306.0" y2="232.6" stroke="#cbd2d9" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="58.0" y1="232.6" x2="64.0" y2="232.6" stroke="#1f2933" stroke-width="1.5" stroke-linecap="round"/>
+<text x="54.0" y="237.6" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="end" font-weight="normal" fill="#1f2933">5</text>
+<line x1="64.0" y1="201.1" x2="306.0" y2="201.1" stroke="#cbd2d9" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="58.0" y1="201.1" x2="64.0" y2="201.1" stroke="#1f2933" stroke-width="1.5" stroke-linecap="round"/>
+<text x="54.0" y="206.1" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="end" font-weight="normal" fill="#1f2933">10</text>
+<line x1="64.0" y1="169.7" x2="306.0" y2="169.7" stroke="#cbd2d9" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="58.0" y1="169.7" x2="64.0" y2="169.7" stroke="#1f2933" stroke-width="1.5" stroke-linecap="round"/>
+<text x="54.0" y="174.7" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="end" font-weight="normal" fill="#1f2933">15</text>
+<line x1="64.0" y1="138.3" x2="306.0" y2="138.3" stroke="#cbd2d9" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="58.0" y1="138.3" x2="64.0" y2="138.3" stroke="#1f2933" stroke-width="1.5" stroke-linecap="round"/>
+<text x="54.0" y="143.3" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="end" font-weight="normal" fill="#1f2933">20</text>
+<line x1="64.0" y1="106.9" x2="306.0" y2="106.9" stroke="#cbd2d9" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="58.0" y1="106.9" x2="64.0" y2="106.9" stroke="#1f2933" stroke-width="1.5" stroke-linecap="round"/>
+<text x="54.0" y="111.9" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="end" font-weight="normal" fill="#1f2933">25</text>
+<line x1="64.0" y1="75.4" x2="306.0" y2="75.4" stroke="#cbd2d9" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="58.0" y1="75.4" x2="64.0" y2="75.4" stroke="#1f2933" stroke-width="1.5" stroke-linecap="round"/>
+<text x="54.0" y="80.4" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="end" font-weight="normal" fill="#1f2933">30</text>
+<line x1="64.0" y1="44.0" x2="306.0" y2="44.0" stroke="#cbd2d9" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="58.0" y1="44.0" x2="64.0" y2="44.0" stroke="#1f2933" stroke-width="1.5" stroke-linecap="round"/>
+<text x="54.0" y="49.0" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="end" font-weight="normal" fill="#1f2933">35</text>
+<line x1="64.0" y1="44.0" x2="64.0" y2="264.0" stroke="#1f2933" stroke-width="2" stroke-linecap="round"/>
+<line x1="64.0" y1="264.0" x2="306.0" y2="264.0" stroke="#1f2933" stroke-width="2" stroke-linecap="round"/>
+<rect x="90" y="75.4" width="46" height="188.6" fill="#9fd3c7" stroke="#1f2933" stroke-width="1.2"/>
+<text x="113.0" y="284.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">Red</text>
+<rect x="162" y="169.7" width="46" height="94.3" fill="#9fd3c7" stroke="#1f2933" stroke-width="1.2"/>
+<text x="185.0" y="284.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">Blue</text>
+<rect x="234" y="106.9" width="46" height="157.1" fill="#9fd3c7" stroke="#1f2933" stroke-width="1.2"/>
+<text x="257.0" y="284.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">Green</text>
+<text x="16" y="154.0" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#1f2933" text-anchor="middle" transform="rotate(-90 16 154.0)">Number of pupils</text>
+</svg>
