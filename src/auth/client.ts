@@ -315,8 +315,9 @@ export function createAuthClient(config: AuthConfig | null, deps: Deps = {}) {
      * Clears the session from this client at once, then from device storage. Returns
      * storage_unavailable when the device copy could not be removed or overwritten: the caller must
      * not claim a durable sign-out, because a reload could restore the session. Pending Google
-     * verifiers are also cleared; a PKCE generation still in flight cannot recreate one. Any sign-in or refresh
-     * still waiting for the server is superseded and cannot restore a session when it answers late.
+     * verifiers are also cleared; a PKCE generation still in flight cannot recreate one. Any sign-in
+     * or refresh still waiting for the server is superseded and cannot restore a session when it
+     * answers late.
      * Server-side logout is best effort and never changes the local result.
      */
     async signOut(): Promise<SignOutResult> {
