@@ -1,7 +1,7 @@
 {
   "schema_version": "chinese-curriculum/1",
   "manifest_version": "zh-2024-p2p3-draft.2",
-  "status": "proposed_not_import_enabled",
+  "status": "approved",
   "source_date": "2026-10-17",
   "courses": [
     "p2_chinese",
@@ -2006,7 +2006,7 @@
     {"id":"zh.p3_higher_chinese.char.u9f3b","course":"p3_higher_chinese","character":"鼻","recognition_list_pages":[5],"writing_list_pages":[5],"source_ref":"moe-hcl-characters-2024"},
     {"id":"zh.p3_higher_chinese.char.u9f50","course":"p3_higher_chinese","character":"齐","recognition_list_pages":[],"writing_list_pages":[5],"source_ref":"moe-hcl-characters-2024"}
   ],
-  "coverage_status": "denominator_and_mapping_review_pending",
+  "coverage_status": "approved",
   "limitations": [
     "Grade assignment is a source-based working map requiring independent matrix audit; no release percentage is claimed.",
     "Listed grade character sets are new/revisited list occurrences, not cumulative proficiency targets or a complete word vocabulary.",

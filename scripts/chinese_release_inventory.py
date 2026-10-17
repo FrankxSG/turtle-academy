@@ -221,10 +221,11 @@ def render(curriculum, batch):
         'Counts below combine all batches. A batch\'s review state covers only its own items.',
         '',
         '**Read this first.** Nothing here is approved coverage. The release denominator is the in-scope '
-        'leaf list below, which is itself a proposal until the independent page/grade audit and the owner '
-        'approve it. "Authored" means a leaf has general-practice questions and at least one complete '
-        'exact/similar/generic repair route in the draft batch; it becomes coverage only after review, '
-        'rights and owner sign-off. Character-group coverage is reported separately and never merged into '
+        'leaf list below' + (', approved by the owner.' if curriculum['status'] == 'approved' else
+                             ', which is itself a proposal until the owner approves it.') +
+        ' "Authored" means a leaf has general-practice questions and at least one complete '
+        'exact/similar/generic repair route in the catalogue; it becomes coverage only after review, '
+        'rights and owner sign-off of the batch that holds it. Character-group coverage is reported separately and never merged into '
         'the skill percentage (owner decision 2026-10-16).',
         '',
         'Higher Chinese uses the same leaves and the same shared questions as Chinese. No question is '
