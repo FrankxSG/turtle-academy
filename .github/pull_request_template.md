@@ -1,13 +1,15 @@
 <!--
 Follow docs/AI_COLLABORATION.md.
 Title: type: user-facing description (optional scope only when useful).
-Types: feat, fix, improve, refactor, docs, chore.
+Types: feat, fix, improve, refactor, docs, chore, content (lesson/curriculum data, e.g. content(chinese):), trial (separate trial/demo features).
 For fixes, describe the symptom and trigger rather than the code-level change.
 Add a visible Closes #<issue-number> or Related: #<issue-number> when applicable.
 For fork PRs, keep Allow edits from maintainers enabled when available.
 -->
 
 Owner (Claude or ChatGPT) and reviewer (the other):  
+Issue:  
+Touches (files or folders):  
 Depends on (PRs):  
 
 ## What Problem This Solves
