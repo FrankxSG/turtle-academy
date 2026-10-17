@@ -102,3 +102,37 @@ Validation of the correction: 39 client/owner-check tests, repository TypeScript
 ### 2026-10-17 review of the pending-Google correction (`d75d89d..e3d2dd8`)
 
 No blocking findings. The verifier is cleared on sign-out (empty-value overwrite when removal fails; an empty verifier can never be exchanged), and the identity generation now also covers PKCE generation. Each of four deliberate weakenings (skipping the verifier cleanup, the PKCE generation check, the overwrite fallback, or reporting a stuck verifier) fails at least one regression test, and a reload after the overwrite fallback was confirmed not to complete a stale callback. Local evidence: `test_database.py` **19 pass** (PostgreSQL 16); client and owner-check suites **39 pass** (Node 22); strict type-check of the changed modules, privacy guard and `git diff --check` pass. The build is evidenced by GitHub CI on the pushed head.
+
+## 2026-10-17 Pilot learning engine (Issue #17, synthetic only)
+
+Branch `claude/pilot-learning-engine`, based on `main` at `266a2ba`, PR #20. Adds the on-device engine (`src/engine/`), the catalogue adapter (`src/catalogue/`) and a separate Dexie learner store (`turtle-academy-pilot-v1`; the guest database is never changed). Synthetic fixtures only, under `tests/engine/`. No backend calls, uploads or real data. Design and engineering proposals: `src/engine/README.md`.
+
+Evidence at tested code head `70c1eaf`:
+- `npm run test:engine` (`node --test tests/engine/*.test.ts`): **51 pass** locally (Node 22). It covers the #17 acceptance cases: F01–F19, F21, F22, F24, F25, F27, F29, F32, F36–F40, legacy guest isolation, and a populated snapshot that passes the #16 validator pinned to `pilot-snapshot/1`.
+- Strict type check of the engine, catalogue, snapshot and test modules passes locally (TypeScript 6). Twenty of 22 deliberate rule weakenings fail at least one test; the two others are redundant second guards (see PR #20).
+- GitHub CI at `70c1eaf`: `foundation` passed (`npm ci`, `npm audit`, `npm run build` including the TypeScript 7 type check of the Dexie store, and the end-to-end tests); `engine` and `privacy-guard` passed.
+- Not yet executed: the Dexie store against IndexedDB (needs a pinned `fake-indexeddb` lockfile change or a browser test), and browser or service-worker update acceptance.
+
+### 2026-10-17 ChatGPT independent review of PR #20 (`3ca9a0e`)
+
+Reviewed against `main` at `266a2ba`. Fixed F29 catalogue version pinning: conflicting installs under an existing subject/version are rejected, identical retries remain idempotent, and loader/reader references cannot mutate installed content. Two synthetic regression tests cover a paused task across reload and reference mutation. This correction needs independent re-review.
+
+Remaining blockers recorded on PR #20: general-practice mistake observations survive flagging of their source question; frozen material plans can serve an item version suspended after planning; and Issue #17 AC1 still lacks executable IndexedDB transaction/restart tests. These are not accepted limitations or merge approval.
+
+Review environment: Node 24.21.0; dependency installation and local app build unavailable. Focused catalogue/story suite: 14 pass. Broader engine results and CI for the resulting head are recorded on the PR. Local source materialization omits the release content directory, so its release-path isolation test requires CI's complete checkout. Existing head `3ca9a0e` has successful Learning engine and Privacy guard CI. No backend, deployment, real content release or real learner data action.
+
+### 2026-10-17 response to the PR #20 review (`9d59192` → `3377d73`)
+
+- **Catalogue correction (`9d59192`) re-reviewed:** correct. Installed releases are now deep-frozen copies returned without per-read cloning (the engine reads the release several times per question); a mutation attempt throws. Its two regression tests pass, one updated to expect the read-only error.
+- **[P1] Flagged general questions:** fixed. App-caught observations record their source presentation; the reducer counts them only while that question is valid evidence, collapses same-day repeats, and replays on parent restore or disable. Tests: the review's reproduction, same-day errors with one flagged, a later flag on the same item version with restore and disable, and reload.
+- **[P2] Frozen plans and later suspensions:** fixed. Unshown and shown-but-unanswered suspended questions are replaced in place inside the material (feedback still withheld, whole-task aggregation kept); answered work keeps its count. Tests: the review's reproduction, a shown question, a target-assessed replacement, and an answered question.
+- **[P2] AC1 on real IndexedDB:** six Playwright tests on Chromium exercise the actual Dexie store (reopen, idempotent and conflicting commits with full rollback, the engine restarting on Dexie) and the legacy boundary (valid, corrupt and unknown-layout guest data preserved byte-for-byte, an absent guest database not created, interrupted and repeated startup). The legacy reader now uses native IndexedDB read-only.
+
+Evidence at tested code head `3377d73`: `npm run test:engine` **60 pass** locally (Node 22); strict type check of the engine and tests passes (TypeScript 6). Deliberate weakenings: 23 of 26 caught, including each new fix; the three not caught are redundant second guards (daily clearance cap, checkpoint de-duplication, same-day collapse). GitHub CI at `3377d73`: `foundation` passed (`npm ci`, `npm audit`, `npm run build`, Playwright **65 passed**, up from 59 with the six new storage tests); `engine` and `privacy-guard` passed.
+
+### 2026-10-17 response to the PR #20 re-review (`2bb3f38` → `0855be5`)
+
+- **[P1] Exhausted material replacements:** fixed. A withdrawn material slot with no replacement (flagged before an answer, or suspended after planning) no longer holds back help for the surviving answers. The task finalises at the actual count with `replacements_exhausted`; checkpoints stay idempotent across reload.
+- **[P1] Skill and pool compatibility:** fixed. One shared rule decides whether a question can credit a target: same subject, course and knowledge point, the exact assessed skill (a missing skill on either side is not a wildcard), and a pool for the target's stage. It is used for material coverage, attachment, short repair and replacements, and re-checked when a question is shown. Incompatible questions stay general practice and the target keeps its own repair slot.
+
+Evidence at tested code head `0855be5`: `npm run test:engine` **66 pass** locally (Node 22), including both reproductions from the re-review; strict type check passes (TypeScript 6). Deliberate weakenings: 29 of 33 caught, including each new fix; the four not caught are redundant second guards (daily clearance cap, checkpoint de-duplication, same-day collapse, compatibility re-check when shown). GitHub CI at `0855be5`: `foundation` passed (`npm ci`, `npm audit`, `npm run build`, Playwright **65 passed**); `engine` and `privacy-guard` passed.
