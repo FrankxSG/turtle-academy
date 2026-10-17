@@ -2090,7 +2090,8 @@
    "Disputed for the owner: four tone-mark placement items (zh-p2-sound2.q2, .q3, -repair.q2, -repair.q3) — whether telling correctly marked pinyin from wrongly marked pinyin is in P2 scope.",
    "Owner sample: 7 of 34 undisputed items, ceil(N/5), random.Random('zh-starter-002-v1-owner-sample-2026-10-18').sample(pool, ceil(len(pool)/5)) over batch order, pool excluding the disputed items.",
    "Owner decision 2026-10-18: all four tone-mark placement items kept as written; disputes cleared. The owner sample was drawn while they were disputed, so its pool stays the 34 items listed in the review pack.",
-   "Pending: independent cross-review (ChatGPT), owner review of the sample, rights review."
+   "Owner decisions 2026-10-18: all 7 sampled items accepted as written, with no notes; rights cleared, because the content is original Turtle Academy material and no worksheet, textbook or past-paper text was copied.",
+   "Pending: independent cross-review (ChatGPT) of all 38 items, Claude re-review of any corrections, then owner sign-off of the batch."
   ],
   "independent_review": "pending",
   "owner_signoff": "pending",
@@ -2104,7 +2105,7 @@
    "zh-p2-reason-repair.q2"
   ],
   "disputed_item_ids": [],
-  "rights_status": "original_draft_pending_owner_rights_review",
+  "rights_status": "cleared",
   "artwork": "none"
  }
 }

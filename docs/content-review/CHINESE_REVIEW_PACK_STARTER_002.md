@@ -1,13 +1,13 @@
 # Chinese review pack — batch zh-starter-002 v1
 
-New original P2 content for Chinese and Higher Chinese, drafted by Claude on 2026-10-18. Status: `author_checked_pending_independent_and_owner_review`. Independent review `pending`, owner `pending`, rights `original_draft_pending_owner_rights_review`. Batch `zh-starter-001` v10 is unchanged and keeps its approval; this batch's review state covers only its own 38 items.
+New original P2 content for Chinese and Higher Chinese, drafted by Claude on 2026-10-18. Status: `author_checked_pending_independent_and_owner_review`. Independent review `pending`, owner `pending`, rights `cleared`. Batch `zh-starter-001` v10 is unchanged and keeps its approval; this batch's review state covers only its own 38 items.
 
 Every question is single-answer multiple choice with four options. `[空1]` marks the blank; pinyin annotations are shown in brackets. Keys are review aids, not shipping approval.
 
 ## What to review
 
 - **ChatGPT (independent cross-review):** all 38 items and the material, against the common and Chinese authoring skills. Corrections go back to Claude for re-review, as in PR 23.
-- **Owner:** the 7 sampled items below. The 4 disputed items were decided on 2026-10-18.
+- **Owner:** decided on 2026-10-18: the 4 disputed items kept, all 7 sampled items accepted and rights cleared. Batch sign-off waits for the cross-review.
 
 | Set | Items | Leaf | Repair group |
 | --- | ---: | --- | --- |
@@ -123,4 +123,5 @@ Material **zh-m20 · 回家的路上** (v1, reading). All first answers are coll
 - Disputed for the owner: four tone-mark placement items (zh-p2-sound2.q2, .q3, -repair.q2, -repair.q3) — whether telling correctly marked pinyin from wrongly marked pinyin is in P2 scope.
 - Owner sample: 7 of 34 undisputed items, ceil(N/5), random.Random('zh-starter-002-v1-owner-sample-2026-10-18').sample(pool, ceil(len(pool)/5)) over batch order, pool excluding the disputed items.
 - Owner decision 2026-10-18: all four tone-mark placement items kept as written; disputes cleared. The owner sample was drawn while they were disputed, so its pool stays the 34 items listed in the review pack.
-- Pending: independent cross-review (ChatGPT), owner review of the sample, rights review.
+- Owner decisions 2026-10-18: all 7 sampled items accepted as written, with no notes; rights cleared, because the content is original Turtle Academy material and no worksheet, textbook or past-paper text was copied.
+- Pending: independent cross-review (ChatGPT) of all 38 items, Claude re-review of any corrections, then owner sign-off of the batch.
