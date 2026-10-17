@@ -1,0 +1,22 @@
+.st{display:flex;flex-direction:column;align-items:center;gap:8px;max-width:100%}
+.st-board{display:block;flex:none;background:#fffdf7;border:2px solid #c9a77c;border-radius:16px;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.st-surface{touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;line-height:0}
+.st-board{touch-action:none}
+.st-drawable{cursor:crosshair}
+.st-grid line{stroke:#e2c9a6;stroke-width:4;stroke-dasharray:22 18}
+.st-outline{fill:#e7e1d6}
+.st-stroke-done{fill:#213c35}
+.st-anim{fill:none;stroke:#213c35;stroke-width:150;stroke-linecap:round;stroke-linejoin:round;animation-name:st-draw;animation-timing-function:ease-in-out;animation-fill-mode:forwards}
+.st-hint{stroke:#c9781f}
+.st-ink polyline{fill:none;stroke:#174d43;stroke-opacity:.82;stroke-linecap:round;stroke-linejoin:round}
+.st-ink .st-rejected{stroke:#b26c1f;animation:st-fade .45s ease-out forwards}
+.st-start{fill:#c9781f;opacity:.55}
+.st-start-strong{opacity:.9}
+.st-badge{margin:0;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#8a5a1c;background:#f5e8c6;border-radius:20px;padding:4px 10px}
+.st-status{min-height:22px;margin:0;font-size:15px;line-height:1.45;color:#345c46;text-align:center}
+.st-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.st-actions button{padding:8px 14px;border:1px solid #b7c9b5;border-radius:12px;background:#eff4e9;color:#213c35}
+.st-actions button:disabled{cursor:default;opacity:.45}
+@keyframes st-draw{to{stroke-dashoffset:0}}
+@keyframes st-fade{to{stroke-opacity:0}}
+@media(prefers-reduced-motion:reduce){.st-anim{animation:none;stroke-dashoffset:0!important}.st-ink .st-rejected{animation:none}}

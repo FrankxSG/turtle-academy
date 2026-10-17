@@ -9,8 +9,12 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "node scripts/generate-icons.mjs && tsc --noEmit && vite build",
+    "build:hosted": "if [ \"$TURTLE_SITE\" = \"trials\" ]; then npm run build:trials && rm -rf dist && cp -R trials/dist dist; else npm run build; fi",
     "preview": "vite preview --host 127.0.0.1",
     "typecheck": "tsc --noEmit",
+    "dev:trials": "vite --config vite.trials.config.ts --host 127.0.0.1",
+    "build:trials": "tsc --noEmit && vite build --config vite.trials.config.ts",
+    "preview:trials": "vite preview --config vite.trials.config.ts --host 127.0.0.1",
     "test:e2e": "playwright test"
   },
   "dependencies": {
