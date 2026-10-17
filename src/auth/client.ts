@@ -26,7 +26,11 @@ export type AuthError =
   | 'google_signup_refused'
   | 'google_failed'
   | 'storage_unavailable'
+  | 'superseded'
 export type AuthResult = { ok: true; session: Session } | { ok: false; error: AuthError }
+
+// superseded: a sign-out or a newer sign-in happened while this request was waiting for the server.
+// Its late answer is discarded (never stored or returned) and its session is revoked best effort.
 
 /** storage_unavailable: this device may still hold the old session after a reload; tell the parent. */
 export type SignOutResult = { ok: true } | { ok: false; error: 'storage_unavailable' }
@@ -125,6 +129,10 @@ export function createAuthClient(config: AuthConfig | null, deps: Deps = {}) {
   // This instance's view of the session. undefined = not yet known, so read storage.
   // After sign-out it is null even if the device storage could not be cleared.
   let current: Session | null | undefined
+  // Identity generation. Sign-out and every sign-in start move it on, and a successful sign-in moves
+  // it on again, so an older request that completes late (a background refresh, a slow sign-in) is
+  // stale: it must neither persist credentials nor hand its session to the caller.
+  let generation = 0
 
   /** Persists the session; returns false if the device copy could not be written or cleared. */
   function save(session: Session | null): boolean {
@@ -161,8 +169,24 @@ export function createAuthClient(config: AuthConfig | null, deps: Deps = {}) {
     }
   }
 
+  /** Best-effort server revocation of one discarded session only (never the parent's other sessions). */
+  async function revokeLocally(session: Session): Promise<void> {
+    if (!config) return
+    try {
+      await doFetch(`${config.url}/auth/v1/logout?scope=local`, {
+        method: 'POST',
+        headers: { apikey: config.anonKey, Authorization: `Bearer ${session.accessToken}` },
+      })
+    } catch {
+      // Offline: the discarded tokens are not stored anywhere on this device.
+    }
+  }
+
   async function tokenRequest(grant: 'password' | 'refresh_token' | 'pkce', body: Record<string, string>): Promise<AuthResult> {
     if (!config) return { ok: false, error: 'not_configured' }
+    // A sign-in replaces the identity, so it makes every older pending request stale. A refresh only
+    // renews the current identity, so it joins the current generation without moving it.
+    const issuedIn = grant === 'refresh_token' ? generation : ++generation
     let res: Response
     try {
       res = await doFetch(`${config.url}/auth/v1/token?grant_type=${grant}`, {
@@ -182,6 +206,11 @@ export function createAuthClient(config: AuthConfig | null, deps: Deps = {}) {
     }
     const session = toSession(parsed)
     if (!session) return { ok: false, error: 'unavailable' }
+    if (issuedIn !== generation) {
+      await revokeLocally(session)
+      return { ok: false, error: 'superseded' }
+    }
+    if (grant !== 'refresh_token') generation++ // refreshes issued before this sign-in landed are stale
     save(session)
     return { ok: true, session }
   }
@@ -268,10 +297,12 @@ export function createAuthClient(config: AuthConfig | null, deps: Deps = {}) {
     /**
      * Clears the session from this client at once, then from device storage. Returns
      * storage_unavailable when the device copy could not be removed or overwritten: the caller must
-     * not claim a durable sign-out, because a reload could restore the session. Server-side logout is
-     * best effort and never changes the local result.
+     * not claim a durable sign-out, because a reload could restore the session. Any sign-in or refresh
+     * still waiting for the server is superseded and cannot restore a session when it answers late.
+     * Server-side logout is best effort and never changes the local result.
      */
     async signOut(): Promise<SignOutResult> {
+      generation++ // any request still waiting for the server can no longer restore a session
       const previous = getStoredSession()
       const durable = save(null)
       if (config && previous) {

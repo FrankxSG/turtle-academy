@@ -270,3 +270,125 @@ test('a throwing localStorage getter does not break the client', async () => {
     else delete globalThis.localStorage
   }
 })
+
+// PR #19 re-review: a sign-in or refresh answered after sign-out (or after a newer sign-in) must not
+// restore a session. Responses are held with deferred promises so the order is deterministic.
+function deferredServer() {
+  const pending = []
+  const calls = []
+  const fetch = (url, init) => {
+    calls.push({ url, init })
+    if (url.includes('/logout')) return Promise.resolve(new Response('{}', { status: 204 }))
+    return new Promise((resolve) => pending.push(resolve))
+  }
+  const tokens = (name, userId = 'u-1') => new Response(JSON.stringify({ access_token: `a-${name}`, refresh_token: `r-${name}`, expires_at: 2000000000, user: { id: userId } }), { status: 200 })
+  return { fetch, calls, pending, tokens }
+}
+
+const CFG = { url: 'https://example.invalid', anonKey: 'k' }
+const flush = () => new Promise((r) => setImmediate(r))
+
+test('refresh -> sign-out -> late refresh success stays signed out, also after reload (re-review)', async () => {
+  const store = memoryStore()
+  store.setItem(auth.SESSION_KEY, JSON.stringify(SESSION))
+  const srv = deferredServer()
+  const client = auth.createAuthClient(CFG, { fetch: srv.fetch, storage: store })
+  const refreshing = client.refreshSession()
+  await flush()
+  assert.equal(srv.pending.length, 1, 'refresh is waiting for the server')
+  assert.deepEqual(await client.signOut(), { ok: true })
+  assert.equal(client.getStoredSession(), null)
+  srv.pending.shift()(srv.tokens('late'))
+  assert.deepEqual(await refreshing, { ok: false, error: 'superseded' }, 'no actionable session is returned')
+  assert.equal(client.getStoredSession(), null, 'memory stays signed out')
+  assert.equal(store.m.has(auth.SESSION_KEY), false, 'storage was not recreated')
+  assert.equal(auth.createAuthClient(CFG, { storage: store }).getStoredSession(), null, 'a reloaded client sees no session')
+  const revoke = srv.calls.find((c) => c.url.endsWith('/auth/v1/logout?scope=local'))
+  assert.ok(revoke, 'the late session is revoked on the server, best effort')
+  assert.equal(revoke.init.headers.Authorization, 'Bearer a-late')
+  // A deliberate sign-in afterwards still works.
+  const signingIn = client.signInWithPassword('parent@example.invalid', 'synthetic-password')
+  await flush()
+  srv.pending.shift()(srv.tokens('fresh'))
+  const fresh = await signingIn
+  assert.equal(fresh.ok, true)
+  assert.equal(client.getStoredSession().accessToken, 'a-fresh')
+  assert.equal(JSON.parse(store.getItem(auth.SESSION_KEY)).accessToken, 'a-fresh')
+})
+
+test('a password sign-in answered after sign-out is discarded (re-review)', async () => {
+  const store = memoryStore()
+  const srv = deferredServer()
+  const client = auth.createAuthClient(CFG, { fetch: srv.fetch, storage: store })
+  const signingIn = client.signInWithPassword('parent@example.invalid', 'synthetic-password')
+  await flush()
+  assert.deepEqual(await client.signOut(), { ok: true })
+  srv.pending.shift()(srv.tokens('late'))
+  assert.deepEqual(await signingIn, { ok: false, error: 'superseded' })
+  assert.equal(client.getStoredSession(), null)
+  assert.equal(store.m.has(auth.SESSION_KEY), false)
+})
+
+test('a Google (PKCE) completion answered after sign-out is discarded (re-review)', async () => {
+  const store = memoryStore()
+  const srv = deferredServer()
+  const client = auth.createAuthClient({ ...CFG, googleEnabled: true }, { fetch: srv.fetch, storage: store })
+  assert.equal((await client.startGoogleSignIn('https://app.example.invalid/cb')).ok, true)
+  const completing = client.completeGoogleSignIn('https://app.example.invalid/cb?code=synthetic-code')
+  await flush()
+  assert.deepEqual(await client.signOut(), { ok: true })
+  srv.pending.shift()(srv.tokens('late'))
+  assert.deepEqual(await completing, { ok: false, error: 'superseded' })
+  assert.equal(client.getStoredSession(), null)
+  assert.equal(store.m.has(auth.SESSION_KEY), false)
+})
+
+test('an old refresh cannot overwrite a newer sign-in, in either completion order (re-review)', async () => {
+  for (const refreshFirst of [false, true]) {
+    const store = memoryStore()
+    store.setItem(auth.SESSION_KEY, JSON.stringify(SESSION))
+    const srv = deferredServer()
+    const client = auth.createAuthClient(CFG, { fetch: srv.fetch, storage: store })
+    const refreshing = client.refreshSession()
+    await flush()
+    const signingIn = client.signInWithPassword('parent@example.invalid', 'synthetic-password')
+    await flush()
+    const [resolveRefresh, resolveSignIn] = srv.pending.splice(0, 2)
+    if (refreshFirst) resolveRefresh(srv.tokens('old')), resolveSignIn(srv.tokens('new', 'u-2'))
+    else resolveSignIn(srv.tokens('new', 'u-2')), resolveRefresh(srv.tokens('old'))
+    assert.deepEqual(await refreshing, { ok: false, error: 'superseded' }, `refreshFirst=${refreshFirst}`)
+    assert.equal((await signingIn).ok, true)
+    assert.equal(client.getStoredSession().accessToken, 'a-new')
+    assert.equal(JSON.parse(store.getItem(auth.SESSION_KEY)).userId, 'u-2')
+  }
+})
+
+test('a refresh started while a sign-in is pending cannot overwrite it when it lands (re-review)', async () => {
+  const store = memoryStore()
+  store.setItem(auth.SESSION_KEY, JSON.stringify(SESSION))
+  const srv = deferredServer()
+  const client = auth.createAuthClient(CFG, { fetch: srv.fetch, storage: store })
+  const signingIn = client.signInWithPassword('parent@example.invalid', 'synthetic-password')
+  await flush()
+  const refreshing = client.refreshSession()
+  await flush()
+  const [resolveSignIn, resolveRefresh] = srv.pending.splice(0, 2)
+  resolveSignIn(srv.tokens('new', 'u-2'))
+  assert.equal((await signingIn).ok, true)
+  resolveRefresh(srv.tokens('old'))
+  assert.deepEqual(await refreshing, { ok: false, error: 'superseded' })
+  assert.equal(client.getStoredSession().accessToken, 'a-new')
+})
+
+test('an ordinary refresh with no competing sign-in or sign-out still renews the session', async () => {
+  const store = memoryStore()
+  store.setItem(auth.SESSION_KEY, JSON.stringify(SESSION))
+  const srv = deferredServer()
+  const client = auth.createAuthClient(CFG, { fetch: srv.fetch, storage: store })
+  const refreshing = client.refreshSession()
+  await flush()
+  srv.pending.shift()(srv.tokens('renewed'))
+  assert.equal((await refreshing).ok, true)
+  assert.equal(JSON.parse(store.getItem(auth.SESSION_KEY)).accessToken, 'a-renewed')
+  assert.equal(srv.calls.some((c) => c.url.includes('/logout')), false, 'nothing is revoked')
+})
