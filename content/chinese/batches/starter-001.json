@@ -1,7 +1,7 @@
 {
   "schema_version": "chinese-content/1",
   "batch_id": "zh-starter-001",
-  "version": 9,
+  "version": 10,
   "curriculum_manifest_version": "zh-2024-p2p3-draft.2",
   "status": "author_checked_pending_independent_and_owner_review",
   "materials": [
@@ -8920,7 +8920,7 @@
     },
     {
       "id": "zh-p2-sound.q5",
-      "version": 2,
+      "version": 3,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -8952,7 +8952,7 @@
         }
       ],
       "correct_option_id": "opt-2",
-      "hint": "轻声读一读每个字，再比较声母和声调。",
+      "hint": "小声读一读每个字，再比较声母和声调。",
       "explanation": "“跑”读 pǎo。“抱”读 bào，“泡”读 pào，“饱”读 bǎo。",
       "rationale": "选出与字对应的拼音或与拼音对应的字；只评估书面拼音辨认，不评估口语发音。",
       "material_id": null,
@@ -9903,7 +9903,7 @@
     },
     {
       "id": "zh-p2-radmeaning-repair.q3",
-      "version": 2,
+      "version": 3,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -9922,7 +9922,7 @@
       "options": [
         {
           "id": "opt-1",
-          "text": "女的家人"
+          "text": "女人和女孩"
         },
         {
           "id": "opt-2",
@@ -9939,7 +9939,7 @@
       ],
       "correct_option_id": "opt-1",
       "hint": "这三个字说的都是家里的什么人？",
-      "explanation": "“妈、姐、妹”都是女字旁，都表示女的家人。",
+      "explanation": "女字旁的字常和女人、女孩有关。“妈、姐、妹”都是家里的女人或女孩。",
       "rationale": "根据常见偏旁推想字和什么有关；干扰项字形或读音相近。",
       "material_id": null,
       "stage": "generic",
@@ -10249,7 +10249,7 @@
     },
     {
       "id": "zh-p2-punctread-repair.q3",
-      "version": 2,
+      "version": 3,
       "courses": [
         "p2_chinese",
         "p2_higher_chinese"
@@ -10264,7 +10264,7 @@
       ],
       "family": "character",
       "format": "mcq_4plus",
-      "stem": "哪一句读起来语气更强？",
+      "stem": "哪一句读起来语气最强？",
       "options": [
         {
           "id": "opt-1",
@@ -18914,7 +18914,8 @@
       "2026-10-16 audit-response revision (ZH1–ZH4): language-use leaves and the P3 matrix rows added; 75 language-use items remapped from w-ideas; word, language-point and reading-skill repair targets with complete pools in four new groups; every non-repair question declares repair_target_refs; zh-m16 rewritten as an accurate pinwheel process with its five blanks; zh-m11.q1 remapped to explicit retrieval. Mapping-only changes keep item versions; content changes increment them. All remain pending independent re-review.",
       "2026-10-17 release-inventory pass (batch v8, manifest draft.2): Claude reviewed all 318 v7 items. Of these, 293 were drafted by Claude, so this pass is an author recheck for them, not independent AI cross-review. Corrections: answer leak (zh-m12.q5), double-cue stem, penguin hint, stem containing its key, brand-neutral wording, four calculation questions changed to explicit retrieval, 33 hints that named the only option with the radical, 10 P2 instructions reworded within the P1-P2 character lists. Mapping: punctuation choice to w-punctuation; notice/visual-text retrieval to r-explicit-practical. New: 字音 leaf with 10 items (zh-group-p2-pinyin) and a P2 card-format route with the zh-m19 生日卡 material (8 items); 字义, 偏旁表义 and 借助标点理解 routes with general practice (21 items). New items await independent cross-review; sampled IDs are drawn from unchanged agreed items only; outcomes pending owner.",
       "2026-10-17 ChatGPT review of input head 9d4357a: desk-checked all 357 items and 19 materials, keys/options/hints/explanations and mapped response demands. This is cross-review for Claude-authored content and an author recheck for the 25 originally ChatGPT-drafted items (previous Claude cross-review retained). Ten item corrections in v9 now require Claude re-review and owner disposition; independent_review stays changes_requested. Source hashes match the private register; the saved syllabus text does not preserve the coloured grade matrix and live MOE access was challenged, so no complete page/grade audit is claimed. No rights or owner approval is inferred.",
-      "v9 owner sample: 67 of 333 AI-agreed unchanged items, ceil(N/5), random.Random('zh-starter-001-v9-owner-sample-2026-10-17').sample over batch order; every outstanding or v9-revised item excluded. v8 sample is historical, not carried forward as approval. Owner outcomes pending."
+      "v9 owner sample: 67 of 333 AI-agreed unchanged items, ceil(N/5), random.Random('zh-starter-001-v9-owner-sample-2026-10-17').sample over batch order; every outstanding or v9-revised item excluded. v8 sample is historical, not carried forward as approval. Owner outcomes pending.",
+      "2026-10-17 Claude re-review of ChatGPT v9 corrections at 3e5255f: all ten accepted in substance. Batch v10 refines three still-disputed items: zh-p2-radmeaning-repair.q3 key widened from 女的家人 to 女人和女孩 (女字旁 is not limited to family); zh-p2-punctread-repair.q3 asks for the strongest of four sentences (最强, not 更强); zh-p2-sound.q5 hint avoids 轻声, which children also learn as the neutral tone. Pool membership is unchanged, so the v9 sample stands. independent_review stays changes_requested pending ChatGPT re-review of these three edits; owner outcomes pending."
     ],
     "independent_review": "changes_requested",
     "owner_signoff": "pending",

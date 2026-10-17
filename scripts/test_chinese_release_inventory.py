@@ -32,8 +32,10 @@ class Inventory(unittest.TestCase):
         row = self.row(data, 'r-character')
         self.assertEqual(row['route_stock'][target], 2)
         self.assertEqual(row['stock'], 1)
+        routes = {t for r in data['p2_chinese']['rows'] for t in r['complete']}
         report = '\n'.join(missing_section(data))
-        self.assertIn('| p2_chinese | 35 | 34 |', report)
+        # Only the duplicated route gains spare stock; every other route stays thin.
+        self.assertIn(f'| p2_chinese | {len(routes)} | {len(routes) - 1} |', report)
 
     def test_missing_stage_is_reported_with_no_complete_route(self):
         self.batch['items'] = [i for i in self.batch['items'] if i['id'] != 'zh-p2-sound-repair.q3']

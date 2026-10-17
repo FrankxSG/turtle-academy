@@ -1,6 +1,6 @@
-# Chinese review pack — batch zh-starter-001 v9
+# Chinese review pack — batch zh-starter-001 v10
 
-Input reviewed: `9d4357abd2b19cc0d4a34892d0772e09dce5b1c1`. This pack replaces v8 for current review; v8 is historical. Manifest remains `zh-2024-p2p3-draft.2`, proposed and import-disabled. No content, rights, grade map or release is approved.
+Inputs reviewed: `9d4357a` (ChatGPT pass, batch v9) and `3e5255f` (Claude re-review, batch v10). This pack replaces v8 and v9 for current review; v8 is historical. Manifest remains `zh-2024-p2p3-draft.2`, proposed and import-disabled. No content, rights, grade map or release is approved.
 
 ## Review performed and limits
 
@@ -8,18 +8,30 @@ ChatGPT desk-reviewed all 357 v8 questions and all 19 materials: stems, four opt
 
 All three source fingerprints match the current register. The saved MOE syllabus text does not retain the coloured grade bands; the live official PDF returned a browser challenge. Source wording/page anchoring is not a completed independent visual grade audit. Keep that audit open for PDF pp28–32, and retain the full denominator as proposed. No private-library text is reproduced here.
 
-## A. Corrections requiring Claude re-review (10)
+## Claude re-review of the v9 corrections (batch v10)
+
+Claude re-reviewed all ten ChatGPT corrections at `3e5255f`, the inventory algorithm changes and the four regression tests, and confirmed the v9 sample reproduces from the stated seed. All ten corrections are accepted in substance. Three still-disputed items get a further wording refinement in v10, so they need ChatGPT re-review before the owner rules:
+
+| Item | v10 refinement |
+| --- | --- |
+| `zh-p2-radmeaning-repair.q3` v3 | 女的家人 still narrows 女字旁 (to family). Key is now 女人和女孩; explanation says 女字旁 characters often relate to women and girls. |
+| `zh-p2-punctread-repair.q3` v3 | Four sentences are compared, so the stem asks for 最强 rather than 更强. |
+| `zh-p2-sound.q5` v3 | Hint said 轻声读; children also learn 轻声 as the neutral tone, which is confusing in a tone question. Now 小声读. |
+
+Inventory test fix: the thin-stock regression no longer hard-codes 35/34 routes, so adding content does not break it. Non-blocking notes, no change made: `zh-p2-meaning.q4`'s key is now the longest and most qualified option, a mild test-taking cue; `zh-p2-sound-repair.q3` (in the agreed pool) also says 轻声读 in its hint and should get the same wording at the next content revision, which will move it out of the pool and require a redraw. Pool membership did not change in v10, so the v9 draw below still stands.
+
+## A. Corrections from the v9 pass (10)
 
 | Item | Finding / correction |
 | --- | --- |
 | `zh-p2-punctread.q1` v2 | 冒号 pinyin had the wrong tone on 冒 (máo → mào). |
 | `zh-p2-radmeaning.q1` v2 | 舌 is also related to speaking; replace the ambiguous distractor and explicitly assess the radical cue. |
 | `zh-p2-radmeaning.q4` v2 | The stem named 口字旁 while 口 was the key. |
-| `zh-p2-radmeaning-repair.q3` v2 | 女字旁 includes adult women; 女孩子 incorrectly narrows the category. |
-| `zh-p2-punctread-repair.q3` v2 | An exclamation mark signals strong feeling or emphasis, not necessarily happiness. |
+| `zh-p2-radmeaning-repair.q3` v2→v3 | 女字旁 includes adult women; 女孩子 incorrectly narrows the category. |
+| `zh-p2-punctread-repair.q3` v2→v3 | An exclamation mark signals strong feeling or emphasis, not necessarily happiness. |
 | `zh-p2-card-repair.q3` v2 | Do not teach a particular card layout as a universal compulsory rule. |
 | `zh-p2-meaning.q4` v2 | 晴 does not require a completely cloudless sky. |
-| `zh-p2-sound.q5` v2 | The options differ in both initials and tones; the old hint directed attention to initials alone. |
+| `zh-p2-sound.q5` v2→v3 | The options differ in both initials and tones; the old hint directed attention to initials alone. |
 | `zh-p2-sound.q7` v2 | 着 is polyphonic; do not present zhe as its only pronunciation. |
 | `zh-p3-wordchoice.q5` v4 | 害怕地承认错误 was also coherent; revised context specifically asks for the trait demonstrated by never lying. |
 
@@ -52,11 +64,11 @@ All 15 prior disputed IDs remain pending owner disposition. Nine newly corrected
 | `zh-p2-punctread.q1` v2 | pending | pending |
 | `zh-p2-radmeaning.q1` v2 | pending | pending |
 | `zh-p2-radmeaning.q4` v2 | pending | pending |
-| `zh-p2-radmeaning-repair.q3` v2 | pending | pending |
-| `zh-p2-punctread-repair.q3` v2 | pending | pending |
+| `zh-p2-radmeaning-repair.q3` v3 | pending | pending |
+| `zh-p2-punctread-repair.q3` v3 | pending | pending |
 | `zh-p2-card-repair.q3` v2 | pending | pending |
 | `zh-p2-meaning.q4` v2 | pending | pending |
-| `zh-p2-sound.q5` v2 | pending | pending |
+| `zh-p2-sound.q5` v3 | pending | pending |
 | `zh-p2-sound.q7` v2 | pending | pending |
 
 - `zh-p2-order.q2` v3 (lu-sentence-order, general)
@@ -158,13 +170,13 @@ All 15 prior disputed IDs remain pending owner disposition. Nine newly corrected
   - Options: 眼睛 · **口** · 脚 · 耳朵
   - Hint: 吃东西、喝水、唱歌，都要用到哪里？ · Explanation: “吃、喝、唱”都要用口，所以都是口字旁。
 
-- `zh-p2-radmeaning-repair.q3` v2 (r-radical, generic)
+- `zh-p2-radmeaning-repair.q3` v3 (r-radical, generic)
   - “妈、姐、妹”都有同一个偏旁(piān páng)。这个偏旁和什么有关？
-  - Options: **女的家人** · 马 · 树木 · 嘴巴
-  - Hint: 这三个字说的都是家里的什么人？ · Explanation: “妈、姐、妹”都是女字旁，都表示女的家人。
+  - Options: **女人和女孩** · 马 · 树木 · 嘴巴
+  - Hint: 这三个字说的都是家里的什么人？ · Explanation: 女字旁的字常和女人、女孩有关。“妈、姐、妹”都是家里的女人或女孩。
 
-- `zh-p2-punctread-repair.q3` v2 (r-punctuation, generic)
-  - 哪一句读起来语气更强？
+- `zh-p2-punctread-repair.q3` v3 (r-punctuation, generic)
+  - 哪一句读起来语气最强？
   - Options: 妈妈回来了吗？ · 妈妈回来了。 · **妈妈回来了！** · 妈妈回来了没有？
   - Hint: 比较句子最后的标点，想想读的时候语气有什么不同。 · Explanation: “妈妈回来了！”用感叹号，读起来语气更强。感叹号可以表示高兴、惊讶等不同感情，不能只凭它判断心情。
 
@@ -178,10 +190,10 @@ All 15 prior disputed IDs remain pending owner disposition. Nine newly corrected
   - Options: 下着大雨 · 天上有很多乌云 · **天空明亮，云很少或没有云** · 刮着大风
   - Hint: 想想晴天和阴天、雨天有什么不同。 · Explanation: “晴”表示天空明亮，云很少或没有云；晴天也可能有少量的云。
 
-- `zh-p2-sound.q5` v2 (r-char-sound, general)
+- `zh-p2-sound.q5` v3 (r-char-sound, general)
   - 拼音“pǎo”是哪个字？
   - Options: 抱 · **跑** · 泡 · 饱
-  - Hint: 轻声读一读每个字，再比较声母和声调。 · Explanation: “跑”读 pǎo。“抱”读 bào，“泡”读 pào，“饱”读 bǎo。
+  - Hint: 小声读一读每个字，再比较声母和声调。 · Explanation: “跑”读 pǎo。“抱”读 bào，“泡”读 pào，“饱”读 bǎo。
 
 - `zh-p2-sound.q7` v2 (r-char-sound, general)
   - 拼音“kàn”是哪个字？
@@ -657,7 +669,7 @@ Original generic authored materials only. Each material is answered as a whole b
 
 ## Next review and sign-off
 
-1. Claude reviews the ten corrected versions, inventory changes, regression tests and this review/sample provenance. Recheck any newly disputed item and redraw only if pool membership changes.
+1. ChatGPT re-reviews the three v10 refinements above. Recheck any newly disputed item and redraw only if pool membership changes.
 2. Complete the independent visual page/grade audit and owner denominator decision; do not use 13/17 as approved MOE coverage.
 3. Owner decides every disputed item, reviews the random sample and records batch and rights sign-off separately. Update `review_log` only from recorded decisions; do not clear disputes solely because this correction pass ran.
 4. Keep P3 import, real data, merge and release gates unchanged. Stock remains one item per repair stage; CL/HCL shared availability does not establish HCL depth.

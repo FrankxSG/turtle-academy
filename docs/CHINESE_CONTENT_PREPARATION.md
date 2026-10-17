@@ -14,7 +14,7 @@ This is one review entry point for curriculum preparation and authoring contract
 | --- | --- | --- |
 | [Curriculum manifest](../content/chinese/curriculum.json) | Four course identities, official references, 136 course-specific outcome records (including language-use leaves), 46 word/language-point/reading-skill repair targets and 1,796 character records | Source-based working inventory (draft.2 adds finer leaves); independent grade/denominator audit pending |
 | [Contract schema](../contracts/chinese/1.schema.json) | Curriculum, original catalogue, frozen synthetic task plan, minimal Chinese intake and answer-event shapes | Proposed engineering contract; no app integration |
-| [Starter batch](../content/chinese/batches/starter-001.json) | Version 9: 357 original items — 19 materials (95 questions), 12 declared repair groups (45 character pools and 23 skill pools; 204 questions), and 58 further general-practice items; every non-repair question declares a repair route | Author checked; independent review and owner sign-off pending |
+| [Starter batch](../content/chinese/batches/starter-001.json) | Version 10: 357 original items — 19 materials (95 questions), 12 declared repair groups (45 character pools and 23 skill pools; 204 questions), and 58 further general-practice items; every non-repair question declares a repair route | Author checked; independent review and owner sign-off pending |
 | [Task fixtures](../content/chinese/fixtures/) | Complete P2 examples for X=6, 10, 12 and 19 | Synthetic, deterministic validation examples; no learner data |
 | [Validator](../scripts/validate_chinese_content.py) and [boundary checks](../scripts/test_chinese_content_contracts.py) | Structural integrity and cross-file rejection cases | Standard-library authoring tools; not learning-engine implementation |
 
@@ -225,15 +225,15 @@ Author revision and review preparation only. Nothing here approves content, the 
 
 Validation: `python3 scripts/validate_chinese_content.py`, the contract tests, `python3 scripts/chinese_release_inventory.py --check` and the privacy guard.
 
-## Current review — batch version 9
+## Current review — batch version 10
 
-See [review pack v9](content-review/CHINESE_REVIEW_PACK_V9.md) for the ten item corrections, all 24 pending owner dispositions, the reproducible 67-of-333 owner sample and complete material context. ChatGPT desk-reviewed the 357-item v8 input; its own ten edits require Claude re-review. Source fingerprints match the register, but the independent visual grade audit, denominator approval, rights clearance and owner sign-off remain open. The earlier v8 pack and prior disposition above are historical evidence, not approval of this head.
+See [review pack v10](content-review/CHINESE_REVIEW_PACK_V10.md) for the ten item corrections, all 24 pending owner dispositions, the reproducible 67-of-333 owner sample and complete material context. ChatGPT desk-reviewed the 357-item v8 input; its own ten edits require Claude re-review. Source fingerprints match the register, but the independent visual grade audit, denominator approval, rights clearance and owner sign-off remain open. The earlier v8 pack and prior disposition above are historical evidence, not approval of this head.
 
 The inventory now uses leaf-specific repair stages and per-route thin-stock counts. Its material supply is an upper bound on complete tasks without reuse, not a scheduling prediction. No app files, import allowlists or learner-data gates change.
 
 ## 6. Starter content review
 
-Version 9. Original generic drafts, not learner targets or copied passages. `[空n]` denotes a linked blank, with pinyin annotations expanded for this review view. Keys are review aids, not shipping approval. No application rendering validation is claimed here.
+Version 10. Original generic drafts, not learner targets or copied passages. `[空n]` denotes a linked blank, with pinyin annotations expanded for this review view. Keys are review aids, not shipping approval. No application rendering validation is claimed here.
 
 ### zh-m01 · 种豆子 (v2)
 
@@ -636,7 +636,7 @@ Courses: p3_chinese, p3_higher_chinese. Kind: visual_text.
 | zh-p2-sound.q2 v1 / general | “这条路很长。”这里的“长”怎么读？<br>1 zhǎng；2 zhàng；3 cháng；4 chāng | cháng | 这里说的是路的长短。 | 说长短的“长”读 cháng。 | 辨识字音（字与拼音、多音字） |
 | zh-p2-sound.q3 v1 / general | “我要去图书馆还书。”这里的“还”怎么读？<br>1 hái；2 huán；3 huàn；4 hāi | huán | 这里是把借来的书送回去。 | 把东西送回去的“还”读 huán，“还有”的“还”读 hái。 | 辨识字音（字与拼音、多音字） |
 | zh-p2-sound.q4 v1 / general | “妹妹睡着了。”这里的“着”怎么读？<br>1 zhe；2 zhuó；3 zháo；4 zhāo | zháo | “睡着了”是说已经睡了，不是“看着”的“着”。 | “睡着”的“着”读 zháo，“看着”的“着”读 zhe。 | 辨识字音（字与拼音、多音字） |
-| zh-p2-sound.q5 v2 / general | 拼音“pǎo”是哪个字？<br>1 抱；2 跑；3 泡；4 饱 | 跑 | 轻声读一读每个字，再比较声母和声调。 | “跑”读 pǎo。“抱”读 bào，“泡”读 pào，“饱”读 bǎo。 | 辨识字音（字与拼音、多音字） |
+| zh-p2-sound.q5 v3 / general | 拼音“pǎo”是哪个字？<br>1 抱；2 跑；3 泡；4 饱 | 跑 | 小声读一读每个字，再比较声母和声调。 | “跑”读 pǎo。“抱”读 bào，“泡”读 pào，“饱”读 bǎo。 | 辨识字音（字与拼音、多音字） |
 | zh-p2-sound.q6 v1 / general | “快乐”的“乐”怎么读？<br>1 yuè；2 lè；3 lèi；4 luò | lè | “快乐”是说心里高兴。 | “快乐”的“乐”读 lè，“音乐”的“乐”读 yuè。 | 辨识字音（字与拼音、多音字） |
 | zh-p2-sound.q7 v2 / general | 拼音“kàn”是哪个字？<br>1 着；2 手；3 看；4 目 | 看 | 这个字和眼睛有关。 | “看”读 kàn。“手”读 shǒu，“目”读 mù。“着”有不同读音，如“看着”的 zhe、“睡着”的 zháo，都不是 kàn。 | 辨识字音（字与拼音、多音字） |
 | zh-p2-card-repair.q1 v1 / exact | 读一读：【便条(biàn tiáo)】<br>妈妈：<br>我去图书馆借书，下午五点回家。<br>小安<br>十月九日<br>这张便条(biàn tiáo)是谁写的？<br>1 妈妈；2 小安；3 老师；4 图书馆 | 小安 | 写的人的名字写在哪里？看看下面。 | 便条下面写着“小安”，是小安写给妈妈的。 | 认识贺卡、便条的格式（称呼、祝福语、写的人、日期） |
@@ -651,14 +651,14 @@ Courses: p3_chinese, p3_higher_chinese. Kind: visual_text.
 | zh-p2-meaning.q4 v2 / general | “今天是晴天。”“晴”是说什么？<br>1 下着大雨；2 天上有很多乌云；3 天空明亮，云很少或没有云；4 刮着大风 | 天空明亮，云很少或没有云 | 想想晴天和阴天、雨天有什么不同。 | “晴”表示天空明亮，云很少或没有云；晴天也可能有少量的云。 | 理解字在词语中的意思 |
 | zh-p2-radmeaning-repair.q1 v1 / exact | 下面哪个字和水有关？<br>1 何；2 河；3 可；4 哥 | 河 | 看看每个字的左边。 | “河”是三点水，河里有水。其他三个字都有“可”，但和水没有关系。 | 根据偏旁推想字和什么有关 |
 | zh-p2-radmeaning-repair.q2 v1 / similar | 下面哪个字和火有关？<br>1 打；2 钉；3 灯；4 盯 | 灯 | 以前的灯要点火才会亮。看看每个字的左边。 | “灯”是火字旁，和火、和光有关。 | 根据偏旁推想字和什么有关 |
-| zh-p2-radmeaning-repair.q3 v2 / generic | “妈、姐、妹”都有同一个偏旁(piān páng)。这个偏旁和什么有关？<br>1 女的家人；2 马；3 树木；4 嘴巴 | 女的家人 | 这三个字说的都是家里的什么人？ | “妈、姐、妹”都是女字旁，都表示女的家人。 | 根据偏旁推想字和什么有关 |
+| zh-p2-radmeaning-repair.q3 v3 / generic | “妈、姐、妹”都有同一个偏旁(piān páng)。这个偏旁和什么有关？<br>1 女人和女孩；2 马；3 树木；4 嘴巴 | 女人和女孩 | 这三个字说的都是家里的什么人？ | 女字旁的字常和女人、女孩有关。“妈、姐、妹”都是家里的女人或女孩。 | 根据偏旁推想字和什么有关 |
 | zh-p2-radmeaning.q1 v2 / general | 看看偏旁，下面哪个字和说话有关？<br>1 活；2 恬；3 话；4 适 | 话 | 看看每个字的左边，哪个偏旁和说话有关？ | “话”是言字旁，和说话有关。 | 根据偏旁推想字和什么有关 |
 | zh-p2-radmeaning.q2 v1 / general | “跑、跳、踢”都和身体的哪里有关？<br>1 手；2 眼睛；3 口；4 脚 | 脚 | 看看这三个字左边都一样的地方。 | “跑、跳、踢”都是足字旁，都是用脚做的动作。 | 根据偏旁推想字和什么有关 |
 | zh-p2-radmeaning.q3 v1 / general | 下面哪个字和手有关？<br>1 白；2 拍；3 伯；4 怕 | 拍 | 看看每个字的左边，哪个偏旁和手有关？ | “拍”是提手旁，拍手、拍球都要用手。 | 根据偏旁推想字和什么有关 |
 | zh-p2-radmeaning.q4 v2 / general | “吃、喝、唱”的左边都一样。它们都和什么有关？<br>1 眼睛；2 口；3 脚；4 耳朵 | 口 | 吃东西、喝水、唱歌，都要用到哪里？ | “吃、喝、唱”都要用口，所以都是口字旁。 | 根据偏旁推想字和什么有关 |
 | zh-p2-punctread-repair.q1 v1 / exact | 哪一句是在问别人？<br>1 我们去公园。；2 我们去公园吗？；3 我们去公园！；4 我们去公园了。 | 我们去公园吗？ | 看看每一句最后的标点。 | 句子最后是问号“？”，又有“吗”，是在问别人。 | 借助标点理解句子 |
 | zh-p2-punctread-repair.q2 v1 / similar | “今天会下雨吗？”说这句话的人在做什么？<br>1 告诉别人一件事；2 问别人；3 请别人帮忙；4 说自己很高兴 | 问别人 | 看看句子最后的标点。 | 句子最后是问号“？”，说话的人在问别人今天会不会下雨。 | 借助标点理解句子 |
-| zh-p2-punctread-repair.q3 v2 / generic | 哪一句读起来语气更强？<br>1 妈妈回来了吗？；2 妈妈回来了。；3 妈妈回来了！；4 妈妈回来了没有？ | 妈妈回来了！ | 比较句子最后的标点，想想读的时候语气有什么不同。 | “妈妈回来了！”用感叹号，读起来语气更强。感叹号可以表示高兴、惊讶等不同感情，不能只凭它判断心情。 | 借助标点理解句子 |
+| zh-p2-punctread-repair.q3 v3 / generic | 哪一句读起来语气最强？<br>1 妈妈回来了吗？；2 妈妈回来了。；3 妈妈回来了！；4 妈妈回来了没有？ | 妈妈回来了！ | 比较句子最后的标点，想想读的时候语气有什么不同。 | “妈妈回来了！”用感叹号，读起来语气更强。感叹号可以表示高兴、惊讶等不同感情，不能只凭它判断心情。 | 借助标点理解句子 |
 | zh-p2-punctread.q1 v2 / general | 老师说：“请大家坐好。”冒号(mào hào)“：”后面写的是什么？<br>1 老师是谁；2 同学说的话；3 老师说的话；4 上课的时间 | 老师说的话 | 看看“：”前面写着“老师说”。 | 冒号“：”后面引号里的，是老师说的话。 | 借助标点理解句子 |
 | zh-p2-punctread.q2 v1 / general | “我喜欢红色、黄色和蓝色。”这句话说到几种颜色？<br>1 一种；2 两种；3 三种；4 四种 | 三种 | “、”和“和”把颜色分开了，一个一个数。 | 红色、黄色和蓝色，一共三种颜色。 | 借助标点理解句子 |
 | zh-p2-punctread.q3 v1 / general | 哪一句是在说一件事，不是在问别人？<br>1 小明在家吗？；2 小明在家。；3 小明去哪里了？；4 小明在家没有？ | 小明在家。 | 找一找最后不是问号的句子。 | “小明在家。”最后是句号，是在说一件事。其他三句都在问人。 | 借助标点理解句子 |
