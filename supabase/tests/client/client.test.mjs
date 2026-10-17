@@ -392,3 +392,50 @@ test('an ordinary refresh with no competing sign-in or sign-out still renews the
   assert.equal(JSON.parse(store.getItem(auth.SESSION_KEY)).accessToken, 'a-renewed')
   assert.equal(srv.calls.some((c) => c.url.includes('/logout')), false, 'nothing is revoked')
 })
+
+test('sign-out cancels Google before its callback, including across reload', async () => {
+  const store = memoryStore()
+  let calls = 0
+  const config = { ...CFG, googleEnabled: true }
+  const deps = { storage: store, fetch: async () => { calls++; throw new Error('cancelled callback must not exchange tokens') } }
+  const client = auth.createAuthClient(config, deps)
+  assert.equal((await client.startGoogleSignIn('https://app.example.invalid/cb')).ok, true)
+  assert.deepEqual(await client.signOut(), { ok: true })
+  assert.equal(store.getItem(auth.PKCE_KEY), null)
+  for (const c of [client, auth.createAuthClient(config, deps)]) {
+    assert.deepEqual(await c.completeGoogleSignIn('https://app.example.invalid/cb?code=cancelled'), { ok: false, error: 'google_failed' })
+    assert.equal(c.getStoredSession(), null)
+  }
+  assert.equal(calls, 0)
+  assert.equal((await client.startGoogleSignIn('https://app.example.invalid/cb')).ok, true, 'a deliberate later flow still works')
+})
+
+test('sign-out during Google PKCE generation cannot recreate a verifier', async () => {
+  const store = memoryStore()
+  const client = auth.createAuthClient({ ...CFG, googleEnabled: true }, { storage: store })
+  const starting = client.startGoogleSignIn('https://app.example.invalid/cb')
+  assert.deepEqual(await client.signOut(), { ok: true })
+  assert.deepEqual(await starting, { ok: false, error: 'superseded' })
+  assert.equal(store.getItem(auth.PKCE_KEY), null)
+})
+
+test('sign-out overwrites a verifier when removal fails and reports a stuck verifier', async () => {
+  for (const canOverwrite of [true, false]) {
+    const store = memoryStore()
+    const clientStore = {
+      getItem: k => store.getItem(k),
+      setItem: (k, v) => {
+        if (k === auth.PKCE_KEY && v === '' && !canOverwrite) throw new Error('read-only')
+        store.setItem(k, v)
+      },
+      removeItem: k => {
+        if (k === auth.PKCE_KEY) throw new Error('remove blocked')
+        store.removeItem(k)
+      },
+    }
+    const client = auth.createAuthClient({ ...CFG, googleEnabled: true }, { storage: clientStore })
+    assert.equal((await client.startGoogleSignIn('https://app.example.invalid/cb')).ok, true)
+    assert.deepEqual(await client.signOut(), canOverwrite ? { ok: true } : { ok: false, error: 'storage_unavailable' })
+    assert.equal(Boolean(store.getItem(auth.PKCE_KEY)), !canOverwrite)
+  }
+})

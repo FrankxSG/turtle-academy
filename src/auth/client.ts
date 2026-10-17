@@ -32,7 +32,7 @@ export type AuthResult = { ok: true; session: Session } | { ok: false; error: Au
 // superseded: a sign-out or a newer sign-in happened while this request was waiting for the server.
 // Its late answer is discarded (never stored or returned) and its session is revoked best effort.
 
-/** storage_unavailable: this device may still hold the old session after a reload; tell the parent. */
+/** storage_unavailable: a session or pending Google verifier may survive reload; tell the parent. */
 export type SignOutResult = { ok: true } | { ok: false; error: 'storage_unavailable' }
 
 export type KeyValueStore = {
@@ -133,6 +133,21 @@ export function createAuthClient(config: AuthConfig | null, deps: Deps = {}) {
   // it on again, so an older request that completes late (a background refresh, a slow sign-in) is
   // stale: it must neither persist credentials nor hand its session to the caller.
   let generation = 0
+
+  function clearPendingGoogleSignIn(): boolean {
+    if (!storage) return true
+    try {
+      storage.removeItem(PKCE_KEY)
+      return true
+    } catch {
+      try {
+        storage.setItem(PKCE_KEY, '') // a callback must not exchange a cancelled verifier
+        return true
+      } catch {
+        return false
+      }
+    }
+  }
 
   /** Persists the session; returns false if the device copy could not be written or cleared. */
   function save(session: Session | null): boolean {
@@ -237,7 +252,9 @@ export function createAuthClient(config: AuthConfig | null, deps: Deps = {}) {
       }
       if (!isSafeOrigin(redirect)) return { ok: false, error: 'not_configured' }
       if (!storage) return { ok: false, error: 'storage_unavailable' }
+      const startedIn = ++generation
       const { verifier, challenge } = await pkcePair()
+      if (startedIn !== generation) return { ok: false, error: 'superseded' }
       try {
         storage.setItem(PKCE_KEY, verifier)
       } catch {
@@ -297,7 +314,8 @@ export function createAuthClient(config: AuthConfig | null, deps: Deps = {}) {
     /**
      * Clears the session from this client at once, then from device storage. Returns
      * storage_unavailable when the device copy could not be removed or overwritten: the caller must
-     * not claim a durable sign-out, because a reload could restore the session. Any sign-in or refresh
+     * not claim a durable sign-out, because a reload could restore the session. Pending Google
+     * verifiers are also cleared; a PKCE generation still in flight cannot recreate one. Any sign-in or refresh
      * still waiting for the server is superseded and cannot restore a session when it answers late.
      * Server-side logout is best effort and never changes the local result.
      */
@@ -305,6 +323,7 @@ export function createAuthClient(config: AuthConfig | null, deps: Deps = {}) {
       generation++ // any request still waiting for the server can no longer restore a session
       const previous = getStoredSession()
       const durable = save(null)
+      const googleCleared = clearPendingGoogleSignIn()
       if (config && previous) {
         try {
           await doFetch(`${config.url}/auth/v1/logout`, {
@@ -315,7 +334,7 @@ export function createAuthClient(config: AuthConfig | null, deps: Deps = {}) {
           // Offline sign-out still clears this device.
         }
       }
-      return durable ? { ok: true } : { ok: false, error: 'storage_unavailable' }
+      return durable && googleCleared ? { ok: true } : { ok: false, error: 'storage_unavailable' }
     },
   }
 }
