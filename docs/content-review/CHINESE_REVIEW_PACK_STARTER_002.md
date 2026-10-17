@@ -1,0 +1,124 @@
+# Chinese review pack — batch zh-starter-002 v1
+
+New original P2 content for Chinese and Higher Chinese, drafted by Claude on 2026-10-18. Status: `author_checked_pending_independent_and_owner_review`. Independent review `pending`, owner `pending`, rights `original_draft_pending_owner_rights_review`. Batch `zh-starter-001` v10 is unchanged and keeps its approval; this batch's review state covers only its own 38 items.
+
+Every question is single-answer multiple choice with four options. `[空1]` marks the blank; pinyin annotations are shown in brackets. Keys are review aids, not shipping approval.
+
+## What to review
+
+- **ChatGPT (independent cross-review):** all 38 items and the material, against the common and Chinese authoring skills. Corrections go back to Claude for re-review, as in PR 23.
+- **Owner:** the 4 disputed items and the 7 sampled items below. Anything else the owner wants to look at is welcome.
+
+| Set | Items | Leaf | Repair group |
+| --- | ---: | --- | --- |
+| 二年级形近字与同音字辨析组（二） | 15 | `r-character` | `zh-group-p2-confusable-2` |
+| 二年级字音组（二） | 8 | `r-char-sound` | `zh-group-p2-pinyin-2` |
+| 二年级词语运用组（二） | 8 | `lu-word-choice` | `zh-group-p2-language-use-2` |
+| 二年级阅读组（二）：把原因找全 | 7 | `r-explicit` | `zh-group-p2-reading-skills-2` |
+
+## Disputed — owner decision
+
+Tone-mark placement (声调写在哪个字母上). These four items ask the child to pick the correctly written pinyin of a known character, where one distractor puts the tone mark on the wrong letter (for example zoǔ for zǒu). The syllabus P2 row for 字音 covers reading characters with pinyin; it does not say whether telling correct from incorrect tone-mark placement belongs to P2. Accept, change or remove. If the two repair items are removed, the 字音 pool in this batch needs two replacement items before it is complete.
+
+| ID / version / stage | Question and options | Key | Hint | Explanation | Repair route |
+| --- | --- | --- | --- | --- | --- |
+| zh-p2-sound2.q2 v1 / general **(disputed)** | “走路”的“走”，哪一个拼音写对了？<br>1 zoǔ；2 zuǒ；3 zǒu；4 zòu | zǒu | 看一看声调写在哪个字母上面。 | “走”读 zǒu，第三声。ou 在一起时，声调写在 o 上面。zuǒ 是“左”的读音。 | 字音（字与拼音） |
+| zh-p2-sound2.q3 v1 / general **(disputed)** | “就”的拼音，哪一个写对了？<br>1 jiū；2 jìu；3 qiù；4 jiù | jiù | 看一看声母，再看一看声调写在哪个字母上面。 | “就”读 jiù，第四声。iu 在一起时，声调写在 u 上面。 | 字音（字与拼音） |
+| zh-p2-sound2-repair.q2 v1 / similar **(disputed)** | “牛”的拼音，哪一个写对了？<br>1 níu；2 niú；3 nóu；4 niǔ | niú | 看一看声调写在哪个字母上面。 | “牛”读 niú，第二声。iu 在一起时，声调写在 u 上面。 | zh.p2_chinese.skill.char-sound; zh.p2_higher_chinese.skill.char-sound |
+| zh-p2-sound2-repair.q3 v1 / generic **(disputed)** | “手”的拼音，哪一个写对了？<br>1 shoǔ；2 sǒu；3 shǔ；4 shǒu | shǒu | 先看声母，再看声调写在哪个字母上面。 | “手”读 shǒu，第三声。ou 在一起时，声调写在 o 上面。 | zh.p2_chinese.skill.char-sound; zh.p2_higher_chinese.skill.char-sound |
+
+## Owner sample
+
+7 of 34 undisputed items. Reproduce:
+
+```python
+import json, math, random
+b = json.load(open('content/chinese/batches/starter-002.json'))
+pool = [i['id'] for i in b['items'] if i['id'] not in b['review_log']['disputed_item_ids']]
+picked = set(random.Random('zh-starter-002-v1-owner-sample-2026-10-18').sample(pool, math.ceil(len(pool) / 5)))
+assert [i for i in pool if i in picked] == b['review_log']['sampled_item_ids']
+```
+
+| ID / version / stage | Question and options | Key | Hint | Explanation | Repair route |
+| --- | --- | --- | --- | --- | --- |
+| zh-p2-confusable2-u8fdc.q2 v1 / similar *(sampled)* | 我们走了很[空1]的路，才到海边。<br>1 园；2 元；3 远；4 运 | 远 | 走了很久才到，路长不长？ | “很远的路”就是很长的路。 | zh.p2_chinese.char.u8fdc; zh.p2_higher_chinese.char.u8fdc |
+| zh-p2-confusable2-u5b8c.q3 v1 / generic *(sampled)* | 这本故事书，我已经看[空1]了。<br>1 元；2 玩；3 园；4 完 | 完 | 书从头看到了最后，用哪个字？ | “看完了”就是从头看到了最后。 | zh.p2_chinese.char.u5b8c; zh.p2_higher_chinese.char.u5b8c |
+| zh-p2-confusable2-u6349.q2 v1 / similar *(sampled)* | 青蛙跳起来，一口就[空1]住了一只虫子。<br>1 种；2 足；3 跳；4 捉 | 捉 | 青蛙用口把虫子抓住了，用哪个字？ | “捉住虫子”就是把虫子抓住了。 | zh.p2_chinese.char.u6349; zh.p2_higher_chinese.char.u6349 |
+| zh-p2-confusable2-u6349.q3 v1 / generic *(sampled)* | 弟弟在水池边[空1]到了一只青蛙。<br>1 捉；2 种；3 足；4 路 | 捉 | 弟弟把青蛙抓住了，用哪个字？ | “捉到青蛙”就是把青蛙抓住了。“路”和“捉”都有“足”，可是“路”是走路的“路”。 | zh.p2_chinese.char.u6349; zh.p2_higher_chinese.char.u6349 |
+| zh-p2-confusable2-u5e26.q2 v1 / similar *(sampled)* | 哥哥[空1]我去游泳。<br>1 忘；2 带；3 市；4 常 | 带 | 是谁跟着谁去？ | “哥哥带我去”，就是我跟着哥哥一起去。 | zh.p2_chinese.char.u5e26; zh.p2_higher_chinese.char.u5e26 |
+| zh-p2-reason-repair.q1 v1 / exact *(sampled)* | 读一读：弟弟哭了，因为他的风筝飞走了，他还找不到妈妈。<br>弟弟为什么哭了？哪一句把原因说全了？<br>1 因为他的风筝飞走了。；2 因为他找不到妈妈。；3 因为他的风筝飞走了，他还找不到妈妈。；4 因为他不想回家，也不想吃饭。 | 因为他的风筝飞走了，他还找不到妈妈。 | “因为”后面写了几件事？ | “因为”后面写了两件事：风筝飞走了，还找不到妈妈。两件都要说。 | zh.p2_chinese.skill.explicit-info; zh.p2_higher_chinese.skill.explicit-info |
+| zh-p2-reason-repair.q2 v1 / similar *(sampled)* | 读一读：今天我很开心，因为我考了一百分，妈妈还给我买了一本新书。<br>“我”为什么很开心？哪一句把原因说全了？<br>1 因为我考了一百分，妈妈还给我买了一本新书。；2 因为我考了一百分。；3 因为妈妈给我买了一本新书。；4 因为今天不用上学，还可以去公园。 | 因为我考了一百分，妈妈还给我买了一本新书。 | “因为”后面写了几件事？ | “我”开心有两个原因：考了一百分，妈妈还买了一本新书。 | zh.p2_chinese.skill.explicit-info; zh.p2_higher_chinese.skill.explicit-info |
+
+## All items
+
+### 二年级形近字与同音字辨析组（二）
+
+| ID / version / stage | Question and options | Key | Hint | Explanation | Repair route |
+| --- | --- | --- | --- | --- | --- |
+| zh-p2-confusable2-u8fdc.q1 v1 / exact | 外婆住得很[空1]，我们要坐很久的车才能到。<br>1 运；2 远；3 园；4 元 | 远 | 要坐很久的车才能到，说明路长不长？ | 路很长，要坐很久的车，是“远”。“运”在“运动”里，“园”在“公园”里，“元”在“一元”里。 | zh.p2_chinese.char.u8fdc; zh.p2_higher_chinese.char.u8fdc |
+| zh-p2-confusable2-u8fdc.q2 v1 / similar *(sampled)* | 我们走了很[空1]的路，才到海边。<br>1 园；2 元；3 远；4 运 | 远 | 走了很久才到，路长不长？ | “很远的路”就是很长的路。 | zh.p2_chinese.char.u8fdc; zh.p2_higher_chinese.char.u8fdc |
+| zh-p2-confusable2-u8fdc.q3 v1 / generic | 我们要做永[空1]的好朋友。<br>1 远；2 元；3 运；4 园 | 远 | “永（　）”就是一直都会这样。 | “永远”就是一直都会这样。 | zh.p2_chinese.char.u8fdc; zh.p2_higher_chinese.char.u8fdc |
+| zh-p2-confusable2-u5b8c.q1 v1 / exact | 我做[空1]作业，就去公园玩。<br>1 玩；2 完；3 元；4 园 | 完 | 作业都做好了，用哪个字？ | “做完”就是做好了。“玩”是“玩游戏”的“玩”；“元”“园”读 yuán。 | zh.p2_chinese.char.u5b8c; zh.p2_higher_chinese.char.u5b8c |
+| zh-p2-confusable2-u5b8c.q2 v1 / similar | 弟弟喝[空1]牛奶，就去刷牙。<br>1 园；2 元；3 完；4 玩 | 完 | 牛奶喝好了，没有了，用哪个字？ | “喝完牛奶”就是牛奶都喝好了。 | zh.p2_chinese.char.u5b8c; zh.p2_higher_chinese.char.u5b8c |
+| zh-p2-confusable2-u5b8c.q3 v1 / generic *(sampled)* | 这本故事书，我已经看[空1]了。<br>1 元；2 玩；3 园；4 完 | 完 | 书从头看到了最后，用哪个字？ | “看完了”就是从头看到了最后。 | zh.p2_chinese.char.u5b8c; zh.p2_higher_chinese.char.u5b8c |
+| zh-p2-confusable2-u6349.q1 v1 / exact | 小猫在草地上[空1]虫子。<br>1 足；2 捉；3 种；4 跳 | 捉 | 小猫想吃虫子，它要做什么？ | “捉虫子”就是把虫子抓住。“足”在“足球”里，“种”在“种花”里。 | zh.p2_chinese.char.u6349; zh.p2_higher_chinese.char.u6349 |
+| zh-p2-confusable2-u6349.q2 v1 / similar *(sampled)* | 青蛙跳起来，一口就[空1]住了一只虫子。<br>1 种；2 足；3 跳；4 捉 | 捉 | 青蛙用口把虫子抓住了，用哪个字？ | “捉住虫子”就是把虫子抓住了。 | zh.p2_chinese.char.u6349; zh.p2_higher_chinese.char.u6349 |
+| zh-p2-confusable2-u6349.q3 v1 / generic *(sampled)* | 弟弟在水池边[空1]到了一只青蛙。<br>1 捉；2 种；3 足；4 路 | 捉 | 弟弟把青蛙抓住了，用哪个字？ | “捉到青蛙”就是把青蛙抓住了。“路”和“捉”都有“足”，可是“路”是走路的“路”。 | zh.p2_chinese.char.u6349; zh.p2_higher_chinese.char.u6349 |
+| zh-p2-confusable2-u5e26.q1 v1 / exact | 下雨了，出门要记得[空1]雨伞。<br>1 常；2 忘；3 带；4 市 | 带 | 出门时把雨伞拿在身边，用哪个字？ | “带雨伞”就是出门时把雨伞拿在身边。不能说“记得忘雨伞”。 | zh.p2_chinese.char.u5e26; zh.p2_higher_chinese.char.u5e26 |
+| zh-p2-confusable2-u5e26.q2 v1 / similar *(sampled)* | 哥哥[空1]我去游泳。<br>1 忘；2 带；3 市；4 常 | 带 | 是谁跟着谁去？ | “哥哥带我去”，就是我跟着哥哥一起去。 | zh.p2_chinese.char.u5e26; zh.p2_higher_chinese.char.u5e26 |
+| zh-p2-confusable2-u5e26.q3 v1 / generic | 妈妈[空1]着两个小朋友过马路。<br>1 市；2 常；3 忘；4 带 | 带 | 是谁跟着谁？ | “妈妈带着小朋友”，就是小朋友跟着妈妈一起走。 | zh.p2_chinese.char.u5e26; zh.p2_higher_chinese.char.u5e26 |
+| zh-p2-confusable2-u8bb0.q1 v1 / exact | 我常常忘[空1]带水壶。<br>1 己；2 记；3 起；4 语 | 记 | “忘（　）”就是没有想起来。 | “忘记”就是没有想起来。“己”在“自己”里，“起”在“起床”里。 | zh.p2_chinese.char.u8bb0; zh.p2_higher_chinese.char.u8bb0 |
+| zh-p2-confusable2-u8bb0.q2 v1 / similar | 你还[空1]得那只小白兔吗？<br>1 起；2 己；3 语；4 记 | 记 | “（　）得”就是没有忘。 | “记得”就是没有忘。 | zh.p2_chinese.char.u8bb0; zh.p2_higher_chinese.char.u8bb0 |
+| zh-p2-confusable2-u8bb0.q3 v1 / generic | 老师说的话，我都[空1]在本子上了。<br>1 语；2 起；3 记；4 己 | 记 | 把话写在本子上，用哪个字？ | “记在本子上”就是写下来，不会忘。 | zh.p2_chinese.char.u8bb0; zh.p2_higher_chinese.char.u8bb0 |
+
+### 二年级字音组（二）
+
+| ID / version / stage | Question and options | Key | Hint | Explanation | Repair route |
+| --- | --- | --- | --- | --- | --- |
+| zh-p2-sound2.q1 v1 / general | “前面”的“前”怎么读？<br>1 xián；2 qián；3 qiǎn；4 jiàn | qián | “前”的声母和“七”一样。再想一想，是第几声？ | “前”读 qián，声母是 q，第二声。 | 字音（字与拼音） |
+| zh-p2-sound2.q2 v1 / general **(disputed)** | “走路”的“走”，哪一个拼音写对了？<br>1 zoǔ；2 zuǒ；3 zǒu；4 zòu | zǒu | 看一看声调写在哪个字母上面。 | “走”读 zǒu，第三声。ou 在一起时，声调写在 o 上面。zuǒ 是“左”的读音。 | 字音（字与拼音） |
+| zh-p2-sound2.q3 v1 / general **(disputed)** | “就”的拼音，哪一个写对了？<br>1 jiū；2 jìu；3 qiù；4 jiù | jiù | 看一看声母，再看一看声调写在哪个字母上面。 | “就”读 jiù，第四声。iu 在一起时，声调写在 u 上面。 | 字音（字与拼音） |
+| zh-p2-sound2.q4 v1 / general | “树上结出了很多果子”里的“结”怎么读？<br>1 jié；2 jiē；3 jiě；4 qiē | jiē | “结”有两个读音。想一想，长出果子的“结”读哪一个？ | 长出果子的“结”读 jiē，第一声。“结”在别的地方还可以读 jié。 | 字音（字与拼音） |
+| zh-p2-sound2.q5 v1 / general | “小狗”的“狗”怎么读？<br>1 gōu；2 kǒu；3 gòu；4 gǒu | gǒu | 先看声母，再看声调。 | “狗”读 gǒu，第三声。kǒu 是“口”的读音。 | 字音（字与拼音） |
+| zh-p2-sound2-repair.q1 v1 / exact | 拼音“qián”是哪个字？<br>1 前；2 见；3 全；4 先 | 前 | 小声读一读每个字，再看声母和声调。 | “前”读 qián。“见”读 jiàn，“全”读 quán，“先”读 xiān。 | zh.p2_chinese.skill.char-sound; zh.p2_higher_chinese.skill.char-sound |
+| zh-p2-sound2-repair.q2 v1 / similar **(disputed)** | “牛”的拼音，哪一个写对了？<br>1 níu；2 niú；3 nóu；4 niǔ | niú | 看一看声调写在哪个字母上面。 | “牛”读 niú，第二声。iu 在一起时，声调写在 u 上面。 | zh.p2_chinese.skill.char-sound; zh.p2_higher_chinese.skill.char-sound |
+| zh-p2-sound2-repair.q3 v1 / generic **(disputed)** | “手”的拼音，哪一个写对了？<br>1 shoǔ；2 sǒu；3 shǔ；4 shǒu | shǒu | 先看声母，再看声调写在哪个字母上面。 | “手”读 shǒu，第三声。ou 在一起时，声调写在 o 上面。 | zh.p2_chinese.skill.char-sound; zh.p2_higher_chinese.skill.char-sound |
+
+### 二年级词语运用组（二）
+
+| ID / version / stage | Question and options | Key | Hint | Explanation | Repair route |
+| --- | --- | --- | --- | --- | --- |
+| zh-p2-wordchoice-b.q1 v1 / general | 小明很[空1]，每天都自己收好玩具。<br>1 坏；2 乖；3 怕；4 哭 | 乖 | 每天都自己收好玩具，小明是一个怎样的孩子？ | “乖”就是听话、懂事。自己收好玩具，说明小明很乖。 | 根据句意选择词语 |
+| zh-p2-wordchoice-b.q2 v1 / general | [空1]别人是不对的。<br>1 帮助；2 照顾；3 欺负；4 认识 | 欺负 | 哪一件事是不对的？ | “欺负别人”就是对别人不好，这样做不对。帮助、照顾别人都是好事。 | 根据句意选择词语 |
+| zh-p2-wordchoice-b.q3 v1 / general | 我[空1]这本书送给你。<br>1 给；2 被；3 让；4 把 | 把 | 我要送的是什么？这样东西放在“送给你”的前面。 | “我把这本书送给你”，说的是我送书给你。 | 根据句意选择词语 |
+| zh-p2-wordchoice-b.q4 v1 / general | 奶奶送[空1]我一个新书包。<br>1 给；2 把；3 被；4 让 | 给 | 新书包到了谁的手里？ | “送给我”，就是书包到了我的手里。 | 根据句意选择词语 |
+| zh-p2-wordchoice-b.q5 v1 / general | 我的水壶在这里，你的水壶[空1]？<br>1 吗；2 吧；3 呢；4 的 | 呢 | 问别人的水壶在哪里，句子最后用哪个字？ | “你的水壶呢？”就是问你的水壶在哪里。 | 根据句意选择词语 |
+| zh-p2-wordchoice-b-repair.q1 v1 / exact | 一只小鸟飞到窗边，[空1]在找东西吃。<br>1 他；2 它；3 她；4 地 | 它 | 小鸟是人，还是动物？ | 说到动物或东西，用“它”。“他”和“她”说的是人。 | zh.p2_chinese.skill.word-choice; zh.p2_higher_chinese.skill.word-choice |
+| zh-p2-wordchoice-b-repair.q2 v1 / similar | 大树的叶子都黄了，[空1]好像生病了。<br>1 她；2 地；3 它；4 他 | 它 | 大树是人吗？ | 说到大树这样的东西，用“它”。 | zh.p2_chinese.skill.word-choice; zh.p2_higher_chinese.skill.word-choice |
+| zh-p2-wordchoice-b-repair.q3 v1 / generic | 我的书包很旧了，可是我还是很喜欢[空1]。<br>1 地；2 他；3 她；4 它 | 它 | “喜欢（　）”说的是书包。书包是人吗？ | 说到书包这样的东西，用“它”。 | zh.p2_chinese.skill.word-choice; zh.p2_higher_chinese.skill.word-choice |
+
+### 二年级阅读组（二）：把原因找全
+
+Material **zh-m20 · 回家的路上** (v1, reading). All first answers are collected before feedback.
+
+> 星期三放学后，小美和妈妈走路回家。走到半路，妈妈说：“天上来了很多乌云，还刮起了大风，快下雨了。我们去巴士站等一等吧！”她们在巴士站等了一会儿，雨就停了。回到家，小美说：“还好我们没有淋湿！”
+
+| ID / version / stage | Question and options | Key | Hint | Explanation | Repair route |
+| --- | --- | --- | --- | --- | --- |
+| zh-m20.q1 v1 / general | 小美和谁走路回家？<br>1 爸爸；2 姐姐；3 妈妈；4 老师 | 妈妈 | 看第一句。 | 第一句写明小美和妈妈走路回家。 | 找出短文中明示的信息 |
+| zh-m20.q2 v1 / general | 妈妈为什么说快下雨了？哪一句把原因说全了？<br>1 因为天上来了很多乌云。；2 因为天上来了很多乌云，还刮起了大风。；3 因为她们走了很久，还没有走到家。；4 因为她们要去巴士站等一等。 | 因为天上来了很多乌云，还刮起了大风。 | 找一找妈妈说的话，原因有几个？ | 妈妈说了两个原因：天上来了很多乌云，还刮起了大风。只说乌云，原因就没有说全。 | 找出短文中明示的信息 |
+| zh-m20.q3 v1 / general | 她们在巴士站等了多久，雨就停了？<br>1 一个下午；2 一会儿；3 一个晚上；4 两天 | 一会儿 | 找一找“雨就停了”前面的话。 | 短文写明她们等了一会儿，雨就停了。 | 找出短文中明示的信息 |
+| zh-m20.q4 v1 / general | 回到家，小美说了什么？<br>1 “还好我们没有淋湿！”；2 “我们都淋湿了！”；3 “我想坐巴士回家！”；4 “雨一直没有停！” | “还好我们没有淋湿！” | 看最后一句。 | 最后一句写明小美说：“还好我们没有淋湿！” | 找出短文中明示的信息 |
+| zh-p2-reason-repair.q1 v1 / exact *(sampled)* | 读一读：弟弟哭了，因为他的风筝飞走了，他还找不到妈妈。<br>弟弟为什么哭了？哪一句把原因说全了？<br>1 因为他的风筝飞走了。；2 因为他找不到妈妈。；3 因为他的风筝飞走了，他还找不到妈妈。；4 因为他不想回家，也不想吃饭。 | 因为他的风筝飞走了，他还找不到妈妈。 | “因为”后面写了几件事？ | “因为”后面写了两件事：风筝飞走了，还找不到妈妈。两件都要说。 | zh.p2_chinese.skill.explicit-info; zh.p2_higher_chinese.skill.explicit-info |
+| zh-p2-reason-repair.q2 v1 / similar *(sampled)* | 读一读：今天我很开心，因为我考了一百分，妈妈还给我买了一本新书。<br>“我”为什么很开心？哪一句把原因说全了？<br>1 因为我考了一百分，妈妈还给我买了一本新书。；2 因为我考了一百分。；3 因为妈妈给我买了一本新书。；4 因为今天不用上学，还可以去公园。 | 因为我考了一百分，妈妈还给我买了一本新书。 | “因为”后面写了几件事？ | “我”开心有两个原因：考了一百分，妈妈还买了一本新书。 | zh.p2_chinese.skill.explicit-info; zh.p2_higher_chinese.skill.explicit-info |
+| zh-p2-reason-repair.q3 v1 / generic | 读一读：小花没有去公园。她生病了，外面又下着大雨。<br>小花为什么没有去公园？哪一句把原因说全了？<br>1 因为外面下着大雨。；2 因为她不喜欢公园。；3 因为她生病了。；4 因为她生病了，外面又下着大雨。 | 因为她生病了，外面又下着大雨。 | 这一次没有写“因为”。想一想，哪些事让小花不能去？ | 小花没有去公园，有两个原因：她生病了，外面又下着大雨。 | zh.p2_chinese.skill.explicit-info; zh.p2_higher_chinese.skill.explicit-info |
+
+## Author checks
+
+- 2026-10-18 author draft (Claude): 38 original P2 items for Chinese and Higher Chinese in four topic sets — look-alike/sound-alike characters (远 完 捉 带 记; 15), character sounds and written pinyin (8), word choice including 它 for animals and things, 把/给, 呢, 乖 and 欺负 (8), and finding the whole reason in a short text (material zh-m20 and three standalone items; 7). Each set has a complete exact/similar/generic pool.
+- Drafted one set at a time; every item read rendered with blanks, annotations and options; common checks 1-11 and Chinese checks ZH1-ZH5 run on each item. Stems, options, hints, explanations and the passage use only characters on the cumulative P1-P2 lists, except the pinyin term 声调 (as in the approved zh-p2-sound.q5). Pinyin checked by hand; the 结 reading for bearing fruit (jiē) checked against a dictionary; no pinyin library was available.
+- Known limits: in the four "which reason is complete" items the key is the longest option, because a complete reason is longer than a partial one (check 10); in the standalone ones the key also repeats the given sentence, because they test finding the whole reason, not paraphrase (check 5).
+- Sources: P2 school exercise formats were reviewed privately to choose question types. No worksheet, textbook or past-paper wording, answer or learner information is used. As with every public group, the targets are generic curriculum content, not a record of any learner's errors.
+- Disputed for the owner: four tone-mark placement items (zh-p2-sound2.q2, .q3, -repair.q2, -repair.q3) — whether telling correctly marked pinyin from wrongly marked pinyin is in P2 scope.
+- Owner sample: 7 of 34 undisputed items, ceil(N/5), random.Random('zh-starter-002-v1-owner-sample-2026-10-18').sample(pool, ceil(len(pool)/5)) over batch order, pool excluding the disputed items.
+- Pending: independent cross-review (ChatGPT), owner review of the disputes and sample, rights review.
