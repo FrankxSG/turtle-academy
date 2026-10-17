@@ -153,3 +153,7 @@ vite.config.ts.timestamp-*
 public/icons/*.png
 test-results/
 playwright-report/
+
+# Python bytecode caches
+__pycache__/
+*.py[cod]

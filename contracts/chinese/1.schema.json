@@ -1,0 +1,1258 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:turtle-academy:chinese-contracts:1",
+  "title": "Proposed Chinese authoring and synthetic integration contracts",
+  "description": "Review proposals, not runtime storage or import authorization. See CHINESE_CONTENT_PREPARATION.md for semantic invariants. Validator implements only the schema keywords used here.",
+  "$defs": {
+    "option": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      },
+      "required": [
+        "id",
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    "item": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "courses": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "p2_chinese",
+              "p2_higher_chinese",
+              "p3_chinese",
+              "p3_higher_chinese"
+            ]
+          },
+          "minItems": 1
+        },
+        "outcome_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+          },
+          "minItems": 1
+        },
+        "target_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+          },
+          "minItems": 0
+        },
+        "family": {
+          "enum": [
+            "reading",
+            "visual_text",
+            "cloze",
+            "character"
+          ]
+        },
+        "format": {
+          "const": "mcq_4plus"
+        },
+        "stem": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/option"
+          },
+          "minItems": 4
+        },
+        "correct_option_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+        },
+        "hint": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "explanation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "material_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "stage": {
+          "anyOf": [
+            {
+              "enum": [
+                "exact",
+                "similar",
+                "generic"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "provenance": {
+          "const": "original_generic_author_draft"
+        },
+        "asset_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+          },
+          "minItems": 0
+        },
+        "blanks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/blank"
+          }
+        },
+        "annotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/annotation"
+          }
+        },
+        "blank_ref": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "repair_target_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "courses",
+        "outcome_refs",
+        "target_refs",
+        "family",
+        "format",
+        "stem",
+        "options",
+        "correct_option_id",
+        "hint",
+        "explanation",
+        "rationale",
+        "material_id",
+        "stage",
+        "provenance",
+        "asset_refs",
+        "blanks",
+        "annotations",
+        "blank_ref"
+      ],
+      "additionalProperties": false
+    },
+    "material": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "courses": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "p2_chinese",
+              "p2_higher_chinese",
+              "p3_chinese",
+              "p3_higher_chinese"
+            ]
+          },
+          "minItems": 1
+        },
+        "kind": {
+          "enum": [
+            "reading",
+            "visual_text",
+            "cloze"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "body": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "question_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+          },
+          "minItems": 1
+        },
+        "feedback_policy": {
+          "const": "after_all_first_responses"
+        },
+        "asset_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+          },
+          "minItems": 0
+        },
+        "blanks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/blank"
+          }
+        },
+        "annotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/annotation"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "courses",
+        "kind",
+        "title",
+        "body",
+        "question_ids",
+        "feedback_policy",
+        "asset_refs",
+        "blanks",
+        "annotations"
+      ],
+      "additionalProperties": false
+    },
+    "batch": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "chinese-content/1"
+        },
+        "batch_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "curriculum_manifest_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "status": {
+          "enum": [
+            "author_checked_pending_independent_and_owner_review",
+            "independently_reviewed_pending_owner",
+            "approved",
+            "retired"
+          ]
+        },
+        "materials": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/material"
+          },
+          "minItems": 1
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/item"
+          },
+          "minItems": 1
+        },
+        "review_log": {
+          "type": "object",
+          "properties": {
+            "author_check_date": {
+              "type": "string",
+              "format": "date"
+            },
+            "author_checks": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "minItems": 1
+            },
+            "independent_review": {
+              "enum": [
+                "pending",
+                "changes_requested",
+                "passed"
+              ]
+            },
+            "owner_signoff": {
+              "enum": [
+                "pending",
+                "changes_requested",
+                "approved"
+              ]
+            },
+            "sampled_item_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+              },
+              "minItems": 0
+            },
+            "disputed_item_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+              },
+              "minItems": 0
+            },
+            "rights_status": {
+              "enum": [
+                "original_draft_pending_owner_rights_review",
+                "cleared",
+                "blocked"
+              ]
+            },
+            "artwork": {
+              "const": "none"
+            }
+          },
+          "required": [
+            "author_check_date",
+            "author_checks",
+            "independent_review",
+            "owner_signoff",
+            "sampled_item_ids",
+            "disputed_item_ids",
+            "rights_status",
+            "artwork"
+          ],
+          "additionalProperties": false
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/group"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "schema_version",
+        "batch_id",
+        "version",
+        "curriculum_manifest_version",
+        "status",
+        "materials",
+        "items",
+        "review_log",
+        "groups"
+      ],
+      "additionalProperties": false
+    },
+    "slot": {
+      "type": "object",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+        },
+        "item_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "role": {
+          "enum": [
+            "general",
+            "repair",
+            "delayed_review"
+          ]
+        },
+        "target_ref": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "starting_stage": {
+          "anyOf": [
+            {
+              "enum": [
+                "exact",
+                "similar",
+                "generic"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "item_id",
+        "item_version",
+        "role",
+        "target_ref",
+        "starting_stage"
+      ],
+      "additionalProperties": false
+    },
+    "task_plan": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "chinese-task-plan/1"
+        },
+        "plan_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+        },
+        "content_batch_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+        },
+        "content_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "manifest_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "course": {
+          "enum": [
+            "p2_chinese",
+            "p2_higher_chinese",
+            "p3_chinese",
+            "p3_higher_chinese"
+          ]
+        },
+        "x": {
+          "type": "integer",
+          "minimum": 6,
+          "maximum": 19
+        },
+        "material_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+          },
+          "minItems": 2
+        },
+        "slots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/slot"
+          },
+          "minItems": 6
+        },
+        "planned_main_count": {
+          "type": "integer",
+          "minimum": 6
+        },
+        "halfway_count": {
+          "type": "integer",
+          "minimum": 3
+        },
+        "feedback_policy": {
+          "const": "material_first_responses_then_help"
+        },
+        "aggregation_policy": {
+          "const": "whole_task_all_related_first_responses"
+        },
+        "stage_gate": {
+          "const": "next_task_and_transfer_later_calendar_day"
+        },
+        "purpose": {
+          "const": "synthetic_contract_fixture_not_runtime_plan"
+        },
+        "halfway_safe_boundary_count": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "schema_version",
+        "plan_id",
+        "content_batch_id",
+        "content_version",
+        "manifest_version",
+        "course",
+        "x",
+        "material_ids",
+        "slots",
+        "planned_main_count",
+        "halfway_count",
+        "feedback_policy",
+        "aggregation_policy",
+        "stage_gate",
+        "purpose",
+        "halfway_safe_boundary_count"
+      ],
+      "additionalProperties": false
+    },
+    "candidate": {
+      "type": "object",
+      "properties": {
+        "candidate_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "mapping_status": {
+          "enum": [
+            "mapped",
+            "pending_content"
+          ]
+        },
+        "knowledge_point_ref": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "target_kind": {
+          "enum": [
+            "character",
+            "word",
+            "language_point",
+            "reading_skill"
+          ]
+        },
+        "target_value": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "assessed_skill": {
+          "enum": [
+            "character_recognition",
+            "word_meaning",
+            "language_use",
+            "reading_information",
+            "sentence_organisation",
+            "unknown"
+          ]
+        },
+        "error_type": {
+          "enum": [
+            "form_confusion",
+            "meaning_confusion",
+            "information_selection",
+            "sentence_order",
+            "punctuation",
+            "unknown_cause"
+          ]
+        },
+        "observed_wrong_form": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "observation_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "source_type": {
+          "enum": [
+            "schoolwork",
+            "home_practice",
+            "external_assessment",
+            "other_reviewed_work"
+          ]
+        }
+      },
+      "required": [
+        "mapping_status",
+        "knowledge_point_ref",
+        "target_kind",
+        "target_value",
+        "assessed_skill",
+        "error_type",
+        "observation_date",
+        "source_type"
+      ],
+      "additionalProperties": false
+    },
+    "import": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "pilot-mistakes/1"
+        },
+        "subject": {
+          "const": "chinese"
+        },
+        "course": {
+          "enum": [
+            "p2_chinese",
+            "p2_higher_chinese"
+          ]
+        },
+        "curriculum_manifest_version": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "extraction_result": {
+          "enum": [
+            "errors_found",
+            "no_errors_found",
+            "incomplete"
+          ]
+        },
+        "items": {
+          "type": "array",
+          "maxItems": 1000,
+          "items": {
+            "$ref": "#/$defs/candidate"
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "subject",
+        "course",
+        "curriculum_manifest_version",
+        "extraction_result",
+        "items"
+      ],
+      "additionalProperties": false
+    },
+    "attempt": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "chinese-attempt/1"
+        },
+        "event_id": {
+          "$ref": "#/$defs/opaque_id"
+        },
+        "task_id": {
+          "$ref": "#/$defs/opaque_id"
+        },
+        "item_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+        },
+        "item_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "phase": {
+          "enum": [
+            "first",
+            "retry",
+            "correction"
+          ]
+        },
+        "selected_option_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+        },
+        "assistance": {
+          "enum": [
+            "none",
+            "hint",
+            "answer_and_explanation"
+          ]
+        },
+        "local_day": {
+          "type": "string",
+          "format": "date"
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "idempotency_key": {
+          "$ref": "#/$defs/opaque_id"
+        }
+      },
+      "required": [
+        "schema_version",
+        "event_id",
+        "task_id",
+        "item_id",
+        "item_version",
+        "phase",
+        "selected_option_id",
+        "assistance",
+        "local_day",
+        "sequence",
+        "idempotency_key"
+      ],
+      "additionalProperties": false
+    },
+    "curriculum": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "chinese-curriculum/1"
+        },
+        "manifest_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "status": {
+          "enum": [
+            "proposed_not_import_enabled",
+            "approved"
+          ]
+        },
+        "source_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "courses": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "p2_chinese",
+              "p2_higher_chinese",
+              "p3_chinese",
+              "p3_higher_chinese"
+            ]
+          },
+          "minItems": 4
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+              },
+              "url": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}(?![\\s\\S])"
+              },
+              "accessed": {
+                "type": "string",
+                "format": "date"
+              },
+              "pdf_pages": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "required": [
+              "id",
+              "url",
+              "sha256",
+              "accessed",
+              "pdf_pages"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "course_character_counts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "course": {
+                "enum": [
+                  "p2_chinese",
+                  "p2_higher_chinese",
+                  "p3_chinese",
+                  "p3_higher_chinese"
+                ]
+              },
+              "recognition_list_unique": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "writing_list_unique": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "union_unique": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "source_pdf_pages": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "minItems": 2
+              }
+            },
+            "required": [
+              "course",
+              "recognition_list_unique",
+              "writing_list_unique",
+              "union_unique",
+              "source_pdf_pages"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 4
+        },
+        "outcomes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+              },
+              "course": {
+                "enum": [
+                  "p2_chinese",
+                  "p2_higher_chinese",
+                  "p3_chinese",
+                  "p3_higher_chinese"
+                ]
+              },
+              "label_zh": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "scope": {
+                "enum": [
+                  "deferred",
+                  "external",
+                  "in_app",
+                  "partial",
+                  "context_only"
+                ]
+              },
+              "source_ref": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+              },
+              "source_pdf_page": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "source_printed_page": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "grade_basis": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "content_status": {
+                "enum": [
+                  "unfilled",
+                  "draft",
+                  "approved"
+                ]
+              },
+              "required_stages": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "exact",
+                    "similar",
+                    "generic"
+                  ]
+                },
+                "minItems": 0
+              }
+            },
+            "required": [
+              "id",
+              "course",
+              "label_zh",
+              "scope",
+              "source_ref",
+              "source_pdf_page",
+              "source_printed_page",
+              "grade_basis",
+              "content_status",
+              "required_stages"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "characters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+              },
+              "course": {
+                "enum": [
+                  "p2_chinese",
+                  "p2_higher_chinese",
+                  "p3_chinese",
+                  "p3_higher_chinese"
+                ]
+              },
+              "character": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+              },
+              "recognition_list_pages": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "minItems": 0
+              },
+              "writing_list_pages": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "minItems": 0
+              },
+              "source_ref": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+              }
+            },
+            "required": [
+              "id",
+              "course",
+              "character",
+              "recognition_list_pages",
+              "writing_list_pages",
+              "source_ref"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "coverage_status": {
+          "enum": [
+            "denominator_and_mapping_review_pending",
+            "approved"
+          ]
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "minItems": 1
+        },
+        "skill_targets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/skill_target"
+          },
+          "minItems": 0
+        },
+        "route_compatibility": {
+          "type": "array",
+          "maxItems": 200,
+          "items": {
+            "type": "object",
+            "properties": {
+              "item_outcome": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+              },
+              "target_ref": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+              },
+              "note": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+              }
+            },
+            "required": [
+              "item_outcome",
+              "target_ref",
+              "note"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "manifest_version",
+        "status",
+        "source_date",
+        "courses",
+        "sources",
+        "course_character_counts",
+        "outcomes",
+        "characters",
+        "coverage_status",
+        "limitations"
+      ],
+      "additionalProperties": false
+    },
+    "opaque_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}(?![\\s\\S])"
+    },
+    "blank": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+        },
+        "question_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+        }
+      },
+      "required": [
+        "id",
+        "question_id"
+      ],
+      "additionalProperties": false
+    },
+    "annotation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "pinyin": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "pinyin"
+      ],
+      "additionalProperties": false
+    },
+    "group": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "label_zh": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "label_en": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "courses": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "p2_chinese",
+              "p2_higher_chinese",
+              "p3_chinese",
+              "p3_higher_chinese"
+            ]
+          },
+          "minItems": 1
+        },
+        "target_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+          },
+          "minItems": 1
+        },
+        "item_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+          },
+          "minItems": 3
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "label_zh",
+        "label_en",
+        "courses",
+        "target_refs",
+        "item_ids"
+      ],
+      "additionalProperties": false
+    },
+    "skill_target": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+        },
+        "course": {
+          "enum": [
+            "p2_chinese",
+            "p2_higher_chinese",
+            "p3_chinese",
+            "p3_higher_chinese"
+          ]
+        },
+        "outcome_ref": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+        },
+        "kind": {
+          "enum": [
+            "word",
+            "language_point",
+            "reading_skill"
+          ]
+        },
+        "label_zh": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "assessed_skill": {
+          "enum": [
+            "character_recognition",
+            "word_meaning",
+            "language_use",
+            "reading_information",
+            "sentence_organisation"
+          ]
+        },
+        "word": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 8
+        }
+      },
+      "required": [
+        "id",
+        "course",
+        "outcome_ref",
+        "kind",
+        "label_zh",
+        "assessed_skill"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
