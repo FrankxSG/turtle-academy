@@ -107,7 +107,11 @@ export class CatalogueRegistry {
   install(release: CatalogueRelease): InstallResult {
     const problem = checkRelease(release)
     if (problem) return { ok: false, reason: problem }
-    this.releases.set(`${release.subject}@${release.version}`, release)
+    const key = `${release.subject}@${release.version}`
+    const previous = this.releases.get(key)
+    // A task pins this identity, including its answer keys. Updates need a new version.
+    if (previous && JSON.stringify(previous) !== JSON.stringify(release)) return { ok: false, reason: 'version_conflict' }
+    this.releases.set(key, structuredClone(release))
     this.currentBySubject.set(release.subject, release.version)
     return { ok: true }
   }
@@ -129,7 +133,8 @@ export class CatalogueRegistry {
   release(subject: Subject, version: string): CatalogueRelease {
     const r = this.releases.get(`${subject}@${version}`)
     if (!r) throw new Error(`catalogue ${subject}@${version} unavailable`)
-    return r
+    // Callers must not mutate the release behind an already frozen task.
+    return structuredClone(r)
   }
 
   current(subject: Subject): CatalogueRelease | null {
@@ -156,3 +161,4 @@ export function judge(item: CatalogueItem, response: Response): boolean {
   }
   return same(item.key.option_ids, response.option_ids)
 }
+

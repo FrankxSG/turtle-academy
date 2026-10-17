@@ -112,3 +112,13 @@ Evidence at tested code head `70c1eaf`:
 - Strict type check of the engine, catalogue, snapshot and test modules passes locally (TypeScript 6). Twenty of 22 deliberate rule weakenings fail at least one test; the two others are redundant second guards (see PR #20).
 - GitHub CI at `70c1eaf`: `foundation` passed (`npm ci`, `npm audit`, `npm run build` including the TypeScript 7 type check of the Dexie store, and the end-to-end tests); `engine` and `privacy-guard` passed.
 - Not yet executed: the Dexie store against IndexedDB (needs a pinned `fake-indexeddb` lockfile change or a browser test), and browser or service-worker update acceptance.
+
+### 2026-10-17 ChatGPT independent review of PR #20 (`3ca9a0e`)
+
+Reviewed against `main` at `266a2ba`. Fixed F29 catalogue version pinning: conflicting installs under an existing subject/version are rejected, identical retries remain idempotent, and loader/reader references cannot mutate installed content. Two synthetic regression tests cover a paused task across reload and reference mutation. This correction needs independent re-review.
+
+Remaining blockers recorded on PR #20: general-practice mistake observations survive flagging of their source question; frozen material plans can serve an item version suspended after planning; and Issue #17 AC1 still lacks executable IndexedDB transaction/restart tests. These are not accepted limitations or merge approval.
+
+Review environment: Node 24.21.0; dependency installation and local app build unavailable. Focused catalogue/story suite: 14 pass. Broader engine results and CI for the resulting head are recorded on the PR. Local source materialization omits the release content directory, so its release-path isolation test requires CI's complete checkout. Existing head `3ca9a0e` has successful Learning engine and Privacy guard CI. No backend, deployment, real content release or real learner data action.
+
+
