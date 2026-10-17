@@ -15,7 +15,7 @@ import type { SaveStatus } from './engine/persistence.ts'
 import { openRuntime, type Runtime } from './ui/runtime.ts'
 import { Practice } from './ui/Practice.tsx'
 import type { Language } from './ui/development.ts'
-import { stories, deliverStory } from './ui/story.ts'
+import { stories, deliverStory, canPresentStory } from './ui/story.ts'
 
 const config = readAuthConfig(import.meta.env)
 type Entry = 'loading' | 'login' | 'setup' | 'ready'
@@ -196,7 +196,11 @@ export function App() {
     const next = await r.engine.next(taskId)
     setStep(next)
     const pending = r.engine.pendingCheckpoints()[0]
-    if (pending && !r.writer.status().warning) {
+    if (
+      pending &&
+      canPresentStory(r.engine, next) &&
+      !r.writer.status().warning
+    ) {
       if (next.kind !== 'done') await r.engine.pause(taskId)
       // Persist delivered state BEFORE presenting a checkpoint, so reload cannot replay it.
       await deliverStory(r.engine, pending)

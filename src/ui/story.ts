@@ -1,4 +1,4 @@
-import type { LearningEngine } from '../engine/engine.ts'
+import type { LearningEngine, Step } from '../engine/engine.ts'
 import type { Checkpoint } from '../engine/types.ts'
 
 export const stories = {
@@ -14,6 +14,24 @@ export const stories = {
     '微风把小灯转向岛上的小路。温暖的光一直照到图书馆门口。',
     '小灯又亮起来了。小岛会一直保留这份光。小海龟也会陪你聊天，一起发现新事物。',
   ],
+}
+
+/** A checkpoint delayed by a save failure must still wait for a safe UI boundary after saving recovers. */
+export function canPresentStory(engine: LearningEngine, step: Step): boolean {
+  if (step.kind !== 'question') return true
+  if (step.awaiting !== 'first') return false
+  const ref = step.presentation.material_ref
+  if (ref === null) return true
+  return !engine.state.presentations.some(
+    (p) =>
+      p.task_id === step.taskId &&
+      p.material_ref === ref &&
+      p.status !== 'flagged_replaced' &&
+      p.status !== 'invalidated' &&
+      engine.state.events.some(
+        (e) => e.presentation_id === p.id && e.phase === 'first',
+      ),
+  )
 }
 
 export async function deliverStory(

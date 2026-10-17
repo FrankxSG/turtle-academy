@@ -289,3 +289,50 @@ test('a second tab cannot write the same working copy', async ({
     second.getByRole('button', { name: 'Start Chinese' }),
   ).toBeVisible()
 })
+
+test('a checkpoint delayed by save failure waits for the next complete material boundary after recovery', async ({
+  page,
+  context,
+}) => {
+  await setup(page, context)
+  await parent(page)
+  await page.getByLabel('Chinese X').selectOption('6')
+  await page.getByRole('button', { name: 'Exit and lock' }).click()
+  await page.getByRole('button', { name: 'Start Chinese' }).click()
+  await answer(page)
+  await answer(page)
+  await page.evaluate(() => {
+    const original = IDBObjectStore.prototype.put
+    ;(globalThis as any).restoreWrites = () => {
+      IDBObjectStore.prototype.put = original
+    }
+    IDBObjectStore.prototype.put = function (...args: any[]) {
+      if (this.transaction.db.name.startsWith('turtle-academy-synthetic-'))
+        throw new DOMException('Synthetic failure', 'QuotaExceededError')
+      return original.apply(this, args as any)
+    }
+  })
+  await answer(page) // completes material one; halfway checkpoint cannot yet be saved
+  await expect(page.getByRole('alert')).toContainText(
+    'Some changes are not saved',
+  )
+  await answer(page) // begins material two while the warning is visible
+  await page.evaluate(() => (globalThis as any).restoreWrites())
+  await page.getByRole('button', { name: 'Retry local save' }).click()
+  await expect(page.getByRole('alert')).toHaveCount(0)
+  await answer(page) // saving recovered, but this is still inside material two
+  await expect(
+    page.getByRole('region', { name: 'Story checkpoint' }),
+  ).toHaveCount(0)
+  await answer(page) // now the complete material is a safe boundary
+  await expect(
+    page.getByRole('region', { name: 'Story checkpoint' }),
+  ).toBeVisible()
+  await finish(page)
+  const stored = await state(page)
+  expect(stored.events.length).toBe(6)
+  const checkpoints = stored.records.find((r) => r.table === 'story').value
+    .checkpoints
+  expect(checkpoints).toHaveLength(2)
+  expect(new Set(checkpoints.map((c) => c.id)).size).toBe(2)
+})

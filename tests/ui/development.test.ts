@@ -10,7 +10,7 @@ import {
   exercise,
   subjects,
 } from '../../src/ui/development.ts'
-import { deliverStory } from '../../src/ui/story.ts'
+import { deliverStory, canPresentStory } from '../../src/ui/story.ts'
 
 const now = () => '2027-03-01T01:00:00.000Z'
 const child = '00000000-0000-4000-8000-000000000001'
@@ -114,4 +114,40 @@ test('finite shared story preserves a valid world flag and is idempotent across 
     exportSnapshot(engine.state, engine.derived(), child, now()).check.ok,
     true,
   )
+})
+
+test('a pending story delayed by a save failure cannot interrupt a material or its corrections', async () => {
+  const engine = LearningEngine.fresh('Asia/Singapore', {
+    registry: developmentRegistry(),
+    now,
+  })
+  await engine.setX('chinese', 6)
+  const start = await engine.startOrResume('chinese')
+  if (start.kind !== 'task') throw new Error('expected task')
+  for (let n = 0; n < 3; n++) {
+    const step = await engine.next(start.task.id)
+    if (step.kind !== 'question') throw new Error('expected question')
+    await engine.answer(step.presentation.id, exercise(step.item.id).key)
+  }
+  const boundary = await engine.next(start.task.id)
+  assert.equal(engine.pendingCheckpoints().length, 1)
+  assert.equal(canPresentStory(engine, boundary), true)
+  if (boundary.kind !== 'question') throw new Error('expected question')
+  await engine.answer(boundary.presentation.id, exercise(boundary.item.id).key)
+  const inside = await engine.next(start.task.id)
+  assert.equal(canPresentStory(engine, inside), false)
+  if (inside.kind !== 'question') throw new Error('expected question')
+  await engine.answer(inside.presentation.id, {
+    kind: 'single',
+    option_ids: ['wrong'],
+    pairs: [],
+  })
+  const last = await engine.next(start.task.id)
+  if (last.kind !== 'question') throw new Error('expected question')
+  await engine.answer(last.presentation.id, exercise(last.item.id).key)
+  const retry = await engine.next(start.task.id)
+  assert.equal(canPresentStory(engine, retry), false)
+  if (retry.kind !== 'question') throw new Error('expected retry')
+  await engine.retry(retry.presentation.id, exercise(retry.item.id).key)
+  assert.equal(canPresentStory(engine, await engine.next(start.task.id)), true)
 })
