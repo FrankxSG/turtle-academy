@@ -66,6 +66,19 @@ Merge authorization never covers deployment, repository publication, real learne
 
 The automatic `Privacy guard` runs on every PR and supplements, but does not replace, human review. Prefer PR-triggered lightweight checks, concurrency cancellation and one canonical full-validation run when needed. Avoid duplicate push-plus-PR builds, scheduled runs and artifact uploads. Read-only checks never need production secrets.
 
+## PR communication and UI evidence
+
+Use [the PR template](../.github/pull_request_template.md) when preparing or reviewing a PR. Apply the same standard to Claude, ChatGPT and other contributors.
+
+- **Titles:** `type: user-facing description`, with an optional parenthesized scope only when useful. Types: `feat`, `fix`, `improve`, `refactor`, `docs`, `chore`. Fix titles describe the symptom and trigger, not implementation details.
+- **Descriptions:** lead with the concrete problem, user impact and a brief explanation of the approach. Internal-only changes should state there is no user-visible change. Keep risks, breaking changes, migrations and required actions visible; put long output and optional technical detail in links or `<details>`.
+- **Evidence:** summarize what was checked, the result, tested SHA and meaningful gaps. Reuse valid existing evidence. Keep ownership, dependencies, independent review, merge authorization and privacy/scope checks from the template.
+- **Visible UI changes:** before calling the work complete or ready to merge, capture and inspect screenshots of the affected screens/states at relevant viewport sizes, then include them in both the PR and chat. Use only synthetic data in an isolated test session; check the images for learner information, account/infrastructure identifiers and credentials before sharing. Screenshots supplement behavior tests and do not prove real-device, offline or educational acceptance.
+- **Unavailable screenshots:** record the concrete blocker and affected validation gap in the PR and chat. Do not claim visual validation or readiness; obtain the screenshots or an explicit owner waiver before completion/merge. Documentation and changes with no visible UI effect do not need screenshots.
+- **Fork contributions:** keep **Allow edits from maintainers** enabled when available.
+
+This standard adopts the problem/impact/approach/evidence principles of [OpenClaw's PR template](https://github.com/openclaw/openclaw/blob/main/.github/pull_request_template.md), with Turtle Academy's existing privacy, proportional-validation and merge-authorization rules retained.
+
 ## Communication and handoff
 
 Record meaningful scope changes, blockers, review findings, merge authorizations and handoffs in GitHub; skip acknowledgment-only comments and chat transcripts. Do not assume the other assistant runs continuously or receives chat messages: pending handoffs live in GitHub until that assistant starts its next task. A chat-only "done" does not establish shared project state.
