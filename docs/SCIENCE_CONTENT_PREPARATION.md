@@ -1,6 +1,8 @@
 # Science content pool (P3)
 
-Independent public-source research and current content findings: [research audit](content-review/SCIENCE_RESEARCH_AUDIT.md) (2026-10-16; changes required). This evidence supplements the authoring source register and does not approve the batch.
+Independent public-source research and original findings: [research audit](content-review/SCIENCE_RESEARCH_AUDIT.md) (2026-10-16). The review disposition below records subsequent corrections; the historical audit remains evidence, not batch approval.
+
+**Review disposition — 17 October 2026:** Independent re-review of `6babcfa` closes the encoded-external-reference SVG and stale-version findings. The plant-stage explanation is item v3, the corrected fungi asset is v2, the timeline question's copy cleanup is v3, and the pool is v4; the readable item review agrees. The earlier scientific corrections remain accepted. All six shared test methods and the subject validator pass. No open blocker from this correction remains for merging preparation work; this is not owner merge authorization or approved shipping content. SC4's source-complete inventory, full item QA, owner disputed-item review/random 20% sample, batch sign-off and coverage approval remain pending. The guided-observation/teaching/two-independent-tests flow still requires application acceptance testing.
 
 **Review proposal · 16 October 2026 · generic/public content pool**
 
