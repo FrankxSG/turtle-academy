@@ -15,6 +15,7 @@ This is one review entry point for curriculum preparation and authoring contract
 | [Curriculum manifest](../content/chinese/curriculum.json) | Four course identities, official references, 136 course-specific outcome records (including language-use leaves), 46 word/language-point/reading-skill repair targets and 1,796 character records | Source-based working inventory (draft.2 adds finer leaves); independent grade/denominator audit pending |
 | [Contract schema](../contracts/chinese/1.schema.json) | Curriculum, original catalogue, frozen synthetic task plan, minimal Chinese intake and answer-event shapes | Proposed engineering contract; no app integration |
 | [Starter batch](../content/chinese/batches/starter-001.json) | Version 10: 357 original items — 19 materials (95 questions), 12 declared repair groups (45 character pools and 23 skill pools; 204 questions), and 58 further general-practice items; every non-repair question declares a repair route | Batch approved by the owner 2026-10-18 (rights cleared); manifest denominator still proposed |
+| [Second batch](../content/chinese/batches/starter-002.json) | Version 1: 38 new original P2 items — 1 material (4 questions), 4 repair groups (5 character pools and 3 skill pools; 24 questions) and 10 further general-practice items | Author draft; independent cross-review, owner review of 4 disputes and a 7-item sample, and rights review pending ([review pack](content-review/CHINESE_REVIEW_PACK_STARTER_002.md)) |
 | [Task fixtures](../content/chinese/fixtures/) | Complete P2 examples for X=6, 10, 12 and 19 | Synthetic, deterministic validation examples; no learner data |
 | [Validator](../scripts/validate_chinese_content.py) and [boundary checks](../scripts/test_chinese_content_contracts.py) | Structural integrity and cross-file rejection cases | Standard-library authoring tools; not learning-engine implementation |
 
@@ -177,7 +178,7 @@ python3 -m unittest discover -s scripts -p test_chinese_content_contracts.py -v
 python3 scripts/privacy_guard.py
 ```
 
-Current authoring evidence: schema/reference/key checks and 25 boundary test methods pass (including whole-pool deletion and undeclared repair items); the optional PDF source audit reproduces all character records and counts. Additional rejection cases include nonpositive versions, stale item pins, ID/hash trailing newlines, inconsistent approval states, invalid review IDs, wrong grade/source pages, incomplete target course coverage, wrong mapped character values, broken blank/annotation links and a premature X=12 halfway boundary. Existing X/material/import/assistance checks remain. No app/browser/backend tests are claimed; application files and dependencies are unchanged.
+Current authoring evidence: schema/reference/key checks pass for every batch, and the boundary test methods pass (including whole-pool deletion and undeclared repair items); the optional PDF source audit reproduces all character records and counts. Additional rejection cases include nonpositive versions, stale item pins, ID/hash trailing newlines, inconsistent approval states, invalid review IDs, wrong grade/source pages, incomplete target course coverage, wrong mapped character values, broken blank/annotation links and a premature X=12 halfway boundary. Existing X/material/import/assistance checks remain. No app/browser/backend tests are claimed; application files and dependencies are unchanged.
 
 Before building Chinese: approve the independently audited source map/leaf boundaries and contracts; complete content QA and private coverage/proceed gates; resolve the existing data-protection gates for real records. Then authorize a focused synthetic-only implementation slice separately. This preparation PR must remain draft until review is resolved, and must not merge or deploy without the owner's explicit authorization.
 
@@ -234,6 +235,12 @@ Before drafting or reviewing Chinese items, read the common [question authoring 
 See [review pack v10](content-review/CHINESE_REVIEW_PACK_V10.md) for the ten item corrections, the 24 owner dispositions, the reproducible 67-of-333 owner sample and complete material context. ChatGPT desk-reviewed the 357-item v8 input; its own ten edits require Claude re-review. Source fingerprints match the register, but the independent visual grade audit, denominator approval, rights clearance and owner sign-off remain open. The earlier v8 pack and prior disposition above are historical evidence, not approval of this head.
 
 The inventory now uses leaf-specific repair stages and per-route thin-stock counts. Its material supply is an upper bound on complete tasks without reuse, not a scheduling prediction. No app files, import allowlists or learner-data gates change.
+
+## Second batch — zh-starter-002 v1 (18 October 2026)
+
+New P2 content is published as a separate batch, so the owner's approval of `zh-starter-001` v10 is unchanged and covers only its own items. Each batch carries its own review state. The validator checks every file in `content/chinese/batches/` on its own and rejects an item, material or group ID used in two batches. The release inventory combines the batches for counting and names the open gates of each batch.
+
+The batch adds four topic sets, each with a complete exact/similar/generic pool: look-alike and sound-alike characters (远 完 捉 带 记), character sounds and written pinyin, word choice (它 for animals and things, 把/给, 呢, 乖 and 欺负), and finding the whole reason in a short text. P2 school exercise formats were reviewed privately to choose question types; no worksheet, textbook or past-paper wording, answer or learner information is used. As with every public group, the targets are generic curriculum content and not a record of any learner's errors. Items, disputes, the owner sample and the author checks are in the [review pack](content-review/CHINESE_REVIEW_PACK_STARTER_002.md).
 
 ## 6. Starter content review
 

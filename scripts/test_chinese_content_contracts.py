@@ -4,8 +4,8 @@ import datetime as dt
 import unittest
 
 from validate_chinese_content import (ROOT, SCHEMA, Invalid, check_attempt,
-                                     check_catalogue, check_import, check_plan,
-                                     load, schema_check)
+                                     check_batches, check_catalogue, check_import,
+                                     check_plan, load, schema_check)
 
 
 class Contracts(unittest.TestCase):
@@ -20,6 +20,18 @@ class Contracts(unittest.TestCase):
                             'target_kind': 'character', 'target_value': '晴',
                             'assessed_skill': 'character_recognition', 'error_type': 'unknown_cause',
                             'observation_date': '2026-10-14', 'source_type': 'home_practice'}]}
+
+    def test_every_published_batch_is_valid_on_its_own(self):
+        batches = [load(p) for p in sorted((ROOT / 'content/chinese/batches').glob('*.json'))]
+        check_batches(self.curriculum, batches)
+
+    def test_ids_must_be_unique_across_batches(self):
+        other = copy.deepcopy(self.batch)
+        other['batch_id'] = 'zh-test-other'
+        with self.assertRaisesRegex(Invalid, 'duplicate_catalogue_id_across_batches'):
+            check_batches(self.curriculum, [self.batch, other])
+        with self.assertRaisesRegex(Invalid, 'duplicate_batch_id'):
+            check_batches(self.curriculum, [self.batch, copy.deepcopy(self.batch)])
 
     def test_all_public_plans_valid(self):
         for path in (ROOT / 'content/chinese/fixtures').glob('task-*.json'):
