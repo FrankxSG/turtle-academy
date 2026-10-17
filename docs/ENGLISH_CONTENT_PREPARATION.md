@@ -1,6 +1,8 @@
 # English content pool (P2-P3)
 
-Independent public-source research and current content findings: [research audit](content-review/ENGLISH_RESEARCH_AUDIT.md) (2026-10-16; changes required). This evidence supplements the authoring source register and does not approve the batch.
+Independent public-source research and original findings: [research audit](content-review/ENGLISH_RESEARCH_AUDIT.md) (2026-10-16). The review disposition below records subsequent corrections; the historical audit remains evidence, not batch approval.
+
+**Review disposition — 17 October 2026:** Independent re-review of `40aa8a4` closes the encoded-external-reference SVG finding. All six shared test methods and the subject validator pass. The prior acceptance of the robot-cloze routes, six new repair questions, cause/result route and P3 reinforcement remains valid. Pool v4 correctly identifies that revision, and the inventory now reports all 96 authored leaves. No open blocker from this correction remains for merging preparation work; this is not owner merge authorization or approved shipping content. EL3's source-complete inventory, full item QA, owner disputed-item review/random 20% sample, batch sign-off and coverage approval remain pending. Listening and full writing/oral exclusions are unchanged.
 
 **Review proposal · 16 October 2026 · generic/public content pool**
 
@@ -8,7 +10,7 @@ Original P2 and P3 English questions and passages for the public (generic) versi
 
 ## 1. What is in this pool
 
-- `content/english/curriculum.json`: 35 topic records with scope and Pilot status, 94 leaf records (assessed ability, representation, scope, MOE page reference) and cited sources.
+- `content/english/curriculum.json`: 35 topic records with scope and Pilot status, 96 leaf records (assessed ability, representation, scope, MOE page reference) and cited sources.
 - `content/english/pool-001.json` (batch version 4): 364 original questions (P2 187, P3 177), 19 materials, 91 three-stage repair sets (exact → similar → generic), 91 non-repair questions with a declared repair route.
 - `content/english/assets/`: 4 original SVG diagrams referenced by items or materials (no scripts, links, images or external references; titles and alt text describe the picture without giving the answer).
 - `scripts/validate_subject_content.py`: structural checks (IDs, keys, 4+ distinct options, topic/source/leaf references, complete repair sets with one leaf mapping, repair routes for every non-repair question when leaves are declared, diagrams present for visual leaves, knowledge-point links and acyclic prerequisites, SVG safety, hints that do not state the answer).
