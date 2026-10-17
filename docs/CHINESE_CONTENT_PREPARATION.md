@@ -14,7 +14,7 @@ This is one review entry point for curriculum preparation and authoring contract
 | --- | --- | --- |
 | [Curriculum manifest](../content/chinese/curriculum.json) | Four course identities, official references, 136 course-specific outcome records (including language-use leaves), 46 word/language-point/reading-skill repair targets and 1,796 character records | Source-based working inventory (draft.2 adds finer leaves); independent grade/denominator audit pending |
 | [Contract schema](../contracts/chinese/1.schema.json) | Curriculum, original catalogue, frozen synthetic task plan, minimal Chinese intake and answer-event shapes | Proposed engineering contract; no app integration |
-| [Starter batch](../content/chinese/batches/starter-001.json) | Version 10: 357 original items — 19 materials (95 questions), 12 declared repair groups (45 character pools and 23 skill pools; 204 questions), and 58 further general-practice items; every non-repair question declares a repair route | Author checked; independent review and owner sign-off pending |
+| [Starter batch](../content/chinese/batches/starter-001.json) | Version 10: 357 original items — 19 materials (95 questions), 12 declared repair groups (45 character pools and 23 skill pools; 204 questions), and 58 further general-practice items; every non-repair question declares a repair route | Batch approved by the owner 2026-10-18 (rights cleared); manifest denominator still proposed |
 | [Task fixtures](../content/chinese/fixtures/) | Complete P2 examples for X=6, 10, 12 and 19 | Synthetic, deterministic validation examples; no learner data |
 | [Validator](../scripts/validate_chinese_content.py) and [boundary checks](../scripts/test_chinese_content_contracts.py) | Structural integrity and cross-file rejection cases | Standard-library authoring tools; not learning-engine implementation |
 
@@ -229,7 +229,7 @@ Validation: `python3 scripts/validate_chinese_content.py`, the contract tests, `
 
 Before drafting or reviewing Chinese items, read the common [question authoring skill](../skills/question-authoring/SKILL.md), then the [Chinese layer](../skills/chinese-question-authoring/SKILL.md) on top of it. The [PR 23 case log](../skills/chinese-question-authoring/references/pr23-lessons.md) records each error found in cross-review, its cause and the check that now catches it.
 
-**Owner decisions 2026-10-18:** all 24 disputed items and all 67 sampled items accepted, batch approved and rights cleared by the owner. The batch is not marked `approved` until ChatGPT re-reviews the three v10 refinements; the manifest denominator, visual grade audit and release gates are unchanged.
+**Owner decisions 2026-10-18:** all 24 disputed items and all 67 sampled items accepted, batch approved and rights cleared by the owner. The owner also confirmed the three v10 refinements and waived their ChatGPT re-review, so the batch status is `approved`. The manifest denominator, visual grade audit and release gates are unchanged.
 
 See [review pack v10](content-review/CHINESE_REVIEW_PACK_V10.md) for the ten item corrections, the 24 owner dispositions, the reproducible 67-of-333 owner sample and complete material context. ChatGPT desk-reviewed the 357-item v8 input; its own ten edits require Claude re-review. Source fingerprints match the register, but the independent visual grade audit, denominator approval, rights clearance and owner sign-off remain open. The earlier v8 pack and prior disposition above are historical evidence, not approval of this head.
 

@@ -675,7 +675,7 @@ Original generic authored materials only. Each material is answered as a whole b
 
 ## Next review and sign-off
 
-1. ChatGPT re-reviews the three v10 refinements above. Recheck any newly disputed item and redraw only if pool membership changes.
+1. Waived 2026-10-18: the owner confirmed the three v10 refinements and waived ChatGPT re-review of them. Batch status is `approved`.
 2. Complete the independent visual page/grade audit and owner denominator decision; do not use 13/17 as approved MOE coverage.
 3. Done 2026-10-18: owner accepted all 24 disputed items and all 67 sampled items, approved the batch and cleared rights. Recorded in `review_log`.
 4. Keep P3 import, real data, merge and release gates unchanged. Stock remains one item per repair stage; CL/HCL shared availability does not establish HCL depth.

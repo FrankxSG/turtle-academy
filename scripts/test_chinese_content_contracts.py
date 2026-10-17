@@ -151,6 +151,9 @@ class Contracts(unittest.TestCase):
     def test_review_states_are_shape_not_approval(self):
         b = copy.deepcopy(self.batch)
         b['status'] = 'approved'
+        # Synthetic pending states, independent of the real batch's current review state.
+        b['review_log'].update(independent_review='changes_requested', owner_signoff='pending',
+                               rights_status='original_draft_pending_owner_rights_review')
         schema_check(b, SCHEMA['$defs']['batch'])
         with self.assertRaisesRegex(Invalid, 'approved_batch_review_state'):
             check_catalogue(self.curriculum, b)

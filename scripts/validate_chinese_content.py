@@ -356,7 +356,10 @@ def main():
         check_plan(load(path), curriculum, batch)
     print(f"PASS: {len(curriculum['outcomes'])} course outcomes, {len(curriculum['characters'])} character records; "
           f"{len(batch['materials'])} materials, {len(batch['items'])} items, {len(plans)} synthetic plans.")
-    print('QA pending: independent review, owner sign-off, approved coverage denominator. Not a content release.')
+    pending = [] if batch['status'] == 'approved' else ['batch review and sign-off']
+    if curriculum['status'] != 'approved':
+        pending.append('approved coverage denominator')
+    print('QA pending: ' + (', '.join(pending) or 'none recorded') + '. Not a content release.')
 
 
 if __name__ == '__main__':
