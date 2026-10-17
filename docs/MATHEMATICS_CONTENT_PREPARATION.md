@@ -1,6 +1,8 @@
 # Mathematics content pool (P2-P3)
 
-Independent public-source research and current content findings: [research audit](content-review/MATHEMATICS_RESEARCH_AUDIT.md) (2026-10-16; changes required). This evidence supplements the authoring source register and does not approve the batch.
+Independent public-source research and original findings: [research audit](content-review/MATHEMATICS_RESEARCH_AUDIT.md) (2026-10-16). The review disposition below records subsequent corrections; the historical audit remains evidence, not batch approval.
+
+**Review disposition — 17 October 2026:** Independent re-review of `cba8714` closes the encoded-external-reference SVG finding. Decoded attribute checks reject the original decimal/hex-encoded URL, style, protocol, data-URI and CSS-escape probes; literal or encoded same-file references remain allowed. All six shared test methods and the subject validator pass. Questions and diagrams are unchanged from the prior content review. No open blocker from this correction remains for merging preparation work; this is not owner merge authorization or approved shipping content. MA3's source-complete inventory and known mental two-digit addition/subtraction gap remain pending, together with full item QA, owner disputed-item review/random 20% sample, batch sign-off and coverage approval. P3 Mathematics remains locked in the Pilot.
 
 **Review proposal · 16 October 2026 · generic/public content pool**
 
