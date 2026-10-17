@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 457 158" width="457" height="158" role="img">
+<title>The heights of two plants on Day 1 and Day 14.</title>
+<rect x="0" y="0" width="457" height="158" fill="#ffffff"/>
+<text x="228.5" y="26.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">Heights of two plants</text>
+<rect x="10" y="44" width="437" height="34" fill="#e4f2ee"/>
+<line x1="10.0" y1="44.0" x2="447.0" y2="44.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="78.0" x2="447.0" y2="78.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="112.0" x2="447.0" y2="112.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="146.0" x2="447.0" y2="146.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="44.0" x2="10.0" y2="146.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<text x="65.0" y="66.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f2933">Plant</text>
+<text x="65.0" y="100.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">A</text>
+<text x="65.0" y="134.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">B</text>
+<line x1="120.0" y1="44.0" x2="120.0" y2="146.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<text x="199.5" y="66.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f2933">Height on Day 1</text>
+<text x="199.5" y="100.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">4 cm</text>
+<text x="199.5" y="134.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">5 cm</text>
+<line x1="279.0" y1="44.0" x2="279.0" y2="146.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<text x="363.0" y="66.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f2933">Height on Day 14</text>
+<text x="363.0" y="100.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">15 cm</text>
+<text x="363.0" y="134.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">9 cm</text>
+<line x1="447.0" y1="44.0" x2="447.0" y2="146.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+</svg>

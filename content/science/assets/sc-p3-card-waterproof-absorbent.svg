@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 150" width="360" height="150" role="img">
+<title>A drop of water on a plastic sheet and on a paper towel.</title>
+<rect x="0" y="0" width="360" height="150" fill="#ffffff"/>
+<rect x="20" y="70" width="140" height="18" fill="#b9c2cc" stroke="#1f2933" stroke-width="1.2"/>
+<ellipse cx="90" cy="62" rx="14" ry="9" fill="#cfe8fb" stroke="#3a7bd5" stroke-width="1.5"/>
+<text x="90.0" y="112.0" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" font-weight="normal" fill="#1f2933">plastic sheet</text>
+<text x="90.0" y="130.0" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" font-weight="normal" fill="#7b8794">water stays on top</text>
+<rect x="200" y="70" width="140" height="18" fill="#fffbe6" stroke="#1f2933" stroke-width="1.2"/>
+<ellipse cx="270" cy="79" rx="40" ry="8" fill="#cfe8fb" opacity="0.8"/>
+<text x="270.0" y="112.0" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" font-weight="normal" fill="#1f2933">paper towel</text>
+<text x="270.0" y="130.0" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" font-weight="normal" fill="#7b8794">water soaks in</text>
+<text x="180.0" y="30.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f2933">A drop of water is put on each material</text>
+</svg>

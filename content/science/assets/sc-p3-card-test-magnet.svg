@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 778 192" width="778" height="192" role="img">
+<title>Results of testing three rods with a magnet.</title>
+<rect x="0" y="0" width="778" height="192" fill="#ffffff"/>
+<text x="389.0" y="26.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">Is it a magnet?</text>
+<rect x="10" y="44" width="758" height="34" fill="#e4f2ee"/>
+<line x1="10.0" y1="44.0" x2="768.0" y2="44.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="78.0" x2="768.0" y2="78.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="112.0" x2="768.0" y2="112.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="146.0" x2="768.0" y2="146.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="180.0" x2="768.0" y2="180.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="44.0" x2="10.0" y2="180.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<text x="65.0" y="66.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f2933">Rod</text>
+<text x="65.0" y="100.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">A</text>
+<text x="65.0" y="134.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">B</text>
+<text x="65.0" y="168.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">C</text>
+<line x1="120.0" y1="44.0" x2="120.0" y2="180.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<text x="199.5" y="66.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f2933">Near the N pole</text>
+<text x="199.5" y="100.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">repels</text>
+<text x="199.5" y="134.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">attracts</text>
+<text x="199.5" y="168.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">nothing</text>
+<line x1="279.0" y1="44.0" x2="279.0" y2="180.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<text x="358.5" y="66.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f2933">Near the S pole</text>
+<text x="358.5" y="100.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">attracts</text>
+<text x="358.5" y="134.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">attracts</text>
+<text x="358.5" y="168.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">nothing</text>
+<line x1="438.0" y1="44.0" x2="438.0" y2="180.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<text x="603.0" y="66.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f2933">What it shows</text>
+<text x="603.0" y="100.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">A is a magnet</text>
+<text x="603.0" y="134.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">B is magnetic, may not be a magnet</text>
+<text x="603.0" y="168.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">C is non-magnetic</text>
+<line x1="768.0" y1="44.0" x2="768.0" y2="180.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+</svg>

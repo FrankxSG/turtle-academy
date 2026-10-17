@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 350" width="440" height="350" role="img">
+<title>The life cycle of a frog as a cycle diagram.</title>
+<rect x="0" y="0" width="440" height="350" fill="#ffffff"/>
+<text x="220.0" y="24.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">Life cycle of a frog</text>
+<line x1="256.8" y1="80.0" x2="295.2" y2="158.0" stroke="#7b8794" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="295.2" y1="158.0" x2="287.3" y2="151.9" stroke="#7b8794" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="295.2" y1="158.0" x2="295.2" y2="148.0" stroke="#7b8794" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="295.2" y1="192.0" x2="256.8" y2="270.0" stroke="#7b8794" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="256.8" y1="270.0" x2="256.8" y2="260.0" stroke="#7b8794" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="256.8" y1="270.0" x2="264.7" y2="263.9" stroke="#7b8794" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="183.2" y1="270.0" x2="144.8" y2="192.0" stroke="#7b8794" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="144.8" y1="192.0" x2="152.7" y2="198.1" stroke="#7b8794" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="144.8" y1="192.0" x2="144.8" y2="202.0" stroke="#7b8794" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="144.8" y1="158.0" x2="183.2" y2="80.0" stroke="#7b8794" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="183.2" y1="80.0" x2="183.2" y2="90.0" stroke="#7b8794" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="183.2" y1="80.0" x2="175.3" y2="86.1" stroke="#7b8794" stroke-width="2.2" stroke-linecap="round"/>
+<rect x="164.0" y="43.0" width="112" height="40" rx="12" fill="#cfe8fb" stroke="#1f2933" stroke-width="1.8"/>
+<text x="220.0" y="68.0" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" font-weight="bold" fill="#1f2933">egg</text>
+<rect x="276.0" y="155.0" width="112" height="40" rx="12" fill="#cfe8fb" stroke="#1f2933" stroke-width="1.8"/>
+<text x="332.0" y="180.0" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" font-weight="bold" fill="#1f2933">tadpole</text>
+<rect x="164.0" y="267.0" width="112" height="40" rx="12" fill="#ffffff" stroke="#1f2933" stroke-width="1.8"/>
+<text x="220.0" y="292.0" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" font-weight="bold" fill="#1f2933">young frog</text>
+<rect x="52.0" y="155.0" width="112" height="40" rx="12" fill="#ffffff" stroke="#1f2933" stroke-width="1.8"/>
+<text x="108.0" y="180.0" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" font-weight="bold" fill="#1f2933">adult frog</text>
+<rect x="12" y="320" width="22" height="16" rx="4" fill="#cfe8fb" stroke="#1f2933" stroke-width="1"/>
+<text x="42.0" y="333.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" font-weight="normal" fill="#1f2933">lives in water</text>
+</svg>

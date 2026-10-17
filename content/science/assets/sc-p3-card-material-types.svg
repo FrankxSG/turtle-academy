@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 365 226" width="365" height="226" role="img">
+<title>Objects and the materials they are made of.</title>
+<rect x="0" y="0" width="365" height="226" fill="#ffffff"/>
+<text x="182.5" y="26.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">What is it made of?</text>
+<rect x="10" y="44" width="345" height="34" fill="#e4f2ee"/>
+<line x1="10.0" y1="44.0" x2="355.0" y2="44.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="78.0" x2="355.0" y2="78.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="112.0" x2="355.0" y2="112.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="146.0" x2="355.0" y2="146.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="180.0" x2="355.0" y2="180.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="214.0" x2="355.0" y2="214.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="44.0" x2="10.0" y2="214.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<text x="71.5" y="66.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f2933">Object</text>
+<text x="71.5" y="100.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">pencil</text>
+<text x="71.5" y="134.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">window pane</text>
+<text x="71.5" y="168.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">spoon</text>
+<text x="71.5" y="202.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">T-shirt</text>
+<line x1="133.0" y1="44.0" x2="133.0" y2="214.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<text x="244.0" y="66.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f2933">Materials</text>
+<text x="244.0" y="100.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">wood, graphite, rubber</text>
+<text x="244.0" y="134.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">glass</text>
+<text x="244.0" y="168.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">metal</text>
+<text x="244.0" y="202.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">fabric</text>
+<line x1="355.0" y1="44.0" x2="355.0" y2="214.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+</svg>

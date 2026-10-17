@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 325 192" width="325" height="192" role="img">
+<title>A record of when the young plant, first flower and first fruit appeared for a chilli plant.</title>
+<rect x="0" y="0" width="325" height="192" fill="#ffffff"/>
+<text x="162.5" y="26.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">Chilli plant record</text>
+<rect x="10" y="44" width="305" height="34" fill="#e4f2ee"/>
+<line x1="10.0" y1="44.0" x2="315.0" y2="44.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="78.0" x2="315.0" y2="78.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="112.0" x2="315.0" y2="112.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="146.0" x2="315.0" y2="146.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="180.0" x2="315.0" y2="180.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="44.0" x2="10.0" y2="180.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<text x="107.5" y="66.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f2933">What we saw</text>
+<text x="107.5" y="100.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">Young plant appears</text>
+<text x="107.5" y="134.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">First flower</text>
+<text x="107.5" y="168.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">First fruit</text>
+<line x1="205.0" y1="44.0" x2="205.0" y2="180.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<text x="260.0" y="66.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f2933">Week</text>
+<text x="260.0" y="100.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">Week 2</text>
+<text x="260.0" y="134.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">Week 9</text>
+<text x="260.0" y="168.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">Week 11</text>
+<line x1="315.0" y1="44.0" x2="315.0" y2="180.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+</svg>

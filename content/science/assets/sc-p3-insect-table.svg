@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 363 226" width="363" height="226" role="img">
+<title>A table of the body parts and legs of four small animals.</title>
+<rect x="0" y="0" width="363" height="226" fill="#ffffff"/>
+<text x="181.5" y="26.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">Four small animals</text>
+<rect x="10" y="44" width="343" height="34" fill="#e4f2ee"/>
+<line x1="10.0" y1="44.0" x2="353.0" y2="44.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="78.0" x2="353.0" y2="78.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="112.0" x2="353.0" y2="112.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="146.0" x2="353.0" y2="146.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="180.0" x2="353.0" y2="180.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="214.0" x2="353.0" y2="214.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="10.0" y1="44.0" x2="10.0" y2="214.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<text x="65.0" y="66.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f2933">Animal</text>
+<text x="65.0" y="100.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">W</text>
+<text x="65.0" y="134.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">X</text>
+<text x="65.0" y="168.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">Y</text>
+<text x="65.0" y="202.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">Z</text>
+<line x1="120.0" y1="44.0" x2="120.0" y2="214.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<text x="181.5" y="66.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f2933">Body parts</text>
+<text x="181.5" y="100.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">2</text>
+<text x="181.5" y="134.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">3</text>
+<text x="181.5" y="168.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">many</text>
+<text x="181.5" y="202.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">1 long body</text>
+<line x1="243.0" y1="44.0" x2="243.0" y2="214.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+<text x="298.0" y="66.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f2933">Legs</text>
+<text x="298.0" y="100.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">8</text>
+<text x="298.0" y="134.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">6</text>
+<text x="298.0" y="168.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">many</text>
+<text x="298.0" y="202.0" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#1f2933">none</text>
+<line x1="353.0" y1="44.0" x2="353.0" y2="214.0" stroke="#1f2933" stroke-width="1.2" stroke-linecap="round"/>
+</svg>

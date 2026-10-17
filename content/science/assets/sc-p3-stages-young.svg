@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 150" width="440" height="150" role="img">
+<title>Pictures of a plant at different stages.</title>
+<rect x="0" y="0" width="440" height="150" fill="#ffffff"/>
+<rect x="9.0" y="103.0" width="92" height="12" fill="#a07850"/>
+<line x1="55.0" y1="103.0" x2="55.0" y2="35.0" stroke="#4c9f70" stroke-width="3.5" stroke-linecap="round"/>
+<ellipse cx="68.0" cy="89.0" rx="13" ry="5" fill="#4c9f70"/>
+<ellipse cx="42.0" cy="75.0" rx="13" ry="5" fill="#4c9f70"/>
+<ellipse cx="68.0" cy="61.0" rx="13" ry="5" fill="#4c9f70"/>
+<ellipse cx="42.0" cy="49.0" rx="13" ry="5" fill="#4c9f70"/>
+<text x="55.0" y="140.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">A</text>
+<rect x="119.0" y="103.0" width="92" height="12" fill="#a07850"/>
+<ellipse cx="165.0" cy="97.0" rx="11" ry="7" fill="#d8b384" stroke="#1f2933" stroke-width="1.5"/>
+<text x="165.0" y="140.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">B</text>
+<rect x="229.0" y="103.0" width="92" height="12" fill="#a07850"/>
+<line x1="275.0" y1="103.0" x2="275.0" y2="73.0" stroke="#4c9f70" stroke-width="3" stroke-linecap="round"/>
+<ellipse cx="265.0" cy="71.0" rx="11" ry="5" fill="#4c9f70"/>
+<ellipse cx="285.0" cy="71.0" rx="11" ry="5" fill="#4c9f70"/>
+<text x="275.0" y="140.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">C</text>
+<rect x="339.0" y="103.0" width="92" height="12" fill="#a07850"/>
+<line x1="385.0" y1="103.0" x2="385.0" y2="35.0" stroke="#4c9f70" stroke-width="3.5" stroke-linecap="round"/>
+<ellipse cx="398.0" cy="89.0" rx="13" ry="5" fill="#4c9f70"/>
+<ellipse cx="372.0" cy="75.0" rx="13" ry="5" fill="#4c9f70"/>
+<ellipse cx="398.0" cy="61.0" rx="13" ry="5" fill="#4c9f70"/>
+<ellipse cx="372.0" cy="49.0" rx="13" ry="5" fill="#4c9f70"/>
+<circle cx="385.0" cy="29.0" r="9" fill="#d9534f" stroke="#1f2933" stroke-width="1"/>
+<text x="385.0" y="140.0" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" font-weight="bold" fill="#1f2933">D</text>
+</svg>
