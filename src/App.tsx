@@ -204,7 +204,10 @@ export function App() {
       if (next.kind !== 'done') await r.engine.pause(taskId)
       // Persist delivered state BEFORE presenting a checkpoint, so reload cannot replay it.
       await deliverStory(r.engine, pending)
-      if (!r.writer.status().warning) setCheckpoint({ ...pending })
+      // Present even if this delivery write failed: it is already marked delivered and queued, so
+      // skipping the card would lose the scene once saving recovers. The save warning discloses
+      // that a reload before recovery may show it again.
+      setCheckpoint({ ...pending })
     }
   }
   async function login() {

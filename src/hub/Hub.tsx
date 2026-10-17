@@ -96,7 +96,7 @@ export function Hub({
             setDialogue(
               engine.state.story.ended
                 ? zh
-                  ? '我们的灯塔亮起来了！今天想去哪里看看？'
+                  ? '我们的小灯亮起来了！今天想去哪里看看？'
                   : 'Our lantern is glowing! Where shall we wander today?'
                 : zh
                   ? '你好！我是小海龟。先观察，再尝试，我会陪着你。'
@@ -119,7 +119,7 @@ export function Hub({
         {engine.state.story.world_flags.includes('lantern_lit') && (
           <span
             className="lantern"
-            aria-label={zh ? '已点亮的灯塔' : 'Lit lantern'}
+            aria-label={zh ? '已点亮的小灯' : 'Lit lantern'}
           >
             ☀
           </span>

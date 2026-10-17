@@ -336,3 +336,50 @@ test('a checkpoint delayed by save failure waits for the next complete material 
   expect(checkpoints).toHaveLength(2)
   expect(new Set(checkpoints.map((c) => c.id)).size).toBe(2)
 })
+
+test('a checkpoint whose own delivery write fails is still presented once, not silently skipped', async ({
+  page,
+  context,
+}) => {
+  await setup(page, context)
+  await parent(page)
+  await page.getByLabel('Chinese X').selectOption('6')
+  await page.getByRole('button', { name: 'Exit and lock' }).click()
+  await page.getByRole('button', { name: 'Start Chinese' }).click()
+  await answer(page)
+  await answer(page)
+  await page.evaluate(() => {
+    // Fail only the write that marks a checkpoint delivered; the answer that emits it saves normally.
+    const original = IDBObjectStore.prototype.put
+    ;(globalThis as any).restoreWrites = () => {
+      IDBObjectStore.prototype.put = original
+    }
+    IDBObjectStore.prototype.put = function (...args: any[]) {
+      const row = args[0]
+      if (
+        this.transaction.db.name.startsWith('turtle-academy-synthetic-') &&
+        row?.table === 'story' &&
+        row.value?.checkpoints?.some((c: any) => c.state === 'delivered')
+      )
+        throw new DOMException('Synthetic failure', 'QuotaExceededError')
+      return original.apply(this, args as any)
+    }
+  })
+  await answer(page) // completes material one; the halfway delivery cannot be saved yet
+  await expect(page.getByRole('alert')).toContainText(
+    'Some changes are not saved',
+  )
+  const story = page.getByRole('region', { name: 'Story checkpoint' })
+  await expect(story).toBeVisible()
+  await page.evaluate(() => (globalThis as any).restoreWrites())
+  await page.getByRole('button', { name: 'Retry local save' }).click()
+  await expect(page.getByRole('alert')).toHaveCount(0)
+  await story.getByRole('button', { name: 'Continue', exact: true }).click()
+  const later = await finish(page)
+  expect(later).toHaveLength(1)
+  const checkpoints = (await state(page)).records.find(
+    (r) => r.table === 'story',
+  ).value.checkpoints
+  expect(checkpoints).toHaveLength(2)
+  expect(checkpoints.every((c: any) => c.state === 'delivered')).toBe(true)
+})
