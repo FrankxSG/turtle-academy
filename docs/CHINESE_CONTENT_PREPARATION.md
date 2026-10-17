@@ -229,7 +229,9 @@ Validation: `python3 scripts/validate_chinese_content.py`, the contract tests, `
 
 Before drafting or reviewing Chinese items, read the common [question authoring skill](../skills/question-authoring/SKILL.md), then the [Chinese layer](../skills/chinese-question-authoring/SKILL.md) on top of it. The [PR 23 case log](../skills/chinese-question-authoring/references/pr23-lessons.md) records each error found in cross-review, its cause and the check that now catches it.
 
-See [review pack v10](content-review/CHINESE_REVIEW_PACK_V10.md) for the ten item corrections, all 24 pending owner dispositions, the reproducible 67-of-333 owner sample and complete material context. ChatGPT desk-reviewed the 357-item v8 input; its own ten edits require Claude re-review. Source fingerprints match the register, but the independent visual grade audit, denominator approval, rights clearance and owner sign-off remain open. The earlier v8 pack and prior disposition above are historical evidence, not approval of this head.
+**Owner decisions 2026-10-18:** all 24 disputed items and all 67 sampled items accepted, batch approved and rights cleared by the owner. The batch is not marked `approved` until ChatGPT re-reviews the three v10 refinements; the manifest denominator, visual grade audit and release gates are unchanged.
+
+See [review pack v10](content-review/CHINESE_REVIEW_PACK_V10.md) for the ten item corrections, the 24 owner dispositions, the reproducible 67-of-333 owner sample and complete material context. ChatGPT desk-reviewed the 357-item v8 input; its own ten edits require Claude re-review. Source fingerprints match the register, but the independent visual grade audit, denominator approval, rights clearance and owner sign-off remain open. The earlier v8 pack and prior disposition above are historical evidence, not approval of this head.
 
 The inventory now uses leaf-specific repair stages and per-route thin-stock counts. Its material supply is an upper bound on complete tasks without reuse, not a scheduling prediction. No app files, import allowlists or learner-data gates change.
 

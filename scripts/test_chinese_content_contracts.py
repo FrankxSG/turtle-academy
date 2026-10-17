@@ -155,6 +155,8 @@ class Contracts(unittest.TestCase):
         with self.assertRaisesRegex(Invalid, 'approved_batch_review_state'):
             check_catalogue(self.curriculum, b)
         b['review_log'].update(independent_review='passed', owner_signoff='approved', rights_status='cleared')
+        # Synthetic open dispute, independent of the real batch's current review state.
+        b['review_log']['disputed_item_ids'] = [b['items'][0]['id']]
         with self.assertRaisesRegex(Invalid, 'approved_batch_unresolved_items'):
             check_catalogue(self.curriculum, b)
         b['review_log']['disputed_item_ids'] = []

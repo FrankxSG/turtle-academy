@@ -18915,10 +18915,11 @@
       "2026-10-17 release-inventory pass (batch v8, manifest draft.2): Claude reviewed all 318 v7 items. Of these, 293 were drafted by Claude, so this pass is an author recheck for them, not independent AI cross-review. Corrections: answer leak (zh-m12.q5), double-cue stem, penguin hint, stem containing its key, brand-neutral wording, four calculation questions changed to explicit retrieval, 33 hints that named the only option with the radical, 10 P2 instructions reworded within the P1-P2 character lists. Mapping: punctuation choice to w-punctuation; notice/visual-text retrieval to r-explicit-practical. New: 字音 leaf with 10 items (zh-group-p2-pinyin) and a P2 card-format route with the zh-m19 生日卡 material (8 items); 字义, 偏旁表义 and 借助标点理解 routes with general practice (21 items). New items await independent cross-review; sampled IDs are drawn from unchanged agreed items only; outcomes pending owner.",
       "2026-10-17 ChatGPT review of input head 9d4357a: desk-checked all 357 items and 19 materials, keys/options/hints/explanations and mapped response demands. This is cross-review for Claude-authored content and an author recheck for the 25 originally ChatGPT-drafted items (previous Claude cross-review retained). Ten item corrections in v9 now require Claude re-review and owner disposition; independent_review stays changes_requested. Source hashes match the private register; the saved syllabus text does not preserve the coloured grade matrix and live MOE access was challenged, so no complete page/grade audit is claimed. No rights or owner approval is inferred.",
       "v9 owner sample: 67 of 333 AI-agreed unchanged items, ceil(N/5), random.Random('zh-starter-001-v9-owner-sample-2026-10-17').sample over batch order; every outstanding or v9-revised item excluded. v8 sample is historical, not carried forward as approval. Owner outcomes pending.",
-      "2026-10-17 Claude re-review of ChatGPT v9 corrections at 3e5255f: all ten accepted in substance. Batch v10 refines three still-disputed items: zh-p2-radmeaning-repair.q3 key widened from 女的家人 to 女人和女孩 (女字旁 is not limited to family); zh-p2-punctread-repair.q3 asks for the strongest of four sentences (最强, not 更强); zh-p2-sound.q5 hint avoids 轻声, which children also learn as the neutral tone. Pool membership is unchanged, so the v9 sample stands. independent_review stays changes_requested pending ChatGPT re-review of these three edits; owner outcomes pending."
+      "2026-10-17 Claude re-review of ChatGPT v9 corrections at 3e5255f: all ten accepted in substance. Batch v10 refines three still-disputed items: zh-p2-radmeaning-repair.q3 key widened from 女的家人 to 女人和女孩 (女字旁 is not limited to family); zh-p2-punctread-repair.q3 asks for the strongest of four sentences (最强, not 更强); zh-p2-sound.q5 hint avoids 轻声, which children also learn as the neutral tone. Pool membership is unchanged, so the v9 sample stands. independent_review stays changes_requested pending ChatGPT re-review of these three edits; owner outcomes pending.",
+      "2026-10-18 owner decisions (batch v10, recorded from the owner review page): all 24 disputed items accepted as written (v10 versions) with no notes; all 67 sampled items accepted with no notes; batch decision approved (2026-10-18 00:11 SGT). Owner rights confirmation the same day: original Turtle Academy content, no copied worksheet, textbook, past-paper or commercial text (papers informed formats only), no franchise content, MOE character lists kept as cited curriculum data per the 2026-10-16 decision, AI-assisted drafting accepted for publication. Disputes cleared by these decisions: zh-p2-order.q2, zh-p2-collocation.q8, zh-p3-wordchoice.q5, zh-m07.q5, zh-m10.q5, zh-m12.q5, zh-m14.q5, zh-m18.q2, zh-m18.q4, zh-m15.q5, zh-p2-charctx-repair.q2, zh-m08.q3, zh-m17.q5, zh-p2-notice-repair.q3, zh-p3-notice-repair.q3, zh-p2-punctread.q1, zh-p2-radmeaning.q1, zh-p2-radmeaning.q4, zh-p2-radmeaning-repair.q3, zh-p2-punctread-repair.q3, zh-p2-card-repair.q3, zh-p2-meaning.q4, zh-p2-sound.q5, zh-p2-sound.q7. independent_review stays changes_requested until ChatGPT re-reviews the three v10 refinements; batch status is not set to approved until then. Manifest denominator, visual grade audit and release gates are unchanged."
     ],
     "independent_review": "changes_requested",
-    "owner_signoff": "pending",
+    "owner_signoff": "approved",
     "sampled_item_ids": [
       "zh-m02.q1",
       "zh-m03.q2",
@@ -18988,33 +18989,8 @@
       "zh-p2-read-repair.q3",
       "zh-p3-read-repair.q2"
     ],
-    "disputed_item_ids": [
-      "zh-p2-order.q2",
-      "zh-p2-collocation.q8",
-      "zh-p3-wordchoice.q5",
-      "zh-m07.q5",
-      "zh-m10.q5",
-      "zh-m12.q5",
-      "zh-m14.q5",
-      "zh-m18.q2",
-      "zh-m18.q4",
-      "zh-m15.q5",
-      "zh-p2-charctx-repair.q2",
-      "zh-m08.q3",
-      "zh-m17.q5",
-      "zh-p2-notice-repair.q3",
-      "zh-p3-notice-repair.q3",
-      "zh-p2-punctread.q1",
-      "zh-p2-radmeaning.q1",
-      "zh-p2-radmeaning.q4",
-      "zh-p2-radmeaning-repair.q3",
-      "zh-p2-punctread-repair.q3",
-      "zh-p2-card-repair.q3",
-      "zh-p2-meaning.q4",
-      "zh-p2-sound.q5",
-      "zh-p2-sound.q7"
-    ],
-    "rights_status": "original_draft_pending_owner_rights_review",
+    "disputed_item_ids": [],
+    "rights_status": "cleared",
     "artwork": "none"
   },
   "groups": [

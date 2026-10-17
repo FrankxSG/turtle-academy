@@ -50,6 +50,15 @@ class Inventory(unittest.TestCase):
         self.assertIn('at most 5 complete tasks without material reuse', section)
         self.assertIn('eligibility and rotation not simulated', section)
 
+    def test_approval_note_names_open_gates(self):
+        from chinese_release_inventory import approval_note
+        log = self.batch['review_log']
+        log.update(independent_review='changes_requested', owner_signoff='approved', rights_status='cleared', disputed_item_ids=[])
+        note = approval_note(self.curriculum, self.batch)
+        self.assertIn('independent review not passed', note)
+        self.assertNotIn('owner sign-off pending', note)
+        self.assertNotIn('rights', note)
+
 
 if __name__ == '__main__':
     unittest.main()

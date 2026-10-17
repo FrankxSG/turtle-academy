@@ -39,37 +39,39 @@ Inventory fixes also require review: route completion uses stages under the same
 
 ## B. Owner disposition queue (24)
 
-All 15 prior disputed IDs remain pending owner disposition. Nine newly corrected IDs are added; the tenth correction was already disputed. An AI recommendation is not an owner decision.
+**Owner decisions recorded 2026-10-18:** all 24 accepted as written in their v10 versions, with no notes. They are cleared from `review_log.disputed_item_ids`; the decision record is in `review_log.author_checks`. Earlier text below is kept as the review history.
+
+All 15 prior disputed IDs were pending owner disposition. Nine newly corrected IDs were added; the tenth correction was already disputed. An AI recommendation is not an owner decision.
 
 - `zh-m18.q2`, `zh-m18.q4`, `zh-m15.q5`: decide whether the out-of-list tested vocabulary is acceptable at the tagged course/grade, needs pinyin/support, or should be replaced. The old v8 note conflated P1–P2 and P1–P3 list bounds; this pass does not certify a new exhaustive character-list audit.
 - Other IDs: review the revised wording/key/help and explicitly accept or request revision. The three empty-decision columns below remain blank until the owner rules.
 
 | Item | Owner decision | Reason / required follow-up |
 | --- | --- | --- |
-| `zh-p2-order.q2` v3 | pending | pending |
-| `zh-p2-collocation.q8` v2 | pending | pending |
-| `zh-p3-wordchoice.q5` v4 | pending | pending |
-| `zh-m07.q5` v2 | pending | pending |
-| `zh-m10.q5` v2 | pending | pending |
-| `zh-m12.q5` v3 | pending | pending |
-| `zh-m14.q5` v2 | pending | pending |
-| `zh-m18.q2` v1 | pending | pending |
-| `zh-m18.q4` v1 | pending | pending |
-| `zh-m15.q5` v1 | pending | pending |
-| `zh-p2-charctx-repair.q2` v2 | pending | pending |
-| `zh-m08.q3` v2 | pending | pending |
-| `zh-m17.q5` v2 | pending | pending |
-| `zh-p2-notice-repair.q3` v2 | pending | pending |
-| `zh-p3-notice-repair.q3` v2 | pending | pending |
-| `zh-p2-punctread.q1` v2 | pending | pending |
-| `zh-p2-radmeaning.q1` v2 | pending | pending |
-| `zh-p2-radmeaning.q4` v2 | pending | pending |
-| `zh-p2-radmeaning-repair.q3` v3 | pending | pending |
-| `zh-p2-punctread-repair.q3` v3 | pending | pending |
-| `zh-p2-card-repair.q3` v2 | pending | pending |
-| `zh-p2-meaning.q4` v2 | pending | pending |
-| `zh-p2-sound.q5` v3 | pending | pending |
-| `zh-p2-sound.q7` v2 | pending | pending |
+| `zh-p2-order.q2` v3 | accepted 2026-10-18 | none |
+| `zh-p2-collocation.q8` v2 | accepted 2026-10-18 | none |
+| `zh-p3-wordchoice.q5` v4 | accepted 2026-10-18 | none |
+| `zh-m07.q5` v2 | accepted 2026-10-18 | none |
+| `zh-m10.q5` v2 | accepted 2026-10-18 | none |
+| `zh-m12.q5` v3 | accepted 2026-10-18 | none |
+| `zh-m14.q5` v2 | accepted 2026-10-18 | none |
+| `zh-m18.q2` v1 | accepted 2026-10-18 | none |
+| `zh-m18.q4` v1 | accepted 2026-10-18 | none |
+| `zh-m15.q5` v1 | accepted 2026-10-18 | none |
+| `zh-p2-charctx-repair.q2` v2 | accepted 2026-10-18 | none |
+| `zh-m08.q3` v2 | accepted 2026-10-18 | none |
+| `zh-m17.q5` v2 | accepted 2026-10-18 | none |
+| `zh-p2-notice-repair.q3` v2 | accepted 2026-10-18 | none |
+| `zh-p3-notice-repair.q3` v2 | accepted 2026-10-18 | none |
+| `zh-p2-punctread.q1` v2 | accepted 2026-10-18 | none |
+| `zh-p2-radmeaning.q1` v2 | accepted 2026-10-18 | none |
+| `zh-p2-radmeaning.q4` v2 | accepted 2026-10-18 | none |
+| `zh-p2-radmeaning-repair.q3` v3 | accepted 2026-10-18 | none |
+| `zh-p2-punctread-repair.q3` v3 | accepted 2026-10-18 | none |
+| `zh-p2-card-repair.q3` v2 | accepted 2026-10-18 | none |
+| `zh-p2-meaning.q4` v2 | accepted 2026-10-18 | none |
+| `zh-p2-sound.q5` v3 | accepted 2026-10-18 | none |
+| `zh-p2-sound.q7` v2 | accepted 2026-10-18 | none |
 
 - `zh-p2-order.q2` v3 (lu-sentence-order, general)
   - 哪个句子排得对？（妈妈 / 在厨房 / 做饭 / 正）
@@ -205,11 +207,15 @@ All 15 prior disputed IDs remain pending owner disposition. Nine newly corrected
 The pool contains every current item except the 24 outstanding/revised disputed IDs. After this desk review, previously new and wording-only items may enter the agreed pool if unchanged and not disputed. The v8 draw is historical. This new draw is prepared for owner review, not an approval record. Reproduce in Python using batch order:
 
 ```python
-pool = [i['id'] for i in batch['items'] if i['id'] not in batch['review_log']['disputed_item_ids']]
+# The pool excludes the 24 IDs that were disputed when the sample was drawn (now resolved).
+DISPUTED_AT_DRAW = ["zh-p2-order.q2", "zh-p2-collocation.q8", "zh-p3-wordchoice.q5", "zh-m07.q5", "zh-m10.q5", "zh-m12.q5", "zh-m14.q5", "zh-m18.q2", "zh-m18.q4", "zh-m15.q5", "zh-p2-charctx-repair.q2", "zh-m08.q3", "zh-m17.q5", "zh-p2-notice-repair.q3", "zh-p3-notice-repair.q3", "zh-p2-punctread.q1", "zh-p2-radmeaning.q1", "zh-p2-radmeaning.q4", "zh-p2-radmeaning-repair.q3", "zh-p2-punctread-repair.q3", "zh-p2-card-repair.q3", "zh-p2-meaning.q4", "zh-p2-sound.q5", "zh-p2-sound.q7"]
+pool = [i['id'] for i in batch['items'] if i['id'] not in DISPUTED_AT_DRAW]
 picked = set(random.Random('zh-starter-001-v9-owner-sample-2026-10-17').sample(pool, math.ceil(len(pool) / 5)))
 sample = [iid for iid in pool if iid in picked]
 assert sample == batch['review_log']['sampled_item_ids']
 ```
+
+**Owner outcome 2026-10-18:** all 67 sampled items accepted with no notes.
 
 67 is `ceil(333/5)`; the sample and disputes are disjoint. Owner should review each sample question with its material and mark acceptance or a new dispute. If the agreed pool changes, regenerate the draw and record that change before sign-off.
 
@@ -671,7 +677,7 @@ Original generic authored materials only. Each material is answered as a whole b
 
 1. ChatGPT re-reviews the three v10 refinements above. Recheck any newly disputed item and redraw only if pool membership changes.
 2. Complete the independent visual page/grade audit and owner denominator decision; do not use 13/17 as approved MOE coverage.
-3. Owner decides every disputed item, reviews the random sample and records batch and rights sign-off separately. Update `review_log` only from recorded decisions; do not clear disputes solely because this correction pass ran.
+3. Done 2026-10-18: owner accepted all 24 disputed items and all 67 sampled items, approved the batch and cleared rights. Recorded in `review_log`.
 4. Keep P3 import, real data, merge and release gates unchanged. Stock remains one item per repair stage; CL/HCL shared availability does not establish HCL depth.
 
 Validation evidence and the exact published head are recorded on PR23. This file is review preparation, not approval.

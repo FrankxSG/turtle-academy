@@ -32,6 +32,23 @@ def load():
             json.loads(BATCH.read_text(encoding='utf-8')))
 
 
+def approval_note(curriculum, batch):
+    """Name the gates still open; coverage counts only once all are closed."""
+    log = batch['review_log']
+    missing = []
+    if curriculum['status'] != 'approved':
+        missing.append('leaf denominator not approved')
+    if log['independent_review'] != 'passed':
+        missing.append('independent review not passed')
+    if log['owner_signoff'] != 'approved':
+        missing.append('owner sign-off pending')
+    if log['rights_status'] != 'cleared':
+        missing.append('rights not cleared')
+    if log['disputed_item_ids']:
+        missing.append('open disputes')
+    return '; '.join(missing) if missing else 'all gates closed; approved-coverage counting is not implemented yet'
+
+
 def analyse(curriculum, batch):
     skills = {s['id']: s for s in curriculum['skill_targets']}
     chars = {c['id']: c for c in curriculum['characters']}
@@ -81,6 +98,7 @@ def analyse(curriculum, batch):
         char_targets = {t for t in stage_items if t in chars and chars[t]['course'] == course
                         and set(stage_items[t]) == STAGES}
         courses[course] = {
+            'approval_note': approval_note(curriculum, batch),
             'rows': rows, 'materials': mats, 'items': course_items,
             'char_union': len(char_union),
             'char_recognition': sum(bool(c['recognition_list_pages']) for c in char_union),
@@ -113,6 +131,7 @@ def leaf_table(rows):
 
 
 def course_section(course, data, p3=False):
+    approval_note = data['approval_note']
     rows = data['rows']
     scoped = [r for r in rows if r['leaf']['scope'] in {'in_app', 'partial'}]
     authored = [r for r in scoped if r['status'] == 'authored']
@@ -128,7 +147,7 @@ def course_section(course, data, p3=False):
                   '75% release measure.', '']
     lines += [
         '| Measure | Value |', '| --- | --- |',
-        f"| Approved (owner-signed) leaf coverage | 0/{len(scoped)} — no batch is signed off yet |",
+        f"| Approved leaf coverage | 0/{len(scoped)} — {approval_note} |",
         f"| Leaves authored with general practice and a complete repair route | {pct(len(authored), len(scoped))} |",
         f"| Leaves with some items but no complete route or no general practice | {len(partial)} |",
         f"| Empty in-scope leaves (stay in the denominator) | {len(empty)} |",
