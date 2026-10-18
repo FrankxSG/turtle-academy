@@ -57,3 +57,29 @@ Correction: resolve the complete intake before activating or persisting a stored
 Regression evidence: the strengthened existing test fails on the reviewed head at `register === null`; it now checks report/export/plans, the current release, preserved source and unchanged engine targets for both rejection causes. A second test covers write-failure propagation. A private synthetic browser test checks the parent notice, hidden report/export/plans and recovery by installing a valid file, and captures `private-pack-recovery.png`.
 
 No content, policy, dependency, backend, merge or deployment changes. These correction lines require Claude re-review. Current-head test/CI and screenshot results are recorded in the PR review comment.
+
+## Claude re-review of `037876a` (at head `fd2972c`) — 2026-10-18
+
+The focused correction passes on the points it addresses. Each was checked in the code and against the strengthened tests:
+- **Validation before activation.** On open, `validatePack`, the candidate build and the full `planIntake` route resolution all run before the candidate is added to the builds, assigned as the pack, installed or persisted. `installPack` does the same before mutating anything.
+- **Nothing exposed from a rejected pack.** With the pack unassigned: `register` is null, `report()` and `exportFile()` return null, `plans()` is empty, and the current release is the public build.
+- **Source kept for recovery.** The stored pack source is untouched.
+- **Practice continues.** A paused task resumes on its pinned version and serves its next question.
+- **Valid replacement.** It clears the notice and restores the register, report, export and plans. The private browser test covers this.
+- **Storage failures on open propagate.** No storage call is inside the quarantine `try`, and `importRegister` failures are no longer caught.
+
+One more defect, in the same area (install), was found and fixed in this round:
+- **P1 — a failed save during install left the candidate pack's content active.**
+  - `installPack` installed the candidate release, making it current, before `putRelease`/`putPack`. If a write failed, the error propagated, but new tasks would use the unsaved candidate content while the old register stayed active.
+  - The parent screen also reported every install error as "This file was not accepted".
+  - Now validation errors are raised as `PackRejected`. A write failure restores the previously current release, leaves the register, the stored pack and engine records unchanged, and propagates.
+  - The parent screen distinguishes a rejected file from a failed save ("could not be saved on this device… nothing new is in use").
+  - Regression tests: an engine test, which fails without the fix, covers rollback, labelling and retry. A private browser test covers the message, the unchanged report and recovery on retry.
+
+Known limitation, documented and not changed (it needs planner work outside this correction):
+- While a stored pack is quarantined, engine targets imported earlier from it stay in the learner state and are still scheduled.
+- Targets with public pools are practised from those pools without the case stage pins.
+- A slot for a private-only target is filled with general practice, which records no evidence for the target.
+- No progress is falsely credited. Reinstalling a fitting pack restores pinned pools, the report and the export.
+
+**These install-path lines need ChatGPT re-review.**

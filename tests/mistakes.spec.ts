@@ -192,3 +192,29 @@ test('an unusable stored route is quarantined without exposing its report or los
   await expect(page.getByText(/intake_unknown_target/)).toHaveCount(0)
   await expect(page.getByTestId('mistake-totals')).toContainText('Cases 6')
 })
+
+test('a failed save while installing a pack says so, keeps the earlier pack and recovers on retry', async ({ page, context }) => {
+  await setup(page, context)
+  await parent(page)
+  const file = (p: unknown) => ({ name: 'synthetic-pack.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(p)) })
+  await page.getByTestId('mistake-pack').setInputFiles(file(pack))
+  await expect(page.getByTestId('mistake-totals')).toContainText('Cases 6')
+  // Fail only writes of the private pack store, as a full disk or blocked storage would.
+  await page.evaluate(() => {
+    const original = IDBObjectStore.prototype.put
+    ;(globalThis as any).restorePackWrites = () => { IDBObjectStore.prototype.put = original }
+    IDBObjectStore.prototype.put = function (...args: any[]) {
+      if (this.transaction.db.name.startsWith('turtle-academy-private-') && this.name === 'packs')
+        throw new DOMException('Synthetic failure', 'QuotaExceededError')
+      return original.apply(this, args as any)
+    }
+  })
+  const larger = syntheticPack({ pendingRef, extraCase: true })
+  await page.getByTestId('mistake-pack').setInputFiles(file(larger))
+  await expect(page.getByTestId('mistake-message')).toContainText('could not be saved on this device')
+  await expect(page.getByTestId('mistake-message')).not.toContainText('not accepted')
+  await expect(page.getByTestId('mistake-totals')).toContainText('Cases 6')
+  await page.evaluate(() => (globalThis as any).restorePackWrites())
+  await page.getByTestId('mistake-pack').setInputFiles(file(larger))
+  await expect(page.getByTestId('mistake-totals')).toContainText('Cases 7')
+})

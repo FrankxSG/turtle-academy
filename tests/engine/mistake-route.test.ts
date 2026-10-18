@@ -416,3 +416,30 @@ test('a private-store write failure during open is not reported as a harmless re
   s.privateStore.putCrosswalk = async () => { throw new Error('synthetic_storage_failure') }
   await assert.rejects(() => reopen(s), /synthetic_storage_failure/)
 })
+
+test('a failed save while installing a pack leaves the previous pack and content in use; rejections are labelled', async () => {
+  const s = await setup()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  const before = { version: s.program.currentRelease()!.version, cases: s.program.register!.cases.length, stored: await s.privateStore.packs(), targets: structuredClone(s.engine.state.targets) }
+  const next = syntheticPack({ pendingRef: s.pendingRef, extraCase: true })
+  next.pack_id = 'test-pack-zz'
+  const putPack = s.privateStore.putPack.bind(s.privateStore)
+  s.privateStore.putPack = async () => { throw new Error('synthetic_storage_failure') }
+  const failure = await s.program.installPack(next).then(() => null, (e: Error) => e)
+  assert.match(String(failure?.message), /synthetic_storage_failure/)
+  assert.notEqual(failure?.name, 'PackRejected', 'a storage failure is not reported as a rejected file')
+  assert.equal(s.program.currentRelease()!.version, before.version, 'the candidate content is not left current')
+  assert.equal(s.program.register!.cases.length, before.cases, 'the previous register stays active')
+  assert.deepEqual(await s.privateStore.packs(), before.stored, 'the stored pack is unchanged')
+  assert.deepEqual(s.engine.state.targets, before.targets, 'engine records are unchanged')
+  // The same file installs normally once saving works again.
+  s.privateStore.putPack = putPack
+  const ok = await s.program.installPack(next)
+  assert.equal(ok.added_observations, 1)
+  assert.ok(s.program.currentRelease()!.version.endsWith(':testpackzz'))
+  // A file that does not fit is labelled as a rejection.
+  const bad = syntheticPack({ pendingRef: s.pendingRef }) as Record<string, unknown>
+  ;(bad.register as Record<string, unknown>).review_complete = false
+  const rejected = await s.program.installPack(bad).then(() => null, (e: Error) => e)
+  assert.equal(rejected?.name, 'PackRejected')
+})

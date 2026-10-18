@@ -68,6 +68,17 @@ export const LEARNER_COURSES: Record<string, string[]> = {
 
 const errorText = (error: unknown) => (error instanceof Error ? error.message : String(error))
 
+/**
+ * A pack that does not fit this app (structure, content or routes). Distinct from storage failures, which are
+ * not the file's fault and must not be presented to the parent as a rejected file.
+ */
+export class PackRejected extends Error {
+  constructor(cause: unknown) {
+    super(errorText(cause))
+    this.name = 'PackRejected'
+  }
+}
+
 export class MistakeProgram {
   readonly engine: LearningEngine
   private readonly registry: CatalogueRegistry
@@ -180,14 +191,26 @@ export class MistakeProgram {
    * same pack again changes nothing; a newer pack adds new cases and content without touching evidence.
    */
   async installPack(raw: unknown): Promise<IntakeResult> {
-    const pack = validatePack(raw)
-    const b = this.buildFor(pack.course, pack)
-    // Resolve every route before mutating the registry or persisting any part of an intake.
-    planIntake({ state: this.engine.state, register: pack.register, release: b.release, targets: b.targets,
-      today: this.engine.today(), now: this.now() })
+    let pack: PrivatePack
+    let b: BuiltContent
+    try {
+      pack = validatePack(raw)
+      b = this.buildFor(pack.course, pack)
+      // Resolve every route before mutating the registry or persisting any part of an intake.
+      planIntake({ state: this.engine.state, register: pack.register, release: b.release, targets: b.targets,
+        today: this.engine.today(), now: this.now() })
+    } catch (error) { throw new PackRejected(error) }
+    const previous = this.registry.current('chinese')
     this.install(b)
-    await this.store.putRelease(toStored(b))
-    await this.store.putPack(pack)
+    try {
+      await this.store.putRelease(toStored(b))
+      await this.store.putPack(pack)
+    } catch (error) {
+      // Nothing new may stay in use when the pack could not be saved: restore the content that was current.
+      // (Re-installing an identical release only makes it current again.)
+      if (previous) this.registry.install(previous)
+      throw error
+    }
     this.pack = pack
     this.openError = null
     return this.importRegister()

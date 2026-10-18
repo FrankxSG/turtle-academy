@@ -63,9 +63,15 @@ export function Mistakes({
           ),
         )
       } catch (e) {
+        const detail = e instanceof Error ? e.message : String(e)
+        // A rejected file and a failed save on this device need different actions from the parent.
         setMessage(
-          tr('This file was not accepted: ', '文件未被接受：') +
-            (e instanceof Error ? e.message : String(e)),
+          e instanceof Error && e.name === 'PackRejected'
+            ? tr('This file was not accepted: ', '文件未被接受：') + detail
+            : tr(
+                'The pack could not be saved on this device, so nothing new is in use. Please try again. Details: ',
+                '错题包未能保存在本设备上，新内容未启用。请再试一次。详情：',
+              ) + detail,
         )
       }
       refresh()
