@@ -38,6 +38,7 @@ Run these on the rendered question. Subject skills add checks; they may say how 
 9. **Map to the demand, not the topic.** Tag the outcome the child must actually use. If a question needs a skill from a later grade (calculating, comparing, applying information where only retrieval is in scope), rewrite it rather than remap it.
 10. **Keep the key from standing out.** Options similar in length and specificity; the key is not the longest or most qualified one.
 11. **Use neutral, original names and content.** No franchise characters, no worksheet or textbook wording.
+12. **Check real-world facts for the learner's locale.** A stem that states or models everyday behaviour must be true where the child lives. Singapore traffic drives on the left, so a road-crossing item must not teach "look left first" ([case](../chinese-question-authoring/references/pr23-lessons.md#zh-starter-003-author-draft)).
 
 ## Reports and scripts
 

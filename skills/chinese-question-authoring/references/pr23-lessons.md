@@ -73,6 +73,17 @@ The fixes for these are the "How to work" steps in the common skill.
 5. **Reports without tests.** The inventory script's counting rules were not tested against adversarial fixtures, so plausible-looking wrong numbers passed. (Reports)
 6. **Simplifying for children by narrowing meaning.** Child-friendly wording (女孩子, 没有云, 很高兴) was chosen without checking it remained true. (Check 3)
 
+## zh-starter-003 author draft
+
+Found by Claude while drafting the 117 items, before any review. Each was fixed in the draft and is recorded so the check catches it next time.
+
+| Defect | Cause | Check that now catches it |
+| --- | --- | --- |
+| A left/right item said 过马路的时候，先看左边，再看右边. In Singapore traffic comes from the right first. | A stock sentence pattern was used without checking it against the learner's locale. Replaced with a two-hands sentence. | Common check 12 |
+| 场 offered for a 工（　） blank; 工场 is also a word. | The sound-alike that a learner confuses is not always a safe distractor. The exact item now asks which sentence is written correctly (工厂 vs 足球场). | Common check 2 |
+| Hints that contained the key character (学 in “学东西”, 天 in “今天”, 牛 in “牛身上”, 午 in “中午”). | Natural explanations reuse the target word. A script now flags any single-character key found in its hint. | Common check 5 |
+| Words outside the P1–P2 lists in hints and explanations (数, 慢, 另, 交, 千, 春 and others). | Everyday words feel easy but are not on the lists. A script checked every text field against the cumulative lists. | ZH1 |
+
 ## Still to apply
 
 - `zh-p2-sound-repair.q3` hint also says 轻声读; change it at the next content revision and redraw the sample, because it is in the agreed pool.

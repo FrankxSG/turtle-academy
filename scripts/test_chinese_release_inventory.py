@@ -107,5 +107,25 @@ class Inventory(unittest.TestCase):
         self.assertIsNone(approved_leaves(curriculum, self.batch))
 
 
+    def test_review_and_extra_targets_never_count_as_leaf_routes(self):
+        review = self.batch['review']
+        ids = {r['id'] for r in review['characters'] + review['extra_characters']}
+        data = analyse(self.curriculum, self.batch)
+        rows = data['p2_chinese']['rows']
+        self.assertFalse(ids & {t for r in rows for t in r['complete']})
+        # Derive the expected count from the catalogue: targets with all three stages.
+        stages = {}
+        for item in self.batch['items']:
+            for ref in item['target_refs']:
+                stages.setdefault(ref, set()).add(item['stage'])
+        complete = {t for t, s in stages.items() if s == {'exact', 'similar', 'generic'}}
+        expected = sum(1 for r in review['characters'] if r['course'] == 'p2_chinese' and r['id'] in complete)
+        self.assertEqual(data['p2_chinese']['practice_targets']['review'], expected)
+        # Without the review file the same pools would be miscounted as leaf routes; the file is what keeps them apart.
+        without = analyse(self.curriculum, dict(self.batch, review=None))
+        leaked = {t for r in without['p2_chinese']['rows'] for t in r['complete']} & ids
+        self.assertTrue(leaked)
+        self.assertFalse(without['p2_chinese']['practice_union'])
+
 if __name__ == '__main__':
     unittest.main()

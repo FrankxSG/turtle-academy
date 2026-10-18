@@ -315,7 +315,7 @@
           "items": {
             "$ref": "#/$defs/material"
           },
-          "minItems": 1
+          "minItems": 0
         },
         "items": {
           "type": "array",
