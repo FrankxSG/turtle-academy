@@ -188,7 +188,11 @@ export function Mistakes({
                 return (
                   <article key={plan.id} className="production" data-testid={`plan-${plan.id}`}>
                     <p>
-                      <strong>{cases.join(', ')}</strong> · {plan.mode} · {stageName(p.stage)}
+                      <strong>{cases.join(', ')}</strong> ·{' '}
+                      {plan.mode === 'external_speaking'
+                        ? tr('speaking', '说话')
+                        : tr('writing', '书写')}{' '}
+                      · {stageName(p.stage)}
                       {p.next_on ? ` · ${tr('from', '起')} ${p.next_on}` : ''}
                     </p>
                     <p lang="zh">{prompt}</p>
@@ -232,13 +236,16 @@ function CaseLine({
   stageName: (s: string | null) => string
   tr: (en: string, cn: string) => string
 }) {
-  const r = c.recognition
+  // A case waiting for questions has no stage or date to show yet.
+  const r = c.status === 'pending_content' ? null : c.recognition
   const prod = c.production
   return (
     <tr data-testid={`case-${c.case_id}`}>
       <th>
         {c.case_id}
-        {c.uncertain ? ' ?' : ''}
+        {c.uncertain && (
+          <span title={tr('Source reading uncertain', '原始记录辨认不确定')}> ?</span>
+        )}
       </th>
       <td lang="zh">
         {c.target}
@@ -249,7 +256,9 @@ function CaseLine({
       <td>{status[c.status]}</td>
       <td>{r ? stageName(r.stage) : '—'}</td>
       <td>{r ? `${r.first_responses.correct}/${r.first_responses.wrong}` : '—'}</td>
-      <td>{r ? r.next_delayed_check ?? r.eligible_from ?? '—' : '—'}</td>
+      <td style={{ whiteSpace: 'nowrap' }}>
+        {r ? (r.next_delayed_check ?? r.eligible_from ?? '—') : '—'}
+      </td>
       <td>
         {prod
           ? prod.events === 0
