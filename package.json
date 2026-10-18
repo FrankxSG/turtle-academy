@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "build": "node scripts/generate-icons.mjs && tsc --noEmit && vite build",
+    "build": "node scripts/generate-icons.mjs && tsc --noEmit && vite build && node scripts/check-public-bundle.mjs",
     "build:hosted": "if [ \"$TURTLE_SITE\" = \"trials\" ]; then npm run build:trials && rm -rf dist && cp -R trials/dist dist; else npm run build; fi",
     "preview": "vite preview --host 127.0.0.1",
     "typecheck": "tsc --noEmit",
@@ -17,7 +17,10 @@
     "preview:trials": "vite preview --config vite.trials.config.ts --host 127.0.0.1",
     "test:e2e": "playwright test",
     "test:ui": "node --experimental-strip-types --test tests/ui/*.test.ts",
-    "test:engine": "node --experimental-strip-types --test tests/engine/*.test.ts"
+    "test:engine": "node --experimental-strip-types --test tests/engine/*.test.ts",
+    "build:private": "node scripts/generate-icons.mjs && tsc --noEmit && VITE_ENABLE_PRIVATE_PACK=true vite build --mode private",
+    "check:public-bundle": "node scripts/check-public-bundle.mjs",
+    "test:build": "node --test tests/build/*.test.mjs"
   },
   "dependencies": {
     "dexie": "4.4.6",

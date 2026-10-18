@@ -1,6 +1,9 @@
 // A SYNTHETIC private pack for tests. The cases are invented and point at generic public targets; they are not
 // any learner's records. Real packs are built in the private resources repository and never committed here.
 import type { RawBatch, RawItem } from '../../../src/catalogue/chinese.ts'
+import { publicChinese } from './public-chinese.ts'
+const publicItems = publicChinese().batches.flatMap((b) => b.items)
+const pinsFor = (ref: string) => Object.fromEntries(['exact', 'similar', 'generic'].map((stage) => [stage, publicItems.filter((q) => q.stage === stage && q.target_refs.includes(ref)).map((q) => ({ item_id: q.id, version: q.version }))]))
 
 const plan = (id: string, mode: 'external_writing' | 'external_speaking') => ({
   id, mode,
@@ -15,7 +18,7 @@ const plan = (id: string, mode: 'external_writing' | 'external_speaking') => ({
 const objective = (id: string, target: string, ref: string, extra: Record<string, unknown> = {}) => ({
   id, target, observation_type: 'character', observed: '形近字', review_status: 'parent_accepted', cause: 'unknown',
   source_interpretation_uncertain: false, correction_status: 'no_practice_evidence_received',
-  route: { mode: 'objective', progress_target_ref: ref, batch_id: 'any', batch_version: 1, content_state: 'synthetic', stages: { exact: [], similar: [], generic: [] }, ready_for_runtime: false },
+  route: { mode: 'objective', progress_target_ref: ref, batch_id: 'any', batch_version: 1, content_state: 'synthetic', stages: pinsFor(ref), ready_for_runtime: false },
   ...extra,
 })
 
@@ -45,6 +48,8 @@ export function syntheticPack(opts: { pendingRef: string; extraCase?: boolean } 
       route: { mode: 'external', plan: plan('external-o906', 'external_writing') },
     },
   ]
+  const soundCase = cases.find((c) => c.id === 'O904')!
+  if (soundCase.route.mode === 'objective') soundCase.route.stages = Object.fromEntries(['exact', 'similar', 'generic'].map((stage) => [stage, batch.items.filter((q) => q.stage === stage).map((q) => ({ item_id: q.id, version: q.version }))]))
   if (opts.extraCase) cases.push(objective('O907', '住', 'zh.p2_higher_chinese.char.u4f4f'))
   return {
     schema_version: 'turtle-private-pack/1', pack_id: opts.extraCase ? 'test-pack-2' : 'test-pack-1', course: 'p2_higher_chinese',

@@ -158,3 +158,6 @@ playwright-report/
 # Python bytecode caches
 __pycache__/
 *.py[cod]
+
+# Opt-in private builds are never public deployment artifacts.
+dist-private/

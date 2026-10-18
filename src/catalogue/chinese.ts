@@ -136,6 +136,8 @@ export function buildChineseContent(opts: {
   privateBatches?: RawBatch[]
   privateTargets?: RawSkillTarget[]
   privateTag?: string | null
+  /** Version-pinned repair pools from an optional private register; public content never contains them. */
+  stagePins?: Map<string, Map<string, Set<string>>>
 }): BuiltContent {
   const { courses, lists } = opts
   const targets = targetInfo(lists, opts.privateTargets ?? [])
@@ -160,6 +162,8 @@ export function buildChineseContent(opts: {
         ? raw.target_refs.find((r) => r.split('.')[1] === course)
         : (raw.repair_target_refs ?? []).find((r) => r.split('.')[1] === course)
       if (!kp) throw new Error(`no_target_for_course:${raw.id}`)
+      const pins = opts.stagePins?.get(kp)
+      if (raw.stage && pins && !pins.get(raw.stage)?.has(`${raw.id}@${raw.version}`)) continue
       const info = targets.get(kp)
       if (!info) throw new Error(`unknown_target:${kp}`)
       if (!ID.test(raw.id)) throw new Error(`bad_item_id:${raw.id}`)

@@ -244,7 +244,7 @@ test('a pack with identity fields, dates or unknown keys is rejected before anyt
   const bad = syntheticPack({ pendingRef: s.pendingRef }) as Record<string, unknown>
   const withName = structuredClone(bad) as { register: { cases: Record<string, unknown>[] } }
   withName.register.cases[0].name = 'x'
-  await assert.rejects(() => s.program.installPack(withName), /pack_unknown_key/)
+  await assert.rejects(() => s.program.installPack(withName), /pack_identity_field/)
   const withDate = structuredClone(bad) as { register: { cases: Record<string, unknown>[] } }
   withDate.register.cases[0].observed = '2026-05-04'
   await assert.rejects(() => s.program.installPack(withDate), /case_text/)
@@ -338,4 +338,34 @@ test('a case whose only attempt was replaced is reported as not yet evidenced', 
   assert.equal(row.recognition!.first_responses.correct, 1, 'the attempt is still shown')
   assert.equal(row.recognition!.counted_first_responses, 0)
   assert.equal(row.status, 'not_yet_evidenced')
+})
+
+test('private repair uses case-pinned item versions and never falls back to an unrelated pool', async () => {
+  const s = await setup()
+  const pack = syntheticPack({ pendingRef: s.pendingRef })
+  const row = pack.register.cases[0]
+  if (row.route.mode !== 'objective') throw new Error('fixture')
+  // Make the exact-stage version unavailable. Other public items for this target must not substitute for it.
+  row.route.stages.exact = row.route.stages.exact.map((p: any) => ({ ...p, version: 999 }))
+  const shared = pack.register.cases[1]
+  if (shared.route.mode === 'objective') shared.route.stages.exact = structuredClone(row.route.stages.exact)
+  await s.program.installPack(pack)
+  const result = s.program.report()!.cases[0]
+  assert.equal(result.status, 'pending_content')
+  assert.ok(result.recognition!.content.missing.includes('exact'))
+})
+
+
+test('an unknown route is rejected before changing the current release or private storage', async () => {
+  const s = await setup()
+  const before = s.program.currentRelease()!.version
+  const pack = syntheticPack({ pendingRef: s.pendingRef })
+  const row = pack.register.cases[0]
+  if (row.route.mode !== 'objective') throw new Error('fixture')
+  row.route.progress_target_ref = 'zh.p2_higher_chinese.skill.unavailable'
+  await assert.rejects(() => s.program.installPack(pack), /intake_unknown_target/)
+  assert.equal(s.program.currentRelease()!.version, before)
+  assert.equal((await s.privateStore.packs()).length, 0)
+  assert.equal((await s.privateStore.crosswalk()).length, 0)
+  assert.equal(s.engine.state.targets.length, 0)
 })

@@ -4,8 +4,8 @@ import { Answer } from './Answer.tsx'
 import { names, type Language } from './development.ts'
 import { exercise, material } from './content.ts'
 
-export function responseText(itemId: string, response: Response): string {
-  const e = exercise(itemId)
+export function responseText(itemId: string, response: Response, version?: string): string {
+  const e = exercise(itemId, version)
   const option = (id: string) => e.options.find((o) => o.id === id)?.text ?? '—'
   return response.kind === 'matching'
     ? response.pairs
@@ -42,7 +42,7 @@ export function Practice({
   const development = engine.isDevelopmentContent(task.id)
   const zh = language === 'zh'
   const p = step.kind === 'question' ? step.presentation : null
-  const releaseMaterial = p?.material_ref ? material(p.material_ref) : null
+  const releaseMaterial = p?.material_ref ? material(p.material_ref, task.content_version) : null
   const slots = p?.material_ref
     ? task.plan.slots.filter((s) => s.material_ref === p.material_ref)
     : []
@@ -103,7 +103,7 @@ export function Practice({
           <details key={m.material_ref} className="completed-material">
             <summary>
               {zh ? '材料反馈：' : 'Material feedback: '}
-              {material(m.material_ref).title}
+              {material(m.material_ref, task.content_version).title}
             </summary>
             <ol>
               {engine.state.presentations
@@ -121,10 +121,10 @@ export function Practice({
                   )
                   return first ? (
                     <li key={row.id}>
-                      <p className="academic">{exercise(row.item_id).stem}</p>
+                      <p className="academic">{exercise(row.item_id, task.content_version).stem}</p>
                       <p>
                         {zh ? '首次答案：' : 'First answer: '}
-                        {responseText(row.item_id, first.response)} ·{' '}
+                        {responseText(row.item_id, first.response, task.content_version)} ·{' '}
                         <span className="material-feedback">
                           {first.correct
                             ? zh
@@ -173,11 +173,11 @@ export function Practice({
                   key={slot.position}
                   className={row?.id === p?.id ? 'current-question' : ''}
                 >
-                  <p className="academic">{exercise(id).stem}</p>
+                  <p className="academic">{exercise(id, task.content_version).stem}</p>
                   {first && (
                     <p>
                       {zh ? '你的首次答案：' : 'Your first answer: '}
-                      {responseText(id, first.response)}
+                      {responseText(id, first.response, task.content_version)}
                       {materialFinishedFirst && (
                         <span className="material-feedback">
                           {' '}
@@ -227,7 +227,7 @@ export function Practice({
             className="academic"
             lang={task.subject === 'chinese' ? 'zh' : 'en'}
           >
-            {exercise(step.item.id).stem}
+            {exercise(step.item.id, task.content_version).stem}
           </h2>
           {!releaseMaterial && development && (
             <p className="shape-picture">●　■　▲</p>
@@ -235,13 +235,13 @@ export function Practice({
           {step.awaiting === 'retry' && (
             <aside className="hint academic">
               <strong>{zh ? '提示' : 'Hint'}</strong>
-              <p>{exercise(step.item.id).hint}</p>
+              <p>{exercise(step.item.id, task.content_version).hint}</p>
             </aside>
           )}
           {step.awaiting === 'correction' && (
             <aside className="hint academic">
               <strong>{zh ? '一起订正' : 'Supported correction'}</strong>
-              <p>{exercise(step.item.id).explanation}</p>
+              <p>{exercise(step.item.id, task.content_version).explanation}</p>
               <p>
                 {zh
                   ? '请根据说明选择一次答案。'
@@ -251,7 +251,7 @@ export function Practice({
           )}
           <Answer
             key={`${step.presentation.id}-${step.awaiting}`}
-            exercise={exercise(step.item.id)}
+            exercise={exercise(step.item.id, task.content_version)}
             language={language}
             disabled={busy}
             submit={submit}

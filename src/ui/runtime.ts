@@ -1,7 +1,7 @@
 import { LearningEngine } from '../engine/engine.ts'
 import { WriteQueue } from '../engine/persistence.ts'
-import { MistakeProgram } from '../mistakes/program.ts'
-import { DexiePrivateStore, startPilotStorage } from '../storage.ts'
+import type { MistakeProgram } from '../mistakes/program.ts'
+import { startPilotStorage } from '../storage.ts'
 import { developmentRegistry, subjects } from './development.ts'
 
 export async function openRuntime(id: string, timezone: string) {
@@ -36,10 +36,8 @@ export async function openRuntime(id: string, timezone: string) {
       `turtle-academy-synthetic-${id}`,
     )
     const writer = new WriteQueue(storage.store)
-    // Private mistake programme records for this identity (packs, crosswalk, production evidence).
-    const privateStore = new DexiePrivateStore(`turtle-academy-private-${id}`)
+    let closePrivate = () => {}
     try {
-      await privateStore.open()
       // Chinese uses reviewed content (a separate, offline-cached chunk); other subjects keep the
       // synthetic development fixtures until their content is wired. A test-only build flag keeps the
       // synthetic Chinese fixture for browser tests of task mechanics (material sizes, checkpoints).
@@ -55,8 +53,17 @@ export async function openRuntime(id: string, timezone: string) {
         // labelled synthetic); the reviewed release installed next becomes current for new tasks.
         if (engine.state.tasks.some((t) => t.subject === 'chinese' && t.status !== 'finalised' && t.content_version === 'dev-ui-1'))
           developmentRegistry(['chinese'], registry)
-        const { publicChineseContent } = await import('../catalogue/chinese-public.ts')
-        program = await MistakeProgram.open({ engine, registry, publicContent: publicChineseContent(), store: privateStore, now })
+        if (__PRIVATE_PACK_ENABLED__) {
+          const { openPrivateProgram } = await import('../mistakes/runtime.ts')
+          const session = await openPrivateProgram(id, engine, registry, now)
+          program = session.program
+          closePrivate = session.close
+        } else {
+          const { openPublicChinese } = await import('../catalogue/chinese-runtime.ts')
+          const pinned = new Set(engine.state.tasks.filter((t) => t.subject === 'chinese').map((t) => t.content_version))
+          const session = await openPublicChinese(registry, pinned)
+          closePrivate = session.close
+        }
       }
       await engine.flush()
       return {
@@ -67,14 +74,14 @@ export async function openRuntime(id: string, timezone: string) {
         close: () => {
           writer.dispose()
           storage.close()
-          privateStore.close()
+          closePrivate()
           release()
         },
       }
     } catch (e) {
       writer.dispose()
       storage.close()
-      privateStore.close()
+      closePrivate()
       throw e
     }
   } catch (e) {

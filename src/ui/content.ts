@@ -20,17 +20,21 @@ export interface MaterialText {
 
 const exercises = new Map<string, Exercise>()
 const materials = new Map<string, MaterialText>()
+const versionedExercises = new Map<string, Exercise>()
+const versionedMaterials = new Map<string, MaterialText>()
 
-export function registerExercise(id: string, e: Exercise) {
+export function registerExercise(id: string, e: Exercise, version?: string) {
   exercises.set(id, e)
+  if (version) versionedExercises.set(`${version}/${id}`, e)
 }
 
-export function registerMaterial(ref: string, m: MaterialText) {
+export function registerMaterial(ref: string, m: MaterialText, version?: string) {
   materials.set(ref, m)
+  if (version) versionedMaterials.set(`${version}/${ref}`, m)
 }
 
-export function exercise(id: string): Exercise {
-  const e = exercises.get(id)
+export function exercise(id: string, version?: string): Exercise {
+  const e = version ? versionedExercises.get(`${version}/${id}`) ?? (version === 'dev-ui-1' ? exercises.get(id) : undefined) : exercises.get(id)
   if (!e) throw new Error('presentation_missing')
   return e
 }
@@ -39,8 +43,8 @@ export function hasExercise(id: string): boolean {
   return exercises.has(id)
 }
 
-export function material(ref: string): MaterialText {
-  const m = materials.get(ref)
+export function material(ref: string, version?: string): MaterialText {
+  const m = version ? versionedMaterials.get(`${version}/${ref}`) ?? (version === 'dev-ui-1' ? materials.get(ref) : undefined) : materials.get(ref)
   if (!m) throw new Error('material_missing')
   return m
 }

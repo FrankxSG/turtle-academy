@@ -92,11 +92,11 @@ export class MistakeProgram {
   static async open(opts: { engine: LearningEngine; registry: CatalogueRegistry; publicContent: PublicChinese; store: PrivateStore; now: () => string; newId?: () => string; course?: string }): Promise<MistakeProgram> {
     const p = new MistakeProgram(opts)
     // Earlier content versions that an unfinished task still pins are reinstalled first; others are pruned.
-    const pinned = new Set(opts.engine.state.tasks.filter((t) => t.subject === 'chinese' && t.status !== 'finalised').map((t) => t.content_version))
+    const pinned = new Set(opts.engine.state.tasks.filter((t) => t.subject === 'chinese').map((t) => t.content_version))
     const stored = await opts.store.releases()
     const current = new Set<string>()
     const builds = [p.buildFor(opts.course ?? 'p2_higher_chinese', null)]
-    for (const pack of await opts.store.packs()) { builds.push(p.buildFor(pack.course, pack)); p.pack = pack }
+    for (const rawPack of await opts.store.packs()) { const pack = validatePack(rawPack); builds.push(p.buildFor(pack.course, pack)); p.pack = pack }
     for (const b of builds) current.add(b.release.version)
     for (const sb of stored) {
       if (current.has(sb.version)) continue
@@ -106,13 +106,26 @@ export class MistakeProgram {
     for (const b of builds) { p.install(b); await opts.store.putRelease(toStored(b)) }
     p.rows = await opts.store.crosswalk()
     p.events = await opts.store.production()
+    if (p.pack) await p.importRegister() // recompute missing/available pools after a content update
     return p
   }
 
   private buildFor(course: string, pack: PrivatePack | null): BuiltContent {
     const courses = LEARNER_COURSES[course] ?? [course]
+    const stagePins = new Map<string, Map<string, Set<string>>>()
+    for (const c of pack?.register.cases ?? []) {
+      if (c.route.mode !== 'objective') continue
+      const ref = c.route.progress_target_ref
+      const stages = stagePins.get(ref) ?? new Map<string, Set<string>>()
+      for (const [stage, pins] of Object.entries(c.route.stages)) {
+        const ids = stages.get(stage) ?? new Set<string>()
+        for (const pin of pins) ids.add(`${pin.item_id}@${pin.version}`)
+        stages.set(stage, ids)
+      }
+      stagePins.set(ref, stages)
+    }
     return buildChineseContent({
-      courses, lists: this.publicContent.lists, batches: this.publicContent.batches,
+      courses, stagePins, lists: this.publicContent.lists, batches: this.publicContent.batches,
       privateBatches: pack?.corrective_batches ?? [], privateTargets: pack?.private_targets ?? [],
       privateTag: pack ? packTag(pack) : null,
     })
@@ -126,8 +139,8 @@ export class MistakeProgram {
     const r = this.registry.install(b.release)
     if (!r.ok) throw new Error(`content_install_failed:${r.reason}`)
     this.built.set(b.release.version, b)
-    for (const [id, e] of b.exercises) registerExercise(id, e)
-    for (const [ref, m] of b.materials) registerMaterial(ref, m)
+    for (const [id, e] of b.exercises) registerExercise(id, e, b.release.version)
+    for (const [ref, m] of b.materials) registerMaterial(ref, m, b.release.version)
   }
 
   get register(): Register | null { return this.pack?.register ?? null }
@@ -151,6 +164,9 @@ export class MistakeProgram {
   async installPack(raw: unknown): Promise<IntakeResult> {
     const pack = validatePack(raw)
     const b = this.buildFor(pack.course, pack)
+    // Resolve every route before mutating the registry or persisting any part of an intake.
+    planIntake({ state: this.engine.state, register: pack.register, release: b.release, targets: b.targets,
+      today: this.engine.today(), now: this.now() })
     this.install(b)
     await this.store.putRelease(toStored(b))
     await this.store.putPack(pack)

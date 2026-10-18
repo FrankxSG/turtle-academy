@@ -1,8 +1,24 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
-export default defineConfig({
+export default defineConfig(({ mode }) => {
+  const env = { ...loadEnv(mode, process.cwd(), ''), ...process.env }
+  const requested = env.VITE_ENABLE_PRIVATE_PACK === 'true'
+  // A public/hosted build cannot acquire private code through an inherited environment variable.
+  if (requested && mode !== 'private') throw new Error('Private packs require explicit --mode private')
+  if (mode === 'private' && !requested) throw new Error('Private mode requires VITE_ENABLE_PRIVATE_PACK=true')
+  return {
+  define: { __PRIVATE_PACK_ENABLED__: JSON.stringify(requested && mode === 'private') },
   plugins: [
+    ...(mode === 'private' ? [] : [{
+      name: 'public-pack-boundary',
+      generateBundle(_options: unknown, bundle: Record<string, { type: string; modules?: Record<string, unknown> }>) {
+        for (const output of Object.values(bundle)) {
+          if (output.type === 'chunk' && Object.keys(output.modules ?? {}).some((id) => /\/src\/(mistakes\/|parent\/Mistakes\.tsx)/.test(id.replaceAll('\\', '/'))))
+            throw new Error('Private-pack module reached a public build')
+        }
+      },
+    }]),
     VitePWA({
       registerType: 'prompt',
       includeAssets: ['turtle.svg', 'icons/*.png'],
@@ -35,5 +51,6 @@ export default defineConfig({
       },
     }),
   ],
-  build: { sourcemap: false },
+  build: { sourcemap: false, outDir: mode === 'private' ? 'dist-private' : 'dist' },
+  }
 })

@@ -20,6 +20,7 @@ export function Mistakes({
   work: (fn: () => Promise<unknown>) => Promise<void>
   busy: boolean
 }) {
+  if (!__PRIVATE_PACK_ENABLED__) return null
   const zh = language === 'zh'
   const tr = (en: string, cn: string) => (zh ? cn : en)
   const [, setTick] = useState(0)

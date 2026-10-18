@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import type { AuthClient } from '../auth/client.ts'
 import type { Runtime } from '../ui/runtime.ts'
 import { names, subjects, type Language } from '../ui/development.ts'
 import { responseText } from '../ui/Practice.tsx'
 import { resetPin, validPin, verifyPin } from './device.ts'
-import { Mistakes } from './Mistakes.tsx'
+const PrivateMistakes = __PRIVATE_PACK_ENABLED__
+  ? lazy(() => import('./Mistakes.tsx').then((m) => ({ default: m.Mistakes })))
+  : null
 import { xMax } from '../engine/policy.ts'
 
 export function Parent({
@@ -244,13 +246,15 @@ export function Parent({
               </button>
             </article>
           </div>
-          {runtime.program && (
-            <Mistakes
+          {__PRIVATE_PACK_ENABLED__ && runtime.program && PrivateMistakes && (
+            <Suspense fallback={null}>
+            <PrivateMistakes
               program={runtime.program}
               language={language}
               work={work}
               busy={busy}
             />
+            </Suspense>
           )}
           <section className="summary">
             <h2>{tr('Practice summary', '练习记录')}</h2>
@@ -343,7 +347,7 @@ export function Parent({
                                   : e.phase === 'retry'
                                     ? tr('Hint-assisted retry', '提示后重试')
                                     : tr('Supported correction', '辅助订正')}
-                                : {responseText(p.item_id, e.response)} ·{' '}
+                                : {responseText(p.item_id, e.response, t.content_version)} ·{' '}
                                 {e.correct
                                   ? tr('correct', '正确')
                                   : tr('needs correction', '需订正')}{' '}
