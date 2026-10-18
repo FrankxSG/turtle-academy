@@ -14,9 +14,30 @@ All 21 were read rendered, with every distractor substituted into the blank and 
 - `u571f.q2`: the hint says seeds 要 go in the ground; 可以 would be more accurate.
 - `u767d.q1` and `q2` share the 像牛奶 cue across the exact and similar stages.
 
+## Official P1 source audit (Claude, 2026-10-18)
+
+The owner supplied both official MOE character-list PDFs. Their SHA-256 values match the pinned sources exactly:
+- CL `d833e9a4…c145`;
+- HCL `461f131f…7914`.
+
+Both are 6 pages at 539 × 737 pt.
+
+Pages 1–2 (P1 一上 and 一下) use the same table layout as the audited P2 pages: lesson column, then 识读字 and 识写字 columns. `scripts/audit_p1_review_characters.py` extracts them with `pdftotext -bbox`, using the same column bounds as the existing audit. As a control it first reproduces each course's P2 records from pages 3–4.
+
+**Result: all 547 review records match.**
+- CL: 364 P1 characters; 95 are already on the P2 list, leaving 269 records.
+- HCL: 364 P1 characters; 86 are already on the P2 list, leaving 278 records.
+- Each record's ID, source grade, recognition pages, writing pages and source match, as do the summary counts.
+- Swapping the two files is rejected on checksum.
+
+Visual spot-check: two rows were compared by eye with the extracted records, and both match, including the recognise-only characters (雷 旧; 甲 丁 周 末):
+- CL 一上 lesson 10;
+- HCL 一下 lesson 11.
+
+The PDFs are not committed. The audit needs them supplied locally.
+
 ## Still required before release
 
-- Official P1 PDF checksum/layout audit and visual spot-check. Matching existing P2/P3 extracts does not verify the newly added P1 pages.
 - Owner target-list, rights and batch decisions, using the refreshed owner sample and disputed-item review.
 - Real catalogue/intake wiring and end-to-end priority/repair evidence: implemented in draft PR #25, which is stacked on this PR.
 
