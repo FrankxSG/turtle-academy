@@ -30,6 +30,16 @@ export const minMaterials = (x: number): number => Math.ceil(x / 5)
 export const halfwayOf = (total: number): number => Math.ceil(total / 2)
 
 /**
+ * Mistake repair in language tasks (owner instruction 2026-10-18: eligible review and mistake repair come before
+ * general practice). Whole materials are still required (ceil(X/5)); short review/repair questions for targets
+ * no material covers may now be added beyond the materials up to max(X − material questions, ceil(X/2)), so a
+ * learner with eligible mistakes always gets some repair without stacking a full extra X. PROPOSAL for owner
+ * confirmation: it changes the earlier "no short questions once materials reach X" behaviour.
+ */
+export const languagePrescribedShortMax = (x: number, materialQuestions: number): number =>
+  Math.max(x - materialQuestions, Math.ceil(x / 2))
+
+/**
  * Course locks (Functional Design §1, Engine §5 course register, F36).
  * - P3 Chinese/Higher Chinese and English general practice: open from the first release.
  * - P3 language mistake imports: deferred (rejected explicitly, not stored as pending content).

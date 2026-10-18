@@ -485,6 +485,24 @@ export class LearningEngine {
     this.changed()
   }
 
+  // ---------------------------------------------------------------- imported mistakes
+
+  /**
+   * Add or update target records from a parent-confirmed import (src/mistakes/intake.ts decides their content).
+   * Existing observations are never removed or rewritten here: an import can only add observations, attach a
+   * target to content (mapping status) or mark it pending again when content is missing. Evidence is untouched.
+   */
+  async upsertTargets(records: Target[]): Promise<SaveStatus | null> {
+    for (const r of records) {
+      const existing = this.state.targets.find((t) => t.id === r.id)
+      if (!existing) { this.state.targets.push(structuredClone(r)); continue }
+      for (const o of r.observations) if (!existing.observations.some((x) => x.id === o.id)) existing.observations.push(structuredClone(o))
+      existing.mapping_status = r.mapping_status
+    }
+    this.changed()
+    return this.flush()
+  }
+
   // ---------------------------------------------------------------- flags
 
   /** Child flags a suspected problem question: its evidence and count are removed and it is replaced. */

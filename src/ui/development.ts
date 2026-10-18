@@ -5,7 +5,10 @@ import {
   type CatalogueItem,
   type CatalogueRelease,
 } from '../catalogue/adapter.ts'
-import type { AnyCourse, Response, Subject } from '../engine/types.ts'
+import type { AnyCourse, Subject } from '../engine/types.ts'
+import { registerExercise, registerMaterial, type Exercise } from './content.ts'
+
+export { exercise, material, type Exercise } from './content.ts'
 
 export type Language = 'en' | 'zh'
 export const subjects: Subject[] = [
@@ -27,14 +30,6 @@ export const names = {
     mathematics: '数学',
     english: '英文',
   },
-}
-export interface Exercise {
-  stem: string
-  options: { id: string; text: string }[]
-  left?: { id: string; text: string }[]
-  hint: string
-  explanation: string
-  key: Response
 }
 const fixed = (zh: boolean): Exercise[] => [
   {
@@ -104,19 +99,15 @@ const fixed = (zh: boolean): Exercise[] => [
     },
   },
 ]
-const presentations = new Map<string, Exercise>()
-const materials = new Map<string, { title: string; text: string }>()
-export function exercise(id: string): Exercise {
-  const e = presentations.get(id)
-  if (!e) throw new Error('development_presentation_missing')
-  return e
-}
-export function material(ref: string) {
-  return materials.get(ref)!
-}
-export function developmentRegistry(): CatalogueRegistry {
-  const registry = new CatalogueRegistry()
-  for (const subject of subjects) {
+/**
+ * Development fixtures for every subject, or only for the subjects listed (a subject with reviewed content
+ * installs that release instead). Synthetic content is never presented as reviewed curriculum.
+ */
+export function developmentRegistry(
+  only: readonly Subject[] = subjects,
+  registry = new CatalogueRegistry(),
+): CatalogueRegistry {
+  for (const subject of only) {
     const zh = subject === 'chinese'
     const course: AnyCourse = (
       {
@@ -136,7 +127,7 @@ export function developmentRegistry(): CatalogueRegistry {
       acquisition = false,
     ) => {
       const e = defs[n % defs.length]
-      presentations.set(id, e)
+      registerExercise(id, e)
       items.push({
         id,
         version: 1,
@@ -177,7 +168,7 @@ export function developmentRegistry(): CatalogueRegistry {
     if (subject === 'chinese' || subject === 'english') {
       for (let m = 0; m < 5; m++) {
         const ref = `dev-${subject}-material-${m}`
-        materials.set(ref, {
+        registerMaterial(ref, {
           title: zh ? `图形卡 ${m + 1}` : `Shape card ${m + 1}`,
           text: zh
             ? '小海龟找到三个形状：●、■、▲。它把圆形放在前面，然后放正方形，最后放三角形。'

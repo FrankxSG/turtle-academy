@@ -15,7 +15,7 @@ export interface TargetProgress {
   acquisitionSuccessItems: string[]
   /** Earliest learning date for further prescribed practice. */
   notBefore: string | null
-  notBeforeReason: 'app_target_next_task' | 'failure_cooldown' | 'final_stage_gate' | 'review_due' | null
+  notBeforeReason: 'import_next_day' | 'app_target_next_task' | 'failure_cooldown' | 'final_stage_gate' | 'review_due' | null
   /** An unfinalised task whose failure or creation blocks this target until the day after it finalises. */
   blockedByTask: string | null
   finalStageNotBefore: string | null
@@ -129,6 +129,13 @@ export function derive(state: EngineState): Derived {
     if (target.observations.length > 0 && observations.length === 0) continue
     const pr = fresh(target)
     progress.set(target.id, pr)
+    // New imports start no earlier than the day after the app imported them (Functional Design §4). A later
+    // independent import of the same target keeps its stage and moves the earliest practice to the next day.
+    for (const o of observations) {
+      if (o.source_type === 'app_practice') continue
+      const nb = addDays(o.recorded_on, 1)
+      if (pr.notBefore === null || nb > pr.notBefore) { pr.notBefore = nb; pr.notBeforeReason = 'import_next_day' }
+    }
     const ps = byTarget.get(target.id) ?? []
     const steps: Step[] = []
     let seq = 0
