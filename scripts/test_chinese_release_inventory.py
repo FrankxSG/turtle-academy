@@ -106,6 +106,21 @@ class Inventory(unittest.TestCase):
         curriculum['status'] = 'proposed_not_import_enabled'
         self.assertIsNone(approved_leaves(curriculum, self.batch))
 
+    def test_approved_view_preserves_practice_only_target_classification(self):
+        from chinese_release_inventory import approved_leaves, catalogue
+        # Only a P1 practice route plus a general question: this is not grade leaf coverage.
+        source = next(b for b in self.batch['batches'] if 'review_characters_version' in b)
+        target = source['groups'][0]['target_refs'][0]
+        repair = [copy.deepcopy(i) for i in source['items'] if target in i['target_refs']]
+        general = copy.deepcopy(self.batch['items'][0])
+        general.update(stage=None, target_refs=[], outcome_refs=['zh.p2_chinese.r-character'], courses=['p2_chinese'])
+        pending = dict(source, status='approved', items=repair+[general], materials=[])
+        review = dict(self.batch['review'], status='approved')
+        cat = catalogue([pending], review)
+        self.assertEqual(approved_leaves(self.curriculum, cat)['p2_chinese'], 0)
+        self.assertEqual(approved_leaves(self.curriculum, catalogue([pending], dict(review,status='proposed')))['p2_chinese'], 0)
+        self.assertIn('target list not approved', __import__('chinese_release_inventory').approval_note(self.curriculum, catalogue([pending],dict(review,status='proposed'))))
+
 
     def test_review_and_extra_targets_never_count_as_leaf_routes(self):
         review = self.batch['review']

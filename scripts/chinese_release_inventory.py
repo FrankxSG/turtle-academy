@@ -47,6 +47,10 @@ def approval_note(curriculum, cat):
     if curriculum['status'] != 'approved':
         missing.append('leaf denominator not approved')
     batches = cat['batches']
+    if any('review_characters_version' in b for b in batches):
+        review = cat.get('review')
+        if not review or review['status'] != 'approved':
+            missing.append('P1 review/textbook-extra target list not approved')
     for batch in batches:
         log, gates = batch['review_log'], []
         if log['independent_review'] != 'passed':
@@ -154,7 +158,10 @@ def approved_leaves(curriculum, cat):
     Items in a batch that is not approved never count, whatever other batches hold."""
     if curriculum['status'] != 'approved':
         return None
-    approved = catalogue([b for b in cat['batches'] if b['status'] == 'approved'])
+    review = cat.get('review')
+    approved = catalogue([b for b in cat['batches'] if b['status'] == 'approved'
+                          and ('review_characters_version' not in b or
+                               (review and review['status'] == 'approved'))], review)
     if not approved['batches']:
         return {course: 0 for course in curriculum['courses']}
     data = analyse(curriculum, approved)

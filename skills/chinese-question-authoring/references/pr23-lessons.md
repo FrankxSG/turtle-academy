@@ -89,3 +89,10 @@ Found by Claude while drafting the 117 items, before any review. Each was fixed 
 - `zh-p2-sound-repair.q3` hint also says 轻声读; change it at the next content revision and redraw the sample, because it is in the agreed pool.
 - `zh-p2-meaning.q4` key is the longest, most qualified option; balance option length at the next revision.
 - A small lint in the validator could catch common checks 5 (key, key character or unique radical name in stem or hint) and 6 (one option in a material containing another question's key). It needs its own reviewed change.
+
+
+## PR24 cross-review: context is not a definition
+
+Read all 117 v1 items on 2026-10-18; 21 revised items require recheck. Several explanations turned one scene into a rule: clouds are white, seeds need soil to grow, learning means reading at school, wild animals live in forests. Other explanations equated reading with reading aloud or treated 那天 as necessarily past. The 喷 scene used unnatural wording, and a 九 recognition item also required addition.
+
+Why missed: substituting distractors checked the keyed sentence but did not test the explanation against a counterexample. Common checks 3–4 must include a true counterexample to any general definition. Keep an explanation bounded to this sentence when it is only a scene; use an accurate dictionary meaning when defining a word. Recognition tasks should not require an unrelated subject skill. New wording needs the same grade-language scan as the original wording.

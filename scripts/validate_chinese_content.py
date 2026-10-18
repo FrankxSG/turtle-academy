@@ -303,6 +303,8 @@ def check_catalogue(curriculum, batch, review=None):
     for field in ['sampled_item_ids', 'disputed_item_ids']:
         require(len(log[field]) == len(set(log[field])) and set(log[field]) <= set(items), 'review_item_reference')
     if batch['status'] == 'approved':
+        if used & set(reviews):
+            require(review is not None and review['status'] == 'approved', 'approved_batch_review_characters_not_approved')
         require(log['independent_review'] == 'passed' and log['owner_signoff'] == 'approved' and log['rights_status'] == 'cleared', 'approved_batch_review_state')
         require(not log['disputed_item_ids'], 'approved_batch_unresolved_items')
     if curriculum['status'] == 'approved':

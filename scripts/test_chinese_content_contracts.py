@@ -334,6 +334,14 @@ class ReviewCharacters(unittest.TestCase):
         self.review = load(ROOT / 'content/chinese/review-characters.json')
         self.batch = load(ROOT / 'content/chinese/batches/starter-001.json')
 
+    def test_approved_batch_cannot_depend_on_proposed_review_targets(self):
+        batch = load(ROOT / 'content/chinese/batches/starter-003.json')
+        batch['status'] = 'approved'
+        batch['review_log'].update(independent_review='passed', owner_signoff='approved', rights_status='cleared', disputed_item_ids=[])
+        with self.assertRaisesRegex(Invalid, 'approved_batch_review_characters_not_approved'):
+            check_catalogue(self.curriculum, batch, self.review)
+        check_catalogue(self.curriculum, batch, dict(self.review, status='approved'))
+
     def _row(self, review, char, course='p2_chinese'):
         return next(r for r in review['characters'] if r['character'] == char and r['course'] == course)
 
@@ -397,7 +405,7 @@ class ReviewCharacters(unittest.TestCase):
         with self.assertRaisesRegex(Invalid, 'review_characters_version'):
             check_catalogue(self.curriculum, b, self.review)
         b['review_characters_version'] = self.review['version']
-        check_catalogue(self.curriculum, b, self.review)
+        check_catalogue(self.curriculum, b, dict(self.review, status='approved'))
         b['review_characters_version'] = 'stale'
         with self.assertRaisesRegex(Invalid, 'review_characters_version'):
             check_catalogue(self.curriculum, b, self.review)
