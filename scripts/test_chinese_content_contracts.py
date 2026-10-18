@@ -39,11 +39,9 @@ class Contracts(unittest.TestCase):
             check_plan(load(path), self.curriculum, self.batch)
 
     def test_x_boundary_rejects_bool_fraction_and_old_limits(self):
-        for x in [True, 5, 21, 10.5]:
+        for x in [True, 5, 20, 10.5]:
             with self.subTest(x=x), self.assertRaises(Invalid):
                 schema_check(dict(self.plan, x=x), SCHEMA['$defs']['task_plan'])
-        # Owner decision 2026-10-18: Chinese may go up to 20 a day in the first pilot.
-        schema_check(dict(self.plan, x=20), SCHEMA['$defs']['task_plan'])
 
     def test_whole_material_and_actual_total(self):
         for mutate in [lambda p: p['slots'].pop(2),
