@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { Response } from '../engine/types.ts'
-import type { Exercise, Language } from './development.ts'
+import type { Language } from './development.ts'
+import type { Exercise } from './content.ts'
 
 /** Tap/click controls work with touch, mouse and keyboard. Drag is never required. */
 export function Answer({

@@ -155,6 +155,11 @@ export class LearningEngine {
     return this.deps.registry.release(task.subject, task.content_version)
   }
 
+  /** Whether a task runs on synthetic development fixtures (labelled as such) rather than reviewed content. */
+  isDevelopmentContent(taskId: string): boolean {
+    return this.release(this.task(taskId)).development_only
+  }
+
   private ctx(subject: Subject, release: CatalogueRelease, x: number): PlanContext {
     return { state: this.state, derived: this.derived(), release, subject, date: this.today(), x, newId: this.newId }
   }

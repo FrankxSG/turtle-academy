@@ -1,7 +1,8 @@
 import type { LearningEngine, Step } from '../engine/engine.ts'
 import type { Response } from '../engine/types.ts'
 import { Answer } from './Answer.tsx'
-import { exercise, material, names, type Language } from './development.ts'
+import { names, type Language } from './development.ts'
+import { exercise, material } from './content.ts'
 
 export function responseText(itemId: string, response: Response): string {
   const e = exercise(itemId)
@@ -37,6 +38,8 @@ export function Practice({
   flag: () => void
 }) {
   const task = engine.task(step.taskId)
+  // Reviewed original content is labelled as such; synthetic development fixtures keep their warning label.
+  const development = engine.isDevelopmentContent(task.id)
   const zh = language === 'zh'
   const p = step.kind === 'question' ? step.presentation : null
   const releaseMaterial = p?.material_ref ? material(p.material_ref) : null
@@ -63,7 +66,13 @@ export function Practice({
       <div className="section-top">
         <p className="eyebrow">
           {names[language][task.subject]} ·{' '}
-          {zh ? '开发用模拟内容' : 'SYNTHETIC DEVELOPMENT CONTENT'}
+          {development
+            ? zh
+              ? '开发用模拟内容'
+              : 'SYNTHETIC DEVELOPMENT CONTENT'
+            : zh
+              ? '原创练习题（审核中）'
+              : 'ORIGINAL PRACTICE · REVIEW IN PROGRESS'}
         </p>
         <button disabled={busy} onClick={pause}>
           {zh ? '暂停并返回' : 'Pause and return'}
@@ -135,10 +144,14 @@ export function Practice({
       {releaseMaterial && (
         <article className="material">
           <h2>{releaseMaterial.title}</h2>
-          <p className="academic">{releaseMaterial.text}</p>
-          <p className="shape-picture" aria-label="● ■ ▲">
-            ●　■　▲
+          <p className="academic" lang={task.subject === 'chinese' ? 'zh' : 'en'}>
+            {releaseMaterial.text}
           </p>
+          {development && (
+            <p className="shape-picture" aria-label="● ■ ▲">
+              ●　■　▲
+            </p>
+          )}
           <ol>
             {slots.map((slot) => {
               const row = engine.state.presentations.find(
@@ -216,7 +229,9 @@ export function Practice({
           >
             {exercise(step.item.id).stem}
           </h2>
-          {!releaseMaterial && <p className="shape-picture">●　■　▲</p>}
+          {!releaseMaterial && development && (
+            <p className="shape-picture">●　■　▲</p>
+          )}
           {step.awaiting === 'retry' && (
             <aside className="hint academic">
               <strong>{zh ? '提示' : 'Hint'}</strong>

@@ -1,7 +1,8 @@
 import { LearningEngine } from '../engine/engine.ts'
 import { WriteQueue } from '../engine/persistence.ts'
-import { startPilotStorage } from '../storage.ts'
-import { developmentRegistry } from './development.ts'
+import { MistakeProgram } from '../mistakes/program.ts'
+import { DexiePrivateStore, startPilotStorage } from '../storage.ts'
+import { developmentRegistry, subjects } from './development.ts'
 
 export async function openRuntime(id: string, timezone: string) {
   // One working-copy writer at a time. A second tab must not replay stale task state over the first.
@@ -35,27 +36,41 @@ export async function openRuntime(id: string, timezone: string) {
       `turtle-academy-synthetic-${id}`,
     )
     const writer = new WriteQueue(storage.store)
+    // Private mistake programme records for this identity (packs, crosswalk, production evidence).
+    const privateStore = new DexiePrivateStore(`turtle-academy-private-${id}`)
     try {
-      const registry = developmentRegistry()
-      const engine = await LearningEngine.load(storage.store, timezone, {
-        registry,
-        writer,
-        now: () => new Date().toISOString(),
-      })
+      await privateStore.open()
+      // Chinese uses reviewed content (a separate, offline-cached chunk); other subjects keep the
+      // synthetic development fixtures until their content is wired. A test-only build flag keeps the
+      // synthetic Chinese fixture for browser tests of task mechanics (material sizes, checkpoints).
+      const syntheticChinese = import.meta.env.VITE_SYNTHETIC_CHINESE === '1'
+      const registry = developmentRegistry(
+        syntheticChinese ? subjects : ['science', 'mathematics', 'english'],
+      )
+      const now = () => new Date().toISOString()
+      const engine = await LearningEngine.load(storage.store, timezone, { registry, writer, now })
+      let program: MistakeProgram | null = null
+      if (!syntheticChinese) {
+        const { publicChineseContent } = await import('../catalogue/chinese-public.ts')
+        program = await MistakeProgram.open({ engine, registry, publicContent: publicChineseContent(), store: privateStore, now })
+      }
       await engine.flush()
       return {
         engine,
         registry,
         writer,
+        program,
         close: () => {
           writer.dispose()
           storage.close()
+          privateStore.close()
           release()
         },
       }
     } catch (e) {
       writer.dispose()
       storage.close()
+      privateStore.close()
       throw e
     }
   } catch (e) {

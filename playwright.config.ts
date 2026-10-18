@@ -9,7 +9,11 @@ export default defineConfig({
   use: { browserName: 'chromium' },
   projects: [
     // Node's native suites have dedicated commands; don't import/run them again during browser collection.
-    { name: 'app', testIgnore: ['**/trials/**', '**/engine/**', '**/ui/**'], use: { baseURL: 'http://127.0.0.1:4173', serviceWorkers: 'allow' } },
+    { name: 'app', testIgnore: ['**/trials/**', '**/engine/**', '**/ui/**', 'pilot-ui.spec.ts'], use: { baseURL: 'http://127.0.0.1:4173', serviceWorkers: 'allow' } },
+    // Task mechanics (material sizes, checkpoint boundaries, save failures) are tested on a build whose Chinese
+    // uses the synthetic shape fixture, so their exact structure stays fixed. The 'app' project tests the
+    // deployed configuration with reviewed Chinese content.
+    { name: 'synthetic', testMatch: 'pilot-ui.spec.ts', use: { baseURL: 'http://127.0.0.1:4175', serviceWorkers: 'allow' } },
     // Trials build only (Issue #8): served separately so it never shares the app's origin or cache.
     { name: 'trials', testMatch: 'trials/**/*.spec.ts', use: { baseURL: 'http://127.0.0.1:4174', serviceWorkers: 'allow' } },
   ],
@@ -19,6 +23,18 @@ export default defineConfig({
       url: 'http://127.0.0.1:4173',
       reuseExistingServer: false,
       timeout: 30000,
+    },
+    {
+      command: 'npx vite build --outDir dist-synthetic --emptyOutDir && npx vite preview --outDir dist-synthetic --host 127.0.0.1 --port 4175 --strictPort',
+      url: 'http://127.0.0.1:4175',
+      reuseExistingServer: false,
+      timeout: 120000,
+      env: {
+        VITE_SYNTHETIC_CHINESE: '1',
+        // Public synthetic endpoint, intercepted by Playwright; never a hosted project or credential.
+        VITE_SUPABASE_URL: 'http://127.0.0.1:4175',
+        VITE_SUPABASE_ANON_KEY: 'synthetic-test-only',
+      },
     },
     {
       command: 'npm run build:trials && npm run preview:trials -- --port 4174 --strictPort',

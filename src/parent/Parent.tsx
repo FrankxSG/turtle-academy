@@ -4,6 +4,7 @@ import type { Runtime } from '../ui/runtime.ts'
 import { names, subjects, type Language } from '../ui/development.ts'
 import { responseText } from '../ui/Practice.tsx'
 import { resetPin, validPin, verifyPin } from './device.ts'
+import { Mistakes } from './Mistakes.tsx'
 
 export function Parent({
   id,
@@ -242,6 +243,14 @@ export function Parent({
               </button>
             </article>
           </div>
+          {runtime.program && (
+            <Mistakes
+              program={runtime.program}
+              language={language}
+              work={work}
+              busy={busy}
+            />
+          )}
           <section className="summary">
             <h2>{tr('Practice summary', '练习记录')}</h2>
             {engine.state.completions
