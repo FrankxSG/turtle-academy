@@ -28,7 +28,7 @@ Every question is single-answer multiple choice with four options. Matching, ord
 | Empty in-scope leaves (stay in the denominator) | 3 |
 | Out-of-app leaves, not in the denominator | context_only 2, deferred 3, external 9 |
 | Character group coverage, reported separately | 38/477 (8%) of the grade's list characters have a complete repair pool |
-| Extra practice targets, never coverage | P1 review characters with a complete repair pool: 15 of 269; textbook extras: 13 of 13 |
+| Extra practice targets, never coverage | P1 review characters with a complete repair pool: 15 of 269; textbook extras: 13 of 14 |
 | Questions tagged to this course | 353 (0 only for this course) |
 | Whole materials | 11 (cloze 2, reading 6, visual_text 3); at X=10 a task uses ≥2: at most 5 complete tasks without material reuse, from the material quota alone; eligibility and rotation not simulated |
 | Interaction formats | mcq_4plus 353 |
@@ -62,7 +62,7 @@ Every question is single-answer multiple choice with four options. Matching, ord
 | Empty in-scope leaves (stay in the denominator) | 3 |
 | Out-of-app leaves, not in the denominator | context_only 2, deferred 3, external 10 |
 | Character group coverage, reported separately | 37/468 (8%) of the grade's list characters have a complete repair pool |
-| Extra practice targets, never coverage | P1 review characters with a complete repair pool: 16 of 278; textbook extras: 13 of 13 |
+| Extra practice targets, never coverage | P1 review characters with a complete repair pool: 16 of 278; textbook extras: 13 of 14 |
 | Questions tagged to this course | 353 (0 only for this course) |
 | Whole materials | 11 (cloze 2, reading 6, visual_text 3); at X=10 a task uses ≥2: at most 5 complete tasks without material reuse, from the material quota alone; eligibility and rotation not simulated |
 | Interaction formats | mcq_4plus 353 |
