@@ -443,3 +443,50 @@ test('a failed save while installing a pack leaves the previous pack and content
   const rejected = await s.program.installPack(bad).then(() => null, (e: Error) => e)
   assert.equal(rejected?.name, 'PackRejected')
 })
+
+test('a failure after the pack is saved is reported as an incomplete import: the new pack is active, retry and reload finish it', async () => {
+  const s = await setup()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  const next = syntheticPack({ pendingRef: s.pendingRef, extraCase: true })
+  next.pack_id = 'test-pack-zz'
+  const putCrosswalk = s.privateStore.putCrosswalk.bind(s.privateStore)
+  s.privateStore.putCrosswalk = async () => { throw new Error('synthetic_late_save_failure') }
+  const failure = await s.program.installPack(next).then(() => null, (e: Error) => e)
+  assert.equal(failure?.name, 'PackImportIncomplete', 'not a rollback, not a rejected file')
+  assert.match(String(s.program.importPending), /synthetic_late_save_failure/)
+  // What the parent is told matches what is true: the saved pack is the active one.
+  assert.equal(s.program.register!.cases.length, 7)
+  assert.ok(s.program.currentRelease()!.version.endsWith(':testpackzz'))
+  assert.equal((await s.privateStore.packs())[0].register.cases.length, 7)
+  assert.ok(!(await s.privateStore.crosswalk()).some((r) => r.case_id === 'O907'), 'the late write really failed')
+  // Reload before retrying: the next open finishes the import from the saved pack.
+  s.privateStore.putCrosswalk = putCrosswalk
+  const re = await reopen(s)
+  assert.equal(re.program.register!.cases.length, 7)
+  assert.equal(re.program.openError, null)
+  assert.ok((await s.privateStore.crosswalk()).some((r) => r.case_id === 'O907'))
+  // Retry in the original session is idempotent and clears the notice.
+  const retried = await s.program.retryImport()
+  assert.equal(retried.added_targets + retried.added_observations, 0)
+  assert.equal(s.program.importPending, null)
+  assert.equal((await s.program.retryImport()).added_observations, 0)
+})
+
+test('engine records that could not be saved keep the import incomplete until a retry saves them', async () => {
+  const s = await setup()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  const next = syntheticPack({ pendingRef: s.pendingRef, extraCase: true })
+  next.pack_id = 'test-pack-zz'
+  s.store.failAll = true // the engine queues the write and reports it unsaved instead of throwing
+  const failure = await s.program.installPack(next).then(() => null, (e: Error) => e)
+  assert.equal(failure?.name, 'PackImportIncomplete')
+  assert.match(String(s.program.importPending), /engine_records_not_saved/)
+  assert.equal(s.program.register!.cases.length, 7, 'the saved pack is active')
+  s.store.failAll = false
+  await s.program.retryImport()
+  assert.equal(s.program.importPending, null)
+  // The queued engine write is now durable: a fresh load sees the new case's observation.
+  const re = await reopen(s)
+  const zhu = re.engine.state.targets.find((t) => t.id === target(ZHU))!
+  assert.equal(zhu.observations.length, 2, 'O903 and O907 share the 住 target')
+})

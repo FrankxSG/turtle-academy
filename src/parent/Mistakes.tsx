@@ -51,8 +51,16 @@ export function Mistakes({
   async function install(file: File) {
     setMessage('')
     await work(async () => {
+      let raw: unknown
       try {
-        const r = await program.installPack(JSON.parse(await file.text()))
+        raw = JSON.parse(await file.text())
+      } catch {
+        // An unreadable file is the file's problem, not a save failure on this device.
+        setMessage(tr('This file could not be read as a mistake pack.', '无法把这个文件读成错题包。'))
+        return
+      }
+      try {
+        const r = await program.installPack(raw)
         const added = r.added_targets + r.added_observations > 0
         setMessage(
           tr(
@@ -64,14 +72,18 @@ export function Mistakes({
         )
       } catch (e) {
         const detail = e instanceof Error ? e.message : String(e)
-        // A rejected file and a failed save on this device need different actions from the parent.
+        // A rejected file, a save that failed before anything changed, and a saved pack whose records are not
+        // all saved yet need different actions from the parent. The last is shown by the notice below.
+        const name = e instanceof Error ? e.name : ''
         setMessage(
-          e instanceof Error && e.name === 'PackRejected'
+          name === 'PackRejected'
             ? tr('This file was not accepted: ', '文件未被接受：') + detail
-            : tr(
-                'The pack could not be saved on this device, so nothing new is in use. Please try again. Details: ',
-                '错题包未能保存在本设备上，新内容未启用。请再试一次。详情：',
-              ) + detail,
+            : name === 'PackImportIncomplete'
+              ? ''
+              : tr(
+                  'The pack could not be saved on this device, so nothing new is in use. Please try again. Details: ',
+                  '错题包未能保存在本设备上，新内容未启用。请再试一次。详情：',
+                ) + detail,
         )
       }
       refresh()
@@ -130,6 +142,33 @@ export function Mistakes({
           )}
           {program.openError}
         </p>
+      )}
+      {program.importPending && (
+        <div role="alert" data-testid="mistake-import-pending">
+          <p>
+            {tr(
+              'The new pack is saved and in use, but some of its practice records are not saved on this device yet. Finish saving before closing the app. Details: ',
+              '新错题包已保存并正在使用，但部分练习记录尚未保存在本设备上。关闭应用前请完成保存。详情：',
+            )}
+            {program.importPending}
+          </p>
+          <button
+            disabled={busy}
+            onClick={() =>
+              void work(async () => {
+                try {
+                  await program.retryImport()
+                  setMessage(tr('All records are saved.', '所有记录已保存。'))
+                } catch {
+                  setMessage('')
+                }
+                refresh()
+              })
+            }
+          >
+            {tr('Finish saving', '完成保存')}
+          </button>
+        </div>
       )}
       {message && (
         <p role="status" data-testid="mistake-message">

@@ -668,6 +668,11 @@ export class LearningEngine {
   // ---------------------------------------------------------------- persistence
 
   /** Write changed records and new events as one ordered mutation. */
+  /** Retry writes still queued after a storage failure now (the same as returning to the foreground). */
+  async retrySaves(): Promise<SaveStatus | null> {
+    return this.deps.writer ? this.deps.writer.onForeground() : null
+  }
+
   async flush(): Promise<SaveStatus | null> {
     const puts: Put[] = []
     for (const p of toRecords(this.state)) {

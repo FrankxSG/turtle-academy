@@ -79,6 +79,17 @@ export class PackRejected extends Error {
   }
 }
 
+/**
+ * The pack was saved and is the active pack, but finishing its import (engine targets, case links) could not be
+ * saved yet. Those steps are idempotent: `retryImport()` or the next open completes them.
+ */
+export class PackImportIncomplete extends Error {
+  constructor(cause: unknown) {
+    super(errorText(cause))
+    this.name = 'PackImportIncomplete'
+  }
+}
+
 export class MistakeProgram {
   readonly engine: LearningEngine
   private readonly registry: CatalogueRegistry
@@ -91,6 +102,8 @@ export class MistakeProgram {
   private pack: PrivatePack | null = null
   /** Why the stored pack could not be used when the app opened; practice continues without it. */
   openError: string | null = null
+  /** Set when the active pack is saved but its import records are not all saved yet (see PackImportIncomplete). */
+  importPending: string | null = null
   private rows: CrosswalkRow[] = []
   private events: ProductionEvent[] = []
 
@@ -206,18 +219,45 @@ export class MistakeProgram {
       await this.store.putRelease(toStored(b))
       await this.store.putPack(pack)
     } catch (error) {
-      // Nothing new may stay in use when the pack could not be saved: restore the content that was current.
+      // Before the commit point nothing new may stay in use: restore the content that was current.
       // (Re-installing an identical release only makes it current again.)
       if (previous) this.registry.install(previous)
       throw error
     }
+    // Commit point: the saved pack is now the active pack (it is also what the next open loads). The remaining
+    // steps only add engine targets and case links; they are idempotent, so a failure is reported as an
+    // incomplete import that retryImport() or the next open finishes, never as a rollback.
     this.pack = pack
     this.openError = null
-    return this.importRegister()
+    return this.completeImport()
+  }
+
+  /** Finish an import whose records could not all be saved (see PackImportIncomplete). Safe to repeat. */
+  async retryImport(): Promise<IntakeResult> {
+    if (!this.pack) throw new Error('no_private_pack')
+    return this.completeImport()
+  }
+
+  private async completeImport(): Promise<IntakeResult> {
+    try {
+      const { result, saved } = await this.runImport()
+      // The engine queues a failed write and reports it instead of throwing; the import is not complete
+      // until its targets are durable.
+      if (saved?.warning) throw new Error(`engine_records_not_saved:${saved.lastError ?? 'unknown'}`)
+      this.importPending = null
+      return result
+    } catch (error) {
+      this.importPending = errorText(error)
+      throw new PackImportIncomplete(error)
+    }
   }
 
   /** (Re)import the current register against the current content. Safe to repeat. */
   async importRegister(): Promise<IntakeResult> {
+    return (await this.runImport()).result
+  }
+
+  private async runImport() {
     if (!this.pack) throw new Error('no_private_pack')
     const b = this.currentBuild()
     if (!b) throw new Error('no_content')
@@ -225,10 +265,11 @@ export class MistakeProgram {
       state: this.engine.state, register: this.pack.register, release: b.release, targets: b.targets,
       today: this.engine.today(), now: this.now(),
     })
-    if (result.records.length > 0) await this.engine.upsertTargets(result.records)
+    // With nothing new to add, still push any engine writes queued by an earlier failure.
+    const saved = result.records.length > 0 ? await this.engine.upsertTargets(result.records) : await this.engine.retrySaves()
     this.rows = result.crosswalk
     await this.store.putCrosswalk(result.crosswalk)
-    return result
+    return { result, saved }
   }
 
   plans() {

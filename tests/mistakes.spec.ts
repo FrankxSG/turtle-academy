@@ -218,3 +218,35 @@ test('a failed save while installing a pack says so, keeps the earlier pack and 
   await page.getByTestId('mistake-pack').setInputFiles(file(larger))
   await expect(page.getByTestId('mistake-totals')).toContainText('Cases 7')
 })
+
+test('a save that fails after the pack is stored says the new pack is in use and offers to finish saving', async ({ page, context }) => {
+  await setup(page, context)
+  await parent(page)
+  const file = (p: unknown) => ({ name: 'synthetic-pack.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(p)) })
+  // An unreadable file is labelled as the file's problem, not a device save failure.
+  await page.getByTestId('mistake-pack').setInputFiles({ name: 'broken.json', mimeType: 'application/json', buffer: Buffer.from('{not json') })
+  await expect(page.getByTestId('mistake-message')).toContainText('could not be read as a mistake pack')
+  await page.getByTestId('mistake-pack').setInputFiles(file(pack))
+  await expect(page.getByTestId('mistake-totals')).toContainText('Cases 6')
+  // Fail only the case-link write, which happens after the pack itself is saved.
+  await page.evaluate(() => {
+    const original = IDBObjectStore.prototype.put
+    ;(globalThis as any).restoreLinkWrites = () => { IDBObjectStore.prototype.put = original }
+    IDBObjectStore.prototype.put = function (...args: any[]) {
+      if (this.transaction.db.name.startsWith('turtle-academy-private-') && this.name === 'kv')
+        throw new DOMException('Synthetic failure', 'QuotaExceededError')
+      return original.apply(this, args as any)
+    }
+  })
+  await page.getByTestId('mistake-pack').setInputFiles(file(syntheticPack({ pendingRef, extraCase: true })))
+  await expect(page.getByTestId('mistake-import-pending')).toContainText('saved and in use')
+  await expect(page.getByTestId('mistake-totals')).toContainText('Cases 7')
+  await expect(page.getByText('nothing new is in use')).toHaveCount(0)
+  await page.evaluate(() => (globalThis as any).restoreLinkWrites())
+  await page.getByTestId('mistake-import-pending').getByRole('button', { name: 'Finish saving' }).click()
+  await expect(page.getByTestId('mistake-import-pending')).toHaveCount(0)
+  await expect(page.getByTestId('mistake-message')).toContainText('All records are saved')
+  await page.reload()
+  await parent(page)
+  await expect(page.getByTestId('mistake-totals')).toContainText('Cases 7')
+})
