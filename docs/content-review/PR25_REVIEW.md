@@ -40,3 +40,7 @@ Corrected in this round:
 - **P3: one missing text broke the parent area.** Parent practice history shows a dash for a question whose text is no longer on the device, instead of failing the whole parent area. Practice itself still fails closed.
 
 Noted, not changed: `Mistakes.tsx` returns before its hooks when the build flag is off. That is safe because the flag is a build-time constant and the component is never rendered in that build.
+
+## Owner decision — 2026-10-18
+
+The review/repair cap `max(X − material questions, ceil(X/2))` is confirmed by the owner. It is no longer a proposal; the decision is recorded in `src/engine/policy.ts` and `docs/PILOT_FUNCTIONAL_DESIGN.md`.
