@@ -105,7 +105,11 @@ export class MistakeProgram {
     for (const rawPack of await opts.store.packs()) {
       try {
         const pack = validatePack(rawPack)
-        builds.push(p.buildFor(pack.course, pack))
+        const build = p.buildFor(pack.course, pack)
+        // Quarantine structural/content mismatches before activating or persisting the candidate release.
+        planIntake({ state: opts.engine.state, register: pack.register, release: build.release,
+          targets: build.targets, today: opts.engine.today(), now: opts.now() })
+        builds.push(build)
         p.pack = pack
       } catch (error) { p.openError = errorText(error) }
     }
@@ -118,10 +122,9 @@ export class MistakeProgram {
     for (const b of builds) { p.install(b); await opts.store.putRelease(toStored(b)) }
     p.rows = await opts.store.crosswalk()
     p.events = await opts.store.production()
-    if (p.pack) {
-      // Recompute missing/available pools after a content update. A failure changes nothing in the engine.
-      try { await p.importRegister() } catch (error) { p.openError = errorText(error) }
-    }
+    // Validation failures were handled before activation. Storage failures must propagate: swallowing one
+    // here could claim recovery after engine records have already changed.
+    if (p.pack) await p.importRegister()
     return p
   }
 

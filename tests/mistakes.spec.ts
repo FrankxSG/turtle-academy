@@ -158,3 +158,37 @@ test('accepted mistakes import, are practised first the next day, and report and
     out.report.cases.find((c: any) => c.case_id === 'O905').status,
   ).toBe('pending_content')
 })
+
+test('an unusable stored route is quarantined without exposing its report or losing the source', async ({ page, context }) => {
+  await setup(page, context)
+  await parent(page)
+  const file = { name: 'synthetic-pack.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(pack)) }
+  await page.getByTestId('mistake-pack').setInputFiles(file)
+  await expect(page.getByTestId('mistake-totals')).toContainText('Cases 6')
+  await page.evaluate(async () => {
+    const name = (await indexedDB.databases()).find((d) => d.name?.startsWith('turtle-academy-private-'))!.name!
+    const db = await new Promise<IDBDatabase>((resolve, reject) => {
+      const r = indexedDB.open(name); r.onsuccess = () => resolve(r.result); r.onerror = () => reject(r.error)
+    })
+    const tx = db.transaction('packs', 'readwrite')
+    const store = tx.objectStore('packs')
+    const request = store.getAll()
+    request.onsuccess = () => {
+      const stored = request.result[0]
+      stored.register.cases[0].route.progress_target_ref = 'zh.p2_higher_chinese.skill.no-longer-declared'
+      store.put(stored)
+    }
+    await new Promise<void>((resolve, reject) => { tx.oncomplete = () => resolve(); tx.onabort = () => reject(tx.error) })
+    db.close()
+  })
+  await page.reload()
+  await parent(page)
+  await expect(page.getByText(/intake_unknown_target/)).toBeVisible()
+  await expect(page.getByTestId('mistake-table')).toHaveCount(0)
+  await expect(page.getByTestId('mistake-export')).toHaveCount(0)
+  await expect(page.locator('[data-testid^="plan-"]')).toHaveCount(0)
+  await page.screenshot({ path: 'test-results/ui-review/private-pack-recovery.png', fullPage: true })
+  await page.getByTestId('mistake-pack').setInputFiles(file)
+  await expect(page.getByText(/intake_unknown_target/)).toHaveCount(0)
+  await expect(page.getByTestId('mistake-totals')).toContainText('Cases 6')
+})

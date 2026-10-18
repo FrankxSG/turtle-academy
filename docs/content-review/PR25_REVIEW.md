@@ -44,3 +44,16 @@ Noted, not changed: `Mistakes.tsx` returns before its hooks when the build flag 
 ## Owner decision — 2026-10-18
 
 The review/repair cap `max(X − material questions, ceil(X/2))` is confirmed by the owner. It is no longer a proposal; the decision is recorded in `src/engine/policy.ts` and `docs/PILOT_FUNCTIONAL_DESIGN.md`.
+
+
+## ChatGPT re-review of `eac4fcb` — 2026-10-18
+
+The owner-confirmed repair cap and the P1 source-audit follow-up are accepted as recorded decisions/evidence, not outstanding proposals. The audit script verifies pinned checksums and all recorded P1 fields against the extracted columns; the supplied PDFs are not present in this checkout, so this re-review does not claim a second extraction or visual spot-check. Claude's missing-history-text fallback is accepted; practice remains strict about pinned wording.
+
+One P1 remains in the new stored-pack recovery implementation: a structurally valid pack with an unknown route is installed and assigned to `p.pack` before the import fails. Catching that failure leaves its register, reports, production plans and export active even while the parent is told it was set aside. The earlier regression only checked that a task could be created.
+
+Correction: resolve the complete intake before activating or persisting a stored candidate. A rejected candidate retains its original stored file for recovery and reports a parent notice, while report/export/production plans are unavailable and new tasks use the public catalogue. Pinned historical builds remain available. Do not catch persistence failures as if they were harmless validation failures: a failed write can occur after engine records change and must propagate.
+
+Regression evidence: the strengthened existing test fails on the reviewed head at `register === null`; it now checks report/export/plans, the current release, preserved source and unchanged engine targets for both rejection causes. A second test covers write-failure propagation. A private synthetic browser test checks the parent notice, hidden report/export/plans and recovery by installing a valid file, and captures `private-pack-recovery.png`.
+
+No content, policy, dependency, backend, merge or deployment changes. These correction lines require Claude re-review. Current-head test/CI and screenshot results are recorded in the PR review comment.

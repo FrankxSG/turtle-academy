@@ -382,6 +382,10 @@ test('a stored pack that no longer fits the app is set aside on open; practice c
   ]) {
     const s = await setup()
     await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+    const paused = await s.engine.startOrResume('chinese')
+    if (paused.kind !== 'task') throw new Error('fixture task')
+    await s.engine.next(paused.task.id)
+    await s.engine.pause(paused.task.id)
     const targets = structuredClone(s.engine.state.targets)
     const stored = await s.privateStore.packs()
     spoil(stored[0])
@@ -389,8 +393,26 @@ test('a stored pack that no longer fits the app is set aside on open; practice c
     s.clock.sgt('2027-03-02')
     const re = await reopen(s)
     assert.ok(re.program.openError, 'the reason is kept for the parent area')
+    assert.equal(re.program.register, null, 'the rejected pack must not remain active')
+    assert.equal(re.program.report(), null, 'the rejected register must not produce a report')
+    assert.equal(re.program.exportFile(), null, 'the rejected register must not be exported')
+    assert.equal(re.program.plans().size, 0, 'the rejected pack must not accept parent evidence')
+    assert.ok(!re.program.currentRelease()!.version.includes('testpack'), 'fresh tasks use public content')
+    assert.deepEqual(await s.privateStore.packs(), stored, 'the rejected source is preserved for recovery')
     assert.deepEqual(re.engine.state.targets, targets, 'engine records are untouched')
     const t = await re.engine.startOrResume('chinese')
     assert.equal(t.kind, 'task', 'the child can still practise')
+    if (t.kind !== 'task') throw new Error('expected resumed task')
+    assert.equal(t.task.id, paused.task.id, 'the paused task is preserved')
+    assert.equal(t.task.content_version, paused.task.content_version, 'pinned content remains available')
+    assert.equal((await re.engine.next(t.task.id)).kind, 'question')
   }
+})
+
+
+test('a private-store write failure during open is not reported as a harmless rejected pack', async () => {
+  const s = await setup()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  s.privateStore.putCrosswalk = async () => { throw new Error('synthetic_storage_failure') }
+  await assert.rejects(() => reopen(s), /synthetic_storage_failure/)
 })
