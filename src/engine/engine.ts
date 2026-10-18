@@ -6,7 +6,7 @@ import { derive, type Derived } from './evidence.ts'
 import { compatibleItem, nothingEligible, planTask, resolveShortSlot, usableItem, usableVersion, type PlanContext } from './planner.ts'
 import type { Mutation, Put, RecordStore, SaveStatus, Table } from './persistence.ts'
 import { WriteQueue } from './persistence.ts'
-import { halfwayOf, IDLE_AFTER_SECONDS, isLanguage, isValidX, POLICY_VERSION, SUBJECTS } from './policy.ts'
+import { halfwayOf, IDLE_AFTER_SECONDS, isLanguage, isValidX, POLICY_VERSION, SUBJECTS, xMax } from './policy.ts'
 import { emptyState, fromRecords, toRecords } from './records.ts'
 import type {
   ActivityState, Assistance, Checkpoint, Completion, EngineState, Flag, PlanSlot, Presentation, Response, Role, Subject, Target, Task,
@@ -122,7 +122,7 @@ export class LearningEngine {
   // ---------------------------------------------------------------- parent settings (PIN gate is in the UI layer)
 
   async setX(subject: Subject, x: number): Promise<SaveStatus | null> {
-    if (!isValidX(x)) throw new RangeError('X must be an integer from 6 to 19')
+    if (!isValidX(x, subject)) throw new RangeError(`X must be an integer from 6 to ${xMax(subject)}`)
     const entry = this.state.settings.subjects.find((s) => s.subject === subject)
     if (!entry) throw new RangeError('unknown subject')
     entry.x = x

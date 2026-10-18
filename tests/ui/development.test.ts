@@ -3,6 +3,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { LearningEngine } from '../../src/engine/engine.ts'
+import { xMax } from '../../src/engine/policy.ts'
 import { exportSnapshot } from '../../src/engine/snapshot.ts'
 import type { Response } from '../../src/engine/types.ts'
 import {
@@ -56,8 +57,8 @@ async function finish(engine: LearningEngine, id: string, mistakes: boolean) {
 }
 
 test('every supported X and development subject remains presentable and snapshot-compatible, including banked errors and assisted corrections', async () => {
-  for (let x = 6; x <= 19; x++)
-    for (const subject of subjects) {
+  for (let x = 6; x <= 20; x++)
+    for (const subject of subjects.filter((s) => x <= xMax(s))) {
       const registry = developmentRegistry()
       const engine = LearningEngine.fresh('Asia/Singapore', { registry, now })
       await engine.setX(subject, x)

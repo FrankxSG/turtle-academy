@@ -5,6 +5,7 @@ import { names, subjects, type Language } from '../ui/development.ts'
 import { responseText } from '../ui/Practice.tsx'
 import { resetPin, validPin, verifyPin } from './device.ts'
 import { Mistakes } from './Mistakes.tsx'
+import { xMax } from '../engine/policy.ts'
 
 export function Parent({
   id,
@@ -187,8 +188,8 @@ export function Parent({
               <h2>{tr('Daily practice size', '每日练习量')}</h2>
               <p>
                 {tr(
-                  '6–19 main questions per subject. Changes apply to new tasks. Language tasks finish whole materials and can exceed this number.',
-                  '每科 6–19 题。更改从下一次新任务生效。语言任务完成整份材料，题数可能更多。',
+                  '6–19 main questions per subject (Chinese up to 20 in this pilot). Changes apply to new tasks. Language tasks finish whole materials and can exceed this number.',
+                  '每科 6–19 题（本次试用华文最多 20 题）。更改从下一次新任务生效。语言任务完成整份材料，题数可能更多。',
                 )}
               </p>
               {subjects.map((s) => (
@@ -202,7 +203,7 @@ export function Parent({
                       void work(() => engine.setX(s, Number(ev.target.value)))
                     }
                   >
-                    {Array.from({ length: 14 }, (_, i) => i + 6).map((x) => (
+                    {Array.from({ length: xMax(s) - 5 }, (_, i) => i + 6).map((x) => (
                       <option key={x}>{x}</option>
                     ))}
                   </select>

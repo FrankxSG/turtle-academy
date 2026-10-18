@@ -156,14 +156,14 @@
       "value": 5
     },
     {
-      "name": "daily size above 19",
+      "name": "daily size above 20",
       "path": [
         "tasks",
         0,
         "x"
       ],
       "op": "set",
-      "value": 20
+      "value": 21
     },
     {
       "name": "fractional integer",

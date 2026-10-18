@@ -5,7 +5,7 @@ Runs entirely on the device with no backend calls. Authority: Pilot Functional D
 | Module | Responsibility |
 | --- | --- |
 | `types.ts` | Record types mirroring the closed `pilot-snapshot/1` allow-list. Wrong forms and the PIN/hash have no field. |
-| `policy.ts` | Confirmed constants: X 6–19 (default 10), review intervals 1/3/7/14/30/30, two clearances per target per day, Science 7-day filler exclusion, 2-minute idle, course locks. |
+| `policy.ts` | Confirmed constants: X 6–19 (default 10; Chinese up to 20 in the first pilot), review intervals 1/3/7/14/30/30, two clearances per target per day, Science 7-day filler exclusion, 2-minute idle, course locks. |
 | `calendar.ts` | Learning dates in the profile timezone, with timezone-change guards. |
 | `evidence.ts` | Reducer: stages, due dates, eligibility and unlocks are re-derived from the append-only events on every change. |
 | `planner.ts` | Frozen task plans (X, content and policy versions, materials, formal total) and slot resolution when a question is shown. |
