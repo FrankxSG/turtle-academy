@@ -1,0 +1,6786 @@
+{
+  "schema_version": "chinese-review-characters/1",
+  "version": "zh-2024-p1-review.1",
+  "curriculum_manifest_version": "zh-2024-p2p3-draft.2",
+  "status": "proposed",
+  "basis": "Owner decision 2026-10-18: P2 learners may practise P1 characters they still get wrong. Records are the official MOE P1 recognition and writing lists (PDF pages 1-2 of the same checksum-pinned character lists), for each P2 course, minus characters already in that course's P2 list records. Review characters are practice targets only: they are not P2 outcomes and never count toward P2 coverage.",
+  "counts": [
+    {
+      "course": "p2_chinese",
+      "p1_union_unique": 364,
+      "already_in_grade_list": 95,
+      "review_records": 269,
+      "source_pdf_pages": [
+        1,
+        2
+      ]
+    },
+    {
+      "course": "p2_higher_chinese",
+      "p1_union_unique": 364,
+      "already_in_grade_list": 86,
+      "review_records": 278,
+      "source_pdf_pages": [
+        1,
+        2
+      ]
+    }
+  ],
+  "characters": [
+    {
+      "id": "zh.p2_chinese.review.u4e00",
+      "course": "p2_chinese",
+      "character": "一",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4e01",
+      "course": "p2_chinese",
+      "character": "丁",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4e03",
+      "course": "p2_chinese",
+      "character": "七",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4e09",
+      "course": "p2_chinese",
+      "character": "三",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4e0a",
+      "course": "p2_chinese",
+      "character": "上",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4e0b",
+      "course": "p2_chinese",
+      "character": "下",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4e0d",
+      "course": "p2_chinese",
+      "character": "不",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4e1c",
+      "course": "p2_chinese",
+      "character": "东",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4e24",
+      "course": "p2_chinese",
+      "character": "两",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4e2a",
+      "course": "p2_chinese",
+      "character": "个",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4e2d",
+      "course": "p2_chinese",
+      "character": "中",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4e32",
+      "course": "p2_chinese",
+      "character": "串",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4e3a",
+      "course": "p2_chinese",
+      "character": "为",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4e48",
+      "course": "p2_chinese",
+      "character": "么",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4e50",
+      "course": "p2_chinese",
+      "character": "乐",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4e5d",
+      "course": "p2_chinese",
+      "character": "九",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4e5f",
+      "course": "p2_chinese",
+      "character": "也",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4e60",
+      "course": "p2_chinese",
+      "character": "习",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4e66",
+      "course": "p2_chinese",
+      "character": "书",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4e70",
+      "course": "p2_chinese",
+      "character": "买",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4e86",
+      "course": "p2_chinese",
+      "character": "了",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4e8c",
+      "course": "p2_chinese",
+      "character": "二",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4e94",
+      "course": "p2_chinese",
+      "character": "五",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4e95",
+      "course": "p2_chinese",
+      "character": "井",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4eba",
+      "course": "p2_chinese",
+      "character": "人",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4ec0",
+      "course": "p2_chinese",
+      "character": "什",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4eca",
+      "course": "p2_chinese",
+      "character": "今",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4ed6",
+      "course": "p2_chinese",
+      "character": "他",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4ee5",
+      "course": "p2_chinese",
+      "character": "以",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4eec",
+      "course": "p2_chinese",
+      "character": "们",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4ef6",
+      "course": "p2_chinese",
+      "character": "件",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4f19",
+      "course": "p2_chinese",
+      "character": "伙",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4f1a",
+      "course": "p2_chinese",
+      "character": "会",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4f34",
+      "course": "p2_chinese",
+      "character": "伴",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u4f60",
+      "course": "p2_chinese",
+      "character": "你",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u505a",
+      "course": "p2_chinese",
+      "character": "做",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u513f",
+      "course": "p2_chinese",
+      "character": "儿",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5143",
+      "course": "p2_chinese",
+      "character": "元",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5148",
+      "course": "p2_chinese",
+      "character": "先",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u516b",
+      "course": "p2_chinese",
+      "character": "八",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u516c",
+      "course": "p2_chinese",
+      "character": "公",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u516d",
+      "course": "p2_chinese",
+      "character": "六",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5173",
+      "course": "p2_chinese",
+      "character": "关",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5174",
+      "course": "p2_chinese",
+      "character": "兴",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u518d",
+      "course": "p2_chinese",
+      "character": "再",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u51e0",
+      "course": "p2_chinese",
+      "character": "几",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5200",
+      "course": "p2_chinese",
+      "character": "刀",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5207",
+      "course": "p2_chinese",
+      "character": "切",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5230",
+      "course": "p2_chinese",
+      "character": "到",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5237",
+      "course": "p2_chinese",
+      "character": "刷",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u529b",
+      "course": "p2_chinese",
+      "character": "力",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u529e",
+      "course": "p2_chinese",
+      "character": "办",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5305",
+      "course": "p2_chinese",
+      "character": "包",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5341",
+      "course": "p2_chinese",
+      "character": "十",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5348",
+      "course": "p2_chinese",
+      "character": "午",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u534a",
+      "course": "p2_chinese",
+      "character": "半",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u534e",
+      "course": "p2_chinese",
+      "character": "华",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5382",
+      "course": "p2_chinese",
+      "character": "厂",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u53bb",
+      "course": "p2_chinese",
+      "character": "去",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u53c8",
+      "course": "p2_chinese",
+      "character": "又",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u53cc",
+      "course": "p2_chinese",
+      "character": "双",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u53cd",
+      "course": "p2_chinese",
+      "character": "反",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u53d4",
+      "course": "p2_chinese",
+      "character": "叔",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u53d8",
+      "course": "p2_chinese",
+      "character": "变",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u53e3",
+      "course": "p2_chinese",
+      "character": "口",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u53e4",
+      "course": "p2_chinese",
+      "character": "古",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u53e5",
+      "course": "p2_chinese",
+      "character": "句",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u53ea",
+      "course": "p2_chinese",
+      "character": "只",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u53eb",
+      "course": "p2_chinese",
+      "character": "叫",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u53ef",
+      "course": "p2_chinese",
+      "character": "可",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u53f0",
+      "course": "p2_chinese",
+      "character": "台",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u53f3",
+      "course": "p2_chinese",
+      "character": "右",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5403",
+      "course": "p2_chinese",
+      "character": "吃",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u540c",
+      "course": "p2_chinese",
+      "character": "同",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u540e",
+      "course": "p2_chinese",
+      "character": "后",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5468",
+      "course": "p2_chinese",
+      "character": "周",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u548c",
+      "course": "p2_chinese",
+      "character": "和",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u54e5",
+      "course": "p2_chinese",
+      "character": "哥",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5531",
+      "course": "p2_chinese",
+      "character": "唱",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5546",
+      "course": "p2_chinese",
+      "character": "商",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u554a",
+      "course": "p2_chinese",
+      "character": "啊",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u559d",
+      "course": "p2_chinese",
+      "character": "喝",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u56db",
+      "course": "p2_chinese",
+      "character": "四",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u56de",
+      "course": "p2_chinese",
+      "character": "回",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u56e0",
+      "course": "p2_chinese",
+      "character": "因",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u56ed",
+      "course": "p2_chinese",
+      "character": "园",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u56fd",
+      "course": "p2_chinese",
+      "character": "国",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u56fe",
+      "course": "p2_chinese",
+      "character": "图",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5706",
+      "course": "p2_chinese",
+      "character": "圆",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u571f",
+      "course": "p2_chinese",
+      "character": "土",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5728",
+      "course": "p2_chinese",
+      "character": "在",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u573a",
+      "course": "p2_chinese",
+      "character": "场",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u58eb",
+      "course": "p2_chinese",
+      "character": "士",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u591a",
+      "course": "p2_chinese",
+      "character": "多",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5927",
+      "course": "p2_chinese",
+      "character": "大",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5929",
+      "course": "p2_chinese",
+      "character": "天",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5934",
+      "course": "p2_chinese",
+      "character": "头",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5973",
+      "course": "p2_chinese",
+      "character": "女",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5979",
+      "course": "p2_chinese",
+      "character": "她",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u597d",
+      "course": "p2_chinese",
+      "character": "好",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5988",
+      "course": "p2_chinese",
+      "character": "妈",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u59b9",
+      "course": "p2_chinese",
+      "character": "妹",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u59d0",
+      "course": "p2_chinese",
+      "character": "姐",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5b50",
+      "course": "p2_chinese",
+      "character": "子",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5b57",
+      "course": "p2_chinese",
+      "character": "字",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5b66",
+      "course": "p2_chinese",
+      "character": "学",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5b69",
+      "course": "p2_chinese",
+      "character": "孩",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5b83",
+      "course": "p2_chinese",
+      "character": "它",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5bf8",
+      "course": "p2_chinese",
+      "character": "寸",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5c0f",
+      "course": "p2_chinese",
+      "character": "小",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5c11",
+      "course": "p2_chinese",
+      "character": "少",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5c16",
+      "course": "p2_chinese",
+      "character": "尖",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5c3a",
+      "course": "p2_chinese",
+      "character": "尺",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5c3e",
+      "course": "p2_chinese",
+      "character": "尾",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5c4b",
+      "course": "p2_chinese",
+      "character": "屋",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5c71",
+      "course": "p2_chinese",
+      "character": "山",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5de5",
+      "course": "p2_chinese",
+      "character": "工",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5de6",
+      "course": "p2_chinese",
+      "character": "左",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5df1",
+      "course": "p2_chinese",
+      "character": "己",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5df4",
+      "course": "p2_chinese",
+      "character": "巴",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5dfe",
+      "course": "p2_chinese",
+      "character": "巾",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5e08",
+      "course": "p2_chinese",
+      "character": "师",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5e72",
+      "course": "p2_chinese",
+      "character": "干",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5e7f",
+      "course": "p2_chinese",
+      "character": "广",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5e86",
+      "course": "p2_chinese",
+      "character": "庆",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5e8a",
+      "course": "p2_chinese",
+      "character": "床",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5e97",
+      "course": "p2_chinese",
+      "character": "店",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5f00",
+      "course": "p2_chinese",
+      "character": "开",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5f13",
+      "course": "p2_chinese",
+      "character": "弓",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5f1f",
+      "course": "p2_chinese",
+      "character": "弟",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5f2f",
+      "course": "p2_chinese",
+      "character": "弯",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5fc3",
+      "course": "p2_chinese",
+      "character": "心",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u5feb",
+      "course": "p2_chinese",
+      "character": "快",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u600e",
+      "course": "p2_chinese",
+      "character": "怎",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u620f",
+      "course": "p2_chinese",
+      "character": "戏",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6211",
+      "course": "p2_chinese",
+      "character": "我",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6237",
+      "course": "p2_chinese",
+      "character": "户",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u624b",
+      "course": "p2_chinese",
+      "character": "手",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6253",
+      "course": "p2_chinese",
+      "character": "打",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u626b",
+      "course": "p2_chinese",
+      "character": "扫",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6276",
+      "course": "p2_chinese",
+      "character": "扶",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u62b1",
+      "course": "p2_chinese",
+      "character": "抱",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u62b9",
+      "course": "p2_chinese",
+      "character": "抹",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u62cd",
+      "course": "p2_chinese",
+      "character": "拍",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u62fe",
+      "course": "p2_chinese",
+      "character": "拾",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u652f",
+      "course": "p2_chinese",
+      "character": "支",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6536",
+      "course": "p2_chinese",
+      "character": "收",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6587",
+      "course": "p2_chinese",
+      "character": "文",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u65a4",
+      "course": "p2_chinese",
+      "character": "斤",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u65e5",
+      "course": "p2_chinese",
+      "character": "日",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u65e7",
+      "course": "p2_chinese",
+      "character": "旧",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u65e9",
+      "course": "p2_chinese",
+      "character": "早",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u660e",
+      "course": "p2_chinese",
+      "character": "明",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6628",
+      "course": "p2_chinese",
+      "character": "昨",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u662f",
+      "course": "p2_chinese",
+      "character": "是",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u665a",
+      "course": "p2_chinese",
+      "character": "晚",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6700",
+      "course": "p2_chinese",
+      "character": "最",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6708",
+      "course": "p2_chinese",
+      "character": "月",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6709",
+      "course": "p2_chinese",
+      "character": "有",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u670d",
+      "course": "p2_chinese",
+      "character": "服",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6728",
+      "course": "p2_chinese",
+      "character": "木",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u672b",
+      "course": "p2_chinese",
+      "character": "末",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u672c",
+      "course": "p2_chinese",
+      "character": "本",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6761",
+      "course": "p2_chinese",
+      "character": "条",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6765",
+      "course": "p2_chinese",
+      "character": "来",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u679c",
+      "course": "p2_chinese",
+      "character": "果",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u684c",
+      "course": "p2_chinese",
+      "character": "桌",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u68af",
+      "course": "p2_chinese",
+      "character": "梯",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6905",
+      "course": "p2_chinese",
+      "character": "椅",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6b4c",
+      "course": "p2_chinese",
+      "character": "歌",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6b63",
+      "course": "p2_chinese",
+      "character": "正",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6bcd",
+      "course": "p2_chinese",
+      "character": "母",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6bcf",
+      "course": "p2_chinese",
+      "character": "每",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6bdb",
+      "course": "p2_chinese",
+      "character": "毛",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6c14",
+      "course": "p2_chinese",
+      "character": "气",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6c34",
+      "course": "p2_chinese",
+      "character": "水",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6c41",
+      "course": "p2_chinese",
+      "character": "汁",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6c64",
+      "course": "p2_chinese",
+      "character": "汤",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6ca1",
+      "course": "p2_chinese",
+      "character": "没",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6cb3",
+      "course": "p2_chinese",
+      "character": "河",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6cd5",
+      "course": "p2_chinese",
+      "character": "法",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u6ce1",
+      "course": "p2_chinese",
+      "character": "泡",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u706b",
+      "course": "p2_chinese",
+      "character": "火",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u70b9",
+      "course": "p2_chinese",
+      "character": "点",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u722a",
+      "course": "p2_chinese",
+      "character": "爪",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u7236",
+      "course": "p2_chinese",
+      "character": "父",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u7238",
+      "course": "p2_chinese",
+      "character": "爸",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u7259",
+      "course": "p2_chinese",
+      "character": "牙",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u725b",
+      "course": "p2_chinese",
+      "character": "牛",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u72ee",
+      "course": "p2_chinese",
+      "character": "狮",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u738b",
+      "course": "p2_chinese",
+      "character": "王",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u73a9",
+      "course": "p2_chinese",
+      "character": "玩",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u7518",
+      "course": "p2_chinese",
+      "character": "甘",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u751f",
+      "course": "p2_chinese",
+      "character": "生",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u7528",
+      "course": "p2_chinese",
+      "character": "用",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u7530",
+      "course": "p2_chinese",
+      "character": "田",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u7532",
+      "course": "p2_chinese",
+      "character": "甲",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u7537",
+      "course": "p2_chinese",
+      "character": "男",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u753b",
+      "course": "p2_chinese",
+      "character": "画",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u767d",
+      "course": "p2_chinese",
+      "character": "白",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u7684",
+      "course": "p2_chinese",
+      "character": "的",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u76ae",
+      "course": "p2_chinese",
+      "character": "皮",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u76ee",
+      "course": "p2_chinese",
+      "character": "目",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u76f4",
+      "course": "p2_chinese",
+      "character": "直",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u770b",
+      "course": "p2_chinese",
+      "character": "看",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u773c",
+      "course": "p2_chinese",
+      "character": "眼",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u775b",
+      "course": "p2_chinese",
+      "character": "睛",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u77ed",
+      "course": "p2_chinese",
+      "character": "短",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u795d",
+      "course": "p2_chinese",
+      "character": "祝",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u79be",
+      "course": "p2_chinese",
+      "character": "禾",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u7a7f",
+      "course": "p2_chinese",
+      "character": "穿",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u7acb",
+      "course": "p2_chinese",
+      "character": "立",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u7ad9",
+      "course": "p2_chinese",
+      "character": "站",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u7ae5",
+      "course": "p2_chinese",
+      "character": "童",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u7af9",
+      "course": "p2_chinese",
+      "character": "竹",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u7c73",
+      "course": "p2_chinese",
+      "character": "米",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u7c92",
+      "course": "p2_chinese",
+      "character": "粒",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u7ec4",
+      "course": "p2_chinese",
+      "character": "组",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u7ed9",
+      "course": "p2_chinese",
+      "character": "给",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u7f51",
+      "course": "p2_chinese",
+      "character": "网",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u7f8a",
+      "course": "p2_chinese",
+      "character": "羊",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u8001",
+      "course": "p2_chinese",
+      "character": "老",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u8089",
+      "course": "p2_chinese",
+      "character": "肉",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u81ea",
+      "course": "p2_chinese",
+      "character": "自",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u81ed",
+      "course": "p2_chinese",
+      "character": "臭",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u8282",
+      "course": "p2_chinese",
+      "character": "节",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u82d7",
+      "course": "p2_chinese",
+      "character": "苗",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u82e6",
+      "course": "p2_chinese",
+      "character": "苦",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u864e",
+      "course": "p2_chinese",
+      "character": "虎",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u866b",
+      "course": "p2_chinese",
+      "character": "虫",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u86cb",
+      "course": "p2_chinese",
+      "character": "蛋",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u8863",
+      "course": "p2_chinese",
+      "character": "衣",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u889c",
+      "course": "p2_chinese",
+      "character": "袜",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u88ab",
+      "course": "p2_chinese",
+      "character": "被",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u897f",
+      "course": "p2_chinese",
+      "character": "西",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u8981",
+      "course": "p2_chinese",
+      "character": "要",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u89c1",
+      "course": "p2_chinese",
+      "character": "见",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u8ba4",
+      "course": "p2_chinese",
+      "character": "认",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u8bb2",
+      "course": "p2_chinese",
+      "character": "讲",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u8bed",
+      "course": "p2_chinese",
+      "character": "语",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u8bfe",
+      "course": "p2_chinese",
+      "character": "课",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u8c01",
+      "course": "p2_chinese",
+      "character": "谁",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u8c22",
+      "course": "p2_chinese",
+      "character": "谢",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u8c46",
+      "course": "p2_chinese",
+      "character": "豆",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u8d1d",
+      "course": "p2_chinese",
+      "character": "贝",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u8d77",
+      "course": "p2_chinese",
+      "character": "起",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u8eb2",
+      "course": "p2_chinese",
+      "character": "躲",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u8f66",
+      "course": "p2_chinese",
+      "character": "车",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u8fd8",
+      "course": "p2_chinese",
+      "character": "还",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u8fd9",
+      "course": "p2_chinese",
+      "character": "这",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u9009",
+      "course": "p2_chinese",
+      "character": "选",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u90fd",
+      "course": "p2_chinese",
+      "character": "都",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u91c7",
+      "course": "p2_chinese",
+      "character": "采",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u91cc",
+      "course": "p2_chinese",
+      "character": "里",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u91cd",
+      "course": "p2_chinese",
+      "character": "重",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u957f",
+      "course": "p2_chinese",
+      "character": "长",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u95e8",
+      "course": "p2_chinese",
+      "character": "门",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u95f4",
+      "course": "p2_chinese",
+      "character": "间",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u963f",
+      "course": "p2_chinese",
+      "character": "阿",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u96e8",
+      "course": "p2_chinese",
+      "character": "雨",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u96f7",
+      "course": "p2_chinese",
+      "character": "雷",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u9762",
+      "course": "p2_chinese",
+      "character": "面",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u978b",
+      "course": "p2_chinese",
+      "character": "鞋",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u9971",
+      "course": "p2_chinese",
+      "character": "饱",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u997c",
+      "course": "p2_chinese",
+      "character": "饼",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u997f",
+      "course": "p2_chinese",
+      "character": "饿",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u9a6c",
+      "course": "p2_chinese",
+      "character": "马",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u9ad8",
+      "course": "p2_chinese",
+      "character": "高",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_chinese.review.u9e2d",
+      "course": "p2_chinese",
+      "character": "鸭",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-cl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4e00",
+      "course": "p2_higher_chinese",
+      "character": "一",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4e01",
+      "course": "p2_higher_chinese",
+      "character": "丁",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4e03",
+      "course": "p2_higher_chinese",
+      "character": "七",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4e09",
+      "course": "p2_higher_chinese",
+      "character": "三",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4e0a",
+      "course": "p2_higher_chinese",
+      "character": "上",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4e0b",
+      "course": "p2_higher_chinese",
+      "character": "下",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4e0d",
+      "course": "p2_higher_chinese",
+      "character": "不",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4e1c",
+      "course": "p2_higher_chinese",
+      "character": "东",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4e24",
+      "course": "p2_higher_chinese",
+      "character": "两",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4e2a",
+      "course": "p2_higher_chinese",
+      "character": "个",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4e2d",
+      "course": "p2_higher_chinese",
+      "character": "中",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4e32",
+      "course": "p2_higher_chinese",
+      "character": "串",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4e3a",
+      "course": "p2_higher_chinese",
+      "character": "为",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4e48",
+      "course": "p2_higher_chinese",
+      "character": "么",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4e50",
+      "course": "p2_higher_chinese",
+      "character": "乐",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4e5d",
+      "course": "p2_higher_chinese",
+      "character": "九",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4e5f",
+      "course": "p2_higher_chinese",
+      "character": "也",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4e60",
+      "course": "p2_higher_chinese",
+      "character": "习",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4e66",
+      "course": "p2_higher_chinese",
+      "character": "书",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4e70",
+      "course": "p2_higher_chinese",
+      "character": "买",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4e86",
+      "course": "p2_higher_chinese",
+      "character": "了",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4e8c",
+      "course": "p2_higher_chinese",
+      "character": "二",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4e91",
+      "course": "p2_higher_chinese",
+      "character": "云",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4e94",
+      "course": "p2_higher_chinese",
+      "character": "五",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4e95",
+      "course": "p2_higher_chinese",
+      "character": "井",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4eba",
+      "course": "p2_higher_chinese",
+      "character": "人",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4ec0",
+      "course": "p2_higher_chinese",
+      "character": "什",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4eca",
+      "course": "p2_higher_chinese",
+      "character": "今",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4ed6",
+      "course": "p2_higher_chinese",
+      "character": "他",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4ee5",
+      "course": "p2_higher_chinese",
+      "character": "以",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4eec",
+      "course": "p2_higher_chinese",
+      "character": "们",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4ef6",
+      "course": "p2_higher_chinese",
+      "character": "件",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4f19",
+      "course": "p2_higher_chinese",
+      "character": "伙",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4f1a",
+      "course": "p2_higher_chinese",
+      "character": "会",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4f34",
+      "course": "p2_higher_chinese",
+      "character": "伴",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u4f60",
+      "course": "p2_higher_chinese",
+      "character": "你",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u505a",
+      "course": "p2_higher_chinese",
+      "character": "做",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u513f",
+      "course": "p2_higher_chinese",
+      "character": "儿",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5143",
+      "course": "p2_higher_chinese",
+      "character": "元",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5144",
+      "course": "p2_higher_chinese",
+      "character": "兄",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5148",
+      "course": "p2_higher_chinese",
+      "character": "先",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u516b",
+      "course": "p2_higher_chinese",
+      "character": "八",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u516c",
+      "course": "p2_higher_chinese",
+      "character": "公",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u516d",
+      "course": "p2_higher_chinese",
+      "character": "六",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5173",
+      "course": "p2_higher_chinese",
+      "character": "关",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5174",
+      "course": "p2_higher_chinese",
+      "character": "兴",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u518d",
+      "course": "p2_higher_chinese",
+      "character": "再",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u51b2",
+      "course": "p2_higher_chinese",
+      "character": "冲",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u51c9",
+      "course": "p2_higher_chinese",
+      "character": "凉",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u51e0",
+      "course": "p2_higher_chinese",
+      "character": "几",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5200",
+      "course": "p2_higher_chinese",
+      "character": "刀",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5207",
+      "course": "p2_higher_chinese",
+      "character": "切",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5230",
+      "course": "p2_higher_chinese",
+      "character": "到",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5237",
+      "course": "p2_higher_chinese",
+      "character": "刷",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u529b",
+      "course": "p2_higher_chinese",
+      "character": "力",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u529e",
+      "course": "p2_higher_chinese",
+      "character": "办",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u52a8",
+      "course": "p2_higher_chinese",
+      "character": "动",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5305",
+      "course": "p2_higher_chinese",
+      "character": "包",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5341",
+      "course": "p2_higher_chinese",
+      "character": "十",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5348",
+      "course": "p2_higher_chinese",
+      "character": "午",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u534a",
+      "course": "p2_higher_chinese",
+      "character": "半",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u534e",
+      "course": "p2_higher_chinese",
+      "character": "华",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5382",
+      "course": "p2_higher_chinese",
+      "character": "厂",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u53bb",
+      "course": "p2_higher_chinese",
+      "character": "去",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u53c8",
+      "course": "p2_higher_chinese",
+      "character": "又",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u53cb",
+      "course": "p2_higher_chinese",
+      "character": "友",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u53cc",
+      "course": "p2_higher_chinese",
+      "character": "双",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u53cd",
+      "course": "p2_higher_chinese",
+      "character": "反",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u53d4",
+      "course": "p2_higher_chinese",
+      "character": "叔",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u53d8",
+      "course": "p2_higher_chinese",
+      "character": "变",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u53e3",
+      "course": "p2_higher_chinese",
+      "character": "口",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u53e4",
+      "course": "p2_higher_chinese",
+      "character": "古",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u53e5",
+      "course": "p2_higher_chinese",
+      "character": "句",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u53ea",
+      "course": "p2_higher_chinese",
+      "character": "只",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u53eb",
+      "course": "p2_higher_chinese",
+      "character": "叫",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u53ef",
+      "course": "p2_higher_chinese",
+      "character": "可",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u53f0",
+      "course": "p2_higher_chinese",
+      "character": "台",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u53f3",
+      "course": "p2_higher_chinese",
+      "character": "右",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5403",
+      "course": "p2_higher_chinese",
+      "character": "吃",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u540c",
+      "course": "p2_higher_chinese",
+      "character": "同",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u540e",
+      "course": "p2_higher_chinese",
+      "character": "后",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5468",
+      "course": "p2_higher_chinese",
+      "character": "周",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u548c",
+      "course": "p2_higher_chinese",
+      "character": "和",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u54e5",
+      "course": "p2_higher_chinese",
+      "character": "哥",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5531",
+      "course": "p2_higher_chinese",
+      "character": "唱",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5546",
+      "course": "p2_higher_chinese",
+      "character": "商",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u554a",
+      "course": "p2_higher_chinese",
+      "character": "啊",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u56db",
+      "course": "p2_higher_chinese",
+      "character": "四",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u56de",
+      "course": "p2_higher_chinese",
+      "character": "回",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u56e0",
+      "course": "p2_higher_chinese",
+      "character": "因",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u56ed",
+      "course": "p2_higher_chinese",
+      "character": "园",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5706",
+      "course": "p2_higher_chinese",
+      "character": "圆",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u571f",
+      "course": "p2_higher_chinese",
+      "character": "土",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5728",
+      "course": "p2_higher_chinese",
+      "character": "在",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5730",
+      "course": "p2_higher_chinese",
+      "character": "地",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u573a",
+      "course": "p2_higher_chinese",
+      "character": "场",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5750",
+      "course": "p2_higher_chinese",
+      "character": "坐",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u58eb",
+      "course": "p2_higher_chinese",
+      "character": "士",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u591a",
+      "course": "p2_higher_chinese",
+      "character": "多",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5927",
+      "course": "p2_higher_chinese",
+      "character": "大",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5929",
+      "course": "p2_higher_chinese",
+      "character": "天",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5934",
+      "course": "p2_higher_chinese",
+      "character": "头",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5973",
+      "course": "p2_higher_chinese",
+      "character": "女",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5979",
+      "course": "p2_higher_chinese",
+      "character": "她",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u597d",
+      "course": "p2_higher_chinese",
+      "character": "好",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5988",
+      "course": "p2_higher_chinese",
+      "character": "妈",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u59b9",
+      "course": "p2_higher_chinese",
+      "character": "妹",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u59d0",
+      "course": "p2_higher_chinese",
+      "character": "姐",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5b50",
+      "course": "p2_higher_chinese",
+      "character": "子",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5b57",
+      "course": "p2_higher_chinese",
+      "character": "字",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5b66",
+      "course": "p2_higher_chinese",
+      "character": "学",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5b83",
+      "course": "p2_higher_chinese",
+      "character": "它",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5bf8",
+      "course": "p2_higher_chinese",
+      "character": "寸",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5c0f",
+      "course": "p2_higher_chinese",
+      "character": "小",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5c11",
+      "course": "p2_higher_chinese",
+      "character": "少",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5c16",
+      "course": "p2_higher_chinese",
+      "character": "尖",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5c3a",
+      "course": "p2_higher_chinese",
+      "character": "尺",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5c3e",
+      "course": "p2_higher_chinese",
+      "character": "尾",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5c4b",
+      "course": "p2_higher_chinese",
+      "character": "屋",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5c71",
+      "course": "p2_higher_chinese",
+      "character": "山",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5de5",
+      "course": "p2_higher_chinese",
+      "character": "工",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5de6",
+      "course": "p2_higher_chinese",
+      "character": "左",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5df1",
+      "course": "p2_higher_chinese",
+      "character": "己",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5df4",
+      "course": "p2_higher_chinese",
+      "character": "巴",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5dfe",
+      "course": "p2_higher_chinese",
+      "character": "巾",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5e08",
+      "course": "p2_higher_chinese",
+      "character": "师",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5e38",
+      "course": "p2_higher_chinese",
+      "character": "常",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5e72",
+      "course": "p2_higher_chinese",
+      "character": "干",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5e7f",
+      "course": "p2_higher_chinese",
+      "character": "广",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5e86",
+      "course": "p2_higher_chinese",
+      "character": "庆",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5e8a",
+      "course": "p2_higher_chinese",
+      "character": "床",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5e97",
+      "course": "p2_higher_chinese",
+      "character": "店",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5f00",
+      "course": "p2_higher_chinese",
+      "character": "开",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5f13",
+      "course": "p2_higher_chinese",
+      "character": "弓",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5f1f",
+      "course": "p2_higher_chinese",
+      "character": "弟",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5f2f",
+      "course": "p2_higher_chinese",
+      "character": "弯",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5fc3",
+      "course": "p2_higher_chinese",
+      "character": "心",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u5feb",
+      "course": "p2_higher_chinese",
+      "character": "快",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u600e",
+      "course": "p2_higher_chinese",
+      "character": "怎",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u620f",
+      "course": "p2_higher_chinese",
+      "character": "戏",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u6211",
+      "course": "p2_higher_chinese",
+      "character": "我",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u6237",
+      "course": "p2_higher_chinese",
+      "character": "户",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u624b",
+      "course": "p2_higher_chinese",
+      "character": "手",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u6253",
+      "course": "p2_higher_chinese",
+      "character": "打",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u626b",
+      "course": "p2_higher_chinese",
+      "character": "扫",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u6276",
+      "course": "p2_higher_chinese",
+      "character": "扶",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u62b1",
+      "course": "p2_higher_chinese",
+      "character": "抱",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u62b9",
+      "course": "p2_higher_chinese",
+      "character": "抹",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u62cd",
+      "course": "p2_higher_chinese",
+      "character": "拍",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u62ff",
+      "course": "p2_higher_chinese",
+      "character": "拿",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u652f",
+      "course": "p2_higher_chinese",
+      "character": "支",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u6587",
+      "course": "p2_higher_chinese",
+      "character": "文",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u65a4",
+      "course": "p2_higher_chinese",
+      "character": "斤",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u65b9",
+      "course": "p2_higher_chinese",
+      "character": "方",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u65e5",
+      "course": "p2_higher_chinese",
+      "character": "日",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u65e7",
+      "course": "p2_higher_chinese",
+      "character": "旧",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u65e9",
+      "course": "p2_higher_chinese",
+      "character": "早",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u660e",
+      "course": "p2_higher_chinese",
+      "character": "明",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u6628",
+      "course": "p2_higher_chinese",
+      "character": "昨",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u662f",
+      "course": "p2_higher_chinese",
+      "character": "是",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u6708",
+      "course": "p2_higher_chinese",
+      "character": "月",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u6709",
+      "course": "p2_higher_chinese",
+      "character": "有",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u670b",
+      "course": "p2_higher_chinese",
+      "character": "朋",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u670d",
+      "course": "p2_higher_chinese",
+      "character": "服",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u6728",
+      "course": "p2_higher_chinese",
+      "character": "木",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u672b",
+      "course": "p2_higher_chinese",
+      "character": "末",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u672c",
+      "course": "p2_higher_chinese",
+      "character": "本",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u6761",
+      "course": "p2_higher_chinese",
+      "character": "条",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u6765",
+      "course": "p2_higher_chinese",
+      "character": "来",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u679c",
+      "course": "p2_higher_chinese",
+      "character": "果",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u6821",
+      "course": "p2_higher_chinese",
+      "character": "校",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u68af",
+      "course": "p2_higher_chinese",
+      "character": "梯",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u6b4c",
+      "course": "p2_higher_chinese",
+      "character": "歌",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u6b63",
+      "course": "p2_higher_chinese",
+      "character": "正",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u6b65",
+      "course": "p2_higher_chinese",
+      "character": "步",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u6bcd",
+      "course": "p2_higher_chinese",
+      "character": "母",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u6bcf",
+      "course": "p2_higher_chinese",
+      "character": "每",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u6bdb",
+      "course": "p2_higher_chinese",
+      "character": "毛",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u6c14",
+      "course": "p2_higher_chinese",
+      "character": "气",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u6c34",
+      "course": "p2_higher_chinese",
+      "character": "水",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u6c41",
+      "course": "p2_higher_chinese",
+      "character": "汁",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u6ca1",
+      "course": "p2_higher_chinese",
+      "character": "没",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u6cb3",
+      "course": "p2_higher_chinese",
+      "character": "河",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u6cd5",
+      "course": "p2_higher_chinese",
+      "character": "法",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u6ce1",
+      "course": "p2_higher_chinese",
+      "character": "泡",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u706b",
+      "course": "p2_higher_chinese",
+      "character": "火",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u70b9",
+      "course": "p2_higher_chinese",
+      "character": "点",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u722a",
+      "course": "p2_higher_chinese",
+      "character": "爪",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u7236",
+      "course": "p2_higher_chinese",
+      "character": "父",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u7238",
+      "course": "p2_higher_chinese",
+      "character": "爸",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u7259",
+      "course": "p2_higher_chinese",
+      "character": "牙",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u725b",
+      "course": "p2_higher_chinese",
+      "character": "牛",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u7269",
+      "course": "p2_higher_chinese",
+      "character": "物",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u72ee",
+      "course": "p2_higher_chinese",
+      "character": "狮",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u738b",
+      "course": "p2_higher_chinese",
+      "character": "王",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u73a9",
+      "course": "p2_higher_chinese",
+      "character": "玩",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u7403",
+      "course": "p2_higher_chinese",
+      "character": "球",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u7518",
+      "course": "p2_higher_chinese",
+      "character": "甘",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u751f",
+      "course": "p2_higher_chinese",
+      "character": "生",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u7528",
+      "course": "p2_higher_chinese",
+      "character": "用",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u7530",
+      "course": "p2_higher_chinese",
+      "character": "田",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u7532",
+      "course": "p2_higher_chinese",
+      "character": "甲",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u7537",
+      "course": "p2_higher_chinese",
+      "character": "男",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u753b",
+      "course": "p2_higher_chinese",
+      "character": "画",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u767d",
+      "course": "p2_higher_chinese",
+      "character": "白",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u7684",
+      "course": "p2_higher_chinese",
+      "character": "的",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u76ae",
+      "course": "p2_higher_chinese",
+      "character": "皮",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u76ee",
+      "course": "p2_higher_chinese",
+      "character": "目",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u770b",
+      "course": "p2_higher_chinese",
+      "character": "看",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u77ed",
+      "course": "p2_higher_chinese",
+      "character": "短",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u77f3",
+      "course": "p2_higher_chinese",
+      "character": "石",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u79be",
+      "course": "p2_higher_chinese",
+      "character": "禾",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u7a7f",
+      "course": "p2_higher_chinese",
+      "character": "穿",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u7acb",
+      "course": "p2_higher_chinese",
+      "character": "立",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u7ad9",
+      "course": "p2_higher_chinese",
+      "character": "站",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u7ae5",
+      "course": "p2_higher_chinese",
+      "character": "童",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u7af9",
+      "course": "p2_higher_chinese",
+      "character": "竹",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u7c73",
+      "course": "p2_higher_chinese",
+      "character": "米",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u7c92",
+      "course": "p2_higher_chinese",
+      "character": "粒",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u7ea2",
+      "course": "p2_higher_chinese",
+      "character": "红",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u7ec4",
+      "course": "p2_higher_chinese",
+      "character": "组",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u7ed9",
+      "course": "p2_higher_chinese",
+      "character": "给",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u7f51",
+      "course": "p2_higher_chinese",
+      "character": "网",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u7f8a",
+      "course": "p2_higher_chinese",
+      "character": "羊",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u8001",
+      "course": "p2_higher_chinese",
+      "character": "老",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u8089",
+      "course": "p2_higher_chinese",
+      "character": "肉",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u81ea",
+      "course": "p2_higher_chinese",
+      "character": "自",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u81ed",
+      "course": "p2_higher_chinese",
+      "character": "臭",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u8272",
+      "course": "p2_higher_chinese",
+      "character": "色",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u8282",
+      "course": "p2_higher_chinese",
+      "character": "节",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u82b1",
+      "course": "p2_higher_chinese",
+      "character": "花",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u82d7",
+      "course": "p2_higher_chinese",
+      "character": "苗",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u82e6",
+      "course": "p2_higher_chinese",
+      "character": "苦",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u864e",
+      "course": "p2_higher_chinese",
+      "character": "虎",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u866b",
+      "course": "p2_higher_chinese",
+      "character": "虫",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u86cb",
+      "course": "p2_higher_chinese",
+      "character": "蛋",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u8863",
+      "course": "p2_higher_chinese",
+      "character": "衣",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u889c",
+      "course": "p2_higher_chinese",
+      "character": "袜",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u88ab",
+      "course": "p2_higher_chinese",
+      "character": "被",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u897f",
+      "course": "p2_higher_chinese",
+      "character": "西",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u8981",
+      "course": "p2_higher_chinese",
+      "character": "要",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u89c1",
+      "course": "p2_higher_chinese",
+      "character": "见",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u8ba4",
+      "course": "p2_higher_chinese",
+      "character": "认",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u8bed",
+      "course": "p2_higher_chinese",
+      "character": "语",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u8bf4",
+      "course": "p2_higher_chinese",
+      "character": "说",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u8bfe",
+      "course": "p2_higher_chinese",
+      "character": "课",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u8c01",
+      "course": "p2_higher_chinese",
+      "character": "谁",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u8c22",
+      "course": "p2_higher_chinese",
+      "character": "谢",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u8c46",
+      "course": "p2_higher_chinese",
+      "character": "豆",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u8d1d",
+      "course": "p2_higher_chinese",
+      "character": "贝",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u8d70",
+      "course": "p2_higher_chinese",
+      "character": "走",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u8d77",
+      "course": "p2_higher_chinese",
+      "character": "起",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u8dd1",
+      "course": "p2_higher_chinese",
+      "character": "跑",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u8eb2",
+      "course": "p2_higher_chinese",
+      "character": "躲",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u8f66",
+      "course": "p2_higher_chinese",
+      "character": "车",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u8fd8",
+      "course": "p2_higher_chinese",
+      "character": "还",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u8fd9",
+      "course": "p2_higher_chinese",
+      "character": "这",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u9009",
+      "course": "p2_higher_chinese",
+      "character": "选",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u91c7",
+      "course": "p2_higher_chinese",
+      "character": "采",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u91cc",
+      "course": "p2_higher_chinese",
+      "character": "里",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u957f",
+      "course": "p2_higher_chinese",
+      "character": "长",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u95e8",
+      "course": "p2_higher_chinese",
+      "character": "门",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u95f4",
+      "course": "p2_higher_chinese",
+      "character": "间",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u963f",
+      "course": "p2_higher_chinese",
+      "character": "阿",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u96e8",
+      "course": "p2_higher_chinese",
+      "character": "雨",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u96f7",
+      "course": "p2_higher_chinese",
+      "character": "雷",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u9752",
+      "course": "p2_higher_chinese",
+      "character": "青",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u9762",
+      "course": "p2_higher_chinese",
+      "character": "面",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u978b",
+      "course": "p2_higher_chinese",
+      "character": "鞋",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u98de",
+      "course": "p2_higher_chinese",
+      "character": "飞",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u9971",
+      "course": "p2_higher_chinese",
+      "character": "饱",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u997c",
+      "course": "p2_higher_chinese",
+      "character": "饼",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u997f",
+      "course": "p2_higher_chinese",
+      "character": "饿",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u9999",
+      "course": "p2_higher_chinese",
+      "character": "香",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u9a6c",
+      "course": "p2_higher_chinese",
+      "character": "马",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        1
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u9ad8",
+      "course": "p2_higher_chinese",
+      "character": "高",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u9c7c",
+      "course": "p2_higher_chinese",
+      "character": "鱼",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        1
+      ],
+      "writing_list_pages": [
+        2
+      ],
+      "source_ref": "moe-hcl-characters-2024"
+    },
+    {
+      "id": "zh.p2_higher_chinese.review.u9e2d",
+      "course": "p2_higher_chinese",
+      "character": "鸭",
+      "source_grade": 1,
+      "recognition_list_pages": [
+        2
+      ],
+      "writing_list_pages": [],
+      "source_ref": "moe-hcl-characters-2024"
+    }
+  ]
+}

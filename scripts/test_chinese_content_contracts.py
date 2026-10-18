@@ -5,7 +5,7 @@ import unittest
 
 from validate_chinese_content import (ROOT, SCHEMA, Invalid, check_attempt,
                                      check_batches, check_catalogue, check_import,
-                                     check_plan, load, schema_check)
+                                     check_plan, check_review_characters, load, schema_check)
 
 
 class Contracts(unittest.TestCase):
@@ -13,6 +13,7 @@ class Contracts(unittest.TestCase):
         self.curriculum = load(ROOT / 'content/chinese/curriculum.json')
         self.batch = load(ROOT / 'content/chinese/batches/starter-001.json')
         self.plan = load(ROOT / 'content/chinese/fixtures/task-x10.json')
+        self.review = load(ROOT / 'content/chinese/review-characters.json')
         self.payload = {'schema_version': 'pilot-mistakes/1', 'subject': 'chinese',
                         'course': 'p2_chinese', 'curriculum_manifest_version': None,
                         'extraction_result': 'errors_found', 'items': [{
@@ -23,7 +24,7 @@ class Contracts(unittest.TestCase):
 
     def test_every_published_batch_is_valid_on_its_own(self):
         batches = [load(p) for p in sorted((ROOT / 'content/chinese/batches').glob('*.json'))]
-        check_batches(self.curriculum, batches)
+        check_batches(self.curriculum, batches, self.review)
 
     def test_ids_must_be_unique_across_batches(self):
         other = copy.deepcopy(self.batch)
@@ -323,6 +324,95 @@ class Contracts(unittest.TestCase):
             mutate(c)
             with self.subTest(code=code), self.assertRaisesRegex(Invalid, code):
                 check_catalogue(c, self.batch)
+
+
+class ReviewCharacters(unittest.TestCase):
+    """P1 review characters: P2-course practice targets from the P1 pages of the official lists."""
+
+    def setUp(self):
+        self.curriculum = load(ROOT / 'content/chinese/curriculum.json')
+        self.review = load(ROOT / 'content/chinese/review-characters.json')
+        self.batch = load(ROOT / 'content/chinese/batches/starter-001.json')
+
+    def _row(self, review, char, course='p2_chinese'):
+        return next(r for r in review['characters'] if r['character'] == char and r['course'] == course)
+
+    def test_published_list_is_valid_and_never_repeats_a_grade_character(self):
+        rows = check_review_characters(self.curriculum, self.review)
+        grade = {(r['course'], r['character']) for r in self.curriculum['characters']}
+        self.assertFalse({(r['course'], r['character']) for r in rows.values()} & grade)
+        self.assertEqual({r['course'] for r in rows.values()}, {'p2_chinese', 'p2_higher_chinese'})
+
+    def test_corruptions_are_rejected(self):
+        first = self.review['characters'][0]
+        cases = [
+            (lambda r: r['characters'][0].update(recognition_list_pages=[3]), 'review_character_grade_pages'),
+            (lambda r: r['characters'][0].update(recognition_list_pages=[], writing_list_pages=[]), 'review_character_grade_pages'),
+            (lambda r: r['characters'][0].update(id=first['id'].replace('.review.', '.char.')), 'review_character_id'),
+            (lambda r: r['characters'][0].update(course='p3_chinese'), 'enum'),
+            (lambda r: r['characters'][0].update(source_ref='moe-hcl-characters-2024')
+             if first['course'] == 'p2_chinese' else r['characters'][0].update(source_ref='moe-cl-characters-2024'), 'review_character_source'),
+            (lambda r: r['characters'].append(dict(first, character='晴', id='zh.p2_chinese.review.u6674', course='p2_chinese',
+                                                   source_ref='moe-cl-characters-2024')), 'review_duplicates_grade_character'),
+            (lambda r: r['characters'].append(dict(first)), 'duplicate_id'),
+            (lambda r: r['counts'][0].update(review_records=r['counts'][0]['review_records'] + 1), 'review_count_records'),
+            (lambda r: r.update(curriculum_manifest_version='other'), 'review_manifest_version'),
+            (lambda r: r['characters'][0].update(extra=1), 'unknown_key'),
+        ]
+        for mutate, code in cases:
+            r = copy.deepcopy(self.review)
+            mutate(r)
+            with self.subTest(code=code), self.assertRaisesRegex(Invalid, code):
+                check_review_characters(self.curriculum, r)
+
+    def _review_pool_batch(self):
+        """A synthetic batch with one complete review-character pool."""
+        b = copy.deepcopy(self.batch)
+        template = next(i for i in b['items'] if i['stage'] == 'exact' and i['id'].startswith('zh-p2-confusable-'))
+        refs = [self._row(self.review, '以')['id'], self._row(self.review, '以', 'p2_higher_chinese')['id']]
+        new = []
+        for n, stage in enumerate(['exact', 'similar', 'generic'], 1):
+            item = copy.deepcopy(template)
+            item.update(id=f'zh-test-review.q{n}', stage=stage, target_refs=refs)
+            item['blanks'] = [dict(item['blanks'][0], question_id=item['id'])] if item['blanks'] else []
+            new.append(item)
+        b['items'] += new
+        b['groups'].append({'id': 'zh-test-review-group', 'version': 1, 'label_zh': '测试', 'label_en': 'test',
+                            'courses': ['p2_chinese', 'p2_higher_chinese'], 'target_refs': refs,
+                            'item_ids': [i['id'] for i in new]})
+        return b
+
+    def test_batch_using_review_targets_must_pin_the_list_version(self):
+        b = self._review_pool_batch()
+        with self.assertRaisesRegex(Invalid, 'target_reference'):
+            check_catalogue(self.curriculum, b)
+        with self.assertRaisesRegex(Invalid, 'review_characters_version'):
+            check_catalogue(self.curriculum, b, self.review)
+        b['review_characters_version'] = self.review['version']
+        check_catalogue(self.curriculum, b, self.review)
+        b['review_characters_version'] = 'stale'
+        with self.assertRaisesRegex(Invalid, 'review_characters_version'):
+            check_catalogue(self.curriculum, b, self.review)
+
+    def test_mapped_import_to_a_review_character_needs_an_approved_list(self):
+        today = dt.date(2026, 10, 15)
+        c = copy.deepcopy(self.curriculum)
+        c.update(status='approved', coverage_status='approved')
+        row = self._row(self.review, '以')
+        p = {'schema_version': 'pilot-mistakes/1', 'subject': 'chinese', 'course': 'p2_chinese',
+             'curriculum_manifest_version': c['manifest_version'], 'extraction_result': 'errors_found',
+             'items': [{'mapping_status': 'mapped', 'knowledge_point_ref': row['id'], 'target_kind': 'character',
+                        'target_value': '以', 'assessed_skill': 'character_recognition', 'error_type': 'unknown_cause',
+                        'observation_date': '2026-10-14', 'source_type': 'home_practice'}]}
+        with self.assertRaisesRegex(Invalid, 'mapped_ref'):
+            check_import(p, c, today, [c['manifest_version']])
+        with self.assertRaisesRegex(Invalid, 'review_characters_not_approved'):
+            check_import(p, c, today, [c['manifest_version']], self.review)
+        approved = dict(self.review, status='approved')
+        check_import(p, c, today, [c['manifest_version']], approved)
+        p['items'][0]['target_value'] = '东'
+        with self.assertRaisesRegex(Invalid, 'mapped_character_value'):
+            check_import(p, c, today, [c['manifest_version']], approved)
 
 
 if __name__ == '__main__':

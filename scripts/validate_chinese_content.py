@@ -120,7 +120,36 @@ def safe_halfway_boundary(plan, materials):
     raise Invalid('no_safe_halfway_boundary')
 
 
-def check_catalogue(curriculum, batch):
+def check_review_characters(curriculum, review):
+    """P1 review characters for P2 courses: practice targets only, never P2 outcomes or coverage."""
+    schema_check(review, SCHEMA['$defs']['review_characters'])
+    require(review['curriculum_manifest_version'] == curriculum['manifest_version'], 'review_manifest_version')
+    sources = unique(curriculum['sources'])
+    grade = {(r['course'], r['character']) for r in curriculum['characters']}
+    rows = unique(review['characters'])
+    require(not (set(rows) & ({r['id'] for r in curriculum['characters']} | set(unique(curriculum['outcomes']))
+                               | set(unique(curriculum.get('skill_targets', []))))), 'duplicate_curriculum_id')
+    for row in rows.values():
+        require(row['id'] == f"zh.{row['course']}.review.u{ord(row['character']):04x}", 'review_character_id')
+        require(row['course'] in curriculum['courses'], 'curriculum_course')
+        expected_source = 'moe-hcl-characters-2024' if 'higher' in row['course'] else 'moe-cl-characters-2024'
+        require(row['source_ref'] == expected_source and row['source_ref'] in sources, 'review_character_source')
+        pages = row['recognition_list_pages'] + row['writing_list_pages']
+        # P1 lists are PDF pages 1-2 of the same official character-list files.
+        require(bool(pages) and set(pages) <= {1, 2}, 'review_character_grade_pages')
+        require(all(len(row[k]) == len(set(row[k])) for k in ['recognition_list_pages', 'writing_list_pages']), 'duplicate_character_page')
+        # A character already on the course's own P2 list is targeted through that record, never twice.
+        require((row['course'], row['character']) not in grade, 'review_duplicates_grade_character')
+    require({c['course'] for c in review['counts']} == {r['course'] for r in rows.values()}
+            and len(review['counts']) == len({c['course'] for c in review['counts']}), 'review_count_courses')
+    for count in review['counts']:
+        require(count['source_pdf_pages'] == [1, 2], 'review_count_pages')
+        n = sum(1 for r in rows.values() if r['course'] == count['course'])
+        require(n == count['review_records'] and count['p1_union_unique'] == n + count['already_in_grade_list'], 'review_count_records')
+    return rows
+
+
+def check_catalogue(curriculum, batch, review=None):
     schema_check(curriculum, SCHEMA['$defs']['curriculum'])
     schema_check(batch, SCHEMA['$defs']['batch'])
     require(batch['curriculum_manifest_version'] == curriculum['manifest_version'], 'manifest_version')
@@ -166,7 +195,11 @@ def check_catalogue(curriculum, batch):
     for row in curriculum.get('route_compatibility', []):
         require(row['item_outcome'] in outcomes and row['target_ref'] in skills, 'route_compatibility_reference')
         compat.add((row['item_outcome'], row['target_ref']))
-    targets = {**targets, **skills}
+    reviews = check_review_characters(curriculum, review) if review is not None else {}
+    used = {r for item in batch['items'] for r in item['target_refs'] + item.get('repair_target_refs', [])}
+    if used & set(reviews) or 'review_characters_version' in batch:
+        require(review is not None and batch.get('review_characters_version') == review['version'], 'review_characters_version')
+    targets = {**targets, **reviews, **skills}
     items, materials = unique(batch['items']), unique(batch['materials'])
     require(not (set(items) & set(materials)), 'duplicate_catalogue_id')
     for item in items.values():
@@ -266,9 +299,9 @@ def check_catalogue(curriculum, batch):
     return items, materials
 
 
-def check_plan(plan, curriculum, batch):
+def check_plan(plan, curriculum, batch, review=None):
     schema_check(plan, SCHEMA['$defs']['task_plan'])
-    items, materials = check_catalogue(curriculum, batch)
+    items, materials = check_catalogue(curriculum, batch, review)
     require(plan['manifest_version'] == curriculum['manifest_version'], 'plan_manifest_version')
     require(plan['content_batch_id'] == batch['batch_id'] and plan['content_version'] == batch['version'], 'plan_batch_version')
     mids = plan['material_ids']
@@ -300,7 +333,7 @@ def check_plan(plan, curriculum, batch):
     require(plan['halfway_safe_boundary_count'] == safe_halfway_boundary(plan, materials), 'halfway_safe_boundary')
 
 
-def check_import(payload, curriculum, today, approved_manifest_versions=()):
+def check_import(payload, curriculum, today, approved_manifest_versions=(), review=None):
     # No I/O, storage, ownership, logging, preview or mutation. Caller must first
     # enforce <= 1 MiB decoded UTF-8 JSON; this authoring tool never accepts users.
     schema_check(payload, SCHEMA['$defs']['import'])
@@ -311,9 +344,11 @@ def check_import(payload, curriculum, today, approved_manifest_versions=()):
     if manifest is not None:
         require(manifest in approved_manifest_versions and manifest == curriculum['manifest_version'], 'manifest_not_approved')
         require(curriculum['status'] == 'approved' and curriculum['coverage_status'] == 'approved', 'manifest_not_approved')
-    # Mapped entries must name an explicitly typed repair target: a character record or a skill
-    # target. A raw outcome is never a mapping target.
+    # Mapped entries must name an explicitly typed repair target: a character record (grade list or
+    # approved P1 review list) or a skill target. A raw outcome is never a mapping target.
     known = {r['id']: r for r in curriculum['characters'] + curriculum.get('skill_targets', [])}
+    reviews = check_review_characters(curriculum, review) if review is not None else {}
+    known.update(reviews)
     for entry in entries:
         bound = {'character': 1, 'word': 8}.get(entry['target_kind'], 64)
         for field in ['target_value', 'observed_wrong_form']:
@@ -325,6 +360,7 @@ def check_import(payload, curriculum, today, approved_manifest_versions=()):
             continue
         require(manifest is not None and ref in known, 'mapped_ref')
         target = known[ref]
+        require(ref not in reviews or review['status'] == 'approved', 'review_characters_not_approved')
         require(target['course'] == payload['course'], 'mapped_course')
         if 'character' in target:
             require(entry['target_kind'] == 'character', 'mapped_target_kind')
@@ -345,13 +381,13 @@ def check_attempt(event, item):
     require(event['assistance'] == required[event['phase']], 'attempt_assistance_phase')
 
 
-def check_batches(curriculum, batches):
+def check_batches(curriculum, batches, review=None):
     """Each batch is checked on its own, so one batch's review state never covers another's items.
     Catalogue IDs must still be unique across batches, because attempts and plans name items by ID."""
     require(len({b['batch_id'] for b in batches}) == len(batches), 'duplicate_batch_id')
     seen = set()
     for batch in batches:
-        check_catalogue(curriculum, batch)
+        check_catalogue(curriculum, batch, review)
         ids = {r['id'] for key in ['items', 'materials', 'groups'] for r in batch[key]}
         require(not (ids & seen), 'duplicate_catalogue_id_across_batches')
         seen |= ids
@@ -361,20 +397,24 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.parse_args()
     curriculum = load(ROOT / 'content/chinese/curriculum.json')
+    review = load(ROOT / 'content/chinese/review-characters.json')
     batches = [load(path) for path in sorted((ROOT / 'content/chinese/batches').glob('*.json'))]
-    check_batches(curriculum, batches)
+    check_batches(curriculum, batches, review)
     by_id = {b['batch_id']: b for b in batches}
     plans = sorted((ROOT / 'content/chinese/fixtures').glob('task-*.json'))
     for path in plans:
         plan = load(path)
         require(plan['content_batch_id'] in by_id, 'plan_batch_version')
-        check_plan(plan, curriculum, by_id[plan['content_batch_id']])
-    print(f"PASS: {len(curriculum['outcomes'])} course outcomes, {len(curriculum['characters'])} character records; "
+        check_plan(plan, curriculum, by_id[plan['content_batch_id']], review)
+    print(f"PASS: {len(curriculum['outcomes'])} course outcomes, {len(curriculum['characters'])} character records, "
+          f"{len(review['characters'])} P1 review records ({review['status']}); "
           f"{len(batches)} batches, {sum(len(b['materials']) for b in batches)} materials, "
           f"{sum(len(b['items']) for b in batches)} items, {len(plans)} synthetic plans.")
     pending = [f"{b['batch_id']} v{b['version']} review and sign-off" for b in batches if b['status'] != 'approved']
     if curriculum['status'] != 'approved':
         pending.append('approved coverage denominator')
+    if review['status'] != 'approved':
+        pending.append(f"P1 review list {review['version']} review and sign-off")
     print('QA pending: ' + (', '.join(pending) or 'none recorded') + '. Not a content release.')
 
 
