@@ -51,6 +51,10 @@ export async function openRuntime(id: string, timezone: string) {
       const engine = await LearningEngine.load(storage.store, timezone, { registry, writer, now })
       let program: MistakeProgram | null = null
       if (!syntheticChinese) {
+        // A Chinese task started on the earlier synthetic fixture still resumes and finishes on it (it stays
+        // labelled synthetic); the reviewed release installed next becomes current for new tasks.
+        if (engine.state.tasks.some((t) => t.subject === 'chinese' && t.status !== 'finalised' && t.content_version === 'dev-ui-1'))
+          developmentRegistry(['chinese'], registry)
         const { publicChineseContent } = await import('../catalogue/chinese-public.ts')
         program = await MistakeProgram.open({ engine, registry, publicContent: publicChineseContent(), store: privateStore, now })
       }

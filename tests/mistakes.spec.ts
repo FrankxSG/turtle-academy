@@ -107,6 +107,8 @@ test('accepted mistakes import, are practised first the next day, and report and
   )
   const planned = new Set(task.plan.slots.map((s: any) => s.target_ref))
   expect(planned.has(`case-target:${pendingRef}`)).toBe(false)
+  // Synthetic pack only; never a credential or PIN screen.
+  await page.screenshot({ path: 'test-results/ui-review/chinese-repair.png', fullPage: true })
   const answered = await answerCorrectly(page)
   expect(answered.target_ref).toMatch(/^case-target:/)
   expect(answered.stage).toBe('exact')
@@ -122,6 +124,8 @@ test('accepted mistakes import, are practised first the next day, and report and
   // Cases with no attempt stay honestly unevidenced.
   await expect(page.getByTestId('case-O905')).toContainText('Waiting for questions')
 
+  await page.getByTestId('mistake-table').scrollIntoViewIfNeeded()
+  await page.screenshot({ path: 'test-results/ui-review/mistake-report.png', fullPage: true })
   // Parent-observed writing: help never advances; an independent correct does.
   const writing = page.getByTestId(`plan-production-${ZUO}`)
   await writing.getByRole('button', { name: 'With help' }).click()
