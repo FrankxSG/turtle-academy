@@ -6450,9 +6450,10 @@
       "Pending: independent cross-review (ChatGPT) of all items, owner review of the sample, rights decision and batch sign-off; approval of the P1 review and textbook-extras list.",
       "2026-10-18 ChatGPT cross-review at 69c97c4: read all 117 stems, four options, hints and explanations. v2 revises 21 items: remove arithmetic from character recognition; qualify cloud/seed/animal/time definitions; repair spray collocation, density hints, glue/fire-alarm wording and magic explanation. Keys and target IDs unchanged. These corrections require Claude re-review, not a claimed independent approval of ChatGPT edits.",
       "Prior v1 sample IDs remain in the v1 review-pack history. All revised IDs are disputed; current sample is drawn from the 96 unchanged agreed items in batch order using random.Random(zh-starter-003-v2-owner-sample-2026-10-18), ceil(N/5). Owner/rights/list approvals remain pending.",
-      "V1 owner draw (historical only): zh-p2-p1review-u4ee5.q3, zh-p2-p1review-u53f3.q1, zh-p2-p1review-u5929.q1, zh-p2-p1review-u5929.q3, zh-p2-p1review-u600e.q2, zh-p2-p1review-u672c.q1, zh-p2-p1review-u672c.q2, zh-p2-p1review-u89c1.q1, zh-p2-confusable3-u50cf.q3, zh-p2-confusable3-u5168.q1, zh-p2-confusable3-u5168.q2, zh-p2-confusable3-u533b.q3, zh-p2-confusable3-u5427.q1, zh-p2-confusable3-u5427.q2, zh-p2-confusable3-u8bfb.q2, zh-p2-textbook-extra-u517d.q2, zh-p2-textbook-extra-u55b7.q2, zh-p2-textbook-extra-u55b7.q3, zh-p2-textbook-extra-u6a61.q1, zh-p2-textbook-extra-u6a61.q3, zh-p2-textbook-extra-u74f6.q3, zh-p2-textbook-extra-u80f6.q1, zh-p2-textbook-extra-u8b66.q3, zh-p2-textbook-extra-u9152.q3. Current v2 draw excludes disputed items; every revised item needs independent recheck. Dictionary sense checks: https://www.zdic.net/hans/白 ; https://www.zdic.net/hans/野兽 ; https://www.zdic.net/hans/喷 ; https://www.zdic.net/hans/火警 ; https://www.zdic.net/hans/密 ; https://www.zdic.net/hans/胶水 ."
+      "V1 owner draw (historical only): zh-p2-p1review-u4ee5.q3, zh-p2-p1review-u53f3.q1, zh-p2-p1review-u5929.q1, zh-p2-p1review-u5929.q3, zh-p2-p1review-u600e.q2, zh-p2-p1review-u672c.q1, zh-p2-p1review-u672c.q2, zh-p2-p1review-u89c1.q1, zh-p2-confusable3-u50cf.q3, zh-p2-confusable3-u5168.q1, zh-p2-confusable3-u5168.q2, zh-p2-confusable3-u533b.q3, zh-p2-confusable3-u5427.q1, zh-p2-confusable3-u5427.q2, zh-p2-confusable3-u8bfb.q2, zh-p2-textbook-extra-u517d.q2, zh-p2-textbook-extra-u55b7.q2, zh-p2-textbook-extra-u55b7.q3, zh-p2-textbook-extra-u6a61.q1, zh-p2-textbook-extra-u6a61.q3, zh-p2-textbook-extra-u74f6.q3, zh-p2-textbook-extra-u80f6.q1, zh-p2-textbook-extra-u8b66.q3, zh-p2-textbook-extra-u9152.q3. Current v2 draw excludes disputed items; every revised item needs independent recheck. Dictionary sense checks: https://www.zdic.net/hans/白 ; https://www.zdic.net/hans/野兽 ; https://www.zdic.net/hans/喷 ; https://www.zdic.net/hans/火警 ; https://www.zdic.net/hans/密 ; https://www.zdic.net/hans/胶水 .",
+      "2026-10-18 Claude recheck of ChatGPT's 21 v2 revisions: each read rendered (blank shown, four options, hint, explanation); every distractor substituted into the blank; keys and target IDs confirmed unchanged; hints checked for the key text; cumulative P1-P2 list scan unchanged from the v1 record. All 21 pass. Non-blocking notes kept for a later round: u571f.q2 hint says seeds 要 go in the ground (could be 可以); u767d.q1/q2 share the 像牛奶 cue across exact and similar. Cross-review now runs both ways; owner, rights and list approvals remain pending."
     ],
-    "independent_review": "changes_requested",
+    "independent_review": "passed",
     "owner_signoff": "pending",
     "sampled_item_ids": [
       "zh-p2-p1review-u5348.q2",
@@ -6476,29 +6477,7 @@
       "zh-p2-textbook-extra-u5858.q1",
       "zh-p2-p1review-u5929.q2"
     ],
-    "disputed_item_ids": [
-      "zh-p2-p1review-u4e5d.q2",
-      "zh-p2-p1review-u571f.q2",
-      "zh-p2-p1review-u767d.q1",
-      "zh-p2-p1review-u767d.q2",
-      "zh-p2-p1review-u5b66.q2",
-      "zh-p2-p1review-u672c.q3",
-      "zh-p2-confusable3-u7eff.q1",
-      "zh-p2-confusable3-u7eff.q2",
-      "zh-p2-confusable3-u8bfb.q1",
-      "zh-p2-confusable3-u90a3.q3",
-      "zh-p2-confusable3-u9e1f.q1",
-      "zh-p2-confusable3-u9e1f.q3",
-      "zh-p2-textbook-extra-u517d.q3",
-      "zh-p2-textbook-extra-u55b7.q2",
-      "zh-p2-textbook-extra-u55b7.q3",
-      "zh-p2-textbook-extra-u5bc6.q1",
-      "zh-p2-textbook-extra-u5bc6.q2",
-      "zh-p2-textbook-extra-u80f6.q1",
-      "zh-p2-textbook-extra-u80f6.q2",
-      "zh-p2-textbook-extra-u8b66.q3",
-      "zh-p2-textbook-extra-u9b54.q2"
-    ],
+    "disputed_item_ids": [],
     "rights_status": "original_draft_pending_owner_rights_review",
     "artwork": "none"
   }
