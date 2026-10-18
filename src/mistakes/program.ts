@@ -66,6 +66,9 @@ export const LEARNER_COURSES: Record<string, string[]> = {
   p2_chinese: ['p2_chinese', 'p3_chinese'],
 }
 
+/** Engine targets a set-aside pack's cases live on. */
+const heldFrom = (rows: CrosswalkRow[]) => rows.flatMap((r) => (r.engine_target_id ? [r.engine_target_id] : []))
+
 const errorText = (error: unknown) => (error instanceof Error ? error.message : String(error))
 
 /**
@@ -146,6 +149,9 @@ export class MistakeProgram {
     for (const b of builds) { p.install(b); await opts.store.putRelease(toStored(b)) }
     p.rows = await opts.store.crosswalk()
     p.events = await opts.store.production()
+    // While the stored pack is set aside, the targets it imported are held: they keep their records but get no
+    // slots, so they are neither practised without their case pins nor given slots with nothing to show.
+    if (!p.pack && p.openError !== null) opts.engine.holdTargets(heldFrom(p.rows))
     // Validation failures were handled before activation. Storage failures must propagate: swallowing one
     // here could claim recovery after engine records have already changed.
     if (p.pack) await p.importRegister()
@@ -229,6 +235,7 @@ export class MistakeProgram {
     // incomplete import that retryImport() or the next open finishes, never as a rollback.
     this.pack = pack
     this.openError = null
+    this.engine.holdTargets([])
     return this.completeImport()
   }
 

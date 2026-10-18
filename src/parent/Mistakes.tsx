@@ -137,8 +137,8 @@ export function Mistakes({
       {program.openError && (
         <p role="alert" data-testid="mistake-open-error">
           {tr(
-            'The saved mistake pack does not fit this version of the app, so it is not in use. Practice continues. Load an updated pack from the private repository. Details: ',
-            '已保存的错题包与当前版本不符，暂不使用；练习照常进行。请从私有仓库载入更新后的错题包。详情：',
+            'The saved mistake pack does not fit this version of the app, so it is not in use. Its mistakes are paused and keep their progress; other practice continues. Load an updated pack from the private repository to resume them. Details: ',
+            '已保存的错题包与当前版本不符，暂不使用。其中的错题已暂停，进度保留；其他练习照常进行。请从私有仓库载入更新后的错题包以恢复。详情：',
           )}
           {program.openError}
         </p>
