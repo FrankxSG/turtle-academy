@@ -47,3 +47,29 @@ No owner or rights approval is inferred from passing structural checks. No deplo
 ## Owner approval — 2026-10-18
 
 The owner approved the full practice target list in chat, then signed the batch-v2 receipt at `2026-10-18T14:14:53.948Z`: all 20 seeded sample items and 21 revisions reviewed; content approved for 117 items; rights/public use approved. The receipt binds source head `1aa0e39ac6ae0a2c140b27d541e755f42a0427e0` and pre-approval batch SHA-256 `a393c21fc90ab87a6fd55a2d1dfa4e1528ef16599994eb0780b974918a0e85d6`. The list and batch approval metadata are updated; no item content changed. This does not authorize merge, deployment, real-data use, or approve the separate private bank.
+
+## Claude verification of the approval record — 2026-10-18
+
+Receipt binding:
+- **Fingerprint:** `starter-003.json` at the signed head `1aa0e39` hashes to `a393c21f…0e85d6`, exactly as the receipt records.
+- **Items and groups:** identical between `1aa0e39` and the current head.
+- **`fe36ae7`:** changes only status and review-log metadata.
+
+List and batch state: `zh-2024-p1-review.3` is `approved`. `zh-starter-003` v2 is `approved`, with independent review passed, owner sign-off approved, rights cleared and no disputes.
+
+Branch fix (`bcadc75`):
+- `fe36ae7` had carried #25's 20-a-day plan-size test into this branch, where the plan schema still caps X at 19. The Python suite therefore failed at `fe36ae7` (1 error).
+- The boundary test is restored to this branch's limit. `fe36ae7`'s two explicit proposed-list fixtures are kept.
+- No content or approval metadata changed.
+
+At `bcadc75`, these pass:
+- 48 Python tests;
+- catalogue validation;
+- the generated inventory;
+- the P1 audit, re-run against the owner-supplied PDFs: all 547 records match;
+- the privacy and whitespace checks.
+
+Disposition:
+- All review findings on this PR are closed.
+- Owner content, list and rights approval are complete.
+- Approval of content is not merge, deployment or real-data authorisation; those remain separate owner actions.
