@@ -4,10 +4,20 @@ import type { Runtime } from '../ui/runtime.ts'
 import { names, subjects, type Language } from '../ui/development.ts'
 import { responseText } from '../ui/Practice.tsx'
 import { resetPin, validPin, verifyPin } from './device.ts'
+import { xMax } from '../engine/policy.ts'
 const PrivateMistakes = __PRIVATE_PACK_ENABLED__
   ? lazy(() => import('./Mistakes.tsx').then((m) => ({ default: m.Mistakes })))
   : null
-import { xMax } from '../engine/policy.ts'
+
+// History is read-only: a question whose text is no longer on this device shows a dash instead of
+// breaking the whole parent area. (Practice itself still refuses to show text from another version.)
+function historyText(...args: Parameters<typeof responseText>): string {
+  try {
+    return responseText(...args)
+  } catch {
+    return '—'
+  }
+}
 
 export function Parent({
   id,
@@ -347,7 +357,7 @@ export function Parent({
                                   : e.phase === 'retry'
                                     ? tr('Hint-assisted retry', '提示后重试')
                                     : tr('Supported correction', '辅助订正')}
-                                : {responseText(p.item_id, e.response, t.content_version)} ·{' '}
+                                : {historyText(p.item_id, e.response, t.content_version)} ·{' '}
                                 {e.correct
                                   ? tr('correct', '正确')
                                   : tr('needs correction', '需订正')}{' '}

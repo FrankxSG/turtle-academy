@@ -369,3 +369,28 @@ test('an unknown route is rejected before changing the current release or privat
   assert.equal((await s.privateStore.crosswalk()).length, 0)
   assert.equal(s.engine.state.targets.length, 0)
 })
+
+test('a stored pack that no longer fits the app is set aside on open; practice continues and nothing changes', async () => {
+  for (const spoil of [
+    // Stricter validation in a later app version.
+    (p: ReturnType<typeof syntheticPack>) => { (p.register as Record<string, unknown>).review_complete = false },
+    // A route whose target this content no longer declares.
+    (p: ReturnType<typeof syntheticPack>) => {
+      const c = p.register.cases[0] as { route: { progress_target_ref: string } }
+      c.route.progress_target_ref = 'zh.p2_higher_chinese.skill.no-longer-declared'
+    },
+  ]) {
+    const s = await setup()
+    await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+    const targets = structuredClone(s.engine.state.targets)
+    const stored = await s.privateStore.packs()
+    spoil(stored[0])
+    await s.privateStore.putPack(stored[0])
+    s.clock.sgt('2027-03-02')
+    const re = await reopen(s)
+    assert.ok(re.program.openError, 'the reason is kept for the parent area')
+    assert.deepEqual(re.engine.state.targets, targets, 'engine records are untouched')
+    const t = await re.engine.startOrResume('chinese')
+    assert.equal(t.kind, 'task', 'the child can still practise')
+  }
+})

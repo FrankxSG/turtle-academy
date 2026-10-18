@@ -66,6 +66,8 @@ export const LEARNER_COURSES: Record<string, string[]> = {
   p2_chinese: ['p2_chinese', 'p3_chinese'],
 }
 
+const errorText = (error: unknown) => (error instanceof Error ? error.message : String(error))
+
 export class MistakeProgram {
   readonly engine: LearningEngine
   private readonly registry: CatalogueRegistry
@@ -76,6 +78,8 @@ export class MistakeProgram {
   /** Content builds by release version, so a task pinned to an earlier pack keeps its presentations. */
   private readonly built = new Map<string, BuiltContent>()
   private pack: PrivatePack | null = null
+  /** Why the stored pack could not be used when the app opened; practice continues without it. */
+  openError: string | null = null
   private rows: CrosswalkRow[] = []
   private events: ProductionEvent[] = []
 
@@ -96,7 +100,15 @@ export class MistakeProgram {
     const stored = await opts.store.releases()
     const current = new Set<string>()
     const builds = [p.buildFor(opts.course ?? 'p2_higher_chinese', null)]
-    for (const rawPack of await opts.store.packs()) { const pack = validatePack(rawPack); builds.push(p.buildFor(pack.course, pack)); p.pack = pack }
+    // A stored pack that no longer fits this app version (stricter checks, changed content) must never stop the
+    // child from practising: it is set aside and reported in the parent area until an updated pack is loaded.
+    for (const rawPack of await opts.store.packs()) {
+      try {
+        const pack = validatePack(rawPack)
+        builds.push(p.buildFor(pack.course, pack))
+        p.pack = pack
+      } catch (error) { p.openError = errorText(error) }
+    }
     for (const b of builds) current.add(b.release.version)
     for (const sb of stored) {
       if (current.has(sb.version)) continue
@@ -106,7 +118,10 @@ export class MistakeProgram {
     for (const b of builds) { p.install(b); await opts.store.putRelease(toStored(b)) }
     p.rows = await opts.store.crosswalk()
     p.events = await opts.store.production()
-    if (p.pack) await p.importRegister() // recompute missing/available pools after a content update
+    if (p.pack) {
+      // Recompute missing/available pools after a content update. A failure changes nothing in the engine.
+      try { await p.importRegister() } catch (error) { p.openError = errorText(error) }
+    }
     return p
   }
 
@@ -171,6 +186,7 @@ export class MistakeProgram {
     await this.store.putRelease(toStored(b))
     await this.store.putPack(pack)
     this.pack = pack
+    this.openError = null
     return this.importRegister()
   }
 

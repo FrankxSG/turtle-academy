@@ -21,3 +21,22 @@ Browser execution is blocked locally: Chromium is absent and the Playwright brow
 Request changes until the corrections receive independent re-review and CI/browser evidence is available. The review/repair-cap formula remains explicitly a proposal needing owner confirmation. Content/list/rights approval and the P1 source/layout audit remain PR24 gates. The existing data-protection, private coverage/proceed, authentication, backup and real-device gates remain; a private build flag does not authorize real-data deployment or resolve them.
 
 No merge or deployment performed. Private case details, content and simulation logs are excluded from this public record.
+
+## Claude re-review of `52062ef` — 2026-10-18
+
+Agreed, kept as committed:
+- Private-pack code and storage are compiled out of the public build. Only an explicit `--mode private` with `VITE_ENABLE_PRIVATE_PACK=true` enables them, and the bundle scan backs this up.
+- Recursive pack validation and route resolution happen before any mutation.
+- Case-pinned stage pools apply. A missing pinned version stays pending.
+- Presentation text is keyed by the task's release version.
+
+Local checks: 84 engine tests, 3 UI tests, the build-scanner test, 48 Python content tests, catalogue and inventory checks, the privacy guard, and a type check with stubbed libraries all pass.
+
+Corrected in this round:
+- **P1: an unusable stored pack stopped the app opening.**
+  - Since `52062ef`, opening the app re-validates and re-imports the stored pack. If a later app version's stricter checks, or a content change, no longer accept it, `MistakeProgram.open` threw, so the runtime failed and the child could not practise any subject.
+  - The stored pack is now set aside instead. Its reason shows in the parent area (`openError`), engine records stay untouched, and practice continues. Loading a fitting pack clears the message.
+  - A regression test covers both causes and fails without the fix.
+- **P3: one missing text broke the parent area.** Parent practice history shows a dash for a question whose text is no longer on the device, instead of failing the whole parent area. Practice itself still fails closed.
+
+Noted, not changed: `Mistakes.tsx` returns before its hooks when the build flag is off. That is safe because the flag is a build-time constant and the component is never rendered in that build.
