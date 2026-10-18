@@ -1,6 +1,6 @@
 {
   "schema_version": "chinese-review-characters/1",
-  "version": "zh-2024-p1-review.1",
+  "version": "zh-2024-p1-review.2",
   "curriculum_manifest_version": "zh-2024-p2p3-draft.2",
   "status": "proposed",
   "basis": "Owner decision 2026-10-18: P2 learners may practise P1 characters they still get wrong. Records are the official MOE P1 recognition and writing lists (PDF pages 1-2 of the same checksum-pinned character lists), for each P2 course, minus characters already in that course's P2 list records. Review characters are practice targets only: they are not P2 outcomes and never count toward P2 coverage.",
@@ -6781,6 +6781,191 @@
       ],
       "writing_list_pages": [],
       "source_ref": "moe-hcl-characters-2024"
+    }
+  ],
+  "extra_basis": "Owner decision 2026-10-18: a short owner-approved list of characters that P2 textbook lessons (欢乐伙伴 2.0) use in their vocabulary but that are on neither the P1 nor the P2 official list. Practice targets only, for recognition in the listed word; never P2 outcomes or coverage. \"official_list\" says whether the character appears on a later-grade (P3) list.",
+  "extra_characters": [
+    {
+      "id": "zh.p2_chinese.extra.u517d",
+      "course": "p2_chinese",
+      "character": "兽",
+      "example_word": "兽医",
+      "official_list": "none"
+    },
+    {
+      "id": "zh.p2_chinese.extra.u55b7",
+      "course": "p2_chinese",
+      "character": "喷",
+      "example_word": "香喷喷",
+      "official_list": "p3"
+    },
+    {
+      "id": "zh.p2_chinese.extra.u5858",
+      "course": "p2_chinese",
+      "character": "塘",
+      "example_word": "池塘",
+      "official_list": "none"
+    },
+    {
+      "id": "zh.p2_chinese.extra.u5bc6",
+      "course": "p2_chinese",
+      "character": "密",
+      "example_word": "密布",
+      "official_list": "none"
+    },
+    {
+      "id": "zh.p2_chinese.extra.u5bdf",
+      "course": "p2_chinese",
+      "character": "察",
+      "example_word": "警察",
+      "official_list": "none"
+    },
+    {
+      "id": "zh.p2_chinese.extra.u6a61",
+      "course": "p2_chinese",
+      "character": "橡",
+      "example_word": "橡皮",
+      "official_list": "none"
+    },
+    {
+      "id": "zh.p2_chinese.extra.u70db",
+      "course": "p2_chinese",
+      "character": "烛",
+      "example_word": "蜡烛",
+      "official_list": "none"
+    },
+    {
+      "id": "zh.p2_chinese.extra.u74f6",
+      "course": "p2_chinese",
+      "character": "瓶",
+      "example_word": "水瓶",
+      "official_list": "p3"
+    },
+    {
+      "id": "zh.p2_chinese.extra.u80f6",
+      "course": "p2_chinese",
+      "character": "胶",
+      "example_word": "胶水",
+      "official_list": "none"
+    },
+    {
+      "id": "zh.p2_chinese.extra.u8721",
+      "course": "p2_chinese",
+      "character": "蜡",
+      "example_word": "蜡烛",
+      "official_list": "none"
+    },
+    {
+      "id": "zh.p2_chinese.extra.u8b66",
+      "course": "p2_chinese",
+      "character": "警",
+      "example_word": "警察",
+      "official_list": "none"
+    },
+    {
+      "id": "zh.p2_chinese.extra.u9152",
+      "course": "p2_chinese",
+      "character": "酒",
+      "example_word": "家家酒",
+      "official_list": "none"
+    },
+    {
+      "id": "zh.p2_chinese.extra.u9b54",
+      "course": "p2_chinese",
+      "character": "魔",
+      "example_word": "魔术",
+      "official_list": "none"
+    },
+    {
+      "id": "zh.p2_higher_chinese.extra.u517d",
+      "course": "p2_higher_chinese",
+      "character": "兽",
+      "example_word": "兽医",
+      "official_list": "none"
+    },
+    {
+      "id": "zh.p2_higher_chinese.extra.u55b7",
+      "course": "p2_higher_chinese",
+      "character": "喷",
+      "example_word": "香喷喷",
+      "official_list": "p3"
+    },
+    {
+      "id": "zh.p2_higher_chinese.extra.u5858",
+      "course": "p2_higher_chinese",
+      "character": "塘",
+      "example_word": "池塘",
+      "official_list": "none"
+    },
+    {
+      "id": "zh.p2_higher_chinese.extra.u5bc6",
+      "course": "p2_higher_chinese",
+      "character": "密",
+      "example_word": "密布",
+      "official_list": "none"
+    },
+    {
+      "id": "zh.p2_higher_chinese.extra.u5bdf",
+      "course": "p2_higher_chinese",
+      "character": "察",
+      "example_word": "警察",
+      "official_list": "none"
+    },
+    {
+      "id": "zh.p2_higher_chinese.extra.u6a61",
+      "course": "p2_higher_chinese",
+      "character": "橡",
+      "example_word": "橡皮",
+      "official_list": "none"
+    },
+    {
+      "id": "zh.p2_higher_chinese.extra.u70db",
+      "course": "p2_higher_chinese",
+      "character": "烛",
+      "example_word": "蜡烛",
+      "official_list": "none"
+    },
+    {
+      "id": "zh.p2_higher_chinese.extra.u74f6",
+      "course": "p2_higher_chinese",
+      "character": "瓶",
+      "example_word": "水瓶",
+      "official_list": "p3"
+    },
+    {
+      "id": "zh.p2_higher_chinese.extra.u80f6",
+      "course": "p2_higher_chinese",
+      "character": "胶",
+      "example_word": "胶水",
+      "official_list": "none"
+    },
+    {
+      "id": "zh.p2_higher_chinese.extra.u8721",
+      "course": "p2_higher_chinese",
+      "character": "蜡",
+      "example_word": "蜡烛",
+      "official_list": "none"
+    },
+    {
+      "id": "zh.p2_higher_chinese.extra.u8b66",
+      "course": "p2_higher_chinese",
+      "character": "警",
+      "example_word": "警察",
+      "official_list": "none"
+    },
+    {
+      "id": "zh.p2_higher_chinese.extra.u9152",
+      "course": "p2_higher_chinese",
+      "character": "酒",
+      "example_word": "家家酒",
+      "official_list": "none"
+    },
+    {
+      "id": "zh.p2_higher_chinese.extra.u9b54",
+      "course": "p2_higher_chinese",
+      "character": "魔",
+      "example_word": "魔术",
+      "official_list": "none"
     }
   ]
 }

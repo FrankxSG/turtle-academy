@@ -1385,6 +1385,54 @@
             "additionalProperties": false
           },
           "minItems": 1
+        },
+        "extra_basis": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "extra_characters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+              },
+              "course": {
+                "enum": [
+                  "p2_chinese",
+                  "p2_higher_chinese"
+                ]
+              },
+              "character": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+              },
+              "example_word": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 8
+              },
+              "official_list": {
+                "enum": [
+                  "none",
+                  "p3"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "course",
+              "character",
+              "example_word",
+              "official_list"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0
         }
       },
       "required": [
@@ -1394,7 +1442,9 @@
         "status",
         "basis",
         "counts",
-        "characters"
+        "characters",
+        "extra_basis",
+        "extra_characters"
       ],
       "additionalProperties": false
     }

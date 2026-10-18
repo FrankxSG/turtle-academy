@@ -146,7 +146,18 @@ def check_review_characters(curriculum, review):
         require(count['source_pdf_pages'] == [1, 2], 'review_count_pages')
         n = sum(1 for r in rows.values() if r['course'] == count['course'])
         require(n == count['review_records'] and count['p1_union_unique'] == n + count['already_in_grade_list'], 'review_count_records')
-    return rows
+    # Owner-approved P2 textbook characters that are on neither the P1 nor the P2 official list.
+    extras = unique(review['extra_characters'])
+    require(not (set(extras) & set(rows)), 'duplicate_curriculum_id')
+    listed = grade | {(r['course'], r['character']) for r in rows.values()}
+    later = {r['character'] for r in curriculum['characters'] if r['course'].startswith('p3_')}
+    for row in extras.values():
+        require(row['id'] == f"zh.{row['course']}.extra.u{ord(row['character']):04x}", 'extra_character_id')
+        require(row['course'] in curriculum['courses'], 'curriculum_course')
+        require((row['course'], row['character']) not in listed, 'extra_character_on_official_list')
+        require(row['character'] in row['example_word'], 'extra_character_example_word')
+        require(row['official_list'] == ('p3' if row['character'] in later else 'none'), 'extra_character_official_list')
+    return {**rows, **extras}
 
 
 def check_catalogue(curriculum, batch, review=None):
@@ -407,7 +418,7 @@ def main():
         require(plan['content_batch_id'] in by_id, 'plan_batch_version')
         check_plan(plan, curriculum, by_id[plan['content_batch_id']], review)
     print(f"PASS: {len(curriculum['outcomes'])} course outcomes, {len(curriculum['characters'])} character records, "
-          f"{len(review['characters'])} P1 review records ({review['status']}); "
+          f"{len(review['characters'])} P1 review and {len(review['extra_characters'])} textbook-extra records ({review['status']}); "
           f"{len(batches)} batches, {sum(len(b['materials']) for b in batches)} materials, "
           f"{sum(len(b['items']) for b in batches)} items, {len(plans)} synthetic plans.")
     pending = [f"{b['batch_id']} v{b['version']} review and sign-off" for b in batches if b['status'] != 'approved']

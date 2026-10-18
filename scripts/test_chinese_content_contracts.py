@@ -358,6 +358,14 @@ class ReviewCharacters(unittest.TestCase):
             (lambda r: r['counts'][0].update(review_records=r['counts'][0]['review_records'] + 1), 'review_count_records'),
             (lambda r: r.update(curriculum_manifest_version='other'), 'review_manifest_version'),
             (lambda r: r['characters'][0].update(extra=1), 'unknown_key'),
+            (lambda r: r['extra_characters'][0].update(id=r['extra_characters'][0]['id'].replace('.extra.', '.review.')), 'extra_character_id'),
+            (lambda r: r['extra_characters'].append({'id': 'zh.p2_chinese.extra.u6674', 'course': 'p2_chinese', 'character': '晴',
+                                                     'example_word': '晴天', 'official_list': 'none'}), 'extra_character_on_official_list'),
+            (lambda r: r['extra_characters'].append({'id': 'zh.p2_chinese.extra.u4ee5', 'course': 'p2_chinese', 'character': '以',
+                                                     'example_word': '所以', 'official_list': 'none'}), 'extra_character_on_official_list'),
+            (lambda r: r['extra_characters'][0].update(example_word='天气'), 'extra_character_example_word'),
+            (lambda r: r['extra_characters'][0].update(official_list='p3' if r['extra_characters'][0]['official_list'] == 'none' else 'none'),
+             'extra_character_official_list'),
         ]
         for mutate, code in cases:
             r = copy.deepcopy(self.review)
