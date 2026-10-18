@@ -8,6 +8,7 @@ Catalogue: manifest `zh-2024-p2p3-draft.2` (approved).
 | --- | ---: | --- | ---: | --- | --- | --- |
 | `zh-starter-001` | 10 | approved | 357 | passed | approved | cleared |
 | `zh-starter-002` | 3 | approved | 38 | passed | approved | cleared |
+| `zh-starter-003` | 2 | approved | 117 | passed | approved | cleared |
 
 Counts below combine all batches. A batch's review state covers only its own items.
 
@@ -26,14 +27,15 @@ Every question is single-answer multiple choice with four options. Matching, ord
 | Leaves with some items but no complete route or no general practice | 0 |
 | Empty in-scope leaves (stay in the denominator) | 3 |
 | Out-of-app leaves, not in the denominator | context_only 2, deferred 3, external 9 |
-| Character group coverage, reported separately | 27/477 (6%) of the grade's list characters have a complete repair pool |
-| Questions tagged to this course | 236 (0 only for this course) |
+| Character group coverage, reported separately | 38/477 (8%) of the grade's list characters have a complete repair pool |
+| Extra practice targets, never coverage | P1 review characters with a complete repair pool: 15 of 269; textbook extras: 13 of 14 |
+| Questions tagged to this course | 353 (0 only for this course) |
 | Whole materials | 11 (cloze 2, reading 6, visual_text 3); at X=10 a task uses ≥2: at most 5 complete tasks without material reuse, from the material quota alone; eligibility and rotation not simulated |
-| Interaction formats | mcq_4plus 236 |
+| Interaction formats | mcq_4plus 353 |
 
 | Leaf | Label | Scope | PDF p | General items | Repair items | Complete routes | Min stock/stage | Status |
 | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
-| `r-character` | 辨识字形（形近字、同音字据义辨析） | in_app | 28 | 7 | 54 | 18 | 1 (thin) | authored |
+| `r-character` | 辨识字形（形近字、同音字据义辨析） | in_app | 28 | 7 | 171 | 29 | 1 (thin) | authored |
 | `r-char-sound` | 辨识字音（字与拼音、多音字） | in_app | 28 | 12 | 6 | 1 | 2 | authored |
 | `r-char-meaning` | 理解字义（字在词语中的意思） | in_app | 28 | 4 | 3 | 1 | 1 (thin) | authored |
 | `r-radical` | 部件与偏旁辨认 | in_app | 28 | 4 | 33 | 11 | 1 (thin) | authored |
@@ -59,14 +61,15 @@ Every question is single-answer multiple choice with four options. Matching, ord
 | Leaves with some items but no complete route or no general practice | 0 |
 | Empty in-scope leaves (stay in the denominator) | 3 |
 | Out-of-app leaves, not in the denominator | context_only 2, deferred 3, external 10 |
-| Character group coverage, reported separately | 27/468 (6%) of the grade's list characters have a complete repair pool |
-| Questions tagged to this course | 236 (0 only for this course) |
+| Character group coverage, reported separately | 37/468 (8%) of the grade's list characters have a complete repair pool |
+| Extra practice targets, never coverage | P1 review characters with a complete repair pool: 16 of 278; textbook extras: 13 of 14 |
+| Questions tagged to this course | 353 (0 only for this course) |
 | Whole materials | 11 (cloze 2, reading 6, visual_text 3); at X=10 a task uses ≥2: at most 5 complete tasks without material reuse, from the material quota alone; eligibility and rotation not simulated |
-| Interaction formats | mcq_4plus 236 |
+| Interaction formats | mcq_4plus 353 |
 
 | Leaf | Label | Scope | PDF p | General items | Repair items | Complete routes | Min stock/stage | Status |
 | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
-| `r-character` | 辨识字形（形近字、同音字据义辨析） | in_app | 28 | 7 | 54 | 18 | 1 (thin) | authored |
+| `r-character` | 辨识字形（形近字、同音字据义辨析） | in_app | 28 | 7 | 171 | 28 | 1 (thin) | authored |
 | `r-char-sound` | 辨识字音（字与拼音、多音字） | in_app | 28 | 12 | 6 | 1 | 2 | authored |
 | `r-char-meaning` | 理解字义（字在词语中的意思） | in_app | 28 | 4 | 3 | 1 | 1 (thin) | authored |
 | `r-radical` | 部件与偏旁辨认 | in_app | 28 | 4 | 33 | 11 | 1 (thin) | authored |
@@ -210,7 +213,7 @@ A route with one item per stage has no spare question: a child who fails a stage
 
 | Course | Complete routes | Of which at least one stage has only one item |
 | --- | ---: | ---: |
-| p2_chinese | 40 | 37 |
-| p2_higher_chinese | 40 | 37 |
+| p2_chinese | 51 | 48 |
+| p2_higher_chinese | 50 | 47 |
 | p3_chinese | 33 | 33 |
 | p3_higher_chinese | 33 | 33 |

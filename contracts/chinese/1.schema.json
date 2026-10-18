@@ -315,7 +315,7 @@
           "items": {
             "$ref": "#/$defs/material"
           },
-          "minItems": 1
+          "minItems": 0
         },
         "items": {
           "type": "array",
@@ -399,6 +399,11 @@
             "$ref": "#/$defs/group"
           },
           "minItems": 0
+        },
+        "review_characters_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
         }
       },
       "required": [
@@ -1251,6 +1256,195 @@
         "kind",
         "label_zh",
         "assessed_skill"
+      ],
+      "additionalProperties": false
+    },
+    "review_characters": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "chinese-review-characters/1"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "curriculum_manifest_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "status": {
+          "enum": [
+            "proposed",
+            "approved"
+          ]
+        },
+        "basis": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "counts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "course": {
+                "enum": [
+                  "p2_chinese",
+                  "p2_higher_chinese"
+                ]
+              },
+              "p1_union_unique": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "already_in_grade_list": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "review_records": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "source_pdf_pages": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "minItems": 2
+              }
+            },
+            "required": [
+              "course",
+              "p1_union_unique",
+              "already_in_grade_list",
+              "review_records",
+              "source_pdf_pages"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 2
+        },
+        "characters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+              },
+              "course": {
+                "enum": [
+                  "p2_chinese",
+                  "p2_higher_chinese"
+                ]
+              },
+              "character": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+              },
+              "source_grade": {
+                "const": 1
+              },
+              "recognition_list_pages": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "minItems": 0
+              },
+              "writing_list_pages": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "minItems": 0
+              },
+              "source_ref": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+              }
+            },
+            "required": [
+              "id",
+              "course",
+              "character",
+              "source_grade",
+              "recognition_list_pages",
+              "writing_list_pages",
+              "source_ref"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "extra_basis": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "extra_characters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{2,95}(?![\\s\\S])"
+              },
+              "course": {
+                "enum": [
+                  "p2_chinese",
+                  "p2_higher_chinese"
+                ]
+              },
+              "character": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+              },
+              "example_word": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 8
+              },
+              "official_list": {
+                "enum": [
+                  "none",
+                  "p3"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "course",
+              "character",
+              "example_word",
+              "official_list"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "schema_version",
+        "version",
+        "curriculum_manifest_version",
+        "status",
+        "basis",
+        "counts",
+        "characters",
+        "extra_basis",
+        "extra_characters"
       ],
       "additionalProperties": false
     }

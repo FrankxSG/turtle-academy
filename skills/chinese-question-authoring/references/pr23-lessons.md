@@ -73,8 +73,26 @@ The fixes for these are the "How to work" steps in the common skill.
 5. **Reports without tests.** The inventory script's counting rules were not tested against adversarial fixtures, so plausible-looking wrong numbers passed. (Reports)
 6. **Simplifying for children by narrowing meaning.** Child-friendly wording (女孩子, 没有云, 很高兴) was chosen without checking it remained true. (Check 3)
 
+## zh-starter-003 author draft
+
+Found by Claude while drafting the 117 items, before any review. Each was fixed in the draft and is recorded so the check catches it next time.
+
+| Defect | Cause | Check that now catches it |
+| --- | --- | --- |
+| A left/right item said 过马路的时候，先看左边，再看右边. In Singapore traffic comes from the right first. | A stock sentence pattern was used without checking it against the learner's locale. Replaced with a two-hands sentence. | Common check 12 |
+| 场 offered for a 工（　） blank; 工场 is also a word. | The sound-alike that a learner confuses is not always a safe distractor. The exact item now asks which sentence is written correctly (工厂 vs 足球场). | Common check 2 |
+| Hints that contained the key character (学 in “学东西”, 天 in “今天”, 牛 in “牛身上”, 午 in “中午”). | Natural explanations reuse the target word. A script now flags any single-character key found in its hint. | Common check 5 |
+| Words outside the P1–P2 lists in hints and explanations (数, 慢, 另, 交, 千, 春 and others). | Everyday words feel easy but are not on the lists. A script checked every text field against the cumulative lists. | ZH1 |
+
 ## Still to apply
 
 - `zh-p2-sound-repair.q3` hint also says 轻声读; change it at the next content revision and redraw the sample, because it is in the agreed pool.
 - `zh-p2-meaning.q4` key is the longest, most qualified option; balance option length at the next revision.
 - A small lint in the validator could catch common checks 5 (key, key character or unique radical name in stem or hint) and 6 (one option in a material containing another question's key). It needs its own reviewed change.
+
+
+## PR24 cross-review: context is not a definition
+
+Read all 117 v1 items on 2026-10-18; 21 revised items require recheck. Several explanations turned one scene into a rule: clouds are white, seeds need soil to grow, learning means reading at school, wild animals live in forests. Other explanations equated reading with reading aloud or treated 那天 as necessarily past. The 喷 scene used unnatural wording, and a 九 recognition item also required addition.
+
+Why missed: substituting distractors checked the keyed sentence but did not test the explanation against a counterexample. Common checks 3–4 must include a true counterexample to any general definition. Keep an explanation bounded to this sentence when it is only a scene; use an accurate dictionary meaning when defining a word. Recognition tasks should not require an unrelated subject skill. New wording needs the same grade-language scan as the original wording.

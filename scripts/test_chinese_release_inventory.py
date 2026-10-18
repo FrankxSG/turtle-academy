@@ -106,6 +106,41 @@ class Inventory(unittest.TestCase):
         curriculum['status'] = 'proposed_not_import_enabled'
         self.assertIsNone(approved_leaves(curriculum, self.batch))
 
+    def test_approved_view_preserves_practice_only_target_classification(self):
+        from chinese_release_inventory import approved_leaves, catalogue
+        # Only a P1 practice route plus a general question: this is not grade leaf coverage.
+        source = next(b for b in self.batch['batches'] if 'review_characters_version' in b)
+        target = source['groups'][0]['target_refs'][0]
+        repair = [copy.deepcopy(i) for i in source['items'] if target in i['target_refs']]
+        general = copy.deepcopy(self.batch['items'][0])
+        general.update(stage=None, target_refs=[], outcome_refs=['zh.p2_chinese.r-character'], courses=['p2_chinese'])
+        pending = dict(source, status='approved', items=repair+[general], materials=[])
+        review = dict(self.batch['review'], status='approved')
+        cat = catalogue([pending], review)
+        self.assertEqual(approved_leaves(self.curriculum, cat)['p2_chinese'], 0)
+        self.assertEqual(approved_leaves(self.curriculum, catalogue([pending], dict(review,status='proposed')))['p2_chinese'], 0)
+        self.assertIn('target list not approved', __import__('chinese_release_inventory').approval_note(self.curriculum, catalogue([pending],dict(review,status='proposed'))))
+
+
+    def test_review_and_extra_targets_never_count_as_leaf_routes(self):
+        review = self.batch['review']
+        ids = {r['id'] for r in review['characters'] + review['extra_characters']}
+        data = analyse(self.curriculum, self.batch)
+        rows = data['p2_chinese']['rows']
+        self.assertFalse(ids & {t for r in rows for t in r['complete']})
+        # Derive the expected count from the catalogue: targets with all three stages.
+        stages = {}
+        for item in self.batch['items']:
+            for ref in item['target_refs']:
+                stages.setdefault(ref, set()).add(item['stage'])
+        complete = {t for t, s in stages.items() if s == {'exact', 'similar', 'generic'}}
+        expected = sum(1 for r in review['characters'] if r['course'] == 'p2_chinese' and r['id'] in complete)
+        self.assertEqual(data['p2_chinese']['practice_targets']['review'], expected)
+        # Without the review file the same pools would be miscounted as leaf routes; the file is what keeps them apart.
+        without = analyse(self.curriculum, dict(self.batch, review=None))
+        leaked = {t for r in without['p2_chinese']['rows'] for t in r['complete']} & ids
+        self.assertTrue(leaked)
+        self.assertFalse(without['p2_chinese']['practice_union'])
 
 if __name__ == '__main__':
     unittest.main()

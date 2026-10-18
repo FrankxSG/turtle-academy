@@ -17,6 +17,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CURRICULUM = ROOT / 'content/chinese/curriculum.json'
 BATCHES = ROOT / 'content/chinese/batches'
+REVIEW = ROOT / 'content/chinese/review-characters.json'
 REPORT = ROOT / 'docs/content-review/CHINESE_RELEASE_INVENTORY.md'
 STAGES = {'exact', 'similar', 'generic'}
 COURSE_NAMES = {'p2_chinese': 'P2 Chinese (华文)', 'p2_higher_chinese': 'P2 Higher Chinese (高级华文)',
@@ -27,15 +28,17 @@ THIN_STOCK = 1
 DEFAULT_X = 10
 
 
-def catalogue(batches):
-    """Combine published batches for counting. Review state stays per batch, under 'batches'."""
+def catalogue(batches, review=None):
+    """Combine published batches for counting. Review state stays per batch, under 'batches'.
+    P1 review and textbook-extra characters are practice targets, never leaf coverage."""
     return {'batches': batches, 'items': [i for b in batches for i in b['items']],
-            'materials': [m for b in batches for m in b['materials']]}
+            'materials': [m for b in batches for m in b['materials']], 'review': review}
 
 
 def load():
     batches = [json.loads(p.read_text(encoding='utf-8')) for p in sorted(BATCHES.glob('*.json'))]
-    return json.loads(CURRICULUM.read_text(encoding='utf-8')), catalogue(batches)
+    review = json.loads(REVIEW.read_text(encoding='utf-8'))
+    return json.loads(CURRICULUM.read_text(encoding='utf-8')), catalogue(batches, review)
 
 
 def approval_note(curriculum, cat):
@@ -44,6 +47,10 @@ def approval_note(curriculum, cat):
     if curriculum['status'] != 'approved':
         missing.append('leaf denominator not approved')
     batches = cat['batches']
+    if any('review_characters_version' in b for b in batches):
+        review = cat.get('review')
+        if not review or review['status'] != 'approved':
+            missing.append('P1 review/textbook-extra target list not approved')
     for batch in batches:
         log, gates = batch['review_log'], []
         if log['independent_review'] != 'passed':
@@ -62,6 +69,9 @@ def approval_note(curriculum, cat):
 def analyse(curriculum, batch):
     skills = {s['id']: s for s in curriculum['skill_targets']}
     chars = {c['id']: c for c in curriculum['characters']}
+    review = batch.get('review') or {'characters': [], 'extra_characters': []}
+    extra = {r['id']: ('review' if r in review['characters'] else 'extra')
+             for r in review['characters'] + review['extra_characters']}
     items = batch['items']
     stage_items = defaultdict(lambda: defaultdict(list))   # target -> stage -> item ids
     for item in items:
@@ -76,7 +86,7 @@ def analyse(curriculum, batch):
             lid = leaf['id']
             general = [i for i in items if lid in i['outcome_refs'] and i['stage'] is None]
             repair = [i for i in items if lid in i['outcome_refs'] and i['stage'] is not None]
-            targets = sorted({r for i in repair for r in i['target_refs'] if r.split('.')[1] == course})
+            targets = sorted({r for i in repair for r in i['target_refs'] if r.split('.')[1] == course and r not in extra})
             targets += sorted(t for t, s in skills.items()
                               if s['outcome_ref'] == lid and t not in targets and t in stage_items)
             # A target can appear under multiple leaves. Do not assemble a leaf's
@@ -114,6 +124,9 @@ def analyse(curriculum, batch):
             'char_recognition': sum(bool(c['recognition_list_pages']) for c in char_union),
             'char_targets': len(char_targets),
             'char_targets_recognition': sum(bool(chars[t]['recognition_list_pages']) for t in char_targets),
+            'practice_targets': Counter(extra[t] for t in stage_items if t in extra and t.split('.')[1] == course
+                                        and set(stage_items[t]) == STAGES),
+            'practice_union': Counter(v for t, v in extra.items() if t.split('.')[1] == course),
             'course_only_items': sum(1 for i in course_items if i['courses'] == [course]),
             'formats': Counter(i['format'] for i in course_items),
             'families': Counter(i['family'] for i in course_items),
@@ -145,7 +158,10 @@ def approved_leaves(curriculum, cat):
     Items in a batch that is not approved never count, whatever other batches hold."""
     if curriculum['status'] != 'approved':
         return None
-    approved = catalogue([b for b in cat['batches'] if b['status'] == 'approved'])
+    review = cat.get('review')
+    approved = catalogue([b for b in cat['batches'] if b['status'] == 'approved'
+                          and ('review_characters_version' not in b or
+                               (review and review['status'] == 'approved'))], review)
     if not approved['batches']:
         return {course: 0 for course in curriculum['courses']}
     data = analyse(curriculum, approved)
@@ -178,6 +194,9 @@ def course_section(course, data, p3=False, approved=None):
         f"| Empty in-scope leaves (stay in the denominator) | {len(empty)} |",
         f"| Out-of-app leaves, not in the denominator | " + ', '.join(f'{k} {v}' for k, v in sorted(out_scope.items())) + ' |',
         f"| Character group coverage, reported separately | {pct(data['char_targets'], data['char_union'])} of the grade's list characters have a complete repair pool |",
+        *([f"| Extra practice targets, never coverage | P1 review characters with a complete repair pool: "
+           f"{data['practice_targets']['review']} of {data['practice_union']['review']}; textbook extras: "
+           f"{data['practice_targets']['extra']} of {data['practice_union']['extra']} |"] if data['practice_union'] else []),
         f"| Questions tagged to this course | {len(data['items'])} ({data['course_only_items']} only for this course) |",
         f"| Whole materials | {len(data['materials'])} (" + ', '.join(f'{k} {v}' for k, v in sorted(mats.items())) +
         f"); at X={DEFAULT_X} a task uses ≥{per_day}: at most {len(data['materials']) // per_day} "
