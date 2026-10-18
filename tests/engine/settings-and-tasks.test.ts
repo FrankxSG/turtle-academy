@@ -25,6 +25,18 @@ test('F10: X outside 6–19 or non-integer is rejected; boundaries accepted', as
   assert.equal(h.engine.xFor('english'), 19)
 })
 
+test('F10 (owner decision 2026-10-18): Chinese alone may go to 20 in the first pilot', async () => {
+  const h = harness()
+  await h.engine.setX('chinese', 20)
+  assert.equal(h.engine.xFor('chinese'), 20)
+  await assert.rejects(h.engine.setX('chinese', 21), RangeError)
+  for (const s of ['english', 'mathematics', 'science'] as const) await assert.rejects(h.engine.setX(s, 20), RangeError)
+  const start = await h.engine.startOrResume('chinese')
+  if (start.kind !== 'task') throw new Error('no task')
+  assert.equal(start.task.x, 20)
+  assert.ok(start.task.plan.materials.length >= minMaterials(20))
+})
+
 test('F02: changing X during a paused task keeps the task frozen; next task and other subjects use their own X', async () => {
   const h = harness()
   await h.engine.setX('mathematics', 8)

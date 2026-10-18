@@ -135,7 +135,7 @@ The material quota is intentionally a **minimum**, as required by Functional Des
 
 These are acceptance obligations for a later engine PR, not claims that the authoring tool implements learning progression.
 
-1. Freeze X per subject/task (integer 6–19, default 10); do not reinterpret a paused queue after a setting/content update. Planned total is actual full-material count, not X.
+1. Freeze X per subject/task (integer 6–19, default 10; Chinese up to 20 in the first pilot by owner decision 2026-10-18); do not reinterpret a paused queue after a setting/content update. Planned total is actual full-material count, not X.
 2. Collect every first response in a material before any correctness, hint or correction. Preserve first answers, retry, assistance and correction separately across pause/reload.
 3. For a passage-assessed target, aggregate every relevant task question, including related short questions. Any first wrong answer retains the task's starting stage. All correct may clear only once, after the full aggregate and format threshold. No early pass after the first passage.
 4. The high-option/matching/ordering route needs one independent first success OR the low-option route needs two distinct first successes; a wrong answer resets low-option partial evidence. An assisted response never clears a stage. A high-option pass cannot override a passage-aggregate failure.

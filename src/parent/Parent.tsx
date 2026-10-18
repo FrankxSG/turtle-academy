@@ -1,9 +1,23 @@
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import type { AuthClient } from '../auth/client.ts'
 import type { Runtime } from '../ui/runtime.ts'
 import { names, subjects, type Language } from '../ui/development.ts'
 import { responseText } from '../ui/Practice.tsx'
 import { resetPin, validPin, verifyPin } from './device.ts'
+import { xMax } from '../engine/policy.ts'
+const PrivateMistakes = __PRIVATE_PACK_ENABLED__
+  ? lazy(() => import('./Mistakes.tsx').then((m) => ({ default: m.Mistakes })))
+  : null
+
+// History is read-only: a question whose text is no longer on this device shows a dash instead of
+// breaking the whole parent area. (Practice itself still refuses to show text from another version.)
+function historyText(...args: Parameters<typeof responseText>): string {
+  try {
+    return responseText(...args)
+  } catch {
+    return '—'
+  }
+}
 
 export function Parent({
   id,
@@ -186,8 +200,8 @@ export function Parent({
               <h2>{tr('Daily practice size', '每日练习量')}</h2>
               <p>
                 {tr(
-                  '6–19 main questions per subject. Changes apply to new tasks. Language tasks finish whole materials and can exceed this number.',
-                  '每科 6–19 题。更改从下一次新任务生效。语言任务完成整份材料，题数可能更多。',
+                  '6–19 main questions per subject (Chinese up to 20 in this pilot). Changes apply to new tasks. Language tasks finish whole materials and can exceed this number.',
+                  '每科 6–19 题（本次试用华文最多 20 题）。更改从下一次新任务生效。语言任务完成整份材料，题数可能更多。',
                 )}
               </p>
               {subjects.map((s) => (
@@ -201,7 +215,7 @@ export function Parent({
                       void work(() => engine.setX(s, Number(ev.target.value)))
                     }
                   >
-                    {Array.from({ length: 14 }, (_, i) => i + 6).map((x) => (
+                    {Array.from({ length: xMax(s) - 5 }, (_, i) => i + 6).map((x) => (
                       <option key={x}>{x}</option>
                     ))}
                   </select>
@@ -242,6 +256,16 @@ export function Parent({
               </button>
             </article>
           </div>
+          {__PRIVATE_PACK_ENABLED__ && runtime.program && PrivateMistakes && (
+            <Suspense fallback={null}>
+            <PrivateMistakes
+              program={runtime.program}
+              language={language}
+              work={work}
+              busy={busy}
+            />
+            </Suspense>
+          )}
           <section className="summary">
             <h2>{tr('Practice summary', '练习记录')}</h2>
             {engine.state.completions
@@ -333,7 +357,7 @@ export function Parent({
                                   : e.phase === 'retry'
                                     ? tr('Hint-assisted retry', '提示后重试')
                                     : tr('Supported correction', '辅助订正')}
-                                : {responseText(p.item_id, e.response)} ·{' '}
+                                : {historyText(p.item_id, e.response, t.content_version)} ·{' '}
                                 {e.correct
                                   ? tr('correct', '正确')
                                   : tr('needs correction', '需订正')}{' '}

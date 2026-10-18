@@ -6,7 +6,7 @@ import { derive, type Derived } from './evidence.ts'
 import { compatibleItem, nothingEligible, planTask, resolveShortSlot, usableItem, usableVersion, type PlanContext } from './planner.ts'
 import type { Mutation, Put, RecordStore, SaveStatus, Table } from './persistence.ts'
 import { WriteQueue } from './persistence.ts'
-import { halfwayOf, IDLE_AFTER_SECONDS, isLanguage, isValidX, POLICY_VERSION, SUBJECTS } from './policy.ts'
+import { halfwayOf, IDLE_AFTER_SECONDS, isLanguage, isValidX, POLICY_VERSION, SUBJECTS, xMax } from './policy.ts'
 import { emptyState, fromRecords, toRecords } from './records.ts'
 import type {
   ActivityState, Assistance, Checkpoint, Completion, EngineState, Flag, PlanSlot, Presentation, Response, Role, Subject, Target, Task,
@@ -122,7 +122,7 @@ export class LearningEngine {
   // ---------------------------------------------------------------- parent settings (PIN gate is in the UI layer)
 
   async setX(subject: Subject, x: number): Promise<SaveStatus | null> {
-    if (!isValidX(x)) throw new RangeError('X must be an integer from 6 to 19')
+    if (!isValidX(x, subject)) throw new RangeError(`X must be an integer from 6 to ${xMax(subject)}`)
     const entry = this.state.settings.subjects.find((s) => s.subject === subject)
     if (!entry) throw new RangeError('unknown subject')
     entry.x = x
@@ -153,6 +153,11 @@ export class LearningEngine {
 
   private release(task: Task): CatalogueRelease {
     return this.deps.registry.release(task.subject, task.content_version)
+  }
+
+  /** Whether a task runs on synthetic development fixtures (labelled as such) rather than reviewed content. */
+  isDevelopmentContent(taskId: string): boolean {
+    return this.release(this.task(taskId)).development_only
   }
 
   private ctx(subject: Subject, release: CatalogueRelease, x: number): PlanContext {
@@ -485,6 +490,24 @@ export class LearningEngine {
     this.changed()
   }
 
+  // ---------------------------------------------------------------- imported mistakes
+
+  /**
+   * Add or update target records from a parent-confirmed import (src/mistakes/intake.ts decides their content).
+   * Existing observations are never removed or rewritten here: an import can only add observations, attach a
+   * target to content (mapping status) or mark it pending again when content is missing. Evidence is untouched.
+   */
+  async upsertTargets(records: Target[]): Promise<SaveStatus | null> {
+    for (const r of records) {
+      const existing = this.state.targets.find((t) => t.id === r.id)
+      if (!existing) { this.state.targets.push(structuredClone(r)); continue }
+      for (const o of r.observations) if (!existing.observations.some((x) => x.id === o.id)) existing.observations.push(structuredClone(o))
+      existing.mapping_status = r.mapping_status
+    }
+    this.changed()
+    return this.flush()
+  }
+
   // ---------------------------------------------------------------- flags
 
   /** Child flags a suspected problem question: its evidence and count are removed and it is replaced. */
@@ -645,6 +668,11 @@ export class LearningEngine {
   // ---------------------------------------------------------------- persistence
 
   /** Write changed records and new events as one ordered mutation. */
+  /** Retry writes still queued after a storage failure now (the same as returning to the foreground). */
+  async retrySaves(): Promise<SaveStatus | null> {
+    return this.deps.writer ? this.deps.writer.onForeground() : null
+  }
+
   async flush(): Promise<SaveStatus | null> {
     const puts: Put[] = []
     for (const p of toRecords(this.state)) {

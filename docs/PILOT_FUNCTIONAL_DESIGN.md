@@ -23,7 +23,7 @@ No runtime AI/OCR, in-app worksheet image intake, tracing, automatic handwriting
 
 ## 2. Setup, daily entry and task completion
 
-Each subject has its own persistent parent setting **X: integer 6–19**, default **10**. No shared X, fixed five-target quota or three-consecutive-answer requirement. Changes apply to subsequently created tasks of that subject, not an active task's frozen configuration. Quotas and checkpoints use that subject's X. Record actual practice time per subject; the owner reviews defaults after each subject release. Count active time only while the subject screen is open and in use; teaching counts. Stop on pause, backgrounding or two or more minutes of inactivity. Do not describe planned workload estimates as measured daily duration.
+Each subject has its own persistent parent setting **X: integer 6–19**, default **10**. Owner decision 2026-10-18: in the first pilot Chinese may go up to 20 (other subjects stay 6–19). No shared X, fixed five-target quota or three-consecutive-answer requirement. Changes apply to subsequently created tasks of that subject, not an active task's frozen configuration. Quotas and checkpoints use that subject's X. Record actual practice time per subject; the owner reviews defaults after each subject release. Count active time only while the subject screen is open and in use; teaching counts. Stop on pause, backgrounding or two or more minutes of inactivity. Do not describe planned workload estimates as measured daily duration.
 
 Profile timezone is set at setup and can be changed by the parent in a PIN-protected setting. A timezone change must not create extra learning days, duplicate daily completion/story credit or bring review/target eligibility forward. Preserve completed-day and not-before evidence across the change; the engine specifies required tests.
 
@@ -47,9 +47,9 @@ Each language task requires **at least ceil(X/5) complete materials AND at least
 | --- | --- |
 | 6–10 | 2 |
 | 11–15 | 3 |
-| 16–19 | 4 |
+| 16–19 (Chinese 16–20) | 4 |
 
-Prioritise complete materials that cover eligible due/repair targets. Use short questions for targets not appropriately covered by materials, and supplement if the total is below X. Do not mechanically stack X short repair questions plus the material quota. Unselected targets remain pending; clearing the whole bank today is not required. Whole-material completion can make actual question total exceed X; parent settings/summary must make that clear. Daily work is not exactly the sum of four X values: language tasks can exceed their X, and Science also has uncounted learning activities.
+Prioritise complete materials that cover eligible due/repair targets. Use short questions for targets not appropriately covered by materials, and supplement if the total is below X. Do not mechanically stack X short repair questions plus the material quota. **Owner decision 2026-10-18:** short review/repair questions for targets the chosen materials do not cover come first in the task, up to max(X − material questions, ceil(X/2)) — about half the task. Due reviews take precedence over repair, and each repair target gets one slot before any gets a second. Unselected targets remain pending; clearing the whole bank today is not required. Whole-material completion can make actual question total exceed X; parent settings/summary must make that clear. Daily work is not exactly the sum of four X values: language tasks can exceed their X, and Science also has uncounted learning activities.
 
 Pre-arrange the material structure and actual question total. Do not end a material because X is reached. User interruption remains resumable, not a system-imposed split. Finish **all first responses in a material before correctness feedback or correction**. Then address incorrect answers with the subject's hint, one retry and correction if necessary.
 

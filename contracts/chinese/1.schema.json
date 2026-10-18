@@ -506,7 +506,7 @@
         "x": {
           "type": "integer",
           "minimum": 6,
-          "maximum": 19
+          "maximum": 20
         },
         "material_ids": {
           "type": "array",

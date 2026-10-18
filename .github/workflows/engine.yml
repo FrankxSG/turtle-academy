@@ -4,6 +4,7 @@ on:
     paths:
       - 'src/engine/**'
       - 'src/catalogue/**'
+      - 'src/mistakes/**'
       - 'src/snapshot/**'
       - 'tests/engine/**'
       - '.github/workflows/engine.yml'

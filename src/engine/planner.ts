@@ -5,7 +5,7 @@
 import type { CatalogueItem, CatalogueRelease, Pool } from '../catalogue/adapter.ts'
 import { daysBetween } from './calendar.ts'
 import { completedKnowledgePoints, isEligible, type Derived, type TargetProgress } from './evidence.ts'
-import { isLanguage, isPractisable, minMaterials, SCIENCE_FILLER_EXCLUSION_DAYS } from './policy.ts'
+import { isLanguage, isPractisable, languagePrescribedShortMax, minMaterials, SCIENCE_FILLER_EXCLUSION_DAYS } from './policy.ts'
 import type { EngineState, PlanMaterial, PlanSlot, Role, Stage, Subject, Target, Task } from './types.ts'
 
 export interface PlanResult {
@@ -202,6 +202,17 @@ export function planTask(ctx: PlanContext): PlanResult {
     pick(true)
     pick(false)
     if (chosen.length < need) pick(false)
+    // Short review/repair questions for targets that no material covers come FIRST in the task (owner instruction
+    // 2026-10-18: eligible review and mistake repair precede general practice): due reviews, then mistake repair.
+    // One slot per target first; then a second slot for repair targets, so short-only repair can clear two stages
+    // in a day. Capped by policy so they never become a full extra short quota on top of the materials.
+    const materialQuestions = chosen.reduce((n, m) => n + m.question_ids.length, 0)
+    const cap = languagePrescribedShortMax(x, materialQuestions)
+    const uncovered = prescribed.filter((pr) => !covered.has(pr.target.id))
+    const shortPlan = [...uncovered, ...uncovered.filter((pr) => pr.stage !== 'delayed_review')].slice(0, cap)
+    const order = new Map(uncovered.map((pr, i) => [pr.target.id, i]))
+    shortPlan.sort((a, b) => (order.get(a.target.id) as number) - (order.get(b.target.id) as number))
+    for (const pr of shortPlan) slots.push(slot(slots.length, 'short', roleOf(pr), { target_ref: pr.target.id, stage: pr.stage }))
     for (const m of chosen) {
       materials.push({ material_ref: m.ref, material_version: m.version, family: m.family, question_count: m.question_ids.length })
       for (const q of m.question_ids) {
@@ -212,12 +223,6 @@ export function planTask(ctx: PlanContext): PlanResult {
           target_ref: pr?.target.id ?? null, stage: pr?.stage ?? null,
         }))
       }
-    }
-    // Short questions only for targets that no material covers; never a full short quota on top of materials.
-    for (const pr of prescribed) {
-      if (slots.length >= x) break
-      if (covered.has(pr.target.id)) continue
-      slots.push(slot(slots.length, 'short', roleOf(pr), { target_ref: pr.target.id, stage: pr.stage }))
     }
     while (slots.length < x) slots.push(slot(slots.length, 'short', 'general_practice'))
     return { materials, slots, plannedTotal: slots.filter((s) => s.counts_toward_x).length, newTargets }

@@ -19,7 +19,7 @@
     "position": { "type": "integer", "minimum": 0, "maximum": 200 },
     "item_version": { "type": "integer", "minimum": 1, "maximum": 100000 },
     "nullable_item_version": { "type": "integer", "minimum": 1, "maximum": 100000, "nullable": true },
-    "x": { "type": "integer", "minimum": 6, "maximum": 19 },
+    "x": { "type": "integer", "minimum": 6, "maximum": 20 },
     "stage": { "type": "string", "enum": ["acquisition", "exact", "similar", "generic", "delayed_review"] },
     "nullable_stage": { "type": "string", "enum": ["acquisition", "exact", "similar", "generic", "delayed_review"], "nullable": true },
     "role": { "type": "string", "enum": ["material_question", "repair", "delayed_review", "general_practice", "acquisition_test", "replacement"] },

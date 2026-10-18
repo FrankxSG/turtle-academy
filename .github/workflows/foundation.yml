@@ -7,6 +7,18 @@ on:
       - 'src/ui/**'
       - 'src/hub/**'
       - 'src/parent/**'
+      - 'src/mistakes/**'
+      - 'src/catalogue/**'
+      - 'src/engine/**'
+      - 'src/storage.ts'
+      - 'content/chinese/**'
+      - 'tests/mistakes.spec.ts'
+      - 'tests/public-packaging.spec.ts'
+      - 'scripts/check-public-bundle.mjs'
+      - 'tests/build/**'
+      - 'src/private-build.d.ts'
+      - 'tests/engine/fixtures/**'
+      - 'vite.config.ts'
       - 'tests/foundation.spec.ts'
       - 'tests/pilot-ui.spec.ts'
       - 'tests/parent/**'
@@ -38,12 +50,15 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
       - run: npm run test:ui
+      - run: npm run test:build
       - run: npm audit --audit-level=high
       # Public synthetic endpoint, intercepted by Playwright; never a hosted project or credential.
       - run: npm run build
         env:
           VITE_SUPABASE_URL: http://127.0.0.1:4173
           VITE_SUPABASE_ANON_KEY: synthetic-test-only
+      - name: Assert default public artifacts exclude private-pack code
+        run: npm run check:public-bundle
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
       - name: Save synthetic UI images for visual review

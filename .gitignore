@@ -81,6 +81,7 @@ out
 # Nuxt.js build / generate output
 .nuxt
 dist
+dist-synthetic
 trials/dist
 .output
 
@@ -157,3 +158,6 @@ playwright-report/
 # Python bytecode caches
 __pycache__/
 *.py[cod]
+
+# Opt-in private builds are never public deployment artifacts.
+dist-private/
