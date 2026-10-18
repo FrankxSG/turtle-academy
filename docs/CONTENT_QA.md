@@ -13,7 +13,7 @@ Current behavioral authority is [Functional Design](PILOT_FUNCTIONAL_DESIGN.md);
 
 ## Private worksheet processing
 
-- Parent crops identifying detail before providing images to a **private** Claude/ChatGPT account. Cropping reduces risk but does not guarantee anonymity; service-specific data handling terms apply.
+- Parent provides worksheet images to a **private** Claude/ChatGPT account without having to crop them first. The AI filters identifying detail (names, school, class, teacher comments, photos) out of everything it produces (owner decision 2026-10-18; this replaces parent cropping). The provider still receives the full image under its data handling terms, and filtering does not guarantee anonymity.
 - External AI prepares structured candidate targets, error type and uncertainty. Parent reviews and accepts/rejects every item before a parent-only paste-in import. **Only the registered child's authenticated private bank** holds actual errors, including verified, uncertain and unmatched/pending-content entries. No source image upload to Pilot app/backend and no runtime AI/OCR.
 - Repeat occurrences preserve learning observations; no unverified inference of a knowledge misconception from an isolated wrong response. Only verified targets with reviewed catalogue exercises generate targeted practice.
 - Real worksheets, errors, handwriting, progress, school data and identifiable records never enter public Git, Issues, PRs, screenshots, code fixtures, CI, logs or builds. Use synthetic examples for all validation.

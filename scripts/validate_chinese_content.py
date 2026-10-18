@@ -345,18 +345,37 @@ def check_attempt(event, item):
     require(event['assistance'] == required[event['phase']], 'attempt_assistance_phase')
 
 
+def check_batches(curriculum, batches):
+    """Each batch is checked on its own, so one batch's review state never covers another's items.
+    Catalogue IDs must still be unique across batches, because attempts and plans name items by ID."""
+    require(len({b['batch_id'] for b in batches}) == len(batches), 'duplicate_batch_id')
+    seen = set()
+    for batch in batches:
+        check_catalogue(curriculum, batch)
+        ids = {r['id'] for key in ['items', 'materials', 'groups'] for r in batch[key]}
+        require(not (ids & seen), 'duplicate_catalogue_id_across_batches')
+        seen |= ids
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.parse_args()
     curriculum = load(ROOT / 'content/chinese/curriculum.json')
-    batch = load(ROOT / 'content/chinese/batches/starter-001.json')
-    check_catalogue(curriculum, batch)
+    batches = [load(path) for path in sorted((ROOT / 'content/chinese/batches').glob('*.json'))]
+    check_batches(curriculum, batches)
+    by_id = {b['batch_id']: b for b in batches}
     plans = sorted((ROOT / 'content/chinese/fixtures').glob('task-*.json'))
     for path in plans:
-        check_plan(load(path), curriculum, batch)
+        plan = load(path)
+        require(plan['content_batch_id'] in by_id, 'plan_batch_version')
+        check_plan(plan, curriculum, by_id[plan['content_batch_id']])
     print(f"PASS: {len(curriculum['outcomes'])} course outcomes, {len(curriculum['characters'])} character records; "
-          f"{len(batch['materials'])} materials, {len(batch['items'])} items, {len(plans)} synthetic plans.")
-    print('QA pending: independent review, owner sign-off, approved coverage denominator. Not a content release.')
+          f"{len(batches)} batches, {sum(len(b['materials']) for b in batches)} materials, "
+          f"{sum(len(b['items']) for b in batches)} items, {len(plans)} synthetic plans.")
+    pending = [f"{b['batch_id']} v{b['version']} review and sign-off" for b in batches if b['status'] != 'approved']
+    if curriculum['status'] != 'approved':
+        pending.append('approved coverage denominator')
+    print('QA pending: ' + (', '.join(pending) or 'none recorded') + '. Not a content release.')
 
 
 if __name__ == '__main__':

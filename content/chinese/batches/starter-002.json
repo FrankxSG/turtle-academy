@@ -1,0 +1,2115 @@
+{
+ "schema_version": "chinese-content/1",
+ "batch_id": "zh-starter-002",
+ "version": 3,
+ "curriculum_manifest_version": "zh-2024-p2p3-draft.2",
+ "status": "approved",
+ "materials": [
+  {
+   "id": "zh-m20",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "kind": "reading",
+   "title": "回家的路上",
+   "body": "星期三放学后，小美和妈妈走路回家。走到半路，妈妈说：“天上来了很多乌云，还刮起了大风，快下雨了。我们去巴士站等一等吧！”她们在巴士站等了一会儿，雨就停了。回到家，小美说：“还好我们没有淋湿！”",
+   "question_ids": [
+    "zh-m20.q1",
+    "zh-m20.q2",
+    "zh-m20.q3",
+    "zh-m20.q4"
+   ],
+   "feedback_policy": "after_all_first_responses",
+   "asset_refs": [],
+   "blanks": [],
+   "annotations": []
+  }
+ ],
+ "items": [
+  {
+   "id": "zh-p2-confusable2-u8fdc.q1",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-character",
+    "zh.p2_higher_chinese.r-character"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.char.u8fdc",
+    "zh.p2_higher_chinese.char.u8fdc"
+   ],
+   "family": "character",
+   "format": "mcq_4plus",
+   "stem": "外婆住得很{{blank-1}}，我们要坐很久的车才能到。",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "运"
+    },
+    {
+     "id": "opt-2",
+     "text": "远"
+    },
+    {
+     "id": "opt-3",
+     "text": "园"
+    },
+    {
+     "id": "opt-4",
+     "text": "元"
+    }
+   ],
+   "correct_option_id": "opt-2",
+   "hint": "要坐很久的车才能到，说明路长不长？",
+   "explanation": "路很长，要坐很久的车，是“远”。“运”在“运动”里，“园”在“公园”里，“元”在“一元”里。",
+   "rationale": "二年级形近字与同音字辨析组（二）：辨认“远”与形近、同音或容易混淆的字；只评估辨认，不评估手写。",
+   "material_id": null,
+   "stage": "exact",
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [
+    {
+     "id": "blank-1",
+     "question_id": "zh-p2-confusable2-u8fdc.q1"
+    }
+   ],
+   "annotations": [],
+   "blank_ref": "blank-1"
+  },
+  {
+   "id": "zh-p2-confusable2-u8fdc.q2",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-character",
+    "zh.p2_higher_chinese.r-character"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.char.u8fdc",
+    "zh.p2_higher_chinese.char.u8fdc"
+   ],
+   "family": "character",
+   "format": "mcq_4plus",
+   "stem": "我们走了很{{blank-1}}的路，才到海边。",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "园"
+    },
+    {
+     "id": "opt-2",
+     "text": "元"
+    },
+    {
+     "id": "opt-3",
+     "text": "远"
+    },
+    {
+     "id": "opt-4",
+     "text": "运"
+    }
+   ],
+   "correct_option_id": "opt-3",
+   "hint": "走了很久才到，路长不长？",
+   "explanation": "“很远的路”就是很长的路。",
+   "rationale": "二年级形近字与同音字辨析组（二）：辨认“远”与形近、同音或容易混淆的字；只评估辨认，不评估手写。",
+   "material_id": null,
+   "stage": "similar",
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [
+    {
+     "id": "blank-1",
+     "question_id": "zh-p2-confusable2-u8fdc.q2"
+    }
+   ],
+   "annotations": [],
+   "blank_ref": "blank-1"
+  },
+  {
+   "id": "zh-p2-confusable2-u8fdc.q3",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-character",
+    "zh.p2_higher_chinese.r-character"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.char.u8fdc",
+    "zh.p2_higher_chinese.char.u8fdc"
+   ],
+   "family": "character",
+   "format": "mcq_4plus",
+   "stem": "我们要做永{{blank-1}}的好朋友。",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "远"
+    },
+    {
+     "id": "opt-2",
+     "text": "元"
+    },
+    {
+     "id": "opt-3",
+     "text": "运"
+    },
+    {
+     "id": "opt-4",
+     "text": "园"
+    }
+   ],
+   "correct_option_id": "opt-1",
+   "hint": "“永（　）”就是一直都会这样。",
+   "explanation": "“永远”就是一直都会这样。",
+   "rationale": "二年级形近字与同音字辨析组（二）：辨认“远”与形近、同音或容易混淆的字；只评估辨认，不评估手写。",
+   "material_id": null,
+   "stage": "generic",
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [
+    {
+     "id": "blank-1",
+     "question_id": "zh-p2-confusable2-u8fdc.q3"
+    }
+   ],
+   "annotations": [],
+   "blank_ref": "blank-1"
+  },
+  {
+   "id": "zh-p2-confusable2-u5b8c.q1",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-character",
+    "zh.p2_higher_chinese.r-character"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.char.u5b8c",
+    "zh.p2_higher_chinese.char.u5b8c"
+   ],
+   "family": "character",
+   "format": "mcq_4plus",
+   "stem": "我做{{blank-1}}作业，就去公园玩。",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "玩"
+    },
+    {
+     "id": "opt-2",
+     "text": "完"
+    },
+    {
+     "id": "opt-3",
+     "text": "元"
+    },
+    {
+     "id": "opt-4",
+     "text": "园"
+    }
+   ],
+   "correct_option_id": "opt-2",
+   "hint": "作业都做好了，用哪个字？",
+   "explanation": "“做完”就是做好了。“玩”是“玩游戏”的“玩”；“元”“园”读 yuán。",
+   "rationale": "二年级形近字与同音字辨析组（二）：辨认“完”与形近、同音或容易混淆的字；只评估辨认，不评估手写。",
+   "material_id": null,
+   "stage": "exact",
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [
+    {
+     "id": "blank-1",
+     "question_id": "zh-p2-confusable2-u5b8c.q1"
+    }
+   ],
+   "annotations": [],
+   "blank_ref": "blank-1"
+  },
+  {
+   "id": "zh-p2-confusable2-u5b8c.q2",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-character",
+    "zh.p2_higher_chinese.r-character"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.char.u5b8c",
+    "zh.p2_higher_chinese.char.u5b8c"
+   ],
+   "family": "character",
+   "format": "mcq_4plus",
+   "stem": "弟弟喝{{blank-1}}牛奶，就去刷牙。",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "园"
+    },
+    {
+     "id": "opt-2",
+     "text": "元"
+    },
+    {
+     "id": "opt-3",
+     "text": "完"
+    },
+    {
+     "id": "opt-4",
+     "text": "玩"
+    }
+   ],
+   "correct_option_id": "opt-3",
+   "hint": "牛奶喝好了，没有了，用哪个字？",
+   "explanation": "“喝完牛奶”就是牛奶都喝好了。",
+   "rationale": "二年级形近字与同音字辨析组（二）：辨认“完”与形近、同音或容易混淆的字；只评估辨认，不评估手写。",
+   "material_id": null,
+   "stage": "similar",
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [
+    {
+     "id": "blank-1",
+     "question_id": "zh-p2-confusable2-u5b8c.q2"
+    }
+   ],
+   "annotations": [],
+   "blank_ref": "blank-1"
+  },
+  {
+   "id": "zh-p2-confusable2-u5b8c.q3",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-character",
+    "zh.p2_higher_chinese.r-character"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.char.u5b8c",
+    "zh.p2_higher_chinese.char.u5b8c"
+   ],
+   "family": "character",
+   "format": "mcq_4plus",
+   "stem": "这本故事书，我已经看{{blank-1}}了。",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "元"
+    },
+    {
+     "id": "opt-2",
+     "text": "玩"
+    },
+    {
+     "id": "opt-3",
+     "text": "园"
+    },
+    {
+     "id": "opt-4",
+     "text": "完"
+    }
+   ],
+   "correct_option_id": "opt-4",
+   "hint": "书从头看到了最后，用哪个字？",
+   "explanation": "“看完了”就是从头看到了最后。",
+   "rationale": "二年级形近字与同音字辨析组（二）：辨认“完”与形近、同音或容易混淆的字；只评估辨认，不评估手写。",
+   "material_id": null,
+   "stage": "generic",
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [
+    {
+     "id": "blank-1",
+     "question_id": "zh-p2-confusable2-u5b8c.q3"
+    }
+   ],
+   "annotations": [],
+   "blank_ref": "blank-1"
+  },
+  {
+   "id": "zh-p2-confusable2-u6349.q1",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-character",
+    "zh.p2_higher_chinese.r-character"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.char.u6349",
+    "zh.p2_higher_chinese.char.u6349"
+   ],
+   "family": "character",
+   "format": "mcq_4plus",
+   "stem": "小猫在草地上{{blank-1}}虫子。",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "足"
+    },
+    {
+     "id": "opt-2",
+     "text": "捉"
+    },
+    {
+     "id": "opt-3",
+     "text": "种"
+    },
+    {
+     "id": "opt-4",
+     "text": "跳"
+    }
+   ],
+   "correct_option_id": "opt-2",
+   "hint": "小猫想吃虫子，它要做什么？",
+   "explanation": "“捉虫子”就是把虫子抓住。“足”在“足球”里，“种”在“种花”里。",
+   "rationale": "二年级形近字与同音字辨析组（二）：辨认“捉”与形近、同音或容易混淆的字；只评估辨认，不评估手写。",
+   "material_id": null,
+   "stage": "exact",
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [
+    {
+     "id": "blank-1",
+     "question_id": "zh-p2-confusable2-u6349.q1"
+    }
+   ],
+   "annotations": [],
+   "blank_ref": "blank-1"
+  },
+  {
+   "id": "zh-p2-confusable2-u6349.q2",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-character",
+    "zh.p2_higher_chinese.r-character"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.char.u6349",
+    "zh.p2_higher_chinese.char.u6349"
+   ],
+   "family": "character",
+   "format": "mcq_4plus",
+   "stem": "青蛙跳起来，一口就{{blank-1}}住了一只虫子。",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "种"
+    },
+    {
+     "id": "opt-2",
+     "text": "足"
+    },
+    {
+     "id": "opt-3",
+     "text": "跳"
+    },
+    {
+     "id": "opt-4",
+     "text": "捉"
+    }
+   ],
+   "correct_option_id": "opt-4",
+   "hint": "青蛙用口把虫子抓住了，用哪个字？",
+   "explanation": "“捉住虫子”就是把虫子抓住了。",
+   "rationale": "二年级形近字与同音字辨析组（二）：辨认“捉”与形近、同音或容易混淆的字；只评估辨认，不评估手写。",
+   "material_id": null,
+   "stage": "similar",
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [
+    {
+     "id": "blank-1",
+     "question_id": "zh-p2-confusable2-u6349.q2"
+    }
+   ],
+   "annotations": [],
+   "blank_ref": "blank-1"
+  },
+  {
+   "id": "zh-p2-confusable2-u6349.q3",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-character",
+    "zh.p2_higher_chinese.r-character"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.char.u6349",
+    "zh.p2_higher_chinese.char.u6349"
+   ],
+   "family": "character",
+   "format": "mcq_4plus",
+   "stem": "弟弟在水池边{{blank-1}}到了一只青蛙。",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "捉"
+    },
+    {
+     "id": "opt-2",
+     "text": "种"
+    },
+    {
+     "id": "opt-3",
+     "text": "足"
+    },
+    {
+     "id": "opt-4",
+     "text": "路"
+    }
+   ],
+   "correct_option_id": "opt-1",
+   "hint": "弟弟把青蛙抓住了，用哪个字？",
+   "explanation": "“捉到青蛙”就是把青蛙抓住了。“路”和“捉”都有“足”，可是“路”是走路的“路”。",
+   "rationale": "二年级形近字与同音字辨析组（二）：辨认“捉”与形近、同音或容易混淆的字；只评估辨认，不评估手写。",
+   "material_id": null,
+   "stage": "generic",
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [
+    {
+     "id": "blank-1",
+     "question_id": "zh-p2-confusable2-u6349.q3"
+    }
+   ],
+   "annotations": [],
+   "blank_ref": "blank-1"
+  },
+  {
+   "id": "zh-p2-confusable2-u5e26.q1",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-character",
+    "zh.p2_higher_chinese.r-character"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.char.u5e26",
+    "zh.p2_higher_chinese.char.u5e26"
+   ],
+   "family": "character",
+   "format": "mcq_4plus",
+   "stem": "下雨了，出门要记得{{blank-1}}雨伞。",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "常"
+    },
+    {
+     "id": "opt-2",
+     "text": "忘"
+    },
+    {
+     "id": "opt-3",
+     "text": "带"
+    },
+    {
+     "id": "opt-4",
+     "text": "市"
+    }
+   ],
+   "correct_option_id": "opt-3",
+   "hint": "出门时把雨伞拿在身边，用哪个字？",
+   "explanation": "“带雨伞”就是出门时把雨伞拿在身边。不能说“记得忘雨伞”。",
+   "rationale": "二年级形近字与同音字辨析组（二）：辨认“带”与形近、同音或容易混淆的字；只评估辨认，不评估手写。",
+   "material_id": null,
+   "stage": "exact",
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [
+    {
+     "id": "blank-1",
+     "question_id": "zh-p2-confusable2-u5e26.q1"
+    }
+   ],
+   "annotations": [],
+   "blank_ref": "blank-1"
+  },
+  {
+   "id": "zh-p2-confusable2-u5e26.q2",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-character",
+    "zh.p2_higher_chinese.r-character"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.char.u5e26",
+    "zh.p2_higher_chinese.char.u5e26"
+   ],
+   "family": "character",
+   "format": "mcq_4plus",
+   "stem": "哥哥{{blank-1}}我去游泳。",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "忘"
+    },
+    {
+     "id": "opt-2",
+     "text": "带"
+    },
+    {
+     "id": "opt-3",
+     "text": "市"
+    },
+    {
+     "id": "opt-4",
+     "text": "常"
+    }
+   ],
+   "correct_option_id": "opt-2",
+   "hint": "是谁跟着谁去？",
+   "explanation": "“哥哥带我去”，就是我跟着哥哥一起去。",
+   "rationale": "二年级形近字与同音字辨析组（二）：辨认“带”与形近、同音或容易混淆的字；只评估辨认，不评估手写。",
+   "material_id": null,
+   "stage": "similar",
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [
+    {
+     "id": "blank-1",
+     "question_id": "zh-p2-confusable2-u5e26.q2"
+    }
+   ],
+   "annotations": [],
+   "blank_ref": "blank-1"
+  },
+  {
+   "id": "zh-p2-confusable2-u5e26.q3",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-character",
+    "zh.p2_higher_chinese.r-character"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.char.u5e26",
+    "zh.p2_higher_chinese.char.u5e26"
+   ],
+   "family": "character",
+   "format": "mcq_4plus",
+   "stem": "妈妈{{blank-1}}着两个小朋友过马路。",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "市"
+    },
+    {
+     "id": "opt-2",
+     "text": "常"
+    },
+    {
+     "id": "opt-3",
+     "text": "忘"
+    },
+    {
+     "id": "opt-4",
+     "text": "带"
+    }
+   ],
+   "correct_option_id": "opt-4",
+   "hint": "是谁跟着谁？",
+   "explanation": "“妈妈带着小朋友”，就是小朋友跟着妈妈一起走。",
+   "rationale": "二年级形近字与同音字辨析组（二）：辨认“带”与形近、同音或容易混淆的字；只评估辨认，不评估手写。",
+   "material_id": null,
+   "stage": "generic",
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [
+    {
+     "id": "blank-1",
+     "question_id": "zh-p2-confusable2-u5e26.q3"
+    }
+   ],
+   "annotations": [],
+   "blank_ref": "blank-1"
+  },
+  {
+   "id": "zh-p2-confusable2-u8bb0.q1",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-character",
+    "zh.p2_higher_chinese.r-character"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.char.u8bb0",
+    "zh.p2_higher_chinese.char.u8bb0"
+   ],
+   "family": "character",
+   "format": "mcq_4plus",
+   "stem": "我常常忘{{blank-1}}带水壶。",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "己"
+    },
+    {
+     "id": "opt-2",
+     "text": "记"
+    },
+    {
+     "id": "opt-3",
+     "text": "起"
+    },
+    {
+     "id": "opt-4",
+     "text": "语"
+    }
+   ],
+   "correct_option_id": "opt-2",
+   "hint": "“忘（　）”就是没有想起来。",
+   "explanation": "“忘记”就是没有想起来。“己”在“自己”里，“起”在“起床”里。",
+   "rationale": "二年级形近字与同音字辨析组（二）：辨认“记”与形近、同音或容易混淆的字；只评估辨认，不评估手写。",
+   "material_id": null,
+   "stage": "exact",
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [
+    {
+     "id": "blank-1",
+     "question_id": "zh-p2-confusable2-u8bb0.q1"
+    }
+   ],
+   "annotations": [],
+   "blank_ref": "blank-1"
+  },
+  {
+   "id": "zh-p2-confusable2-u8bb0.q2",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-character",
+    "zh.p2_higher_chinese.r-character"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.char.u8bb0",
+    "zh.p2_higher_chinese.char.u8bb0"
+   ],
+   "family": "character",
+   "format": "mcq_4plus",
+   "stem": "你还{{blank-1}}得那只小白兔吗？",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "起"
+    },
+    {
+     "id": "opt-2",
+     "text": "己"
+    },
+    {
+     "id": "opt-3",
+     "text": "语"
+    },
+    {
+     "id": "opt-4",
+     "text": "记"
+    }
+   ],
+   "correct_option_id": "opt-4",
+   "hint": "“（　）得”就是没有忘。",
+   "explanation": "“记得”就是没有忘。",
+   "rationale": "二年级形近字与同音字辨析组（二）：辨认“记”与形近、同音或容易混淆的字；只评估辨认，不评估手写。",
+   "material_id": null,
+   "stage": "similar",
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [
+    {
+     "id": "blank-1",
+     "question_id": "zh-p2-confusable2-u8bb0.q2"
+    }
+   ],
+   "annotations": [],
+   "blank_ref": "blank-1"
+  },
+  {
+   "id": "zh-p2-confusable2-u8bb0.q3",
+   "version": 2,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-character",
+    "zh.p2_higher_chinese.r-character"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.char.u8bb0",
+    "zh.p2_higher_chinese.char.u8bb0"
+   ],
+   "family": "character",
+   "format": "mcq_4plus",
+   "stem": "老师说的话，我都{{blank-1}}在本子上了。",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "语"
+    },
+    {
+     "id": "opt-2",
+     "text": "起"
+    },
+    {
+     "id": "opt-3",
+     "text": "记"
+    },
+    {
+     "id": "opt-4",
+     "text": "己"
+    }
+   ],
+   "correct_option_id": "opt-3",
+   "hint": "把话写在本子上，用哪个字？",
+   "explanation": "“记在本子上”就是把话写下来，以后可以再看。",
+   "rationale": "二年级形近字与同音字辨析组（二）：辨认“记”与形近、同音或容易混淆的字；只评估辨认，不评估手写。",
+   "material_id": null,
+   "stage": "generic",
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [
+    {
+     "id": "blank-1",
+     "question_id": "zh-p2-confusable2-u8bb0.q3"
+    }
+   ],
+   "annotations": [],
+   "blank_ref": "blank-1"
+  },
+  {
+   "id": "zh-p2-sound2.q1",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-char-sound",
+    "zh.p2_higher_chinese.r-char-sound"
+   ],
+   "target_refs": [],
+   "family": "character",
+   "format": "mcq_4plus",
+   "stem": "“前面”的“前”怎么读？",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "xián"
+    },
+    {
+     "id": "opt-2",
+     "text": "qián"
+    },
+    {
+     "id": "opt-3",
+     "text": "qiǎn"
+    },
+    {
+     "id": "opt-4",
+     "text": "jiàn"
+    }
+   ],
+   "correct_option_id": "opt-2",
+   "hint": "“前”的声母和“七”一样。再想一想，是第几声？",
+   "explanation": "“前”读 qián，声母是 q，第二声。",
+   "rationale": "选出与字对应的拼音或与拼音对应的字；只评估书面拼音辨认，不评估口语发音。",
+   "material_id": null,
+   "stage": null,
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [],
+   "annotations": [],
+   "blank_ref": null,
+   "repair_target_refs": [
+    "zh.p2_chinese.skill.char-sound",
+    "zh.p2_higher_chinese.skill.char-sound"
+   ]
+  },
+  {
+   "id": "zh-p2-sound2.q2",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-char-sound",
+    "zh.p2_higher_chinese.r-char-sound"
+   ],
+   "target_refs": [],
+   "family": "character",
+   "format": "mcq_4plus",
+   "stem": "“走路”的“走”，哪一个拼音写对了？",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "zoǔ"
+    },
+    {
+     "id": "opt-2",
+     "text": "zuǒ"
+    },
+    {
+     "id": "opt-3",
+     "text": "zǒu"
+    },
+    {
+     "id": "opt-4",
+     "text": "zòu"
+    }
+   ],
+   "correct_option_id": "opt-3",
+   "hint": "看一看声调写在哪个字母上面。",
+   "explanation": "“走”读 zǒu，第三声。ou 在一起时，声调写在 o 上面。zuǒ 是“左”的读音。",
+   "rationale": "辨认拼音的声调写在哪个字母上；只评估书面拼音辨认，不评估口语发音。",
+   "material_id": null,
+   "stage": null,
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [],
+   "annotations": [],
+   "blank_ref": null,
+   "repair_target_refs": [
+    "zh.p2_chinese.skill.char-sound",
+    "zh.p2_higher_chinese.skill.char-sound"
+   ]
+  },
+  {
+   "id": "zh-p2-sound2.q3",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-char-sound",
+    "zh.p2_higher_chinese.r-char-sound"
+   ],
+   "target_refs": [],
+   "family": "character",
+   "format": "mcq_4plus",
+   "stem": "“就”的拼音，哪一个写对了？",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "jiū"
+    },
+    {
+     "id": "opt-2",
+     "text": "jìu"
+    },
+    {
+     "id": "opt-3",
+     "text": "qiù"
+    },
+    {
+     "id": "opt-4",
+     "text": "jiù"
+    }
+   ],
+   "correct_option_id": "opt-4",
+   "hint": "看一看声母，再看一看声调写在哪个字母上面。",
+   "explanation": "“就”读 jiù，第四声。iu 在一起时，声调写在 u 上面。",
+   "rationale": "辨认拼音的声调写在哪个字母上；只评估书面拼音辨认，不评估口语发音。",
+   "material_id": null,
+   "stage": null,
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [],
+   "annotations": [],
+   "blank_ref": null,
+   "repair_target_refs": [
+    "zh.p2_chinese.skill.char-sound",
+    "zh.p2_higher_chinese.skill.char-sound"
+   ]
+  },
+  {
+   "id": "zh-p2-sound2.q4",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-char-sound",
+    "zh.p2_higher_chinese.r-char-sound"
+   ],
+   "target_refs": [],
+   "family": "character",
+   "format": "mcq_4plus",
+   "stem": "“树上结出了很多果子”里的“结”怎么读？",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "jié"
+    },
+    {
+     "id": "opt-2",
+     "text": "jiē"
+    },
+    {
+     "id": "opt-3",
+     "text": "jiě"
+    },
+    {
+     "id": "opt-4",
+     "text": "qiē"
+    }
+   ],
+   "correct_option_id": "opt-2",
+   "hint": "“结”有两个读音。想一想，长出果子的“结”读哪一个？",
+   "explanation": "长出果子的“结”读 jiē，第一声。“结”在别的地方还可以读 jié。",
+   "rationale": "选出与字对应的拼音或与拼音对应的字；只评估书面拼音辨认，不评估口语发音。",
+   "material_id": null,
+   "stage": null,
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [],
+   "annotations": [],
+   "blank_ref": null,
+   "repair_target_refs": [
+    "zh.p2_chinese.skill.char-sound",
+    "zh.p2_higher_chinese.skill.char-sound"
+   ]
+  },
+  {
+   "id": "zh-p2-sound2.q5",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-char-sound",
+    "zh.p2_higher_chinese.r-char-sound"
+   ],
+   "target_refs": [],
+   "family": "character",
+   "format": "mcq_4plus",
+   "stem": "“小狗”的“狗”怎么读？",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "gōu"
+    },
+    {
+     "id": "opt-2",
+     "text": "kǒu"
+    },
+    {
+     "id": "opt-3",
+     "text": "gòu"
+    },
+    {
+     "id": "opt-4",
+     "text": "gǒu"
+    }
+   ],
+   "correct_option_id": "opt-4",
+   "hint": "先看声母，再看声调。",
+   "explanation": "“狗”读 gǒu，第三声。kǒu 是“口”的读音。",
+   "rationale": "选出与字对应的拼音或与拼音对应的字；只评估书面拼音辨认，不评估口语发音。",
+   "material_id": null,
+   "stage": null,
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [],
+   "annotations": [],
+   "blank_ref": null,
+   "repair_target_refs": [
+    "zh.p2_chinese.skill.char-sound",
+    "zh.p2_higher_chinese.skill.char-sound"
+   ]
+  },
+  {
+   "id": "zh-p2-sound2-repair.q1",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-char-sound",
+    "zh.p2_higher_chinese.r-char-sound"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.skill.char-sound",
+    "zh.p2_higher_chinese.skill.char-sound"
+   ],
+   "family": "character",
+   "format": "mcq_4plus",
+   "stem": "拼音“qián”是哪个字？",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "前"
+    },
+    {
+     "id": "opt-2",
+     "text": "见"
+    },
+    {
+     "id": "opt-3",
+     "text": "全"
+    },
+    {
+     "id": "opt-4",
+     "text": "先"
+    }
+   ],
+   "correct_option_id": "opt-1",
+   "hint": "小声读一读每个字，再看声母和声调。",
+   "explanation": "“前”读 qián。“见”读 jiàn，“全”读 quán，“先”读 xiān。",
+   "rationale": "选出与字对应的拼音或与拼音对应的字；只评估书面拼音辨认，不评估口语发音。",
+   "material_id": null,
+   "stage": "exact",
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [],
+   "annotations": [],
+   "blank_ref": null
+  },
+  {
+   "id": "zh-p2-sound2-repair.q2",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-char-sound",
+    "zh.p2_higher_chinese.r-char-sound"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.skill.char-sound",
+    "zh.p2_higher_chinese.skill.char-sound"
+   ],
+   "family": "character",
+   "format": "mcq_4plus",
+   "stem": "“牛”的拼音，哪一个写对了？",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "níu"
+    },
+    {
+     "id": "opt-2",
+     "text": "niú"
+    },
+    {
+     "id": "opt-3",
+     "text": "nóu"
+    },
+    {
+     "id": "opt-4",
+     "text": "niǔ"
+    }
+   ],
+   "correct_option_id": "opt-2",
+   "hint": "看一看声调写在哪个字母上面。",
+   "explanation": "“牛”读 niú，第二声。iu 在一起时，声调写在 u 上面。",
+   "rationale": "辨认拼音的声调写在哪个字母上；只评估书面拼音辨认，不评估口语发音。",
+   "material_id": null,
+   "stage": "similar",
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [],
+   "annotations": [],
+   "blank_ref": null
+  },
+  {
+   "id": "zh-p2-sound2-repair.q3",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-char-sound",
+    "zh.p2_higher_chinese.r-char-sound"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.skill.char-sound",
+    "zh.p2_higher_chinese.skill.char-sound"
+   ],
+   "family": "character",
+   "format": "mcq_4plus",
+   "stem": "“手”的拼音，哪一个写对了？",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "shoǔ"
+    },
+    {
+     "id": "opt-2",
+     "text": "sǒu"
+    },
+    {
+     "id": "opt-3",
+     "text": "shǔ"
+    },
+    {
+     "id": "opt-4",
+     "text": "shǒu"
+    }
+   ],
+   "correct_option_id": "opt-4",
+   "hint": "先看声母，再看声调写在哪个字母上面。",
+   "explanation": "“手”读 shǒu，第三声。ou 在一起时，声调写在 o 上面。",
+   "rationale": "辨认拼音的声调写在哪个字母上；只评估书面拼音辨认，不评估口语发音。",
+   "material_id": null,
+   "stage": "generic",
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [],
+   "annotations": [],
+   "blank_ref": null
+  },
+  {
+   "id": "zh-p2-wordchoice-b.q1",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.lu-word-choice",
+    "zh.p2_higher_chinese.lu-word-choice"
+   ],
+   "target_refs": [],
+   "family": "cloze",
+   "format": "mcq_4plus",
+   "stem": "小明很{{blank-1}}，每天都自己收好玩具。",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "坏"
+    },
+    {
+     "id": "opt-2",
+     "text": "乖"
+    },
+    {
+     "id": "opt-3",
+     "text": "怕"
+    },
+    {
+     "id": "opt-4",
+     "text": "哭"
+    }
+   ],
+   "correct_option_id": "opt-2",
+   "hint": "每天都自己收好玩具，小明是一个怎样的孩子？",
+   "explanation": "“乖”就是听话、懂事。自己收好玩具，说明小明很乖。",
+   "rationale": "词语选择：根据句子的意思选出合适的词；其他选项放进句子都说不通。",
+   "material_id": null,
+   "stage": null,
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [
+    {
+     "id": "blank-1",
+     "question_id": "zh-p2-wordchoice-b.q1"
+    }
+   ],
+   "annotations": [],
+   "blank_ref": "blank-1",
+   "repair_target_refs": [
+    "zh.p2_chinese.skill.word-choice",
+    "zh.p2_higher_chinese.skill.word-choice"
+   ]
+  },
+  {
+   "id": "zh-p2-wordchoice-b.q2",
+   "version": 2,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.lu-word-choice",
+    "zh.p2_higher_chinese.lu-word-choice"
+   ],
+   "target_refs": [],
+   "family": "cloze",
+   "format": "mcq_4plus",
+   "stem": "{{blank-1}}别人是不对的。",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "帮助"
+    },
+    {
+     "id": "opt-2",
+     "text": "照顾"
+    },
+    {
+     "id": "opt-3",
+     "text": "欺负"
+    },
+    {
+     "id": "opt-4",
+     "text": "认识"
+    }
+   ],
+   "correct_option_id": "opt-3",
+   "hint": "哪一件事是不对的？",
+   "explanation": "为了让别人难过，抢别人的东西、笑别人，是欺负人的做法。这些做法是不对的。",
+   "rationale": "词语选择：根据句子的意思选出合适的词；其他选项放进句子都说不通。",
+   "material_id": null,
+   "stage": null,
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [
+    {
+     "id": "blank-1",
+     "question_id": "zh-p2-wordchoice-b.q2"
+    }
+   ],
+   "annotations": [],
+   "blank_ref": "blank-1",
+   "repair_target_refs": [
+    "zh.p2_chinese.skill.word-choice",
+    "zh.p2_higher_chinese.skill.word-choice"
+   ]
+  },
+  {
+   "id": "zh-p2-wordchoice-b.q3",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.lu-word-choice",
+    "zh.p2_higher_chinese.lu-word-choice"
+   ],
+   "target_refs": [],
+   "family": "cloze",
+   "format": "mcq_4plus",
+   "stem": "我{{blank-1}}这本书送给你。",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "给"
+    },
+    {
+     "id": "opt-2",
+     "text": "被"
+    },
+    {
+     "id": "opt-3",
+     "text": "让"
+    },
+    {
+     "id": "opt-4",
+     "text": "把"
+    }
+   ],
+   "correct_option_id": "opt-4",
+   "hint": "我要送的是什么？这样东西放在“送给你”的前面。",
+   "explanation": "“我把这本书送给你”，说的是我送书给你。",
+   "rationale": "词语选择：根据句子的意思选出合适的词；其他选项放进句子都说不通。",
+   "material_id": null,
+   "stage": null,
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [
+    {
+     "id": "blank-1",
+     "question_id": "zh-p2-wordchoice-b.q3"
+    }
+   ],
+   "annotations": [],
+   "blank_ref": "blank-1",
+   "repair_target_refs": [
+    "zh.p2_chinese.skill.word-choice",
+    "zh.p2_higher_chinese.skill.word-choice"
+   ]
+  },
+  {
+   "id": "zh-p2-wordchoice-b.q4",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.lu-word-choice",
+    "zh.p2_higher_chinese.lu-word-choice"
+   ],
+   "target_refs": [],
+   "family": "cloze",
+   "format": "mcq_4plus",
+   "stem": "奶奶送{{blank-1}}我一个新书包。",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "给"
+    },
+    {
+     "id": "opt-2",
+     "text": "把"
+    },
+    {
+     "id": "opt-3",
+     "text": "被"
+    },
+    {
+     "id": "opt-4",
+     "text": "让"
+    }
+   ],
+   "correct_option_id": "opt-1",
+   "hint": "新书包到了谁的手里？",
+   "explanation": "“送给我”，就是书包到了我的手里。",
+   "rationale": "词语选择：根据句子的意思选出合适的词；其他选项放进句子都说不通。",
+   "material_id": null,
+   "stage": null,
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [
+    {
+     "id": "blank-1",
+     "question_id": "zh-p2-wordchoice-b.q4"
+    }
+   ],
+   "annotations": [],
+   "blank_ref": "blank-1",
+   "repair_target_refs": [
+    "zh.p2_chinese.skill.word-choice",
+    "zh.p2_higher_chinese.skill.word-choice"
+   ]
+  },
+  {
+   "id": "zh-p2-wordchoice-b.q5",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.lu-word-choice",
+    "zh.p2_higher_chinese.lu-word-choice"
+   ],
+   "target_refs": [],
+   "family": "cloze",
+   "format": "mcq_4plus",
+   "stem": "我的水壶在这里，你的水壶{{blank-1}}？",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "吗"
+    },
+    {
+     "id": "opt-2",
+     "text": "吧"
+    },
+    {
+     "id": "opt-3",
+     "text": "呢"
+    },
+    {
+     "id": "opt-4",
+     "text": "的"
+    }
+   ],
+   "correct_option_id": "opt-3",
+   "hint": "问别人的水壶在哪里，句子最后用哪个字？",
+   "explanation": "“你的水壶呢？”就是问你的水壶在哪里。",
+   "rationale": "词语选择：根据句子的意思选出合适的词；其他选项放进句子都说不通。",
+   "material_id": null,
+   "stage": null,
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [
+    {
+     "id": "blank-1",
+     "question_id": "zh-p2-wordchoice-b.q5"
+    }
+   ],
+   "annotations": [],
+   "blank_ref": "blank-1",
+   "repair_target_refs": [
+    "zh.p2_chinese.skill.word-choice",
+    "zh.p2_higher_chinese.skill.word-choice"
+   ]
+  },
+  {
+   "id": "zh-p2-wordchoice-b-repair.q1",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.lu-word-choice",
+    "zh.p2_higher_chinese.lu-word-choice"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.skill.word-choice",
+    "zh.p2_higher_chinese.skill.word-choice"
+   ],
+   "family": "cloze",
+   "format": "mcq_4plus",
+   "stem": "一只小鸟飞到窗边，{{blank-1}}在找东西吃。",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "他"
+    },
+    {
+     "id": "opt-2",
+     "text": "它"
+    },
+    {
+     "id": "opt-3",
+     "text": "她"
+    },
+    {
+     "id": "opt-4",
+     "text": "地"
+    }
+   ],
+   "correct_option_id": "opt-2",
+   "hint": "小鸟是人，还是动物？",
+   "explanation": "说到动物或东西，用“它”。“他”和“她”说的是人。",
+   "rationale": "词语选择：根据句子的意思选出合适的词；其他选项放进句子都说不通。",
+   "material_id": null,
+   "stage": "exact",
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [
+    {
+     "id": "blank-1",
+     "question_id": "zh-p2-wordchoice-b-repair.q1"
+    }
+   ],
+   "annotations": [],
+   "blank_ref": "blank-1"
+  },
+  {
+   "id": "zh-p2-wordchoice-b-repair.q2",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.lu-word-choice",
+    "zh.p2_higher_chinese.lu-word-choice"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.skill.word-choice",
+    "zh.p2_higher_chinese.skill.word-choice"
+   ],
+   "family": "cloze",
+   "format": "mcq_4plus",
+   "stem": "大树的叶子都黄了，{{blank-1}}好像生病了。",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "她"
+    },
+    {
+     "id": "opt-2",
+     "text": "地"
+    },
+    {
+     "id": "opt-3",
+     "text": "它"
+    },
+    {
+     "id": "opt-4",
+     "text": "他"
+    }
+   ],
+   "correct_option_id": "opt-3",
+   "hint": "大树是人吗？",
+   "explanation": "说到大树这样的东西，用“它”。",
+   "rationale": "词语选择：根据句子的意思选出合适的词；其他选项放进句子都说不通。",
+   "material_id": null,
+   "stage": "similar",
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [
+    {
+     "id": "blank-1",
+     "question_id": "zh-p2-wordchoice-b-repair.q2"
+    }
+   ],
+   "annotations": [],
+   "blank_ref": "blank-1"
+  },
+  {
+   "id": "zh-p2-wordchoice-b-repair.q3",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.lu-word-choice",
+    "zh.p2_higher_chinese.lu-word-choice"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.skill.word-choice",
+    "zh.p2_higher_chinese.skill.word-choice"
+   ],
+   "family": "cloze",
+   "format": "mcq_4plus",
+   "stem": "我的书包很旧了，可是我还是很喜欢{{blank-1}}。",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "地"
+    },
+    {
+     "id": "opt-2",
+     "text": "他"
+    },
+    {
+     "id": "opt-3",
+     "text": "她"
+    },
+    {
+     "id": "opt-4",
+     "text": "它"
+    }
+   ],
+   "correct_option_id": "opt-4",
+   "hint": "“喜欢（　）”说的是书包。书包是人吗？",
+   "explanation": "说到书包这样的东西，用“它”。",
+   "rationale": "词语选择：根据句子的意思选出合适的词；其他选项放进句子都说不通。",
+   "material_id": null,
+   "stage": "generic",
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [
+    {
+     "id": "blank-1",
+     "question_id": "zh-p2-wordchoice-b-repair.q3"
+    }
+   ],
+   "annotations": [],
+   "blank_ref": "blank-1"
+  },
+  {
+   "id": "zh-m20.q1",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-explicit",
+    "zh.p2_higher_chinese.r-explicit"
+   ],
+   "target_refs": [],
+   "family": "reading",
+   "format": "mcq_4plus",
+   "stem": "小美和谁走路回家？",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "爸爸"
+    },
+    {
+     "id": "opt-2",
+     "text": "姐姐"
+    },
+    {
+     "id": "opt-3",
+     "text": "妈妈"
+    },
+    {
+     "id": "opt-4",
+     "text": "老师"
+    }
+   ],
+   "correct_option_id": "opt-3",
+   "hint": "看第一句。",
+   "explanation": "第一句写明小美和妈妈走路回家。",
+   "rationale": "只问短文中直接写出的信息；问原因时，要把文中写出的原因找全。",
+   "material_id": "zh-m20",
+   "stage": null,
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [],
+   "annotations": [],
+   "blank_ref": null,
+   "repair_target_refs": [
+    "zh.p2_chinese.skill.explicit-info",
+    "zh.p2_higher_chinese.skill.explicit-info"
+   ]
+  },
+  {
+   "id": "zh-m20.q2",
+   "version": 3,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-explicit",
+    "zh.p2_higher_chinese.r-explicit"
+   ],
+   "target_refs": [],
+   "family": "reading",
+   "format": "mcq_4plus",
+   "stem": "妈妈为什么说快下雨了？哪一句把原因说全了？",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "因为天上来了很多乌云，天色看起来很暗。"
+    },
+    {
+     "id": "opt-2",
+     "text": "因为天上来了很多乌云，还刮起了大风。"
+    },
+    {
+     "id": "opt-3",
+     "text": "因为天上来了很多乌云，还下起了大雨。"
+    },
+    {
+     "id": "opt-4",
+     "text": "因为她们已经走了很久，还没有走到家。"
+    }
+   ],
+   "correct_option_id": "opt-2",
+   "hint": "妈妈说了哪两件事？看一看，哪一句里的两件事都是妈妈说的。",
+   "explanation": "妈妈说了两个原因：天上来了很多乌云，还刮起了大风。别的句子里，有的话不是妈妈说的。",
+   "rationale": "只问短文中直接写出的信息；问原因时，要把文中写出的原因找全。",
+   "material_id": "zh-m20",
+   "stage": null,
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [],
+   "annotations": [],
+   "blank_ref": null,
+   "repair_target_refs": [
+    "zh.p2_chinese.skill.explicit-info",
+    "zh.p2_higher_chinese.skill.explicit-info"
+   ]
+  },
+  {
+   "id": "zh-m20.q3",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-explicit",
+    "zh.p2_higher_chinese.r-explicit"
+   ],
+   "target_refs": [],
+   "family": "reading",
+   "format": "mcq_4plus",
+   "stem": "她们在巴士站等了多久，雨就停了？",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "一个下午"
+    },
+    {
+     "id": "opt-2",
+     "text": "一会儿"
+    },
+    {
+     "id": "opt-3",
+     "text": "一个晚上"
+    },
+    {
+     "id": "opt-4",
+     "text": "两天"
+    }
+   ],
+   "correct_option_id": "opt-2",
+   "hint": "找一找“雨就停了”前面的话。",
+   "explanation": "短文写明她们等了一会儿，雨就停了。",
+   "rationale": "只问短文中直接写出的信息；问原因时，要把文中写出的原因找全。",
+   "material_id": "zh-m20",
+   "stage": null,
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [],
+   "annotations": [],
+   "blank_ref": null,
+   "repair_target_refs": [
+    "zh.p2_chinese.skill.explicit-info",
+    "zh.p2_higher_chinese.skill.explicit-info"
+   ]
+  },
+  {
+   "id": "zh-m20.q4",
+   "version": 1,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-explicit",
+    "zh.p2_higher_chinese.r-explicit"
+   ],
+   "target_refs": [],
+   "family": "reading",
+   "format": "mcq_4plus",
+   "stem": "回到家，小美说了什么？",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "“还好我们没有淋湿！”"
+    },
+    {
+     "id": "opt-2",
+     "text": "“我们都淋湿了！”"
+    },
+    {
+     "id": "opt-3",
+     "text": "“我想坐巴士回家！”"
+    },
+    {
+     "id": "opt-4",
+     "text": "“雨一直没有停！”"
+    }
+   ],
+   "correct_option_id": "opt-1",
+   "hint": "看最后一句。",
+   "explanation": "最后一句写明小美说：“还好我们没有淋湿！”",
+   "rationale": "只问短文中直接写出的信息；问原因时，要把文中写出的原因找全。",
+   "material_id": "zh-m20",
+   "stage": null,
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [],
+   "annotations": [],
+   "blank_ref": null,
+   "repair_target_refs": [
+    "zh.p2_chinese.skill.explicit-info",
+    "zh.p2_higher_chinese.skill.explicit-info"
+   ]
+  },
+  {
+   "id": "zh-p2-reason-repair.q1",
+   "version": 3,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-explicit",
+    "zh.p2_higher_chinese.r-explicit"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.skill.explicit-info",
+    "zh.p2_higher_chinese.skill.explicit-info"
+   ],
+   "family": "reading",
+   "format": "mcq_4plus",
+   "stem": "读一读：弟弟哭了，因为他的风筝飞走了，他还找不到妈妈。\n弟弟为什么哭了？哪一句把原因说全了？",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "因为他的风筝飞走了，飞得很高很远。"
+    },
+    {
+     "id": "opt-2",
+     "text": "因为他一直找不到妈妈，心里很着急。"
+    },
+    {
+     "id": "opt-3",
+     "text": "因为他的风筝飞走了，他还找不到妈妈。"
+    },
+    {
+     "id": "opt-4",
+     "text": "因为他的风筝飞走了，妈妈还不让他回家。"
+    }
+   ],
+   "correct_option_id": "opt-3",
+   "hint": "“因为”后面写了哪两件事？看一看，哪一句里的两件事都写在句子里。",
+   "explanation": "“因为”后面写了两件事：风筝飞走了，还找不到妈妈。两件都要说。",
+   "rationale": "只问短文中直接写出的信息；问原因时，要把文中写出的原因找全。",
+   "material_id": null,
+   "stage": "exact",
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [],
+   "annotations": [],
+   "blank_ref": null
+  },
+  {
+   "id": "zh-p2-reason-repair.q2",
+   "version": 3,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-explicit",
+    "zh.p2_higher_chinese.r-explicit"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.skill.explicit-info",
+    "zh.p2_higher_chinese.skill.explicit-info"
+   ],
+   "family": "reading",
+   "format": "mcq_4plus",
+   "stem": "读一读：今天我很开心，因为我考了一百分，妈妈还给我买了一本新书。\n“我”为什么很开心？哪一句把原因说全了？",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "因为我考了一百分，妈妈还给我买了一本新书。"
+    },
+    {
+     "id": "opt-2",
+     "text": "因为我这次考了一百分，妈妈还带我去公园玩。"
+    },
+    {
+     "id": "opt-3",
+     "text": "因为妈妈给我买了一本新书，还送我一支彩色笔。"
+    },
+    {
+     "id": "opt-4",
+     "text": "因为妈妈今天给我买了一本我很喜欢的新书。"
+    }
+   ],
+   "correct_option_id": "opt-1",
+   "hint": "“因为”后面写了哪两件事？看一看，哪一句里的两件事都写在句子里。",
+   "explanation": "“我”开心有两个原因：考了一百分，妈妈还买了一本新书。",
+   "rationale": "只问短文中直接写出的信息；问原因时，要把文中写出的原因找全。",
+   "material_id": null,
+   "stage": "similar",
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [],
+   "annotations": [],
+   "blank_ref": null
+  },
+  {
+   "id": "zh-p2-reason-repair.q3",
+   "version": 2,
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "outcome_refs": [
+    "zh.p2_chinese.r-explicit",
+    "zh.p2_higher_chinese.r-explicit"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.skill.explicit-info",
+    "zh.p2_higher_chinese.skill.explicit-info"
+   ],
+   "family": "reading",
+   "format": "mcq_4plus",
+   "stem": "读一读：小花没有去公园。她生病了，外面又下着大雨。\n小花为什么没有去公园？哪一句把原因说全了？",
+   "options": [
+    {
+     "id": "opt-1",
+     "text": "因为外面下着大雨，雨实在太大了。"
+    },
+    {
+     "id": "opt-2",
+     "text": "因为她生病了，外面又刮起大风。"
+    },
+    {
+     "id": "opt-3",
+     "text": "因为外面下着大雨，她又找不到伞。"
+    },
+    {
+     "id": "opt-4",
+     "text": "因为她生病了，外面又下着大雨。"
+    }
+   ],
+   "correct_option_id": "opt-4",
+   "hint": "这一次没有写“因为”。想一想，哪些事让小花不能去？",
+   "explanation": "小花没有去公园，有两个原因：她生病了，外面又下着大雨。",
+   "rationale": "只问短文中直接写出的信息；问原因时，要把文中写出的原因找全。",
+   "material_id": null,
+   "stage": "generic",
+   "provenance": "original_generic_author_draft",
+   "asset_refs": [],
+   "blanks": [],
+   "annotations": [],
+   "blank_ref": null
+  }
+ ],
+ "groups": [
+  {
+   "id": "zh-group-p2-confusable-2",
+   "version": 1,
+   "label_zh": "二年级形近字与同音字辨析组（二）",
+   "label_en": "P2 look-alike and sound-alike characters, set 2",
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.char.u8fdc",
+    "zh.p2_higher_chinese.char.u8fdc",
+    "zh.p2_chinese.char.u5b8c",
+    "zh.p2_higher_chinese.char.u5b8c",
+    "zh.p2_chinese.char.u6349",
+    "zh.p2_higher_chinese.char.u6349",
+    "zh.p2_chinese.char.u5e26",
+    "zh.p2_higher_chinese.char.u5e26",
+    "zh.p2_chinese.char.u8bb0",
+    "zh.p2_higher_chinese.char.u8bb0"
+   ],
+   "item_ids": [
+    "zh-p2-confusable2-u8fdc.q1",
+    "zh-p2-confusable2-u8fdc.q2",
+    "zh-p2-confusable2-u8fdc.q3",
+    "zh-p2-confusable2-u5b8c.q1",
+    "zh-p2-confusable2-u5b8c.q2",
+    "zh-p2-confusable2-u5b8c.q3",
+    "zh-p2-confusable2-u6349.q1",
+    "zh-p2-confusable2-u6349.q2",
+    "zh-p2-confusable2-u6349.q3",
+    "zh-p2-confusable2-u5e26.q1",
+    "zh-p2-confusable2-u5e26.q2",
+    "zh-p2-confusable2-u5e26.q3",
+    "zh-p2-confusable2-u8bb0.q1",
+    "zh-p2-confusable2-u8bb0.q2",
+    "zh-p2-confusable2-u8bb0.q3"
+   ]
+  },
+  {
+   "id": "zh-group-p2-pinyin-2",
+   "version": 1,
+   "label_zh": "二年级字音组（二）",
+   "label_en": "P2 character sounds and pinyin, set 2",
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.skill.char-sound",
+    "zh.p2_higher_chinese.skill.char-sound"
+   ],
+   "item_ids": [
+    "zh-p2-sound2-repair.q1",
+    "zh-p2-sound2-repair.q2",
+    "zh-p2-sound2-repair.q3"
+   ]
+  },
+  {
+   "id": "zh-group-p2-language-use-2",
+   "version": 1,
+   "label_zh": "二年级词语运用组（二）",
+   "label_en": "P2 word choice, set 2",
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.skill.word-choice",
+    "zh.p2_higher_chinese.skill.word-choice"
+   ],
+   "item_ids": [
+    "zh-p2-wordchoice-b-repair.q1",
+    "zh-p2-wordchoice-b-repair.q2",
+    "zh-p2-wordchoice-b-repair.q3"
+   ]
+  },
+  {
+   "id": "zh-group-p2-reading-skills-2",
+   "version": 1,
+   "label_zh": "二年级阅读组（二）：把原因找全",
+   "label_en": "P2 reading: finding the whole reason",
+   "courses": [
+    "p2_chinese",
+    "p2_higher_chinese"
+   ],
+   "target_refs": [
+    "zh.p2_chinese.skill.explicit-info",
+    "zh.p2_higher_chinese.skill.explicit-info"
+   ],
+   "item_ids": [
+    "zh-p2-reason-repair.q1",
+    "zh-p2-reason-repair.q2",
+    "zh-p2-reason-repair.q3"
+   ]
+  }
+ ],
+ "review_log": {
+  "author_check_date": "2026-10-18",
+  "author_checks": [
+   "2026-10-18 author draft (Claude): 38 original P2 items for Chinese and Higher Chinese in four topic sets — look-alike/sound-alike characters (远 完 捉 带 记; 15), character sounds and written pinyin (8), word choice including 它 for animals and things, 把/给, 呢, 乖 and 欺负 (8), and finding the whole reason in a short text (material zh-m20 and three standalone items; 7). Each set has a complete exact/similar/generic pool.",
+   "Drafted one set at a time; every item read rendered with blanks, annotations and options; common checks 1-11 and Chinese checks ZH1-ZH5 run on each item. Stems, options, hints, explanations and the passage use only characters on the cumulative P1-P2 lists, except the pinyin term 声调 (as in the approved zh-p2-sound.q5). Pinyin checked by hand; the 结 reading for bearing fruit (jiē) checked against a dictionary; no pinyin library was available.",
+   "Known limits: in the four \"which reason is complete\" items the key is the longest option, because a complete reason is longer than a partial one (check 10); in the standalone ones the key also repeats the given sentence, because they test finding the whole reason, not paraphrase (check 5).",
+   "Sources: P2 school exercise formats were reviewed privately to choose question types. No worksheet, textbook or past-paper wording, answer or learner information is used. As with every public group, the targets are generic curriculum content, not a record of any learner's errors.",
+   "Disputed for the owner: four tone-mark placement items (zh-p2-sound2.q2, .q3, -repair.q2, -repair.q3) — whether telling correctly marked pinyin from wrongly marked pinyin is in P2 scope.",
+   "Owner sample: 7 of 34 undisputed items, ceil(N/5), random.Random('zh-starter-002-v1-owner-sample-2026-10-18').sample(pool, ceil(len(pool)/5)) over batch order, pool excluding the disputed items.",
+   "Owner decision 2026-10-18: all four tone-mark placement items kept as written; disputes cleared. The owner sample was drawn while they were disputed, so its pool stays the 34 items listed in the review pack.",
+   "Owner decisions 2026-10-18: all 7 sampled items accepted as written, with no notes; rights cleared, because the content is original Turtle Academy material and no worksheet, textbook or past-paper text was copied.",
+   "Pending: independent cross-review (ChatGPT) of all 38 items, Claude re-review of any corrections, then owner sign-off of the batch.",
+   "2026-10-18 ChatGPT independent cross-review of all 38 v1 questions and zh-m20 at 619c7c3: all keys correct; 32 items without blocking findings. Six revisions in v2 require Claude re-review and owner disposition: four complete-reason items had a uniquely longest key; the 记 explanation promised remembering; the 欺负 explanation was too broad. Read all revised stems/options/hints/explanations together with the material; keys, IDs, courses, leaf mappings and repair routes unchanged. Written pinyin readings checked against dictionary entries; cumulative P1-P2 text check found only the existing disclosed 调 in 声调.",
+   "v2 owner-review provenance: the four tone-mark decisions and seven sampled-item acceptances recorded on 2026-10-18 apply to the v1 items the owner saw. Two originally sampled items, zh-p2-reason-repair.q1 and .q2, now have new versions and need a fresh owner decision. The prior seven-ID draw remains documented in the review pack. All six revised IDs are disputed pending review; redraw from the 32 unchanged agreed items using random.Random('zh-starter-002-v2-owner-sample-2026-10-18').sample(pool, ceil(len(pool)/5)) in batch order. Current sample decisions pending; rights clearance retained; owner batch sign-off remains pending.",
+   "2026-10-18 Claude re-review of the six v2 corrections at 1f59eb6: all six accepted in substance (balanced option lengths, unsupported-detail distractors, narrower 记 and 欺负 explanations). Follow-up in v3: every option in zh-m20.q2 and zh-p2-reason-repair.q1-.q2 now has two parts, so the hints that asked how many things the reason has no longer separated the options (common check 7). The hints now ask which two things the text states. The zh-m20.q2 explanation no longer refers to a removed one-cloud option. Keys, options, IDs and routes unchanged; text within the P1-P2 lists.",
+   "Owner decisions 2026-10-18 at b94314d: the six corrected items accepted in their current versions (zh-p2-confusable2-u8bb0.q3 v2, zh-p2-wordchoice-b.q2 v2, zh-m20.q2 v3, zh-p2-reason-repair.q1 v3, .q2 v3, .q3 v2); ChatGPT re-review of the three Claude v3 hint edits waived by the owner; all seven v2-sample items accepted with no notes; batch approved. Independent review: ChatGPT cross-reviewed all v1 items; Claude re-reviewed the six ChatGPT corrections."
+  ],
+  "independent_review": "passed",
+  "owner_signoff": "approved",
+  "sampled_item_ids": [
+   "zh-p2-confusable2-u8fdc.q2",
+   "zh-p2-confusable2-u8fdc.q3",
+   "zh-p2-confusable2-u5e26.q2",
+   "zh-p2-confusable2-u8bb0.q2",
+   "zh-p2-sound2.q2",
+   "zh-p2-wordchoice-b.q4",
+   "zh-m20.q4"
+  ],
+  "disputed_item_ids": [],
+  "rights_status": "cleared",
+  "artwork": "none"
+ }
+}

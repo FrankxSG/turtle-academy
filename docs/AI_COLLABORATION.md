@@ -110,7 +110,7 @@ A handoff transfers ownership of the named branch and files. Do not include secr
 
 ## Non-negotiable project boundaries
 
-- No runtime AI. Owner-authorised private external ChatGPT/Claude processing of cropped/redacted worksheet material is allowed for human-verified preparation only; never runtime AI or public learner-data disclosure.
+- No runtime AI. Owner-authorised private external ChatGPT/Claude processing of worksheet material is allowed for human-verified preparation only, with the AI filtering identifying detail out of its outputs; never runtime AI or public learner-data disclosure.
 - Synthetic development data only; no real learner files anywhere in the checkout, including ignored folders, screenshots or artifacts.
 - Separate generic content from private learner instances; enforce authenticated ownership, RLS and private storage for registered records.
 - Guest remains local-only and cannot silently acquire registered-only capabilities.

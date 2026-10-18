@@ -109,7 +109,7 @@ Proposed safety bounds: at most 1 MiB decoded JSON and 1,000 candidates; these a
 | assessed_skill | Controlled skill where applicable; explicit not-applicable where legitimate |
 | error_type | Supported controlled type; unknown cause if evidence does not justify classification |
 | observed_wrong_form | Optional necessary bounded form; same proposed per-kind limits as target_value; device-local only, excluded from snapshots. No full source question or meaningless option-number-only record |
-| observation_date | Valid ISO calendar date provided/verified by parent; future dates require correction; do not silently infer from upload time |
+| observation_date | Valid ISO calendar date; future dates require correction. Owner rule (2026-10-18): use the date written on the work; if it has none, use the nearest dated work on the same lesson; if that cannot be found either, use the upload/processing date. Show estimated dates as estimated at preview so the parent can correct them; never estimate silently |
 | source_type | Fixed list: schoolwork, home_practice, external_assessment, other_reviewed_work |
 
 No learner name, school/teacher identifiers, worksheet titles, free source descriptions, original images/text, stage/mastery/due fields or foreign ownership IDs. Structural validation cannot guarantee anonymization or semantic correctness. A bounded string can still be sensitive; privacy review remains required. Do not log raw invalid payloads in public diagnostics.
