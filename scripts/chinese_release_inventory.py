@@ -140,7 +140,20 @@ def leaf_table(rows):
     return out
 
 
-def course_section(course, data, p3=False):
+def approved_leaves(curriculum, cat):
+    """Per course, the leaves authored from approved batches alone, once the leaf list is approved.
+    Items in a batch that is not approved never count, whatever other batches hold."""
+    if curriculum['status'] != 'approved':
+        return None
+    approved = catalogue([b for b in cat['batches'] if b['status'] == 'approved'])
+    if not approved['batches']:
+        return {course: 0 for course in curriculum['courses']}
+    data = analyse(curriculum, approved)
+    return {course: sum(r['status'] == 'authored' and r['leaf']['scope'] in {'in_app', 'partial'} for r in d['rows'])
+            for course, d in data.items()}
+
+
+def course_section(course, data, p3=False, approved=None):
     approval_note = data['approval_note']
     rows = data['rows']
     scoped = [r for r in rows if r['leaf']['scope'] in {'in_app', 'partial'}]
@@ -157,7 +170,9 @@ def course_section(course, data, p3=False):
                   '75% release measure.', '']
     lines += [
         '| Measure | Value |', '| --- | --- |',
-        f"| Approved leaf coverage | 0/{len(scoped)} — {approval_note} |",
+        (f"| Approved leaf coverage | {pct(approved, len(scoped))} — leaves with general practice and a complete "
+         'repair route from owner-approved batches, against the approved leaf list |' if approved is not None else
+         f"| Approved leaf coverage | 0/{len(scoped)} — {approval_note} |"),
         f"| Leaves authored with general practice and a complete repair route | {pct(len(authored), len(scoped))} |",
         f"| Leaves with some items but no complete route or no general practice | {len(partial)} |",
         f"| Empty in-scope leaves (stay in the denominator) | {len(empty)} |",
@@ -205,6 +220,7 @@ def missing_section(courses):
 
 def render(curriculum, batch):
     courses = analyse(curriculum, batch)
+    approved = approved_leaves(curriculum, batch)
     head = [
         '# Chinese release inventory and QA readiness',
         '',
@@ -220,7 +236,10 @@ def render(curriculum, batch):
         '',
         'Counts below combine all batches. A batch\'s review state covers only its own items.',
         '',
-        '**Read this first.** Nothing here is approved coverage. The release denominator is the in-scope '
+        ('**Read this first.** "Approved leaf coverage" counts only leaves covered by owner-approved batches, '
+         'against the owner-approved leaf list. Every other figure here is authoring readiness, not approved coverage. '
+         if curriculum['status'] == 'approved' else '**Read this first.** Nothing here is approved coverage. ') +
+        'The release denominator is the in-scope '
         'leaf list below' + (', approved by the owner.' if curriculum['status'] == 'approved' else
                              ', which is itself a proposal until the owner approves it.') +
         ' "Authored" means a leaf has general-practice questions and at least one complete '
@@ -237,10 +256,10 @@ def render(curriculum, batch):
     ]
     body = []
     for course in ['p2_chinese', 'p2_higher_chinese']:
-        body += course_section(course, courses[course])
+        body += course_section(course, courses[course], approved=approved and approved[course])
     body += ['# Supported P3 general-practice inventory', '']
     for course in ['p3_chinese', 'p3_higher_chinese']:
-        body += course_section(course, courses[course], p3=True)
+        body += course_section(course, courses[course], p3=True, approved=approved and approved[course])
     body += missing_section(courses)
     return '\n'.join(head + body).rstrip() + '\n'
 

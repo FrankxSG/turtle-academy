@@ -87,6 +87,25 @@ class Inventory(unittest.TestCase):
         self.assertIn('zh-test-pending: owner sign-off pending', note)
         self.assertNotIn('zh-test-done', note)
 
+    def test_approved_coverage_counts_only_approved_batches(self):
+        from chinese_release_inventory import approved_leaves, catalogue
+        curriculum = copy.deepcopy(self.curriculum)
+        curriculum['status'] = 'approved'
+        batches = copy.deepcopy(self.batch['batches'])
+        for b in batches:
+            b['status'] = 'approved'
+        full = approved_leaves(curriculum, catalogue(batches))['p2_chinese']
+        for b in batches:
+            b['status'] = 'author_checked_pending_independent_and_owner_review'
+        self.assertEqual(approved_leaves(curriculum, catalogue(batches))['p2_chinese'], 0)
+        self.assertGreater(full, 0)
+
+    def test_no_approved_coverage_before_the_leaf_list_is_approved(self):
+        from chinese_release_inventory import approved_leaves
+        curriculum = copy.deepcopy(self.curriculum)
+        curriculum['status'] = 'proposed_not_import_enabled'
+        self.assertIsNone(approved_leaves(curriculum, self.batch))
+
 
 if __name__ == '__main__':
     unittest.main()

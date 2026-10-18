@@ -11,7 +11,7 @@ Catalogue: manifest `zh-2024-p2p3-draft.2` (approved).
 
 Counts below combine all batches. A batch's review state covers only its own items.
 
-**Read this first.** Nothing here is approved coverage. The release denominator is the in-scope leaf list below, approved by the owner. "Authored" means a leaf has general-practice questions and at least one complete exact/similar/generic repair route in the catalogue; it becomes coverage only after review, rights and owner sign-off of the batch that holds it. Character-group coverage is reported separately and never merged into the skill percentage (owner decision 2026-10-16).
+**Read this first.** "Approved leaf coverage" counts only leaves covered by owner-approved batches, against the owner-approved leaf list. Every other figure here is authoring readiness, not approved coverage. The release denominator is the in-scope leaf list below, approved by the owner. "Authored" means a leaf has general-practice questions and at least one complete exact/similar/generic repair route in the catalogue; it becomes coverage only after review, rights and owner sign-off of the batch that holds it. Character-group coverage is reported separately and never merged into the skill percentage (owner decision 2026-10-16).
 
 Higher Chinese uses the same leaves and the same shared questions as Chinese. No question is Higher-Chinese-only, so the HCL numbers show shared availability, not evidence of HCL depth.
 
@@ -21,7 +21,7 @@ Every question is single-answer multiple choice with four options. Matching, ord
 
 | Measure | Value |
 | --- | --- |
-| Approved leaf coverage | 0/16 — all gates closed; approved-coverage counting is not implemented yet |
+| Approved leaf coverage | 13/16 (81%) — leaves with general practice and a complete repair route from owner-approved batches, against the approved leaf list |
 | Leaves authored with general practice and a complete repair route | 13/16 (81%) |
 | Leaves with some items but no complete route or no general practice | 0 |
 | Empty in-scope leaves (stay in the denominator) | 3 |
@@ -54,7 +54,7 @@ Every question is single-answer multiple choice with four options. Matching, ord
 
 | Measure | Value |
 | --- | --- |
-| Approved leaf coverage | 0/16 — all gates closed; approved-coverage counting is not implemented yet |
+| Approved leaf coverage | 13/16 (81%) — leaves with general practice and a complete repair route from owner-approved batches, against the approved leaf list |
 | Leaves authored with general practice and a complete repair route | 13/16 (81%) |
 | Leaves with some items but no complete route or no general practice | 0 |
 | Empty in-scope leaves (stay in the denominator) | 3 |
@@ -91,7 +91,7 @@ P3 general practice is unlocked from the first Chinese release using reviewed av
 
 | Measure | Value |
 | --- | --- |
-| Approved leaf coverage | 0/20 — all gates closed; approved-coverage counting is not implemented yet |
+| Approved leaf coverage | 7/20 (35%) — leaves with general practice and a complete repair route from owner-approved batches, against the approved leaf list |
 | Leaves authored with general practice and a complete repair route | 7/20 (35%) |
 | Leaves with some items but no complete route or no general practice | 4 |
 | Empty in-scope leaves (stay in the denominator) | 9 |
@@ -130,7 +130,7 @@ P3 general practice is unlocked from the first Chinese release using reviewed av
 
 | Measure | Value |
 | --- | --- |
-| Approved leaf coverage | 0/21 — all gates closed; approved-coverage counting is not implemented yet |
+| Approved leaf coverage | 7/21 (33%) — leaves with general practice and a complete repair route from owner-approved batches, against the approved leaf list |
 | Leaves authored with general practice and a complete repair route | 7/21 (33%) |
 | Leaves with some items but no complete route or no general practice | 4 |
 | Empty in-scope leaves (stay in the denominator) | 10 |
