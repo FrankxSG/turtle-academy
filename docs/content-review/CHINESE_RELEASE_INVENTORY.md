@@ -7,7 +7,7 @@ Catalogue: manifest `zh-2024-p2p3-draft.2` (approved).
 | Batch | Version | Status | Items | Independent review | Owner | Rights |
 | --- | ---: | --- | ---: | --- | --- | --- |
 | `zh-starter-001` | 10 | approved | 357 | passed | approved | cleared |
-| `zh-starter-002` | 2 | author_checked_pending_independent_and_owner_review | 38 | changes_requested | pending | cleared |
+| `zh-starter-002` | 3 | author_checked_pending_independent_and_owner_review | 38 | changes_requested | pending | cleared |
 
 Counts below combine all batches. A batch's review state covers only its own items.
 

@@ -1,4 +1,4 @@
-# Chinese review pack — batch zh-starter-002 v2
+# Chinese review pack — batch zh-starter-002 v3
 
 38 original P2 items for Chinese and Higher Chinese. Claude drafted v1; ChatGPT cross-reviewed all 38 questions and material `zh-m20` at `619c7c3b2d5437b45231939b4ff2d17d1a78775c`, then revised six questions for v2 on 2026-10-18. The other 32 questions have no blocking finding from that review.
 
@@ -16,6 +16,10 @@ Every question is single-answer multiple choice with four options. `[空1]` mark
 
 Sources checked during the cross-review: [记](https://zdic.net/hans/记), [欺负](https://zdic.net/hans/欺负), [结](https://zdic.net/hans/结), and the dictionary readings for 前、七、走、左、就、狗、牛、手、见、全、先、口. The bearing-fruit reading of 结 is jiē. The four owner-retained tone-mark questions are correct. The cumulative P1–P2 text check found only the already-disclosed 调 in 声调. These are educational desk checks; no app rendering or release is approved.
 
+## Claude re-review of the v2 corrections (2026-10-18)
+
+All six corrections are accepted in substance. One follow-up is made in v3 (common check 7): every option in `zh-m20.q2`, `zh-p2-reason-repair.q1` and `.q2` now has two parts, so a hint asking how many things the reason has no longer separated the options. These three hints now ask which two things the text states. The `zh-m20.q2` explanation no longer refers to an option that says only 乌云. Keys and options are unchanged. `zh-p2-reason-repair.q3` keeps its hint, which already asks which things stopped 小花.
+
 ## Owner decisions and sample history
 
 The owner kept the four tone-mark questions in v1 (`zh-p2-sound2.q2`, `.q3`, `zh-p2-sound2-repair.q2`, `.q3`), accepted the v1 seven-item sample and cleared rights on 2026-10-18. Those decisions remain evidence for the item versions seen. Batch sign-off is still pending.
@@ -27,8 +31,8 @@ The owner kept the four tone-mark questions in v1 (`zh-p2-sound2.q2`, `.q3`, `zh
 | `zh-p2-confusable2-u6349.q2` | 1 | Owner accepted v1; question unchanged |
 | `zh-p2-confusable2-u6349.q3` | 1 | Owner accepted v1; question unchanged |
 | `zh-p2-confusable2-u5e26.q2` | 1 | Owner accepted v1; question unchanged |
-| `zh-p2-reason-repair.q1` | 2 | Owner accepted v1; revised v2 needs a fresh decision |
-| `zh-p2-reason-repair.q2` | 2 | Owner accepted v1; revised v2 needs a fresh decision |
+| `zh-p2-reason-repair.q1` | 3 | Owner accepted v1; revised (now v3) needs a fresh decision |
+| `zh-p2-reason-repair.q2` | 3 | Owner accepted v1; revised (now v3) needs a fresh decision |
 
 The v1 sample was drawn from 34 items, excluding the four then-disputed tone-mark items, with seed `zh-starter-002-v1-owner-sample-2026-10-18`. It can be reproduced against the v1 batch at `619c7c3`. It is historical and is not the v2 sample.
 
@@ -38,9 +42,9 @@ The v1 sample was drawn from 34 items, excluding the four then-disputed tone-mar
 | --- | ---: | --- | --- |
 | `zh-p2-confusable2-u8bb0.q3` | 2 | pending | pending |
 | `zh-p2-wordchoice-b.q2` | 2 | pending | pending |
-| `zh-m20.q2` | 2 | pending | pending |
-| `zh-p2-reason-repair.q1` | 2 | pending | pending |
-| `zh-p2-reason-repair.q2` | 2 | pending | pending |
+| `zh-m20.q2` | 3 | pending | pending |
+| `zh-p2-reason-repair.q1` | 3 | pending | pending |
+| `zh-p2-reason-repair.q2` | 3 | pending | pending |
 | `zh-p2-reason-repair.q3` | 2 | pending | pending |
 
 ## V2 owner sample — 7 of 32 unchanged agreed items
@@ -109,11 +113,11 @@ assert [i for i in pool if i in picked] == b['review_log']['sampled_item_ids']
 | zh-p2-wordchoice-b-repair.q2 v1 / similar | 大树的叶子都黄了，[空1]好像生病了。<br>1 她；2 地；3 它；4 他 | 它 | 大树是人吗？ | 说到大树这样的东西，用“它”。 | zh.p2_chinese.skill.word-choice; zh.p2_higher_chinese.skill.word-choice |
 | zh-p2-wordchoice-b-repair.q3 v1 / generic | 我的书包很旧了，可是我还是很喜欢[空1]。<br>1 地；2 他；3 她；4 它 | 它 | “喜欢（　）”说的是书包。书包是人吗？ | 说到书包这样的东西，用“它”。 | zh.p2_chinese.skill.word-choice; zh.p2_higher_chinese.skill.word-choice |
 | zh-m20.q1 v1 / general | 小美和谁走路回家？<br>1 爸爸；2 姐姐；3 妈妈；4 老师 | 妈妈 | 看第一句。 | 第一句写明小美和妈妈走路回家。 | zh.p2_chinese.skill.explicit-info; zh.p2_higher_chinese.skill.explicit-info |
-| zh-m20.q2 v2 / general | 妈妈为什么说快下雨了？哪一句把原因说全了？<br>1 因为天上来了很多乌云，天色看起来很暗。；2 因为天上来了很多乌云，还刮起了大风。；3 因为天上来了很多乌云，还下起了大雨。；4 因为她们已经走了很久，还没有走到家。 | 因为天上来了很多乌云，还刮起了大风。 | 找一找妈妈说的话，原因有几个？ | 妈妈说了两个原因：天上来了很多乌云，还刮起了大风。只说乌云，原因就没有说全。 | zh.p2_chinese.skill.explicit-info; zh.p2_higher_chinese.skill.explicit-info |
+| zh-m20.q2 v3 / general | 妈妈为什么说快下雨了？哪一句把原因说全了？<br>1 因为天上来了很多乌云，天色看起来很暗。；2 因为天上来了很多乌云，还刮起了大风。；3 因为天上来了很多乌云，还下起了大雨。；4 因为她们已经走了很久，还没有走到家。 | 因为天上来了很多乌云，还刮起了大风。 | 妈妈说了哪两件事？看一看，哪一句里的两件事都是妈妈说的。 | 妈妈说了两个原因：天上来了很多乌云，还刮起了大风。别的句子里，有的话不是妈妈说的。 | zh.p2_chinese.skill.explicit-info; zh.p2_higher_chinese.skill.explicit-info |
 | zh-m20.q3 v1 / general | 她们在巴士站等了多久，雨就停了？<br>1 一个下午；2 一会儿；3 一个晚上；4 两天 | 一会儿 | 找一找“雨就停了”前面的话。 | 短文写明她们等了一会儿，雨就停了。 | zh.p2_chinese.skill.explicit-info; zh.p2_higher_chinese.skill.explicit-info |
 | zh-m20.q4 v1 / general | 回到家，小美说了什么？<br>1 “还好我们没有淋湿！”；2 “我们都淋湿了！”；3 “我想坐巴士回家！”；4 “雨一直没有停！” | “还好我们没有淋湿！” | 看最后一句。 | 最后一句写明小美说：“还好我们没有淋湿！” | zh.p2_chinese.skill.explicit-info; zh.p2_higher_chinese.skill.explicit-info |
-| zh-p2-reason-repair.q1 v2 / exact | 读一读：弟弟哭了，因为他的风筝飞走了，他还找不到妈妈。<br>弟弟为什么哭了？哪一句把原因说全了？<br>1 因为他的风筝飞走了，飞得很高很远。；2 因为他一直找不到妈妈，心里很着急。；3 因为他的风筝飞走了，他还找不到妈妈。；4 因为他的风筝飞走了，妈妈还不让他回家。 | 因为他的风筝飞走了，他还找不到妈妈。 | “因为”后面写了几件事？ | “因为”后面写了两件事：风筝飞走了，还找不到妈妈。两件都要说。 | zh.p2_chinese.skill.explicit-info; zh.p2_higher_chinese.skill.explicit-info |
-| zh-p2-reason-repair.q2 v2 / similar | 读一读：今天我很开心，因为我考了一百分，妈妈还给我买了一本新书。<br>“我”为什么很开心？哪一句把原因说全了？<br>1 因为我考了一百分，妈妈还给我买了一本新书。；2 因为我这次考了一百分，妈妈还带我去公园玩。；3 因为妈妈给我买了一本新书，还送我一支彩色笔。；4 因为妈妈今天给我买了一本我很喜欢的新书。 | 因为我考了一百分，妈妈还给我买了一本新书。 | “因为”后面写了几件事？ | “我”开心有两个原因：考了一百分，妈妈还买了一本新书。 | zh.p2_chinese.skill.explicit-info; zh.p2_higher_chinese.skill.explicit-info |
+| zh-p2-reason-repair.q1 v3 / exact | 读一读：弟弟哭了，因为他的风筝飞走了，他还找不到妈妈。<br>弟弟为什么哭了？哪一句把原因说全了？<br>1 因为他的风筝飞走了，飞得很高很远。；2 因为他一直找不到妈妈，心里很着急。；3 因为他的风筝飞走了，他还找不到妈妈。；4 因为他的风筝飞走了，妈妈还不让他回家。 | 因为他的风筝飞走了，他还找不到妈妈。 | “因为”后面写了哪两件事？看一看，哪一句里的两件事都写在句子里。 | “因为”后面写了两件事：风筝飞走了，还找不到妈妈。两件都要说。 | zh.p2_chinese.skill.explicit-info; zh.p2_higher_chinese.skill.explicit-info |
+| zh-p2-reason-repair.q2 v3 / similar | 读一读：今天我很开心，因为我考了一百分，妈妈还给我买了一本新书。<br>“我”为什么很开心？哪一句把原因说全了？<br>1 因为我考了一百分，妈妈还给我买了一本新书。；2 因为我这次考了一百分，妈妈还带我去公园玩。；3 因为妈妈给我买了一本新书，还送我一支彩色笔。；4 因为妈妈今天给我买了一本我很喜欢的新书。 | 因为我考了一百分，妈妈还给我买了一本新书。 | “因为”后面写了哪两件事？看一看，哪一句里的两件事都写在句子里。 | “我”开心有两个原因：考了一百分，妈妈还买了一本新书。 | zh.p2_chinese.skill.explicit-info; zh.p2_higher_chinese.skill.explicit-info |
 | zh-p2-reason-repair.q3 v2 / generic | 读一读：小花没有去公园。她生病了，外面又下着大雨。<br>小花为什么没有去公园？哪一句把原因说全了？<br>1 因为外面下着大雨，雨实在太大了。；2 因为她生病了，外面又刮起大风。；3 因为外面下着大雨，她又找不到伞。；4 因为她生病了，外面又下着大雨。 | 因为她生病了，外面又下着大雨。 | 这一次没有写“因为”。想一想，哪些事让小花不能去？ | 小花没有去公园，有两个原因：她生病了，外面又下着大雨。 | zh.p2_chinese.skill.explicit-info; zh.p2_higher_chinese.skill.explicit-info |
 
 ## Material context
@@ -122,11 +126,11 @@ assert [i for i in pool if i in picked] == b['review_log']['sampled_item_ids']
 
 > 星期三放学后，小美和妈妈走路回家。走到半路，妈妈说：“天上来了很多乌云，还刮起了大风，快下雨了。我们去巴士站等一等吧！”她们在巴士站等了一会儿，雨就停了。回到家，小美说：“还好我们没有淋湿！”
 
-All first answers in this four-question material are collected before feedback. `zh-m20.q2` changes to v2; material wording and the other three questions are unchanged.
+All first answers in this four-question material are collected before feedback. `zh-m20.q2` is now v3 (v2 options, v3 hint and explanation); material wording and the other three questions are unchanged.
 
 ## Handoff
 
-- Claude reviews all six v2 corrections and checks that the new reason distractors leave exactly one fully supported answer, with no recurring length or clause-count cue.
+- Done 2026-10-18: Claude re-reviewed the six v2 corrections. Each reason question leaves exactly one fully supported answer, with no length or clause-count cue. The three v3 hint edits are Claude edits, so they need ChatGPT re-review (or an owner waiver).
 - Owner rules on the corrected versions and reviews the prepared sample after any review corrections settle. Preserve earlier decisions against the versions actually reviewed.
 - Keep independent review, owner batch sign-off and import/release authorization separate. Current batch state records pending work.
 
@@ -143,3 +147,4 @@ All first answers in this four-question material are collected before feedback. 
 - Pending: independent cross-review (ChatGPT) of all 38 items, Claude re-review of any corrections, then owner sign-off of the batch.
 - 2026-10-18 ChatGPT independent cross-review of all 38 v1 questions and zh-m20 at 619c7c3: all keys correct; 32 items without blocking findings. Six revisions in v2 require Claude re-review and owner disposition: four complete-reason items had a uniquely longest key; the 记 explanation promised remembering; the 欺负 explanation was too broad. Read all revised stems/options/hints/explanations together with the material; keys, IDs, courses, leaf mappings and repair routes unchanged. Written pinyin readings checked against dictionary entries; cumulative P1-P2 text check found only the existing disclosed 调 in 声调.
 - v2 owner-review provenance: the four tone-mark decisions and seven sampled-item acceptances recorded on 2026-10-18 apply to the v1 items the owner saw. Two originally sampled items, zh-p2-reason-repair.q1 and .q2, now have new versions and need a fresh owner decision. The prior seven-ID draw remains documented in the review pack. All six revised IDs are disputed pending review; redraw from the 32 unchanged agreed items using random.Random('zh-starter-002-v2-owner-sample-2026-10-18').sample(pool, ceil(len(pool)/5)) in batch order. Current sample decisions pending; rights clearance retained; owner batch sign-off remains pending.
+- 2026-10-18 Claude re-review of the six v2 corrections at 1f59eb6: all six accepted in substance (balanced option lengths, unsupported-detail distractors, narrower 记 and 欺负 explanations). Follow-up in v3: every option in zh-m20.q2 and zh-p2-reason-repair.q1-.q2 now has two parts, so the hints that asked how many things the reason has no longer separated the options (common check 7). The hints now ask which two things the text states. The zh-m20.q2 explanation no longer refers to a removed one-cloud option. Keys, options, IDs and routes unchanged; text within the P1-P2 lists.

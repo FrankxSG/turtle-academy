@@ -1,7 +1,7 @@
 {
  "schema_version": "chinese-content/1",
  "batch_id": "zh-starter-002",
- "version": 2,
+ "version": 3,
  "curriculum_manifest_version": "zh-2024-p2p3-draft.2",
  "status": "author_checked_pending_independent_and_owner_review",
  "materials": [
@@ -1692,7 +1692,7 @@
   },
   {
    "id": "zh-m20.q2",
-   "version": 2,
+   "version": 3,
    "courses": [
     "p2_chinese",
     "p2_higher_chinese"
@@ -1724,8 +1724,8 @@
     }
    ],
    "correct_option_id": "opt-2",
-   "hint": "找一找妈妈说的话，原因有几个？",
-   "explanation": "妈妈说了两个原因：天上来了很多乌云，还刮起了大风。只说乌云，原因就没有说全。",
+   "hint": "妈妈说了哪两件事？看一看，哪一句里的两件事都是妈妈说的。",
+   "explanation": "妈妈说了两个原因：天上来了很多乌云，还刮起了大风。别的句子里，有的话不是妈妈说的。",
    "rationale": "只问短文中直接写出的信息；问原因时，要把文中写出的原因找全。",
    "material_id": "zh-m20",
    "stage": null,
@@ -1839,7 +1839,7 @@
   },
   {
    "id": "zh-p2-reason-repair.q1",
-   "version": 2,
+   "version": 3,
    "courses": [
     "p2_chinese",
     "p2_higher_chinese"
@@ -1874,7 +1874,7 @@
     }
    ],
    "correct_option_id": "opt-3",
-   "hint": "“因为”后面写了几件事？",
+   "hint": "“因为”后面写了哪两件事？看一看，哪一句里的两件事都写在句子里。",
    "explanation": "“因为”后面写了两件事：风筝飞走了，还找不到妈妈。两件都要说。",
    "rationale": "只问短文中直接写出的信息；问原因时，要把文中写出的原因找全。",
    "material_id": null,
@@ -1887,7 +1887,7 @@
   },
   {
    "id": "zh-p2-reason-repair.q2",
-   "version": 2,
+   "version": 3,
    "courses": [
     "p2_chinese",
     "p2_higher_chinese"
@@ -1922,7 +1922,7 @@
     }
    ],
    "correct_option_id": "opt-1",
-   "hint": "“因为”后面写了几件事？",
+   "hint": "“因为”后面写了哪两件事？看一看，哪一句里的两件事都写在句子里。",
    "explanation": "“我”开心有两个原因：考了一百分，妈妈还买了一本新书。",
    "rationale": "只问短文中直接写出的信息；问原因时，要把文中写出的原因找全。",
    "material_id": null,
@@ -2093,7 +2093,8 @@
    "Owner decisions 2026-10-18: all 7 sampled items accepted as written, with no notes; rights cleared, because the content is original Turtle Academy material and no worksheet, textbook or past-paper text was copied.",
    "Pending: independent cross-review (ChatGPT) of all 38 items, Claude re-review of any corrections, then owner sign-off of the batch.",
    "2026-10-18 ChatGPT independent cross-review of all 38 v1 questions and zh-m20 at 619c7c3: all keys correct; 32 items without blocking findings. Six revisions in v2 require Claude re-review and owner disposition: four complete-reason items had a uniquely longest key; the 记 explanation promised remembering; the 欺负 explanation was too broad. Read all revised stems/options/hints/explanations together with the material; keys, IDs, courses, leaf mappings and repair routes unchanged. Written pinyin readings checked against dictionary entries; cumulative P1-P2 text check found only the existing disclosed 调 in 声调.",
-   "v2 owner-review provenance: the four tone-mark decisions and seven sampled-item acceptances recorded on 2026-10-18 apply to the v1 items the owner saw. Two originally sampled items, zh-p2-reason-repair.q1 and .q2, now have new versions and need a fresh owner decision. The prior seven-ID draw remains documented in the review pack. All six revised IDs are disputed pending review; redraw from the 32 unchanged agreed items using random.Random('zh-starter-002-v2-owner-sample-2026-10-18').sample(pool, ceil(len(pool)/5)) in batch order. Current sample decisions pending; rights clearance retained; owner batch sign-off remains pending."
+   "v2 owner-review provenance: the four tone-mark decisions and seven sampled-item acceptances recorded on 2026-10-18 apply to the v1 items the owner saw. Two originally sampled items, zh-p2-reason-repair.q1 and .q2, now have new versions and need a fresh owner decision. The prior seven-ID draw remains documented in the review pack. All six revised IDs are disputed pending review; redraw from the 32 unchanged agreed items using random.Random('zh-starter-002-v2-owner-sample-2026-10-18').sample(pool, ceil(len(pool)/5)) in batch order. Current sample decisions pending; rights clearance retained; owner batch sign-off remains pending.",
+   "2026-10-18 Claude re-review of the six v2 corrections at 1f59eb6: all six accepted in substance (balanced option lengths, unsupported-detail distractors, narrower 记 and 欺负 explanations). Follow-up in v3: every option in zh-m20.q2 and zh-p2-reason-repair.q1-.q2 now has two parts, so the hints that asked how many things the reason has no longer separated the options (common check 7). The hints now ask which two things the text states. The zh-m20.q2 explanation no longer refers to a removed one-cloud option. Keys, options, IDs and routes unchanged; text within the P1-P2 lists."
   ],
   "independent_review": "changes_requested",
   "owner_signoff": "pending",
