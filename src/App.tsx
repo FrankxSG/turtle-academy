@@ -13,6 +13,7 @@ import {
 import { Parent } from './parent/Parent.tsx'
 import type { SaveStatus } from './engine/persistence.ts'
 import { openRuntime, type Runtime } from './ui/runtime.ts'
+import { keepStorage, type StorageKeep } from './ui/keep-storage.ts'
 import { Practice } from './ui/Practice.tsx'
 import type { Language } from './ui/development.ts'
 import { stories, deliverStory, canPresentStory } from './ui/story.ts'
@@ -42,6 +43,7 @@ export function App() {
   const [confirmPin, setConfirmPin] = useState('')
   const [timezone, setTimezone] = useState('Asia/Singapore')
   const [online, setOnline] = useState(navigator.onLine)
+  const [kept, setKept] = useState<StorageKeep | null>(null)
   const [shellReady, setShellReady] = useState(false)
   const {
     needRefresh: [needRefresh],
@@ -108,6 +110,13 @@ export function App() {
   }, [auth])
 
   useEffect(() => runtime?.writer.onStatus(setSave), [runtime])
+  // Records live only on this device: ask the browser not to clear them under storage pressure.
+  useEffect(() => {
+    if (entry !== 'ready') return
+    let alive = true
+    void keepStorage(navigator.storage).then((k) => { if (alive) setKept(k) })
+    return () => { alive = false }
+  }, [entry])
   useEffect(() => {
     if (!runtime) return
     const activeTask = () =>
@@ -582,6 +591,16 @@ export function App() {
               '记录仅在本设备，没有云端备份。清除或回收浏览器存储可能丢失记录。',
             )}
           </p>
+          {kept && (
+            <p data-testid="storage-kept">
+              {kept === 'kept'
+                ? tr('This browser has agreed to keep these records when space runs low.', '浏览器已同意在空间不足时保留这些记录。')
+                : tr(
+                    'This browser has not agreed to keep these records when space runs low. Add the app to the home screen, then reopen it from there.',
+                    '浏览器尚未同意在空间不足时保留这些记录。请把应用添加到主屏幕，再从主屏幕打开。',
+                  )}
+            </p>
+          )}
           {needRefresh && (
             <button
               disabled={busy || view !== 'hub' || !!save?.warning}
