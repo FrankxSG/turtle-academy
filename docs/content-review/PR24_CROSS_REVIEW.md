@@ -38,7 +38,12 @@ The PDFs are not committed. The audit needs them supplied locally.
 
 ## Still required before release
 
-- Owner target-list, rights and batch decisions, using the refreshed owner sample and disputed-item review.
+- Owner target-list, rights and batch decisions are complete as recorded below.
 - Real catalogue/intake wiring and end-to-end priority/repair evidence: implemented in draft PR #25, which is stacked on this PR.
 
 No owner or rights approval is inferred from passing structural checks. No deployment or merge performed.
+
+
+## Owner approval — 2026-10-18
+
+The owner approved the full practice target list in chat, then signed the batch-v2 receipt at `2026-10-18T14:14:53.948Z`: all 20 seeded sample items and 21 revisions reviewed; content approved for 117 items; rights/public use approved. The receipt binds source head `1aa0e39ac6ae0a2c140b27d541e755f42a0427e0` and pre-approval batch SHA-256 `a393c21fc90ab87a6fd55a2d1dfa4e1528ef16599994eb0780b974918a0e85d6`. The list and batch approval metadata are updated; no item content changed. This does not authorize merge, deployment, real-data use, or approve the separate private bank.

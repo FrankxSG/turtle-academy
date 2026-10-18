@@ -2,8 +2,8 @@
   "schema_version": "chinese-review-characters/1",
   "version": "zh-2024-p1-review.3",
   "curriculum_manifest_version": "zh-2024-p2p3-draft.2",
-  "status": "proposed",
-  "basis": "Owner decision 2026-10-18: P2 learners may practise P1 characters they still get wrong. Records are the official MOE P1 recognition and writing lists (PDF pages 1-2 of the same checksum-pinned character lists), for each P2 course, minus characters already in that course's P2 list records. Review characters are practice targets only: they are not P2 outcomes and never count toward P2 coverage.",
+  "status": "approved",
+  "basis": "Owner decision 2026-10-18: P2 learners may practise P1 characters they still get wrong. Records are the official MOE P1 recognition and writing lists (PDF pages 1-2 of the same checksum-pinned character lists), for each P2 course, minus characters already in that course's P2 list records. Review characters are practice targets only: they are not P2 outcomes and never count toward P2 coverage. Owner approved the full practice target list zh-2024-p1-review.3 in chat on 2026-10-18: 269 CL and 278 HCL P1-review records and the same 14 textbook extras per course. Approval covers practice scope, not official P2 coverage, merge, deployment or real-data use.",
   "counts": [
     {
       "course": "p2_chinese",

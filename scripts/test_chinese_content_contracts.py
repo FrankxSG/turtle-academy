@@ -341,7 +341,7 @@ class ReviewCharacters(unittest.TestCase):
         batch['status'] = 'approved'
         batch['review_log'].update(independent_review='passed', owner_signoff='approved', rights_status='cleared', disputed_item_ids=[])
         with self.assertRaisesRegex(Invalid, 'approved_batch_review_characters_not_approved'):
-            check_catalogue(self.curriculum, batch, self.review)
+            check_catalogue(self.curriculum, batch, dict(self.review, status='proposed'))
         check_catalogue(self.curriculum, batch, dict(self.review, status='approved'))
 
     def _row(self, review, char, course='p2_chinese'):
@@ -425,7 +425,7 @@ class ReviewCharacters(unittest.TestCase):
         with self.assertRaisesRegex(Invalid, 'mapped_ref'):
             check_import(p, c, today, [c['manifest_version']])
         with self.assertRaisesRegex(Invalid, 'review_characters_not_approved'):
-            check_import(p, c, today, [c['manifest_version']], self.review)
+            check_import(p, c, today, [c['manifest_version']], dict(self.review, status='proposed'))
         approved = dict(self.review, status='approved')
         check_import(p, c, today, [c['manifest_version']], approved)
         p['items'][0]['target_value'] = '东'
