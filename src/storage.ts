@@ -181,7 +181,13 @@ export class DexiePrivateStore implements PrivateStore {
   async open() { await this.db.open() }
   close() { this.db.close() }
   async packs() { return this.db.packs.toArray() }
-  async putPack(p: PrivatePack) { await this.db.packs.put(p) }
+  /** The current pack replaces any earlier one; tasks pinned to earlier content keep it through stored builds. */
+  async putPack(p: PrivatePack) {
+    await this.db.transaction('rw', this.db.packs, async () => {
+      await this.db.packs.clear()
+      await this.db.packs.put(p)
+    })
+  }
   async crosswalk() { return ((await this.db.kv.get('crosswalk'))?.value as CrosswalkRow[] | undefined) ?? [] }
   async putCrosswalk(rows: CrosswalkRow[]) { await this.db.kv.put({ key: 'crosswalk', value: rows }) }
   async production() { return this.db.production.toArray() }

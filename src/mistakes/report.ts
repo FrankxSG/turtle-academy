@@ -32,6 +32,8 @@ export interface CaseRow {
     stage: Stage | null
     clearances: { stage: Stage; on: string }[]
     first_responses: { correct: number; wrong: number }
+    /** First responses that count as evidence (not replaced, invalidated, suspended or ineligible). */
+    counted_first_responses: number
     independent_first_correct: number
     hint_retries: number
     supported_corrections: number
@@ -120,7 +122,7 @@ export function buildReport(opts: {
     const target = engineId ? state.targets.find((t) => t.id === engineId) : undefined
     const pr = engineId ? derived.progress.get(engineId) : undefined
     const ps = engineId ? presentationsOf.get(engineId) ?? [] : []
-    let firstCorrect = 0, firstWrong = 0, indep = 0, retries = 0, corrections = 0, excludedCount = 0
+    let firstCorrect = 0, firstWrong = 0, counted = 0, indep = 0, retries = 0, corrections = 0, excludedCount = 0
     const delayed: { on: string; correct: boolean }[] = []
     let last: string | null = null
     for (const p of ps) {
@@ -132,6 +134,7 @@ export function buildReport(opts: {
         if (e.phase === 'first') {
           if (e.correct) firstCorrect += 1
           else firstWrong += 1
+          if (evidence) counted += 1
           if (evidence && e.correct && e.assistance === 'none') indep += 1
           if (evidence && p.stage === 'delayed_review') delayed.push({ on, correct: e.correct })
         } else if (e.phase === 'retry') retries += 1
@@ -144,6 +147,7 @@ export function buildReport(opts: {
       stage: pr ? pr.stage : null,
       clearances: pr ? pr.clearances.map((k) => ({ stage: k.stage, on: k.cleared_on })) : [],
       first_responses: { correct: firstCorrect, wrong: firstWrong },
+      counted_first_responses: counted,
       independent_first_correct: indep,
       hint_retries: retries,
       supported_corrections: corrections,
@@ -156,7 +160,8 @@ export function buildReport(opts: {
     let status: CaseStatus
     if (!target) status = 'not_imported'
     else if (target.mapping_status === 'pending_content') status = 'pending_content'
-    else if (ps.length === 0 || firstCorrect + firstWrong === 0) status = 'not_yet_evidenced'
+    // Only counted first responses are evidence; a replaced or invalidated attempt leaves the case unevidenced.
+    else if (counted === 0) status = 'not_yet_evidenced'
     else if (pr?.stage === 'delayed_review') status = 'in_delayed_review'
     else status = 'in_repair'
     return { ...base, status, recognition }
@@ -167,7 +172,7 @@ export function buildReport(opts: {
   }
   for (const r of rows) {
     totals[r.status] += 1
-    if (r.recognition && r.recognition.first_responses.correct + r.recognition.first_responses.wrong > 0) totals.with_recognition_evidence += 1
+    if (r.recognition && r.recognition.counted_first_responses > 0) totals.with_recognition_evidence += 1
     if (r.production && r.production.events > 0) totals.with_production_evidence += 1
   }
   return {

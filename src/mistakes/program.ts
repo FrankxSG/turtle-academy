@@ -15,7 +15,9 @@ import { deriveProduction, type ProductionEvent, type ProductionStage } from './
 import { buildExport, buildReport, normalizedEvents, type CaseReport, type PrivateExport } from './report.ts'
 
 export interface PrivateStore {
+  /** At most one pack: the current one. */
   packs(): Promise<PrivatePack[]>
+  /** Replaces the stored pack. Earlier content stays available to pinned tasks through stored builds. */
   putPack(pack: PrivatePack): Promise<void>
   crosswalk(): Promise<CrosswalkRow[]>
   putCrosswalk(rows: CrosswalkRow[]): Promise<void>
@@ -44,11 +46,9 @@ export class MemoryPrivateStore implements PrivateStore {
   packList: PrivatePack[] = []
   rows: CrosswalkRow[] = []
   events = new Map<string, ProductionEvent>()
-  async packs() { return structuredClone(this.packList) }
-  async putPack(p: PrivatePack) {
-    this.packList = this.packList.filter((x) => x.pack_id !== p.pack_id)
-    this.packList.push(structuredClone(p))
-  }
+  // Like the device store: listed by pack_id, and the current pack replaces any earlier one.
+  async packs() { return structuredClone([...this.packList].sort((a, b) => a.pack_id.localeCompare(b.pack_id))) }
+  async putPack(p: PrivatePack) { this.packList = [structuredClone(p)] }
   async crosswalk() { return structuredClone(this.rows) }
   async putCrosswalk(rows: CrosswalkRow[]) { this.rows = structuredClone(rows) }
   async production() { return [...this.events.values()].map((e) => structuredClone(e)) }

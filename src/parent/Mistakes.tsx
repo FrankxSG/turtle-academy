@@ -52,10 +52,13 @@ export function Mistakes({
     await work(async () => {
       try {
         const r = await program.installPack(JSON.parse(await file.text()))
+        const added = r.added_targets + r.added_observations > 0
         setMessage(
           tr(
-            `Imported. New practice targets: ${r.added_targets}; new cases linked to existing targets: ${r.added_observations}. Practice starts tomorrow.`,
-            `已导入。新增练习目标 ${r.added_targets} 个；链接到已有目标的新错例 ${r.added_observations} 个。明天开始练习。`,
+            `Imported. New practice targets: ${r.added_targets}; new cases linked to existing targets: ${r.added_observations}.` +
+              (added ? ' New cases start tomorrow.' : ' Nothing new; existing progress is unchanged.'),
+            `已导入。新增练习目标 ${r.added_targets} 个；链接到已有目标的新错例 ${r.added_observations} 个。` +
+              (added ? '新错例明天开始练习。' : '没有新内容，已有进度不变。'),
           ),
         )
       } catch (e) {

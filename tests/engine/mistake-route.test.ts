@@ -295,3 +295,47 @@ test('a content revision keeps earlier evidence on its pinned version and new ta
   if (next.kind !== 'task') throw new Error('no task')
   assert.equal(next.task.content_version, program2.currentRelease()!.version)
 })
+
+test('an updated pack stays current after a restart, whatever its ID sorts as, and pinned tasks still resume', async () => {
+  const s = await setup()
+  const first = syntheticPack({ pendingRef: s.pendingRef })
+  first.pack_id = 'test-pack-zzz'
+  await s.program.installPack(first)
+  s.clock.sgt('2027-03-02')
+  const t = await s.engine.startOrResume('chinese')
+  if (t.kind !== 'task') throw new Error('no task')
+  const step = await s.engine.next(t.task.id)
+  if (step.kind === 'question') await s.engine.answer(step.presentation.id, correctResponse(step.item))
+  await s.engine.pause(t.task.id)
+  // A later pack whose ID sorts before the first one (pack IDs end in a content hash).
+  const second = syntheticPack({ pendingRef: s.pendingRef, extraCase: true })
+  second.pack_id = 'test-pack-aaa'
+  await s.program.installPack(second)
+  assert.equal((await s.privateStore.packs()).length, 1, 'only the current pack is kept')
+  const re = await reopen(s)
+  assert.ok(re.program.register!.cases.some((c) => c.id === 'O907'), 'the later register is current after restart')
+  assert.ok(re.program.currentRelease()!.version.endsWith(':testpackaaa'))
+  const resumed = await re.engine.startOrResume('chinese')
+  if (resumed.kind !== 'task') throw new Error('no task')
+  assert.equal(resumed.task.id, t.task.id)
+  assert.equal(resumed.task.content_version, t.task.content_version, 'the paused task keeps its pinned content')
+  await run(re.engine, resumed.task.id, () => true)
+})
+
+test('a case whose only attempt was replaced is reported as not yet evidenced', async () => {
+  const s = await setup()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  s.clock.sgt('2027-03-02')
+  const t = await s.engine.startOrResume('chinese')
+  if (t.kind !== 'task') throw new Error('no task')
+  const step = await s.engine.next(t.task.id)
+  if (step.kind !== 'question' || !step.presentation.target_ref) throw new Error('expected a repair question first')
+  await s.engine.answer(step.presentation.id, correctResponse(step.item))
+  await s.engine.flag(step.presentation.id, 'answer_looks_wrong')
+  await s.engine.pause(t.task.id)
+  const caseId = s.program.crosswalk.find((r) => r.engine_target_id === step.presentation.target_ref)!.case_id
+  const row = s.program.report()!.cases.find((c) => c.case_id === caseId)!
+  assert.equal(row.recognition!.first_responses.correct, 1, 'the attempt is still shown')
+  assert.equal(row.recognition!.counted_first_responses, 0)
+  assert.equal(row.status, 'not_yet_evidenced')
+})
