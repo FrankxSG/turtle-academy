@@ -2,7 +2,7 @@
 
 38 original P2 items for Chinese and Higher Chinese. Claude drafted v1; ChatGPT cross-reviewed all 38 questions and material `zh-m20` at `619c7c3b2d5437b45231939b4ff2d17d1a78775c`, then revised six questions for v2 on 2026-10-18. The other 32 questions have no blocking finding from that review.
 
-Batch status: `author_checked_pending_independent_and_owner_review`; independent review `changes_requested`; owner sign-off `pending`; rights `cleared`. The six ChatGPT corrections await Claude re-review and owner disposition. Approval of `zh-starter-001` v10 covers its own items.
+Batch status: `approved` (2026-10-18). Independent review `passed`, owner sign-off `approved`, rights `cleared`. ChatGPT cross-reviewed v1; Claude re-reviewed the six ChatGPT corrections and edited three hints (v3); the owner accepted the six, waived re-review of the three hint edits, accepted the seven-item sample and approved the batch. Approval of `zh-starter-001` v10 covers its own items.
 
 Every question is single-answer multiple choice with four options. `[空1]` marks a linked blank; keys below are review aids.
 
@@ -22,7 +22,7 @@ All six corrections are accepted in substance. One follow-up is made in v3 (comm
 
 ## Owner decisions and sample history
 
-The owner kept the four tone-mark questions in v1 (`zh-p2-sound2.q2`, `.q3`, `zh-p2-sound2-repair.q2`, `.q3`), accepted the v1 seven-item sample and cleared rights on 2026-10-18. Those decisions remain evidence for the item versions seen. Batch sign-off is still pending.
+The owner kept the four tone-mark questions in v1 (`zh-p2-sound2.q2`, `.q3`, `zh-p2-sound2-repair.q2`, `.q3`), accepted the v1 seven-item sample and cleared rights on 2026-10-18. Those decisions remain evidence for the item versions seen. The batch was approved on 2026-10-18.
 
 | Original v1 sample | Current version | Decision scope |
 | --- | ---: | --- |
@@ -31,25 +31,25 @@ The owner kept the four tone-mark questions in v1 (`zh-p2-sound2.q2`, `.q3`, `zh
 | `zh-p2-confusable2-u6349.q2` | 1 | Owner accepted v1; question unchanged |
 | `zh-p2-confusable2-u6349.q3` | 1 | Owner accepted v1; question unchanged |
 | `zh-p2-confusable2-u5e26.q2` | 1 | Owner accepted v1; question unchanged |
-| `zh-p2-reason-repair.q1` | 3 | Owner accepted v1; revised (now v3) needs a fresh decision |
-| `zh-p2-reason-repair.q2` | 3 | Owner accepted v1; revised (now v3) needs a fresh decision |
+| `zh-p2-reason-repair.q1` | 3 | Owner accepted v1; current v3 accepted 2026-10-18 as a corrected item |
+| `zh-p2-reason-repair.q2` | 3 | Owner accepted v1; current v3 accepted 2026-10-18 as a corrected item |
 
 The v1 sample was drawn from 34 items, excluding the four then-disputed tone-mark items, with seed `zh-starter-002-v1-owner-sample-2026-10-18`. It can be reproduced against the v1 batch at `619c7c3`. It is historical and is not the v2 sample.
 
-## V2 pending owner disposition queue
+## Corrected items — dispositions
 
 | Item | Version | Claude re-review | Owner disposition |
 | --- | ---: | --- | --- |
-| `zh-p2-confusable2-u8bb0.q3` | 2 | pending | pending |
-| `zh-p2-wordchoice-b.q2` | 2 | pending | pending |
-| `zh-m20.q2` | 3 | pending | pending |
-| `zh-p2-reason-repair.q1` | 3 | pending | pending |
-| `zh-p2-reason-repair.q2` | 3 | pending | pending |
-| `zh-p2-reason-repair.q3` | 2 | pending | pending |
+| `zh-p2-confusable2-u8bb0.q3` | 2 | accepted | accepted 2026-10-18 |
+| `zh-p2-wordchoice-b.q2` | 2 | accepted | accepted 2026-10-18 |
+| `zh-m20.q2` | 3 | accepted | accepted 2026-10-18 |
+| `zh-p2-reason-repair.q1` | 3 | accepted | accepted 2026-10-18 |
+| `zh-p2-reason-repair.q2` | 3 | accepted | accepted 2026-10-18 |
+| `zh-p2-reason-repair.q3` | 2 | accepted | accepted 2026-10-18 |
 
 ## V2 owner sample — 7 of 32 unchanged agreed items
 
-Six corrected IDs are excluded. All four previously disputed tone-mark questions are now eligible because the owner kept them and the cross-review found no correctness issue. This draw is prepared for review; no new owner acceptance is inferred.
+Six corrected IDs are excluded. All four previously disputed tone-mark questions are now eligible because the owner kept them and the cross-review found no correctness issue. The owner accepted all seven on 2026-10-18 with no notes.
 
 ```python
 import json, math, random
@@ -67,15 +67,15 @@ picked = set(random.Random('zh-starter-002-v2-owner-sample-2026-10-18').sample(p
 assert [i for i in pool if i in picked] == b['review_log']['sampled_item_ids']
 ```
 
-| Sampled item | Version | V2 sample decision |
+| Sampled item | Version | Owner decision |
 | --- | ---: | --- |
-| `zh-p2-confusable2-u8fdc.q2` | 1 | pending |
-| `zh-p2-confusable2-u8fdc.q3` | 1 | pending |
-| `zh-p2-confusable2-u5e26.q2` | 1 | pending |
-| `zh-p2-confusable2-u8bb0.q2` | 1 | pending |
-| `zh-p2-sound2.q2` | 1 | pending |
-| `zh-p2-wordchoice-b.q4` | 1 | pending |
-| `zh-m20.q4` | 1 | pending |
+| `zh-p2-confusable2-u8fdc.q2` | 1 | accepted 2026-10-18 |
+| `zh-p2-confusable2-u8fdc.q3` | 1 | accepted 2026-10-18 |
+| `zh-p2-confusable2-u5e26.q2` | 1 | accepted 2026-10-18 |
+| `zh-p2-confusable2-u8bb0.q2` | 1 | accepted 2026-10-18 |
+| `zh-p2-sound2.q2` | 1 | accepted 2026-10-18 |
+| `zh-p2-wordchoice-b.q4` | 1 | accepted 2026-10-18 |
+| `zh-m20.q4` | 1 | accepted 2026-10-18 |
 
 ## All 38 current questions
 
@@ -132,7 +132,7 @@ All first answers in this four-question material are collected before feedback. 
 
 - Done 2026-10-18: Claude re-reviewed the six v2 corrections. Each reason question leaves exactly one fully supported answer, with no length or clause-count cue. The three v3 hint edits are Claude edits, so they need ChatGPT re-review (or an owner waiver).
 - Owner rules on the corrected versions and reviews the prepared sample after any review corrections settle. Preserve earlier decisions against the versions actually reviewed.
-- Keep independent review, owner batch sign-off and import/release authorization separate. Current batch state records pending work.
+- Keep independent review, owner batch sign-off and import/release authorization separate. The batch is approved; import and release still need separate authorization.
 
 ## Author and review history
 
@@ -148,3 +148,4 @@ All first answers in this four-question material are collected before feedback. 
 - 2026-10-18 ChatGPT independent cross-review of all 38 v1 questions and zh-m20 at 619c7c3: all keys correct; 32 items without blocking findings. Six revisions in v2 require Claude re-review and owner disposition: four complete-reason items had a uniquely longest key; the 记 explanation promised remembering; the 欺负 explanation was too broad. Read all revised stems/options/hints/explanations together with the material; keys, IDs, courses, leaf mappings and repair routes unchanged. Written pinyin readings checked against dictionary entries; cumulative P1-P2 text check found only the existing disclosed 调 in 声调.
 - v2 owner-review provenance: the four tone-mark decisions and seven sampled-item acceptances recorded on 2026-10-18 apply to the v1 items the owner saw. Two originally sampled items, zh-p2-reason-repair.q1 and .q2, now have new versions and need a fresh owner decision. The prior seven-ID draw remains documented in the review pack. All six revised IDs are disputed pending review; redraw from the 32 unchanged agreed items using random.Random('zh-starter-002-v2-owner-sample-2026-10-18').sample(pool, ceil(len(pool)/5)) in batch order. Current sample decisions pending; rights clearance retained; owner batch sign-off remains pending.
 - 2026-10-18 Claude re-review of the six v2 corrections at 1f59eb6: all six accepted in substance (balanced option lengths, unsupported-detail distractors, narrower 记 and 欺负 explanations). Follow-up in v3: every option in zh-m20.q2 and zh-p2-reason-repair.q1-.q2 now has two parts, so the hints that asked how many things the reason has no longer separated the options (common check 7). The hints now ask which two things the text states. The zh-m20.q2 explanation no longer refers to a removed one-cloud option. Keys, options, IDs and routes unchanged; text within the P1-P2 lists.
+- Owner decisions 2026-10-18 at b94314d: the six corrected items accepted in their current versions (zh-p2-confusable2-u8bb0.q3 v2, zh-p2-wordchoice-b.q2 v2, zh-m20.q2 v3, zh-p2-reason-repair.q1 v3, .q2 v3, .q3 v2); ChatGPT re-review of the three Claude v3 hint edits waived by the owner; all seven v2-sample items accepted with no notes; batch approved. Independent review: ChatGPT cross-reviewed all v1 items; Claude re-reviewed the six ChatGPT corrections.

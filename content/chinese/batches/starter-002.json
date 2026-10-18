@@ -3,7 +3,7 @@
  "batch_id": "zh-starter-002",
  "version": 3,
  "curriculum_manifest_version": "zh-2024-p2p3-draft.2",
- "status": "author_checked_pending_independent_and_owner_review",
+ "status": "approved",
  "materials": [
   {
    "id": "zh-m20",
@@ -2094,10 +2094,11 @@
    "Pending: independent cross-review (ChatGPT) of all 38 items, Claude re-review of any corrections, then owner sign-off of the batch.",
    "2026-10-18 ChatGPT independent cross-review of all 38 v1 questions and zh-m20 at 619c7c3: all keys correct; 32 items without blocking findings. Six revisions in v2 require Claude re-review and owner disposition: four complete-reason items had a uniquely longest key; the 记 explanation promised remembering; the 欺负 explanation was too broad. Read all revised stems/options/hints/explanations together with the material; keys, IDs, courses, leaf mappings and repair routes unchanged. Written pinyin readings checked against dictionary entries; cumulative P1-P2 text check found only the existing disclosed 调 in 声调.",
    "v2 owner-review provenance: the four tone-mark decisions and seven sampled-item acceptances recorded on 2026-10-18 apply to the v1 items the owner saw. Two originally sampled items, zh-p2-reason-repair.q1 and .q2, now have new versions and need a fresh owner decision. The prior seven-ID draw remains documented in the review pack. All six revised IDs are disputed pending review; redraw from the 32 unchanged agreed items using random.Random('zh-starter-002-v2-owner-sample-2026-10-18').sample(pool, ceil(len(pool)/5)) in batch order. Current sample decisions pending; rights clearance retained; owner batch sign-off remains pending.",
-   "2026-10-18 Claude re-review of the six v2 corrections at 1f59eb6: all six accepted in substance (balanced option lengths, unsupported-detail distractors, narrower 记 and 欺负 explanations). Follow-up in v3: every option in zh-m20.q2 and zh-p2-reason-repair.q1-.q2 now has two parts, so the hints that asked how many things the reason has no longer separated the options (common check 7). The hints now ask which two things the text states. The zh-m20.q2 explanation no longer refers to a removed one-cloud option. Keys, options, IDs and routes unchanged; text within the P1-P2 lists."
+   "2026-10-18 Claude re-review of the six v2 corrections at 1f59eb6: all six accepted in substance (balanced option lengths, unsupported-detail distractors, narrower 记 and 欺负 explanations). Follow-up in v3: every option in zh-m20.q2 and zh-p2-reason-repair.q1-.q2 now has two parts, so the hints that asked how many things the reason has no longer separated the options (common check 7). The hints now ask which two things the text states. The zh-m20.q2 explanation no longer refers to a removed one-cloud option. Keys, options, IDs and routes unchanged; text within the P1-P2 lists.",
+   "Owner decisions 2026-10-18 at b94314d: the six corrected items accepted in their current versions (zh-p2-confusable2-u8bb0.q3 v2, zh-p2-wordchoice-b.q2 v2, zh-m20.q2 v3, zh-p2-reason-repair.q1 v3, .q2 v3, .q3 v2); ChatGPT re-review of the three Claude v3 hint edits waived by the owner; all seven v2-sample items accepted with no notes; batch approved. Independent review: ChatGPT cross-reviewed all v1 items; Claude re-reviewed the six ChatGPT corrections."
   ],
-  "independent_review": "changes_requested",
-  "owner_signoff": "pending",
+  "independent_review": "passed",
+  "owner_signoff": "approved",
   "sampled_item_ids": [
    "zh-p2-confusable2-u8fdc.q2",
    "zh-p2-confusable2-u8fdc.q3",
@@ -2107,14 +2108,7 @@
    "zh-p2-wordchoice-b.q4",
    "zh-m20.q4"
   ],
-  "disputed_item_ids": [
-   "zh-p2-confusable2-u8bb0.q3",
-   "zh-p2-wordchoice-b.q2",
-   "zh-m20.q2",
-   "zh-p2-reason-repair.q1",
-   "zh-p2-reason-repair.q2",
-   "zh-p2-reason-repair.q3"
-  ],
+  "disputed_item_ids": [],
   "rights_status": "cleared",
   "artwork": "none"
  }
