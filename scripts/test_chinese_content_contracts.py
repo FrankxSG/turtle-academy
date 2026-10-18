@@ -39,9 +39,11 @@ class Contracts(unittest.TestCase):
             check_plan(load(path), self.curriculum, self.batch)
 
     def test_x_boundary_rejects_bool_fraction_and_old_limits(self):
-        for x in [True, 5, 20, 10.5]:
+        for x in [True, 5, 21, 10.5]:
             with self.subTest(x=x), self.assertRaises(Invalid):
                 schema_check(dict(self.plan, x=x), SCHEMA['$defs']['task_plan'])
+        # Owner decision 2026-10-18: Chinese may go up to 20 a day in the first pilot.
+        schema_check(dict(self.plan, x=20), SCHEMA['$defs']['task_plan'])
 
     def test_whole_material_and_actual_total(self):
         for mutate in [lambda p: p['slots'].pop(2),
@@ -339,7 +341,7 @@ class ReviewCharacters(unittest.TestCase):
         batch['status'] = 'approved'
         batch['review_log'].update(independent_review='passed', owner_signoff='approved', rights_status='cleared', disputed_item_ids=[])
         with self.assertRaisesRegex(Invalid, 'approved_batch_review_characters_not_approved'):
-            check_catalogue(self.curriculum, batch, self.review)
+            check_catalogue(self.curriculum, batch, dict(self.review, status='proposed'))
         check_catalogue(self.curriculum, batch, dict(self.review, status='approved'))
 
     def _row(self, review, char, course='p2_chinese'):
@@ -423,7 +425,7 @@ class ReviewCharacters(unittest.TestCase):
         with self.assertRaisesRegex(Invalid, 'mapped_ref'):
             check_import(p, c, today, [c['manifest_version']])
         with self.assertRaisesRegex(Invalid, 'review_characters_not_approved'):
-            check_import(p, c, today, [c['manifest_version']], self.review)
+            check_import(p, c, today, [c['manifest_version']], dict(self.review, status='proposed'))
         approved = dict(self.review, status='approved')
         check_import(p, c, today, [c['manifest_version']], approved)
         p['items'][0]['target_value'] = '东'

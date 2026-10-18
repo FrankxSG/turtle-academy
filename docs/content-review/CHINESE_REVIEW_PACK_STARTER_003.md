@@ -1,22 +1,22 @@
 # Chinese review pack — batch zh-starter-003 v2
 
-117 original recognition questions. Independent review: **changes requested**; owner sign-off and rights decision remain pending. This is content preparation, not a runtime release.
+117 original recognition questions. Independent review: **passed**; owner sign-off **approved** and rights **cleared** on 2026-10-18. This is content preparation, not a runtime release.
 
 ## Cross-review findings
 
-ChatGPT read all 117 v1 items with their options, hints and explanations. Twenty-one items are revised at item version 2: bounded meanings replace overbroad definitions; colour contexts specify the intended colour; the 九 recognition item no longer requires addition; unnatural 喷 usage is replaced. Keys and target IDs are unchanged. The revised items need Claude recheck.
+ChatGPT read all 117 v1 items with their options, hints and explanations. Twenty-one items are revised at item version 2: bounded meanings replace overbroad definitions; colour contexts specify the intended colour; the 九 recognition item no longer requires addition; unnatural 喷 usage is replaced. Keys and target IDs are unchanged. Claude independently rechecked all 21 revisions and passed them.
 
-The P1 review list remains proposed. Approval requires its official-source PDF audit/spot-check as well as the list and batch review decisions. Tests now prevent proposed target lists entering approved release coverage and preserve practice-only classification.
+The official-source P1 audit and visual spot-check are recorded in PR24_CROSS_REVIEW.md. The owner approved list zh-2024-p1-review.3, and approved this 117-item batch and its public use. Tests now prevent proposed target lists entering approved release coverage and preserve practice-only classification.
 
 ## Owner sample
 
-Current v2 draw: 20 of 96 non-disputed items (ceil(N/5)); all 21 disputed revisions require separate independent recheck.
+Current v2 draw: 20 of 96 non-disputed items (ceil(N/5)); the 21 revised items were separately independently rechecked and owner-reviewed.
 
 `zh-p2-p1review-u5348.q2`, `zh-p2-confusable3-u53d1.q1`, `zh-p2-confusable3-u5168.q2`, `zh-p2-textbook-extra-u8721.q1`, `zh-p2-confusable3-u8eab.q1`, `zh-p2-p1review-u4ee5.q3`, `zh-p2-confusable3-u5168.q1`, `zh-p2-p1review-u725b.q2`, `zh-p2-p1review-u4e5d.q1`, `zh-p2-confusable3-u7eff.q3`, `zh-p2-p1review-u5b66.q3`, `zh-p2-p1review-u672c.q1`, `zh-p2-textbook-extra-u8721.q2`, `zh-p2-textbook-extra-u74f6.q2`, `zh-p2-confusable3-u50cf.q3`, `zh-p2-p1review-u4e1c.q2`, `zh-p2-textbook-extra-u517d.q1`, `zh-p2-confusable3-u5427.q1`, `zh-p2-textbook-extra-u5858.q1`, `zh-p2-p1review-u5929.q2`
 
 Recipe: `random.Random('zh-starter-003-v2-owner-sample-2026-10-18').sample(pool, ceil(len(pool)/5))`, preserving batch order before sampling and excluding disputed IDs. V1 sample is preserved in the batch review-log history.
 
-## Revised items awaiting recheck
+## Revised items reviewed and accepted
 
 `zh-p2-p1review-u4e5d.q2` v2, `zh-p2-p1review-u571f.q2` v2, `zh-p2-p1review-u767d.q1` v2, `zh-p2-p1review-u767d.q2` v2, `zh-p2-p1review-u5b66.q2` v2, `zh-p2-p1review-u672c.q3` v2, `zh-p2-confusable3-u7eff.q1` v2, `zh-p2-confusable3-u7eff.q2` v2, `zh-p2-confusable3-u8bfb.q1` v2, `zh-p2-confusable3-u90a3.q3` v2, `zh-p2-confusable3-u9e1f.q1` v2, `zh-p2-confusable3-u9e1f.q3` v2, `zh-p2-textbook-extra-u517d.q3` v2, `zh-p2-textbook-extra-u55b7.q2` v2, `zh-p2-textbook-extra-u55b7.q3` v2, `zh-p2-textbook-extra-u5bc6.q1` v2, `zh-p2-textbook-extra-u5bc6.q2` v2, `zh-p2-textbook-extra-u80f6.q1` v2, `zh-p2-textbook-extra-u80f6.q2` v2, `zh-p2-textbook-extra-u8b66.q3` v2, `zh-p2-textbook-extra-u9b54.q2` v2
 
@@ -143,3 +143,7 @@ Keys below are reviewer aids. Recognition does not assess independent handwritin
 | `zh-p2-textbook-extra-u9b54.q1` v1 / exact | 我最喜欢玩（　）术方块。<br>1 床；2 林；3 魔；4 广 | 魔 | 一种可以转来转去的方块，叫“（　）术方块”。 | “魔术方块”可以转来转去。“林”在“树林”里，“床”在“起床”里。 |
 | `zh-p2-textbook-extra-u9b54.q2` v2 / similar | 叔叔会变（　）术，手里的球一下子不见了。<br>1 魔；2 林；3 床；4 广 | 魔 | 让东西一下子不见了，叫变“（　）术”。 | 这里是在变魔术，球只是看起来不见了。 |
 | `zh-p2-textbook-extra-u9b54.q3` v1 / generic | 故事里的老人会（　）法，可以让小花说话。<br>1 广；2 床；3 魔；4 林 | 魔 | 能让小花说话，这是故事里的“（　）法”。 | “魔法”是故事里才有的。 |
+
+## Owner approval — 2026-10-18
+
+The owner signed after reviewing the 20 seeded sample items and all 21 revised items. Content approval covers zh-starter-003 v2 (117 items); rights and public use are approved. The signed source is `1aa0e39ac6ae0a2c140b27d541e755f42a0427e0`, pre-approval batch SHA-256 `a393c21fc90ab87a6fd55a2d1dfa4e1528ef16599994eb0780b974918a0e85d6`, signed at `2026-10-18T14:14:53.948Z`. The target-list approval was given separately earlier in the same chat. Question text, keys, IDs and versions are unchanged. No merge, deployment or real learner data use is authorized.
