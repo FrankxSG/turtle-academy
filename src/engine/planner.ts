@@ -23,6 +23,11 @@ export interface PlanContext {
   date: string
   x: number
   newId: () => string
+  /**
+   * Targets set aside for now (e.g. their private mistake pack no longer fits this app). They keep their records
+   * but are never newly scheduled, so no slot is planned or resolved for them until they are released.
+   */
+  held?: ReadonlySet<string>
 }
 
 const key = (id: string, v: number) => `${id}@${v}`
@@ -55,7 +60,7 @@ const isRepairStage = (s: Stage): boolean => s === 'exact' || s === 'similar' ||
 function eligibleTargets(ctx: PlanContext, excludeTargets: Set<string> = new Set()) {
   const list = [...ctx.derived.progress.values()].filter((pr) =>
     pr.target.subject === ctx.subject && pr.target.knowledge_point_ref !== null && isPractisable(pr.target.course)
-    && !excludeTargets.has(pr.target.id) && pr.stage !== 'acquisition' && isEligible(pr, ctx.date))
+    && !excludeTargets.has(pr.target.id) && !ctx.held?.has(pr.target.id) && pr.stage !== 'acquisition' && isEligible(pr, ctx.date))
   const reviews = list.filter((pr) => pr.stage === 'delayed_review').sort((a, b) => (a.dueOn ?? '').localeCompare(b.dueOn ?? ''))
   const repairs = list.filter((pr) => isRepairStage(pr.stage)).sort((a, b) =>
     (b.lastIndependentObservationOn ?? '').localeCompare(a.lastIndependentObservationOn ?? '') || a.target.id.localeCompare(b.target.id))
@@ -296,7 +301,7 @@ export function resolveShortSlot(ctx: PlanContext, task: Task, s: PlanSlot, whol
     }
   } else if (s.role === 'repair' || s.role === 'delayed_review' || s.role === 'replacement' || s.role === 'material_question') {
     const { reviews, repairs } = eligibleTargets(ctx, wholeTaskTargets)
-    const planned = s.target_ref ? ctx.derived.progress.get(s.target_ref) : undefined
+    const planned = s.target_ref && !ctx.held?.has(s.target_ref) ? ctx.derived.progress.get(s.target_ref) : undefined
     const order: TargetProgress[] = []
     // A replacement for a material question keeps its target; the whole-task aggregate still applies.
     if (planned && (isEligible(planned, ctx.date) || (s.role === 'material_question' && wholeTaskTargets.has(planned.target.id)))) order.push(planned)

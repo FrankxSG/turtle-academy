@@ -409,6 +409,97 @@ test('a stored pack that no longer fits the app is set aside on open; practice c
   }
 })
 
+test('while a stored pack is set aside its targets get no slots; loading a fitting pack schedules them again', async () => {
+  const s = await setup()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  const t0 = await s.engine.startOrResume('chinese')
+  if (t0.kind !== 'task') throw new Error('fixture task')
+  await run(s.engine, t0.task.id, () => true)
+  const imported = new Set(s.program.crosswalk.flatMap((r) => (r.engine_target_id ? [r.engine_target_id] : [])))
+  const stored = await s.privateStore.packs()
+  ;(stored[0].register as Record<string, unknown>).review_complete = false
+  await s.privateStore.putPack(stored[0])
+  // Next day every imported target would be due for repair; set aside, none of them may be planned or resolved.
+  s.clock.sgt('2027-03-02')
+  const re = await reopen(s)
+  assert.ok(re.program.openError)
+  assert.deepEqual(new Set(re.engine.heldTargets()), imported, 'exactly the set-aside pack’s targets are held')
+  const t1 = await re.engine.startOrResume('chinese')
+  if (t1.kind !== 'task') throw new Error('the child can still practise')
+  assert.ok(t1.task.plan.slots.every((x) => x.target_ref === null || !imported.has(x.target_ref)), 'no slot is planned for a held target')
+  const { seen } = await run(re.engine, t1.task.id, () => true)
+  assert.ok(seen.length > 0, 'the task still has questions')
+  for (const q of seen) {
+    const p = re.engine.state.presentations.find((x) => x.id === q.presentation.id)!
+    assert.ok(p.target_ref === null || !imported.has(p.target_ref), 'no question is resolved for a held target')
+  }
+  assert.deepEqual(re.engine.state.targets.filter((x) => imported.has(x.id)).map((x) => x.observations.length),
+    s.engine.state.targets.filter((x) => imported.has(x.id)).map((x) => x.observations.length), 'held records are untouched')
+  // Loading a fitting pack releases the hold; the next task prioritises the same targets again.
+  await re.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  assert.equal(re.engine.heldTargets().size, 0)
+  s.clock.sgt('2027-03-03')
+  const t2 = await re.engine.startOrResume('chinese')
+  if (t2.kind !== 'task') throw new Error('no task')
+  const repairTargets = new Set(t2.task.plan.slots.filter((x) => x.role === 'repair' || x.role === 'delayed_review').map((x) => x.target_ref))
+  for (const ref of [ZUO, ZHU, PRIVATE_REF]) assert.ok(repairTargets.has(target(ref)), `${ref} scheduled again`)
+})
+
+test('a task planned before the pack was set aside resolves none of its repair slots to a held target', async () => {
+  const s = await setup()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  const t0 = await s.engine.startOrResume('chinese')
+  if (t0.kind !== 'task') throw new Error('fixture task')
+  await run(s.engine, t0.task.id, () => true)
+  s.clock.sgt('2027-03-02')
+  const planned = await s.engine.startOrResume('chinese')
+  if (planned.kind !== 'task') throw new Error('fixture task')
+  assert.ok(planned.task.plan.slots.some((x) => x.role === 'repair'), 'fixture: repair slots were planned')
+  await s.engine.pause(planned.task.id)
+  const stored = await s.privateStore.packs()
+  ;(stored[0].register as Record<string, unknown>).review_complete = false
+  await s.privateStore.putPack(stored[0])
+  const re = await reopen(s)
+  const held = re.engine.heldTargets()
+  assert.ok(held.size > 0)
+  const t = await re.engine.startOrResume('chinese')
+  if (t.kind !== 'task') throw new Error('expected resumed task')
+  assert.equal(t.task.id, planned.task.id)
+  const { seen } = await run(re.engine, t.task.id, () => true)
+  for (const q of seen) {
+    const p = re.engine.state.presentations.find((x) => x.id === q.presentation.id)!
+    assert.ok(p.target_ref === null || !held.has(p.target_ref), 'a held target is never resolved')
+  }
+})
+
+test('a set-aside pack holds every target it imported even when its case links were never saved or are stale', async () => {
+  for (const scenario of ['first import interrupted', 'stale case links'] as const) {
+    const s = await setup()
+    if (scenario === 'first import interrupted') {
+      // Engine targets are saved before the case links; fail the case links on the very first import.
+      s.privateStore.putCrosswalk = async () => { throw new Error('synthetic_late_save_failure') }
+      const failure = await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef })).then(() => null, (e: Error) => e)
+      assert.equal(failure?.name, 'PackImportIncomplete')
+      assert.equal((await s.privateStore.crosswalk()).length, 0, `${scenario}: no case links were saved`)
+    } else {
+      await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+      s.privateStore.rows = s.privateStore.rows.filter((r) => r.target_ref !== ZUO)
+    }
+    const imported = new Set(s.engine.state.targets.map((t) => t.id))
+    assert.ok(imported.size >= 4, `${scenario}: fixture imported its targets`)
+    const stored = await s.privateStore.packs()
+    ;(stored[0].register as Record<string, unknown>).review_complete = false
+    await s.privateStore.putPack(stored[0])
+    s.clock.sgt('2027-03-02')
+    const re = await reopen(s)
+    assert.ok(re.program.openError, `${scenario}: pack set aside`)
+    assert.deepEqual(new Set(re.engine.heldTargets()), imported, `${scenario}: every imported target is held`)
+    const t = await re.engine.startOrResume('chinese')
+    if (t.kind !== 'task') throw new Error(`${scenario}: the child can still practise`)
+    assert.ok(t.task.plan.slots.every((x) => x.target_ref === null || !imported.has(x.target_ref)), `${scenario}: no slot for a held target`)
+    assert.ok(!t.task.plan.slots.some((x) => x.role === 'repair'), `${scenario}: no repair slot without a target to repair`)
+  }
+})
 
 test('a private-store write failure during open is not reported as a harmless rejected pack', async () => {
   const s = await setup()

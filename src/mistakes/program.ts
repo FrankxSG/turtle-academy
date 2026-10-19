@@ -8,8 +8,9 @@
 import type { CatalogueRegistry, CatalogueRelease } from '../catalogue/adapter.ts'
 import { buildChineseContent, type BuiltContent, type RawBatch, type TargetLists } from '../catalogue/chinese.ts'
 import type { LearningEngine } from '../engine/engine.ts'
+import type { Target } from '../engine/types.ts'
 import { registerExercise, registerMaterial } from '../ui/content.ts'
-import { planIntake, type CrosswalkRow, type IntakeResult } from './intake.ts'
+import { isImportedCase, planIntake, type CrosswalkRow, type IntakeResult } from './intake.ts'
 import { packTag, productionPlans, validatePack, type PrivatePack, type Register } from './pack.ts'
 import { deriveProduction, type ProductionEvent, type ProductionStage } from './production.ts'
 import { buildExport, buildReport, normalizedEvents, type CaseReport, type PrivateExport } from './report.ts'
@@ -65,6 +66,18 @@ export const LEARNER_COURSES: Record<string, string[]> = {
   p2_higher_chinese: ['p2_higher_chinese', 'p3_higher_chinese'],
   p2_chinese: ['p2_chinese', 'p3_chinese'],
 }
+
+/**
+ * Engine targets a set-aside pack's cases live on: those in its saved case links, plus every target holding
+ * imported case evidence. The second part matters because engine targets are saved before the case links, so an
+ * interrupted import can leave targets the saved links do not list. Only one pack is stored at a time, so this can
+ * also hold a target that only an earlier pack imported; that errs towards pausing, never towards practising a
+ * target without its case pins.
+ */
+const heldFrom = (rows: CrosswalkRow[], targets: readonly Target[]) => new Set([
+  ...rows.flatMap((r) => (r.engine_target_id ? [r.engine_target_id] : [])),
+  ...targets.filter((t) => t.observations.some(isImportedCase)).map((t) => t.id),
+])
 
 const errorText = (error: unknown) => (error instanceof Error ? error.message : String(error))
 
@@ -146,6 +159,9 @@ export class MistakeProgram {
     for (const b of builds) { p.install(b); await opts.store.putRelease(toStored(b)) }
     p.rows = await opts.store.crosswalk()
     p.events = await opts.store.production()
+    // While the stored pack is set aside, the targets it imported are held: they keep their records but get no
+    // slots, so they are neither practised without their case pins nor given slots with nothing to show.
+    if (!p.pack && p.openError !== null) opts.engine.holdTargets(heldFrom(p.rows, opts.engine.state.targets))
     // Validation failures were handled before activation. Storage failures must propagate: swallowing one
     // here could claim recovery after engine records have already changed.
     if (p.pack) await p.importRegister()
@@ -229,6 +245,7 @@ export class MistakeProgram {
     // incomplete import that retryImport() or the next open finishes, never as a rollback.
     this.pack = pack
     this.openError = null
+    this.engine.holdTargets([])
     return this.completeImport()
   }
 

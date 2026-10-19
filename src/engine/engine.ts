@@ -161,7 +161,19 @@ export class LearningEngine {
   }
 
   private ctx(subject: Subject, release: CatalogueRelease, x: number): PlanContext {
-    return { state: this.state, derived: this.derived(), release, subject, date: this.today(), x, newId: this.newId }
+    return { state: this.state, derived: this.derived(), release, subject, date: this.today(), x, newId: this.newId, held: this.held }
+  }
+
+  /** Targets that are not scheduled for now. Device-local and not persisted: the owner of the hold re-applies it on open. */
+  private held: ReadonlySet<string> = new Set()
+
+  /** Replace the set of held targets (see PlanContext.held). Records and evidence are untouched. */
+  holdTargets(ids: Iterable<string>) {
+    this.held = new Set(ids)
+  }
+
+  heldTargets(): ReadonlySet<string> {
+    return this.held
   }
 
   openTask(subject: Subject): Task | null {

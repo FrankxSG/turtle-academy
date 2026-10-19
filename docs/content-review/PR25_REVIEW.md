@@ -104,3 +104,12 @@ Regression tests (both engine tests fail without the fix):
 - **Private browser test:** an unreadable file, a late failure, the "saved and in use" notice, Finish saving, and reload.
 
 **These lines need ChatGPT re-review.**
+
+## Follow-up: quarantine scheduling limitation closed (2026-10-19)
+
+The known limitation above (targets of a set-aside pack still scheduled) is closed on branch `claude/quarantine-scheduling`:
+- When the stored pack is set aside on open, the engine holds the targets that pack imported: those in its saved case links plus every target holding imported case evidence, so an interrupted or stale case-link save cannot leave one scheduled (ChatGPT review P2 on #26). This can also hold a target that only an earlier pack imported, which errs towards pausing. Held targets keep their records and evidence but are never planned, and a short slot planned before the hold never resolves to one. Their slots go to other eligible review or repair, then general practice.
+- The hold is device-local and not persisted; it is re-applied on every open while the pack stays set aside, and released when a fitting pack is installed.
+- The parent screen now says the set-aside pack's mistakes are paused with progress kept.
+- Three engine regressions cover planning, case links missing after an interrupted first import or stale after a later one, resolution of an earlier-planned task, untouched records and re-scheduling after a fitting pack is loaded. Each fails without its part of the fix.
+- Material questions in a task frozen before the hold keep their pinned item and target, because they were planned against valid content.
