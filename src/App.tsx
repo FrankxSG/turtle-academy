@@ -110,7 +110,7 @@ export function App() {
   }, [auth])
 
   useEffect(() => runtime?.writer.onStatus(setSave), [runtime])
-  // Records live only on this device: ask the browser not to clear them under storage pressure.
+  // The device holds the working copy (the only copy until cloud sync exists): ask the browser not to clear it under storage pressure.
   useEffect(() => {
     if (entry !== 'ready') return
     let alive = true

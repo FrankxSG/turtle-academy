@@ -1,6 +1,6 @@
 // Ask the browser to keep this site's storage instead of clearing it when the device runs low on space.
-// With device-only records (no cloud backup) this is the main protection against silent loss. Browsers may
-// refuse; the parent is told so, and installing the app to the home screen usually lets the request succeed.
+// Until cloud sync exists the device copy is the only copy, so this is the main protection against silent loss;
+// afterwards it still protects offline work not yet synced. Browsers may refuse; the parent is told so, and installing the app to the home screen usually lets the request succeed.
 export type StorageKeep = 'kept' | 'not_kept' | 'unsupported'
 
 interface StorageManagerLike {
