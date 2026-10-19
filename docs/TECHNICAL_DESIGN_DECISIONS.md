@@ -107,6 +107,8 @@ The authoritative Pilot delivery slice is defined by [Scope](PILOT_V0_1_SCOPE.md
 - One online first login is accepted. Afterwards cached lessons/local saves must function even when offline or auth expires. Upload waits/retries; never claim indefinite authentication validity or mainland network availability.
 - Independently verify dedicated staging and production account/project identities from service metadata before any service write. Real learner data is prohibited until dedicated environment identity is independently verified and synthetic Auth/RLS, backup/recovery and real-device privacy gates have passed. No service-role key in frontend, PR checks or previews; no unapproved paid services. **No runtime AI**; private external worksheet preparation requires parent verification and complies with publication boundaries.
 
+- **Device-only exception (owner decision 2026-10-19):** for one family on one primary device, records may stay device-only with snapshot backup deferred. The backup-dependent requirements above are deferred, not passed; every other real-data gate still applies. [Pilot §3.1](PILOT_V0_1_SCOPE.md#31-device-only-exception-owner-decision-2026-10-19) lists what is deferred and what remains.
+
 This is a **documentation decision only**, not evidence of implementation or authorisation to modify code, services, merge or deploy.
 
 ## 9. Validation status and open questions

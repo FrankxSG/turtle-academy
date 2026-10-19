@@ -68,6 +68,15 @@ Chinese first, then Science, Mathematics and English is delivery sequencing, not
 
 Routine parent PIN, its device-only protection and reset are defined in Functional Design §2. It is never server authorization.
 
+### 3.1 Device-only exception (owner decision 2026-10-19)
+
+The owner chose **device-only first** for one family on one primary device: practice records stay in the device's browser storage and are not uploaded. Automatic snapshot backup is deferred, not cancelled; turning it on later needs its own review against this section.
+
+- **Deferred while device-only:** P0-15 (snapshot backup and protected restore), the §5.3 resilience tests for snapshots, restore, pruning and deletion, and the safety-copy implementation gate. None of these is claimed as passed.
+- **Still required before real records:** environment identity verification, Auth and cross-family/child RLS with synthetic data (§5.6), content accuracy (§5.4), privacy (§5.5), handling of IndexedDB denial/eviction (§5.3), real-device acceptance (§5.2, P0-19), and the data-protection gate (§5.8), whose operational policy must state that losing the device or its browser data loses practice history.
+- The app asks the browser to keep its storage and shows the parent whether it agreed. An exported progress file is a record, not a restore.
+- Any second learner, second device, use outside the family or cloud backup ends this exception.
+
 ## 4. Content coverage and private proceed gates
 
 Full scoped coverage is the goal. Chinese, Mathematics and English use **75% of their P2 in-scope outcomes** as the separate-subject release guideline. P3 Chinese/Higher Chinese and English general practice is unlocked from each subject's first release using reviewed available content; P3 mistake imports follow later. Mathematics is P2-only in Pilot, with P3 locked and no P3 content-authoring requirement. Science's initial release uses **75% of the in-scope outcomes in its first two topics** (Diversity of living and non-living things; Classification of living things); the other five topics unlock in syllabus order as authored and reviewed. The owner's recorded proceed decision in Issue #3 may override coverage either way. Report grade/course, inventory version, numerator/denominator and missing areas. Keep Chinese/Higher Chinese coverage visible separately. Unmatched targets remain private pending_content. This guideline does not waive QA, source/rights checks, privacy, security, backup, device or data-protection requirements.
@@ -82,7 +91,7 @@ Use original/rights-cleared generic curriculum groups, not learner-specific publ
 
 1. **Learning:** Each subject has usable instructions, a complete content loop, feedback and short review. A learner can complete and revisit each released subject loop; later subjects need not ship simultaneously.
 2. **Offline:** After initial online login, test cached app, refresh, answer/import, expired session, delayed review and return visit on real landscape phone/tablet; no network should block cached lessons.
-3. **Resilience:** Follow the preserved cloud backup, conflict recovery, retention and deletion policy. Handle IndexedDB denial/eviction; backups are not multi-device sync or independent provider disaster recovery. Before implementation acceptance, use synthetic data to test:
+3. **Resilience:** Follow the preserved cloud backup, conflict recovery, retention and deletion policy (deferred under the [device-only exception](#31-device-only-exception-owner-decision-2026-10-19); eviction handling still applies). Handle IndexedDB denial/eviction; backups are not multi-device sync or independent provider disaster recovery. Before implementation acceptance, use synthetic data to test:
    - First snapshot establishes exactly one head; duplicate/interrupted retries (including restart and a lost response after commit) neither duplicate snapshots nor lose pending work.
    - Competing/stale-base writes are rejected without moving the head; rejected devices stop uploads and retain local changes. A second device follows the cloud-restore-only policy.
    - Restore requires password reauthentication, explicit parent confirmation, a successful local safety copy and schema/size/content-version validation. Cancellation and every failure preserve local data and keep conflict uploads paused; no silent rollback.
