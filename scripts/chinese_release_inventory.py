@@ -1,12 +1,9 @@
 #!/usr/bin/env python3
 """Chinese release inventory: per-course leaf coverage, repair-route readiness and supply.
 
-Reads only the public catalogue (content/chinese). Writes a generated Markdown report.
-This is an authoring readiness report. It does not approve content, a denominator or
-a release, and no number in it is a coverage claim until the owner signs off.
+Reads the public catalogue (content/chinese) and prints a Markdown report.
 
-    python3 scripts/chinese_release_inventory.py          # rewrite the report
-    python3 scripts/chinese_release_inventory.py --check  # fail if the report is stale
+    python3 scripts/chinese_release_inventory.py
 """
 import argparse
 import json
@@ -18,7 +15,6 @@ ROOT = Path(__file__).resolve().parents[1]
 CURRICULUM = ROOT / 'content/chinese/curriculum.json'
 BATCHES = ROOT / 'content/chinese/batches'
 REVIEW = ROOT / 'content/chinese/review-characters.json'
-REPORT = ROOT / 'docs/content-review/CHINESE_RELEASE_INVENTORY.md'
 STAGES = {'exact', 'similar', 'generic'}
 COURSE_NAMES = {'p2_chinese': 'P2 Chinese (华文)', 'p2_higher_chinese': 'P2 Higher Chinese (高级华文)',
                 'p3_chinese': 'P3 Chinese (华文)', 'p3_higher_chinese': 'P3 Higher Chinese (高级华文)'}
@@ -284,17 +280,8 @@ def render(curriculum, batch):
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument('--check', action='store_true', help='fail if the committed report is stale')
-    args = parser.parse_args()
-    text = render(*load())
-    if args.check:
-        if REPORT.read_text(encoding='utf-8') != text:
-            raise SystemExit('FAIL: docs/content-review/CHINESE_RELEASE_INVENTORY.md is stale; rerun the script.')
-        print('PASS: Chinese release inventory report is current.')
-        return
-    REPORT.write_text(text, encoding='utf-8')
-    print(f'Wrote {REPORT.relative_to(ROOT)}')
+    argparse.ArgumentParser(description=__doc__.splitlines()[0]).parse_args()
+    print(render(*load()), end='')
 
 
 if __name__ == '__main__':

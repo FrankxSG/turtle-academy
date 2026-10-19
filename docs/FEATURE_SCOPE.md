@@ -1,16 +1,6 @@
-# Turtle Academy — Full Feature Scope
+# Full Feature Scope
 
-**Document type:** Long-term product and curriculum specification  
-**Status:** Confirmed feature directions and curriculum choices; not a release checklist or implementation report  
-**Last scope consolidation:** 2026-10-15 (Pilot documentation alignment; full scope preserved)
-
-## How to use this document
-
-- This document describes the **complete target feature scope** for Turtle Academy across Science, Chinese, English and Mathematics. It does **not** mean every feature belongs in the first release, is already implemented, or has an assigned delivery date.
-- [`TECHNICAL_DESIGN_DECISIONS.md`](TECHNICAL_DESIGN_DECISIONS.md) is authoritative for architecture, security, privacy and engineering constraints.
-- [`PILOT_V0_1_SCOPE.md`](PILOT_V0_1_SCOPE.md) defines **the confirmed first delivery subset** for a family-only learning trial; deferring a feature in the Pilot does not remove it from this full scope.
-- Numbered cross-subject design choices ended at **#202**. The reference number is a decision identifier, **not** a count of total questions or features. No higher-numbered cross-subject decisions are confirmed. The separately agreed English **E1–E12** and Mathematics **M1–M12** choices are recorded in full below.
-- Future post-Pilot release priorities require separate confirmation; labels such as Phase 2 and Phase 3 must not be inferred from the feature list itself.
+Long-term product ideas and confirmed curriculum choices. Not a build list; the Pilot is in [PILOT_FUNCTIONAL_DESIGN.md](PILOT_FUNCTIONAL_DESIGN.md). Numbers (#120–#202, E1–E12, M1–M12) are the owner's decision IDs.
 
 ## 1. Product vision and child experience
 
@@ -83,9 +73,6 @@ Turtle Academy is an original 2.5D fantasy-adventure PWA blending narrative, ani
 - Writing devices: finger, stylus, pen-and-paper printouts; no machine-vision or AI handwriting grading. Auto-save active draft locally, cleanup stale drafts after notice, preserve selected finished samples in private portfolio (#170–175).
 - Carefully distinguish actual knowledge mistakes from presentation neatness and possible inadvertent slips; do not stigmatise a child as careless.
 
-### Recurring private worksheet-to-mistake-bank workflow
-
-The parent may use a private ChatGPT/Claude account to prepare structured candidate characters/words and mistake classifications from newly completed worksheets; the AI filters identifying detail out of what it produces (owner decision 2026-10-18), the AI provider still receives the full image subject to its terms, and filtering does not guarantee anonymity. Each candidate must be human-reviewed before import into the **Registered** Child's private mistake bank via a parent-only paste-in screen. Keep verified, uncertain and unmatched private records; only verified catalogue-matched entries generate approved practice. Catalogue-unmatched targets are retained privately as pending content, while public generic catalogue growth is curriculum-based and original/licensed. Original worksheet images stay outside the Pilot app/backend and all public Git/development artifacts. The app does not use runtime AI, OCR or automatic handwriting grading.
 
 ## 7. Focus, instruction-following and classroom transfer (#201–202)
 
@@ -110,16 +97,14 @@ The parent may use a private ChatGPT/Claude account to prepare structured candid
 - Habits garden visually represents sustained growth; unused garden stays healthy and retains unlocked ornaments (#183 B).
 - Different decoration lines correspond to habits, concepts, correction, and long-term milestones (#184 C). Voluntary care/pet interaction and independent experiment zone (#185 C).
 
-## 9. Access, accessibility, and health boundaries
+## 9. Boundaries
 
-- No attention disorder diagnosis or focus-score labelling. No forced login streaks, punitive missed-day penalties, harmful overuse loops, public comparison/leaderboards, monetary gambling or child-to-child chat.
-- Accessible alternatives for drag; audio repeat; input speed customization; study/leisure caps; offline course packs and clear connectivity messages; persistent progress handled by authenticated sync only for registered users.
-- Any identifiable learner artwork, handwriting, worksheets, school details and learning histories must remain private. Never include learner data in public repositories, Issues, PRs, dev fixtures, public logs, artifacts, screenshots, bundles or deployments. Parent-initiated private ChatGPT/Claude worksheet preparation is permitted outside the app under provider privacy terms, with the AI filtering identifying detail out of its outputs; that does not guarantee anonymity. No in-app AI receives learner data.
-- Child-safe offline activities should specify tools, supervision, boundaries and real-world observation authenticity.
+- No diagnosis or focus scores, punitive streaks, leaderboards, gambling, paid currency or child-to-child chat.
+- Accessible alternatives to drag, audio replay and adjustable pace.
 
 ## 10. English World: confirmed E1–E12 curriculum decisions
 
-The English track is designed for advanced lower-primary readiness and beyond-foundational literacy. These are **long-term instructional decisions**, not a requirement to deliver every element in Pilot v0.1. Instruction is authored/reviewed by humans, with no AI scoring of original writing.
+The English track aims at advanced lower-primary literacy. No AI scoring of writing.
 
 | ID | Confirmed selection | Scope and educational intent |
 |---|---|---|
@@ -136,11 +121,10 @@ The English track is designed for advanced lower-primary readiness and beyond-fo
 | E11 | B — Model-based Revision | Human-reviewed before/after examples, focused self-check, one or two revision targets at a time and preserved drafts; no required parent-marking workflow. |
 | E12 | C — Multi-dimensional Mastery, Transfer & Portfolio | Assess reading, vocabulary, language, writing and reasoning through unseen texts, cross-theme application, independent performance, writing portfolio and optional human observations; avoid automated scores for free writing. |
 
-**English Pilot subset:** P2 + P3 textual/visual practice across eight approved families; P3 general practice is unlocked from the start using reviewed available content, while P3 mistake imports follow later; complete writing and oral practice external, listening deferred. Objective selected answers only. See [Functional Design](PILOT_FUNCTIONAL_DESIGN.md); the earlier single Mystery unit is superseded.
 
 ## 11. Mathematics World: confirmed M1–M12 curriculum decisions
 
-Full lower-primary topic coverage and sophisticated mathematical reasoning are **target product scope**, with the Pilot's P2-only knowledge-point requirement defined separately. No opaque simulated mastery precision and no automatic grading of open reasoning.
+Full lower-primary coverage and mathematical reasoning. No automatic grading of open reasoning.
 
 | ID | Confirmed selection | Scope and educational intent |
 |---|---|---|
@@ -157,7 +141,6 @@ Full lower-primary topic coverage and sophisticated mathematical reasoning are *
 | M11 | B — Applied Mathematics & Interactive Exploration | Real-world problems plus virtual shopping, garden design, measurement lab, time planning and data explorer; **not** the larger multi-topic family-project option. |
 | M12 | C — Mastery + Transfer + Mathematical Portfolio | Unseen tasks, cross-context transfer, independent performance, delayed review, investigations, portfolio artefacts and optional human observations. |
 
-**Mathematics Pilot subset:** All P2 knowledge points represented through objective practice; no typed answers or free-workings scoring. P3 Mathematics is locked, and no P3 Mathematics content needs authoring in Pilot. Confirmed post-Pilot phase: build a Mathematics teaching flow, then open P3. See [Functional Design](PILOT_FUNCTIONAL_DESIGN.md). The earlier Fractions-only Pilot is superseded; broader full-product depth remains later work.
 
 ## 12. Selected numbered cross-subject decisions
 
@@ -183,21 +166,3 @@ Full lower-primary topic coverage and sophisticated mathematical reasoning are *
 | 200 | B | Independent explanation behaviour tracking only |
 | 201 | C | Self-monitoring and optional classroom transfer |
 | 202 | C | Multi-step directions, repeat/check and optional classroom transfer |
-
-## 13. Implementation dependencies
-
-1. Core engine/content IDs/editorial QA → meaningful mastery, mistake reviews and content migrations.
-2. Local-first persistence & PWA offline packs → journals, drafts, quest progress and offline operation where connectivity is restricted, such as mainland China.
-3. Secure registration + profile identity + RLS + sync → personalised mistakes, parent letters, portfolios, analytics and cross-device continuation.
-4. Deterministic feedback + scoped validated assessment → independent science expression tracking without AI or false mastery claims.
-5. Game inventory/rewards/achievements → companions, home garden and milestone collections.
-6. Parent safety and time policy engine → screen-time compliance for adventures, leisure and offline activities.
-
-## 14. Scope, publication and data boundaries
-
-- All learning assets committed to the repository must be original, permissively licensed or properly authorised for redistribution, with attribution and licence evidence where required. Educational materials obtained from teachers, schools, textbooks or worksheets are **not** presumed redistributable.
-- Generic curricular examples and synthetic test cases may be public. Original learner worksheets, identifiable writing or drawings, learner answers, mistakes, progress, photographs, school identifiers and household documents must remain **outside Git and the public build**. Private records require appropriate authenticated storage when cloud features are enabled.
-- The Pilot delivers Chinese first, then Science, Mathematics and English under [Functional Design](PILOT_FUNCTIONAL_DESIGN.md). Scope is P2 + P3 Chinese/Higher Chinese and English textual/visual outcomes, P2 Mathematics, plus the seven selected P3 Science topic areas. P3 language general practice is unlocked from the start; P3 language mistake imports follow later. Each subject has its own X=6–19, default 10. Owner decision 2026-10-18: in the first pilot Chinese may go up to 20 (other subjects stay 6–19). P2 language/Math coverage and Science's first-two-topic coverage use a 75% release guideline with a recorded owner override; full scoped coverage remains the goal and reviewed content remains delivery work.
-- Features not selected for the Pilot remain part of the long-term scope where previously confirmed, but their schedule, budget, implementation readiness and educational outcomes are not guaranteed by this document.
-- No runtime AI, automatic correctness claims for open writing/scientific explanations, punitive streak mechanics or unsafe encouragement to prolong children's screen time.
-- Publishing a document that is safe to share **does not** by itself authorise publishing any repository or deployment. Any repository that has ever held private material needs a separate full-history, refs, secrets, CI artifacts, licensing and hosting-preview security audit under the technical decisions, or should be replaced by a new clean repository.

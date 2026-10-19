@@ -1,11 +1,35 @@
-# Turtle Academy — shared agent entrypoint
+# AGENTS.md
 
-Read `docs/AI_COLLABORATION.md`, `docs/TECHNICAL_DESIGN_DECISIONS.md`, `docs/FEATURE_SCOPE.md`, `docs/PILOT_V0_1_SCOPE.md`, `docs/PILOT_FUNCTIONAL_DESIGN.md`, `docs/PILOT_LEARNING_ENGINE_SPEC.md`, `docs/TECHNICAL_HANDOFF.md` and `docs/FOUNDATION_SETUP.md` before work.
+Turtle Academy: an offline-capable learning PWA for one primary-school child. React, Vite, TypeScript, Dexie (IndexedDB), Supabase.
 
-**Prepare every contribution for public publication, even while the repository is private.** Published commits, branches, PR descriptions, Issues, comments and CI logs can be copied and cannot be reliably withdrawn. Never include learner names, school details, worksheets, handwriting, photos, progress records, account identifiers, infrastructure project details or credentials, even temporarily.
+## Layout
 
-GitHub is the shared source of truth for Claude and ChatGPT. Check the current main SHA and relevant open PRs; unmerged code is not the main baseline. Use the common collaboration protocol rather than separate assistant-specific rules. Record task progress, decisions and test evidence in the repository/Issues/PRs, not only in chat. Follow `docs/AI_COLLABORATION.md`: branch prefixes `claude/` and `chatgpt/`, the seven-step task lifecycle, proportional checks, and per-PR merge authorization from the owner (in chat or on GitHub, recorded on the PR before merging). No standing merge or deployment permission exists.
+- `src/engine/` learning engine (tasks, repair stages, review dates)
+- `src/ui/`, `src/hub/`, `src/parent/` screens
+- `src/catalogue/`, `content/<subject>/` question content (JSON)
+- `src/mistakes/` private mistake pack import
+- `supabase/` database migrations and tests
+- `src/trials/` separate demo features, not in the app build
 
-**Content work** (drafting, revising or reviewing questions, repair pools or coverage reports): follow `skills/question-authoring/SKILL.md` first, then the subject skill on top of it (for Chinese, `skills/chinese-question-authoring/SKILL.md`). Lessons that apply across subjects update the common skill; subject-only lessons update the subject skill, each with a case log.
+## Commands
 
-No runtime AI, real learner fixtures, privileged frontend keys or cross-project resource reuse. Preserve private learner storage, offline records and the distinction between submission/story/mastery. Full feature scope is not the Pilot build list: `docs/PILOT_V0_1_SCOPE.md`, `docs/PILOT_FUNCTIONAL_DESIGN.md` and `docs/PILOT_LEARNING_ENGINE_SPEC.md` together define the committed delivery slice. Merging and deployment remain separately approved actions. Later explicit owner instructions supersede stale records and must be reconciled in GitHub.
+```sh
+npm run typecheck
+npm run test:engine
+npm run test:ui
+npm run build
+npm run test:e2e
+python3 scripts/privacy_guard.py
+python3 scripts/validate_subject_content.py <subject>
+python3 scripts/validate_chinese_content.py
+```
+
+## Rules
+
+- This repo is public: no real learner data (worksheets, answers, mistakes, name, school) and no secrets. Real material lives in the private `turtle-academy-resources` repo.
+- No AI inside the app.
+- One branch and PR per task (`claude/…` or `chatgpt/…`). Agents working in parallel take separate areas so they don't edit the same files.
+- Before opening or updating a PR, the relevant tests pass. The owner merges, or tells you to merge a named PR.
+- Reviews: fix critical and important findings in the same PR; note minor ones in a PR comment. No review documents in the repo, and no new docs or policy text unless the owner asks.
+- Content work: follow `skills/question-authoring/SKILL.md`, then the subject skill (e.g. `skills/chinese-question-authoring/SKILL.md`).
+- Product behaviour: `docs/PILOT_FUNCTIONAL_DESIGN.md`.

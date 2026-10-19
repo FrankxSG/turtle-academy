@@ -1,8 +1,0 @@
-# Sensitive paths always need review from the repository owner.
-/.github/ @FrankxSG
-/scripts/ @FrankxSG
-/docs/TECHNICAL_DESIGN_DECISIONS.md @FrankxSG
-/docs/FEATURE_SCOPE.md @FrankxSG
-/docs/PILOT_V0_1_SCOPE.md @FrankxSG
-/AGENTS.md @FrankxSG
-/CLAUDE.md @FrankxSG

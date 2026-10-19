@@ -7,7 +7,7 @@ description: Use for Turtle Academy Chinese and Higher Chinese questions, repair
 
 **Read [question-authoring](../question-authoring/SKILL.md) first.** Its working method and its checks 1–11 apply to every Chinese item. This file adds Chinese-specific checks (ZH1–ZH5) and says how some common checks apply in Chinese. It never removes a common check.
 
-Sources: [preparation record](../../docs/CHINESE_CONTENT_PREPARATION.md), [CONTENT_QA](../../docs/CONTENT_QA.md), the curriculum manifest in `content/chinese/curriculum.json`. Evidence for every rule here is in the [PR 23 case log](references/pr23-lessons.md).
+Sources: [Chinese content](../../docs/CHINESE_CONTENT_PREPARATION.md) and `content/chinese/curriculum.json`. Evidence for every rule here is in the [PR 23 case log](references/pr23-lessons.md).
 
 ## How common checks apply in Chinese
 

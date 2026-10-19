@@ -5,7 +5,7 @@ description: Use when drafting, revising or reviewing Turtle Academy objective q
 
 # Question authoring and review — common to all subjects
 
-This is the shared base for content work in `content/<subject>/`. Read it first, then the subject skill, which adds checks on top of these and never removes one. It does not replace [CONTENT_QA](../../docs/CONTENT_QA.md), the Pilot specifications or a subject's preparation record; it is the working method that applies them to one question at a time.
+This is the shared base for content work in `content/<subject>/`. Read it first, then the subject skill, which adds checks on top of these and never removes one.
 
 | Subject | Subject skill |
 | --- | --- |
