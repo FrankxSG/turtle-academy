@@ -38,6 +38,13 @@ const TARGET_VALUE = /^[A-Za-z0-9㐀-䶿一-鿿' -]{1,24}$/
 
 export const caseObservationId = (caseId: string) => `case:${caseId.toLowerCase()}`
 export const importTargetId = (ref: string) => `case-target:${ref}`
+const IMPORT_PREFIX = 'import:'
+const importInstanceRef = (registerId: string) => `${IMPORT_PREFIX}${registerId}`
+/**
+ * Case evidence a pack import added. It is saved with its target, so it identifies the targets a pack's cases
+ * live on even when the case links (crosswalk) were never saved or are stale.
+ */
+export const isImportedCase = (o: Observation) => o.source_type === 'schoolwork' && o.instance_ref.startsWith(IMPORT_PREFIX)
 
 export function missingStages(release: CatalogueRelease, ref: string): PlanStage[] {
   const s = poolSizes(release, ref)
@@ -82,7 +89,7 @@ export function planIntake(opts: {
         && t.knowledge_point_ref === ref && t.assessed_skill === info.assessed_skill)
     const observations: Observation[] = cases.map((caseId, i) => ({
       id: caseObservationId(caseId), source_type: 'schoolwork', observed_on: today, recorded_on: today,
-      instance_ref: `import:${register.register_id}`, batch_ref: null,
+      instance_ref: importInstanceRef(register.register_id), batch_ref: null,
       recurrence: i === 0 && !existing ? 'first' : 'independent', invalidated: false,
     }))
     if (existing) {

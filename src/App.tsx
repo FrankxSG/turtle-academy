@@ -595,6 +595,11 @@ export function App() {
             <p data-testid="storage-kept">
               {kept === 'kept'
                 ? tr('This browser has agreed to keep these records when space runs low.', '浏览器已同意在空间不足时保留这些记录。')
+                : kept === 'unsupported'
+                ? tr(
+                    'This browser cannot be asked to keep these records when space runs low. Keep enough free space on the device.',
+                    '此浏览器无法设置在空间不足时保留这些记录。请为设备保留足够的可用空间。',
+                  )
                 : tr(
                     'This browser has not agreed to keep these records when space runs low. Add the app to the home screen, then reopen it from there.',
                     '浏览器尚未同意在空间不足时保留这些记录。请把应用添加到主屏幕，再从主屏幕打开。',

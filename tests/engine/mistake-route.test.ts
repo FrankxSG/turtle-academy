@@ -472,6 +472,34 @@ test('a task planned before the pack was set aside resolves none of its repair s
   }
 })
 
+test('a set-aside pack holds every target it imported even when its case links were never saved or are stale', async () => {
+  for (const scenario of ['first import interrupted', 'stale case links'] as const) {
+    const s = await setup()
+    if (scenario === 'first import interrupted') {
+      // Engine targets are saved before the case links; fail the case links on the very first import.
+      s.privateStore.putCrosswalk = async () => { throw new Error('synthetic_late_save_failure') }
+      const failure = await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef })).then(() => null, (e: Error) => e)
+      assert.equal(failure?.name, 'PackImportIncomplete')
+      assert.equal((await s.privateStore.crosswalk()).length, 0, `${scenario}: no case links were saved`)
+    } else {
+      await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+      s.privateStore.rows = s.privateStore.rows.filter((r) => r.target_ref !== ZUO)
+    }
+    const imported = new Set(s.engine.state.targets.map((t) => t.id))
+    assert.ok(imported.size >= 4, `${scenario}: fixture imported its targets`)
+    const stored = await s.privateStore.packs()
+    ;(stored[0].register as Record<string, unknown>).review_complete = false
+    await s.privateStore.putPack(stored[0])
+    s.clock.sgt('2027-03-02')
+    const re = await reopen(s)
+    assert.ok(re.program.openError, `${scenario}: pack set aside`)
+    assert.deepEqual(new Set(re.engine.heldTargets()), imported, `${scenario}: every imported target is held`)
+    const t = await re.engine.startOrResume('chinese')
+    if (t.kind !== 'task') throw new Error(`${scenario}: the child can still practise`)
+    assert.ok(t.task.plan.slots.every((x) => x.target_ref === null || !imported.has(x.target_ref)), `${scenario}: no slot for a held target`)
+    assert.ok(!t.task.plan.slots.some((x) => x.role === 'repair'), `${scenario}: no repair slot without a target to repair`)
+  }
+})
 
 test('a private-store write failure during open is not reported as a harmless rejected pack', async () => {
   const s = await setup()
