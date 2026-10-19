@@ -601,8 +601,8 @@ export function App() {
                     '此浏览器无法设置在空间不足时保留这些记录。请为设备保留足够的可用空间。',
                   )
                 : tr(
-                    'This browser has not agreed to keep these records when space runs low. Add the app to the home screen, then reopen it from there.',
-                    '浏览器尚未同意在空间不足时保留这些记录。请把应用添加到主屏幕，再从主屏幕打开。',
+                    'This browser has not agreed to keep these records when space runs low. Add the app to the home screen, then reopen it from there. On iPhone or iPad, do this before practice starts: records made in the browser tab may not carry over.',
+                    '浏览器尚未同意在空间不足时保留这些记录。请把应用添加到主屏幕，再从主屏幕打开。在 iPhone 或 iPad 上，请在开始练习前完成：浏览器标签页中的记录可能不会转移。',
                   )}
             </p>
           )}
