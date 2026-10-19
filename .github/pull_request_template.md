@@ -1,5 +1,8 @@
-## What and why
+## Result and reason
 
-## How it was tested
+## Validation and remaining limits
 
-- [ ] No real learner data or secrets
+Tested head / relevant checks:
+
+- [ ] Public-safe diff, description and evidence; no real learner records or secrets.
+

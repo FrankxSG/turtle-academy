@@ -1,71 +1,86 @@
-# Pilot v0.1 — Functional Design
+# Pilot: daily learning for one family
 
-Goal: a usable daily-practice tool for one family. One parent account, one child profile (nickname only). Each subject releases separately; full P2 coverage is the aim.
+Confirmed behavior, not an implementation report. Chinese releases first, then Science, Mathematics and English; each releases separately. [README](../README.md) describes current code. [Technical decisions](TECHNICAL_DESIGN_DECISIONS.md) owns architecture/privacy; [full scope](FEATURE_SCOPE.md) retains later capabilities.
 
 ## 1. Scope
 
-| Subject | In the Pilot | Not in the Pilot |
-| --- | --- | --- |
-| Chinese / Higher Chinese | P2 mistakes and practice; P3 general practice | Handwriting, writing, oral, listening |
-| Mathematics | All P2 knowledge points, objective answers | P3 (locked until a Maths teaching flow is built), typed answers |
-| English | P2 mistakes and practice; P3 general practice; 8 exercise families (grammar, vocabulary, cloze, spelling/editing, sentence order, visual text, comprehension, writing foundations) | Free writing, oral, listening, typed spelling |
-| Science | 7 P3 topics: diversity of living and non-living things; classification of living things; diversity of materials; life cycles of plants; life cycles of animals; properties of magnets; making and using magnets | P2 Science, scored free explanations |
+| Subject | Pilot |
+| --- | --- |
+| Chinese / Higher Chinese | P2 mistakes/general practice; P3 general practice from first release; P3 mistake imports later |
+| Mathematics | P2 objective practice; P3 stays locked until a later teaching flow |
+| English | P2 mistakes/general practice; P3 general practice from first release, imports later; grammar, vocabulary, cloze, spelling/editing, sentence order, visual text, comprehension, writing foundations |
+| Science | P3 living/non-living diversity, living classification, materials, plant/animal life cycles, magnets' properties and making/using magnets |
 
-Delivery order: Chinese, Science, Mathematics, English. Release guideline: 75% of a subject's P2 outcomes (Science: of its first two topics); the owner can override.
+One provisioned parent and nickname-only child; no Guest, public signup or multi-child UI. No runtime AI/OCR, worksheet scans in the app, typed formal answers, automated handwriting/free-writing/oral assessment, listening, tracing, PDF generation or weekly timetable. Writing/speaking production stays external and cannot be certified by recognition answers.
 
-Also out of the Pilot: runtime AI or OCR, in-app worksheet scans, Guest mode, sign-up, multiple children, weekly timetable, tracing, PDF generation.
+Full coverage remains the aim. Release guideline: 75% of P2 in-scope outcomes per language/Maths; Science initially its first two topics, later topics progressively. Show grade/course, denominator and missing areas; Chinese/Higher Chinese separately. Owner may override coverage in the release PR; never QA, rights, privacy or safety.
 
 ## 2. Daily use
 
-- Each subject has a parent setting **X** = 6–19 questions (default 10; Chinese up to 20).
-- On first entry each day the app suggests a subject with reviews due; the child may pick another. When every available subject is done, the island opens for exploration.
-- Pause and resume keep everything. Finishing yesterday's unfinished task counts for today. No missed-day debt, streaks or catch-up tasks.
-- **Rest day**: the parent can mark today as rest; nothing is credited.
-- Active time per subject counts only while in use (stops after 2 minutes idle).
-- UI and story language: Chinese or English. Chinese content stays in Chinese; other subjects in English.
-- **Parent PIN** (4–6 digits) protects settings, imports and records, offline too. Reset needs the account password.
+- Per-subject X: integer 6–19, default 10; Chinese may reach 20. A changed X applies to new tasks, not paused ones. X counts formal first questions, not teaching, retry or correction.
+- Suggest a subject with due work; child can choose another. Complete all available subjects before exploration. Optional extra practice earns no duplicate daily/story credit.
+- Pause/resume preserves answers, help, task/version and progress. Finalizing yesterday's task satisfies today's subject requirement. No missed-day debt or punitive streaks.
+- Rest day opens exploration, preserves progress/tasks/X and grants no fabricated learning credit. Active subject time includes teaching, stops on background/pause or two minutes idle.
+- UI/story toggle Chinese/English; Chinese academic text stays Chinese, other subjects English. Objective choice/matching/word-bank/ordering only; click/tap alternatives to drag.
+- Parent PIN: 4–6 digits, salted slow hash and increasing failed-attempt backoff, device-only; reset needs online same-account password reauthentication. New device sets its own PIN. Sensitive cloud restore/deletion requires online parent reauthentication.
+- Parent-controlled timezone changes preserve day/checkpoint identities and eligibility bounds: no extra daily credit or earlier reviews.
 
-## 3. Chinese and English tasks
+## 3. Tasks and feedback
 
-- A task has at least ceil(X/5) whole passages (X 6–10: 2; 11–15: 3; 16–20: 4) and at least X questions.
-- Short review/repair questions for targets the passages don't cover come first, up to about half the task. Due reviews before repair; each repair target gets one slot before any gets a second.
-- All first answers in a passage are given before feedback and correction.
-- A target tested in a passage advances only if all its first answers in the task are correct, and its next stage waits for the next task.
+Language tasks contain at least ceil(X/5) complete materials AND at least X questions; rotate reading, visual text and cloze. Never cut a passage to meet X. Whole materials can exceed X; show actual size.
 
-## 4. Mistakes, repair and review
+Short reviews/repairs for targets not covered by materials come first, capped at max(X − material questions, ceil(X/2)); due reviews precede repair, each repair target gets one slot before a second. Pending targets need not all fit today.
 
-- Every mistake becomes a **target**: Chinese character/word, language point or reading skill; Science knowledge point; Maths knowledge point and method; English vocabulary, grammar point or reading skill.
-- Repair has three stages: the original error → a similar question → a new context. A stage clears with one first-try correct answer on a 4+ option, matching or ordering question, or two on true/false or 2–3 option questions. A wrong first answer resets the low-option count.
-- Help after a wrong answer: hint, one retry, then the answer and a short explanation. Hint-assisted answers never advance a stage.
-- After a wrong answer, more practice on that target starts the next day. The final stage is always on a later day than stage 2. At most two stages clear per target per day.
-- After the three stages: delayed reviews at **1 → 3 → 7 → 14 → 30 days, then every 30 days**. A wrong review restarts at 1 day.
-- Order of work: due reviews, then repair, then general practice.
-- Wrong first answers in general practice join the mistake bank automatically. A repeat counts only on a different day or from a new import.
-- Prefer unseen questions; reuse older ones when needed, without calling them new evidence.
+Collect all first answers in a material before feedback. A passage-assessed target aggregates its relevant answers across the entire task: all independently first-correct plus the stage threshold are required, advancement occurs once, and its next stage waits for another task. Do not mix immediate short-question advancement with that aggregate.
+
+After a wrong first answer: hint, one retry, then supported correction/explanation. Assisted answers never advance. Preserve first responses before revealing help. Incorrect or flagged questions do not fabricate learning evidence. Exhausted replacements end at actual work with a visible reason, not an endless loop.
+
+## 4. Repair and review
+
+- Targets identify the actual character/word/skill/concept or Maths relationship/method; unknown cause stays unknown. Use verified compatible mappings; unmatched targets remain private `pending_content`.
+- Stages: exact error → similar → new context. One independent first-correct 4+ option/matching/ordering answer OR two distinct low-option first-correct answers clears a stage; a wrong first answer resets low-option partial successes. A retry is never a new independent attempt.
+- Short-only targets may advance within task capacity; at most two clearances per target/day. Final transfer always waits until a later day than stage 2. Failed-target practice waits until the day AFTER its task finalizes, not merely after its wrong answer.
+- After repair, generic delayed checks use 1 → 3 → 7 → 14 → 30 → recurring 30 days, from actual responses. Failure stays generic; after the cooldown, the next independent success restarts the one-day interval. No permanent-mastery claim.
+- Priority: due review → repair → general practice. General first-wrong answers create/update bank entries for a subsequent eligible task, never reinterpret the creating task as repair. Recurrence means a different-day general error or independent import; same-source retries and repair/review failures are not new recurrence.
+- Reuse suitable older items when necessary; record exposure and never call cosmetic/repeated success novel transfer. General first-correct answers do not skip a repair stage.
 
 ## 5. Science
 
-- Each small knowledge point: guided look and short teaching, then two independent tests in different contexts. Both right: it enters review. Either wrong: repair.
-- Teaching does not count towards X. Later chapters unlock in syllabus order as content is reviewed.
-- If nothing eligible is left, the task ends early and still counts as done.
+Each point has guided observation/short teaching and two independent tests in distinct contexts. Both first-correct enter review; either failure enters repair. After revealing help, a same-day second test cannot certify independent acquisition. Reserve two formal positions for acquisition when due work and learning coexist; preserve partial testing if capacity runs out.
 
-## 6. Answers and exercise types
+Initial prerequisite failure blocks only dependent new learning until repair completes; later generic failure does not revoke existing unlocks. Filler excludes the previous seven calendar days (day eight eligible); due review may reuse the least-recently presented suitable item. No eligible content: shorten with a reason; zero questions still satisfies the subject but grants no story checkpoint.
 
-All answers are objective: choice, matching, word bank or ordering, with click alternatives to drag. No keyboard answers. Maths uses number options, not typed numbers.
+## 6. Adventure and parent view
 
-## 7. Adventure
+Small 2D island, movable avatar, one companion, shared scripted story and a few interactions. Deliver halfway/completion checkpoints at safe material/correction boundaries, combine coincident milestones and deduplicate across reload/devices. Shortened work grants its interaction once; after the story ends retain the world and use brief companion interactions. No correctness-based reward, scores, leaderboards or paid currency.
 
-Small 2D island, movable avatar, one companion, a few interactions and one shared story across all subjects. Story checkpoints at halfway and completion of each task. Rewards never depend on correctness. No scores, leaderboards or paid items.
+Parent summary shows per-subject actual time, stages/due dates, answers/retries/help and shorter-task reasons; expand detail as needed. Parent can amend/invalidate records; recompute evidence without inheriting success for a different target or revoking delivered story/past daily credit. Child can flag/skip a question for replacement; parent restore/disable is child/version-scoped, never a global bank rewrite.
 
-## 8. Parent
+## 7. Intake
 
-- **Import mistakes**: the parent uses a private Claude or ChatGPT chat to extract mistakes from worksheets (the AI removes names and school), checks them, then pastes the result into the app and confirms once. Worksheets themselves are never stored in the app.
-- Parent view: per-subject time, answers, retries, stages, due dates and the reason for any short task.
-- The parent can fix or invalidate an import or record; progress is recalculated.
-- The child can flag a bad question and gets a replacement; the parent decides to restore or disable it.
+External private ChatGPT/Claude preparation may receive full worksheet images; filtering identifying detail does not guarantee anonymity. Parent verifies extraction, previews once and confirms the valid subset. Invalid/uncertain/unmatched items stay explicit; cancel changes nothing. Verified no-error results allow general practice; failed/incomplete extraction never proves no mistakes.
 
-## 9. Offline and sync
+Use the versioned curriculum manifest and existing validators; no imported identity, ownership, stage/mastery/due overrides, source text/images or school details. Wrong forms stay device-only. Dates use written work date, then nearest dated same-lesson work, otherwise processing date; disclose estimates. Historical dates never bypass day-after-import eligibility. Deduplicate same-source reimports; independent observations preserve stage and schedule priority from the next day.
 
-- After the first online sign-in, practice works offline.
-- **Sync (owner decision, 19 Oct 2026):** learning records and the private mistake pack sync to every signed-in device. Answers are add-only; stages and dates are recalculated; settings keep the latest edit. The wrong-answer text, PIN and worksheets never leave the device. Not built yet.
-- Content updates ship with app updates and are cached for offline use.
+Before enabling new mapped imports, privately compare verified targets to reviewed practice groups and record only a rough aggregate and owner proceed decision in the existing release record. Missing coverage remains pending; public content is original curriculum-level material, never a disclosed learner error set.
+
+## 8. Release checks
+
+Review shipped keys, hints, age suitability, sources and rights. Owner checks every disputed item and a random 20% of AI-agreed items per batch, then signs off that batch; validators/AI agreement do not prove educational quality. Generate inventories/review views from JSON rather than committing duplicate listings.
+
+For each subject demonstrate the usable loop, honest learning evidence, resume and bounded workload with reviewed content. Use synthetic fixtures for ownership isolation, retries and recovery; test the actual landscape device/PWA offline, storage denial/eviction and safe updates. Keep synthetic acceptance identities separate from real use. Record evidence and unresolved checks in the release PR; merging docs passes none of these.
+
+## 9. Offline, sync and recovery
+
+After initial online setup, cached practice and ordinary PIN controls work without an offline time limit, including expired sessions. Re-sign-in is needed to sync, not to practise. Persist locally first; retry ordered failures with backoff. Distinguish memory-only unsaved answers (lost on reload) from durable changes waiting to upload (lost if the device is wiped). Warn honestly; never bypass failed local saves with direct cloud writes.
+
+Owner-selected live sync (19 October) is not built yet:
+- Sync learning records and the private pack under family/child authorization. Append-only answers/production events/amendments retain all evidence; derive stages/dates/unlocks from merged history. Preserve daily/story completion once.
+- Share daily task identity per child/subject/day; retain presentations/answers from both offline devices and earlier pack/content versions needed by pinned tasks.
+- Settings merge deterministically per field, retaining replaced values. Document clock-skew uncertainty: disconnected devices cannot guarantee true wall-clock edit order. Targets use traceable amendments, not silent overwrite.
+- New/reset devices recover synced records/pack. Never attach another identity's local records. Wrong forms (including pack `observed`), PIN/hash, original worksheets and unbounded free descriptions never enter uploads/snapshots/logs; other devices repair from correct targets.
+- Server-made snapshots: at most one/day plus before restore; keep newest ten. Parent password-confirmed restore reinstates settings/pack as new edits across devices, preserving answers/progress. Exclude bad practice through synchronized invalidations. Keep creation/restore/pruning/deletion auditable and family-scoped; clients cannot prune snapshots. Old client `upload_snapshot` is not the new sync contract.
+- Deletion reaches offline devices and cannot resurrect erased family data from pending writes. Explain local-copy clearing. Synthetic tests must cover interruption/duplicate retry, two offline devices, reset recovery, identity isolation, excluded fields, restore/invalidation and deletion.
+
+Generic content ships in app updates; pin active versions, preserve pending work and retain usable cached content after failed downloads. Real-record release conditions are in [technical decisions](TECHNICAL_DESIGN_DECISIONS.md#data-and-release); synthetic implementation does not wait for a separate policy-writing cycle.
+

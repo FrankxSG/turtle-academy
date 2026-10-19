@@ -17,10 +17,14 @@ python3 supabase/tests/test_database.py                                   # need
 node --experimental-strip-types --test supabase/tests/client/*.test.mjs
 ```
 
-## Setup (owner)
+## Setup (owner, synthetic staging only)
+
+Verify the dedicated project/environment before any write. Use synthetic users/nicknames here; real-record readiness is governed by [technical decisions](../docs/TECHNICAL_DESIGN_DECISIONS.md#data-and-release). These migrations implement the older snapshot contract, not live sync. Failed/inconclusive hosted probes are not a pass.
+
 
 1. In the Supabase project: Authentication → turn off new sign-ups and anonymous sign-ins.
 2. Run the SQL files in `supabase/migrations/` in order.
 3. Check: `TA_SUPABASE_URL=… TA_SUPABASE_ANON_KEY=… node scripts/check-hosted-auth.mjs` must print `PASS` twice.
 4. Create the parent user in the dashboard, then run `select private.provision_family('<user id>', '<nickname>');`.
-5. Google sign-in is off. To turn it on, enable the Google provider, run `node --experimental-strip-types scripts/check-google-link.mjs --expect same` and `--expect refused`; if both pass, set `VITE_GOOGLE_LOGIN=on`.
+5. Google sign-in is off. To turn it on, enable the Google provider, run `node --experimental-strip-types scripts/check-google-link.mjs --expect same` and `--expect refused`; also verify password fallback and that the unrelated-account probe created no user; only then set `VITE_GOOGLE_LOGIN=on`.
+

@@ -1,35 +1,28 @@
-# AGENTS.md
+# Working on Turtle Academy
 
-Turtle Academy: an offline-capable learning PWA for one primary-school child. React, Vite, TypeScript, Dexie (IndexedDB), Supabase.
+Public React/Vite/TypeScript learning PWA. The private resources repo holds reference text and approved anonymous authoring records; it is never a public dependency.
 
-## Layout
+## Start and coordinate
 
-- `src/engine/` learning engine (tasks, repair stages, review dates)
-- `src/ui/`, `src/hub/`, `src/parent/` screens
-- `src/catalogue/`, `content/<subject>/` question content (JSON)
-- `src/mistakes/` private mistake pack import
-- `supabase/` database migrations and tests
-- `src/trials/` separate demo features, not in the app build
+- Check current main and relevant open PRs. Read [README](README.md), then only the files needed for the task. [Pilot](docs/PILOT_FUNCTIONAL_DESIGN.md) owns release behavior; [technical decisions](docs/TECHNICAL_DESIGN_DECISIONS.md) owns architecture/privacy; [full scope](docs/FEATURE_SCOPE.md) is the long-term roadmap, not today's build list.
+- One task, one implementing agent, one branch/PR (`claude/…` or `chatgpt/…`). Use an isolated checkout/worktree or a connector branch. Reuse existing work; check its head before editing. Never reset another agent's work.
+- Parallelize only independent tasks with distinct files/resources. Give each worker the goal, owned paths, constraints and expected result. Agree shared interfaces first; keep one writer for shared files and lockfiles.
+- Put the task, current head, remaining work and validation in its Issue or PR. That is the handoff; do not create a second plan, ledger or review document. Routine implementation choices stay with the implementer; ask only for a missing material decision.
+- A different agent reviews requirements and correctness at the current head. Fix substantive findings in the same PR; scope re-review to fixes and affected behavior. Record minor suggestions without turning them into release gates.
+- Every review states **Ready to merge**, **Not ready to merge**, or **Unable to determine**, with findings, tested/reviewed SHA and limits. Both assistants share an identity: a review comment is not a formal GitHub approval.
+- Only the owner merges or explicitly authorizes a named PR at its current head. Squash only; required checks must pass. Deployment, first real-data use and spending require their applicable owner authorization.
 
-## Commands
+## Boundaries and checks
 
-```sh
-npm run typecheck
-npm run test:engine
-npm run test:ui
-npm run build
-npm run test:e2e
-python3 scripts/privacy_guard.py
-python3 scripts/validate_subject_content.py <subject>
-python3 scripts/validate_chinese_content.py
-```
+- No runtime AI. No authentic learner records, worksheets, handwriting, photographs, credentials or private-library text in public files, conversations, tests, logs, builds or previews. Generic code may handle private data; authorization and data separation must enforce privacy.
+- Use synthetic development data, least-privilege CI and dedicated staging/production. Keep private repository Actions disabled. Never use production secrets in PR workflows.
+- Run relevant checks once for the changed code; reuse unchanged evidence. Docs: privacy, links and consistency. Engine/UI: affected tests/typecheck; build/browser checks when affected. Auth/data: negative ownership and recovery tests. No app build solely for Markdown.
+- Content work: [common authoring skill](skills/question-authoring/SKILL.md), then the subject skill if present. Keep question JSON/schema as the source and generate repeated views.
+- Update the single relevant specification with an agreed behavior change in the same PR. Do not add policies, duplicate status narratives or mandatory frameworks. Preserve confirmed requirements when shortening text.
 
-## Rules
+## Map and commands
 
-- This repo is public: no real learner data (worksheets, answers, mistakes, name, school) and no secrets. Real material lives in the private `turtle-academy-resources` repo.
-- No AI inside the app.
-- One branch and PR per task (`claude/…` or `chatgpt/…`). Agents working in parallel take separate areas so they don't edit the same files.
-- Before opening or updating a PR, the relevant tests pass. The owner merges, or tells you to merge a named PR.
-- Reviews: fix critical and important findings in the same PR; note minor ones in a PR comment. No review documents in the repo, and no new docs or policy text unless the owner asks.
-- Content work: follow `skills/question-authoring/SKILL.md`, then the subject skill (e.g. `skills/chinese-question-authoring/SKILL.md`).
-- Product behaviour: `docs/PILOT_FUNCTIONAL_DESIGN.md`.
+`src/engine/`: learning rules; `src/ui|hub|parent/`: screens; `src/catalogue/`, `content/`: reviewed content; `src/mistakes/`: pack intake; `supabase/`: migrations/tests; `src/trials/`: isolated demos.
+
+`npm run typecheck`, `test:engine`, `test:ui`, `build`, `test:e2e`; `python3 scripts/privacy_guard.py`. Setup and content commands are in README and the relevant subject guide.
+

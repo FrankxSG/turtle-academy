@@ -1,6 +1,6 @@
 # Full Feature Scope
 
-Long-term product ideas and confirmed curriculum choices. Not a build list; the Pilot is in [PILOT_FUNCTIONAL_DESIGN.md](PILOT_FUNCTIONAL_DESIGN.md). Numbers (#120–#202, E1–E12, M1–M12) are the owner's decision IDs.
+Confirmed long-term product scope and curriculum choices. Not a release checklist or implementation report; the Pilot is in [PILOT_FUNCTIONAL_DESIGN.md](PILOT_FUNCTIONAL_DESIGN.md). Numbers (#120–#202, E1–E12, M1–M12) are the owner's decision IDs.
 
 ## 1. Product vision and child experience
 
@@ -166,3 +166,4 @@ Full lower-primary coverage and mathematical reasoning. No automatic grading of 
 | 200 | B | Independent explanation behaviour tracking only |
 | 201 | C | Self-monitoring and optional classroom transfer |
 | 202 | C | Multi-step directions, repeat/check and optional classroom transfer |
+
