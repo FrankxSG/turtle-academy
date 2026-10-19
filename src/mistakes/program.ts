@@ -70,7 +70,9 @@ export const LEARNER_COURSES: Record<string, string[]> = {
 /**
  * Engine targets a set-aside pack's cases live on: those in its saved case links, plus every target holding
  * imported case evidence. The second part matters because engine targets are saved before the case links, so an
- * interrupted import can leave targets the saved links do not list.
+ * interrupted import can leave targets the saved links do not list. Only one pack is stored at a time, so this can
+ * also hold a target that only an earlier pack imported; that errs towards pausing, never towards practising a
+ * target without its case pins.
  */
 const heldFrom = (rows: CrosswalkRow[], targets: readonly Target[]) => new Set([
   ...rows.flatMap((r) => (r.engine_target_id ? [r.engine_target_id] : [])),
