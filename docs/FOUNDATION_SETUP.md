@@ -41,7 +41,7 @@ The `Privacy guard` workflow runs automatically on every pull request (read-only
 1. Recheck current repository protections and confirm Actions secrets and hosting link state before any implementation/deployment; the `privacy-guard` required check and successful foundation baseline are already recorded above.
 2. Confirm Vercel plan and manual deployment controls before importing. Use the repository root, Vite preset, `npm run build`, output `dist`, Node 22 and the committed lockfile. This shell requires no environment variables.
 3. Deploy a synthetic preview only after approval. Verify HTTPS, assets, SPA routing, offline use, update behavior, preview access and logs.
-4. Verify the correct dedicated Supabase projects independently before writes. For Pilot implement provisioned parent authentication (Google linking subject to staging test; email/password fallback), family/child ownership, RLS and authenticated versioned snapshot backup, using synthetic cross-family tests before real data. Invitation redemption and private original worksheet storage remain later full-scope features.
+4. Verify the correct dedicated Supabase projects independently before writes. For Pilot implement provisioned parent authentication (Google linking subject to staging test; email/password fallback), family/child ownership, RLS and live sync with snapshot history (owner decisions 2026-10-19), using synthetic cross-family tests before real data. Invitation redemption and private original worksheet storage remain later full-scope features.
 5. Verify free quotas, email delivery/recovery, retention/deletion and production/staging separation before real learner use.
 
 Do not link production credentials to PR workflows or previews; in a public repository, fork PRs must never receive secrets. Do not merge or deploy merely because checks pass.
@@ -49,7 +49,7 @@ Do not link production credentials to PR workflows or previews; in a public repo
 ## Open product and recovery work
 
 - Pilot Scope + Functional Design + Learning Engine together define the delivery slice; later phases are provisional. The design is not evidence of implementation.
-- Pilot Auth/RLS, snapshot recovery and real-device acceptance remain unimplemented/unverified. The [Pilot decision register](PILOT_V0_1_SCOPE.md#3-identity-and-protected-backup-policy) owns the Google fallback and snapshot conflict/retention/deletion policy; [Pilot §5](PILOT_V0_1_SCOPE.md#5-testing-and-release-gates) lists acceptance tests. Private catalogue coverage and [data protection](TECHNICAL_DESIGN_DECISIONS.md#9-validation-status-and-open-questions) remain pre-implementation gates. Guest import, complete multi-device sync and full service-worker recovery remain longer-term work.
+- Pilot Auth/RLS, snapshot recovery and real-device acceptance remain unimplemented/unverified. The [Pilot policy](PILOT_V0_1_SCOPE.md#3-identity-live-sync-and-backup-policy) owns the Google fallback and the live-sync, snapshot and deletion policy; [Pilot §5](PILOT_V0_1_SCOPE.md#5-testing-and-release-gates) lists acceptance tests. Private catalogue coverage and [data protection](TECHNICAL_DESIGN_DECISIONS.md#9-validation-status-and-open-questions) remain pre-implementation gates. Guest import, complete multi-device sync and full service-worker recovery remain longer-term work.
 
 ## 2026-10-11 conditional Pilot ratification
 

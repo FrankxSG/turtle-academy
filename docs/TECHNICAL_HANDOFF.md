@@ -59,21 +59,21 @@ flowchart TD
   C["Curated versioned content and assets"] --> P["PWA UI and deterministic lesson engine"]
   P --> L["IndexedDB: local records and drafts"]
   P --> W["Service worker: shell and lesson packs"]
-  L --> Q["Pilot: authenticated snapshot backup; long-term: event sync"]
+  L --> Q["Pilot: live sync with snapshot history"]
   Q --> D["Supabase Auth and Postgres with RLS"]
   Q --> S["Private storage: selected works"]
 ```
 
-Pilot Registered records stay local-first with authenticated Supabase **snapshot backups**, not live per-record sync. Guest (when added later) remains local-only. Full sync and private selected-work storage arrows are future implementation. The service-worker cache stores downloadable app/content files, not a substitute for ownership-controlled learner storage.
+Pilot Registered records stay local-first, with **live sync** through Supabase across the family's devices and server-made snapshot history (owner decisions 2026-10-19). Guest (when added later) remains local-only. Sync and private selected-work storage arrows are future implementation. The service-worker cache stores downloadable app/content files, not a substitute for ownership-controlled learner storage.
 
 | Layer | Responsibility | Current implementation |
 | --- | --- | --- |
 | React UI and game presentation | Navigation, subject worlds, quests, accessible input, parent views | Small React shell |
 | Lesson/content engine | Stable content IDs and versions; concepts, prerequisites, answers, hints and reviewed explanations | One hard-coded generic Science question; no modular engine yet |
 | Progress and assessment | Distinct story/submission/mastery evidence; rule-based review scheduling | No domain progress model yet |
-| Local persistence | Pilot Registered records and pending backup, draft state and safe schema changes | One Dexie guest-only checkpoint from earlier foundation spike (Pilot upgrade not implemented) |
+| Local persistence | Pilot Registered records and pending uploads, draft state and safe schema changes | One Dexie guest-only checkpoint from earlier foundation spike (Pilot upgrade not implemented) |
 | Offline delivery | App shell, versioned lesson packs, readiness/download/recovery state | Workbox shell precaching only |
-| Pilot backup and server authorization | Authenticated child-scoped snapshot backup, RLS, conflict-safe recovery; full event sync later | Not implemented |
+| Pilot sync and server authorization | Live sync of learning records and the private pack, RLS, rule-based merge, snapshot history and restore | Not implemented |
 | Private backend and storage | Family-owned records, selected portfolios, parent notes | Not implemented |
 | Hosting and CI | Static build delivery, checks and controlled releases | GitHub: automatic privacy check on pull requests, manual full CI; proposed Vercel configuration |
 
@@ -134,7 +134,7 @@ Guest mode is device-only, with restricted personalization. No cloud sync, persi
 
 Original worksheets and identifiable handwriting/photos remain outside Git, including ignored folders. A private preparation workflow may produce structured correction candidates; parent/human verification precedes secure import into the authenticated learner bank. Do not bundle private mistake entries into generic lesson JSON. No privileged backend key belongs in browser variables, public PR workflows, test logs or previews.
 
-**Pilot:** Chinese tracing and typed learning answers are excluded; objective selection remains supported and full writing is external. Registered records use snapshot backup under the [Pilot decision register](PILOT_V0_1_SCOPE.md#3-identity-and-protected-backup-policy). **Long term:** drawing drafts, selected private portfolios and per-record outcome sync remain separately scoped; retention/cleanup notices need specification. Voice practice, if added, is transient with no voice archive.
+**Pilot:** Chinese tracing and typed learning answers are excluded; objective selection remains supported and full writing is external. Registered records use live sync under the [Pilot policy](PILOT_V0_1_SCOPE.md#3-identity-live-sync-and-backup-policy). **Long term:** drawing drafts, selected private portfolios and per-record outcome sync remain separately scoped; retention/cleanup notices need specification. Voice practice, if added, is transient with no voice archive.
 
 Science journals must distinguish simulated values, actual observations and inferences. Corrections preserve original values, reason and time. Attention/instruction activities cannot diagnose disorders, claim measured attention or guarantee classroom transfer.
 
@@ -142,7 +142,7 @@ Science journals must distinguish simulated values, actual observations and infe
 
 Pilot cached lessons must run offline after first online login without external runtime fonts, scripts, images or mandatory APIs. Downloadable pack readiness, sizes and incomplete-download recovery are later full-scope work. Browser storage can be evicted; communicate that limitation.
 
-Pilot backup/recovery policy and tests are in [Pilot §5](PILOT_V0_1_SCOPE.md#5-testing-and-release-gates); cloud-restore-only conflict recovery is decision A, and full sync is deferred. Long-term registered sync requires stable event IDs, transactional persistence, idempotent retries, duplicate detection and reconciliation. Do not use naive last-write-wins for mastery, progress or rewards. Reward issuance must not duplicate during retries. Detailed event schema, account-switch isolation, offline-auth recovery and conflict rules remain design/implementation work.
+Pilot live-sync policy is in [Pilot §3](PILOT_V0_1_SCOPE.md#3-identity-live-sync-and-backup-policy) and its tests in [Pilot §5](PILOT_V0_1_SCOPE.md#5-testing-and-release-gates). Registered sync requires stable event IDs, transactional persistence, idempotent retries, duplicate detection and reconciliation. Do not use naive last-write-wins for mastery, progress or rewards. Reward issuance must not duplicate during retries. Detailed event schema, account-switch isolation, offline-auth recovery and conflict rules remain design/implementation work.
 
 Test interrupted writes, repeated requests, multi-device conflicts, logout/account switching, stale packs, service-worker replacement, iOS Home Screen and storage eviction before claiming robust offline support. Do not claim indefinite offline authentication validity.
 
@@ -160,7 +160,7 @@ This repository is public since 2026-10-10. Every commit, Issue, PR description,
 
 ## 9. Suggested next implementation task
 
-Propose a scoped implementation task with acceptance criteria for the **Registered-only Pilot**, retaining long-term Guest requirements separately. Establish family/child identity, server authorization, RLS and snapshot contracts before dependent UI work. Resolve the private catalogue-coverage and data-protection gates before the implementation they govern, and define safety-copy recovery and owner-only retention/deletion operations before the backup PR. This is a suggested sequence, not an owner-approved MVP allocation or implementation authorization.
+Propose a scoped implementation task with acceptance criteria for the **Registered-only Pilot**, retaining long-term Guest requirements separately. Establish family/child identity, server authorization, RLS and sync contracts before dependent UI work. Resolve the private catalogue-coverage and data-protection gates before the implementation they govern, and define owner-only retention/deletion operations before the sync PR. This is a suggested sequence, not an owner-approved MVP allocation or implementation authorization.
 
 Read the current authoritative documents and active GitHub work before proposing changes. Keep PR-specific review instructions, reviewed SHAs and merge authorization on the relevant PR. Code, service changes, merging and deployment require their separately applicable owner authorization.
 
@@ -174,7 +174,7 @@ After each merged implementation change, update the setup evidence and any affec
 
 ## 2026-10-11 conditional Pilot v0.1 decision handoff
 
-Issue #3 conditionally ratifies documentation only: one pre-provisioned Registered parent and nickname-only child, no Pilot Guest; IndexedDB and child-scoped authenticated Supabase snapshot backup (not full sync); parent-verified private worksheet paste-in; Chinese → Science → Mathematics → English, starting with Chinese + movable hub/companion and backup. Later decisions exclude tracing and expand curriculum scope, as recorded in the consolidated functional design. Pilot details and gates are in PILOT_V0_1_SCOPE.md and CONTENT_QA.md. No code, RLS or service configuration is implemented by this documentation PR.
+Issue #3 conditionally ratifies documentation only: one pre-provisioned Registered parent and nickname-only child, no Pilot Guest; IndexedDB and child-scoped authenticated Supabase snapshot backup (not full sync); parent-verified private worksheet paste-in; Chinese → Science → Mathematics → English, starting with Chinese + movable hub/companion and backup. Later decisions exclude tracing, replace snapshot-only backup with live sync (2026-10-19) and expand curriculum scope, as recorded in the consolidated functional design. Pilot details and gates are in PILOT_V0_1_SCOPE.md and CONTENT_QA.md. No code, RLS or service configuration is implemented by this documentation PR.
 
 ## 2026-10-14 consolidated documentation handoff
 

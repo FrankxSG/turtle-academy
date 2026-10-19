@@ -1,6 +1,6 @@
 # Turtle Academy Pilot v0.1 — Learning Engine and Acceptance
 
-**Status:** Consolidated specification, 2026-10-15; no implementation or merge authorization.
+**Status:** Consolidated specification, 2026-10-15; live-sync update 2026-10-19 (§6, F28, F41–F46); no implementation or merge authorization.
 **Authority:** [Functional design](PILOT_FUNCTIONAL_DESIGN.md) owns confirmed behavior. This document proposes implementable contracts and verification criteria. [Pilot scope](PILOT_V0_1_SCOPE.md) preserves security and release gates. Concrete field names, bounds and implementation algorithms below are review proposals, not an already implemented schema.
 
 ## 1. Separation of responsibilities
@@ -13,7 +13,7 @@
 | Evidence reducer | Derive stage, due date and dependency state from compatible evidence | Permanent mastered flag or story credit as learning evidence |
 | Planner | Eligibility, priority, whole-material quota, capacity and exposure history | Force every target into today's task or violate next-day failure eligibility |
 | Adventure adapter | Idempotent structured checkpoints and shared story state | Correctness-dependent rewards |
-| Persistence adapter | Local commits, retry queue and authorized snapshot recovery | Silent multi-device merge or direct cloud bypass on failed local save |
+| Persistence and sync adapter | Local commits, ordered upload queue, rule-based merge of synced changes, protected snapshot restore | Overwriting answer events, copying derived progress between devices, or direct cloud bypass on failed local save |
 
 Evaluation and planning should accept explicit policy/content versions and an injectable clock. Maintain separate outcomes for objective correctness, independent stage clearance, assisted correction, task completion and adventure completion.
 
@@ -108,7 +108,7 @@ Proposed safety bounds: at most 1 MiB decoded JSON and 1,000 candidates; these a
 | target_value | Necessary correct target; proposed maximum 8 Unicode code points for Chinese character/word kinds, 64 for other kinds; no full question/passage or context summary |
 | assessed_skill | Controlled skill where applicable; explicit not-applicable where legitimate |
 | error_type | Supported controlled type; unknown cause if evidence does not justify classification |
-| observed_wrong_form | Optional necessary bounded form; same proposed per-kind limits as target_value; device-local only, excluded from snapshots. No full source question or meaningless option-number-only record |
+| observed_wrong_form | Optional necessary bounded form; same proposed per-kind limits as target_value; device-local only, never synced or in snapshots. No full source question or meaningless option-number-only record |
 | observation_date | Valid ISO calendar date; future dates require correction. Owner rule (2026-10-18): use the date written on the work; if it has none, use the nearest dated work on the same lesson; if that cannot be found either, use the upload/processing date. Show estimated dates as estimated at preview so the parent can correct them; never estimate silently |
 | source_type | Fixed list: schoolwork, home_practice, external_assessment, other_reviewed_work |
 
@@ -124,9 +124,15 @@ Amendments preserve provenance, invalidate affected evidence and recompute deriv
 
 Ordered idempotent local commands and in-memory pending writes support warning-and-continue after retry failure. Retry with backoff while alive and on foreground return. Unsaved memory can be lost on reload/process termination; disclose that limitation. Do not claim background survival or guaranteed preservation.
 
-Backup failure alone permits locally saved learning and shows parent status. Snapshots include minimal target/event history, task cursors/aggregation, per-subject X and active practice time, profile timezone/change and calendar guards, rest-day status, delivered/pending checkpoints and shared story state, question flags/suspensions, exposure history, amendment lineage and safe pending-upload metadata. Exclude `observed_wrong_form`, PIN/hash, original worksheets and free source descriptions. Correct targets alone support restored repair. Preserve the remaining snapshot protection policy, linear-head conflict pause, authenticated ownership, online password reauthentication, current-head restore, validated atomic replacement and successfully saved private safety copy. Retain server-authorized no-head exception and newest-ten owner-managed retention. No keep-device overwrite/rebase or automatic recreation after deletion.
+Sync failure or an expired session alone permits locally saved learning and shows parent status. Live sync follows the [Pilot policy](PILOT_V0_1_SCOPE.md#3-identity-live-sync-and-backup-policy). Proposed contract:
 
-Actual-target storage protection and safety-copy recovery/lifetime remain unresolved gates under technical decisions; this specification does not choose plaintext or authorize real uploads. Offline PIN is not server authorization. Parent chooses 4–6 digits; persist only a salted slow hash on device, never snapshots/logs. Growing wrong-attempt back-off and online account-password reset are required. Specify the exact slow-hash parameters and persistent back-off behavior before implementation; do not claim encryption of learner records from hashing the PIN.
+- **Upload:** each committed local mutation is queued for upload with its existing unique id and order; the server applies a mutation id at most once and acknowledges it, and the device then removes it from the queue. Uploads go through server functions that validate a closed allow-list per record type (the snapshot schema's list plus the pack's register without `observed`, corrective batches, private targets, case links and production events).
+- **Download:** the device pulls changes since its last checkpoint, in a stable order, and applies them through the same merge rules as local changes.
+- **Merge rules by record type:** answer and production events are add-only (union by id); learning stages, due dates and unlocks are recomputed from merged events, never synced as values; daily completions, delivered checkpoints/story and exposure history only grow; a daily task uses one deterministic id per child, subject and day, and its frozen plan is the first version the server accepts; editable records (settings and X, rest days, suspensions, target fields, nickname) merge per field by latest edit, using a hybrid logical clock checked against server time, with device-id tie-break and the replaced value kept in server-side history; the newest loaded pack is active and earlier pack versions stay available to pinned tasks; deletions are flags. Each table's rule must be fixed in the build Issue before code.
+- **Device-only:** `observed_wrong_form`, the pack's `observed` field, PIN/hash, local schema metadata and cached content builds.
+- **Snapshots:** the server makes versioned snapshots from live data (at most daily and before any restore), keeps the newest ten under owner-only pruning, and restores one after parent password reauthentication by writing its editable records and pack back as new edits. Restore never removes answer events.
+
+Storage protection for actual targets and pack contents remains an unresolved gate under technical decisions; this specification does not choose plaintext or authorize real uploads. Offline PIN is not server authorization. Parent chooses 4–6 digits; persist only a salted slow hash on device, never snapshots/logs. Growing wrong-attempt back-off and online account-password reset are required. Specify the exact slow-hash parameters and persistent back-off behavior before implementation; do not claim encryption of learner records from hashing the PIN.
 
 Content is centrally reviewed and released with app updates. Active tasks pin cached versions and assets; updates apply safely between tasks. Changed/retired keys require explicit compatibility/invalidation rules, not retroactive silent grading. Failed downloads preserve usable cached content. No parent generic-bank importer.
 
@@ -163,7 +169,7 @@ These are **required future tests**, not executed app tests. Fixtures must be sy
 | F25 | All formal subject answers objective selection/matching/ordering; no answer keyboard; click alternative to drag |
 | F26 | UI/story language toggle; Chinese academic Chinese and other academic English unchanged |
 | F27 | Local save fails repeatedly; retain memory, warn and continue, ordered background retry, honest reload-loss warning |
-| F28 | Backup failure/stale head permits saved learning; restore state includes checkpoints/suspensions/exposure, excludes wrong forms/PIN; target-only repair works |
+| F28 | Sync failure or expired session permits saved learning; synced and restored state includes checkpoints/suspensions/exposure, excludes wrong forms/PIN; target-only repair works |
 | F29 | Update during paused task; pinned version usable, key changes explicit, failed download preserves cache |
 | F30 | Preset story ends; world preserved and short companion interaction replaces further new plot |
 | F31 | PIN accepts only 4–6 digits; offline verification/back-off; no PIN/hash in logs/snapshots; reset needs online account-password reauthentication |
@@ -176,6 +182,12 @@ These are **required future tests**, not executed app tests. Fixtures must be sy
 | F38 | Active subject time counts teaching/use; stops on pause/background or two minutes idle, resumes without double counting; elapsed task age is not practice time |
 | F39 | Science first acquisition test wrong with revealing help: same-day second test cannot give independent acquisition success; repair follows task-finalisation cooldown |
 | F40 | Zero eligible Science questions counts subject complete with reason and no checkpoint; shortened actual work grants completion once without duplicate halfway reward |
+| F41 | Two devices practise offline and reconnect: all answer events kept once, derived stages/due dates identical on both, no lost or duplicated completion or story checkpoint |
+| F42 | Two offline devices start the same day's task: one shared task id, no extra daily credit |
+| F43 | Same field edited on two offline devices ends as the later edit on both, replaced value in history; different fields both kept; skewed device clock cannot make an older edit win |
+| F44 | Repeated or interrupted upload (lost acknowledgement, restart) applies each mutation once; deletion flags reach a device that was offline |
+| F45 | New or reset device signs in and rebuilds records and pack (without `observed`); repair uses correct targets; expired session never blocks offline practice |
+| F46 | Snapshot restore needs password reauthentication, reaches every device and keeps all answer events; uploads, server tables, snapshots and logs never contain wrong forms or PIN/hash |
 
 Field checks must additionally cover unsupported version, unknown fields, wrong subject/course, oversize payload, malformed date, future date, old observation with current import, correct no-error versus incomplete result, cancellation, valid-subset confirmation, duplicate batch retries, unauthorized imported ownership/stage fields, bounded wrong-form privacy and unknown-cause/pending-target separation.
 
@@ -213,4 +225,4 @@ The previously open evidence, Science assistance/reuse, active-time, timezone, z
 
 Publish the source-verified versioned leaf curriculum manifest, reviewed questions/materials/media, prerequisite/chapter mappings and valid answer/help content before enabling mapped imports. The course register is not a completed knowledge-point inventory; unmapped eligible targets remain pending_content. P3 import support for Chinese/Higher Chinese and English follows later. No P3 Mathematics content is required for Pilot; its teaching flow and course opening are post-Pilot work.
 
-Exact implementation algorithms, hash parameters and storage contracts still need engineering validation, without changing confirmed behavior. Data-protection, actual-target storage, private coverage/proceed and safety-copy gates remain unresolved under Technical Decisions and Pilot Scope. No implementation or real-data approval follows from this document.
+Exact implementation algorithms, hash parameters and storage contracts still need engineering validation, without changing confirmed behavior. Data-protection, actual-target and pack storage, and private coverage/proceed gates remain unresolved under Technical Decisions and Pilot Scope. No implementation or real-data approval follows from this document.
