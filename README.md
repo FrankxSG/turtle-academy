@@ -33,7 +33,7 @@ The default public build excludes private-pack handling. `npm run build:private`
 - Keep staging and production isolated. Never connect previews to real learner data.
 - This repository is public since 2026-10-10. Never commit real learner data, account details or credentials.
 
-Start with [AGENTS.md](AGENTS.md), then follow its task-specific references. [Full feature scope](docs/FEATURE_SCOPE.md) remains confirmed long-term scope. Historical setup/handoff records are dated evidence, not current implementation inventories.
+Start with [AGENTS.md](AGENTS.md), then follow its task-specific references. [Full feature scope](docs/FEATURE_SCOPE.md) remains confirmed long-term scope. The [foundation register](docs/FOUNDATION_SETUP.md) holds dated setup evidence, not a current implementation inventory.
 
 ## Vercel
 
