@@ -821,4 +821,3 @@ Courses: p3_chinese, p3_higher_chinese. Kind: visual_text.
 | zh-p3-charctx-repair.q1 v1 / exact | 他做事很认真，从来不[空1]虎。<br>1 马；2 妈；3 吗；4 码 | 马 | “不认真”可以说成哪个词？ | “马虎”是不认真的意思，句子说他从来不马虎。 | 根据句意选字 |
 | zh-p3-charctx-repair.q2 v1 / similar | 外面下大雨，我们只好在屋子里[空1]棋。<br>1 上；2 下；3 卡；4 不 | 下 | 玩棋的时候，我们说“……棋”。 | 玩棋叫“下棋”。 | 根据句意选字 |
 | zh-p3-charctx-repair.q3 v1 / generic | 冬天，北方很冷，河面都结[空1]了。<br>1 永；2 求；3 水；4 冰 | 冰 | 水很冷的时候会变成什么？ | 水冷到一定程度会结冰。 | 根据句意选字 |
-

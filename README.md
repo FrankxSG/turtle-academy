@@ -38,4 +38,3 @@ Start with [AGENTS.md](AGENTS.md), then follow its task-specific references. [Fu
 ## Vercel
 
 The application build uses the Vite preset, root directory, `npm run build`, and `dist`. Sign-in needs public test Auth configuration; a build without it shows setup instructions and disables sign-in. Never use privileged keys or connect previews to real learner data. Review deployment controls and obtain approval before importing or deploying.
-

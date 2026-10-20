@@ -214,4 +214,3 @@ The previously open evidence, Science assistance/reuse, active-time, timezone, z
 Publish the source-verified versioned leaf curriculum manifest, reviewed questions/materials/media, prerequisite/chapter mappings and valid answer/help content before enabling mapped imports. The course register is not a completed knowledge-point inventory; unmapped eligible targets remain pending_content. P3 import support for Chinese/Higher Chinese and English follows later. No P3 Mathematics content is required for Pilot; its teaching flow and course opening are post-Pilot work.
 
 Exact implementation algorithms, hash parameters and storage contracts still need engineering validation, without changing confirmed behavior. Data-protection, actual-target storage, private coverage/proceed and safety-copy gates remain unresolved under Technical Decisions and Pilot Scope. No implementation or real-data approval follows from this document.
-

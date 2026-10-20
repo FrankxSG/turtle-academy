@@ -20,5 +20,4 @@ These are intended controls, not proof of current configuration. [FOUNDATION_SET
 | Actions: fork pull request workflows | Require approval for all external contributors | Untrusted code never runs unreviewed |
 | Secret Protection and push protection | On | Blocks accidental credential commits |
 
-
 Report unavailable controls rather than buying an upgrade. Keep **Allow edits from maintainers** enabled for fork contributions when available. Verify current vendor documentation and observed settings for service instructions; report inaccessible state as unverified. Publication requirements remain in [technical decisions](TECHNICAL_DESIGN_DECISIONS.md#7-public-repository-governance-and-minimum-cost-ci).
