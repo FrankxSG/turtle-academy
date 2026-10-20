@@ -7,7 +7,7 @@ description: Use for Turtle Academy Chinese and Higher Chinese questions, repair
 
 **Read [question-authoring](../question-authoring/SKILL.md) first.** Its working method and its checks 1–11 apply to every Chinese item. This file adds Chinese-specific checks (ZH1–ZH5) and says how some common checks apply in Chinese. It never removes a common check.
 
-Sources: [Chinese content](../../docs/CHINESE_CONTENT_PREPARATION.md) and `content/chinese/curriculum.json`. Evidence for every rule here is in the [PR 23 case log](references/pr23-lessons.md).
+Read the [Chinese guide](../../docs/CHINESE_CONTENT_PREPARATION.md) for the grade matrix, school formats, contract rules and owner decisions; sources are in `content/chinese/curriculum.json`. Evidence for every rule here is in the [PR 23 case log](references/pr23-lessons.md).
 
 ## How common checks apply in Chinese
 
@@ -50,7 +50,7 @@ Sources: [Chinese content](../../docs/CHINESE_CONTENT_PREPARATION.md) and `conte
 ```sh
 python3 scripts/validate_chinese_content.py
 python3 -m unittest discover -s scripts -p "test_*.py"
-python3 scripts/chinese_release_inventory.py --check
+python3 scripts/chinese_release_inventory.py    # review coverage and thin routes
 python3 scripts/privacy_guard.py
 git diff --check
 ```

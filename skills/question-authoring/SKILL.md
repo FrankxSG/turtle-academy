@@ -7,10 +7,22 @@ description: Use when drafting, revising or reviewing Turtle Academy objective q
 
 This is the shared base for content work in `content/<subject>/`. Read it first, then the subject skill, which adds checks on top of these and never removes one.
 
-| Subject | Subject skill |
-| --- | --- |
-| Chinese | [chinese-question-authoring](../chinese-question-authoring/SKILL.md) |
-| Mathematics, Science, English | Not written yet. Until one exists, use this skill alone and record new lessons as described in "Updating these skills". |
+| Subject | Subject skill | Research and scope guide |
+| --- | --- | --- |
+| Chinese | [chinese-question-authoring](../chinese-question-authoring/SKILL.md) | [Chinese guide](../../docs/CHINESE_CONTENT_PREPARATION.md) |
+| Mathematics | Not written yet | [Mathematics guide](../../docs/MATHEMATICS_CONTENT_PREPARATION.md) |
+| English | Not written yet | [English guide](../../docs/ENGLISH_CONTENT_PREPARATION.md) |
+| Science | Not written yet | [Science guide](../../docs/SCIENCE_CONTENT_PREPARATION.md) |
+
+Read the subject guide before drafting: it holds the syllabus boundaries, past-paper findings, distractor traps and known gaps. Until a subject skill exists, use this skill alone and record new lessons as described in "Updating these skills".
+
+## What every question needs
+
+- Stable versioned ID, objective/outcome and source reference, task type and format class (4+ option MCQ, matching, ordering vs true/false or 2–3 options).
+- Reviewed key, hint, explanation and pedagogical rationale; original or licensed provenance and rights status.
+- Repair items in complete exact → similar → generic sets; new-context items must change the context, not just numbers or option order.
+- Diagrams original, with titles/alt text that describe the picture without giving the answer. AI-drafted artwork needs a provenance note (tool, terms, human edits, no third-party IP).
+- Never reproduce teacher worksheets, textbook passages or past-paper questions; papers inform question types only. Before hand-over, compare new stems and passages with the past-paper text in the resources repo: no run of 12 consecutive words (24 Han characters) may match.
 
 ## How to work
 
@@ -53,6 +65,7 @@ Run these on the rendered question. Subject skills add checks; they may say how 
 - Cross-review runs both ways: the reviewer's corrections get the same checks as the original.
 - Any change to an item removes it from the agreed sample pool. Prefer refining items already disputed; if a pooled item must change, redraw the sample with a recorded seed before the owner starts.
 - Never add items to an approved batch: its approval covers only the items the owner saw. Put new content in a new batch with its own review state, and keep IDs unique across batches ([case](../chinese-question-authoring/references/pr23-lessons.md#found-while-drafting-zh-starter-002)).
+- Owner QA per batch: every disputed item plus a random 20% of AI-agreed items (seeded, recorded), then batch sign-off. Escalate to a qualified educator if the owner can't resolve an item. Validators and AI agreement prove structure, not correctness.
 - An AI recommendation is never an owner decision. Leave owner, rights and independent-review states unchanged until the decision is recorded.
 - In the hand-over comment, list which questions were read rendered, which checks were run, and what remains unverified.
 

@@ -1,6 +1,6 @@
 # Full Feature Scope
 
-Confirmed long-term product scope and curriculum choices. Not a release checklist or implementation report; the Pilot is in [PILOT_FUNCTIONAL_DESIGN.md](PILOT_FUNCTIONAL_DESIGN.md). Numbers (#120–#202, E1–E12, M1–M12) are the owner's decision IDs.
+Confirmed long-term capabilities and curriculum decisions for Turtle Academy across Science, Chinese, English and Mathematics. The [Pilot](PILOT_FUNCTIONAL_DESIGN.md) delivers the first subset; anything not in the Pilot remains confirmed scope. Architecture and data rules: [technical decisions](TECHNICAL_DESIGN_DECISIONS.md). Numbers (#120–#202, E1–E12, M1–M12) are the owner's decision IDs.
 
 ## 1. Product vision and child experience
 
@@ -73,6 +73,9 @@ Turtle Academy is an original 2.5D fantasy-adventure PWA blending narrative, ani
 - Writing devices: finger, stylus, pen-and-paper printouts; no machine-vision or AI handwriting grading. Auto-save active draft locally, cleanup stale drafts after notice, preserve selected finished samples in private portfolio (#170–175).
 - Carefully distinguish actual knowledge mistakes from presentation neatness and possible inadvertent slips; do not stigmatise a child as careless.
 
+### Recurring private worksheet-to-mistake-bank workflow
+
+The parent may use a private ChatGPT/Claude account to prepare structured candidate characters/words and mistake classifications from newly completed worksheets; the AI filters identifying detail out of what it produces, the AI provider still receives the full image subject to its terms, and filtering does not guarantee anonymity. Each candidate must be human-reviewed before import into the **Registered** Child's private mistake bank via a parent-only paste-in screen. Keep verified, uncertain and unmatched private records; only verified catalogue-matched entries generate approved practice. Catalogue-unmatched targets are retained privately as pending content, while public generic catalogue growth is curriculum-based and original/licensed. Original worksheet images stay outside the Pilot app/backend and all public Git/development artifacts. The app does not use runtime AI, OCR or automatic handwriting grading.
 
 ## 7. Focus, instruction-following and classroom transfer (#201–202)
 
@@ -97,14 +100,16 @@ Turtle Academy is an original 2.5D fantasy-adventure PWA blending narrative, ani
 - Habits garden visually represents sustained growth; unused garden stays healthy and retains unlocked ornaments (#183 B).
 - Different decoration lines correspond to habits, concepts, correction, and long-term milestones (#184 C). Voluntary care/pet interaction and independent experiment zone (#185 C).
 
-## 9. Boundaries
+## 9. Access, accessibility, and health boundaries
 
-- No diagnosis or focus scores, punitive streaks, leaderboards, gambling, paid currency or child-to-child chat.
-- Accessible alternatives to drag, audio replay and adjustable pace.
+- No attention disorder diagnosis or focus-score labelling. No forced login streaks, punitive missed-day penalties, harmful overuse loops, public comparison/leaderboards, monetary gambling or child-to-child chat.
+- Accessible alternatives for drag; audio repeat; input speed customization; study/leisure caps; offline course packs and clear connectivity messages; persistent progress handled by authenticated sync only for registered users.
+- Any identifiable learner artwork, handwriting, worksheets, school details and learning histories must remain private. Never include learner data in public repositories, Issues, PRs, dev fixtures, public logs, artifacts, screenshots, bundles or deployments. Parent-initiated private ChatGPT/Claude worksheet preparation is permitted outside the app under provider privacy terms, with the AI filtering identifying detail out of its outputs; that does not guarantee anonymity. No in-app AI receives learner data.
+- Child-safe offline activities should specify tools, supervision, boundaries and real-world observation authenticity.
 
 ## 10. English World: confirmed E1–E12 curriculum decisions
 
-The English track aims at advanced lower-primary literacy. No AI scoring of writing.
+The English track is designed for advanced lower-primary readiness and beyond-foundational literacy. Instruction is authored/reviewed by humans, with no AI scoring of original writing.
 
 | ID | Confirmed selection | Scope and educational intent |
 |---|---|---|
@@ -124,7 +129,7 @@ The English track aims at advanced lower-primary literacy. No AI scoring of writ
 
 ## 11. Mathematics World: confirmed M1–M12 curriculum decisions
 
-Full lower-primary coverage and mathematical reasoning. No automatic grading of open reasoning.
+Full lower-primary topic coverage and sophisticated mathematical reasoning are confirmed product scope. No opaque simulated mastery precision and no automatic grading of open reasoning.
 
 | ID | Confirmed selection | Scope and educational intent |
 |---|---|---|
@@ -166,3 +171,18 @@ Full lower-primary coverage and mathematical reasoning. No automatic grading of 
 | 200 | B | Independent explanation behaviour tracking only |
 | 201 | C | Self-monitoring and optional classroom transfer |
 | 202 | C | Multi-step directions, repeat/check and optional classroom transfer |
+
+## 13. Implementation dependencies
+
+1. Core engine/content IDs/editorial QA → meaningful mastery, mistake reviews and content migrations.
+2. Local-first persistence & PWA offline packs → journals, drafts, quest progress and offline operation where connectivity is restricted, such as mainland China.
+3. Secure registration + profile identity + RLS + sync → personalised mistakes, parent letters, portfolios, analytics and cross-device continuation.
+4. Deterministic feedback + scoped validated assessment → independent science expression tracking without AI or false mastery claims.
+5. Game inventory/rewards/achievements → companions, home garden and milestone collections.
+6. Parent safety and time policy engine → screen-time compliance for adventures, leisure and offline activities.
+
+## 14. Content and data boundaries
+
+- All learning assets committed to the repository must be original, permissively licensed or properly authorised for redistribution, with attribution and licence evidence where required. Educational materials obtained from teachers, schools, textbooks or worksheets are **not** presumed redistributable.
+- Generic curricular examples and synthetic test cases may be public. Original learner worksheets, identifiable writing or drawings, learner answers, mistakes, progress, photographs, school identifiers and household documents must remain **outside Git and the public build**. Private records require appropriate authenticated storage when cloud features are enabled.
+- No runtime AI, automatic correctness claims for open writing/scientific explanations, punitive streak mechanics or unsafe encouragement to prolong children's screen time.

@@ -24,7 +24,7 @@ Sign-in needs `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`. Vercel settings 
 - [AGENTS](AGENTS.md) — rules for Claude and ChatGPT
 - [Pilot](docs/PILOT_FUNCTIONAL_DESIGN.md) — what the Pilot does
 - [Technical decisions](docs/TECHNICAL_DESIGN_DECISIONS.md) — stack and privacy
-- [Full scope](docs/FEATURE_SCOPE.md) — long-term ideas
+- [Full scope](docs/FEATURE_SCOPE.md) — confirmed long-term capabilities
 - Content: [Chinese](docs/CHINESE_CONTENT_PREPARATION.md), [Mathematics](docs/MATHEMATICS_CONTENT_PREPARATION.md), [English](docs/ENGLISH_CONTENT_PREPARATION.md), [Science](docs/SCIENCE_CONTENT_PREPARATION.md)
 
 This repo is public. Never commit real learner data or secrets.

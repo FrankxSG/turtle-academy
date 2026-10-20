@@ -10,6 +10,14 @@
 
 `private.snapshot_schema()` must match `src/snapshot/schema.json` (a test checks this).
 
+## Upload rules (`upload_snapshot`)
+
+- Only a signed-in parent of that child may upload; others get `42501`. Uploads for one child are serialised.
+- Retry identity is child + operation id + identical request: a retry returns the original result and never adds a row or moves the head; reusing an operation id with a different request fails (`PT409 operation_conflict`).
+- Every object is closed (unknown keys rejected); strings are enums, opaque IDs, dates or bounded target values, so free text can't be stored. Size limit 1 MiB. Errors never echo the payload.
+- Linear head: the base must equal the current head, else `PT409 stale_base`. A first snapshot without a base is accepted only when the server sees no head and the caller signed in with a password or Google within the last 5 minutes (`PT403 reauthentication_required`).
+- Snapshots exclude the wrong-answer text, PIN/hash, worksheet text or images, copied questions, free descriptions, school/teacher details and local safety copies.
+
 ## Tests (local, synthetic)
 
 ```sh
