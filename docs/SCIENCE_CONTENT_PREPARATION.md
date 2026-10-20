@@ -40,7 +40,7 @@ Each knowledge point follows the Pilot Science flow (Functional Design §5):
 2. **Two acquisition tests** (the card's two questions) in different contexts. Both first-correct enter spaced review; either wrong triggers repair. No same-day pass after answer-revealing help.
 3. **Three-stage repair set** (exact → similar → generic) used when an acquisition test or later review is wrong.
 
-Pictures and short animations named in the design are not yet authored; the teaching text is written so an illustrator can add visuals later.
+The current pool includes the SVG diagrams referenced below. Short animations remain unimplemented; authoring illustrations does not establish application acceptance.
 
 ## 4. Assessment formats observed (public school documents)
 
@@ -64,24 +64,17 @@ Schools encourage visits and hands-on programmes such as Science Centre Singapor
 
 ## Topic coverage in this pool
 
-| Topic | Grade | Scope | Pilot | Leaves | Repair sets | Questions |
-| --- | --- | --- | --- | ---: | ---: | ---: |
-| Diversity of living and non-living things: characteristics of living things (`sc.p3.living-nonliving`) | P3 | in_app | open | 4 | 4 | 20 |
-| Classification of living things: plants (flowering/non-flowering), animals, fungi, bacteria (`sc.p3.classification`) | P3 | in_app | open | 7 | 7 | 35 |
-| Diversity of materials: types and properties (strength, flexibility, waterproof/absorbent, allowing light through, floating and sinking) (`sc.p3.materials`) | P3 | in_app | open | 7 | 6 | 30 |
-| Life cycles of plants: observing and comparing stages (seed, young plant, adult plant, flowers, fruits) (`sc.p3.plant-life-cycle`) | P3 | in_app | open | 5 | 4 | 20 |
-| Life cycles of animals: three- and four-stage cycles, frog, mosquito control (`sc.p3.animal-life-cycle`) | P3 | in_app | open | 5 | 5 | 25 |
-| Properties of magnets: magnetic materials, poles, attraction and repulsion, force through materials (`sc.p3.magnets-properties`) | P3 | in_app | open | 6 | 6 | 30 |
-| Making and using magnets: stroke and electrical methods, temporary/permanent magnets, uses (`sc.p3.making-magnets`) | P3 | in_app | open | 4 | 4 | 20 |
-| Open-ended explanations using claim, evidence and reasoning (`sc.p3.open-ended-cer`) | P3 | external | open | 1 | 0 | 0 |
-| Practical test: observing, measuring, classifying with real materials (`sc.p3.practical`) | P3 | external | open | 1 | 0 | 0 |
-| P4 lower-block topics (plant and human systems, matter, light, heat) (`sc.p3.p4-topics`) | P3 | deferred | open | 1 | 0 | 0 |
+Generate the current topic/leaf/repair counts and complete item/material view with `python3 scripts/content_review.py`; open `reports/content/index.html`. The JSON's version, status, review log, sources and limitations are included in each report. Authored mappings are not approved coverage.
+
+## Historical corrections
+
+The dated revisions below retain the defects, source interpretations and dispositions that inform authoring. Their old counts, pending states and implementation claims apply to those revisions, not current capabilities; use the current JSON and [README](../README.md). Shared human QA requirements are in [CONTENT_QA](CONTENT_QA.md).
 
 ## Correction revision — 16 October 2026
 
 Batch version 2 corrects six items and two teaching cards. The flexibility question now supplies equal strip dimensions, the same load and measured bending without breakage; the conclusion no longer depends on which strip breaks first. Nickel/cobalt recall is removed from the teaching card and affected options. The induced-paper-clip acquisition question is replaced by an observed on/off electromagnet example; the related permanent-magnet distractor no longer relies on induction. These changes follow the exclusions on PDF p63 / printed p62 of the [official syllabus updated January 2026](https://www.moe.gov.sg/api/media/ba3562d3-5b31-4459-8693-45cde7b97273/Primary-Science-Syllabus-2023.pdf); electrical magnet-making remains included. A hint that directly named steel is also replaced. Revised item/material versions are incremented and revised item IDs remain listed for re-review. The explicit learning-unit/acquisition-to-repair links, prerequisite graph, observation activities/assets, complete curriculum/source audit and owner sign-off remain open.
 
-These are proposed corrections, not independent approval. Existing task/history must retain earlier pinned versions; this authoring revision does not implement evidence migration or retroactive regrading.
+Existing tasks retain their pinned versions; these authoring revisions do not implement evidence migration or retroactive regrading.
 
 ## Audit-response revision — 16 October 2026 (batch version 3)
 
@@ -93,15 +86,6 @@ Responds to [SCIENCE_RESEARCH_AUDIT.md](content-review/SCIENCE_RESEARCH_AUDIT.md
 | **SC2** hardness | Owner decision: replace. `strength-hardness` becomes `strength` (card, 2 acquisition tests and 3 repair items). All test strength through a fair, same-size strip test. A `deferred` leaf records hardness as outside the listed P3 properties. | — |
 | **SC3** observation, links and prerequisites | Every one of the 36 teaching cards (now `kind: teaching`) has an original observation diagram or table: feature tables, life-cycle diagrams, insect and spider body plans, plant stages, and strength, bending, water, light, floating and magnet set-ups. Seven classification items that relied on recalling a named species now ask learners to classify from a feature table. `knowledge_points` link each card to its two acquisition tests, its repair target and its prerequisites (acyclic, checked by the validator). Every acquisition item has a `repair_target_id`. | Short animations are still not authored. The diagrams need an independent visual check. |
 | **SC4** release denominator | `curriculum.json` has one leaf per knowledge point, plus deferred or external leaves (germination/reproduction, hardness, written CER, practical, P4). The first two topics have 4 + 7 in-app leaves. Magnet making by stroking and by electricity stays in P3 (PDF p63). | This is an author working map. It needs independent page verification before the 75% guideline is computed. |
-
-## Validation
-
-```sh
-python3 scripts/validate_subject_content.py science
-python3 scripts/privacy_guard.py
-```
-
-Passing validation proves structure only. Remaining before release: independent review of every item, random 20% sample of agreed items, owner batch sign-off, verification of topic boundaries against the official MOE syllabus PDF, and the existing Pilot coverage, data-protection and device gates. No learner data is used or implied by any item.
 
 ## Re-review corrections — 17 October 2026 (batch version 4)
 

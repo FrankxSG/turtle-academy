@@ -161,3 +161,6 @@ __pycache__/
 
 # Opt-in private builds are never public deployment artifacts.
 dist-private/
+
+# Disposable public catalogue review pages; regenerate from versioned JSON.
+reports/content/

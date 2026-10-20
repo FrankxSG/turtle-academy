@@ -58,43 +58,17 @@ Schools reference short daily practice and online platforms such as KooBits and 
 
 ## Topic coverage in this pool
 
-| Topic | Grade | Scope | Pilot | Leaves | Repair sets | Questions |
-| --- | --- | --- | --- | ---: | ---: | ---: |
-| Numbers to 1000: place value, reading/writing, comparing, ordering, patterns, odd and even (`ma.p2.numbers-1000`) | P2 | in_app | open | 6 | 6 | 18 |
-| Addition and subtraction within 1000, including regrouping and missing numbers (`ma.p2.add-sub-1000`) | P2 | in_app | open | 4 | 4 | 12 |
-| Multiplication and division: equal groups, repeated addition, sharing and grouping (`ma.p2.multiplication-division`) | P2 | in_app | open | 4 | 4 | 12 |
-| Multiplication tables of 2, 5 and 10 (`ma.p2.tables-2-5-10`) | P2 | in_app | open | 3 | 3 | 9 |
-| Multiplication tables of 3 and 4 (`ma.p2.tables-3-4`) | P2 | in_app | open | 2 | 2 | 6 |
-| Word problems (up to 2 steps) for the four operations (`ma.p2.word-problems`) | P2 | in_app | open | 3 | 3 | 9 |
-| Fractions: part of a whole, comparing/ordering unit and like fractions, adding/subtracting like fractions within one whole (`ma.p2.fractions`) | P2 | in_app | open | 6 | 6 | 18 |
-| Money: counting, decimal notation, converting between dollars and cents, adding/subtracting in dollars only or cents only (`ma.p2.money`) | P2 | in_app | open | 6 | 6 | 18 |
-| Length in m and cm: measuring, comparing, word problems (`ma.p2.length`) | P2 | in_app | open | 4 | 4 | 12 |
-| Mass in kg and g: measuring, comparing, word problems (`ma.p2.mass`) | P2 | in_app | open | 4 | 4 | 12 |
-| Volume of liquid in litres: measuring, comparing, word problems (`ma.p2.volume`) | P2 | in_app | open | 3 | 3 | 9 |
-| Time: telling time to the minute, a.m./p.m., hours and minutes, duration (`ma.p2.time`) | P2 | in_app | open | 4 | 4 | 12 |
-| 2D shapes (incl. semicircle, quarter circle), 3D shapes, patterns, composing figures (`ma.p2.shapes`) | P2 | in_app | open | 4 | 4 | 12 |
-| Picture graphs with scales (`ma.p2.picture-graphs`) | P2 | in_app | open | 2 | 2 | 6 |
-| Numbers to 10 000: place value, comparing, ordering, patterns, odd and even (`ma.p3.numbers-10000`) | P3 | in_app | locked | 5 | 5 | 15 |
-| Addition and subtraction within 10 000 (`ma.p3.add-sub-10000`) | P3 | in_app | locked | 2 | 2 | 6 |
-| Multiplication tables of 6, 7, 8 and 9 and related division (`ma.p3.tables-6-9`) | P3 | in_app | locked | 6 | 6 | 18 |
-| Multiplication and division up to 3 digits by 1 digit, with remainder (`ma.p3.multiplication-division`) | P3 | in_app | locked | 4 | 4 | 12 |
-| Word problems with the four operations, including comparison models (`ma.p3.word-problems`) | P3 | in_app | locked | 3 | 3 | 9 |
-| Money in decimal notation: adding, subtracting, word problems (`ma.p3.money`) | P3 | in_app | locked | 3 | 3 | 9 |
-| Equivalent fractions; comparing/ordering unlike fractions; adding/subtracting related fractions within one whole (`ma.p3.fractions`) | P3 | in_app | locked | 5 | 5 | 15 |
-| Length (km, m, cm), mass (kg, g), volume (l, ml): compound units and conversion (`ma.p3.length-mass-volume`) | P3 | in_app | locked | 4 | 4 | 12 |
-| Time: seconds, 24-hour clock, duration, start and end times, conversion (`ma.p3.time`) | P3 | in_app | locked | 6 | 6 | 18 |
-| Area and perimeter: square units, rectangles and squares (`ma.p3.area-perimeter`) | P3 | in_app | locked | 6 | 6 | 18 |
-| Angles: right angles, comparing angles (`ma.p3.angles`) | P3 | in_app | locked | 3 | 3 | 9 |
-| Perpendicular and parallel lines (`ma.p3.perpendicular-parallel`) | P3 | in_app | locked | 3 | 2 | 6 |
-| Bar graphs: reading, interpreting, completing (`ma.p3.bar-graphs`) | P3 | in_app | locked | 4 | 3 | 9 |
-| Performance tasks, investigations, journals and explaining reasoning in words (`ma.p2.investigation`) | P2 | external | open | 1 | 0 | 0 |
-| Structured/long-answer questions with full written workings (`ma.p3.long-answer-workings`) | P3 | partial | locked | 1 | 0 | 0 |
+Generate the current topic/leaf/repair counts and complete item/material view with `python3 scripts/content_review.py`; open `reports/content/index.html`. The JSON's version, status, review log, sources and limitations are included in each report. Authored mappings are not approved coverage.
+
+## Historical corrections
+
+The dated revisions below retain the defects, source interpretations and dispositions that inform authoring. Their old counts, pending states and implementation claims apply to those revisions, not current capabilities; use the current JSON and [README](../README.md). Shared human QA requirements are in [CONTENT_QA](CONTENT_QA.md).
 
 ## Correction revision — 16 October 2026
 
 Batch version 2 corrects `ma-p2-fraction-subtract.q3`: both fractions now refer to the full tank, so the keyed 6/12 follows by like-fraction subtraction. Its hint and explanation use that same whole. The item version is incremented and remains listed for independent re-review. Counts remain P2 153/P3 150; every P3 topic remains locked. The separate time-curriculum gaps (P2 minute reading and P3 24-hour clock), official leaf audit and dated paper/enrichment evidence remain open; this item correction does not resolve those findings.
 
-These are proposed corrections, not independent approval. Existing task/history must retain earlier pinned versions; this authoring revision does not implement evidence migration or retroactive regrading.
+Existing tasks retain their pinned versions; these authoring revisions do not implement evidence migration or retroactive regrading.
 
 ## Audit-response revision — 16 October 2026 (batch version 3)
 
@@ -111,15 +85,6 @@ Responds to [MATHEMATICS_RESEARCH_AUDIT.md](content-review/MATHEMATICS_RESEARCH_
 | **MA3** leaf denominator | `curriculum.json` now has `leaves`: one per repair target (assessed ability, text/visual representation, MOE page range) plus production/external leaves. Every item has `leaf_refs`. | This is an **author working map** derived from the targets, not an independent page-by-page leaf audit. MOE leaves that have no target yet are therefore not listed; independent verification must add them before any coverage percentage is computed. |
 
 Not changed: three questions per target remains thin initial stock (MA3); no question was copied from any paper.
-
-## Validation
-
-```sh
-python3 scripts/validate_subject_content.py mathematics
-python3 scripts/privacy_guard.py
-```
-
-Passing validation proves structure only. Remaining before release: independent review of every item, random 20% sample of agreed items, owner batch sign-off, verification of topic boundaries against the official MOE syllabus PDF, and the existing Pilot coverage, data-protection and device gates. No learner data is used or implied by any item.
 
 ## Re-review corrections — 17 October 2026
 

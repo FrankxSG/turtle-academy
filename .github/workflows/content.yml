@@ -1,0 +1,27 @@
+name: Content checks
+on:
+  pull_request:
+    paths:
+      - 'content/**'
+      - 'contracts/chinese/**'
+      - 'scripts/*content*.py'
+      - 'scripts/*chinese_release_inventory.py'
+      - 'docs/content-review/CHINESE_RELEASE_INVENTORY.md'
+      - '.github/workflows/content.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: content-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  content:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - run: python3 scripts/content_review.py --check
+      - run: python3 -m unittest discover -s scripts -p 'test_*content*.py'
+      - run: python3 scripts/test_chinese_release_inventory.py

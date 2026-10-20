@@ -1,5 +1,7 @@
 # PR25 review — 2026-10-18
 
+Historical review evidence, ordered by revision. Earlier requests and limits below are not current blockers; later dispositions retain their scope. Current behavior is established by code and checks, and recorded owner decisions remain authoritative.
+
 Reviewed public head `c50d3515665230d3f9e1c60708b57f332148c3e2`, stacked on PR24 `7cdbd385f9bfe00661c2f1a2a16db95f465d2c12`.
 Public main remains `f8516fdb3510b783b75e7efc0f60c9119636206f`.
 

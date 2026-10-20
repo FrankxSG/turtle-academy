@@ -56,49 +56,17 @@ Extensive reading is encouraged through NLB booklists and programmes such as kid
 
 ## Topic coverage in this pool
 
-| Topic | Grade | Scope | Pilot | Leaves | Repair sets | Questions |
-| --- | --- | --- | --- | ---: | ---: | ---: |
-| Nouns and noun phrases: plurals (regular, -es, -ies, -ves, irregular), collective and uncountable nouns (`el.p2.nouns`) | P2 | in_app | open | 4 | 4 | 12 |
-| Determiners: a/an, this/that/these/those, some/any (`el.p2.determiners`) | P2 | in_app | open | 3 | 3 | 9 |
-| Verbs and verb phrases: simple present, simple past (regular/irregular), present continuous (`el.p2.verbs`) | P2 | in_app | open | 4 | 4 | 12 |
-| Subject-verb agreement: is/are, has/have, verb -s (`el.p2.sva`) | P2 | in_app | open | 3 | 3 | 9 |
-| Pronouns: subject, object and possessive (`el.p2.pronouns`) | P2 | in_app | open | 2 | 2 | 6 |
-| Adjectives (incl. -er/-est) and -ly adverbs (`el.p2.adjectives-adverbs`) | P2 | in_app | open | 3 | 3 | 9 |
-| Prepositions of place and time (`el.p2.prepositions`) | P2 | in_app | open | 2 | 2 | 6 |
-| Conjunctions: and, but, or, because, so (`el.p2.conjunctions`) | P2 | in_app | open | 2 | 2 | 6 |
-| Punctuation: capitals, full stops, question and exclamation marks, commas in lists (`el.p2.punctuation`) | P2 | in_app | open | 3 | 3 | 9 |
-| Sentence types: statement, question, command, exclamation (`el.p2.sentence-types`) | P2 | in_app | open | 1 | 1 | 3 |
-| Vocabulary: synonyms, antonyms, context, word groups, compound words, contractions (`el.p2.vocabulary`) | P2 | in_app | open | 6 | 6 | 18 |
-| Spelling (incl. common homophones) and editing for grammar (recognition only) (`el.p2.spelling-editing`) | P2 | in_app | open | 4 | 3 | 9 |
-| Word order and sequencing events (`el.p2.sentence-organisation`) | P2 | in_app | open | 2 | 2 | 6 |
-| Connectors, sensory details and showing feelings (selection, not free writing) (`el.p2.writing-foundations`) | P2 | in_app | open | 3 | 3 | 9 |
-| Short-passage comprehension: details, sequence, vocabulary in context, feelings, simple inference (`el.p2.comprehension`) | P2 | in_app | open | 5 | 5 | 35 |
-| Grammar cloze passages (`el.p2.grammar-cloze`) | P2 | in_app | open | 0 | 0 | 10 |
-| Vocabulary cloze passages (`el.p2.vocab-cloze`) | P2 | in_app | open | 0 | 0 | 5 |
-| Visual text comprehension: posters, menus, notices (`el.p2.visual-text`) | P2 | in_app | open | 2 | 2 | 14 |
-| Tenses: past continuous, future with will, irregular past, tense consistency (`el.p3.tenses`) | P3 | in_app | open | 4 | 4 | 12 |
-| Subject-verb agreement: each/everyone/neither, there is/are, intervening phrases (`el.p3.sva`) | P3 | in_app | open | 3 | 3 | 9 |
-| Reflexive pronouns and relative pronouns who/which/whose (`el.p3.pronouns`) | P3 | in_app | open | 2 | 2 | 6 |
-| Prepositions of movement and fixed preposition phrases (`el.p3.prepositions`) | P3 | in_app | open | 2 | 2 | 6 |
-| Conjunctions: although, when/while/before/after, if/unless (`el.p3.conjunctions`) | P3 | in_app | open | 3 | 3 | 9 |
-| Comparatives/superlatives (more/most, irregular), quantifiers, adverbs of frequency (`el.p3.adjectives-adverbs`) | P3 | in_app | open | 3 | 3 | 9 |
-| Apostrophes for possession, speech marks, commas after clauses (`el.p3.punctuation`) | P3 | in_app | open | 3 | 3 | 9 |
-| Vocabulary: synonyms, antonyms, context, phrasal verbs, word forms, simple idioms (`el.p3.vocabulary`) | P3 | in_app | open | 6 | 6 | 18 |
-| Editing for spelling, grammar and homophones (recognition only) (`el.p3.editing`) | P3 | in_app | open | 3 | 3 | 9 |
-| Sentence combining with because/so, although, who/which, before/after, either/neither (`el.p3.synthesis`) | P3 | in_app | open | 6 | 5 | 15 |
-| Passage comprehension: details, reasons, inference, character traits, main message (`el.p3.comprehension`) | P3 | in_app | open | 5 | 5 | 35 |
-| Grammar cloze passages (`el.p3.grammar-cloze`) | P3 | in_app | open | 0 | 0 | 10 |
-| Comprehension cloze passages (no helping words in school papers; options used in app) (`el.p3.comprehension-cloze`) | P3 | in_app | open | 0 | 0 | 10 |
-| Visual text comprehension: leaflets and notices (`el.p3.visual-text`) | P3 | in_app | open | 2 | 2 | 14 |
-| Reading aloud and picture/stimulus-based conversation (`el.p2.oral`) | P2 | external | open | 1 | 0 | 0 |
-| Guided composition (3-picture series, at least 80-100 words) (`el.p3.composition`) | P3 | external | open | 1 | 0 | 0 |
-| Listening comprehension (`el.p3.listening`) | P3 | deferred | open | 1 | 0 | 0 |
+Generate the current topic/leaf/repair counts and complete item/material view with `python3 scripts/content_review.py`; open `reports/content/index.html`. The JSON's version, status, review log, sources and limitations are included in each report. Authored mappings are not approved coverage.
+
+## Historical corrections
+
+The dated revisions below retain the defects, source interpretations and dispositions that inform authoring. Their old counts, pending states and implementation claims apply to those revisions, not current capabilities; use the current JSON and [README](../README.md). Shared human QA requirements are in [CONTENT_QA](CONTENT_QA.md).
 
 ## Correction revision — 16 October 2026
 
 Batch version 2 corrects 29 disputed or related items. The market passage answer now states that the mother gave the auntie rambutans. Preposition questions gain a distinguishing stimulus or lose defensible alternative options; determiner questions no longer reject a valid `some` question. Present-tense prompts explicitly name the required tense, conjunction/synthesis prompts state the intended relation, valid alternative `although` sentences are replaced, and before/after order is explicit. The homophone-editing item now distinguishes a valid tree word from the intended seaside word; its task does not claim that `beech` is intrinsically misspelt. A hint that directly named water is also replaced. Revised item versions are incremented and IDs remain listed for independent re-review. Counts and material grouping are unchanged. Skill-level coverage/repair mappings, verified source pages, dated paper/enrichment analysis and owner sign-off remain open.
 
-These are proposed corrections, not independent approval. Existing task/history must retain earlier pinned versions; this authoring revision does not implement evidence migration or retroactive regrading.
+Existing tasks retain their pinned versions; these authoring revisions do not implement evidence migration or retroactive regrading.
 
 ## Audit-response revision — 16 October 2026 (batch version 3)
 
@@ -112,15 +80,6 @@ Responds to [ENGLISH_RESEARCH_AUDIT.md](content-review/ENGLISH_RESEARCH_AUDIT.md
 | **EL4** material aggregation | No fixed exam pattern is claimed. Aggregation rules: each formal question counts once toward X. Cloze blank *(n)* is question *n* in `question_ids` (the validator checks that each marker appears exactly once). Each question routes to its own repair target. Feedback is delayed until the whole material is answered, as in the Pilot design. | The engine compile step still has to implement these rules. |
 
 Also changed: the P3 night-zoo leaflet and one new notice now use generic names, so no item appears to come from a real organisation.
-
-## Validation
-
-```sh
-python3 scripts/validate_subject_content.py english
-python3 scripts/privacy_guard.py
-```
-
-Passing validation proves structure only. Remaining before release: independent review of every item, random 20% sample of agreed items, owner batch sign-off, verification of topic boundaries against the official MOE syllabus PDF, and the existing Pilot coverage, data-protection and device gates. No learner data is used or implied by any item.
 
 ## Re-review corrections — 17 October 2026 (batch version 4)
 
