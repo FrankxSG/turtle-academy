@@ -2,9 +2,23 @@
 
 > Dated setup and validation evidence. Earlier prototype descriptions are historical, not a current capability inventory. Consult the current [README](../README.md), code and relevant PR/CI evidence; use this register for its specific setup history.
 
-Updated: 2026-10-16. Implementation evidence only; architecture and feature decisions remain in their authoritative documents.
+Updated: 2026-10-20 (repository-control consolidation; dated evidence below unchanged). Implementation evidence only; architecture and feature decisions remain in their authoritative documents.
 
 This repository is public (since 2026-10-10). Record evidence here without account names, project identifiers, regions, dashboard URLs, environment variable values or anything about real learners.
+
+## Repository controls
+
+Shared work follows [AGENTS.md](../AGENTS.md). The owner grants repository-scoped access; service access is separate. Identify the commit and limits when working from a snapshot. These controls describe intended settings; the dated evidence below is not proof of current configuration. Verify settings before relying on enforcement.
+
+| Setting | Intended value |
+| --- | --- |
+| Main ruleset | PR required; `privacy-guard` required; force pushes and deletion blocked |
+| Required approvals / Code Owners | Zero required approvals; Code Owner review off. Both assistants share one identity; `.github/CODEOWNERS` is advisory and those paths still need the owner's attention before merge authorization |
+| Merge methods / branch cleanup | Squash only; automatic head-branch deletion |
+| Actions | Read-only workflow permissions; approval for all external fork contributors |
+| Secret Protection / push protection | On |
+
+GitHub's zero-approval setup does not enforce owner merge authorization or independent review; AGENTS retains those requirements. Report unavailable controls rather than buying an upgrade. Keep **Allow edits from maintainers** enabled for fork contributions when available. Verify current vendor documentation and observed settings for service instructions; report inaccessible state as unverified. Credentials and infrastructure identifiers stay out of public records. If exposed, notify the owner and rotate affected credentials. Publication requirements remain in [technical decisions](TECHNICAL_DESIGN_DECISIONS.md#7-public-repository-governance-and-minimum-cost-ci).
 
 ## Baseline
 
@@ -28,7 +42,9 @@ The Science sample has one generic question. Its attempt count and last answer d
 
 Checks exercise the built application in Chromium: reload persistence, an offline reload followed by an offline write and an online reload, unavailable IndexedDB, denied database opening, and horizontal overflow at tablet, phone portrait and phone landscape sizes. These checks do not establish iOS/Safari compatibility, full visual quality, safe recovery from all service-worker update failures, or mainland China connectivity.
 
-Validation history: the identical application, dependencies and tests passed locked installation, the tracked-file privacy guard, dependency audit, TypeScript/production build and all Chromium checks on 2026-10-10 before the move to this repository (offline precache: 12 entries, approximately 335 KiB). Public baseline: `Foundation checks` run #1 on `main` at `30eef37` reported successful by Claude's 2026-10-10 review.
+Validation history: the identical application, dependencies and tests passed locked installation, the tracked-file privacy guard, dependency audit (zero vulnerabilities), TypeScript/production build and all six Chromium checks on 2026-10-10 before the move to this repository (offline precache: 12 entries, approximately 335 KiB). Public baseline: `Foundation checks` run #1 on `main` at `30eef37` reported successful by Claude's 2026-10-10 review.
+
+The earlier storage spike opens IndexedDB explicitly: Dexie liveQuery alone may wait without exposing unavailable storage; opening failures disable answers rather than overwrite existing checkpoints.
 
 The service worker precaches only application files. New worker activation waits for an explicit update action, disabled while an answer is saving or a storage error is present. Guest data stays on the device and can be evicted or cleared. Malformed existing checkpoints are rejected without silently overwriting them.
 

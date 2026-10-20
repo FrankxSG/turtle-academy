@@ -10,7 +10,7 @@ Read the current README, current main and relevant open work. Follow only the re
 - Architecture, auth, storage or services: [technical decisions](docs/TECHNICAL_DESIGN_DECISIONS.md) and the affected code-area README.
 - Questions/coverage: [common authoring skill](skills/question-authoring/SKILL.md), the subject skill if present, and relevant subject preparation/research references.
 - Long-term scope changes: [confirmed feature scope](docs/FEATURE_SCOPE.md). Pilot omissions do not cancel it.
-- Repository administration/history: [collaboration reference](docs/AI_COLLABORATION.md) and the dated foundation register when relevant.
+- Repository administration/history: [foundation register](docs/FOUNDATION_SETUP.md#repository-controls) when relevant.
 
 ## Build and coordinate
 
