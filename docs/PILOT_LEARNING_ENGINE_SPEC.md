@@ -145,7 +145,7 @@ These are **required future tests**, not executed app tests. Fixtures must be sy
 | F07 | Later prerequisite generic failure preserves already unlocked content and resets interval |
 | F08 | Science final single slot/pause preserves partial acquisition and resumes without duplicate first attempt |
 | F09 | Science eligible content exhausted; shorter completion counts subject, reason shown, next-day targets retained |
-| F10 | Each language uses its own X=6/10/19 for 2/2/4 complete materials and checkpoints; independently reject X=5/20 and nonintegers |
+| F10 | Each language uses its own X=6/10/19 for 2/2/4 complete materials and checkpoints; Chinese additionally accepts X=20 with 4 complete materials (owner decision 2026-10-18). Reject X=5 and nonintegers in every subject, X=20 outside Chinese, and X=21 in Chinese |
 | F11 | Whole material first answers collected before hints/answers; no premature clue disclosure |
 | F12 | Same goal correct in one material, wrong in another; retain starting stage and next-day eligibility |
 | F13 | All task-related goal questions first-correct; advance once, next stage waits next task |
@@ -214,3 +214,4 @@ The previously open evidence, Science assistance/reuse, active-time, timezone, z
 Publish the source-verified versioned leaf curriculum manifest, reviewed questions/materials/media, prerequisite/chapter mappings and valid answer/help content before enabling mapped imports. The course register is not a completed knowledge-point inventory; unmapped eligible targets remain pending_content. P3 import support for Chinese/Higher Chinese and English follows later. No P3 Mathematics content is required for Pilot; its teaching flow and course opening are post-Pilot work.
 
 Exact implementation algorithms, hash parameters and storage contracts still need engineering validation, without changing confirmed behavior. Data-protection, actual-target storage, private coverage/proceed and safety-copy gates remain unresolved under Technical Decisions and Pilot Scope. No implementation or real-data approval follows from this document.
+

@@ -1,5 +1,7 @@
 # Turtle Academy — Technical Handoff
 
+> Historical reference. Implementation descriptions reflect their recorded dates and include superseded prototype states. Start from [AGENTS.md](../AGENTS.md), the current [README](../README.md) and code. This file is not a mandatory onboarding checklist.
+
 Updated: 2026-10-11. Audience: Claude, ChatGPT and the project owner.
 This repository is public since 2026-10-10. Keep account names, project identifiers and any real learner information out of this document.
 
@@ -7,7 +9,7 @@ This is an onboarding summary and dated implementation snapshot. Technical autho
 
 ## 1. Start here: source of truth
 
-Read these repository files, using the latest `main` unless a task explicitly targets another branch:
+The original handoff listed these references. Use AGENTS for current task-specific reading:
 
 | Source | Authority |
 | --- | --- |
@@ -21,7 +23,7 @@ Read these repository files, using the latest `main` unless a task explicitly ta
 | `docs/FOUNDATION_SETUP.md` | Setup evidence; check its branch and update date |
 | Code, migrations, PRs and Actions runs | What exists, what is proposed, and what was tested |
 
-GitHub is the shared record. Chats are working conversations, not a second untracked architecture register. A later explicit owner decision supersedes an older decision; record it in the relevant GitHub document before relying on it in subsequent work. If a new chat instruction is not yet recorded, identify the discrepancy rather than silently treating the older file as current. Both assistants must read the repository again at each task start.
+GitHub is the shared record. Chats are working conversations, not a second untracked architecture register. A later explicit owner decision supersedes an older decision; record it in the relevant GitHub document before relying on it in subsequent work. If a new chat instruction is not yet recorded, identify the discrepancy rather than silently treating the older file as current. Both assistants check current main and relevant work at task start; AGENTS defines the current reading workflow.
 
 Use the name Turtle Academy. Earlier planning chats may mention other working names, repositories or files (for example `docs/MVP_FEATURE_DECISIONS.md`); those are not part of this repository, so do not invent their contents.
 
@@ -183,3 +185,4 @@ Dated design context: the two specifications replaced earlier narrow-unit and th
 ## 2026-10-15 consolidated decision handoff
 
 Each subject has persistent X=6–19, default 10. Owner decision 2026-10-18: in the first pilot Chinese may go up to 20 (other subjects stay 6–19). Subject releases use the 75% coverage guideline and recorded owner override: P2 outcomes for Chinese/Higher Chinese, Mathematics and English, and the first two Science topics for initial Science release. P3 Chinese/Higher Chinese and English general practice is unlocked from the start using reviewed available content; P3 mistake imports follow later. Mathematics P3 stays locked in Pilot and needs no Pilot authoring; a post-Pilot teaching flow precedes opening P3. The remaining five Science topics unlock in syllabus order as authored and reviewed. Short-only repair supports all subjects; final transfer is on a later day. One qualifying high-option/matching/ordering first-success OR two distinct low-option first-successes clears a stage; any wrong first response resets low-option partial successes, while passage aggregation remains required. Science's previous-seven-calendar-days exclusion is filler-only; due review prefers fresh items, otherwise reuses the least-recently presented suitable item. Active time includes teaching, stops on pause/background or two minutes idle. PIN-protected timezone changes cannot create extra completion/rewards or earlier review eligibility. Zero-question Science completion has a visible reason and no checkpoint; shortened actual work has deduplicated completion. Snapshot recovery preserves story, suspensions and exposure but excludes local wrong forms/PIN. Earned story and past daily completion survive learning-evidence replay. Read Scope + Functional Design + Learning Engine together. The unresolved data-protection, private coverage/proceed and safety-copy gates remain. No implementation or merge is authorized by this handoff.
+

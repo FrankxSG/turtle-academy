@@ -1,5 +1,7 @@
 # Foundation setup register
 
+> Dated setup and validation evidence. Earlier prototype descriptions are historical, not a current capability inventory. Consult the current [README](../README.md), code and relevant PR/CI evidence; use this register for its specific setup history.
+
 Updated: 2026-10-16. Implementation evidence only; architecture and feature decisions remain in their authoritative documents.
 
 This repository is public (since 2026-10-10). Record evidence here without account names, project identifiers, regions, dashboard URLs, environment variable values or anything about real learners.
@@ -162,3 +164,4 @@ Local evidence so far: locked install, TypeScript/production build, all **66 eng
 - A queued checkpoint is presented only at a safe boundary after durable saving recovers; it cannot interrupt a material's first answers, retries or corrections. Checkpoint markers are saved before rendering, choosing at-most-once delivery across reload; a crash between save and paint can skip that scene. The finite story and its world change persist without inventing mastery or learning credit.
 
 [PR #21](https://github.com/FrankxSG/turtle-academy/pull/21) is implementation-complete within #18's synthetic-only boundary and **awaiting independent Claude review**. Issue #18 stays open until acceptance/merge. No real-device, hosted-Auth/Google-link, service-worker-update, curriculum-release, backup/import or real-record readiness is claimed. No service configuration, main merge or explicit deployment action was performed. Existing data-protection, private coverage/proceed and safety-copy gates remain open.
+
