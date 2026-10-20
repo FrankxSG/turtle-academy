@@ -1,7 +1,7 @@
 // Pilot sign-in for the single pre-provisioned parent (Issue #16).
 // Email/password is always available. Google sign-in (OAuth with PKCE) is built but OFF by default:
 // it is switched on only by setting VITE_GOOGLE_LOGIN=on after the owner records a passing staging
-// link test on the PR (Pilot Scope section 3). There is deliberately no sign-up or anonymous path:
+// link test (supabase/README.md). There is deliberately no sign-up or anonymous path:
 // sign-up and anonymous sign-in must also be disabled in the hosted Auth settings, which is the real
 // enforcement (see supabase/README.md). A Google account that is not linked to the pre-provisioned
 // parent gets no family membership, so RLS gives it no data.

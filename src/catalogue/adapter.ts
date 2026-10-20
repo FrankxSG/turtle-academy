@@ -1,4 +1,4 @@
-// The small interface the learning engine reads content through (Learning Engine §2).
+// The small interface the learning engine reads content through.
 // Synthetic fixtures implement it in Issue #17; the reviewed subject content contracts plug in later.
 // Releases are versioned and kept side by side so a task pinned to an older version keeps working
 // after an update, and a failed install never replaces usable content (F29).

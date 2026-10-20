@@ -312,7 +312,7 @@ class DatabaseContract(unittest.TestCase):
         self.assertEqual(self.count(child), 2)
 
     def test_first_snapshot_requires_recent_sign_in(self):
-        # Pilot Scope section 3, no-cloud-head exception: starting a new history needs reauthentication.
+        # No-cloud-head exception: starting a new history needs reauthentication.
         child = self.fresh_child()
         stale = sign_in_age(600)
         for amr in (None, [], stale, sign_in_age(10, 'anonymous'), [{'method': 'password', 'timestamp': 'now'}]):

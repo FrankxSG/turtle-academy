@@ -1,4 +1,4 @@
-// Reviewed Chinese content → engine catalogue release (Learning Engine §2) and child-facing presentation text.
+// Reviewed Chinese content → engine catalogue release and child-facing presentation text.
 // Pure: callers pass the parsed public batches (content/chinese/batches), the target lists and, on a parent's
 // device only, a private corrective pack. Nothing here reads learner records.
 //

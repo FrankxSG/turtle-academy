@@ -1,4 +1,4 @@
-// Confirmed Pilot rules (Functional Design §2–5, Learning Engine §3–4) as named constants.
+// Confirmed Pilot rules (docs/PILOT_FUNCTIONAL_DESIGN.md) as named constants.
 import type { AnyCourse, Course, Subject } from './types.ts'
 
 /** Bumped whenever a rule below changes; tasks freeze the version they were planned with. */
@@ -45,7 +45,7 @@ export const languagePrescribedShortMax = (x: number, materialQuestions: number)
   Math.max(x - materialQuestions, Math.ceil(x / 2))
 
 /**
- * Course locks (Functional Design §1, Engine §5 course register, F36).
+ * Course locks (Functional Design §1).
  * - P3 Chinese/Higher Chinese and English general practice: open from the first release.
  * - P3 language mistake imports: deferred (rejected explicitly, not stored as pending content).
  * - P3 Mathematics: locked for practice and import.

@@ -1,4 +1,4 @@
-// Local persistence contract (Learning Engine §6, F27).
+// Local persistence contract.
 // The engine emits ordered, idempotent mutations. Answer events are add-only; other records are keyed puts.
 // If a commit fails, the mutation is retried once at once; if that also fails, it stays in memory, the
 // learner may continue with an honest warning, and ordered background retries run with backoff while the

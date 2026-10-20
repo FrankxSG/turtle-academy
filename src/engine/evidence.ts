@@ -1,4 +1,4 @@
-// Evidence reducer (Learning Engine §2–4). Stage, due date, eligibility and unlock state are derived by
+// Evidence reducer. Stage, due date, eligibility and unlock state are derived by
 // replaying the append-only answer events and immutable records; nothing here is stored as mutable truth.
 // Replaying after a flag decision therefore recalculates progress, while completions and delivered story
 // checkpoints (separate records) are never revoked.

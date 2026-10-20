@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Owner-run staging link test for Google sign-in (Pilot Scope section 3, Issue #16).
+// Owner-run staging link test for Google sign-in (supabase/README.md).
 // Google login may be switched on (VITE_GOOGLE_LOGIN=on) only after BOTH runs below pass on the TEST
 // project and the result is recorded on the PR. It prints only PASS/FAIL lines: never the project URL
 // in the result, keys, emails, user ids or tokens.

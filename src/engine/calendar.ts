@@ -1,5 +1,5 @@
 // Calendar rules: profile-timezone learning dates with guards against timezone changes.
-// Confirmed behaviour (Functional Design §2, Engine §4, F14/F37): a timezone change must not create extra
+// Confirmed behaviour (Functional Design §2): a timezone change must not create extra
 // learning days, duplicate completion/story credit, or bring eligibility or reviews forward.
 // The algorithm below is an engineering proposal implementing that behaviour.
 import type { CalendarGuards, Settings } from './types.ts'

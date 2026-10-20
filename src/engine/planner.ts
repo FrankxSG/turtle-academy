@@ -1,4 +1,4 @@
-// Task planning and slot resolution (Learning Engine §3, Functional Design §2–5).
+// Task planning and slot resolution (Functional Design §2–5).
 // The plan freezes subject X, content and policy versions, the material structure and the formal total.
 // Short review/repair/general slots resolve their item when presented, so short-only repair can advance
 // within the same task; the item is frozen once presented.
