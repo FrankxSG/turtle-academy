@@ -1,5 +1,7 @@
 # Turtle Academy — Technical Handoff
 
+> Historical reference. Implementation descriptions reflect their recorded dates and include superseded prototype states. Start from [AGENTS.md](../AGENTS.md), the current [README](../README.md) and code. This file is not a mandatory onboarding checklist.
+
 Updated: 2026-10-11. Audience: Claude, ChatGPT and the project owner.
 This repository is public since 2026-10-10. Keep account names, project identifiers and any real learner information out of this document.
 
@@ -7,7 +9,7 @@ This is an onboarding summary and dated implementation snapshot. Technical autho
 
 ## 1. Start here: source of truth
 
-Read these repository files, using the latest `main` unless a task explicitly targets another branch:
+The original handoff listed these references. Use AGENTS for current task-specific reading:
 
 | Source | Authority |
 | --- | --- |
@@ -21,7 +23,7 @@ Read these repository files, using the latest `main` unless a task explicitly ta
 | `docs/FOUNDATION_SETUP.md` | Setup evidence; check its branch and update date |
 | Code, migrations, PRs and Actions runs | What exists, what is proposed, and what was tested |
 
-GitHub is the shared record. Chats are working conversations, not a second untracked architecture register. A later explicit owner decision supersedes an older decision; record it in the relevant GitHub document before relying on it in subsequent work. If a new chat instruction is not yet recorded, identify the discrepancy rather than silently treating the older file as current. Both assistants must read the repository again at each task start.
+GitHub is the shared record. Chats are working conversations, not a second untracked architecture register. A later explicit owner decision supersedes an older decision; record it in the relevant GitHub document before relying on it in subsequent work. If a new chat instruction is not yet recorded, identify the discrepancy rather than silently treating the older file as current. Both assistants check current main and relevant work at task start; AGENTS defines the current reading workflow.
 
 Use the name Turtle Academy. Earlier planning chats may mention other working names, repositories or files (for example `docs/MVP_FEATURE_DECISIONS.md`); those are not part of this repository, so do not invent their contents.
 

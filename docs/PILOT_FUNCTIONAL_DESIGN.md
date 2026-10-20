@@ -143,7 +143,7 @@ The owner decisions are recorded above; exact JSON taxonomy and implementation a
 
 | Former inconsistency | Resolution |
 | --- | --- |
-| Five targets / three consecutive successes / X=1–30 | No fixed target quota; format-sensitive independent evidence with language aggregate exception; per-subject X=6–19 |
+| Five targets / three consecutive successes / X=1–30 | No fixed target quota; format-sensitive independent evidence with language aggregate exception; per-subject X=6–19 (Chinese 6–20 in the first pilot) |
 | Language planned stages versus immediate Chinese progress | Passage targets aggregate/defer; short-only repair in all four subjects can advance within capacity, with final transfer on a later day |
 | Same target correct in first material, wrong later | Whole-task aggregate uses starting stage; no early pass |
 | Hint-assisted acquisition | Two independent Science checks; safety clarification prevents post-answer assistance becoming acquisition success |

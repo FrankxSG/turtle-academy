@@ -1,5 +1,7 @@
 # Foundation setup register
 
+> Dated setup and validation evidence. Earlier prototype descriptions are historical, not a current capability inventory. Consult the current [README](../README.md), code and relevant PR/CI evidence; use this register for its specific setup history.
+
 Updated: 2026-10-16. Implementation evidence only; architecture and feature decisions remain in their authoritative documents.
 
 This repository is public (since 2026-10-10). Record evidence here without account names, project identifiers, regions, dashboard URLs, environment variable values or anything about real learners.
