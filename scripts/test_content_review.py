@@ -2,6 +2,7 @@
 from html.parser import HTMLParser
 import html
 import json
+import os
 from pathlib import Path
 import tempfile
 import unittest
@@ -13,16 +14,23 @@ class Parsed(HTMLParser):
     def __init__(self, text):
         super().__init__()
         self.items, self.images, self.materials = [], [], []
+        self.contexts, self.current_material = {}, None
         self.feed(text)
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
         if 'data-item-id' in a:
             self.items.append(a['data-item-id'])
+            self.contexts[a['data-item-id']] = self.current_material
         if 'data-material-id' in a:
             self.materials.append(a['data-material-id'])
+            self.current_material = a['data-material-id']
         if tag == 'img':
             self.images.append(a['src'])
+
+    def handle_endtag(self, tag):
+        if tag == 'section':
+            self.current_material = None
 
 
 class Preservation(unittest.TestCase):
@@ -39,6 +47,12 @@ class Preservation(unittest.TestCase):
                     parsed = Parsed(text)
                     self.assertCountEqual(parsed.items, [i['id'] for i in pool['items']])
                     self.assertCountEqual(parsed.materials, [m['id'] for m in pool['materials']])
+                    self.assertEqual(parsed.contexts, {i['id']: i['material_id'] for i in pool['items']})
+                    assets = {a['id']: a for a in pool.get('assets', [])}
+                    expected_images = [Path(os.path.relpath(base / assets[aid]['path'], output)).as_posix()
+                                       for row in pool['items'] + pool['materials']
+                                       for aid in row.get('asset_ids', [])]
+                    self.assertCountEqual(parsed.images, expected_images)
                     for record in pool['items'] + pool['materials']:
                         # The whole versioned source record, including rationale, routes, blanks and
                         # annotations, must remain inspectable; a stem/key-only view loses knowledge.
@@ -74,6 +88,17 @@ class Preservation(unittest.TestCase):
                          for s in report.SUBJECTS if s != 'chinese')
             self.assertEqual(len(first), count + 1)
         self.assertEqual(before, {p: p.read_bytes() for p in paths})
+
+    def test_obsolete_generated_pages_are_removed_but_author_files_survive(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp)
+            obsolete = output / 'retired-batch.html'
+            obsolete.write_text(report.page('Old report', ''), encoding='utf-8')
+            note = output / 'author-notes.html'
+            note.write_text('<p>Keep my notes.</p>', encoding='utf-8')
+            report.render(output)
+            self.assertFalse(obsolete.exists())
+            self.assertEqual(note.read_text(), '<p>Keep my notes.</p>')
 
 
 if __name__ == '__main__':

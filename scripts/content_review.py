@@ -15,6 +15,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 SUBJECTS = ('chinese', 'english', 'mathematics', 'science')
+GENERATOR = '<meta name="generator" content="turtle-academy-content-review">'
 
 
 def read(path):
@@ -70,7 +71,7 @@ def item_html(item, assets, subject, output):
 
 
 def page(title, body):
-    return ('<!doctype html><html lang="en"><meta charset="utf-8">'
+    return ('<!doctype html><html lang="en"><meta charset="utf-8">' + GENERATOR +
             '<meta name="viewport" content="width=device-width, initial-scale=1">'
             '<title>' + escaped(title) + '</title><style>'
             'body{font:18px/1.6 system-ui;max-width:960px;margin:24px auto;padding:0 20px}'
@@ -131,6 +132,7 @@ def validate():
 def render(output):
     output.mkdir(parents=True, exist_ok=True)
     rows = []
+    generated = {'index.html'}
     for subject in SUBJECTS:
         base = ROOT / 'content' / subject
         curriculum = read(base / 'curriculum.json')
@@ -138,6 +140,7 @@ def render(output):
         for path in paths:
             pool = read(path)
             filename = subject + '-' + path.stem + '.html'
+            generated.add(filename)
             (output / filename).write_text(render_pool(subject, pool, curriculum, output), encoding='utf-8')
             rows.append('<li><a href="' + filename + '">' + escaped(subject + ': ' + pool['batch_id']) +
                         '</a> · v' + str(pool['version']) + ' · ' + escaped(pool['status']) +
@@ -145,8 +148,11 @@ def render(output):
     inventory = Path(os.path.relpath(ROOT / 'docs/content-review/CHINESE_RELEASE_INVENTORY.md', output)).as_posix()
     body = '<p>Generated from current public JSON. Edit the JSON, not these disposable files.</p><ul>' + ''.join(rows) + '</ul>'
     body += '<p><a href="' + escaped(inventory) + '">Chinese approved-coverage inventory</a>. '
-    body += 'Other subjects remain unapproved; authored mappings are not release coverage.</p>'
+    body += 'Use each batch\'s current review/rights record; authored mappings are not release coverage.</p>'
     (output / 'index.html').write_text(page('Content review', body), encoding='utf-8')
+    for path in output.glob('*.html'):
+        if path.name not in generated and GENERATOR in path.read_text(encoding='utf-8'):
+            path.unlink()  # Only this tool's obsolete pages, never unrelated author files.
     print('Wrote ' + str(output / 'index.html'))
 
 
