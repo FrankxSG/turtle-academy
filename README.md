@@ -37,7 +37,7 @@ Run `python3 scripts/content_review.py --check` for the public catalogue validat
 - Keep staging and production isolated. Never connect previews to real learner data.
 - This repository is public since 2026-10-10. Never commit real learner data, account details or credentials.
 
-Start with [AGENTS.md](AGENTS.md), then follow its task-specific references. [Full feature scope](docs/FEATURE_SCOPE.md) remains confirmed long-term scope. [Repository controls and historical evidence](docs/FOUNDATION_SETUP.md) are reference-only; new task/review evidence stays in its Issue or PR. The historical [PR24 content/source review](https://github.com/FrankxSG/turtle-academy/pull/31#issuecomment-6340410328) and [PR25 pack-recovery review](https://github.com/FrankxSG/turtle-academy/pull/31#issuecomment-6340410719) retain their findings and dispositions.
+Start with [AGENTS.md](AGENTS.md), then follow its task-specific references. [Full feature scope](docs/FEATURE_SCOPE.md) remains confirmed long-term scope. [Repository controls](docs/TECHNICAL_DESIGN_DECISIONS.md#repository-controls) are reference-only; new task/review evidence stays in its Issue or PR. The historical [PR24 content/source review](https://github.com/FrankxSG/turtle-academy/pull/31#issuecomment-6340410328) and [PR25 pack-recovery review](https://github.com/FrankxSG/turtle-academy/pull/31#issuecomment-6340410719) retain their findings and dispositions.
 
 ## Vercel
 

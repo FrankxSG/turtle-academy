@@ -1,6 +1,6 @@
 # Turtle Academy — Content QA and Privacy Gates
 
-**Status:** Pilot QA policy aligned 2026-10-15; Issue #3 gates preserved. Not evidence of implemented tests or completed reviews.
+Question-quality and privacy requirements. Batch records hold actual reviews and sign-offs.
 
 Current behavioral authority is [Functional Design](PILOT_FUNCTIONAL_DESIGN.md); [Learning Engine and Acceptance](PILOT_LEARNING_ENGINE_SPEC.md) defines scoped coverage and required future tests. Objective-only practice does not establish independent writing/oral/listening capability.
 
@@ -20,14 +20,11 @@ Current behavioral authority is [Functional Design](PILOT_FUNCTIONAL_DESIGN.md);
 
 ## Learning and release integrity
 
-- Science due reviews prefer fresh questions but may reuse the least-recently presented suitable item with repeated-exposure labeling; the previous-seven-calendar-days exclusion is only for filler/general practice. After first acquisition failure and revealing help, a same-day second test cannot establish independent acquisition success.
-
-- Format-sensitive repair clears with one independent first-correct 4+ option MCQ/matching/ordering response OR two distinct low-option (true-false/2–3 option MCQ) first-correct responses. Any wrong first response resets low-option partial successes. Passage aggregation additionally requires every related first answer correct; a qualifying high-option success never overrides an aggregate failure.
+- Apply the [whole-material, repair and Science evidence rules](PILOT_FUNCTIONAL_DESIGN.md#3-chinese-and-english-whole-material-tasks) and their [acceptance cases](PILOT_LEARNING_ENGINE_SPEC.md#7-behavioral-acceptance-cases).
 - Subject coverage reports use the approved grade/course inventory. Initial Science coverage uses its first two topics; Mathematics is P2-only in Pilot, while Chinese/Higher Chinese and English P3 general practice is unlocked from the start using reviewed available content and P3 mistake imports follow later. The 75% guideline and recorded owner coverage override never waive source verification, rights, shipped-item QA, privacy/security or data-protection gates. Publish the versioned leaf curriculum manifest before accepting mapped extraction IDs.
 - Necessary wrong forms remain device-local; exclude them and PIN/hash from cloud snapshots. App general-practice recurrence is separate from repair/review failures.
 
 - Distinguish objective correct/incorrect, ungraded, child self-reviewed, parent-reviewed and game/lesson completion. Do not equate any one signal with mastery.
-- Use independently reviewed, varied items for immediate understanding and the confirmed 1/3/7/14/30-day review sequence, then every 30 days; avoid punitive missed-day consequences and unsupported claims of causal efficacy.
+- Use independently reviewed, varied items for immediate understanding and the [confirmed delayed-review sequence](PILOT_FUNCTIONAL_DESIGN.md#4-targets-repair-and-delayed-review); avoid punitive missed-day consequences and unsupported claims of causal efficacy.
 - Check Simplified Chinese glyphs (including `lang="zh-Hans"`), pinyin tones and accessibility on target landscape phone/tablet and Safari/WebKit PWA.
 - Before real records: verify Auth/RLS negative cross-family tests, identity linking, safe snapshot conflict and restore handling and correct staging/production separation, using synthetic-only fixtures. Test offline use after first online login.
-- This document approves no implementation, merge, backend configuration, deployment or spending.

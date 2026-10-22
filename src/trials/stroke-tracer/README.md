@@ -1,6 +1,6 @@
 # StrokeTracer trial
 
-Design, decisions and results: **Issue #8**. Status: `exploring`. Scope: later phase, outside Pilot delivery work. PR #7 merged as `dc3ed51`: tracing/PDF are outside Pilot delivery and P0-17 covers offline PIN controls. This trial does not promote tracing into the Pilot.
+Design, decisions and results: **Issue #8**. Status: `exploring`. Scope: later phase, outside Pilot delivery work. PR #7 merged as `dc3ed51`: tracing/PDF are outside Pilot delivery and the Pilot includes offline PIN controls. This trial does not promote tracing into the Pilot.
 
 **Question:** is watching and tracing stroke order comfortable on a landscape tablet and phone with finger and stylus, and does a simple guided check reject wrong strokes without frustrating false rejections?
 
