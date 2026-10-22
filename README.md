@@ -33,7 +33,7 @@ The default public build excludes private-pack handling. `npm run build:private`
 - Keep staging and production isolated. Never connect previews to real learner data.
 - This repository is public since 2026-10-10. Never commit real learner data, account details or credentials.
 
-Start with [AGENTS.md](AGENTS.md), then follow its task-specific references. [Full feature scope](docs/FEATURE_SCOPE.md) remains confirmed long-term scope. The [foundation register](docs/FOUNDATION_SETUP.md) holds dated setup evidence, not a current implementation inventory.
+Start with [AGENTS.md](AGENTS.md), then follow its task-specific references. [Full feature scope](docs/FEATURE_SCOPE.md) remains confirmed long-term scope. [Repository controls](docs/TECHNICAL_DESIGN_DECISIONS.md#repository-controls) are reference-only; new task/review evidence stays in its Issue or PR. The historical [PR24 content/source review](https://github.com/FrankxSG/turtle-academy/pull/31#issuecomment-6340410328) and [PR25 pack-recovery review](https://github.com/FrankxSG/turtle-academy/pull/31#issuecomment-6340410719) retain their findings and dispositions.
 
 ## Vercel
 

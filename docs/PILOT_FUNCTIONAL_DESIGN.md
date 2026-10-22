@@ -1,6 +1,6 @@
 # Turtle Academy Pilot v0.1 — Functional Design
 
-**Status:** Consolidated owner decisions through 2026-10-15, incorporating the recorded PR #7 review decisions; live-sync decisions 2026-10-19 (§9). This is a specification, not implementation, merge, deployment, real-data or spending authorization.
+**Status:** Confirmed Pilot behavior, incorporating the recorded owner decisions. Current implementation evidence is in the README and relevant PRs.
 
 **Read with:** [Learning Engine and Acceptance](PILOT_LEARNING_ENGINE_SPEC.md). This file owns product behavior; that file owns concrete engineering proposals, field checks and acceptance definitions. [Pilot Scope](PILOT_V0_1_SCOPE.md) retains delivery/security gates; [Full Feature Scope](FEATURE_SCOPE.md) preserves long-term capabilities. No learner-specific data belongs in these files.
 

@@ -1,6 +1,6 @@
 # Turtle Academy — Pilot v0.1 Scope
 
-**Status:** Consolidated owner decisions through 2026-10-15; live-sync decisions 2026-10-19 (§3). Documentation only; not implementation, merge, deployment, real imports or spending authorization.
+**Status:** Confirmed Pilot delivery requirements. Current implementation evidence is in the README and relevant PRs.
 
 ## 1. Objective and success criteria
 
@@ -12,9 +12,9 @@ Pilot is **a usable daily-practice tool for one family, with full scoped coverag
 - Do released subjects have sufficient reviewed coverage and variety for actual use, with missing content and workload visible?
 - Do cached learning, local-save failure, live sync, backup/recovery and device access behave safely under the release gates?
 
-Scope, [Functional Design](PILOT_FUNCTIONAL_DESIGN.md) and [Learning Engine and Acceptance](PILOT_LEARNING_ENGINE_SPEC.md) **together define the committed delivery slice**. Scope owns the objective, boundary/index and protected release gates; Functional Design owns behavior; the engine owns proposed contracts and acceptance definitions. [Technical Decisions](TECHNICAL_DESIGN_DECISIONS.md) retains security authority, and [Full Feature Scope](FEATURE_SCOPE.md) retains long-term commitments.
+Scope, [Functional Design](PILOT_FUNCTIONAL_DESIGN.md) and [Learning Engine and Acceptance](PILOT_LEARNING_ENGINE_SPEC.md) **together define the committed delivery slice**. Scope owns the objective, boundary and protected release gates; Functional Design owns behavior; the engine owns proposed contracts and acceptance definitions. [Technical Decisions](TECHNICAL_DESIGN_DECISIONS.md) retains security authority, and [Full Feature Scope](FEATURE_SCOPE.md) retains long-term commitments.
 
-## 2. Delivery boundary and P0 index
+## 2. Delivery boundary
 
 Chinese first, then Science, Mathematics and English is delivery sequencing, not compulsory child subject order. Each subject releases separately; all available subjects have daily tasks. Each subject has persistent X=6–19, default 10. Owner decision 2026-10-18: in the first pilot Chinese may go up to 20 (other subjects stay 6–19).
 
@@ -27,27 +27,7 @@ Chinese first, then Science, Mathematics and English is delivery sequencing, not
 | Movable small 2D hub, one companion, shared scripted story and a few interactions | Full economy, large game/portfolio, open chat |
 | Cached app content updates, offline working copy, live sync across the family's devices and snapshot history | Tracing/PDF generation, parent generic-bank importer |
 
-| ID | Required delivery capability | Detailed authority and acceptance |
-| --- | --- | --- |
-| P0-01 | Reviewed curriculum and source inventory | Engine coverage acceptance; §4–5 below |
-| P0-02 | Complete daily objective practice | Functional §2–6; Engine F01–F13 |
-| P0-03 | Grade-readable academic language and accessibility | Functional §1/6; Engine F25/F26; §5 device gate |
-| P0-04 | Deterministic independent/assisted evidence | Functional §4; Engine §2–4 and F03/F04/F32 |
-| P0-05 | Guided Science learning and prerequisite chapters | Functional §5; Engine F05–F09/F35 |
-| P0-06 | Local persistence and warned retry | Functional §9; Engine F27 |
-| P0-07 | Derived stage/due/unlock history and preserved rewards | Engine §2–4, F14/F19/F23 |
-| P0-08 | Private bank, recurrence and delayed review | Functional §4/8; Engine F20/F21/F24 |
-| P0-09 | Parent summary, answers and actual subject time | Functional §2/8; Engine task contract |
-| P0-10 | Bounded shared adventure | Functional §7; Engine F15–F18/F30 |
-| P0-11 | Cached offline readiness and content versions | Functional §9; Engine F29; §5 offline gate |
-| P0-12 | Privacy, IP and educational QA | CONTENT_QA; §4–5; no coverage override of these gates |
-| P0-13 | Provisioned parent/child authentication | §3/5; staging identity/linking and reauthentication |
-| P0-14 | Family/child authorization and RLS | Technical Decisions §8; §5 negative access tests |
-| P0-15 | Live sync, snapshot history and protected restore | §3/5; Engine F28, F41–F46 |
-| P0-16 | Validated private paste-in intake | Engine §5/F34; private coverage/proceed gate in §4 |
-| P0-17 | Offline PIN controls and online reset (replaces withdrawn tracing) | Functional §2; Engine F31 |
-| P0-18 | Format-sensitive stages and delayed generic checks | Functional §4; Engine F03/F19/F32 |
-| P0-19 | Landscape phone/tablet and real-device acceptance | §5; no automatic device-readiness claim |
+Behavior and acceptance are specified directly in [Functional Design](PILOT_FUNCTIONAL_DESIGN.md) and [the engine acceptance cases](PILOT_LEARNING_ENGINE_SPEC.md#7-behavioral-acceptance-cases).
 
 **Hard release gates:** Each released subject needs a usable learning loop, reviewed shipped content/keys/media, scoped coverage report and recorded owner proceed decision as required, objective/evidence acceptance, child/parent resume and story behavior, offline/local-save resilience, privacy/IP QA and real-device acceptance. Independently verify dedicated staging/production identities **before any service write**; pass synthetic Auth/RLS, sync/snapshot/recovery and data-protection gates before real records. Coverage permission does not authorize implementation, services, deployment, spending or merge.
 
@@ -116,8 +96,4 @@ Use original/rights-cleared generic curriculum groups, not learner-specific publ
 8. **Data protection:** Resolve the pre-implementation open gate in [TDD §9](TECHNICAL_DESIGN_DECISIONS.md#9-validation-status-and-open-questions) before building real-record handling.
 9. **Publication:** These Markdown specifications may be included in a public repository after document-level review. **Making any repository that has held private material public requires its own full history/secrets/refs/preview audit** under `TECHNICAL_DESIGN_DECISIONS.md`, or a new clean repository.
 
-## 6. Change control
-
-Confirmed post-Pilot Mathematics phase: build a teaching flow, then open P3 Mathematics. Pilot does not need to author that P3 content.
-
-Pilot omissions do not cancel the full product. Coding and merge require separate authorization. The private coverage/proceed and data-protection gates remain unresolved until their actual checks and decisions are recorded. A documentation revision cannot mark them passed.
+Pilot omissions remain in the full product scope. The private coverage/proceed and data-protection requirements need their recorded checks and decisions before they can be considered complete.
