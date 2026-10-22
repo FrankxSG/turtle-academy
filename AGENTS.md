@@ -6,11 +6,11 @@ Public React/Vite/TypeScript learning PWA. Claude and ChatGPT share these collab
 
 Read the current README, current main and relevant open work. Follow only the references needed:
 
-- Behavior: [Pilot functional design](docs/PILOT_FUNCTIONAL_DESIGN.md); [scope](docs/PILOT_V0_1_SCOPE.md) for delivery/release boundaries; [engine specification](docs/PILOT_LEARNING_ENGINE_SPEC.md) for contracts and F01–F40.
+- Behavior: [Pilot functional design](docs/PILOT_FUNCTIONAL_DESIGN.md); [scope](docs/PILOT_V0_1_SCOPE.md) for delivery/release boundaries; [engine specification](docs/PILOT_LEARNING_ENGINE_SPEC.md) for contracts and acceptance cases.
 - Architecture, auth, storage or services: [technical decisions](docs/TECHNICAL_DESIGN_DECISIONS.md) and the affected code-area README.
 - Questions/coverage: [common authoring skill](skills/question-authoring/SKILL.md), the subject skill if present, and relevant subject preparation/research references.
 - Long-term scope changes: [confirmed feature scope](docs/FEATURE_SCOPE.md). Pilot omissions do not cancel it.
-- Repository administration/history: [foundation register](docs/FOUNDATION_SETUP.md#repository-controls) when relevant.
+- Repository administration/history: [repository controls](docs/FOUNDATION_SETUP.md#repository-controls) when relevant.
 
 ## Build and coordinate
 

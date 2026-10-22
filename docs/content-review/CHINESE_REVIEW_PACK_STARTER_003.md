@@ -6,7 +6,7 @@
 
 ChatGPT read all 117 v1 items with their options, hints and explanations. Twenty-one items are revised at item version 2: bounded meanings replace overbroad definitions; colour contexts specify the intended colour; the 九 recognition item no longer requires addition; unnatural 喷 usage is replaced. Keys and target IDs are unchanged. Claude independently rechecked all 21 revisions and passed them.
 
-The official-source P1 audit and visual spot-check are recorded in PR24_CROSS_REVIEW.md. The owner approved list zh-2024-p1-review.3, and approved this 117-item batch and its public use. Tests now prevent proposed target lists entering approved release coverage and preserve practice-only classification.
+The official-source P1 audit and visual spot-check are retained in the [historical PR24 cross-review record](https://github.com/FrankxSG/turtle-academy/pull/31#issuecomment-6340410328). The owner approved list zh-2024-p1-review.3, and approved this 117-item batch and its public use. Tests now prevent proposed target lists entering approved release coverage and preserve practice-only classification.
 
 ## Owner sample
 
