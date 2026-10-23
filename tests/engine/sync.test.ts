@@ -592,3 +592,18 @@ test('editable values keep the replaced value in server history; add-only events
   assert.equal(r.results[0].status, 'applied')
   assert.notEqual((server.records(CHILD).find((x) => x.key === ev.key)!.value as { correct: boolean }).correct, forged.correct)
 })
+
+test('the transport deadline also aborts a stalled response body', { timeout: 2_000 }, async () => {
+  const { createTransport, TransportError } = await import('../../src/sync/transport.ts')
+  const transport = createTransport({ url: 'https://synthetic.example.invalid', anonKey: 'synthetic-only' }, {
+    timeoutMs: 20,
+    fetch: async (_input, init) => new Response(new ReadableStream({
+      start(controller) {
+        // Headers arrive immediately but the response body never finishes, as on a stalled connection.
+        init?.signal?.addEventListener('abort', () => controller.error(new DOMException('Synthetic abort', 'AbortError')))
+      },
+    }), { headers: { 'Content-Type': 'application/json' } }),
+  })
+  await assert.rejects(transport.whoami('synthetic-token', new AbortController().signal),
+    (e: unknown) => e instanceof TransportError && e.kind === 'timeout')
+})

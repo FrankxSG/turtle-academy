@@ -47,41 +47,46 @@ export function createTransport(config: { url: string; anonKey: string }, deps: 
     const timer = setTimeout(() => timeout.abort(), timeoutMs)
     const onAbort = () => timeout.abort()
     signal.addEventListener('abort', onAbort)
-    let res: Response
+    // Keep the deadline active until the body is consumed, not just until headers arrive.
     try {
-      res = await doFetch(`${config.url}/rest/v1/rpc/${name}`, {
-        method: 'POST',
-        headers: { apikey: config.anonKey, Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', Prefer: 'return=representation' },
-        body: JSON.stringify(args),
-        signal: timeout.signal,
-      })
-    } catch {
+      let res: Response
+      try {
+        res = await doFetch(`${config.url}/rest/v1/rpc/${name}`, {
+          method: 'POST',
+          headers: { apikey: config.anonKey, Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', Prefer: 'return=representation' },
+          body: JSON.stringify(args),
+          signal: timeout.signal,
+        })
+      } catch {
+        if (signal.aborted) throw new TransportError('aborted', 'aborted')
+        if (timeout.signal.aborted) throw new TransportError('timeout', 'timeout')
+        throw new TransportError('offline', 'network')
+      }
       if (signal.aborted) throw new TransportError('aborted', 'aborted')
-      if (timeout.signal.aborted) throw new TransportError('timeout', 'timeout')
-      throw new TransportError('offline', 'network')
+      let body: unknown = null
+      try {
+        body = await res.json()
+      } catch {
+        if (signal.aborted) throw new TransportError('aborted', 'aborted')
+        if (timeout.signal.aborted) throw new TransportError('timeout', 'timeout')
+        body = null
+      }
+      if (!res.ok) {
+        const message = typeof (body as { message?: unknown })?.message === 'string' ? String((body as { message: string }).message) : ''
+        // Server functions raise short codes; anything else is reduced to the HTTP status.
+        const code = /^[a-z_]{3,40}$/.test(message) ? message : String(res.status)
+        if (res.status === 401) throw new TransportError('unauthorized', code)
+        if (res.status === 403) throw new TransportError('forbidden', code)
+        if (res.status === 409) throw new TransportError('conflict', code)
+        if (res.status === 400 || res.status === 413 || res.status === 422) throw new TransportError('rejected', code)
+        throw new TransportError('server', code)
+      }
+      if (body === null) throw new TransportError('bad_response', 'empty')
+      return body as T
     } finally {
       clearTimeout(timer)
       signal.removeEventListener('abort', onAbort)
     }
-    if (signal.aborted) throw new TransportError('aborted', 'aborted')
-    let body: unknown = null
-    try {
-      body = await res.json()
-    } catch {
-      body = null
-    }
-    if (!res.ok) {
-      const message = typeof (body as { message?: unknown })?.message === 'string' ? String((body as { message: string }).message) : ''
-      // Server functions raise short codes; anything else is reduced to the HTTP status.
-      const code = /^[a-z_]{3,40}$/.test(message) ? message : String(res.status)
-      if (res.status === 401) throw new TransportError('unauthorized', code)
-      if (res.status === 403) throw new TransportError('forbidden', code)
-      if (res.status === 409) throw new TransportError('conflict', code)
-      if (res.status === 400 || res.status === 413 || res.status === 422) throw new TransportError('rejected', code)
-      throw new TransportError('server', code)
-    }
-    if (body === null) throw new TransportError('bad_response', 'empty')
-    return body as T
   }
 
   return {
