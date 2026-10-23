@@ -174,7 +174,7 @@ export class DexieRecordStore implements RecordStore, MarkerStore, RecordsSyncSt
     return { pending: all.filter((o) => o.state === 'pending').length, rejected: all.filter((o) => o.state === 'rejected').length }
   }
 
-  async acknowledge(acks: Ack[], at: string): Promise<void> {
+  async acknowledge(acks: Ack[], _at: string): Promise<void> {
     const { outbox, sync } = this.pilot
     await this.pilot.transaction('rw', [outbox, sync], async () => {
       const meta = (await sync.get('meta')) as SyncMeta
@@ -182,7 +182,6 @@ export class DexieRecordStore implements RecordStore, MarkerStore, RecordsSyncSt
         observe(meta, a.stamp)
         await outbox.where('op_id').equals(a.op_id).delete()
       }
-      meta.last_sync_at = at
       await sync.put(meta)
     })
   }

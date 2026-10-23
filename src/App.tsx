@@ -154,7 +154,9 @@ export function App() {
       setSync(null)
     }
   }, [runtime, id, auth])
-  const restoring = sync?.state === 'restoring'
+  // Bootstrap readiness is independent of network status: a lookup, failed request or expired session must
+  // not let a reset device start a competing task before its saved task and content have been recovered.
+  const restoring = !!config && (!sync || !sync.practiceReady)
   // A separate, non-persistent client for re-verification (PIN reset, sync sign-in). Its sign-out revokes only its
   // own session, never the parent's other sessions.
   const freshAuth = () =>
@@ -308,7 +310,7 @@ export function App() {
   function start(subject: Subject) {
     void work(async () => {
       // A new or reset device first restores the family's records, so today's task is not started twice.
-      if (restoring) return
+      if (restoring || (syncRef.current && !(await syncRef.current.refresh()).practiceReady)) return
       if (runtime!.engine.dailyStatus().rest) return
       const result = await runtime!.engine.startOrResume(subject, {
         optional: true,

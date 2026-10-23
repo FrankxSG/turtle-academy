@@ -80,11 +80,10 @@ class MemoryOutbox {
   counts() {
     return { pending: this.ops.filter((o) => o.state === 'pending').length, rejected: this.ops.filter((o) => o.state === 'rejected').length }
   }
-  acknowledge(acks: Ack[], when: string) {
+  acknowledge(acks: Ack[], _when: string) {
     const done = new Set(acks.map((a) => a.op_id))
     for (const a of acks) observe(this.meta, a.stamp)
     this.ops = this.ops.filter((o) => !done.has(o.op_id))
-    this.meta.last_sync_at = when
   }
   reject(opId: string, code: string) {
     const op = this.ops.find((o) => o.op_id === opId)
@@ -151,6 +150,8 @@ export class MemorySyncRecordStore extends MemoryRecordStore implements RecordsS
 
 /** Local pack store operations the sync layer needs, beyond the program's PrivateStore. */
 export interface PackSyncStore extends SyncStore {
+  /** Local pack/production commits also need automatic sync, even when the engine writer is idle. */
+  onChange(fn: () => void): () => void
   /** Apply downloaded pack records without queuing them for upload. */
   /** Returns whether anything the mistake programme uses changed (so it reloads only then). */
   applyRemote(r: { versions: { ref: string; pack: PrivatePack }[]; active: string | null; links: RemoteRecord[]; production: ProductionEvent[] }): Promise<boolean>
@@ -168,6 +169,10 @@ export class MemorySyncPrivateStore extends MemoryPrivateStore implements PackSy
   packIssue: string | null = null
   clock: () => string = () => new Date().toISOString()
 
+  private readonly listeners = new Set<() => void>()
+  onChange(fn: () => void) { this.listeners.add(fn); return () => { this.listeners.delete(fn) } }
+  private changed() { for (const fn of this.listeners) fn() }
+
   private async packOps(p: PrivatePack): Promise<Change[]> {
     const s = await syncablePack(p)
     if (!s.ok) { this.packIssue = s.code; return [] }
@@ -181,16 +186,19 @@ export class MemorySyncPrivateStore extends MemoryPrivateStore implements PackSy
     const changes = await this.packOps(p)
     await super.putPack(p)
     this.box.queue(changes, at(this.clock()))
+    this.changed()
   }
   override async putCrosswalk(rows: CrosswalkRow[]) {
     const changes = caseLinkChanges(this.rows, rows)
     await super.putCrosswalk(rows)
     this.box.queue(changes, at(this.clock()))
+    if (changes.length > 0) this.changed()
   }
   override async addProduction(e: ProductionEvent) {
     const fresh = !this.events.has(e.id)
     await super.addProduction(e)
     if (fresh) this.box.queue([productionChange(e)], at(this.clock()))
+    if (fresh) this.changed()
   }
   override async packVersions() { return [...this.versions.values()].map((p) => structuredClone(p)) }
 

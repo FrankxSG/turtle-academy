@@ -1,4 +1,4 @@
-import Dexie, { type EntityTable, type Table } from 'dexie'
+import Dexie, { type EntityTable, type Table, liveQuery } from 'dexie'
 import type { PrivatePack } from './pack.ts'
 import type { CrosswalkRow } from './intake.ts'
 import type { ProductionEvent } from './production.ts'
@@ -43,6 +43,11 @@ export class DexiePrivateStore implements PrivateStore, PackSyncStore {
   async open() { await this.db.open() }
   close() { this.db.close() }
   async packs() { return this.db.packs.toArray() }
+  onChange(fn: () => void): () => void {
+    // Observe durable commits, including production-only writes which never touch the engine writer.
+    const subscription = liveQuery(() => this.db.outbox.toArray()).subscribe({ next: () => fn(), error: () => fn() })
+    return () => subscription.unsubscribe()
+  }
 
   /** Queue changes in the current transaction when this store is bound to a family. */
   private async queue(changes: Change[]) {
@@ -138,14 +143,13 @@ export class DexiePrivateStore implements PrivateStore, PackSyncStore {
     const all = await this.db.outbox.toArray()
     return { pending: all.filter((o) => o.state === 'pending').length, rejected: all.filter((o) => o.state === 'rejected').length }
   }
-  async acknowledge(acks: Ack[], at: string) {
+  async acknowledge(acks: Ack[], _at: string) {
     await this.db.transaction('rw', [this.db.outbox, this.db.sync], async () => {
       const meta = (await this.db.sync.get('meta')) as SyncMeta
       for (const a of acks) {
         observe(meta, a.stamp)
         await this.db.outbox.where('op_id').equals(a.op_id).delete()
       }
-      meta.last_sync_at = at
       await this.db.sync.put(meta)
     })
   }

@@ -37,7 +37,7 @@ const setting = (request: APIRequestContext, email: string, key: string) =>
   sql(request, `select r.value::text from public.sync_records r join public.children c on c.id = r.child_id join public.family_members m on m.family_id = c.family_id join auth.users u on u.id = m.user_id where u.email = '${email}' and r.kind = 'setting' and r.key = '${key}';`)
     .then((rows) => (rows[0] ? JSON.parse(rows[0][0]) : null))
 
-async function signIn(page: Page, email: string) {
+async function signIn(page: Page, email: string, waitForRecovery = true) {
   await page.goto('/')
   await page.getByLabel('Parent email', { exact: true }).fill(email)
   await page.getByLabel('Password', { exact: true }).fill('synthetic-password')
@@ -47,6 +47,7 @@ async function signIn(page: Page, email: string) {
   await page.getByLabel('Confirm PIN', { exact: true }).fill('4826')
   await page.getByRole('button', { name: 'Open the island' }).click()
   await expect(page.getByRole('heading', { name: 'A little discovery. A new adventure.' })).toBeVisible()
+  if (waitForRecovery) await expect(page.getByRole('button', { name: /(Start|Resume) Chinese/ })).toBeEnabled({ timeout: 20_000 })
 }
 
 async function syncNow(page: Page) {
@@ -148,8 +149,25 @@ test('a reset device restores the synced records after sign-in and resumes the u
   // A second, empty browser profile stands in for a wiped iPad.
   const fresh = await browser.newContext({ baseURL: test.info().project.use.baseURL, serviceWorkers: 'allow' })
   await useSyncServer(fresh)
+  let releaseLookup!: () => void
+  const lookup = new Promise<void>((resolve) => { releaseLookup = resolve })
+  await fresh.route('**/rest/v1/rpc/sync_whoami', async (route) => { await lookup; await route.fallback() })
+  let blockRecovery = true
+  await fresh.route('**/rest/v1/rpc/sync_pull', (route) => blockRecovery ? route.abort('connectionreset') : route.fallback())
   const wiped = await fresh.newPage()
-  await signIn(wiped, 'browser-3@example.invalid')
+  await signIn(wiped, 'browser-3@example.invalid', false)
+  await expect(wiped.getByRole('button', { name: 'Start Chinese' })).toBeDisabled()
+  releaseLookup()
+  await expect(wiped.getByTestId('restoring')).toBeVisible()
+  await parent(wiped)
+  await expect(wiped.getByTestId('sync-state')).toContainText('Offline')
+  await wiped.reload()
+  await expect(wiped.getByRole('button', { name: 'Start Chinese' })).toBeDisabled()
+  await parent(wiped)
+  blockRecovery = false
+  await syncNow(wiped)
+  await expect(wiped.getByTestId('sync-state')).toHaveText('Up to date', { timeout: 20_000 })
+  await wiped.getByRole('button', { name: 'Exit and lock' }).click()
   await expect(wiped.getByRole('button', { name: 'Resume Chinese' })).toBeVisible({ timeout: 20_000 })
   const after = await state(wiped)
   expect(after.events.map((e: { id: string }) => e.id).sort()).toEqual(before.events.map((e: { id: string }) => e.id).sort())

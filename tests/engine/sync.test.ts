@@ -58,6 +58,104 @@ async function device(server: FakeSyncServer, opts: { user?: string; token?: str
 
 const sortById = <T extends { id: string }>(xs: T[]) => [...xs].sort((a, b) => a.id.localeCompare(b.id))
 
+
+test('bootstrap readiness stays closed until recovery completes, including offline failures and restart', async () => {
+  const server = world()
+  const { d } = await device(server)
+  assert.equal(d.manager.status().practiceReady, false, 'account lookup has not run yet')
+  assert.equal((await d.manager.refresh()).practiceReady, false)
+  server.offline = true
+  assert.equal((await d.sync()).practiceReady, false)
+  await d.open()
+  assert.equal((await d.sync()).practiceReady, false, 'restart must not bypass bootstrap')
+  server.offline = false
+  assert.equal((await d.sync()).practiceReady, true)
+  server.offline = true
+  assert.equal((await d.sync()).practiceReady, true, 'initialized practice keeps working offline')
+})
+
+test('a crash immediately after first binding preserves the recovery intent', async () => {
+  const server = world()
+  const { d: source } = await device(server)
+  await source.practise(2)
+  await source.sync()
+  const records = new MemorySyncRecordStore()
+  const bind = records.bind.bind(records)
+  let crash = true
+  records.bind = async (...args) => {
+    const result = await bind(...args)
+    if (crash) { crash = false; throw new Error('simulated_crash') }
+    return result
+  }
+  const { d } = await device(server, { records })
+  const failed = await d.sync()
+  assert.equal(failed.state, 'failed')
+  assert.equal(failed.practiceReady, false)
+  assert.ok((await records.meta()).owner)
+  assert.equal((await records.meta()).recovery?.done, false)
+  await d.open()
+  assert.equal((await d.sync()).practiceReady, true)
+  assert.equal(d.engine.state.events.length, 2)
+  assert.deepEqual(d.engine.state.tasks[0].plan, source.engine.state.tasks[0].plan)
+})
+
+test('an older refresh cannot close practice again after bootstrap finishes', async () => {
+  const server = world()
+  const { d } = await device(server)
+  let release!: () => void
+  let entered!: () => void
+  const held = new Promise<void>((resolve) => { release = resolve })
+  const reached = new Promise<void>((resolve) => { entered = resolve })
+  let first = true
+  d.pack.issue = async () => {
+    if (first) { first = false; entered(); await held }
+    return null
+  }
+  const old = d.manager.refresh()
+  await reached
+  assert.equal((await d.sync()).practiceReady, true)
+  release()
+  await old
+  assert.equal(d.manager.status().practiceReady, true)
+})
+
+test('production-only writes schedule automatic upload without an engine commit', async () => {
+  const server = world()
+  const { d } = await device(server)
+  await d.program.installPack(invented())
+  await d.sync()
+  d.syncTimers.queue = []
+  const plan = [...d.program.plans().keys()][0]
+  const event = await d.program.recordProduction(plan, 'independent', 'correct')
+  assert.ok(d.syncTimers.queue.length > 0, 'pack commits must wake the sync manager')
+  await d.syncTimers.runAll()
+  await d.manager.syncNow('change') // join the automatically started flight
+  assert.ok(server.records(CHILD).some((r) => r.kind === 'production_event' && r.key === event.id))
+  d.manager.dispose()
+  d.syncTimers.queue = []
+  await d.program.recordProduction(plan, 'independent', 'correct')
+  assert.equal(d.syncTimers.queue.length, 0, 'sign-out removes the pack listener')
+})
+
+test('an acknowledged upload followed by a failed download does not advance last successful sync', async () => {
+  const server = world()
+  const { d } = await device(server)
+  const before = (await d.sync()).lastSyncAt
+  d.clock.advance(60)
+  await d.practise(1)
+  const transport = server.transport()
+  transport.pull = async () => { throw new (await import('../../src/sync/transport.ts')).TransportError('offline', 'network') }
+  const { SyncManager } = await import('../../src/sync/manager.ts')
+  d.manager.dispose()
+  const m = new SyncManager({ transport, auth: new TestAuth(session('parent-a', 'token-a')), identity: 'key-parent-a', identityOf: async (u) => `key-${u}`,
+    records: d.records, pack: d.pack, engine: d.engine, online: () => true, timers: d.syncTimers })
+  const failed = await m.syncNow()
+  assert.equal(failed.state, 'offline')
+  assert.equal(failed.waiting, 0, 'upload was acknowledged')
+  assert.equal(failed.lastSyncAt, before, 'the complete run did not succeed')
+  m.dispose()
+})
+
 test('daily task ids are deterministic per child, subject and learning day', async () => {
   const server = world()
   const { d } = await device(server)

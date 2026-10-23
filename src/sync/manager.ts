@@ -25,6 +25,8 @@ export type SyncState = 'idle' | 'syncing' | 'restoring' | 'offline' | 'sign_in_
 
 export interface SyncStatus {
   state: SyncState
+  /** Existing local practice or a completed bootstrap; remains false across failed/interrupted recovery. */
+  practiceReady: boolean
   /** Last run that finished with every queued change acknowledged and downloads caught up. */
   lastSyncAt: string | null
   /** Locally saved changes not yet acknowledged by the server. */
@@ -83,11 +85,17 @@ export class SyncManager {
   private soonTimer: unknown = null
   private attempt = 0
   private verified: Owner | null = null
-  private current: SyncStatus = { state: 'idle', lastSyncAt: null, waiting: 0, refused: 0, code: null, clockWarning: false, packIssue: null }
+  private refreshSeq = 0
+  private current: SyncStatus = { state: 'idle', practiceReady: false, lastSyncAt: null, waiting: 0, refused: 0, code: null, clockWarning: false, packIssue: null }
   private readonly listeners = new Set<(s: SyncStatus) => void>()
+  private readonly offPack: (() => void) | undefined
 
   constructor(deps: SyncDeps) {
     this.d = deps
+    this.offPack = deps.pack?.onChange(() => {
+      void this.refresh().catch(() => undefined)
+      this.soon()
+    })
   }
 
   private get timers() { return this.d.timers ?? (globalThis as unknown as NonNullable<SyncDeps['timers']>) }
@@ -110,6 +118,8 @@ export class SyncManager {
 
   /** Refresh counts and last-sync time from the stores (e.g. after local changes). */
   async refresh(): Promise<SyncStatus> {
+    const seq = ++this.refreshSeq
+    const gen = this.generation
     const meta = await this.d.records.meta()
     let waiting = 0
     let refused = 0
@@ -118,7 +128,12 @@ export class SyncManager {
       waiting += c.pending + c.rejected
       refused += c.rejected
     }
-    this.emit({ waiting, refused, lastSyncAt: meta.last_sync_at, packIssue: this.d.pack ? await this.d.pack.issue() : null })
+    const practiceReady = meta.recovery ? meta.recovery.done
+      : (await this.d.records.hasLearningRecords()) || (this.d.pack ? await this.d.pack.hasLearningRecords() : false)
+    const packIssue = this.d.pack ? await this.d.pack.issue() : null
+    // Older IndexedDB reads may finish after a newer refresh (e.g. bootstrap finishing); never publish them.
+    if (seq !== this.refreshSeq || gen !== this.generation || gen < 0) return this.status()
+    this.emit({ waiting, refused, practiceReady, lastSyncAt: meta.last_sync_at, packIssue })
     return this.status()
   }
 
@@ -181,6 +196,7 @@ export class SyncManager {
   /** Stop: cancel timers, abort requests and discard any response still in flight (sign-out, account change). */
   dispose() {
     this.generation = -1
+    this.offPack?.()
     this.controller.abort()
     if (this.retryTimer !== null) this.timers.clearTimeout(this.retryTimer)
     if (this.soonTimer !== null) this.timers.clearTimeout(this.soonTimer)
@@ -294,9 +310,11 @@ export class SyncManager {
         await this.d.records.bind(owner, { backfill: true, now })
         if (this.d.pack) await this.d.pack.bind(owner, { backfill: true, now })
       } else {
+        // Persist the recovery intent BEFORE binding. A crash after either store binds must not turn a reset
+        // device into an ordinary incremental client on its next open.
+        await this.d.records.startRecovery(now)
         await this.d.records.bind(owner, { backfill: false, now })
         if (this.d.pack) await this.d.pack.bind(owner, { backfill: false, now })
-        await this.d.records.startRecovery(now)
       }
     } else if (this.d.pack && !(await this.d.pack.meta()).owner) {
       // The pack store was created after the records store was bound (e.g. first private-build open).
