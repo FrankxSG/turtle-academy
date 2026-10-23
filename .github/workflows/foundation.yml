@@ -42,7 +42,8 @@ concurrency:
   cancel-in-progress: true
 jobs:
   foundation:
-    runs-on: ubuntu-latest
+    # Pinned: `playwright install --with-deps` hangs on the ubuntu-latest migration image (Oct 2026).
+    runs-on: ubuntu-24.04
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
