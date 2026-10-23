@@ -10,6 +10,6 @@ export async function openPrivateProgram(id: string, engine: LearningEngine, reg
   try {
     await store.open()
     const program = await MistakeProgram.open({ engine, registry, publicContent: publicChineseContent(), store, now })
-    return { program, close: () => store.close() }
+    return { program, store, close: () => store.close() }
   } catch (error) { store.close(); throw error }
 }

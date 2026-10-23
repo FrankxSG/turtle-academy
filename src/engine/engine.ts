@@ -49,6 +49,13 @@ const HELP: Record<Subject, { retry: Assistance; correction: Assistance }> = {
 
 const defaultId = () => crypto.randomUUID()
 
+/**
+ * Deterministic daily-task identity per child, subject and learning day (Pilot Scope §3 rule 3). Two devices that
+ * start the same day's task offline therefore share one id; `n` counts tasks this device already holds for that
+ * subject and day (an optional extra task after the day's credit is `:1`).
+ */
+export const dailyTaskId = (subject: Subject, localDate: string, n: number) => `t:${subject}:${localDate}:${n}`
+
 export class LearningEngine {
   state: EngineState
   private readonly deps: EngineDeps
@@ -206,7 +213,7 @@ export class LearningEngine {
     const now = this.deps.now()
     this.state.targets.push(...plan.newTargets)
     const task: Task = {
-      id: this.newId(), subject, local_date: date, created_at: now, finalised_at: null, x, policy_version: POLICY_VERSION,
+      id: dailyTaskId(subject, date, this.state.tasks.filter((t) => t.subject === subject && t.local_date === date).length), subject, local_date: date, created_at: now, finalised_at: null, x, policy_version: POLICY_VERSION,
       content_version: release.version, status: 'active', plan: { materials: plan.materials, slots: plan.slots },
       planned_total: plan.plannedTotal, cursor: 0, active_seconds: 0, activity: [{ state: 'active', at: now }], target_aggregates: [],
     }
@@ -683,6 +690,28 @@ export class LearningEngine {
   /** Retry writes still queued after a storage failure now (the same as returning to the foreground). */
   async retrySaves(): Promise<SaveStatus | null> {
     return this.deps.writer ? this.deps.writer.onForeground() : null
+  }
+
+  /**
+   * Apply records downloaded from the server (already merged there by the sync rules). They go through the same
+   * ordered writer as local changes, marked remote so they are never queued for upload again. Derived progress is
+   * recomputed from the merged records; nothing derived is copied in.
+   */
+  async applyRemote(puts: Put[], events: EngineState['events'], deletes: { table: Table; key: string }[] = []): Promise<SaveStatus | null> {
+    const key = (p: { table: string; key: string }) => `${p.table}\u0000${p.key}`
+    const records = new Map(toRecords(this.state).map((p) => [key(p), p]))
+    for (const d of deletes) records.delete(key(d))
+    for (const p of puts) records.set(key(p), structuredClone(p))
+    const known = new Set(this.state.events.map((e) => e.id))
+    const fresh = events.filter((e) => !known.has(e.id)).map((e) => structuredClone(e))
+    if (puts.length === 0 && fresh.length === 0 && deletes.length === 0) return this.deps.writer?.status() ?? null
+    const next = fromRecords({ records: [...records.values()], events: [...this.state.events, ...fresh] }, this.state)
+    this.state = next
+    this.changed()
+    for (const d of deletes) this.persisted.delete(key(d))
+    for (const p of puts) this.persisted.set(key(p), JSON.stringify(p.value))
+    if (!this.deps.writer) return null
+    return this.deps.writer.enqueue({ id: this.newId(), order: this.order++, puts: structuredClone(puts), events: fresh, remote: true, deletes })
   }
 
   async flush(): Promise<SaveStatus | null> {

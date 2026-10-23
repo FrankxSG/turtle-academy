@@ -34,7 +34,11 @@ export interface RegisterCase {
   id: string
   target: string
   observation_type: ObservationType
-  observed: string
+  /**
+   * The wrong form. Device-only: present only on the device that loaded the pack; it is removed before upload, so a
+   * pack recovered from sync has no `observed` and repair works from the correct target alone.
+   */
+  observed?: string
   review_status: 'parent_accepted'
   cause: string
   source_interpretation_uncertain: boolean
@@ -139,6 +143,7 @@ export function validatePack(raw: unknown): PrivatePack {
     seen.add(c.id)
     for (const f of ['target', 'observed'] as const) {
       const v = c[f]
+      if (f === 'observed' && v === undefined) continue // absent on a pack recovered from sync
       if (typeof v !== 'string' || v.length === 0 || v.length > 80 || DATE_LIKE.test(v)) throw new Error(`case_text:${c.id}.${f}`)
     }
     if (!['character', 'word', 'pinyin', 'reading', 'writing', 'speaking'].includes(c.observation_type as string)) throw new Error(`case_type:${c.id}`)

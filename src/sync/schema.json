@@ -1,0 +1,2132 @@
+{
+ "id": "pilot-sync/1",
+ "note": "Closed allow-list for live-sync uploads (Pilot Scope section 3; Learning Engine section 6). One operation per committed local change; every object is closed, so unknown keys, wrong forms (the pack case `observed`), item/material `rationale` and `provenance`, the parent PIN/hash, worksheets, copied source questions, school/teacher details and device-only metadata are rejected. Practice text is bounded per field; descriptive pack fields are short single-line text. Stages, due dates and unlocks are never uploaded. The same descriptor is embedded in the database migration and parity-tested.",
+ "limits": {
+  "op_bytes": 1572864,
+  "request_bytes": 2097152,
+  "ops_per_request": 50,
+  "changes_per_op": 2000,
+  "pull_page": 500
+ },
+ "defs": {
+  "id": {
+   "type": "string",
+   "pattern": "^[a-z0-9][a-z0-9_.:-]{0,127}$"
+  },
+  "nullable_id": {
+   "type": "string",
+   "pattern": "^[a-z0-9][a-z0-9_.:-]{0,127}$",
+   "nullable": true
+  },
+  "token": {
+   "type": "string",
+   "pattern": "^[a-z][a-z0-9_]{0,47}$"
+  },
+  "nullable_token": {
+   "type": "string",
+   "pattern": "^[a-z][a-z0-9_]{0,47}$",
+   "nullable": true
+  },
+  "uuid": {
+   "type": "string",
+   "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+  },
+  "nullable_uuid": {
+   "type": "string",
+   "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+   "nullable": true
+  },
+  "date": {
+   "type": "string",
+   "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+  },
+  "nullable_date": {
+   "type": "string",
+   "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+   "nullable": true
+  },
+  "datetime": {
+   "type": "string",
+   "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]{1,6})?(Z|[+-][0-9]{2}:[0-9]{2})$"
+  },
+  "nullable_datetime": {
+   "type": "string",
+   "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]{1,6})?(Z|[+-][0-9]{2}:[0-9]{2})$",
+   "nullable": true
+  },
+  "timezone": {
+   "type": "string",
+   "pattern": "^[A-Za-z_]{1,32}(/[A-Za-z0-9_+-]{1,32}){0,2}$"
+  },
+  "subject": {
+   "type": "string",
+   "enum": [
+    "chinese",
+    "english",
+    "mathematics",
+    "science"
+   ]
+  },
+  "course": {
+   "type": "string",
+   "enum": [
+    "p2_chinese",
+    "p2_higher_chinese",
+    "p3_chinese",
+    "p3_higher_chinese",
+    "p2_english",
+    "p3_english",
+    "p2_mathematics",
+    "p3_science"
+   ]
+  },
+  "count": {
+   "type": "integer",
+   "minimum": 0,
+   "maximum": 100000
+  },
+  "position": {
+   "type": "integer",
+   "minimum": 0,
+   "maximum": 200
+  },
+  "item_version": {
+   "type": "integer",
+   "minimum": 1,
+   "maximum": 100000
+  },
+  "nullable_item_version": {
+   "type": "integer",
+   "minimum": 1,
+   "maximum": 100000,
+   "nullable": true
+  },
+  "x": {
+   "type": "integer",
+   "minimum": 6,
+   "maximum": 20
+  },
+  "stage": {
+   "type": "string",
+   "enum": [
+    "acquisition",
+    "exact",
+    "similar",
+    "generic",
+    "delayed_review"
+   ]
+  },
+  "nullable_stage": {
+   "type": "string",
+   "enum": [
+    "acquisition",
+    "exact",
+    "similar",
+    "generic",
+    "delayed_review"
+   ],
+   "nullable": true
+  },
+  "role": {
+   "type": "string",
+   "enum": [
+    "material_question",
+    "repair",
+    "delayed_review",
+    "general_practice",
+    "acquisition_test",
+    "replacement"
+   ]
+  },
+  "format_class": {
+   "type": "string",
+   "enum": [
+    "high_option",
+    "low_option"
+   ]
+  },
+  "id_list": {
+   "type": "array",
+   "maxItems": 60,
+   "items": {
+    "$ref": "id"
+   }
+  },
+  "stamp": {
+   "type": "object",
+   "required": [
+    "t",
+    "c",
+    "d"
+   ],
+   "properties": {
+    "t": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 9999999999999
+    },
+    "c": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 1000000
+    },
+    "d": {
+     "$ref": "uuid"
+    }
+   }
+  },
+  "short_text": {
+   "type": "string",
+   "minLength": 1,
+   "maxLength": 48,
+   "pattern": "^[^\\r\\n\\t\\u0001-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]*$",
+   "notPattern": "(19|20)[0-9]{2}-[01][0-9]-[0-3][0-9]|[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\\.[A-Za-z]"
+  },
+  "case_text": {
+   "type": "string",
+   "minLength": 1,
+   "maxLength": 80,
+   "pattern": "^[^\\r\\n\\t\\u0001-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]*$",
+   "notPattern": "(19|20)[0-9]{2}-[01][0-9]-[0-3][0-9]|[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\\.[A-Za-z]"
+  },
+  "pack_token": {
+   "type": "string",
+   "pattern": "^[a-z0-9][a-z0-9_.:-]{0,79}$"
+  },
+  "plan_id": {
+   "type": "string",
+   "pattern": "^[a-z0-9][a-z0-9_.:-]{0,160}$"
+  },
+  "option_id": {
+   "type": "string",
+   "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,31}$"
+  },
+  "pack_course": {
+   "type": "string",
+   "enum": [
+    "p2_chinese",
+    "p2_higher_chinese",
+    "p3_chinese",
+    "p3_higher_chinese"
+   ]
+  },
+  "pack_courses": {
+   "type": "array",
+   "maxItems": 8,
+   "items": {
+    "$ref": "pack_course"
+   }
+  },
+  "ref_list": {
+   "type": "array",
+   "maxItems": 64,
+   "items": {
+    "$ref": "id"
+   }
+  },
+  "prompt": {
+   "type": "string",
+   "maxLength": 400,
+   "pattern": "^[^\\r\\n\\t\\u0001-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]*$",
+   "notPattern": "[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\\.[A-Za-z]"
+  },
+  "blanks": {
+   "type": "array",
+   "maxItems": 40,
+   "items": {
+    "type": "object",
+    "required": [
+     "id",
+     "question_id"
+    ],
+    "properties": {
+     "id": {
+      "$ref": "option_id"
+     },
+     "question_id": {
+      "$ref": "id"
+     }
+    }
+   }
+  },
+  "annotations": {
+   "type": "array",
+   "maxItems": 40,
+   "items": {
+    "type": "object",
+    "required": [
+     "id",
+     "text",
+     "pinyin"
+    ],
+    "properties": {
+     "id": {
+      "$ref": "option_id"
+     },
+     "text": {
+      "type": "string",
+      "maxLength": 16,
+      "pattern": "^[^\\r\\n\\t\\u0001-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]*$",
+      "notPattern": "[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\\.[A-Za-z]"
+     },
+     "pinyin": {
+      "type": "string",
+      "maxLength": 48,
+      "pattern": "^[^\\r\\n\\t\\u0001-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]*$",
+      "notPattern": "[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\\.[A-Za-z]"
+     }
+    }
+   }
+  },
+  "plan": {
+   "type": "object",
+   "required": [
+    "id",
+    "mode",
+    "stages",
+    "success_rule"
+   ],
+   "properties": {
+    "id": {
+     "$ref": "plan_id"
+    },
+    "mode": {
+     "type": "string",
+     "enum": [
+      "external_writing",
+      "external_speaking"
+     ]
+    },
+    "stages": {
+     "type": "object",
+     "required": [
+      "exact",
+      "similar",
+      "generic"
+     ],
+     "properties": {
+      "exact": {
+       "type": "object",
+       "required": [
+        "prompt",
+        "verification",
+        "automatically_scored"
+       ],
+       "properties": {
+        "prompt": {
+         "$ref": "prompt"
+        },
+        "verification": {
+         "type": "string",
+         "enum": [
+          "parent_observation"
+         ]
+        },
+        "automatically_scored": {
+         "type": "boolean",
+         "enum": [
+          false
+         ]
+        }
+       }
+      },
+      "similar": {
+       "type": "object",
+       "required": [
+        "prompt",
+        "verification",
+        "automatically_scored"
+       ],
+       "properties": {
+        "prompt": {
+         "$ref": "prompt"
+        },
+        "verification": {
+         "type": "string",
+         "enum": [
+          "parent_observation"
+         ]
+        },
+        "automatically_scored": {
+         "type": "boolean",
+         "enum": [
+          false
+         ]
+        }
+       }
+      },
+      "generic": {
+       "type": "object",
+       "required": [
+        "prompt",
+        "verification",
+        "automatically_scored"
+       ],
+       "properties": {
+        "prompt": {
+         "$ref": "prompt"
+        },
+        "verification": {
+         "type": "string",
+         "enum": [
+          "parent_observation"
+         ]
+        },
+        "automatically_scored": {
+         "type": "boolean",
+         "enum": [
+          false
+         ]
+        }
+       }
+      }
+     }
+    },
+    "success_rule": {
+     "type": "string",
+     "maxLength": 1200,
+     "pattern": "^[^\\r\\n\\t\\u0001-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]*$",
+     "notPattern": "[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\\.[A-Za-z]"
+    }
+   }
+  },
+  "pins": {
+   "type": "array",
+   "maxItems": 200,
+   "items": {
+    "type": "object",
+    "required": [
+     "item_id",
+     "version"
+    ],
+    "properties": {
+     "item_id": {
+      "$ref": "id"
+     },
+     "version": {
+      "$ref": "item_version"
+     }
+    }
+   }
+  },
+  "objective_route": {
+   "type": "object",
+   "required": [
+    "mode",
+    "progress_target_ref",
+    "batch_id",
+    "batch_version",
+    "content_state",
+    "stages",
+    "ready_for_runtime"
+   ],
+   "properties": {
+    "mode": {
+     "type": "string",
+     "enum": [
+      "objective"
+     ]
+    },
+    "progress_target_ref": {
+     "$ref": "id"
+    },
+    "batch_id": {
+     "$ref": "id"
+    },
+    "batch_version": {
+     "$ref": "item_version"
+    },
+    "content_state": {
+     "$ref": "pack_token"
+    },
+    "stages": {
+     "type": "object",
+     "required": [
+      "exact",
+      "similar",
+      "generic"
+     ],
+     "properties": {
+      "exact": {
+       "$ref": "pins"
+      },
+      "similar": {
+       "$ref": "pins"
+      },
+      "generic": {
+       "$ref": "pins"
+      }
+     }
+    },
+    "ready_for_runtime": {
+     "type": "boolean"
+    }
+   }
+  },
+  "external_route": {
+   "type": "object",
+   "required": [
+    "mode",
+    "plan"
+   ],
+   "properties": {
+    "mode": {
+     "type": "string",
+     "enum": [
+      "external"
+     ]
+    },
+    "plan": {
+     "$ref": "plan"
+    }
+   }
+  },
+  "register_case": {
+   "type": "object",
+   "required": [
+    "id",
+    "target",
+    "observation_type",
+    "review_status",
+    "cause",
+    "source_interpretation_uncertain",
+    "correction_status",
+    "route"
+   ],
+   "properties": {
+    "id": {
+     "type": "string",
+     "pattern": "^O[0-9]{3}$"
+    },
+    "target": {
+     "$ref": "case_text"
+    },
+    "observation_type": {
+     "type": "string",
+     "enum": [
+      "character",
+      "word",
+      "pinyin",
+      "reading",
+      "writing",
+      "speaking"
+     ]
+    },
+    "review_status": {
+     "type": "string",
+     "enum": [
+      "parent_accepted"
+     ]
+    },
+    "cause": {
+     "$ref": "short_text"
+    },
+    "source_interpretation_uncertain": {
+     "type": "boolean"
+    },
+    "correction_status": {
+     "$ref": "short_text"
+    },
+    "route": {
+     "anyOf": [
+      {
+       "$ref": "objective_route"
+      },
+      {
+       "$ref": "external_route"
+      }
+     ]
+    },
+    "production_followup": {
+     "$ref": "plan"
+    }
+   }
+  },
+  "pack_item": {
+   "type": "object",
+   "required": [
+    "id",
+    "version",
+    "courses",
+    "target_refs",
+    "family",
+    "format",
+    "stem",
+    "options",
+    "correct_option_id",
+    "hint",
+    "explanation",
+    "material_id",
+    "stage",
+    "blanks",
+    "annotations",
+    "blank_ref"
+   ],
+   "properties": {
+    "id": {
+     "$ref": "id"
+    },
+    "version": {
+     "$ref": "item_version"
+    },
+    "courses": {
+     "$ref": "pack_courses"
+    },
+    "outcome_refs": {
+     "$ref": "ref_list"
+    },
+    "target_refs": {
+     "$ref": "ref_list"
+    },
+    "repair_target_refs": {
+     "type": "array",
+     "nullable": true,
+     "maxItems": 64,
+     "items": {
+      "$ref": "id"
+     }
+    },
+    "family": {
+     "$ref": "pack_token"
+    },
+    "format": {
+     "type": "string",
+     "enum": [
+      "mcq_4plus"
+     ]
+    },
+    "stem": {
+     "type": "string",
+     "maxLength": 600,
+     "pattern": "^[^\\u0001-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]*$",
+     "notPattern": "[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\\.[A-Za-z]"
+    },
+    "options": {
+     "type": "array",
+     "maxItems": 12,
+     "items": {
+      "type": "object",
+      "required": [
+       "id",
+       "text"
+      ],
+      "properties": {
+       "id": {
+        "$ref": "option_id"
+       },
+       "text": {
+        "type": "string",
+        "maxLength": 200,
+        "pattern": "^[^\\r\\n\\t\\u0001-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]*$",
+        "notPattern": "[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\\.[A-Za-z]"
+       }
+      }
+     }
+    },
+    "correct_option_id": {
+     "$ref": "option_id"
+    },
+    "hint": {
+     "type": "string",
+     "maxLength": 400,
+     "pattern": "^[^\\u0001-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]*$",
+     "notPattern": "[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\\.[A-Za-z]"
+    },
+    "explanation": {
+     "type": "string",
+     "maxLength": 800,
+     "pattern": "^[^\\u0001-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]*$",
+     "notPattern": "[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\\.[A-Za-z]"
+    },
+    "material_id": {
+     "$ref": "nullable_id"
+    },
+    "stage": {
+     "type": "string",
+     "nullable": true,
+     "enum": [
+      "exact",
+      "similar",
+      "generic"
+     ]
+    },
+    "asset_refs": {
+     "$ref": "ref_list"
+    },
+    "blanks": {
+     "$ref": "blanks"
+    },
+    "annotations": {
+     "$ref": "annotations"
+    },
+    "blank_ref": {
+     "type": "string",
+     "nullable": true,
+     "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,31}$"
+    }
+   }
+  },
+  "pack_material": {
+   "type": "object",
+   "required": [
+    "id",
+    "version",
+    "courses",
+    "kind",
+    "title",
+    "body",
+    "question_ids",
+    "blanks",
+    "annotations"
+   ],
+   "properties": {
+    "id": {
+     "$ref": "id"
+    },
+    "version": {
+     "$ref": "item_version"
+    },
+    "courses": {
+     "$ref": "pack_courses"
+    },
+    "kind": {
+     "$ref": "pack_token"
+    },
+    "title": {
+     "type": "string",
+     "maxLength": 120,
+     "pattern": "^[^\\r\\n\\t\\u0001-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]*$",
+     "notPattern": "[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\\.[A-Za-z]"
+    },
+    "body": {
+     "type": "string",
+     "maxLength": 4000,
+     "pattern": "^[^\\u0001-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]*$",
+     "notPattern": "[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\\.[A-Za-z]"
+    },
+    "question_ids": {
+     "$ref": "ref_list"
+    },
+    "blanks": {
+     "$ref": "blanks"
+    },
+    "annotations": {
+     "$ref": "annotations"
+    },
+    "outcome_refs": {
+     "$ref": "ref_list"
+    },
+    "asset_refs": {
+     "$ref": "ref_list"
+    }
+   }
+  },
+  "pack_group": {
+   "type": "object",
+   "required": [
+    "id",
+    "target_refs",
+    "item_ids"
+   ],
+   "properties": {
+    "id": {
+     "$ref": "id"
+    },
+    "version": {
+     "$ref": "item_version"
+    },
+    "label_zh": {
+     "type": "string",
+     "maxLength": 64,
+     "pattern": "^[^\\r\\n\\t\\u0001-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]*$",
+     "notPattern": "[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\\.[A-Za-z]"
+    },
+    "label_en": {
+     "type": "string",
+     "maxLength": 120,
+     "pattern": "^[^\\r\\n\\t\\u0001-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]*$",
+     "notPattern": "[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\\.[A-Za-z]"
+    },
+    "courses": {
+     "$ref": "pack_courses"
+    },
+    "target_refs": {
+     "type": "array",
+     "maxItems": 400,
+     "items": {
+      "$ref": "id"
+     }
+    },
+    "item_ids": {
+     "type": "array",
+     "maxItems": 1000,
+     "items": {
+      "$ref": "id"
+     }
+    }
+   }
+  },
+  "pack_batch": {
+   "type": "object",
+   "required": [
+    "batch_id",
+    "version",
+    "status",
+    "curriculum_manifest_version",
+    "materials",
+    "items",
+    "groups"
+   ],
+   "properties": {
+    "batch_id": {
+     "$ref": "id"
+    },
+    "version": {
+     "$ref": "item_version"
+    },
+    "status": {
+     "$ref": "pack_token"
+    },
+    "curriculum_manifest_version": {
+     "$ref": "pack_token"
+    },
+    "review_characters_version": {
+     "$ref": "pack_token"
+    },
+    "materials": {
+     "type": "array",
+     "maxItems": 500,
+     "items": {
+      "$ref": "pack_material"
+     }
+    },
+    "items": {
+     "type": "array",
+     "maxItems": 3000,
+     "items": {
+      "$ref": "pack_item"
+     }
+    },
+    "groups": {
+     "type": "array",
+     "maxItems": 500,
+     "items": {
+      "$ref": "pack_group"
+     }
+    }
+   }
+  },
+  "private_target": {
+   "type": "object",
+   "required": [
+    "id",
+    "course",
+    "kind",
+    "label_zh",
+    "assessed_skill"
+   ],
+   "properties": {
+    "id": {
+     "$ref": "id"
+    },
+    "course": {
+     "$ref": "pack_course"
+    },
+    "outcome_ref": {
+     "$ref": "id"
+    },
+    "kind": {
+     "type": "string",
+     "enum": [
+      "word",
+      "language_point",
+      "reading_skill"
+     ]
+    },
+    "label_zh": {
+     "type": "string",
+     "maxLength": 64,
+     "pattern": "^[^\\r\\n\\t\\u0001-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]*$",
+     "notPattern": "[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\\.[A-Za-z]"
+    },
+    "assessed_skill": {
+     "$ref": "short_text"
+    },
+    "word": {
+     "type": "string",
+     "maxLength": 24,
+     "pattern": "^[^\\r\\n\\t\\u0001-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]*$",
+     "notPattern": "[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\\.[A-Za-z]"
+    }
+   }
+  },
+  "pack": {
+   "type": "object",
+   "required": [
+    "schema_version",
+    "pack_id",
+    "course",
+    "register",
+    "corrective_batches",
+    "private_targets"
+   ],
+   "properties": {
+    "schema_version": {
+     "type": "string",
+     "enum": [
+      "turtle-private-pack/1"
+     ]
+    },
+    "pack_id": {
+     "$ref": "id"
+    },
+    "course": {
+     "type": "string",
+     "enum": [
+      "p2_chinese",
+      "p2_higher_chinese"
+     ]
+    },
+    "register": {
+     "type": "object",
+     "required": [
+      "schema_version",
+      "register_id",
+      "course",
+      "policy",
+      "review_complete",
+      "cases"
+     ],
+     "properties": {
+      "schema_version": {
+       "type": "string",
+       "enum": [
+        "anonymous-mistake-register/1"
+       ]
+      },
+      "register_id": {
+       "$ref": "id"
+      },
+      "course": {
+       "type": "string",
+       "enum": [
+        "p2_chinese",
+        "p2_higher_chinese"
+       ]
+      },
+      "policy": {
+       "$ref": "short_text"
+      },
+      "review_complete": {
+       "type": "boolean",
+       "enum": [
+        true
+       ]
+      },
+      "cases": {
+       "type": "array",
+       "maxItems": 2000,
+       "items": {
+        "$ref": "register_case"
+       }
+      }
+     }
+    },
+    "corrective_batches": {
+     "type": "array",
+     "maxItems": 20,
+     "items": {
+      "$ref": "pack_batch"
+     }
+    },
+    "private_targets": {
+     "type": "array",
+     "maxItems": 2000,
+     "items": {
+      "$ref": "private_target"
+     }
+    }
+   }
+  }
+ },
+ "operation": {
+  "type": "object",
+  "required": [
+   "op_id",
+   "device_id",
+   "device_seq",
+   "stamp",
+   "changes"
+  ],
+  "properties": {
+   "op_id": {
+    "$ref": "uuid"
+   },
+   "device_id": {
+    "$ref": "uuid"
+   },
+   "device_seq": {
+    "type": "integer",
+    "minimum": 1,
+    "maximum": 9007199254740991
+   },
+   "stamp": {
+    "$ref": "stamp"
+   },
+   "changes": {
+    "type": "array",
+    "maxItems": 2000,
+    "items": {
+     "type": "object",
+     "required": [
+      "kind",
+      "key"
+     ],
+     "properties": {
+      "kind": {
+       "type": "string",
+       "enum": [
+        "answer_event",
+        "presentation",
+        "task",
+        "completion",
+        "checkpoint",
+        "story_state",
+        "target",
+        "amendment",
+        "flag",
+        "suspension",
+        "exposure",
+        "rest_day",
+        "setting",
+        "timezone_change",
+        "guards",
+        "content_version",
+        "pack_version",
+        "active_pack",
+        "case_link",
+        "production_event"
+       ]
+      },
+      "key": {
+       "type": "string",
+       "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+*/-]{0,199}$"
+      },
+      "value": {
+       "type": "object",
+       "open": true
+      },
+      "deleted": {
+       "type": "boolean",
+       "enum": [
+        true
+       ]
+      }
+     }
+    }
+   }
+  }
+ },
+ "kinds": {
+  "answer_event": {
+   "class": "add_only",
+   "key": "id",
+   "value": {
+    "type": "object",
+    "required": [
+     "id",
+     "presentation_id",
+     "local_seq",
+     "phase",
+     "assistance",
+     "response",
+     "correct",
+     "at"
+    ],
+    "properties": {
+     "id": {
+      "$ref": "id"
+     },
+     "presentation_id": {
+      "$ref": "id"
+     },
+     "local_seq": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10000000
+     },
+     "phase": {
+      "type": "string",
+      "enum": [
+       "first",
+       "retry",
+       "correction"
+      ]
+     },
+     "assistance": {
+      "type": "string",
+      "enum": [
+       "none",
+       "hint",
+       "worked_steps",
+       "answer_and_explanation"
+      ]
+     },
+     "response": {
+      "type": "object",
+      "required": [
+       "kind",
+       "option_ids",
+       "pairs"
+      ],
+      "properties": {
+       "kind": {
+        "type": "string",
+        "enum": [
+         "single",
+         "ordered",
+         "matching",
+         "word_bank"
+        ]
+       },
+       "option_ids": {
+        "type": "array",
+        "maxItems": 16,
+        "items": {
+         "$ref": "id"
+        }
+       },
+       "pairs": {
+        "type": "array",
+        "maxItems": 16,
+        "items": {
+         "type": "object",
+         "required": [
+          "left",
+          "right"
+         ],
+         "properties": {
+          "left": {
+           "$ref": "id"
+          },
+          "right": {
+           "$ref": "id"
+          }
+         }
+        }
+       }
+      }
+     },
+     "correct": {
+      "type": "boolean"
+     },
+     "at": {
+      "$ref": "datetime"
+     }
+    }
+   }
+  },
+  "presentation": {
+   "class": "presentation",
+   "key": "id",
+   "value": {
+    "type": "object",
+    "required": [
+     "id",
+     "task_id",
+     "position",
+     "item_id",
+     "item_version",
+     "role",
+     "material_ref",
+     "target_ref",
+     "stage",
+     "format_class",
+     "first_response_eligible",
+     "prior_exposures",
+     "novel_context",
+     "presented_at",
+     "status"
+    ],
+    "properties": {
+     "id": {
+      "$ref": "id"
+     },
+     "task_id": {
+      "$ref": "id"
+     },
+     "position": {
+      "$ref": "position"
+     },
+     "item_id": {
+      "$ref": "id"
+     },
+     "item_version": {
+      "$ref": "item_version"
+     },
+     "role": {
+      "$ref": "role"
+     },
+     "material_ref": {
+      "$ref": "nullable_id"
+     },
+     "target_ref": {
+      "$ref": "nullable_id"
+     },
+     "stage": {
+      "$ref": "nullable_stage"
+     },
+     "format_class": {
+      "$ref": "format_class"
+     },
+     "first_response_eligible": {
+      "type": "boolean"
+     },
+     "prior_exposures": {
+      "$ref": "count"
+     },
+     "novel_context": {
+      "type": "boolean"
+     },
+     "presented_at": {
+      "$ref": "datetime"
+     },
+     "status": {
+      "type": "string",
+      "enum": [
+       "presented",
+       "answered",
+       "corrected",
+       "flagged_replaced",
+       "invalidated"
+      ]
+     }
+    }
+   }
+  },
+  "task": {
+   "class": "task",
+   "key": "id",
+   "value": {
+    "type": "object",
+    "required": [
+     "id",
+     "subject",
+     "local_date",
+     "created_at",
+     "finalised_at",
+     "x",
+     "policy_version",
+     "content_version",
+     "status",
+     "plan",
+     "planned_total",
+     "cursor",
+     "active_seconds",
+     "activity",
+     "target_aggregates"
+    ],
+    "properties": {
+     "id": {
+      "$ref": "id"
+     },
+     "subject": {
+      "$ref": "subject"
+     },
+     "local_date": {
+      "$ref": "date"
+     },
+     "created_at": {
+      "$ref": "datetime"
+     },
+     "finalised_at": {
+      "$ref": "nullable_datetime"
+     },
+     "x": {
+      "$ref": "x"
+     },
+     "policy_version": {
+      "$ref": "id"
+     },
+     "content_version": {
+      "$ref": "id"
+     },
+     "status": {
+      "type": "string",
+      "enum": [
+       "active",
+       "paused",
+       "finalised"
+      ]
+     },
+     "plan": {
+      "type": "object",
+      "required": [
+       "materials",
+       "slots"
+      ],
+      "properties": {
+       "materials": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+         "type": "object",
+         "required": [
+          "material_ref",
+          "material_version",
+          "family",
+          "question_count"
+         ],
+         "properties": {
+          "material_ref": {
+           "$ref": "id"
+          },
+          "material_version": {
+           "$ref": "item_version"
+          },
+          "family": {
+           "$ref": "token"
+          },
+          "question_count": {
+           "type": "integer",
+           "minimum": 1,
+           "maximum": 40
+          }
+         }
+        }
+       },
+       "slots": {
+        "type": "array",
+        "maxItems": 100,
+        "items": {
+         "type": "object",
+         "required": [
+          "position",
+          "kind",
+          "material_ref",
+          "item_id",
+          "item_version",
+          "role",
+          "target_ref",
+          "stage",
+          "counts_toward_x"
+         ],
+         "properties": {
+          "position": {
+           "$ref": "position"
+          },
+          "kind": {
+           "type": "string",
+           "enum": [
+            "material_question",
+            "short",
+            "teaching"
+           ]
+          },
+          "material_ref": {
+           "$ref": "nullable_id"
+          },
+          "item_id": {
+           "$ref": "nullable_id"
+          },
+          "item_version": {
+           "$ref": "nullable_item_version"
+          },
+          "role": {
+           "type": "string",
+           "enum": [
+            "material_question",
+            "repair",
+            "delayed_review",
+            "general_practice",
+            "acquisition_test",
+            "replacement",
+            "teaching"
+           ]
+          },
+          "target_ref": {
+           "$ref": "nullable_id"
+          },
+          "stage": {
+           "$ref": "nullable_stage"
+          },
+          "counts_toward_x": {
+           "type": "boolean"
+          }
+         }
+        }
+       }
+      }
+     },
+     "planned_total": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+     },
+     "cursor": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+     },
+     "active_seconds": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 86400
+     },
+     "activity": {
+      "type": "array",
+      "maxItems": 2000,
+      "items": {
+       "type": "object",
+       "required": [
+        "state",
+        "at"
+       ],
+       "properties": {
+        "state": {
+         "type": "string",
+         "enum": [
+          "active",
+          "paused",
+          "backgrounded",
+          "idle",
+          "closed"
+         ]
+        },
+        "at": {
+         "$ref": "datetime"
+        }
+       }
+      }
+     },
+     "target_aggregates": {
+      "type": "array",
+      "maxItems": 0
+     }
+    }
+   }
+  },
+  "completion": {
+   "class": "add_only",
+   "key": "completion",
+   "value": {
+    "type": "object",
+    "required": [
+     "subject",
+     "local_date",
+     "task_id",
+     "reason",
+     "answered"
+    ],
+    "properties": {
+     "subject": {
+      "$ref": "subject"
+     },
+     "local_date": {
+      "$ref": "date"
+     },
+     "task_id": {
+      "$ref": "nullable_id"
+     },
+     "reason": {
+      "type": "string",
+      "enum": [
+       "full",
+       "shortened_no_eligible_content",
+       "zero_eligible",
+       "replacements_exhausted"
+      ]
+     },
+     "answered": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+     }
+    }
+   }
+  },
+  "checkpoint": {
+   "class": "checkpoint",
+   "key": "id",
+   "value": {
+    "type": "object",
+    "required": [
+     "id",
+     "task_id",
+     "kind",
+     "local_date",
+     "story_seq",
+     "state",
+     "delivered_at"
+    ],
+    "properties": {
+     "id": {
+      "$ref": "id"
+     },
+     "task_id": {
+      "$ref": "nullable_id"
+     },
+     "kind": {
+      "type": "string",
+      "enum": [
+       "halfway",
+       "completion",
+       "combined",
+       "exploration"
+      ]
+     },
+     "local_date": {
+      "$ref": "date"
+     },
+     "story_seq": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100000
+     },
+     "state": {
+      "type": "string",
+      "enum": [
+       "pending",
+       "delivered"
+      ]
+     },
+     "delivered_at": {
+      "$ref": "nullable_datetime"
+     }
+    }
+   }
+  },
+  "story_state": {
+   "class": "grow",
+   "key": "story",
+   "value": {
+    "type": "object",
+    "required": [
+     "next_story_seq",
+     "chapter",
+     "world_flags",
+     "ended"
+    ],
+    "properties": {
+     "next_story_seq": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100000
+     },
+     "chapter": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10000
+     },
+     "world_flags": {
+      "type": "array",
+      "maxItems": 500,
+      "items": {
+       "$ref": "token"
+      }
+     },
+     "ended": {
+      "type": "boolean"
+     }
+    }
+   }
+  },
+  "target": {
+   "class": "target",
+   "key": "id",
+   "value": {
+    "type": "object",
+    "required": [
+     "id",
+     "subject",
+     "course",
+     "target_kind",
+     "knowledge_point_ref",
+     "target_value",
+     "assessed_skill",
+     "error_type",
+     "mapping_status",
+     "verification",
+     "status",
+     "verified_at",
+     "replaces",
+     "observations"
+    ],
+    "properties": {
+     "id": {
+      "$ref": "id"
+     },
+     "subject": {
+      "$ref": "subject"
+     },
+     "course": {
+      "$ref": "course"
+     },
+     "target_kind": {
+      "type": "string",
+      "enum": [
+       "character",
+       "word",
+       "language_point",
+       "reading_skill",
+       "science_concept",
+       "math_relationship",
+       "math_method",
+       "vocabulary",
+       "grammar"
+      ]
+     },
+     "knowledge_point_ref": {
+      "$ref": "nullable_id"
+     },
+     "target_value": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9\\u3400-\\u4dbf\\u4e00-\\u9fff' -]{1,24}$",
+      "nullable": true
+     },
+     "assessed_skill": {
+      "$ref": "nullable_token"
+     },
+     "error_type": {
+      "$ref": "token"
+     },
+     "mapping_status": {
+      "type": "string",
+      "enum": [
+       "mapped",
+       "pending_content"
+      ]
+     },
+     "verification": {
+      "type": "string",
+      "enum": [
+       "verified",
+       "uncertain"
+      ]
+     },
+     "status": {
+      "type": "string",
+      "enum": [
+       "active",
+       "superseded",
+       "invalidated"
+      ]
+     },
+     "verified_at": {
+      "$ref": "nullable_datetime"
+     },
+     "replaces": {
+      "$ref": "nullable_id"
+     },
+     "observations": {
+      "type": "array",
+      "maxItems": 500,
+      "items": {
+       "type": "object",
+       "required": [
+        "id",
+        "source_type",
+        "observed_on",
+        "recorded_on",
+        "instance_ref",
+        "batch_ref",
+        "recurrence",
+        "invalidated"
+       ],
+       "properties": {
+        "id": {
+         "$ref": "id"
+        },
+        "source_type": {
+         "type": "string",
+         "enum": [
+          "schoolwork",
+          "home_practice",
+          "external_assessment",
+          "other_reviewed_work",
+          "app_practice"
+         ]
+        },
+        "observed_on": {
+         "$ref": "date"
+        },
+        "recorded_on": {
+         "$ref": "date"
+        },
+        "instance_ref": {
+         "$ref": "id"
+        },
+        "batch_ref": {
+         "$ref": "nullable_id"
+        },
+        "recurrence": {
+         "type": "string",
+         "enum": [
+          "first",
+          "independent",
+          "duplicate"
+         ]
+        },
+        "invalidated": {
+         "type": "boolean"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "amendment": {
+   "class": "add_only",
+   "key": "id",
+   "value": {
+    "type": "object",
+    "required": [
+     "id",
+     "at",
+     "actor",
+     "kind",
+     "refs",
+     "replacement_ref",
+     "reason",
+     "reducer_revision"
+    ],
+    "properties": {
+     "id": {
+      "$ref": "id"
+     },
+     "at": {
+      "$ref": "datetime"
+     },
+     "actor": {
+      "type": "string",
+      "enum": [
+       "parent"
+      ]
+     },
+     "kind": {
+      "type": "string",
+      "enum": [
+       "amend_target",
+       "invalidate_target",
+       "invalidate_observation",
+       "invalidate_presentation",
+       "restore_item",
+       "disable_item"
+      ]
+     },
+     "refs": {
+      "type": "array",
+      "maxItems": 50,
+      "items": {
+       "$ref": "id"
+      }
+     },
+     "replacement_ref": {
+      "$ref": "nullable_id"
+     },
+     "reason": {
+      "type": "string",
+      "enum": [
+       "wrong_target",
+       "wrong_skill",
+       "wrong_error_type",
+       "wrong_date",
+       "duplicate",
+       "question_problem",
+       "not_a_mistake"
+      ]
+     },
+     "reducer_revision": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100000
+     }
+    }
+   }
+  },
+  "flag": {
+   "class": "flag",
+   "key": "flag",
+   "value": {
+    "type": "object",
+    "required": [
+     "presentation_id",
+     "item_id",
+     "item_version",
+     "reason",
+     "flagged_at",
+     "status",
+     "decided_at"
+    ],
+    "properties": {
+     "presentation_id": {
+      "$ref": "nullable_id"
+     },
+     "item_id": {
+      "$ref": "id"
+     },
+     "item_version": {
+      "$ref": "item_version"
+     },
+     "reason": {
+      "type": "string",
+      "enum": [
+       "answer_looks_wrong",
+       "question_unclear",
+       "too_hard",
+       "other"
+      ]
+     },
+     "flagged_at": {
+      "$ref": "datetime"
+     },
+     "status": {
+      "type": "string",
+      "enum": [
+       "open",
+       "restored",
+       "disabled"
+      ]
+     },
+     "decided_at": {
+      "$ref": "nullable_datetime"
+     }
+    }
+   }
+  },
+  "suspension": {
+   "class": "editable",
+   "key": "suspension",
+   "value": {
+    "type": "object",
+    "required": [
+     "item_id",
+     "item_version",
+     "scope",
+     "since",
+     "restored_at"
+    ],
+    "properties": {
+     "item_id": {
+      "$ref": "id"
+     },
+     "item_version": {
+      "$ref": "nullable_item_version"
+     },
+     "scope": {
+      "type": "string",
+      "enum": [
+       "child",
+       "version"
+      ]
+     },
+     "since": {
+      "$ref": "datetime"
+     },
+     "restored_at": {
+      "$ref": "nullable_datetime"
+     }
+    }
+   }
+  },
+  "exposure": {
+   "class": "grow",
+   "key": "exposure",
+   "value": {
+    "type": "object",
+    "required": [
+     "item_id",
+     "first_presented_on",
+     "last_presented_on",
+     "times"
+    ],
+    "properties": {
+     "item_id": {
+      "$ref": "id"
+     },
+     "first_presented_on": {
+      "$ref": "date"
+     },
+     "last_presented_on": {
+      "$ref": "date"
+     },
+     "times": {
+      "$ref": "count"
+     }
+    }
+   }
+  },
+  "rest_day": {
+   "class": "editable",
+   "key": "rest_day",
+   "deletable": true,
+   "value": {
+    "type": "object",
+    "required": [
+     "date"
+    ],
+    "properties": {
+     "date": {
+      "$ref": "date"
+     }
+    }
+   }
+  },
+  "setting": {
+   "class": "editable",
+   "key": "setting",
+   "value": {
+    "anyOf": [
+     {
+      "type": "object",
+      "required": [
+       "timezone"
+      ],
+      "properties": {
+       "timezone": {
+        "$ref": "timezone"
+       }
+      }
+     },
+     {
+      "type": "object",
+      "required": [
+       "ui_language"
+      ],
+      "properties": {
+       "ui_language": {
+        "type": "string",
+        "enum": [
+         "zh",
+         "en"
+        ]
+       }
+      }
+     },
+     {
+      "type": "object",
+      "required": [
+       "x",
+       "changed_at"
+      ],
+      "properties": {
+       "x": {
+        "$ref": "x"
+       },
+       "changed_at": {
+        "$ref": "nullable_datetime"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "timezone_change": {
+   "class": "add_only",
+   "key": "changed_at",
+   "value": {
+    "type": "object",
+    "required": [
+     "from_timezone",
+     "timezone",
+     "changed_at"
+    ],
+    "properties": {
+     "from_timezone": {
+      "$ref": "timezone"
+     },
+     "timezone": {
+      "$ref": "timezone"
+     },
+     "changed_at": {
+      "$ref": "datetime"
+     }
+    }
+   }
+  },
+  "guards": {
+   "class": "grow",
+   "key": "guards",
+   "value": {
+    "type": "object",
+    "required": [
+     "last_finalised_date",
+     "last_timezone_change_at",
+     "max_local_date_seen"
+    ],
+    "properties": {
+     "last_finalised_date": {
+      "$ref": "nullable_date"
+     },
+     "last_timezone_change_at": {
+      "$ref": "nullable_datetime"
+     },
+     "max_local_date_seen": {
+      "$ref": "nullable_date"
+     }
+    }
+   }
+  },
+  "content_version": {
+   "class": "editable",
+   "key": "subject",
+   "value": {
+    "type": "object",
+    "required": [
+     "subject",
+     "catalogue_version",
+     "manifest_version"
+    ],
+    "properties": {
+     "subject": {
+      "$ref": "subject"
+     },
+     "catalogue_version": {
+      "$ref": "id"
+     },
+     "manifest_version": {
+      "$ref": "nullable_id"
+     }
+    }
+   }
+  },
+  "pack_version": {
+   "class": "add_only",
+   "key": "version_ref",
+   "value": {
+    "type": "object",
+    "required": [
+     "version_ref",
+     "pack"
+    ],
+    "properties": {
+     "version_ref": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_.:-]{0,127}@[0-9a-f]{16}$"
+     },
+     "pack": {
+      "$ref": "pack"
+     }
+    }
+   }
+  },
+  "active_pack": {
+   "class": "editable",
+   "key": "active",
+   "value": {
+    "type": "object",
+    "required": [
+     "version_ref"
+    ],
+    "properties": {
+     "version_ref": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_.:-]{0,127}@[0-9a-f]{16}$"
+     }
+    }
+   }
+  },
+  "case_link": {
+   "class": "editable",
+   "key": "case_id",
+   "deletable": true,
+   "value": {
+    "type": "object",
+    "required": [
+     "case_id",
+     "mode",
+     "target_ref",
+     "engine_target_id",
+     "plan_id",
+     "shared_with"
+    ],
+    "properties": {
+     "case_id": {
+      "type": "string",
+      "pattern": "^O[0-9]{3}$"
+     },
+     "mode": {
+      "type": "string",
+      "enum": [
+       "objective",
+       "external"
+      ]
+     },
+     "target_ref": {
+      "$ref": "nullable_id"
+     },
+     "engine_target_id": {
+      "$ref": "nullable_id"
+     },
+     "plan_id": {
+      "type": "string",
+      "nullable": true,
+      "pattern": "^[a-z0-9][a-z0-9_.:-]{0,160}$"
+     },
+     "shared_with": {
+      "type": "array",
+      "maxItems": 2000,
+      "items": {
+       "type": "string",
+       "pattern": "^O[0-9]{3}$"
+      }
+     }
+    }
+   }
+  },
+  "production_event": {
+   "class": "add_only",
+   "key": "id",
+   "value": {
+    "type": "object",
+    "required": [
+     "id",
+     "plan_id",
+     "stage",
+     "observed_on",
+     "mode",
+     "result",
+     "recorded_at"
+    ],
+    "properties": {
+     "id": {
+      "$ref": "id"
+     },
+     "plan_id": {
+      "$ref": "plan_id"
+     },
+     "stage": {
+      "type": "string",
+      "enum": [
+       "exact",
+       "similar",
+       "generic",
+       "delayed_review"
+      ]
+     },
+     "observed_on": {
+      "$ref": "date"
+     },
+     "mode": {
+      "type": "string",
+      "enum": [
+       "independent",
+       "supported"
+      ]
+     },
+     "result": {
+      "type": "string",
+      "enum": [
+       "correct",
+       "not_yet"
+      ]
+     },
+     "recorded_at": {
+      "$ref": "datetime"
+     }
+    }
+   }
+  }
+ }
+}

@@ -19,6 +19,13 @@ export interface Mutation {
   puts: Put[]
   /** Append-only answer events (keyed by event id; re-adding an identical id is a no-op). */
   events: EngineState['events']
+  /**
+   * Set for records downloaded from the server. They are saved locally like any other change but never queued
+   * for upload again, so a download cannot start an upload loop.
+   */
+  remote?: true
+  /** Records removed by a downloaded deletion (tombstone). Only set on remote mutations. */
+  deletes?: { table: Table; key: string }[]
 }
 
 export interface StoredRecords {
@@ -165,6 +172,7 @@ export class MemoryRecordStore implements RecordStore {
       throw err
     }
     if (this.applied.has(m.id)) return
+    for (const d of m.deletes ?? []) this.records.delete(`${d.table}\u0000${d.key}`)
     for (const p of m.puts) this.records.set(`${p.table}\u0000${p.key}`, structuredClone(p))
     for (const e of m.events) {
       const existing = this.events.get(e.id)

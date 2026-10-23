@@ -5,6 +5,9 @@ import { names, subjects, type Language } from '../ui/development.ts'
 import { responseText } from '../ui/Practice.tsx'
 import { resetPin, validPin, verifyPin } from './device.ts'
 import { xMax } from '../engine/policy.ts'
+import type { SaveStatus } from '../engine/persistence.ts'
+import type { SyncStatus } from '../sync/manager.ts'
+import { SyncPanel } from './Sync.tsx'
 const PrivateMistakes = __PRIVATE_PACK_ENABLED__
   ? lazy(() => import('./Mistakes.tsx').then((m) => ({ default: m.Mistakes })))
   : null
@@ -29,6 +32,11 @@ export function Parent({
   work,
   freshAuth,
   busy,
+  sync,
+  save,
+  syncNow,
+  signIn,
+  signOut,
 }: {
   id: string
   runtime: Runtime
@@ -39,6 +47,11 @@ export function Parent({
   work: (fn: () => Promise<unknown>) => Promise<void>
   freshAuth: () => AuthClient
   busy: boolean
+  sync: SyncStatus | null
+  save: SaveStatus | null
+  syncNow: () => void
+  signIn: (email: string, password: string) => void
+  signOut: () => void
 }) {
   const [pin, setPin] = useState('')
   const [reset, setReset] = useState(false)
@@ -102,7 +115,7 @@ export function Parent({
     <section className="parent">
       <div className="section-top">
         <p className="eyebrow">
-          {tr('PARENT AREA · THIS DEVICE ONLY', '家长区 · 仅保存在本设备')}
+          {tr('PARENT AREA', '家长区')}
         </p>
         <button onClick={close} disabled={busy}>
           {tr('Exit and lock', '退出并锁定')}
@@ -111,8 +124,8 @@ export function Parent({
       <h1>{tr('A little support along the way.', '陪伴每一步成长。')}</h1>
       <p>
         {tr(
-          'Development preview. Use synthetic data only. There is no cloud backup; clearing browser data can lose records.',
-          '开发预览，请只使用模拟数据。没有云端备份，清除浏览器数据可能丢失记录。',
+          'Development preview. Use synthetic data only. Records are saved on this iPad first and sync to the family’s backend when online; clearing browser data loses changes that have not uploaded yet.',
+          '开发预览，请只使用模拟数据。记录先保存在本设备，联网时同步到家庭云端；清除浏览器数据会丢失尚未上传的更改。',
         )}
       </p>
       {!unlocked ? (
@@ -195,6 +208,7 @@ export function Parent({
         </div>
       ) : (
         <>
+          <SyncPanel status={sync} save={save} language={language} busy={busy} syncNow={syncNow} signIn={signIn} signOut={signOut} />
           <div className="settings-grid">
             <article>
               <h2>{tr('Daily practice size', '每日练习量')}</h2>
