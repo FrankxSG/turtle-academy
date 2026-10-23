@@ -310,7 +310,7 @@ export function App() {
   function start(subject: Subject) {
     void work(async () => {
       // A new or reset device first restores the family's records, so today's task is not started twice.
-      if (restoring || (syncRef.current && !(await syncRef.current.refresh()).practiceReady)) return
+      if (restoring || (syncRef.current && !syncRef.current.status().practiceReady)) return
       if (runtime!.engine.dailyStatus().rest) return
       const result = await runtime!.engine.startOrResume(subject, {
         optional: true,
