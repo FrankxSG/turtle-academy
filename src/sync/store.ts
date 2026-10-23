@@ -12,7 +12,7 @@ import type { ProductionEvent } from '../mistakes/production.ts'
 import { MemoryPrivateStore } from '../mistakes/program.ts'
 import { eventChange, recordChanges, stateChanges, type RemoteRecord } from './changes.ts'
 import { makeOps, newMeta, observe, type OutboxOp, type Owner, type SyncMeta } from './outbox.ts'
-import { caseLinkChanges, packChanges, productionChange, syncablePack, withLocalWrongForms } from './pack.ts'
+import { caseLinkChanges, packChanges, productionChange, syncablePack, usablePackVersion, withLocalWrongForms } from './pack.ts'
 import type { Change, Stamp } from './validate.ts'
 
 export type Stream = 'records' | 'pack'
@@ -156,6 +156,8 @@ export interface PackSyncStore extends SyncStore {
   applyRemote(r: { versions: { ref: string; pack: PrivatePack }[]; active: string | null; links: RemoteRecord[]; production: ProductionEvent[] }): Promise<boolean>
   /** Issue recorded when the current pack cannot sync (for example a field over its bound). */
   issue(): Promise<string | null>
+  /** Whether a downloaded pack version fits this app version. */
+  usable(value: unknown): boolean
 }
 
 /** In-memory private store with an outbox: mirrors DexiePrivateStore for Node tests. */
@@ -209,6 +211,7 @@ export class MemorySyncPrivateStore extends MemoryPrivateStore implements PackSy
   async hasLearningRecords() { return this.packList.length > 0 || this.events.size > 0 || this.rows.length > 0 }
   async setLastSync(when: string) { this.box.meta.last_sync_at = when }
   async issue() { return this.packIssue }
+  usable(value: unknown) { return usablePackVersion(value) }
   activeRef: string | null = null
   async applyRemote(r: { versions: { ref: string; pack: PrivatePack }[]; active: string | null; links: RemoteRecord[]; production: ProductionEvent[] }) {
     let changed = false

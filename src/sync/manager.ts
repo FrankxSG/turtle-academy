@@ -13,13 +13,13 @@ import type { LearningEngine } from '../engine/engine.ts'
 import type { Put } from '../engine/persistence.ts'
 import { toRecords } from '../engine/records.ts'
 import type { MistakeProgram } from '../mistakes/program.ts'
-import { validatePack, type PrivatePack } from '../mistakes/pack.ts'
+import type { PrivatePack } from '../mistakes/pack.ts'
 import type { ProductionEvent } from '../mistakes/production.ts'
 import { isEngineKind, toLocal, type RemoteRecord } from './changes.ts'
 import { changeKey, toWire, type OutboxOp, type Owner } from './outbox.ts'
 import type { PackSyncStore, RecordsSyncStore, SyncStore } from './store.ts'
 import { TransportError, type SyncTransport } from './transport.ts'
-import { check, LIMITS, SYNC_SCHEMA, type SyncKind } from './validate.ts'
+import { check, hasKind, LIMITS, SYNC_SCHEMA, type SyncKind } from './validate.ts'
 
 export type SyncState = 'idle' | 'syncing' | 'restoring' | 'offline' | 'sign_in_required' | 'failed'
 
@@ -363,10 +363,9 @@ export class SyncManager {
     // Incompatible data stops here with a clear code before anything is applied, so existing local records are
     // untouched. The staged copy is discarded so the next attempt (after an app or server fix) downloads afresh.
     const compatible = staged.every((r) => {
-      if (r.deleted || r.value === null || !SYNC_SCHEMA.kinds[r.kind]) return true
-      if (!check(SYNC_SCHEMA.kinds[r.kind].value, r.value)) return false
-      if (r.kind !== 'pack_version') return true
-      try { validatePack((r.value as { pack: unknown }).pack); return true } catch { return false }
+      if (r.deleted || r.value === null || !hasKind(r.kind)) return true // e.g. pack records in the public build
+      if (r.kind === 'pack_version') return this.d.pack ? this.d.pack.usable(r.value) : true
+      return check(SYNC_SCHEMA.kinds[r.kind].value, r.value)
     })
     if (!compatible) {
       await this.d.records.resetRecovery()
@@ -400,7 +399,7 @@ export class SyncManager {
     if (remote.length === 0) return
     const pending = new Set<string>()
     for (const s of this.streams()) for (const k of await s.pendingKeys()) pending.add(k)
-    const incoming = remote.filter((r) => !pending.has(changeKey(r)) && (SYNC_SCHEMA.kinds[r.kind] as unknown) !== undefined)
+    const incoming = remote.filter((r) => !pending.has(changeKey(r)) && hasKind(r.kind))
     const engine = this.d.engine
     const local = toLocal(incoming.filter((r) => isEngineKind(r.kind)), { settings: engine.state.settings, story: engine.state.story })
     const current = new Map(toRecords(engine.state).map((p) => [`${p.table}\u0000${p.key}`, JSON.stringify(p.value)]))

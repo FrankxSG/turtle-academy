@@ -8,6 +8,11 @@ on:
       - 'scripts/check-hosted-auth.mjs'
       - 'scripts/check-google-link.mjs'
       - 'scripts/lib/**'
+      - 'src/sync/**'
+      - 'src/engine/**'
+      - 'src/mistakes/**'
+      - 'tests/engine/sync-harness.ts'
+      - 'tests/engine/fixtures/**'
       - '.github/workflows/db-contract.yml'
   workflow_dispatch:
 permissions:
@@ -32,6 +37,12 @@ jobs:
           set -o pipefail
           if ! python3 supabase/tests/test_database.py -v 2>&1 | tee db-test.log; then
             tail -n 40 db-test.log | python3 -c "import sys; t=sys.stdin.read(); print('::error title=db-contract::' + t.replace('%','%25').replace('\r','').replace('\n','%0A'))"
+            exit 1
+          fi
+      - run: |
+          set -o pipefail
+          if ! python3 supabase/tests/test_sync.py -v 2>&1 | tee sync-test.log; then
+            tail -n 60 sync-test.log | python3 -c "import sys; t=sys.stdin.read(); print('::error title=sync-contract::' + t.replace('%','%25').replace('\r','').replace('\n','%0A'))"
             exit 1
           fi
       - run: node --experimental-strip-types --test supabase/tests/client/*.test.mjs

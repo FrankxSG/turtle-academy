@@ -29,7 +29,7 @@ export type SyncKind =
 
 export type MergeClass = 'add_only' | 'presentation' | 'task' | 'checkpoint' | 'grow' | 'target' | 'flag' | 'editable'
 
-interface KindSpec { class: MergeClass; key: string; deletable?: boolean; value: Node }
+export interface KindSpec { class: MergeClass; key: string; deletable?: boolean; value: Node }
 interface Descriptor {
   id: string
   limits: { op_bytes: number; request_bytes: number; ops_per_request: number; changes_per_op: number; pull_page: number }
@@ -38,10 +38,21 @@ interface Descriptor {
   kinds: Record<SyncKind, KindSpec>
 }
 
-export const SYNC_SCHEMA = descriptor as unknown as Descriptor
+// A copy, so registering the pack part (below) never mutates the imported JSON module.
+export const SYNC_SCHEMA = structuredClone(descriptor) as unknown as Descriptor
 export const SYNC_SCHEMA_VERSION = 'pilot-sync/1'
 export const LIMITS = SYNC_SCHEMA.limits
-export const KINDS = Object.keys(SYNC_SCHEMA.kinds) as SyncKind[]
+
+/**
+ * Add the private mistake pack's part of the allow-list (src/sync/pack-schema.json). Only private-build code loads
+ * it, so the public bundle carries no pack structure; until it is registered, pack changes are not valid here and
+ * downloaded pack records are ignored. The server always holds both parts.
+ */
+export function registerPackSchema(pack: { defs: Record<string, Node>; kinds: Partial<Record<SyncKind, KindSpec>> }) {
+  Object.assign(SYNC_SCHEMA.defs, pack.defs)
+  Object.assign(SYNC_SCHEMA.kinds, pack.kinds)
+}
+export const hasKind = (kind: string): kind is SyncKind => Object.hasOwn(SYNC_SCHEMA.kinds, kind)
 
 const patterns = new Map<string, RegExp>()
 function regex(source: string): RegExp {
@@ -146,8 +157,8 @@ export type CheckCode = 'invalid_operation' | 'invalid_change' | 'operation_too_
 /** Validate one change. Never returns or logs content. */
 export function checkChange(c: unknown): boolean {
   if (!isPlainObject(c)) return false
-  const spec = SYNC_SCHEMA.kinds[c.kind as SyncKind]
-  if (!spec || typeof c.key !== 'string') return false
+  if (typeof c.kind !== 'string' || !hasKind(c.kind) || typeof c.key !== 'string') return false
+  const spec = SYNC_SCHEMA.kinds[c.kind]
   if (c.deleted === true) return spec.deletable === true && !Object.hasOwn(c, 'value')
   if (Object.hasOwn(c, 'deleted') || !isPlainObject(c.value)) return false
   if (!check(spec.value, c.value)) return false

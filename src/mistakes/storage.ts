@@ -5,7 +5,7 @@ import type { ProductionEvent } from './production.ts'
 import type { PrivateStore, StoredBuild } from './program.ts'
 import type { RemoteRecord } from '../sync/changes.ts'
 import { makeOps, newMeta, observe, type OutboxOp, type Owner, type SyncMeta } from '../sync/outbox.ts'
-import { caseLinkChanges, packChanges, productionChange, syncablePack, withLocalWrongForms } from '../sync/pack.ts'
+import { caseLinkChanges, packChanges, productionChange, syncablePack, usablePackVersion, withLocalWrongForms } from '../sync/pack.ts'
 import type { Ack, PackSyncStore } from '../sync/store.ts'
 import type { Change } from '../sync/validate.ts'
 
@@ -161,6 +161,7 @@ export class DexiePrivateStore implements PrivateStore, PackSyncStore {
     await this.db.sync.update('meta', { last_sync_at: at })
   }
   async issue() { return ((await this.db.kv.get('pack_issue'))?.value as string | null | undefined) ?? null }
+  usable(value: unknown) { return usablePackVersion(value) }
 
   /** Downloaded pack records. Saved without queuing; this device's own wrong forms for the same cases are kept. */
   async applyRemote(r: { versions: { ref: string; pack: PrivatePack }[]; active: string | null; links: RemoteRecord[]; production: ProductionEvent[] }): Promise<boolean> {

@@ -7,6 +7,7 @@ on:
       - 'src/mistakes/**'
       - 'src/snapshot/**'
       - 'tests/engine/**'
+      - 'src/sync/**'
       - '.github/workflows/engine.yml'
   workflow_dispatch:
 permissions:

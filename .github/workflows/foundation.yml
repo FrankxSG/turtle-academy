@@ -28,6 +28,11 @@ on:
       - 'playwright.config.ts'
       - 'package.json'
       - 'package-lock.json'
+      - 'src/sync/**'
+      - 'tests/sync.spec.ts'
+      - 'supabase/migrations/**'
+      - 'supabase/tests/sync_server.py'
+      - 'supabase/tests/test_database.py'
       - '.github/workflows/foundation.yml'
   workflow_dispatch:
 permissions:

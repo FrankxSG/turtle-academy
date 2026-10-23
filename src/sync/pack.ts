@@ -6,9 +6,12 @@
 // A pack version is identified by its pack id and a digest of the stripped content, so versions are immutable and
 // a task pinned to an earlier version can still be rebuilt after recovery.
 import type { CrosswalkRow } from '../mistakes/intake.ts'
-import type { PrivatePack } from '../mistakes/pack.ts'
+import { validatePack, type PrivatePack } from '../mistakes/pack.ts'
 import type { ProductionEvent } from '../mistakes/production.ts'
-import { check, SYNC_SCHEMA, type Change } from './validate.ts'
+import packSchema from './pack-schema.json' with { type: 'json' }
+import { check, registerPackSchema, SYNC_SCHEMA, type Change, type KindSpec, type Node } from './validate.ts'
+
+registerPackSchema(packSchema as unknown as { defs: Record<string, Node>; kinds: Record<string, KindSpec> })
 
 type Obj = Record<string, unknown>
 
@@ -85,4 +88,15 @@ export function withLocalWrongForms(remote: PrivatePack, local: PrivatePack | nu
     if (typeof o === 'string') c.observed = o
   }
   return pack
+}
+
+/** Whether a downloaded pack version can be used by this app version (restore checks before applying anything). */
+export function usablePackVersion(value: unknown): boolean {
+  if (!check(SYNC_SCHEMA.kinds.pack_version.value, value)) return false
+  try {
+    validatePack((value as { pack: unknown }).pack)
+    return true
+  } catch {
+    return false
+  }
 }

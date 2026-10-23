@@ -21,6 +21,13 @@ export default defineConfig({
   ],
   webServer: [
     {
+      // Local live-sync server: throwaway PostgreSQL with every migration, synthetic parents only (tests/sync.spec.ts).
+      command: 'python3 supabase/tests/sync_server.py --port 54331',
+      url: 'http://127.0.0.1:54331/__test/health',
+      reuseExistingServer: false,
+      timeout: 120000,
+    },
+    {
       command: 'npm run build:private && npx vite preview --mode private --outDir dist-private --host 127.0.0.1 --port 4176 --strictPort',
       url: 'http://127.0.0.1:4176', reuseExistingServer: false, timeout: 120000,
       env: { VITE_ENABLE_PRIVATE_PACK: 'true', VITE_SUPABASE_URL: 'http://127.0.0.1:4176', VITE_SUPABASE_ANON_KEY: 'synthetic-test-only' },

@@ -8,7 +8,7 @@ import { MistakeProgram } from '../../src/mistakes/program.ts'
 import { SyncManager } from '../../src/sync/manager.ts'
 import { MemorySyncPrivateStore, MemorySyncRecordStore } from '../../src/sync/store.ts'
 import type { SyncTransport } from '../../src/sync/transport.ts'
-import type { AuthResult, Session } from '../../src/auth/client.ts'
+import type { AuthClient, AuthResult, Session } from '../../src/auth/client.ts'
 import { Clock, ids, ManualTimers, correctResponse, wrongResponse } from './helpers.ts'
 import { publicChinese } from './fixtures/public-chinese.ts'
 
@@ -35,7 +35,7 @@ export const identityOf = async (userId: string) => `key-${userId}`
 
 export interface DeviceOpts {
   transport: SyncTransport
-  auth: TestAuth
+  auth: Pick<AuthClient, 'getStoredSession' | 'refreshSession' | 'isExpired'>
   userId: string
   clock?: Clock
   records?: MemorySyncRecordStore
