@@ -85,7 +85,22 @@ Science and Chinese were the initial pedagogical priorities; **English and Mathe
 5. Verify hosting preview/production visibility, environment variables, APIs, storage permissions and logs. If learner cloud features exist, verify authenticated isolation including RLS and object policies using synthetic cross-family tests.
 6. Prefer a **new clean public repository** if sensitive contents exist in prior Git history; deleting them from the current tip is insufficient. Do not make a repository public until the gate passes.
 
-This repository used the sanitized, history-free clean-baseline publication route on 2026-10-10, as recorded in [FOUNDATION_SETUP.md](FOUNDATION_SETUP.md). This dated record does not certify future backend or preview safety.
+This repository used the sanitized, history-free clean-baseline publication route on 2026-10-10, as recorded in the [historical setup evidence](https://github.com/FrankxSG/turtle-academy/pull/31#issuecomment-6340409868). This dated record does not certify future backend or preview safety.
+
+### Repository controls
+
+Intended GitHub settings; verify the live settings before relying on them.
+
+| Setting | Intended value |
+| --- | --- |
+| Main ruleset | PR required; `privacy-guard` required; force pushes and deletion blocked |
+| Required approvals / Code Owners | Zero required approvals; Code Owner review off. Both assistants share one identity; `.github/CODEOWNERS` is advisory |
+| Merge methods / branch cleanup | Squash only; automatic head-branch deletion |
+| Actions | Read-only workflow permissions; approval for all external fork contributors |
+| Secret Protection / push protection | On |
+| Fork contributions | **Allow edits from maintainers** enabled when available |
+
+GitHub does not enforce owner merge authorization or independent review here; [AGENTS.md](../AGENTS.md) does. If a credential or infrastructure identifier is exposed, notify the owner and rotate it.
 
 ### CI and cost controls
 

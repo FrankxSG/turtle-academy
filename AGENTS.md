@@ -1,36 +1,27 @@
 # Working on Turtle Academy
 
-Public React/Vite/TypeScript learning PWA. Claude and ChatGPT share these collaboration rules; private repositories add their own data-handling rules.
+Public React/Vite/TypeScript learning PWA. Claude and ChatGPT use this workflow; private repositories add their data rules.
 
-## Start with the task
+## Read for the task
 
-Read the current README, current main and relevant open work. Follow only the references needed:
+Start with the current README, main and relevant open work. Follow only the needed references:
 
-- Behavior: [Pilot functional design](docs/PILOT_FUNCTIONAL_DESIGN.md); [scope](docs/PILOT_V0_1_SCOPE.md) for delivery/release boundaries; [engine specification](docs/PILOT_LEARNING_ENGINE_SPEC.md) for contracts and F01–F40.
-- Architecture, auth, storage or services: [technical decisions](docs/TECHNICAL_DESIGN_DECISIONS.md) and the affected code-area README.
-- Questions/coverage: [common authoring skill](skills/question-authoring/SKILL.md), the subject skill if present, and relevant subject preparation/research references.
-- Long-term scope changes: [confirmed feature scope](docs/FEATURE_SCOPE.md). Pilot omissions do not cancel it.
-- Repository administration/history: [foundation register](docs/FOUNDATION_SETUP.md#repository-controls) when relevant.
+- Behavior: [functional design](docs/PILOT_FUNCTIONAL_DESIGN.md); [Pilot scope](docs/PILOT_V0_1_SCOPE.md) for delivery/release requirements; [engine specification](docs/PILOT_LEARNING_ENGINE_SPEC.md) for contracts and acceptance cases.
+- Architecture/services: [technical decisions](docs/TECHNICAL_DESIGN_DECISIONS.md) and the affected code-area README. Repository settings are in [§7](docs/TECHNICAL_DESIGN_DECISIONS.md#repository-controls).
+- Questions: [common authoring skill](skills/question-authoring/SKILL.md), subject skill where present, and relevant preparation/research.
+- Long-term scope: [feature scope](docs/FEATURE_SCOPE.md). Pilot omissions do not cancel it.
 
-## Build and coordinate
+## Build and review
 
-- Use one Issue or PR as the task record: goal, necessary constraints/dependencies, progress and evidence. Small changes need only a PR. Keep handoffs and reviews there rather than creating additional documents.
-- One implementer owns each task branch (`claude/…` or `chatgpt/…`). Continue existing work when appropriate; inspect its head before editing. Use an isolated checkout/worktree or connector branch. Never reset, force-push over or delete another agent's work.
-- Parallelize independent work with distinct files/resources. Agree shared interfaces first; keep one writer for shared configuration/lockfiles. A handoff names the branch, completed work, evidence and next action.
-- Make routine implementation choices and continue authorized work. Ask for a missing material product decision. Update the relevant existing specification alongside an agreed behavior change in the same implementation PR; separate decision PRs are optional.
-- Preserve requirements, question-authoring knowledge, sources and approval evidence when shortening text. Later explicit owner decisions supersede conflicting older records; unmerged proposals are not main.
+- Use one Issue or PR for the goal, constraints/dependencies, progress, handoff and evidence. Small changes need only a PR.
+- Keep one writer per task branch (`claude/…` or `chatgpt/…`); inspect its head and use an isolated checkout. Preserve other work; never reset, force-push over or delete it. Independent tasks can run in parallel with separate files/resources; agree shared interfaces and one configuration/lockfile writer first.
+- Make routine implementation choices and continue authorized work. Ask for missing material product decisions. Update the existing specification alongside an agreed behavior change; a separate decision PR is optional. Preserve requirements, authoring knowledge, sources and approvals. Later explicit owner decisions supersede older conflicts; unmerged proposals are not main.
+- Run checks for the changed behavior and report the tested revision and limits. Reuse valid evidence. Markdown needs privacy, links and consistency checks; code/content needs affected tests/validators; bundling/offline needs build/integration checks; auth/data needs negative ownership/recovery checks. Mechanical checks do not establish educational quality.
+- Inspect visible UI changes with synthetic data at relevant viewports; link one screenshot set in the PR and chat, or state the unverified visual gap.
+- Review means fix in-scope gaps, commit and push to the existing PR branch, verify, and hand off the updated revision. Do not expand the task for minor suggestions. A different agent reviews requirements and correctness, including reviewer-authored fixes; if unavailable, the owner may review or explicitly waive that review. Never invent independent review.
+- State **Ready to merge**, **Not ready to merge** or **Unable to determine**, with findings and limits. A comment under the shared GitHub identity is not formal approval.
+- The owner merges or authorizes the named PR at its current head; a changed head needs renewed authorization. Before an authorized squash merge, verify the head, required checks, review/waiver and resolved blockers/conflicts; record authorization once and close the task after integration. Deployment, publication, real-data use and spending retain their own owner decisions.
 
-## Verify and review
+## Data boundaries
 
-- Run relevant checks and report evidence/limits at the tested revision. Reuse valid evidence for unchanged code. Markdown needs privacy, links and consistency checks; an app build/browser suite is unnecessary solely for text.
-- Code/content changes need affected tests/validators; bundling/offline changes need build/integration checks; auth/data changes need negative ownership/recovery checks. Mechanical checks do not establish educational quality.
-- Inspect visible UI changes using synthetic data at relevant viewports. Link one screenshot set from PR and chat. If unavailable, describe the specific gap without claiming visual acceptance.
-- A different agent reviews requirements and correctness at the current head. If the other agent is unavailable, the owner may review or explicitly waive cross-agent review; never invent an independent review.
-- When reviewing a PR, fix in-scope gaps, commit the changes to that PR's existing branch, run relevant checks and hand the updated head to the next reviewer. Complete fixes within the authorized task; ask only for a missing material decision or access needed to finish. Reviewer-authored fixes need another reviewer (or the owner-review/waiver exception above). Keep minor suggestions from expanding the task.
-- Every review states **Ready to merge**, **Not ready to merge**, or **Unable to determine**, with reviewed revision, findings and limits. Shared GitHub identity means a review comment is not formal approval.
-- The owner merges or authorizes a named PR at its current head. A changed head requires renewed authorization. Before an authorized squash merge, verify the unchanged head, required checks, independent review (or recorded owner review/explicit waiver) and no unresolved blockers/conflicts; record authorization once on the PR. Close the task after integration.
-- Deployment, publication, real-data use and spending retain their applicable owner decisions and release requirements. Merge permission does not authorize these operations.
-
-## Boundaries
-
-Keep public files, PRs, Issues, logs, previews and fixtures free of real learner records, private extracts and credentials. Use synthetic development data; private originals stay outside the checkout. Separate private learner instances from generic content, enforce authenticated family/child ownership, and preserve offline work and the distinction between story completion and learning evidence. No runtime AI, privileged frontend keys or unrelated service-project reuse. Verify the actual service target before writes; keep staging/production separate and production secrets out of PR jobs. New paid services require approval.
+Keep public files, discussions, logs, previews and fixtures free of real learner records, private extracts and credentials. Use synthetic development data; keep private originals outside the checkout. Separate learner instances from generic content, enforce authenticated family/child ownership, and preserve offline work and the distinction between story completion and learning evidence. No runtime AI, privileged frontend keys or unrelated service-project reuse. Verify the service target before writes; isolate staging/production and keep production secrets out of PR jobs. New paid services require approval.

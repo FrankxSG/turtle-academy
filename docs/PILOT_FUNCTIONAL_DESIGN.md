@@ -1,6 +1,6 @@
 # Turtle Academy Pilot v0.1 — Functional Design
 
-**Status:** Consolidated owner decisions through 2026-10-15, incorporating the recorded PR #7 review decisions. This is a specification, not implementation, merge, deployment, real-data or spending authorization.
+**Status:** Confirmed Pilot behavior, incorporating the recorded owner decisions. Current implementation evidence is in the README and relevant PRs.
 
 **Read with:** [Learning Engine and Acceptance](PILOT_LEARNING_ENGINE_SPEC.md). This file owns product behavior; that file owns concrete engineering proposals, field checks and acceptance definitions. [Pilot Scope](PILOT_V0_1_SCOPE.md) retains delivery/security gates; [Full Feature Scope](FEATURE_SCOPE.md) preserves long-term capabilities. No learner-specific data belongs in these files.
 
@@ -15,9 +15,9 @@ Parent completes setup; child learns independently with occasional help. Initial
 | Mathematics | All P2 knowledge points represented in objective practice; P3 locked in Pilot, with no P3 content-authoring requirement | Imported mistakes and general practice | No typed answers or automatic scoring of free workings; method selection is not independent written method production |
 | English | P2 + P3 textual/visual practice across the eight families below | P2 imported mistakes/general practice; P3 general practice unlocked from the start, P3 mistake imports later | Complete writing and oral practice outside app; listening and independent typed spelling production deferred |
 
-The objective is a usable daily-practice tool for one family, with full scoped coverage as the goal. Subjects release separately. Chinese, Mathematics and English use 75% of their P2 scoped outcomes as the release guideline. Chinese (including Higher Chinese) and English have P3 general practice unlocked from their first subject release, using reviewed available content; P3 mistake imports follow later. Mathematics stays P2-only in Pilot. Science releases when its first two topics (Diversity of living and non-living things; Classification of living things) meet the 75% guideline; the other five topics unlock in syllabus order as authored and reviewed. A recorded owner proceed decision in Issue #3 can override the coverage guideline either way, without waiving security, privacy or content QA. Reviewed coverage is not claimed delivered; objective selection does not measure every curriculum capability. Full-version omissions are not cancellations.
+The objective is a usable daily-practice tool for one family, with full scoped coverage as the goal. Subjects release separately under the [coverage and proceed requirements](PILOT_V0_1_SCOPE.md#4-content-coverage-and-private-proceed-gates). The table above defines the assessed capabilities; full-version omissions remain in [Feature Scope](FEATURE_SCOPE.md).
 
-Post-Pilot Mathematics phase: build a teaching flow, then open P3 Mathematics. This is not a Pilot content requirement or implementation authorization.
+Post-Pilot Mathematics phase: build a teaching flow, then open P3 Mathematics.
 
 No runtime AI/OCR, in-app worksheet image intake, tracing, automatic handwriting/open-writing scoring, PDF generation or mandatory paper-practice backfill. External private ChatGPT/Claude preparation is parent-initiated and reviewed; developing its extraction skill is later work, not code authorized here.
 
@@ -137,20 +137,4 @@ Snapshots include the minimal task, settings/rest-day, timing, checkpoint/story,
 
 Generic content/teaching updates are centrally prepared and reviewed and distributed with app content updates, then cached offline. No parent generic-question-bank importer or content-pack management screen in Pilot. Stable versions protect paused tasks and historical evidence; failed downloads preserve usable cached content.
 
-## 10. Decision consistency appendix
-
-The owner decisions are recorded above; exact JSON taxonomy and implementation algorithms in the engine remain **engineering proposals**; the recorded active-time, timezone, evidence-reset and zero-item rules are confirmed behavior. These do not change confirmed behavior or authorize implementation.
-
-| Former inconsistency | Resolution |
-| --- | --- |
-| Five targets / three consecutive successes / X=1–30 | No fixed target quota; format-sensitive independent evidence with language aggregate exception; per-subject X=6–19 (Chinese 6–20 in the first pilot) |
-| Language planned stages versus immediate Chinese progress | Passage targets aggregate/defer; short-only repair in all four subjects can advance within capacity, with final transfer on a later day |
-| Same target correct in first material, wrong later | Whole-task aggregate uses starting stage; no early pass |
-| Hint-assisted acquisition | Two independent Science checks; safety clarification prevents post-answer assistance becoming acquisition success |
-| Old Fractions/Mystery-only units, tracing/free writing | P2 + P3 language practice, P2 Mathematics and seven selected P3 Science topics; objective answers only; paper/oral/full writing external, listening deferred |
-| Exact 4X workload versus whole passages | Language minimum materials can exceed X; avoid stacking a full short-question quota |
-| Original question archive versus minimal imports | Original worksheets remain outside app; target-based generic matching |
-| Later prerequisite failure versus progress rollback | Keep generic stage and already unlocked content |
-| Full-capability claim from objective question formats | Source-mapped scoped coverage with explicit assessment limits |
-
-Complete curriculum inventories, reviewed content/answer keys, bilingual story/UI and prerequisite graphs remain **delivery work**, not delivered features. [Coverage acceptance](PILOT_LEARNING_ENGINE_SPEC.md#curriculum-coverage-acceptance) defines how to verify them. Existing privacy/security/device/data-protection gates remain before implementation acceptance.
+Use [engine contracts and acceptance cases](PILOT_LEARNING_ENGINE_SPEC.md) to verify these behaviors and [Pilot release requirements](PILOT_V0_1_SCOPE.md#5-testing-and-release-gates) to assess readiness. Exact field names and implementation algorithms remain engineering choices subject to those requirements.

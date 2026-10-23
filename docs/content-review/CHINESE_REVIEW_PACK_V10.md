@@ -1,5 +1,7 @@
 # Chinese review pack — batch zh-starter-001 v10
 
+**Review history:** batch and denominator approval were completed on 2026-10-18; see the current [batch record](../../content/chinese/batches/starter-001.json) and [preparation disposition](../CHINESE_CONTENT_PREPARATION.md#current-review--batch-version-10). Earlier pending states below describe the reviewed revisions, not new work to repeat. The sampled versions, recipes and owner decisions are retained.
+
 Inputs reviewed: `9d4357a` (ChatGPT pass, batch v9) and `3e5255f` (Claude re-review, batch v10). This pack replaces v8 and v9 for current review; v8 is historical. Manifest remains `zh-2024-p2p3-draft.2`, proposed and import-disabled. No content, rights, grade map or release is approved.
 
 ## Review performed and limits
@@ -676,8 +678,8 @@ Original generic authored materials only. Each material is answered as a whole b
 ## Next review and sign-off
 
 1. Waived 2026-10-18: the owner confirmed the three v10 refinements and waived ChatGPT re-review of them. Batch status is `approved`.
-2. Complete the independent visual page/grade audit and owner denominator decision; do not use 13/17 as approved MOE coverage.
+2. Completed 2026-10-18: independent visual page/grade audit and owner denominator decision, as recorded in the preparation disposition and manifest. The old 13/17 figure is not current approved MOE coverage.
 3. Done 2026-10-18: owner accepted all 24 disputed items and all 67 sampled items, approved the batch and cleared rights. Recorded in `review_log`.
 4. Keep P3 import, real data, merge and release gates unchanged. Stock remains one item per repair stage; CL/HCL shared availability does not establish HCL depth.
 
-Validation evidence and the exact published head are recorded on PR23. This file is review preparation, not approval.
+Validation evidence and the exact published head are recorded on PR23. This file preserves versioned review evidence; the canonical batch and manifest records hold current approval status.

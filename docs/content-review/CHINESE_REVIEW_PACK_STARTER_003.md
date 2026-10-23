@@ -6,7 +6,11 @@
 
 ChatGPT read all 117 v1 items with their options, hints and explanations. Twenty-one items are revised at item version 2: bounded meanings replace overbroad definitions; colour contexts specify the intended colour; the 九 recognition item no longer requires addition; unnatural 喷 usage is replaced. Keys and target IDs are unchanged. Claude independently rechecked all 21 revisions and passed them.
 
-The official-source P1 audit and visual spot-check are recorded in PR24_CROSS_REVIEW.md. The owner approved list zh-2024-p1-review.3, and approved this 117-item batch and its public use. Tests now prevent proposed target lists entering approved release coverage and preserve practice-only classification.
+The P1 source audit and visual spot-check are recorded in the [Chinese preparation guide](../CHINESE_CONTENT_PREPARATION.md#p1-review-characters-textbook-extras-and-zh-starter-003-v1-18-october-2026). The owner approved list zh-2024-p1-review.3, and approved this 117-item batch and its public use. Tests now prevent proposed target lists entering approved release coverage and preserve practice-only classification.
+
+Open non-blocking notes from Claude's recheck, for the next revision of these items:
+- `zh-p2-p1review-u571f.q2`: the hint says seeds 要 go in the ground; 可以 is more accurate.
+- `zh-p2-p1review-u767d.q1` and `.q2` share the 像牛奶 cue across the exact and similar stages, so the similar stage does not test a new context.
 
 ## Owner sample
 
