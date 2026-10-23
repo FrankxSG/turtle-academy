@@ -32,6 +32,7 @@ export function Parent({
   work,
   freshAuth,
   busy,
+  restoring = false,
   sync,
   save,
   syncNow,
@@ -47,6 +48,7 @@ export function Parent({
   work: (fn: () => Promise<unknown>) => Promise<void>
   freshAuth: () => AuthClient
   busy: boolean
+  restoring?: boolean
   sync: SyncStatus | null
   save: SaveStatus | null
   syncNow: () => void
@@ -224,7 +226,7 @@ export function Parent({
                   <select
                     aria-label={`${names[language][s]} X`}
                     value={engine.xFor(s)}
-                    disabled={busy}
+                    disabled={busy || restoring}
                     onChange={(ev) =>
                       void work(() => engine.setX(s, Number(ev.target.value)))
                     }
@@ -252,7 +254,7 @@ export function Parent({
                     required
                   />
                 </label>
-                <button disabled={busy}>
+                <button disabled={busy || restoring}>
                   {tr('Save timezone', '保存时区')}
                 </button>
               </form>
@@ -263,7 +265,7 @@ export function Parent({
                 )}
               </p>
               <button
-                disabled={busy || engine.dailyStatus().rest}
+                disabled={busy || restoring || engine.dailyStatus().rest}
                 onClick={() => void work(() => engine.setRestDay())}
               >
                 {tr('Today is a rest day', '今天休息')}
@@ -276,7 +278,7 @@ export function Parent({
               program={runtime.program}
               language={language}
               work={work}
-              busy={busy}
+              busy={busy || restoring}
             />
             </Suspense>
           )}

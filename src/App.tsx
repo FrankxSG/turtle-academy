@@ -565,6 +565,7 @@ export function App() {
                 }}
                 work={work}
                 busy={busy}
+                restoring={restoring}
                 sync={sync}
                 save={save}
                 syncNow={() => void work(async () => { await syncRef.current?.syncNow('manual') })}
