@@ -20,7 +20,7 @@ Current behavioral authority is [Functional Design](PILOT_FUNCTIONAL_DESIGN.md);
 
 ## Learning and release integrity
 
-- Apply the [whole-material, repair and Science evidence rules](PILOT_FUNCTIONAL_DESIGN.md#3-chinese-and-english-whole-material-tasks) and their [acceptance cases](PILOT_LEARNING_ENGINE_SPEC.md#7-behavioral-acceptance-cases).
+- Apply the [whole-material](PILOT_FUNCTIONAL_DESIGN.md#3-chinese-and-english-whole-material-tasks), [repair](PILOT_FUNCTIONAL_DESIGN.md#4-targets-repair-and-delayed-review) and [Science evidence](PILOT_FUNCTIONAL_DESIGN.md#5-science-initial-learning) rules and their [acceptance cases](PILOT_LEARNING_ENGINE_SPEC.md#7-behavioral-acceptance-cases).
 - Subject coverage reports use the approved grade/course inventory. Initial Science coverage uses its first two topics; Mathematics is P2-only in Pilot, while Chinese/Higher Chinese and English P3 general practice is unlocked from the start using reviewed available content and P3 mistake imports follow later. The 75% guideline and recorded owner coverage override never waive source verification, rights, shipped-item QA, privacy/security or data-protection gates. Publish the versioned leaf curriculum manifest before accepting mapped extraction IDs.
 - Necessary wrong forms remain device-local; exclude them and PIN/hash from cloud snapshots. App general-practice recurrence is separate from repair/review failures.
 
