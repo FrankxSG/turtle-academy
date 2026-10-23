@@ -201,15 +201,15 @@ Coverage means all verified **in-app scoped outcomes**, not every curriculum cap
 - English: all P2 + P3 in-app textual/visual outcomes across the eight approved families; listening deferred and full writing/oral external.
 - Science: the seven selected P3 topic areas in Functional Design §5; teaching, two-context testing, chapter order, prerequisites and three-stage repair reviewed. No P2 Science.
 
-**Full scoped coverage is the goal, not a whole-Pilot simultaneous-release prerequisite.** Subjects release separately. Chinese, Mathematics and English use 75% of their P2 in-scope outcomes as the guideline. Chinese/Higher Chinese and English P3 general practice is unlocked from the first subject release, with reviewed available content and P3 mistake imports later. Pilot Mathematics is P2-only. Science uses 75% of the in-scope outcomes within its first two topics (Diversity of living and non-living things; Classification of living things) as the initial release guideline; the remaining five topics unlock in syllabus order as authored and reviewed. The owner's explicit proceed decision recorded in Issue #3 can override coverage either way, specifying subject, grade, inventory version, achieved coverage and missing areas.
+Subject release thresholds, sequencing, P3 availability and the recorded owner override are defined in [Pilot Scope §4](PILOT_V0_1_SCOPE.md#4-content-coverage-and-private-proceed-gates). An override records subject, grade, inventory version, achieved coverage and missing areas.
 
 Coverage percentage is reviewed and fully mapped leaf outcomes divided by the verified in-scope inventory for that release grade/course. Track Chinese and Higher Chinese courses separately; report denominators rather than hiding omissions in an aggregate. A target mapping counts only when its required stages/help and usable content are reviewed. Missing content remains in the denominator and unmatched targets remain private pending_content. Zero unreviewed shipped mappings, rights/privacy blockers or unlabeled limitations remains mandatory. Coverage override does not waive QA, security, data-protection, backup or device gates. Exact item counts are planning, not a new owner quota. A checklist validates references but does not prove educational quality or MOE alignment.
 
-Every mapped repair target needs reviewed original-error/similar/generic variations and delayed checks that assess its actual skill rather than a recognition shortcut. Language material and replacement supply must support the approved task quotas without habitual short-question stacking. Do not claim the current repository bank satisfies coverage: the full leaf inventory and reviewed content are not yet delivered.
+Every mapped repair target needs reviewed original-error/similar/generic variations and delayed checks that assess its actual skill rather than a recognition shortcut. Language material and replacement supply must support the approved task quotas without habitual short-question stacking. Assess coverage from the current manifest, batch review/rights records and generated inventory; authored counts alone do not establish release readiness.
 
 ### Curriculum/source audit register
 
-References to be verified during inventory authoring; official source availability is not a completed coverage audit. Direct MOE retrieval was blocked in prior research, so secondary official school material must not be treated as complete substitute syllabuses.
+Research, retrieved-source fingerprints and subsequent corrections are retained in the [Chinese](CHINESE_CONTENT_PREPARATION.md#research-audit), [Mathematics](MATHEMATICS_CONTENT_PREPARATION.md#research-audit), [English](ENGLISH_CONTENT_PREPARATION.md#research-audit) and [Science](SCIENCE_CONTENT_PREPARATION.md#research-audit) preparation guides. Use current canonical review records for approval status. Official sources define scope; school materials provide corroboration.
 
 | Area | Official reference to verify | Audit status |
 | --- | --- | --- |
@@ -221,8 +221,6 @@ References to be verified during inventory authoring; official source availabili
 Public exam questions can inform format analysis but cannot establish syllabus completeness or grant reuse rights. Published bank size is not evidence of approved coverage. Use original/rights-cleared generic content; never real learner fixtures.
 
 ## 8. Remaining delivery work and protected gates
-
-The previously open evidence, Science assistance/reuse, active-time, timezone, zero-item and P3-entry decisions are resolved in sections 3–5 and Functional Design. They are not unanswered owner questions.
 
 Publish the source-verified versioned leaf curriculum manifest, reviewed questions/materials/media, prerequisite/chapter mappings and valid answer/help content before enabling mapped imports. The course register is not a completed knowledge-point inventory; unmapped eligible targets remain pending_content. P3 import support for Chinese/Higher Chinese and English follows later. No P3 Mathematics content is required for Pilot; its teaching flow and course opening are post-Pilot work.
 

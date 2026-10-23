@@ -22,6 +22,10 @@ Before browser tests, run `npx playwright install chromium` and build with the p
 
 The default public build excludes private-pack handling. `npm run build:private` enables that runtime for deliberate local pack loading; it does not bundle this project's private records or authorize deployment.
 
+## Content preparation
+
+Run `python3 scripts/content_review.py --check` for the public catalogue validators and Chinese inventory freshness check. Run it without `--check` to generate offline review pages at `reports/content/index.html`: all questions, whole materials, diagrams, blanks/pinyin, keys, hints, explanations, mappings and versioned source records. Generated pages are ignored by Git; edit the canonical JSON. These are author review aids, not app rendering or educational approval. [Content QA](docs/CONTENT_QA.md) and the existing authoring skills retain the human review requirements.
+
 ## Boundaries
 
 - No runtime AI, analytics or external fonts. Password sign-in uses the existing Auth client; learning stays local.
@@ -33,7 +37,7 @@ The default public build excludes private-pack handling. `npm run build:private`
 - Keep staging and production isolated. Never connect previews to real learner data.
 - This repository is public since 2026-10-10. Never commit real learner data, account details or credentials.
 
-Start with [AGENTS.md](AGENTS.md), then follow its task-specific references. [Full feature scope](docs/FEATURE_SCOPE.md) remains confirmed long-term scope. [Repository controls](docs/TECHNICAL_DESIGN_DECISIONS.md#repository-controls) are reference-only; new task/review evidence stays in its Issue or PR. The historical [PR24 content/source review](https://github.com/FrankxSG/turtle-academy/pull/31#issuecomment-6340410328) and [PR25 pack-recovery review](https://github.com/FrankxSG/turtle-academy/pull/31#issuecomment-6340410719) retain their findings and dispositions.
+Start with [AGENTS.md](AGENTS.md), then follow its task-specific references. [Full feature scope](docs/FEATURE_SCOPE.md) remains confirmed long-term scope.
 
 ## Vercel
 
