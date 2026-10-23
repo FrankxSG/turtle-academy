@@ -29,6 +29,9 @@ type PrivateDb = Dexie & {
 
 const now = () => new Date().toISOString()
 
+/** Sync bookkeeping for the current pack, kept in the sync table so it never shares a write with case links (kv). */
+interface PackState { id: 'pack'; ref: string | null; issue: string | null }
+
 export class DexiePrivateStore implements PrivateStore, PackSyncStore {
   readonly stream = 'pack' as const
   private readonly db: PrivateDb
@@ -59,11 +62,10 @@ export class DexiePrivateStore implements PrivateStore, PackSyncStore {
   /** The current pack replaces any earlier one; tasks pinned to earlier content keep it through stored builds. */
   async putPack(p: PrivatePack) {
     const prepared = await this.prepare(p)
-    await this.db.transaction('rw', [this.db.packs, this.db.kv, this.db.outbox, this.db.sync, this.db.versions], async () => {
+    await this.db.transaction('rw', [this.db.packs, this.db.outbox, this.db.sync, this.db.versions], async () => {
       await this.db.packs.clear()
       await this.db.packs.put(p)
-      await this.db.kv.put({ key: 'pack_issue', value: prepared.issue })
-      await this.db.kv.put({ key: 'pack_ref', value: prepared.version?.ref ?? null })
+      await this.putPackState({ id: 'pack', ref: prepared.version?.ref ?? null, issue: prepared.issue })
       if (prepared.version) await this.db.versions.put(prepared.version)
       await this.queue(prepared.changes)
     })
@@ -119,8 +121,7 @@ export class DexiePrivateStore implements PrivateStore, PackSyncStore {
         const changes: Change[] = []
         if (prepared && still && JSON.stringify(still) === JSON.stringify(current)) {
           changes.push(...prepared.changes)
-          await this.db.kv.put({ key: 'pack_issue', value: prepared.issue })
-          await this.db.kv.put({ key: 'pack_ref', value: prepared.version?.ref ?? null })
+          await this.putPackState({ id: 'pack', ref: prepared.version?.ref ?? null, issue: prepared.issue })
           if (prepared.version) await this.db.versions.put(prepared.version)
         }
         changes.push(...caseLinkChanges([], ((await this.db.kv.get('crosswalk'))?.value as CrosswalkRow[] | undefined) ?? []))
@@ -160,24 +161,27 @@ export class DexiePrivateStore implements PrivateStore, PackSyncStore {
     await this.meta()
     await this.db.sync.update('meta', { last_sync_at: at })
   }
-  async issue() { return ((await this.db.kv.get('pack_issue'))?.value as string | null | undefined) ?? null }
+  private async packState(): Promise<PackState | undefined> {
+    return (await this.db.sync.get('pack' as never)) as unknown as PackState | undefined
+  }
+  private async putPackState(state: PackState) { await this.db.sync.put(state as unknown as SyncMeta) }
+  async issue() { return (await this.packState())?.issue ?? null }
   usable(value: unknown) { return usablePackVersion(value) }
 
   /** Downloaded pack records. Saved without queuing; this device's own wrong forms for the same cases are kept. */
   async applyRemote(r: { versions: { ref: string; pack: PrivatePack }[]; active: string | null; links: RemoteRecord[]; production: ProductionEvent[] }): Promise<boolean> {
-    const tables = [this.db.packs, this.db.kv, this.db.production, this.db.versions]
+    const tables = [this.db.packs, this.db.kv, this.db.production, this.db.versions, this.db.sync]
     return this.db.transaction('rw', tables, async () => {
       let changed = false
       for (const v of r.versions) if (!(await this.db.versions.get(v.ref))) await this.db.versions.put({ ref: v.ref, pack: v.pack })
-      const currentRef = ((await this.db.kv.get('pack_ref'))?.value as string | null | undefined) ?? null
+      const currentRef = (await this.packState())?.ref ?? null
       if (r.active && r.active !== currentRef) {
         const version = await this.db.versions.get(r.active)
         if (version) {
           const local = (await this.db.packs.toArray())[0] ?? null
           await this.db.packs.clear()
           await this.db.packs.put(withLocalWrongForms(version.pack, local))
-          await this.db.kv.put({ key: 'pack_ref', value: r.active })
-          await this.db.kv.put({ key: 'pack_issue', value: null })
+          await this.putPackState({ id: 'pack', ref: r.active, issue: null })
           changed = true
         }
       }

@@ -48,7 +48,11 @@ export function SyncPanel({
         </dd>
         <dt>{tr('Synced to backend', '已同步到云端')}</dt>
         <dd data-testid="sync-state">
-          {status ? states[status.state] : tr('Not set up on this device', '本设备未设置同步')}
+          {status
+            ? status.state === 'idle' && status.waiting > 0
+              ? tr('Changes are saved on this iPad and waiting to upload', '更改已保存在本设备，等待上传')
+              : states[status.state]
+            : tr('Not set up on this device', '本设备未设置同步')}
           {status?.code && status.state !== 'idle' ? ` (${status.code})` : ''}
         </dd>
         <dt>{tr('Last successful sync', '上次成功同步')}</dt>
