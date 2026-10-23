@@ -42,8 +42,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   foundation:
-    # Pinned: `playwright install --with-deps` hangs on the ubuntu-latest migration image (Oct 2026).
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
@@ -65,7 +64,10 @@ jobs:
           VITE_SUPABASE_ANON_KEY: synthetic-test-only
       - name: Assert default public artifacts exclude private-pack code
         run: npm run check:public-bundle
-      - run: npx playwright install --with-deps chromium
+      # The runner image already has Chrome's system libraries; installing them again (--with-deps, apt) hung for
+      # over ten minutes on several runs in Oct 2026, so only the browser is downloaded, with its own time limit.
+      - run: npx playwright install chromium
+        timeout-minutes: 5
       - run: npm run test:e2e
       - name: Save synthetic UI images for visual review
         if: success() && github.event_name == 'pull_request'
