@@ -2,6 +2,8 @@
 
 Issue #16. This folder holds the database migration for the Pilot's **server foundation** and its tests. Everything here is synthetic-only. Nothing in this folder creates a real record, a real account or a service key.
 
+**Superseded design:** the owner's live-sync decision (2026-10-19, [Pilot Scope §3](../docs/PILOT_V0_1_SCOPE.md#3-identity-live-sync-and-backup-policy)) retires the client `upload_snapshot` path, its linear head and the safety copy. The family/child ownership, RLS and the closed `pilot-snapshot/1` allow-list below remain the basis for sync. This migration stays as built until the sync-server work replaces the client write path; until then the rules below describe the current code, not the target design.
+
 ## What the migration creates
 
 | Object | Purpose |
