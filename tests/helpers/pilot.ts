@@ -4,6 +4,18 @@ export async function mockAuth(
   context: BrowserContext,
   user = 'synthetic-parent-a',
 ) {
+  // These local-UI tests mock an empty backend bootstrap; tests/sync.spec.ts exercises the real functions.
+  await context.route('**/rest/v1/rpc/sync_*', async (route) => {
+    const name = new URL(route.request().url()).pathname.split('/').pop()
+    if (name === 'sync_whoami') {
+      await route.fulfill({ json: [{ family_id: '11111111-1111-4111-8111-111111111111', child_id: '22222222-2222-4222-8222-222222222222' }] })
+    } else if (name === 'sync_pull') {
+      await route.fulfill({ json: { changes: [], cursor: 0, head: 0, more: false, server_time_ms: Date.now() } })
+    } else if (name === 'sync_push') {
+      const { p_ops } = route.request().postDataJSON()
+      await route.fulfill({ json: { server_time_ms: Date.now(), results: p_ops.map((op: any) => ({ op_id: op.op_id, status: 'applied', stamp: op.stamp })) } })
+    } else await route.abort()
+  })
   await context.route('**/auth/v1/**', async (route) => {
     if (route.request().url().includes('/logout')) {
       await route.fulfill({ status: 204 })
@@ -15,7 +27,8 @@ export async function mockAuth(
         json: {
           access_token: 'synthetic-access',
           refresh_token: 'synthetic-refresh',
-          expires_at: Math.floor(Date.now() / 1000) + 3600,
+          // Use the page's clock: task tests deliberately advance it into the following year.
+          expires_at: await route.request().frame().evaluate(() => Math.floor(Date.now() / 1000) + 3600),
           user: { id: user },
         },
       })
@@ -39,6 +52,7 @@ export async function setup(page: Page, context: BrowserContext) {
   await expect(
     page.getByRole('heading', { name: 'A little discovery. A new adventure.' }),
   ).toBeVisible()
+  await expect(page.getByRole('button', { name: /(Start|Resume) Chinese/ })).toBeEnabled()
 }
 export async function parent(page: Page, pin = '4826') {
   await page.getByRole('button', { name: 'Parent area', exact: true }).click()
