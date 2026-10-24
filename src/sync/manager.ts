@@ -320,7 +320,11 @@ export class SyncManager {
         if (this.d.pack) await this.d.pack.bind(owner, { backfill: false, now })
       }
     } else if (this.d.pack && !(await this.d.pack.meta()).owner) {
-      // The pack store was created after the records store was bound (e.g. first private-build open).
+      // The pack store was created after the records store was bound (e.g. first private-build open). The records
+      // checkpoint has already passed pack records a build without the pack store ignored, so download again from
+      // the start once; unchanged records are not rewritten. The reset is saved before binding, so a crash in
+      // between simply repeats it.
+      await this.d.records.setCursor(0)
       await this.d.pack.bind(owner, { backfill: true, now })
     }
     this.guard(gen)

@@ -8,6 +8,7 @@ import { stripPack, syncablePack, versionRef, withLocalWrongForms } from '../../
 import { newMeta, observe, tick } from '../../src/sync/outbox.ts'
 import { checkChange, checkOperation } from '../../src/sync/validate.ts'
 import { MemorySyncPrivateStore, MemorySyncRecordStore } from '../../src/sync/store.ts'
+import { SyncManager } from '../../src/sync/manager.ts'
 import type { PrivatePack } from '../../src/mistakes/pack.ts'
 import { FakeSyncServer } from './fixtures/fake-sync-server.ts'
 import { syntheticPack } from './fixtures/private-pack.ts'
@@ -619,4 +620,27 @@ test('the transport deadline also aborts a stalled response body', { timeout: 2_
   })
   await assert.rejects(transport.whoami('synthetic-token', new AbortController().signal),
     (e: unknown) => e instanceof TransportError && e.kind === 'timeout')
+})
+
+test('records first synced without the pack store get the pack once the pack store is added', async () => {
+  const server = world()
+  const { d: a } = await device(server)
+  await a.program.installPack(invented())
+  assert.equal((await a.sync()).state, 'idle')
+  // A build without the pack store syncs this device's records first; its checkpoint passes the pack records.
+  const records = new MemorySyncRecordStore()
+  const { d: b } = await device(server, { clock: new Clock(a.clock.now()), records })
+  b.manager.dispose()
+  const recordsOnly = new SyncManager({ transport: server.transport(), auth: new TestAuth(session('parent-a', 'token-a')), identity: 'key-parent-a',
+    identityOf: async (u) => `key-${u}`, records, pack: null, engine: b.engine, online: () => true, timers: b.syncTimers })
+  assert.equal((await recordsOnly.syncNow('manual')).state, 'idle')
+  recordsOnly.dispose()
+  // The same local records, now with the pack store.
+  const { d: later } = await device(server, { clock: new Clock(a.clock.now()), records, pack: new MemorySyncPrivateStore() })
+  assert.equal((await later.sync()).state, 'idle')
+  const pack = (await later.pack.packs())[0]
+  assert.equal(pack?.pack_id, 'test-pack-1')
+  assert.ok(pack.register.cases.every((c) => c.observed === undefined))
+  assert.deepEqual(await later.pack.crosswalk(), await a.pack.crosswalk())
+  assert.equal(later.engine.state.events.length, a.engine.state.events.length)
 })
