@@ -617,3 +617,35 @@ footer p {
     scroll-behavior: auto !important;
   }
 }
+.sync-panel {
+  background: #fffdf7;
+  border: 1px solid #d2d9c9;
+  border-radius: 22px;
+  padding: clamp(18px, 3vw, 32px);
+  margin: 20px 0;
+  max-width: 720px;
+}
+.sync-panel dl {
+  display: grid;
+  grid-template-columns: minmax(150px, max-content) 1fr;
+  gap: 6px 18px;
+  margin: 0 0 14px;
+}
+.sync-panel dt {
+  font-weight: 700;
+}
+.sync-panel dd {
+  margin: 0;
+}
+.sync-panel form {
+  max-width: 420px;
+  margin-top: 14px;
+}
+@media (max-width: 520px) {
+  .sync-panel dl {
+    grid-template-columns: 1fr;
+  }
+  .sync-panel dd {
+    margin-bottom: 6px;
+  }
+}

@@ -23,7 +23,12 @@ import uuid
 
 HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent.parent
-MIGRATIONS = sorted((ROOT / 'supabase' / 'migrations').glob('*.sql'))
+# This file is the recorded evidence for the Issue #16 snapshot contract, so it runs against the migrations up to
+# the live-sync migration, which retires client access to upload_snapshot (tested in test_sync.py, which applies
+# every migration).
+LIVE_SYNC = '20261023120000'
+MIGRATIONS = [p for p in sorted((ROOT / 'supabase' / 'migrations').glob('*.sql')) if p.name < LIVE_SYNC]
+ALL_MIGRATIONS = sorted((ROOT / 'supabase' / 'migrations').glob('*.sql'))
 FIXTURES = HERE / 'fixtures'
 
 

@@ -14,6 +14,7 @@ import { isImportedCase, planIntake, type CrosswalkRow, type IntakeResult } from
 import { packTag, productionPlans, validatePack, type PrivatePack, type Register } from './pack.ts'
 import { deriveProduction, type ProductionEvent, type ProductionStage } from './production.ts'
 import { buildExport, buildReport, normalizedEvents, type CaseReport, type PrivateExport } from './report.ts'
+import { syncablePack } from '../sync/pack.ts'
 
 export interface PrivateStore {
   /** At most one pack: the current one. */
@@ -28,6 +29,8 @@ export interface PrivateStore {
   releases(): Promise<StoredBuild[]>
   putRelease(b: StoredBuild): Promise<void>
   deleteRelease(version: string): Promise<void>
+  /** Retained pack versions (downloaded by sync), so a task pinned to an earlier version can be rebuilt. */
+  packVersions(): Promise<PrivatePack[]>
 }
 
 /** A serialisable content build. */
@@ -58,6 +61,7 @@ export class MemoryPrivateStore implements PrivateStore {
   async releases() { return [...this.builds.values()].map((b) => structuredClone(b)) }
   async putRelease(b: StoredBuild) { this.builds.set(b.version, structuredClone(b)) }
   async deleteRelease(v: string) { this.builds.delete(v) }
+  async packVersions(): Promise<PrivatePack[]> { return [] }
 }
 
 export interface PublicChinese { lists: TargetLists; batches: RawBatch[] }
@@ -132,11 +136,31 @@ export class MistakeProgram {
   /** Install public content (and every stored pack, oldest first, so pinned tasks keep working). */
   static async open(opts: { engine: LearningEngine; registry: CatalogueRegistry; publicContent: PublicChinese; store: PrivateStore; now: () => string; newId?: () => string; course?: string }): Promise<MistakeProgram> {
     const p = new MistakeProgram(opts)
+    p.course = opts.course ?? 'p2_higher_chinese'
+    await p.load()
+    return p
+  }
+
+  private course = 'p2_higher_chinese'
+
+  /**
+   * (Re)load from the private store: current pack, kept builds for pinned tasks, case links and production events.
+   * Also used after sync downloads pack records, so a restored device installs the downloaded pack.
+   */
+  async reload(): Promise<void> {
+    await this.load()
+  }
+
+  private async load(): Promise<void> {
+    const p = this
+    const opts = { engine: this.engine, store: this.store, now: this.now }
+    p.openError = null
+    p.pack = null
     // Earlier content versions that an unfinished task still pins are reinstalled first; others are pruned.
     const pinned = new Set(opts.engine.state.tasks.filter((t) => t.subject === 'chinese').map((t) => t.content_version))
     const stored = await opts.store.releases()
     const current = new Set<string>()
-    const builds = [p.buildFor(opts.course ?? 'p2_higher_chinese', null)]
+    const builds = [p.buildFor(this.course, null)]
     // A stored pack that no longer fits this app version (stricter checks, changed content) must never stop the
     // child from practising: it is set aside and reported in the parent area until an updated pack is loaded.
     for (const rawPack of await opts.store.packs()) {
@@ -151,10 +175,23 @@ export class MistakeProgram {
       } catch (error) { p.openError = errorText(error) }
     }
     for (const b of builds) current.add(b.release.version)
+    const installed = new Set<string>()
     for (const sb of stored) {
       if (current.has(sb.version)) continue
-      if (pinned.has(sb.version)) p.installStored(sb)
+      if (pinned.has(sb.version)) { p.installStored(sb); installed.add(sb.version) }
       else await opts.store.deleteRelease(sb.version)
+    }
+    // A restored device has no kept builds: rebuild a pinned task's content from the retained pack versions.
+    for (const raw of await opts.store.packVersions()) {
+      try {
+        const version = validatePack(raw)
+        const build = p.buildFor(version.course, version)
+        const v = build.release.version
+        if (!pinned.has(v) || current.has(v) || installed.has(v)) continue
+        p.install(build)
+        installed.add(v)
+        await opts.store.putRelease(toStored(build))
+      } catch { /* a version this app cannot build stays unused; tasks pinned to it report missing content */ }
     }
     for (const b of builds) { p.install(b); await opts.store.putRelease(toStored(b)) }
     p.rows = await opts.store.crosswalk()
@@ -162,10 +199,10 @@ export class MistakeProgram {
     // While the stored pack is set aside, the targets it imported are held: they keep their records but get no
     // slots, so they are neither practised without their case pins nor given slots with nothing to show.
     if (!p.pack && p.openError !== null) opts.engine.holdTargets(heldFrom(p.rows, opts.engine.state.targets))
+    else opts.engine.holdTargets([])
     // Validation failures were handled before activation. Storage failures must propagate: swallowing one
     // here could claim recovery after engine records have already changed.
     if (p.pack) await p.importRegister()
-    return p
   }
 
   private buildFor(course: string, pack: PrivatePack | null): BuiltContent {
@@ -224,6 +261,10 @@ export class MistakeProgram {
     let b: BuiltContent
     try {
       pack = validatePack(raw)
+      // A pack must fit the sync allow-list (bounded practice text, short descriptive fields) before it is saved:
+      // nothing is stored on this device that could not reach the family's other devices.
+      const syncable = await syncablePack(pack)
+      if (!syncable.ok) throw new Error(syncable.code)
       b = this.buildFor(pack.course, pack)
       // Resolve every route before mutating the registry or persisting any part of an intake.
       planIntake({ state: this.engine.state, register: pack.register, release: b.release, targets: b.targets,

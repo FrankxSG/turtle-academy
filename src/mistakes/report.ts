@@ -22,7 +22,8 @@ export interface CaseRow {
   case_id: string
   observation_type: string
   target: string
-  observed: string
+  /** Null where this device did not load the pack (wrong forms never sync). */
+  observed: string | null
   uncertain: boolean
   shared_with: string[]
   status: CaseStatus
@@ -102,7 +103,7 @@ export function buildReport(opts: {
     const planId = x?.plan_id ?? null
     const production = planId ? deriveProduction(planId, opts.production) : null
     const base = {
-      case_id: c.id, observation_type: c.observation_type, target: c.target, observed: c.observed,
+      case_id: c.id, observation_type: c.observation_type, target: c.target, observed: c.observed ?? null,
       uncertain: c.source_interpretation_uncertain, shared_with: x?.shared_with ?? [], production,
     }
     if (c.route.mode === 'external') {

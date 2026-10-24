@@ -2,6 +2,7 @@ import { LearningEngine } from '../engine/engine.ts'
 import { WriteQueue } from '../engine/persistence.ts'
 import type { MistakeProgram } from '../mistakes/program.ts'
 import { startPilotStorage } from '../storage.ts'
+import type { PackSyncStore } from '../sync/store.ts'
 import { developmentRegistry, subjects } from './development.ts'
 
 export async function openRuntime(id: string, timezone: string) {
@@ -37,6 +38,7 @@ export async function openRuntime(id: string, timezone: string) {
     )
     const writer = new WriteQueue(storage.store)
     let closePrivate = () => {}
+    let pack: PackSyncStore | null = null
     try {
       // Chinese uses reviewed content (a separate, offline-cached chunk); other subjects keep the
       // synthetic development fixtures until their content is wired. A test-only build flag keeps the
@@ -57,6 +59,7 @@ export async function openRuntime(id: string, timezone: string) {
           const { openPrivateProgram } = await import('../mistakes/runtime.ts')
           const session = await openPrivateProgram(id, engine, registry, now)
           program = session.program
+          pack = session.store
           closePrivate = session.close
         } else {
           const { openPublicChinese } = await import('../catalogue/chinese-runtime.ts')
@@ -71,6 +74,9 @@ export async function openRuntime(id: string, timezone: string) {
         registry,
         writer,
         program,
+        /** Local sync stores: the engine working copy and, in the private build, the mistake pack. */
+        records: storage.store,
+        pack,
         close: () => {
           writer.dispose()
           storage.close()

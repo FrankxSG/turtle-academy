@@ -36,10 +36,12 @@ test('initialized practice survives expired-session offline reload and offline w
   await page.getByRole('button', { name: 'Exit and lock' }).click()
   await page.reload()
   expect((await state(page)).events.length).toBe(2)
+  // Offline practice with an expired session never needed the network or a token refresh.
+  expect(authRequests).toBe(0)
   await context.setOffline(false)
   await page.reload()
+  // Back online, sync may try to renew the session in the background; local records are unaffected.
   expect((await state(page)).events.length).toBe(2)
-  expect(authRequests).toBe(0)
   expect(errors).toEqual([])
 })
 

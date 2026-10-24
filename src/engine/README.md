@@ -34,4 +34,4 @@ Runs entirely on the device with no backend calls. Authority: Pilot Functional D
 - The Dexie store and the legacy guest boundary are exercised on real IndexedDB in Chromium by `tests/storage.spec.ts` (run in the Foundation workflow). Other browsers, in particular iPad Safari, are covered by real-device acceptance, not here.
 - Snapshot `target_aggregates` and `eligibility` are recomputed caches. A short-route aggregate keeps at most two clearances, so a task spanning midnight that clears a third stage after midnight drops that entry from the cache, not from the events.
 - Engine tests do not prove browser or service-worker update behaviour (F29 covers content pinning only).
-- Out of scope here: UI (#18), paste-in import and parent amendment replay (F20, F23, F34), cloud upload, and real content or learner data.
+- Out of scope here: UI (#18), paste-in import and parent amendment replay (F20, F23, F34), and real content or learner data. Live sync is in `src/sync/`: the engine only applies downloaded records (`applyRemote`, never re-uploaded) and gives daily tasks a deterministic id per subject and learning day.

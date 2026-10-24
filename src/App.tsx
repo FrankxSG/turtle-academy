@@ -17,6 +17,8 @@ import { keepStorage, type StorageKeep } from './ui/keep-storage.ts'
 import { Practice } from './ui/Practice.tsx'
 import type { Language } from './ui/development.ts'
 import { stories, deliverStory, canPresentStory } from './ui/story.ts'
+import { SyncManager, type SyncStatus } from './sync/manager.ts'
+import { createTransport } from './sync/transport.ts'
 
 const config = readAuthConfig(import.meta.env)
 type Entry = 'loading' | 'login' | 'setup' | 'ready'
@@ -45,6 +47,8 @@ export function App() {
   const [online, setOnline] = useState(navigator.onLine)
   const [kept, setKept] = useState<StorageKeep | null>(null)
   const [shellReady, setShellReady] = useState(false)
+  const [sync, setSync] = useState<SyncStatus | null>(null)
+  const syncRef = useRef<SyncManager | null>(null)
   const {
     needRefresh: [needRefresh],
     updateServiceWorker,
@@ -110,6 +114,63 @@ export function App() {
   }, [auth])
 
   useEffect(() => runtime?.writer.onStatus(setSave), [runtime])
+  // Live sync for this identity's working copy. Practice never waits for it: local saving comes first, uploads
+  // queue, and runs start on open, foreground, reconnection, shortly after changes and on "Sync now".
+  useEffect(() => {
+    if (!runtime || !config || !id) return
+    const manager = new SyncManager({
+      transport: createTransport(config),
+      auth,
+      identity: id,
+      identityOf: identityKey,
+      records: runtime.records,
+      pack: runtime.pack,
+      engine: runtime.engine,
+      program: () => runtime.program,
+    })
+    syncRef.current = manager
+    const offStatus = manager.onStatus((s) => {
+      setSync(s)
+      redraw((n) => n + 1)
+    })
+    const offWriter = runtime.writer.onStatus(() => {
+      void manager.refresh()
+      manager.soon()
+    })
+    const online = () => void manager.syncNow('online')
+    const visible = () => {
+      if (!document.hidden) void manager.syncNow('foreground')
+    }
+    window.addEventListener('online', online)
+    document.addEventListener('visibilitychange', visible)
+    void manager.refresh().then(() => manager.syncNow('open'))
+    return () => {
+      offStatus()
+      offWriter()
+      window.removeEventListener('online', online)
+      document.removeEventListener('visibilitychange', visible)
+      manager.dispose()
+      if (syncRef.current === manager) syncRef.current = null
+      setSync(null)
+    }
+  }, [runtime, id, auth])
+  // Bootstrap readiness is independent of network status: a lookup, failed request or expired session must
+  // not let a reset device start a competing task before its saved task and content have been recovered.
+  const restoring = !!config && (!sync || !sync.practiceReady)
+  // When a reset device finishes restoring, show the family's restored language (setup and any switch made while
+  // restoring were display-only or were replaced by the restored setting).
+  const practiceReady = sync?.practiceReady ?? false
+  useEffect(() => {
+    if (practiceReady && runtimeRef.current) setLanguage(runtimeRef.current.engine.state.settings.ui_language)
+  }, [practiceReady])
+  // A separate, non-persistent client for re-verification (PIN reset, sync sign-in). Its sign-out revokes only its
+  // own session, never the parent's other sessions.
+  const freshAuth = () =>
+    createAuthClient(config, {
+      storage: null,
+      fetch: (input, init) =>
+        fetch(String(input).endsWith('/auth/v1/logout') ? `${input}?scope=local` : input, init),
+    })
   // The device holds the working copy (the only copy until cloud sync exists): ask the browser not to clear it under storage pressure.
   useEffect(() => {
     if (entry !== 'ready') return
@@ -174,6 +235,11 @@ export function App() {
               'The action could not finish. Try again. Online PIN reset needs the same account’s valid password; failed verification leaves your PIN unchanged.',
               '操作未完成，请重试。在线重设需使用同一账户的有效密码，验证失败时原有 PIN 保持不变。',
             )
+          : code === 'different_account'
+            ? tr(
+                'These records belong to a different parent account. Sign in with that account to sync them.',
+                '这些记录属于另一个家长账户。请用该账户登录以同步。',
+              )
           : code === 'sign_in_failed'
             ? tr(
                 'Sign-in failed. Check your account details and connection, then try again.',
@@ -249,6 +315,8 @@ export function App() {
   }
   function start(subject: Subject) {
     void work(async () => {
+      // A new or reset device first restores the family's records, so today's task is not started twice.
+      if (restoring || (syncRef.current && !syncRef.current.status().practiceReady)) return
       if (runtime!.engine.dailyStatus().rest) return
       const result = await runtime!.engine.startOrResume(subject, {
         optional: true,
@@ -292,7 +360,9 @@ export function App() {
   function toggle() {
     void work(async () => {
       const next = zh ? 'en' : 'zh'
-      if (runtime) {
+      // While a reset device restores, change only what is shown: a saved edit would be queued and, as pending
+      // local work, would replace the family's synced language when recovery finishes.
+      if (runtime && !restoring) {
         runtime.engine.state.settings.ui_language = next
         await runtime.engine.flush()
       }
@@ -472,12 +542,22 @@ export function App() {
         {runtime && entry === 'ready' && (
           <>
             {view === 'hub' && (
-              <Hub
-                engine={runtime.engine}
-                language={language}
-                busy={busy}
-                start={start}
-              />
+              <>
+                {restoring && (
+                  <p role="status" data-testid="restoring">
+                    {tr(
+                      'Restoring this child’s records from the backend. Practice opens when it finishes.',
+                      '正在从云端恢复孩子的记录，完成后即可练习。',
+                    )}
+                  </p>
+                )}
+                <Hub
+                  engine={runtime.engine}
+                  language={language}
+                  busy={busy || restoring}
+                  start={start}
+                />
+              </>
             )}
             {view === 'parent' && (
               <Parent
@@ -493,18 +573,40 @@ export function App() {
                 }}
                 work={work}
                 busy={busy}
-                freshAuth={() =>
-                  createAuthClient(config, {
-                    storage: null,
-                    fetch: (input, init) =>
-                      fetch(
-                        String(input).endsWith('/auth/v1/logout')
-                          ? `${input}?scope=local`
-                          : input,
-                        init,
-                      ),
+                restoring={restoring}
+                sync={sync}
+                save={save}
+                syncNow={() => void work(async () => { await syncRef.current?.syncNow('manual') })}
+                signIn={(mail, secret) =>
+                  void work(async () => {
+                    if (!navigator.onLine) throw new Error('online_setup_required')
+                    // Verify the account on a separate, non-persistent client first: a different account must
+                    // never replace this working copy's session or receive its queued changes.
+                    const verifier = freshAuth()
+                    const check = await verifier.signInWithPassword(mail, secret)
+                    if (!check.ok) throw new Error('sign_in_failed')
+                    void verifier.signOut()
+                    if ((await identityKey(check.session.userId)) !== id) throw new Error('different_account')
+                    const result = await auth.signInWithPassword(mail, secret)
+                    if (!result.ok) throw new Error('sign_in_failed')
+                    await syncRef.current?.syncNow('sign_in')
                   })
                 }
+                signOut={() =>
+                  void work(async () => {
+                    syncRef.current?.dispose()
+                    syncRef.current = null
+                    await auth.signOut()
+                    runtimeRef.current?.close()
+                    runtimeRef.current = null
+                    setRuntime(null)
+                    setUnlocked(false)
+                    setView('hub')
+                    setStep(null)
+                    setEntry('login')
+                  })
+                }
+                freshAuth={freshAuth}
               />
             )}
             {view === 'practice' && step && !checkpoint && (
@@ -586,10 +688,15 @@ export function App() {
               : tr('Preparing the offline app…', '正在准备离线应用…')}
           </p>
           <p>
-            {tr(
-              'Records stay on this device. No cloud backup. Browser storage clearing or eviction can lose records.',
-              '记录仅在本设备，没有云端备份。清除或回收浏览器存储可能丢失记录。',
-            )}
+            {config
+              ? tr(
+                  'Records are saved on this device first and sync to the family’s backend when online. Clearing browser storage loses changes not yet uploaded.',
+                  '记录先保存在本设备，联网时同步到家庭云端。清除浏览器存储会丢失尚未上传的更改。',
+                )
+              : tr(
+                  'Records stay on this device. Sync is not configured. Browser storage clearing or eviction can lose records.',
+                  '记录仅在本设备，尚未配置同步。清除或回收浏览器存储可能丢失记录。',
+                )}
           </p>
           {kept && (
             <p data-testid="storage-kept">

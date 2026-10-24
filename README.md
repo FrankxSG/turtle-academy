@@ -18,7 +18,7 @@ npm run test:e2e
 python3 scripts/privacy_guard.py
 ```
 
-Before browser tests, run `npx playwright install chromium` and build with the public synthetic Auth configuration described in [the UI guide](src/ui/README.md). Tests mock Auth and contact no hosted service. Offline behavior is available in the production build, not the Vite development server.
+Before browser tests, run `npx playwright install chromium` and build with the public synthetic Auth configuration described in [the UI guide](src/ui/README.md). Tests mock Auth or use a throwaway local PostgreSQL sync server (`supabase/tests/sync_server.py`, started by the browser test configuration); they contact no hosted service. Offline behavior is available in the production build, not the Vite development server.
 
 The default public build excludes private-pack handling. `npm run build:private` enables that runtime for deliberate local pack loading; it does not bundle this project's private records or authorize deployment.
 
@@ -28,10 +28,10 @@ Run `python3 scripts/content_review.py --check` for the public catalogue validat
 
 ## Boundaries
 
-- No runtime AI, analytics or external fonts. Password sign-in uses the existing Auth client; learning stays local.
+- No runtime AI, analytics or external fonts. Password sign-in uses the existing Auth client; learning is saved on the device first.
 - First-device setup requires online password sign-in for a pre-provisioned synthetic parent. There is no Pilot Guest or signup entry. Cached initialized practice remains available after token expiry, including offline.
 - App updates require a deliberate click. IndexedDB is separate from the service-worker cache.
-- Records can be lost if browser data is cleared or evicted. The older snapshot server contract exists, but the app has no cloud backup/upload/restore UI or live sync.
+- Live sync, first milestone (one signed-in device): when Supabase is configured, saved changes queue on the device and upload to the family's records; a new or reset device restores them after sign-in. See [supabase/README.md](supabase/README.md). Changes not yet uploaded are lost if browser data is cleared or evicted. Two-device reconciliation, server snapshots, restore and deletion are later increments ([Pilot Scope §3](docs/PILOT_V0_1_SCOPE.md#3-identity-live-sync-and-backup-policy)); nothing here is ready for real records.
 - The local PIN is a casual-access control, not encryption or server authorization. Hosted Auth configuration, Google linking and real-record readiness retain their separate verification gates.
 - The legacy guest database is preserved separately and never assigned to a registered identity.
 - Keep staging and production isolated. Never connect previews to real learner data.

@@ -1,95 +1,71 @@
-# Supabase: Pilot identity, ownership and snapshot contract
+# Supabase: identity, ownership and live sync
 
-Issue #16. This folder holds the database migration for the Pilot's **server foundation** and its tests. Everything here is synthetic-only. Nothing in this folder creates a real record, a real account or a service key.
+This folder holds the database migrations for the Pilot's server and their tests. Everything here is synthetic-only. Nothing in this folder creates a real record, a real account or a service key.
 
-**Superseded design:** the owner's live-sync decision (2026-10-19, [Pilot Scope §3](../docs/PILOT_V0_1_SCOPE.md#3-identity-live-sync-and-backup-policy)) retires the client `upload_snapshot` path, its linear head and the safety copy. The family/child ownership, RLS and the closed `pilot-snapshot/1` allow-list below remain the basis for sync. This migration stays as built until the sync-server work replaces the client write path; until then the rules below describe the current code, not the target design.
+Live sync follows [Pilot Scope §3](../docs/PILOT_V0_1_SCOPE.md#3-identity-live-sync-and-backup-policy). The current build is its **first milestone, one signed-in device**: changes are saved on the device, queued, uploaded, and recovered on a new or reset device. Two-device reconciliation, server snapshots, restore, pruning and deletion are later increments.
 
-## What the migration creates
+## What the migrations create
 
 | Object | Purpose |
 | --- | --- |
-| `families`, `family_members`, `children` | Family → parent → child ownership. The child profile has a **nickname only**: no real name, birth date or school column exists. |
-| `snapshots`, `snapshot_heads` | Linear backup history per child, with one server-authoritative committed head. |
-| RLS + grants | Clients may only **read** their own family's rows. No client role (`anon`, `authenticated`, `service_role`) can insert, update or delete any table. |
-| `public.upload_snapshot(child, operation_id, base, payload)` | The **only** client write path (see below). |
-| `private.provision_family(parent_user_id, nickname)` | Owner-only setup of the one parent and child. Not callable by any client role. |
-| Google sign-in | Built in `src/auth/client.ts` (OAuth with PKCE) but **off** unless `VITE_GOOGLE_LOGIN=on`, which is set only after step 6 below passes. Email/password always remains. |
-| `private.snapshot_schema()` | The closed snapshot allow-list. It is identical to `src/snapshot/schema.json`, and a test enforces that. |
+| `families`, `family_members`, `children` | Family → parent → child ownership. The child profile has a **nickname only**. |
+| `sync_records` | The merged, server-authoritative value per child, kind and key. Deletions are kept as tombstones. Pack versions are immutable rows of kind `pack_version`. |
+| `sync_receipts` | One row per applied upload operation: retry identity and the accepted stamp. |
+| `sync_changes` | Add-only history of every record an operation touched. |
+| `sync_field_history` | The value that lost a per-field stamp comparison (replaced, or arrived too late). |
+| `sync_heads`, `sync_devices` | Per-child change counter and per-device ordering. |
+| `public.sync_whoami()`, `public.sync_push(child, ops)`, `public.sync_pull(child, cursor, limit)` | The only client entry points. |
+| `private.sync_schema()` | The closed `pilot-sync/1` allow-list: `src/sync/schema.json` merged with `src/sync/pack-schema.json` (parity-tested). |
+| `snapshots`, `snapshot_heads`, `upload_snapshot` | The earlier one-device snapshot contract (Issue #16). **Retired:** no client role can call `upload_snapshot` any more. Its tables and recorded evidence stay. |
+| `private.provision_family(parent_user_id, nickname)` | Owner-only setup of the one parent and child. |
 
-### What a snapshot holds (`pilot-snapshot/1`)
+Clients may only **read** their own family's rows (RLS). No client role (`anon`, `authenticated`, `service_role`) can insert, update or delete any table. Every table cascades from `children`.
 
-The snapshot carries the **recoverable source state** the learning engine needs (Learning Engine §2 and §6). Stages, due dates and unlocks are not stored; the engine derives them from this state.
+## Sync rules (server side)
 
-| Section | Holds |
-| --- | --- |
-| `targets` | Target identity (kind, knowledge point, bounded correct value, assessed skill, error type or `unknown`, mapping and verification status, supersession) and its **observation history**: source type, observed and recorded dates, opaque source and batch references, and first / independent recurrence / duplicate |
-| `presentations` | Each presented question: task, position, item and version, **role**, material, target and stage, format class (high- or low-option), first-response eligibility, prior exposures, novel context, status |
-| `events` | Attempts in local order: phase (first, retry, correction), assistance and a **structured response** (single choice, ordered options, matching pairs or word-bank selection) |
-| `tasks` | Frozen X, `policy_version`, content version, created and finalised times, the **frozen plan** (materials and slots, with short slots that pick their question when presented), active-time state changes and per-target aggregates (route, starting stage, related presentations, high- and low-option successes, any first wrong, clearances, outcome, final-stage not-before date) |
-| `eligibility` | Not-before dates by reason (next day after import, cooldown, final-stage gate and so on) |
-| `amendments` | Parent amendment lineage: what was amended or invalidated, its replacement and a controlled reason |
-| `story` | Checkpoints with story sequence and **pending or delivered** state, chapter, world flags |
-| also | Settings and timezone history, completions, rest days, flags, suspensions, exposure, calendar guards and safe pending-upload metadata |
-
-Excluded and unrepresentable: the observed wrong form, the parent PIN or its hash, worksheet images or text, copied questions, free-text descriptions, school or teacher details and local safety copies. Taxonomy fields (`assessed_skill`, `error_type`, material `family`, world flags) are lowercase tokens of at most 48 characters, so sentences cannot be stored. P3 Mathematics is not an accepted course in the Pilot.
-
-### Upload rules (`upload_snapshot`)
-
-- The caller must be a signed-in parent of that child; anyone else gets `42501`.
-- All uploads for one child are serialised on that child's head row.
-- **Retry identity** is child + operation id + identical request (base + payload). An identical retry returns the original result (`replayed = true`) and never creates a row or rewinds the head, even after later uploads. Reusing an operation id with a different request is rejected with `PT409 operation_conflict`.
-- **Minimisation is enforced here**, at the server write boundary. Every object is closed (unknown keys are rejected, nested ones included). Strings are only enums, opaque IDs, dates or bounded target values, so free text cannot be stored. The payload must name this child. The size limit is 1 MiB. Failures give `PT422 invalid_snapshot` or `PT413 snapshot_too_large`, and the error never echoes the payload.
-- **Linear head:** the base must equal the current head. Otherwise the upload fails with `PT409 stale_base` and nothing is overwritten. A base-less first snapshot is accepted only when the server, holding the head-row lock, sees no committed head. It also needs **parent reauthentication**: the caller's token must record a password or Google sign-in within the last 5 minutes (`PT403 reauthentication_required` otherwise). A refreshed old session does not count. Later uploads on the head, and lost-response retries of the first, do not need it.
-
-Out of scope here, and waiting on separate gates (Pilot Scope §3, Technical Decisions §9):
-- the backup upload and restore UI and the background uploader
-- the safety copy
-- owner pruning and deletion operations
-- any real child record
+- **Upload** (`sync_push`): the caller must be a signed-in parent of the child (`42501` otherwise). Each operation is validated against the closed allow-list and applied in its own subtransaction, under a per-child lock, in device order; processing stops at the first refused operation. An identical retry returns the original result (`duplicate`, same stamp) without applying it again; an operation id reused with different content is refused (`operation_conflict`). References must resolve within the child (`invalid_reference`). Limits: 1.5 MiB per operation, 2 MiB and 50 operations per request. Results and errors carry codes only, never content.
+- **Allow-list**: wrong forms (including the pack's `observed`), item/material `rationale` and `provenance`, the PIN or its hash, worksheets, school or teacher details, unknown fields and derived values (task aggregates, stages, due dates) are rejected. Practice text is bounded per field; the pack's `cause`, `correction_status` and `policy` are short single-line text.
+- **Merge** (per kind; the descriptor names each kind's class): answer events, production events, completions, amendments and pack versions are add-only and never overwritten. A daily task keeps its first accepted frozen plan while progress only moves forward. Presentation status, checkpoint delivery, story state, exposure and calendar guards only move forward. Editable values (settings, X, rest days, suspensions, flag decisions, target mapping status, case links, the active pack) follow the server-accepted hybrid logical stamp; the server clamps a stamp more than five minutes in its future, once, and keeps the losing value in `sync_field_history`.
+- **Download** (`sync_pull`): records changed after a server-issued cursor, in change order, at most 500 per page, bounded by the head read at the start of the call. Change numbers are assigned only while holding the child's lock, so a transaction that commits later always gets higher numbers: a cursor never skips it. Every upload re-issues the records it touched, so the uploading device re-reads the merged value.
 
 ## Running the tests (local, synthetic)
 
 ```sh
-python3 supabase/tests/test_database.py                                          # needs PostgreSQL 14+ server binaries and psql
-node --experimental-strip-types --test supabase/tests/client/*.test.mjs          # Node 22, no dependencies
+python3 supabase/tests/test_database.py      # Issue #16 snapshot contract (migrations before live sync)
+python3 supabase/tests/test_sync.py          # live-sync contract, plus the client's own sync code against it
+node --experimental-strip-types --test supabase/tests/client/*.test.mjs
 ```
 
-`test_database.py` starts a throwaway local cluster and loads `tests/harness/supabase_stub.sql`, which reproduces Supabase's roles, `auth.uid()` and broad default privileges. It then applies every migration and runs the tests **as the client roles** (`SET ROLE` + `request.jwt.claims`), never as the table owner.
-- Each call is a separate connection, so the race tests use genuinely separate transactions. They also check that the second writer really waited on the first.
-- The harness file is for local tests only and is never applied to a hosted project.
-
-Both test suites share `tests/fixtures/`: one fully populated synthetic snapshot (a test checks that it fills every declared field and every array, and the database test round-trips it unchanged), and the list of changes that must be rejected (wrong forms, PIN or hash, worksheet text or images, copied questions, free-text source descriptions, school or teacher details, safety copies, unknown keys, out-of-range values). The server and the client must agree on every case.
+Both Python suites need PostgreSQL 14+ server binaries, `psql` and Node 22. They start a throwaway local cluster, load `tests/harness/supabase_stub.sql` (Supabase's roles, `auth.uid()` and default privileges) and run as the client roles. `sync_server.py` puts a minimal stand-in for the Supabase Auth and RPC endpoints in front of that cluster; the browser tests (`tests/sync.spec.ts`) start it from `playwright.config.ts`. These harness files are for local tests only and are never applied to a hosted project.
 
 ## Owner steps (test project only, after review)
 
 These are done by the owner. Never record project identifiers, URLs or keys in GitHub.
 
 1. **Confirm the project.** Privately confirm that the project you are about to change is the Turtle Academy **test** project, not production and not another application's project.
-2. **Auth settings** (Authentication → Sign In / Providers):
-   - turn **off** "Allow new users to sign up"
-   - keep **Anonymous sign-ins** off
-   - leave Google off for now (step 6 tests it)
-3. **Apply the migration.** Run the SQL file in `supabase/migrations/` once, in the SQL editor or with the Supabase CLI.
+2. **Auth settings** (Authentication → Sign In / Providers): turn **off** "Allow new users to sign up"; keep **Anonymous sign-ins** off; leave Google off.
+3. **Apply the migrations** in `supabase/migrations/`, in filename order, once each, in the SQL editor or with the Supabase CLI. The live-sync migration (`20261023120000_live_sync.sql`) also retires `upload_snapshot`.
 4. **Check the hosted Auth settings.**
 
    ```sh
    TA_SUPABASE_URL=… TA_SUPABASE_ANON_KEY=… node scripts/check-hosted-auth.mjs
    ```
 
-   Both lines must say `PASS`. A probe passes **only** on the documented refusal code (`signup_disabled`; for the anonymous probe also `anonymous_provider_disabled`). Any other answer, such as an invalid key, an address or CAPTCHA error, rate limiting or a network failure, prints `INCONCLUSIVE` and exits with code 3: it proves nothing, so fix the cause and rerun. `FAIL` (exit 1) means an attempt was accepted. The script prints only status codes and error codes.
-5. **Synthetic parent only.** Create one synthetic test user in the dashboard, then run `select private.provision_family('<that user id>', 'Synthetic');` in the SQL editor. Do not use a real child's nickname until the data-protection gate is resolved.
-6. **Google link test (Pilot Scope §3).** Google sign-in is built but switched off. It may be switched on only if this test passes.
-   - Create the synthetic parent in step 5 with the email of a **synthetic Google test account**, marked confirmed.
-   - Turn on the Google provider in the test project, and add `http://127.0.0.1:54329/callback` to the redirect allow-list. Keep sign-ups off.
-   - Run with that same Google account; it must print `PASS … SAME pre-provisioned parent`:
-     ```sh
-     TA_SUPABASE_URL=… TA_SUPABASE_ANON_KEY=… TA_PARENT_EMAIL=… TA_PARENT_PASSWORD=… \
-       node --experimental-strip-types scripts/check-google-link.mjs --expect same
-     ```
-   - Run again with `--expect refused`, signing in with a **different** Google account. It must print `PASS … the server refused to create an account (signup_disabled)`, and the Users list must show no new user. Cancelling the Google consent screen, a network or token-exchange failure, or any other error prints `INCONCLUSIVE` (exit 3) and does not count: rerun it.
-   - Rerun the password sign-in to confirm email/password still works.
-   - If any run fails, Google stays off for the Pilot and returns with the invitation flow (Pilot Scope §3).
-   - Only if all pass: set `VITE_GOOGLE_LOGIN=on` in the app's environment, and add the app's real callback page to the redirect allow-list.
-7. Record in the PR **only** pass or fail for steps 2–6, with no identifiers.
+   Both lines must say `PASS`. `INCONCLUSIVE` (exit 3) proves nothing: fix the cause and rerun. `FAIL` (exit 1) means an attempt was accepted.
+5. **Synthetic parent only.** Create one synthetic test user in the dashboard, then run `select private.provision_family('<that user id>', 'Synthetic');`. Use a synthetic nickname until the data-protection gate is resolved. One parent has exactly one child in the Pilot; a second child makes sync stop with `multiple_child_profiles`.
+6. **Google link test.** Unchanged from the Issue #16 contract: Google sign-in stays off unless `scripts/check-google-link.mjs` passes both `--expect same` and `--expect refused` against synthetic accounts, as described in [Pilot Scope §3](../docs/PILOT_V0_1_SCOPE.md#3-identity-live-sync-and-backup-policy).
+7. **Point a test build at the project** with `VITE_SUPABASE_URL` and the public `VITE_SUPABASE_ANON_KEY` only (never a service key), on the private test site.
+8. Record in the PR **only** pass or fail for each step, with no identifiers.
 
-The hosted checks stay **pending** until the owner records them. The local SQL tests cannot verify hosted Auth configuration.
+## iPad checks (manual, synthetic records, test project only)
+
+Use an iPad with Safari, the app added to the Home Screen, and the synthetic parent from step 5. Record each result as pass or fail in the PR; until then they are **unverified**.
+
+1. Open the app from the Home Screen, sign in, set a PIN. Parent area → *Saving and sync* shows *Up to date*, *Changes waiting to upload: 0*.
+2. Practise three Chinese questions. Within a few seconds, or after *Sync now*, the parent area shows *Up to date* and a new *Last successful sync* time.
+3. Turn on Airplane Mode. Practise two questions and change Chinese X. The parent area shows *Offline*, a waiting count above 0 and the clearing-data warning.
+4. Still offline, swipe the app away and reopen it. Practice resumes; the waiting count is unchanged.
+5. Turn Airplane Mode off and bring the app to the foreground. It returns to *Up to date*, waiting 0, without any action.
+6. Leave the app in the background for an hour or more (or past the session expiry) and reopen it while offline: practice works with no sign-in prompt. Back online, sync resumes on its own, or the parent area asks for sign-in and resumes after the same account signs in.
+7. Remove the Home Screen app and its website data (Settings → Safari → Advanced → Website Data), reinstall, sign in and set a PIN. The parent area first shows *Restoring…*; then the hub offers *Resume Chinese* for an unfinished task, earlier answers appear in the practice summary, and (private build) the mistake pack and its case table are back without wrong forms.
+8. Sign out from the parent area while a change is waiting, then sign in with a different synthetic parent: that parent's island opens empty, and nothing from the first parent appears on its server records.
