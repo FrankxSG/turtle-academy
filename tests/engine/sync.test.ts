@@ -127,6 +127,7 @@ test('production-only writes schedule automatic upload without an engine commit'
   d.syncTimers.queue = []
   const plan = [...d.program.plans().keys()][0]
   const event = await d.program.recordProduction(plan, 'independent', 'correct')
+  await new Promise((r) => setTimeout(r, 0)) // the observer schedules after refreshing the waiting count
   assert.ok(d.syncTimers.queue.length > 0, 'pack commits must wake the sync manager')
   await d.syncTimers.runAll()
   await d.manager.syncNow('change') // join the automatically started flight
@@ -135,6 +136,18 @@ test('production-only writes schedule automatic upload without an engine commit'
   d.syncTimers.queue = []
   await d.program.recordProduction(plan, 'independent', 'correct')
   assert.equal(d.syncTimers.queue.length, 0, 'sign-out removes the pack listener')
+})
+
+test('a pack-store change with nothing waiting (an acknowledgement) schedules no extra run', async () => {
+  const server = world()
+  const { d } = await device(server)
+  await d.program.installPack(invented())
+  assert.equal((await d.sync()).waiting, 0)
+  d.syncTimers.queue = []
+  ;(d.pack as unknown as { changed: () => void }).changed() // as the IndexedDB observer does after acknowledgements
+  await new Promise((r) => setTimeout(r, 0))
+  assert.equal(d.syncTimers.queue.length, 0)
+  d.manager.dispose()
 })
 
 test('an acknowledged upload followed by a failed download does not advance last successful sync', async () => {

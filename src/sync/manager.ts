@@ -92,9 +92,10 @@ export class SyncManager {
 
   constructor(deps: SyncDeps) {
     this.d = deps
+    // The observer also fires for acknowledgements and on subscribing; schedule a run only when work is waiting,
+    // so each finished upload does not trigger one more empty round trip.
     this.offPack = deps.pack?.onChange(() => {
-      void this.refresh().catch(() => undefined)
-      this.soon()
+      void this.refresh().then((s) => { if (s.waiting > 0) this.soon() }, () => undefined)
     })
   }
 

@@ -354,7 +354,9 @@ export function App() {
   function toggle() {
     void work(async () => {
       const next = zh ? 'en' : 'zh'
-      if (runtime) {
+      // While a reset device restores, change only what is shown: a saved edit would be queued and, as pending
+      // local work, would replace the family's synced language when recovery finishes.
+      if (runtime && !restoring) {
         runtime.engine.state.settings.ui_language = next
         await runtime.engine.flush()
       }
