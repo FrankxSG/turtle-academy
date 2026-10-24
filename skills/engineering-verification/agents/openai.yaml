@@ -1,0 +1,4 @@
+interface:
+  display_name: "Engineering verification"
+  short_description: "Reproduce bugs and verify changes against precise evidence"
+  default_prompt: "Use engineering-verification to implement or review this change and verify its behavior."
