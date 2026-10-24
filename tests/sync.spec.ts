@@ -161,11 +161,12 @@ test('a reset device restores the synced records after sign-in and resumes the u
   const languageBefore = await languageChanges()
   releaseLookup()
   await expect(wiped.getByTestId('restoring')).toBeVisible()
-  // Switching the display language while restoring is not saved, so it can never replace the synced setting.
+  await parent(wiped)
+  // Offline here means the lookup finished and the stores are bound (the restore download failed): an edit saved
+  // now would be queued. Switching the display language while restoring must not be saved.
+  await expect(wiped.getByTestId('sync-state')).toContainText('Offline')
   await wiped.getByRole('button', { name: '中文', exact: true }).click()
   await wiped.getByRole('button', { name: 'English', exact: true }).click()
-  await parent(wiped)
-  await expect(wiped.getByTestId('sync-state')).toContainText('Offline')
   await expect(wiped.getByLabel('Chinese X')).toBeDisabled()
   await wiped.reload()
   await expect(wiped.getByRole('button', { name: 'Start Chinese' })).toBeDisabled()

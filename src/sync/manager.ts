@@ -95,7 +95,9 @@ export class SyncManager {
     // The observer also fires for acknowledgements and on subscribing; schedule a run only when work is waiting,
     // so each finished upload does not trigger one more empty round trip.
     this.offPack = deps.pack?.onChange(() => {
-      void this.refresh().then((s) => { if (s.waiting > 0) this.soon() }, () => undefined)
+      void this.refresh().catch(() => undefined)
+      // Read the queue directly: a refresh overtaken by a newer one returns the older status.
+      void deps.pack?.counts().then((c) => { if (c.pending > 0) this.soon() }, () => undefined)
     })
   }
 

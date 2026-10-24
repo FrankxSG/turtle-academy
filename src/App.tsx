@@ -157,6 +157,12 @@ export function App() {
   // Bootstrap readiness is independent of network status: a lookup, failed request or expired session must
   // not let a reset device start a competing task before its saved task and content have been recovered.
   const restoring = !!config && (!sync || !sync.practiceReady)
+  // When a reset device finishes restoring, show the family's restored language (setup and any switch made while
+  // restoring were display-only or were replaced by the restored setting).
+  const practiceReady = sync?.practiceReady ?? false
+  useEffect(() => {
+    if (practiceReady && runtimeRef.current) setLanguage(runtimeRef.current.engine.state.settings.ui_language)
+  }, [practiceReady])
   // A separate, non-persistent client for re-verification (PIN reset, sync sign-in). Its sign-out revokes only its
   // own session, never the parent's other sessions.
   const freshAuth = () =>
