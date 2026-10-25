@@ -164,8 +164,8 @@ export class SyncManager {
     const gen = this.generation
     const run = (async () => {
       try {
-        if (reason === 'manual') await this.reoffer()
-        await this.run(gen)
+        if (reason === 'manual') await this.during('retry_queue', () => this.reoffer())
+        await this.during('sync', () => this.run(gen))
         this.attempt = 0
       } catch (e) {
         if (e instanceof Stale || gen !== this.generation) return this.status()
@@ -179,7 +179,7 @@ export class SyncManager {
           } else if (e.kind === 'unauthorized') this.emit({ state: 'sign_in_required', code: 'session_expired' })
           else if (e.kind !== 'aborted') this.emit({ state: 'failed', code: e.code })
         } else {
-          this.emit({ state: 'failed', code: e instanceof Error && /^[a-z_:]{3,60}$/.test(e.message) ? e.message : 'sync_error' })
+          this.emit({ state: 'failed', code: 'sync_error' })
         }
       } finally {
         if (gen === this.generation) await this.refresh().catch(() => undefined)
@@ -269,18 +269,38 @@ export class SyncManager {
     }
   }
 
+  /**
+   * Unexpected local exceptions must be diagnosable without publishing their messages, stacks or records.
+   * Keep server/auth codes on their existing paths; categories below are a closed list of browser error names.
+   */
+  private async during<T>(step: string, fn: () => Promise<T>): Promise<T> {
+    try { return await fn() } catch (e) {
+      if (e instanceof Stop || e instanceof Stale || e instanceof TransportError) throw e
+      const names: Record<string, string> = {
+        TypeError: 'type_error', RangeError: 'range_error', DataError: 'data_error', DataCloneError: 'data_clone',
+        TransactionInactiveError: 'transaction_inactive', PrematureCommitError: 'premature_commit',
+        InvalidStateError: 'invalid_state', QuotaExceededError: 'quota_exceeded', ConstraintError: 'constraint',
+        AbortError: 'abort', NotFoundError: 'not_found', UnknownError: 'unknown',
+      }
+      // DOMException is not an Error in every browser. Inspect only its name, never its message.
+      const name = e !== null && typeof e === 'object' && 'name' in e && typeof e.name === 'string' ? e.name : ''
+      const category = Object.hasOwn(names, name) ? names[name] : 'unexpected'
+      throw new Stop('failed', `${step}:${category}`)
+    }
+  }
+
   private async run(gen: number) {
     if (!this.online()) throw new Stop('offline', 'offline')
     this.emit({ state: 'syncing', code: null })
-    const owner = await this.owner(gen)
+    const owner = await this.during('identity_setup', () => this.owner(gen))
     const meta = await this.d.records.meta()
     if (meta.recovery && !meta.recovery.done) {
       this.emit({ state: 'restoring' })
-      await this.restore(gen, owner)
+      await this.during('restore', () => this.restore(gen, owner))
       this.emit({ state: 'syncing' })
     }
-    for (const store of this.streams()) await this.upload(gen, owner, store)
-    await this.download(gen, owner)
+    for (const store of this.streams()) await this.during('upload', () => this.upload(gen, owner, store))
+    await this.during('download', () => this.download(gen, owner))
     // Success only after every queued change was acknowledged and downloads caught up.
     let left = 0
     for (const s of this.streams()) left += (await s.counts()).pending
@@ -290,7 +310,7 @@ export class SyncManager {
       return
     }
     const at = this.nowIso()
-    for (const s of this.streams()) await s.setLastSync(at)
+    for (const s of this.streams()) await this.during('sync_complete', () => s.setLastSync(at))
     this.guard(gen)
     this.emit({ state: 'idle', code: null, lastSyncAt: at })
   }
@@ -406,8 +426,8 @@ export class SyncManager {
     for (let page = 0; page < MAX_BATCHES; page++) {
       const p = await this.call(gen, (t, s) => this.d.transport.pull(t, owner.child_id, cursor, LIMITS.pull_page, s))
       this.checkClock(p.server_time_ms)
-      await this.apply(gen, p.changes.map(strip))
-      await this.d.records.setCursor(p.cursor)
+      await this.during('download_apply', () => this.apply(gen, p.changes.map(strip)))
+      await this.during('download_cursor', () => this.d.records.setCursor(p.cursor))
       this.guard(gen)
       cursor = p.cursor
       if (!p.more) return

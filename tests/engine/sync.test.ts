@@ -644,3 +644,36 @@ test('records first synced without the pack store get the pack once the pack sto
   assert.deepEqual(await later.pack.crosswalk(), await a.pack.crosswalk())
   assert.equal(later.engine.state.events.length, a.engine.state.events.length)
 })
+
+for (const failure of [
+  { step: 'download_apply', name: 'TypeError', expected: 'type_error' },
+  { step: 'download_cursor', name: 'TransactionInactiveError', expected: 'transaction_inactive' },
+  { step: 'sync_complete', name: 'QuotaExceededError', expected: 'quota_exceeded' },
+  { step: 'download_apply', name: 'private_answer_payload_must_not_escape', expected: 'unexpected' },
+]) {
+  test(`unexpected ${failure.step} failure reports a safe category and preserves uploaded answers for retry`, async () => {
+    const server = world()
+    const { d } = await device(server)
+    assert.equal((await d.sync()).state, 'idle')
+    await d.practise(1)
+    const lastSuccess = (await d.records.meta()).last_sync_at
+    d.clock.advance(30)
+    const error = Object.assign(Object.create(null), { name: failure.name, message: 'private_answer_payload_must_not_escape' })
+    const owner = failure.step === 'download_apply' ? d.engine : d.records
+    const key = failure.step === 'download_apply' ? 'applyRemote' : failure.step === 'download_cursor' ? 'setCursor' : 'setLastSync'
+    const obj = owner as unknown as Record<string, (...args: unknown[]) => unknown>
+    const original = obj[key]
+    obj[key] = async () => { throw error }
+    const failed = await d.sync()
+    assert.equal(failed.state, 'failed')
+    assert.equal(failed.code, `${failure.step}:${failure.expected}`)
+    assert.equal(failed.lastSyncAt, lastSuccess, 'a failed run cannot advance last success')
+    assert.equal(failed.waiting, 0, 'upload was already acknowledged before this failure')
+    assert.equal(server.records(CHILD).filter((r) => r.kind === 'answer_event').length, 1)
+    assert.ok(!JSON.stringify(failed).includes(error.message))
+    obj[key] = original
+    assert.equal((await d.sync()).state, 'idle')
+    assert.equal(server.records(CHILD).filter((r) => r.kind === 'answer_event').length, 1, 'retry cannot duplicate the answer')
+    d.manager.dispose()
+  })
+}
