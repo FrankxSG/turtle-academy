@@ -38,7 +38,7 @@ Each knowledge point follows the Pilot Science flow (Functional Design §5):
 
 1. **Teaching card** (`*-learn` material): a short explanation of one small knowledge point. Teaching does not count toward X and creates no error-bank evidence.
 2. **Two acquisition tests** (the card's two questions) in different contexts. Both first-correct enter spaced review; either wrong triggers repair. No same-day pass after answer-revealing help.
-3. **Three-stage repair set** (exact → similar → generic) used when an acquisition test or later review is wrong.
+3. **Three-stage repair set** (exact → similar → generic) used after acquisition failure. A wrong delayed review retains completed repair and resets the review interval; follow [Functional Design §4](PILOT_FUNCTIONAL_DESIGN.md#4-targets-repair-and-delayed-review).
 
 The current pool includes the SVG diagrams referenced below. Short animations remain unimplemented; authoring illustrations does not establish application acceptance.
 
