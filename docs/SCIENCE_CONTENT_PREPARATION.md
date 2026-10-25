@@ -1,23 +1,28 @@
 # Science content pool (P3)
 
-Independent public-source research and original findings: [research audit](#research-audit) (2026-10-16). The review disposition below records subsequent corrections; the historical audit remains evidence, not batch approval.
+**Current working state:** use the [canonical pool](../content/science/pool-001.json) review log and [curriculum](../content/science/curriculum.json) limitations for current status. Full item QA, owner disputed-item review/random 20% sample, rights and batch sign-off remain pending. A targeted preparation re-review is not a subject release. The [README](../README.md) distinguishes implemented app behavior from these authored pools.
 
-**Review disposition — 17 October 2026:** Independent re-review of `6babcfa` closes the encoded-external-reference SVG and stale-version findings. The plant-stage explanation is item v3, the corrected fungi asset is v2, the timeline question's copy cleanup is v3, and the pool is v4; the readable item review agrees. The earlier scientific corrections remain accepted. All six shared test methods and the subject validator pass. No open blocker from this correction remains for merging preparation work; this is not owner merge authorization or approved shipping content. SC4's source-complete inventory, full item QA, owner disputed-item review/random 20% sample, batch sign-off and coverage approval remain pending. The guided-observation/teaching/two-independent-tests flow still requires application acceptance testing.
+## Current findings and next work
 
-**Review proposal · 16 October 2026 · generic/public content pool**
+| Finding | Disposition / remaining work | Retained evidence |
+| --- | --- | --- |
+| SC1–SC2 | Later-grade germination/seed parts and non-core hardness replaced in the authored pool; deferred boundaries retained. Full item QA/sign-off remains pending. | [Audit response](#audit-response-revision--16-october-2026-batch-version-3) |
+| SC3 | Observation diagrams/tables, acquisition-to-repair links and prerequisite graph supplied; short animations and application acceptance remain separate work. | Same response and canonical knowledge-point records |
+| SC4 | Source-complete leaf denominator remains open; do not compute approved coverage from authored topic/target counts. | [Re-review/open work](#re-review-corrections--17-october-2026-batch-version-4) |
 
-Original P3 Science content for the public (generic) version of Turtle Academy, covering the seven P3 topics of the 2023 MOE Primary Science syllabus, with public sources cited. Primary Science starts at P3, so there is no P2 pool. This document does not authorize implementation, release, merge or deployment.
+Historical research: [source audit](#research-audit). Shared review method: [Content QA](CONTENT_QA.md), [authoring skill](../skills/question-authoring/SKILL.md) and [review command](../README.md#content-preparation).
 
 ## 1. What is in this pool
 
-- `content/science/curriculum.json`: 10 topic records with scope and Pilot status, 41 leaf records (assessed ability, representation, scope, MOE page reference) and cited sources.
-- `content/science/pool-001.json` (batch version 4): 180 original questions (P3 180), 36 materials, 36 three-stage repair sets (exact → similar → generic), 72 non-repair questions with a declared repair route, 36 knowledge points.
-- `content/science/assets/`: 51 original SVG diagrams referenced by items or materials (no scripts, links, images or external references; titles and alt text describe the picture without giving the answer).
-- `scripts/validate_subject_content.py`: structural checks (IDs, keys, 4+ distinct options, topic/source/leaf references, complete repair sets with one leaf mapping, repair routes for every non-repair question when leaves are declared, diagrams present for visual leaves, knowledge-point links and acyclic prerequisites, SVG safety, hints that do not state the answer).
+- [Curriculum and source records](../content/science/curriculum.json): topic/leaf mapping, source metadata, scope and limitations.
+- [Original content pool](../content/science/pool-001.json) and [assets](../content/science/assets/): canonical item/material versions, keys, repair routes and review state.
+- [Shared validator](../scripts/validate_subject_content.py): schema, IDs/keys/references, complete stage routes, visual assets, knowledge-point links/prerequisite cycles, SVG safety and non-answer-revealing hints.
 
-Every question is newly written for this project. No question, passage or figure was copied from any past paper, school document or commercial resource. Status: **author-checked, pending independent review and owner sign-off**; not a content release.
+Use the [content-review command](../README.md#content-preparation) for current counts, source records and complete rendered items. This is original authoring; no paper/school/commercial question, passage or figure is copied. The pool remains author-checked with full item QA, independent review and owner sign-off pending; authored mappings are not approved coverage.
 
 ## 2. Sources cited
+
+Historical authoring citations (16 October); the **direct-retrieval failures in their notes are author-stage results**. Later independent retrievals and file fingerprints are in the [research audit](#research-audit). Current machine-readable metadata is in the curriculum JSON; neither a later retrieval nor a count establishes complete leaf verification.
 
 | ID | Type | Source | Used for |
 | --- | --- | --- | --- |
@@ -64,9 +69,19 @@ Schools encourage visits and hands-on programmes such as Science Centre Singapor
 
 ## Topic coverage in this pool
 
-Generate the current topic/leaf/repair counts and complete item/material view with `python3 scripts/content_review.py`; open `reports/content/index.html`. The JSON's version, status, review log, sources and limitations are included in each report. Authored mappings are not approved coverage.
+Current inventory and review pages: [README content preparation](../README.md#content-preparation).
 
 ## Historical corrections
+
+## Historical authoring and review overview
+
+Independent public-source research and original findings: [research audit](#research-audit) (2026-10-16). The review disposition below records subsequent corrections; the historical audit remains evidence, not batch approval.
+
+**Review disposition — 17 October 2026:** Independent re-review of `6babcfa` closes the encoded-external-reference SVG and stale-version findings. The plant-stage explanation is item v3, the corrected fungi asset is v2, the timeline question's copy cleanup is v3, and the pool is v4; the readable item review agrees. The earlier scientific corrections remain accepted. All six shared test methods and the subject validator pass. No open blocker from this correction remains for merging preparation work; this is not owner merge authorization or approved shipping content. SC4's source-complete inventory, full item QA, owner disputed-item review/random 20% sample, batch sign-off and coverage approval remain pending. The guided-observation/teaching/two-independent-tests flow still requires application acceptance testing.
+
+**Review proposal · 16 October 2026 · generic/public content pool**
+
+Original P3 Science content for the public (generic) version of Turtle Academy, covering the seven P3 topics of the 2023 MOE Primary Science syllabus, with public sources cited. Primary Science starts at P3, so there is no P2 pool. This document does not authorize implementation, release, merge or deployment.
 
 The dated revisions below retain the defects, source interpretations and dispositions that inform authoring. Their old counts, pending states and implementation claims apply to those revisions, not current capabilities; use the current JSON and [README](../README.md). Shared human QA requirements are in [CONTENT_QA](CONTENT_QA.md).
 
@@ -113,9 +128,9 @@ Snapshot: 180 P3 questions, 36 text teaching cards, 72 acquisition questions (tw
 
 #### Method and evidence limits
 
-The reviewer independently retrieved public official PDFs, navigated current public school sources, downloaded actual historical paper packets, and examined dated enrichment. This is additional research beyond the previous targeted key corrections and the PR author’s source list. Paper text/OCR was processed across the individual packets; representative question pages, headings and selected rendered pages were examined for skills, response demand and date/course identity. External answer schemes were not assumed correct. The work is a source/scope/coverage audit with targeted item findings, not a second human marking of every external question or signed educator approval of every app key.
+[Shared audit method and limits](CONTENT_QA.md#audit-method-1).
 
-The four audits together use **50 retrieved paper/bundle files**: 47 individual/combined packets and three second-host bundles. Files/hosts may overlap in underlying papers. Only eight pages of each large second-host bundle were examined; there is no claim to have manually audited the complete bundles. Public hosting is not a reuse licence or authentication of a school-issued paper. No source scans, passages, question text, images or answer sheets are added to the repository. No private worksheets or learner data were used.
+[Shared audit method and limits](CONTENT_QA.md#audit-method-2).
 
 #### Content findings
 
@@ -143,7 +158,7 @@ The seven broad areas are a workable organisation, not a leaf-outcome denominato
 
 #### Official and public-school sources
 
-Official sources define scope; school sources corroborate local sequence/assessment, and hosted past papers/enrichment describe practice. Lower-authority sources do not override current MOE requirements. All page numbers below are PDF pages unless explicitly called printed pages. All sources accessed 2026-10-16.
+[Shared audit method and limits](CONTENT_QA.md#audit-method-3).
 
 - [MOE Primary Science 2023, updated January 2026](https://www.moe.gov.sg/api/media/ba3562d3-5b31-4459-8693-45cde7b97273/Primary-Science-Syllabus-2023.pdf). Actual PDF retrieved and inspected: PDF pp39–41 (printed38–40), p43 (printed42), p63 (printed62); P5 reproduction PDFp44. SHA-256: `0556023ceb55fe80de75ae044011b8c77ea7ea494a1873d2b224a9b2b8083ab0`.
 
@@ -151,7 +166,7 @@ Official sources define scope; school sources corroborate local sequence/assessm
 | --- | --- | --- |
 | [ws-p3-2026-3](https://isomer-user-content.by.gov.sg/817/aaa9cff4-0168-4842-9ed2-45b681e1d54a/04_2026_Curriculum_Briefing_Science_P3.pdf); [school navigation](https://www.westspringpri.moe.edu.sg/curriculum-briefing-2026/cb2026p3/) | 4, 7–8: Seven selected P3 topic areas; inquiry and performance work. Magnet making is taught in P3 but this school defers its weighted assessment to P4 WA1: teaching sequence and test schedule differ. | `542cb152c7929898fb187504e923fb97a3f4e66f9badda34839b99988fc4164e` |
 
-The school PDFs were reached through current school navigation; moved legacy file links were not silently counted as retrieved. They are public curriculum documents, not any learner’s school/worksheet information.
+[Shared audit method and limits](CONTENT_QA.md#audit-method-4).
 
 #### Curriculum-to-bank inventory
 
@@ -172,15 +187,15 @@ Current MOE core and observable practices are the acceptance authority. Broad ar
 
 #### Actual paper research, 2021–2026
 
-Citation revision (2026-10-16): third-party past papers are linked through public listing pages only. School/year/type, analysis pages and original file hashes still identify the copies examined; this citation format does not establish reuse rights.
+[Shared audit method and limits](CONTENT_QA.md#audit-method-5).
 
 | Course | 2021 | 2022 | 2023 | 2024 | 2025 | 2026 |
 | --- | --- | --- | --- | --- | --- | --- |
 | p3 science | Retrieved | Retrieved | Retrieved | Retrieved¹ | Retrieved | Not retrieved |
 
-“Retrieved” means a public PDF packet was downloaded and its content examined, not that a direct school release was authenticated. ¹ Catalogue year is not internally established for every packet; retain the per-file qualifications below. This was a bounded multi-host survey, not an exhaustive census. No verified 2026 paper was retrieved as of 2026-10-16; a website’s 2026 title/footer was not treated as the year printed on a paper.
+[Shared audit method and limits](CONTENT_QA.md#audit-method-6).
 
-SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-host bundle below was actually sampled, not counted from an index alone. Multiple hosts can contain the same underlying paper; downloads are not a count of independent schools.
+[Shared audit method and limits](CONTENT_QA.md#audit-method-7).
 
 ##### p3_science-2021
 
@@ -258,13 +273,10 @@ Additional 2025 public teaching was read through indexed page text: [The Pique L
 
 The app content is labelled original author draft. A bounded exact-overlap check compared every app material body and question stem against the retrieved same-subject paper OCR/text: 8 text files, 12 consecutive alphabetic words, case/punctuation normalised. **No threshold-length exact match was found.** This can miss paraphrases, OCR errors, shorter copying, images and sources outside the sample. It is not proof of originality, permission or copyright clearance. Common grammar/number templates are not by themselves evidence of copying. Retain pending rights/independent review/owner sign-off until the project’s review gates are satisfied.
 
-For past papers, start at the cited public listing, identify the recorded grade/course, year and assessment, and obtain the matching file under the host’s current access conditions. Compare its `sha256sum` with the recorded hash; a mismatch may mean the host replaced the file. Official and other source snapshots are likewise identified by their cited URLs and hashes. For paper structure, extract native PDF text and OCR scans (PyMuPDF + Tesseract English / Simplified Chinese), then inspect the stated PDF pages and course/year covers visually where OCR is ambiguous. HTML hashes identify the fetched snapshot, not an immutable future webpage. The documented overlaps used only stems/material bodies, not keys/explanations or character catalogues. Source retrieval and OCR happened outside the public repository; no signed download tokens or private files are required to follow these citations.
+[Shared audit method and limits](CONTENT_QA.md#audit-method-8).
 
 #### Disposition and next revision
 
-1. Resolve the numbered findings above and update the leaf-level map and affected content/metadata together. Keep the agreed Pilot exclusions and locks.
-2. Review original questions, distractors, keys, hints, explanations and any new assets as a coherent batch; increment affected content versions and preserve prior pinned attempts. The earlier correction commit is not approval of unchanged or newly added content.
-3. Re-run schema/content checks and the public-data guard. Validators check structure and references, not curriculum truth, unambiguous meaning, complete transfer pools or educational quality.
-4. Calculate release coverage only from the reviewed in-scope leaf denominator, with explicit omissions. Independent review and owner sign-off remain pending; no percentage or question count authorises implementation/merge.
+[Shared audit method and limits](CONTENT_QA.md#audit-method-9).
 
-Validation for this evidence-only revision: public-source link/hash and report consistency checks; subject content validator rerun without content/schema changes; privacy guard and whitespace diff check. The PR comment records the published evidence revision and exact results.
+[Shared audit method and limits](CONTENT_QA.md#audit-method-10).

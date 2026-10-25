@@ -1,23 +1,29 @@
 # English content pool (P2-P3)
 
-Independent public-source research and original findings: [research audit](#research-audit) (2026-10-16). The review disposition below records subsequent corrections; the historical audit remains evidence, not batch approval.
+**Current working state:** use the [canonical pool](../content/english/pool-001.json) review log and [curriculum](../content/english/curriculum.json) limitations for current status. Full item QA, owner disputed-item review/random 20% sample, rights and batch sign-off remain pending. A targeted preparation re-review is not a subject release. The [README](../README.md) distinguishes implemented app behavior from these authored pools.
 
-**Review disposition — 17 October 2026:** Independent re-review of `40aa8a4` closes the encoded-external-reference SVG finding. All six shared test methods and the subject validator pass. The prior acceptance of the robot-cloze routes, six new repair questions, cause/result route and P3 reinforcement remains valid. Pool v4 correctly identifies that revision, and the inventory now reports all 96 authored leaves. No open blocker from this correction remains for merging preparation work; this is not owner merge authorization or approved shipping content. EL3's source-complete inventory, full item QA, owner disputed-item review/random 20% sample, batch sign-off and coverage approval remain pending. Listening and full writing/oral exclusions are unchanged.
+## Current findings and next work
 
-**Review proposal · 16 October 2026 · generic/public content pool**
+| Finding | Disposition / remaining work | Retained evidence |
+| --- | --- | --- |
+| EL1 | Ambiguity corrections authored; full item QA and sign-off remain pending. | [Correction history](#correction-revision--16-october-2026) |
+| EL2 | Skill-specific reading/cloze repair routes authored, with later robot-cloze and cause/result corrections. | [Re-review disposition](#historical-authoring-and-review-overview) and canonical route records |
+| EL3 | Source-complete leaf inventory and genre breadth remain open; objective recognition never proves independent spelling/writing/oral production. | [Audit response](#audit-response-revision--16-october-2026-batch-version-3) |
+| EL4 | Whole-material aggregation and blank/question links remain required; source papers do not impose a fixed app exam pattern. | Same response; Functional Design §3 |
 
-Original P2 and P3 English questions and passages for the public (generic) version of Turtle Academy, across the eight approved exercise families (grammar, vocabulary, cloze, spelling/editing, sentence organisation, visual text, comprehension, writing foundations), with public sources cited. This document does not authorize implementation, release, merge or deployment.
+Historical research: [source audit](#research-audit). Shared review method: [Content QA](CONTENT_QA.md), [authoring skill](../skills/question-authoring/SKILL.md) and [review command](../README.md#content-preparation).
 
 ## 1. What is in this pool
 
-- `content/english/curriculum.json`: 35 topic records with scope and Pilot status, 96 leaf records (assessed ability, representation, scope, MOE page reference) and cited sources.
-- `content/english/pool-001.json` (batch version 4): 364 original questions (P2 187, P3 177), 19 materials, 91 three-stage repair sets (exact → similar → generic), 91 non-repair questions with a declared repair route.
-- `content/english/assets/`: 4 original SVG diagrams referenced by items or materials (no scripts, links, images or external references; titles and alt text describe the picture without giving the answer).
-- `scripts/validate_subject_content.py`: structural checks (IDs, keys, 4+ distinct options, topic/source/leaf references, complete repair sets with one leaf mapping, repair routes for every non-repair question when leaves are declared, diagrams present for visual leaves, knowledge-point links and acyclic prerequisites, SVG safety, hints that do not state the answer).
+- [Curriculum and source records](../content/english/curriculum.json): topic/leaf mapping, source metadata, scope and limitations.
+- [Original content pool](../content/english/pool-001.json) and [assets](../content/english/assets/): canonical item/material versions, keys, repair routes and review state.
+- [Shared validator](../scripts/validate_subject_content.py): schema, IDs/keys/references, complete stage routes, visual assets, knowledge-point links/prerequisite cycles, SVG safety and non-answer-revealing hints.
 
-Every question is newly written for this project. No question, passage or figure was copied from any past paper, school document or commercial resource. Status: **author-checked, pending independent review and owner sign-off**; not a content release.
+Use the [content-review command](../README.md#content-preparation) for current counts, source records and complete rendered items. This is original authoring; no paper/school/commercial question, passage or figure is copied. The pool remains author-checked with full item QA, independent review and owner sign-off pending; authored mappings are not approved coverage.
 
 ## 2. Sources cited
+
+Historical authoring citations (16 October); the **direct-retrieval failures in their notes are author-stage results**. Later independent retrievals and file fingerprints are in the [research audit](#research-audit). Current machine-readable metadata is in the curriculum JSON; neither a later retrieval nor a count establishes complete leaf verification.
 
 | ID | Type | Source | Used for |
 | --- | --- | --- | --- |
@@ -56,9 +62,19 @@ Extensive reading is encouraged through NLB booklists and programmes such as kid
 
 ## Topic coverage in this pool
 
-Generate the current topic/leaf/repair counts and complete item/material view with `python3 scripts/content_review.py`; open `reports/content/index.html`. The JSON's version, status, review log, sources and limitations are included in each report. Authored mappings are not approved coverage.
+Current inventory and review pages: [README content preparation](../README.md#content-preparation).
 
 ## Historical corrections
+
+## Historical authoring and review overview
+
+Independent public-source research and original findings: [research audit](#research-audit) (2026-10-16). The review disposition below records subsequent corrections; the historical audit remains evidence, not batch approval.
+
+**Review disposition — 17 October 2026:** Independent re-review of `40aa8a4` closes the encoded-external-reference SVG finding. All six shared test methods and the subject validator pass. The prior acceptance of the robot-cloze routes, six new repair questions, cause/result route and P3 reinforcement remains valid. Pool v4 correctly identifies that revision, and the inventory now reports all 96 authored leaves. No open blocker from this correction remains for merging preparation work; this is not owner merge authorization or approved shipping content. EL3's source-complete inventory, full item QA, owner disputed-item review/random 20% sample, batch sign-off and coverage approval remain pending. Listening and full writing/oral exclusions are unchanged.
+
+**Review proposal · 16 October 2026 · generic/public content pool**
+
+Original P2 and P3 English questions and passages for the public (generic) version of Turtle Academy, across the eight approved exercise families (grammar, vocabulary, cloze, spelling/editing, sentence organisation, visual text, comprehension, writing foundations), with public sources cited. This document does not authorize implementation, release, merge or deployment.
 
 The dated revisions below retain the defects, source interpretations and dispositions that inform authoring. Their old counts, pending states and implementation claims apply to those revisions, not current capabilities; use the current JSON and [README](../README.md). Shared human QA requirements are in [CONTENT_QA](CONTENT_QA.md).
 
@@ -106,9 +122,9 @@ Snapshot: 316 questions (166 P2 + 150 P3), 19 materials / 91 questions, 225 repa
 
 #### Method and evidence limits
 
-The reviewer independently retrieved public official PDFs, navigated current public school sources, downloaded actual historical paper packets, and examined dated enrichment. This is additional research beyond the previous targeted key corrections and the PR author’s source list. Paper text/OCR was processed across the individual packets; representative question pages, headings and selected rendered pages were examined for skills, response demand and date/course identity. External answer schemes were not assumed correct. The work is a source/scope/coverage audit with targeted item findings, not a second human marking of every external question or signed educator approval of every app key.
+[Shared audit method and limits](CONTENT_QA.md#audit-method-1).
 
-The four audits together use **50 retrieved paper/bundle files**: 47 individual/combined packets and three second-host bundles. Files/hosts may overlap in underlying papers. Only eight pages of each large second-host bundle were examined; there is no claim to have manually audited the complete bundles. Public hosting is not a reuse licence or authentication of a school-issued paper. No source scans, passages, question text, images or answer sheets are added to the repository. No private worksheets or learner data were used.
+[Shared audit method and limits](CONTENT_QA.md#audit-method-2).
 
 #### Content findings
 
@@ -137,7 +153,7 @@ The inspected papers have three-, four-, seven- and nine-question materials, wit
 
 #### Official and public-school sources
 
-Official sources define scope; school sources corroborate local sequence/assessment, and hosted past papers/enrichment describe practice. Lower-authority sources do not override current MOE requirements. All page numbers below are PDF pages unless explicitly called printed pages. All sources accessed 2026-10-16.
+[Shared audit method and limits](CONTENT_QA.md#audit-method-3).
 
 - [MOE English Language 2020, Primary](https://www.moe.gov.sg/api/media/b8eb0437-67fb-4042-a26c-64fef2af12df/2020-english-language-primary.pdf). Actual PDF retrieved and inspected: PDF/printed p22 reading, p26 writing, p28 grammar, p30 vocabulary. SHA-256: `5738e831e71aa7b98a912013ba5a26b267f4a8f375c99a307426bd7724d24746`.
 
@@ -147,7 +163,7 @@ Official sources define scope; school sources corroborate local sequence/assessm
 | [ws-p3-2026-0](https://isomer-user-content.by.gov.sg/817/1121ea4b-21fb-40a6-8977-3b02891e7652/01_2026_P3_EL_Curriculum_Briefing.pdf); [school navigation](https://www.westspringpri.moe.edu.sg/curriculum-briefing-2026/cb2026p3/) | 5–6: P3 language-paper components include grammar/vocabulary cloze, editing, combining and open comprehension; this is one school’s format, not a national specification. | `527f4507589c817be627cffa8e05ab77c6a6974f2fcaf01a064085a0060949c8` |
 | [tn-p2-2026-0](https://isomer-user-content.by.gov.sg/884/3a985d83-ce36-4fb1-bf7c-b43a3d3aee5b/2026_P2_EL_SOW_Outline.pdf); [school navigation](https://www.tampinesnorthpri.moe.edu.sg/for-parents/parents-portal/primary-2-2026/) | 1: P2 STELLAR unit sequence only; does not supply a full grammar-outcome list. | `3d95f44529b01085b0c32f1a11fd4729b16d38954c3db2563416255c0813bb12` |
 
-The school PDFs were reached through current school navigation; moved legacy file links were not silently counted as retrieved. They are public curriculum documents, not any learner’s school/worksheet information.
+[Shared audit method and limits](CONTENT_QA.md#audit-method-4).
 
 Additional public context: [Shuqun English curriculum](https://www.shuqunpri.moe.edu.sg/our-curriculum/english/) describes STELLAR and differentiated reading. It does not establish the PR’s every per-grade grammar subtopic.
 
@@ -195,16 +211,16 @@ The table enumerates the PR’s working groups, not an official MOE per-year ite
 
 #### Actual paper research, 2021–2026
 
-Citation revision (2026-10-16): third-party past papers are linked through public listing pages only. School/year/type, analysis pages and original file hashes still identify the copies examined; this citation format does not establish reuse rights.
+[Shared audit method and limits](CONTENT_QA.md#audit-method-5).
 
 | Course | 2021 | 2022 | 2023 | 2024 | 2025 | 2026 |
 | --- | --- | --- | --- | --- | --- | --- |
 | p2 english | Retrieved | Retrieved | Retrieved | Retrieved¹ | Retrieved | Not retrieved |
 | p3 english | Retrieved | Retrieved | Retrieved | Retrieved¹ | Retrieved | Not retrieved |
 
-“Retrieved” means a public PDF packet was downloaded and its content examined, not that a direct school release was authenticated. ¹ Catalogue year is not internally established for every packet; retain the per-file qualifications below. This was a bounded multi-host survey, not an exhaustive census. No verified 2026 paper was retrieved as of 2026-10-16; a website’s 2026 title/footer was not treated as the year printed on a paper.
+[Shared audit method and limits](CONTENT_QA.md#audit-method-6).
 
-SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-host bundle below was actually sampled, not counted from an index alone. Multiple hosts can contain the same underlying paper; downloads are not a count of independent schools.
+[Shared audit method and limits](CONTENT_QA.md#audit-method-7).
 
 ##### p2_english-2021
 
@@ -306,13 +322,10 @@ Additional actual public instruction was examined: [Lil’ but Mighty P1/P2 arti
 
 The app content is labelled original author draft. A bounded exact-overlap check compared every app material body and question stem against the retrieved same-subject paper OCR/text: 11 text files, 12 consecutive alphabetic words, case/punctuation normalised. **No threshold-length exact match was found.** This can miss paraphrases, OCR errors, shorter copying, images and sources outside the sample. It is not proof of originality, permission or copyright clearance. Common grammar/number templates are not by themselves evidence of copying. Retain pending rights/independent review/owner sign-off until the project’s review gates are satisfied.
 
-For past papers, start at the cited public listing, identify the recorded grade/course, year and assessment, and obtain the matching file under the host’s current access conditions. Compare its `sha256sum` with the recorded hash; a mismatch may mean the host replaced the file. Official and other source snapshots are likewise identified by their cited URLs and hashes. For paper structure, extract native PDF text and OCR scans (PyMuPDF + Tesseract English / Simplified Chinese), then inspect the stated PDF pages and course/year covers visually where OCR is ambiguous. HTML hashes identify the fetched snapshot, not an immutable future webpage. The documented overlaps used only stems/material bodies, not keys/explanations or character catalogues. Source retrieval and OCR happened outside the public repository; no signed download tokens or private files are required to follow these citations.
+[Shared audit method and limits](CONTENT_QA.md#audit-method-8).
 
 #### Disposition and next revision
 
-1. Resolve the numbered findings above and update the leaf-level map and affected content/metadata together. Keep the agreed Pilot exclusions and locks.
-2. Review original questions, distractors, keys, hints, explanations and any new assets as a coherent batch; increment affected content versions and preserve prior pinned attempts. The earlier correction commit is not approval of unchanged or newly added content.
-3. Re-run schema/content checks and the public-data guard. Validators check structure and references, not curriculum truth, unambiguous meaning, complete transfer pools or educational quality.
-4. Calculate release coverage only from the reviewed in-scope leaf denominator, with explicit omissions. Independent review and owner sign-off remain pending; no percentage or question count authorises implementation/merge.
+[Shared audit method and limits](CONTENT_QA.md#audit-method-9).
 
-Validation for this evidence-only revision: public-source link/hash and report consistency checks; subject content validator rerun without content/schema changes; privacy guard and whitespace diff check. The PR comment records the published evidence revision and exact results.
+[Shared audit method and limits](CONTENT_QA.md#audit-method-10).
