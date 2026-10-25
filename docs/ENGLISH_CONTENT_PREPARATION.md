@@ -122,9 +122,9 @@ Snapshot: 316 questions (166 P2 + 150 P3), 19 materials / 91 questions, 225 repa
 
 #### Method and evidence limits
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-1).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-1).
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-2).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-2).
 
 #### Content findings
 
@@ -153,7 +153,7 @@ The inspected papers have three-, four-, seven- and nine-question materials, wit
 
 #### Official and public-school sources
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-3).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-3).
 
 - [MOE English Language 2020, Primary](https://www.moe.gov.sg/api/media/b8eb0437-67fb-4042-a26c-64fef2af12df/2020-english-language-primary.pdf). Actual PDF retrieved and inspected: PDF/printed p22 reading, p26 writing, p28 grammar, p30 vocabulary. SHA-256: `5738e831e71aa7b98a912013ba5a26b267f4a8f375c99a307426bd7724d24746`.
 
@@ -163,7 +163,7 @@ The inspected papers have three-, four-, seven- and nine-question materials, wit
 | [ws-p3-2026-0](https://isomer-user-content.by.gov.sg/817/1121ea4b-21fb-40a6-8977-3b02891e7652/01_2026_P3_EL_Curriculum_Briefing.pdf); [school navigation](https://www.westspringpri.moe.edu.sg/curriculum-briefing-2026/cb2026p3/) | 5–6: P3 language-paper components include grammar/vocabulary cloze, editing, combining and open comprehension; this is one school’s format, not a national specification. | `527f4507589c817be627cffa8e05ab77c6a6974f2fcaf01a064085a0060949c8` |
 | [tn-p2-2026-0](https://isomer-user-content.by.gov.sg/884/3a985d83-ce36-4fb1-bf7c-b43a3d3aee5b/2026_P2_EL_SOW_Outline.pdf); [school navigation](https://www.tampinesnorthpri.moe.edu.sg/for-parents/parents-portal/primary-2-2026/) | 1: P2 STELLAR unit sequence only; does not supply a full grammar-outcome list. | `3d95f44529b01085b0c32f1a11fd4729b16d38954c3db2563416255c0813bb12` |
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-4).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-4).
 
 Additional public context: [Shuqun English curriculum](https://www.shuqunpri.moe.edu.sg/our-curriculum/english/) describes STELLAR and differentiated reading. It does not establish the PR’s every per-grade grammar subtopic.
 
@@ -211,16 +211,16 @@ The table enumerates the PR’s working groups, not an official MOE per-year ite
 
 #### Actual paper research, 2021–2026
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-5).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-5).
 
 | Course | 2021 | 2022 | 2023 | 2024 | 2025 | 2026 |
 | --- | --- | --- | --- | --- | --- | --- |
 | p2 english | Retrieved | Retrieved | Retrieved | Retrieved¹ | Retrieved | Not retrieved |
 | p3 english | Retrieved | Retrieved | Retrieved | Retrieved¹ | Retrieved | Not retrieved |
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-6).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-6).
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-7).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-7).
 
 ##### p2_english-2021
 
@@ -322,10 +322,10 @@ Additional actual public instruction was examined: [Lil’ but Mighty P1/P2 arti
 
 The app content is labelled original author draft. A bounded exact-overlap check compared every app material body and question stem against the retrieved same-subject paper OCR/text: 11 text files, 12 consecutive alphabetic words, case/punctuation normalised. **No threshold-length exact match was found.** This can miss paraphrases, OCR errors, shorter copying, images and sources outside the sample. It is not proof of originality, permission or copyright clearance. Common grammar/number templates are not by themselves evidence of copying. Retain pending rights/independent review/owner sign-off until the project’s review gates are satisfied.
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-8).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-8).
 
 #### Disposition and next revision
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-9).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-9).
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-10).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-10).

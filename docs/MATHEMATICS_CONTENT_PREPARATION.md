@@ -125,9 +125,9 @@ Snapshot: 303 questions (153 P2 + 150 P3), 101 three-question target sets, all f
 
 #### Method and evidence limits
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-1).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-1).
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-2).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-2).
 
 #### Content findings
 
@@ -158,7 +158,7 @@ The prior numeric/semantic corrections remain useful; no new question edits or r
 
 #### Official and public-school sources
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-3).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-3).
 
 - [MOE Mathematics, updated October 2025](https://www.moe.gov.sg/api/media/92bff26d-b2b4-4535-b868-b8415c744b91/2021-Primary-Mathematics-Syllabus-P1-to-P6-Updated-October-2025.pdf). Actual PDF retrieved and inspected: P2 PDF/printed pp33–34; P3 pp35–36. SHA-256: `e8f77fe10d768e2ad5266dfc39a8821674be7eb1c81bc545ba4b841b12ae70e1`.
 
@@ -167,7 +167,7 @@ The prior numeric/semantic corrections remain useful; no new question edits or r
 | [ws-p2-2026-2](https://isomer-user-content.by.gov.sg/817/de41114b-6ca4-4934-bca0-b5657080dd85/03_2026_Curriculum_Briefing_Mathematics_P2.pdf); [school navigation](https://www.westspringpri.moe.edu.sg/curriculum-briefing-2026/cb2026p2/) | 4, 8: P2 yearly topics and concrete real-world measurement/fraction activities. Fine official limits must still come from MOE. | `13c980dab0708a1e0f9c08332c8514b85d7f57d6de7f72518d207c28a7b5b767` |
 | [ws-p3-2026-2](https://isomer-user-content.by.gov.sg/817/f9d67595-5d02-4a98-bbd1-f0a7ffa2e782/03_2026_Curriculum_Briefing_Mathematics_P3.pdf); [school navigation](https://www.westspringpri.moe.edu.sg/curriculum-briefing-2026/cb2026p3/) | 3–4: P3 topics and activity-based teaching. The slide’s truncated addition/subtraction range is not a substitute for MOE’s 10,000 limit. | `d356de25d1218465d41a0bd88731c96c7386b8139929bae246a0424fc824a88f` |
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-4).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-4).
 
 #### Curriculum-to-bank inventory
 
@@ -207,16 +207,16 @@ This is a broad-strand cross-check, not a substitute for the finer leaf inventor
 
 #### Actual paper research, 2021–2026
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-5).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-5).
 
 | Course | 2021 | 2022 | 2023 | 2024 | 2025 | 2026 |
 | --- | --- | --- | --- | --- | --- | --- |
 | p2 maths | Retrieved | Retrieved | Retrieved | Retrieved¹ | Retrieved | Not retrieved |
 | p3 maths | Retrieved | Retrieved | Retrieved | Retrieved¹ | Retrieved | Not retrieved |
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-6).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-6).
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-7).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-7).
 
 ##### p2_maths-2021
 
@@ -326,10 +326,10 @@ Rejected as current-scope authority: [Gifted Questions P2 page](https://www.gift
 
 The app content is labelled original author draft. A bounded exact-overlap check compared every app material body and question stem against the retrieved same-subject paper OCR/text: 12 text files, 12 consecutive alphabetic words, case/punctuation normalised. **No threshold-length exact match was found.** This can miss paraphrases, OCR errors, shorter copying, images and sources outside the sample. It is not proof of originality, permission or copyright clearance. Common grammar/number templates are not by themselves evidence of copying. Retain pending rights/independent review/owner sign-off until the project’s review gates are satisfied.
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-8).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-8).
 
 #### Disposition and next revision
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-9).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-9).
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-10).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-10).

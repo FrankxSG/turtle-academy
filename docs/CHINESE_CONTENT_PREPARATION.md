@@ -307,9 +307,9 @@ Snapshot: 300 unique questions (150 P2 + 150 P3), shared across CL/HCL; 18 compl
 
 #### Method and evidence limits
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-1).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-1).
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-2).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-2).
 
 #### Content findings
 
@@ -346,7 +346,7 @@ The windmill cloze describes cutting the square into triangles and gluing all co
 
 #### Official and public-school sources
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-3).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-3).
 
 - [MOE Chinese syllabus 2024](https://www.moe.gov.sg/api/media/f41062a6-3a90-4ed1-bf93-2f1aaabeec43/CL-Syllabus-Pri-2024.pdf). Actual PDF retrieved and inspected: PDF pp28–32 (printed26–30), especially course/grade reading progression p29. SHA-256: `6c58e38740ca135fbd8b31c655fe9dcccdcd9b83a2ae430671f41ef7db757973`.
 - [MOE CL character list](https://www.moe.gov.sg/media/files/primary/syllabus/99b31d48-7f90-420a-a748-f64167c45746.pdf). Actual PDF retrieved and inspected: PDF pp3–4 P2; pp5–6 P3; pp1–2 earlier-grade comparison. SHA-256: `d833e9a4e4e632fb633a04b6471e9e6465a0097c7ea07a43e70913956942c145`.
@@ -358,7 +358,7 @@ The windmill cloze describes cutting the square into triangles and gluing all co
 | [ws-p3-2026-1](https://isomer-user-content.by.gov.sg/817/92b8e3b0-02aa-456d-8182-5daef0fc0ead/02_2026_P3_MTL_Curriculum_Briefing.pdf); [school navigation](https://www.westspringpri.moe.edu.sg/curriculum-briefing-2026/cb2026p3/) | 6–9, 11: Integrated language skills; language paper plus composition/listening/oral in the school plan. App’s deliberate external/deferred components must remain explicit. | `a36d7b79285e5c802b30469c028be7773eab79f74306b256b6ed7be0968c26a1` |
 | [tn-p2-2026-2](https://isomer-user-content.by.gov.sg/884/36eef8c1-4166-45e2-9c67-c5de273bf42b/SOW_Outline_2026_P2_CL_MT.pdf); [school navigation](https://www.tampinesnorthpri.moe.edu.sg/for-parents/parents-portal/primary-2-2026/) | 1: P2 Chinese textbook unit sequence; thematic titles alone do not establish assessed-language skill coverage. | `fb5f94d025c8cb5231e4b26728bbdf07037144912738f4e28bc32ecb2cfd8b5d` |
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-4).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-4).
 
 Additional public programme context: [Anderson Chinese programmes](https://www.andersonpri.moe.edu.sg/our-education/departments/chinese-language/programmes/) distinguishes the HCL programme from CL. It is programme evidence, not an exhaustive skill list. A Keming page labelled 2025 linked a slide deck with an October 2024 cover; that page label was not accepted as a 2025 content date.
 
@@ -390,7 +390,7 @@ No defensible “full P2/P3 CL/HCL coverage” percentage is established by this
 
 #### Actual paper research, 2021–2026
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-5).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-5).
 
 | Course | 2021 | 2022 | 2023 | 2024 | 2025 | 2026 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -399,7 +399,7 @@ No defensible “full P2/P3 CL/HCL coverage” percentage is established by this
 | p3 chinese | Retrieved | Retrieved¹ | Retrieved¹ | Retrieved¹ | Retrieved | Not retrieved |
 | p3 higher chinese | Retrieved | Retrieved¹ | Retrieved¹ | Retrieved¹ | Retrieved | Not retrieved |
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-6).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-6).
 
 P2 HCL 2022 and P3 HCL 2022 were recovered from SGTestPaper after the first index had no listing. Targeted SGExam/SGTestPaper/Learning Space and public search checks did not yield verified P2 HCL 2023–2024 downloads; paid bundle listings are not counted. The mislabelled CL 2021 packet is excluded from CL availability and replaced by the Rosyth CL packet.
 
@@ -588,10 +588,10 @@ Actual P2 CL page9 has pinyin completion, character discrimination and vocabular
 
 The app content is labelled original author draft. A bounded exact-overlap check compared every app material body and question stem against the retrieved same-subject paper OCR/text: 19 text files, 24 consecutive Han characters. **No threshold-length exact match was found.** This can miss paraphrases, OCR errors, shorter copying, images and sources outside the sample. It is not proof of originality, permission or copyright clearance. Common grammar/number templates are not by themselves evidence of copying. Retain pending rights/independent review/owner sign-off until the project’s review gates are satisfied.
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-8).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-8).
 
 #### Disposition and next revision
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-9).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-9).
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-10).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-10).

@@ -128,9 +128,9 @@ Snapshot: 180 P3 questions, 36 text teaching cards, 72 acquisition questions (tw
 
 #### Method and evidence limits
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-1).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-1).
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-2).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-2).
 
 #### Content findings
 
@@ -158,7 +158,7 @@ The seven broad areas are a workable organisation, not a leaf-outcome denominato
 
 #### Official and public-school sources
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-3).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-3).
 
 - [MOE Primary Science 2023, updated January 2026](https://www.moe.gov.sg/api/media/ba3562d3-5b31-4459-8693-45cde7b97273/Primary-Science-Syllabus-2023.pdf). Actual PDF retrieved and inspected: PDF pp39–41 (printed38–40), p43 (printed42), p63 (printed62); P5 reproduction PDFp44. SHA-256: `0556023ceb55fe80de75ae044011b8c77ea7ea494a1873d2b224a9b2b8083ab0`.
 
@@ -166,7 +166,7 @@ The seven broad areas are a workable organisation, not a leaf-outcome denominato
 | --- | --- | --- |
 | [ws-p3-2026-3](https://isomer-user-content.by.gov.sg/817/aaa9cff4-0168-4842-9ed2-45b681e1d54a/04_2026_Curriculum_Briefing_Science_P3.pdf); [school navigation](https://www.westspringpri.moe.edu.sg/curriculum-briefing-2026/cb2026p3/) | 4, 7–8: Seven selected P3 topic areas; inquiry and performance work. Magnet making is taught in P3 but this school defers its weighted assessment to P4 WA1: teaching sequence and test schedule differ. | `542cb152c7929898fb187504e923fb97a3f4e66f9badda34839b99988fc4164e` |
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-4).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-4).
 
 #### Curriculum-to-bank inventory
 
@@ -187,15 +187,15 @@ Current MOE core and observable practices are the acceptance authority. Broad ar
 
 #### Actual paper research, 2021–2026
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-5).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-5).
 
 | Course | 2021 | 2022 | 2023 | 2024 | 2025 | 2026 |
 | --- | --- | --- | --- | --- | --- | --- |
 | p3 science | Retrieved | Retrieved | Retrieved | Retrieved¹ | Retrieved | Not retrieved |
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-6).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-6).
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-7).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-7).
 
 ##### p3_science-2021
 
@@ -273,10 +273,10 @@ Additional 2025 public teaching was read through indexed page text: [The Pique L
 
 The app content is labelled original author draft. A bounded exact-overlap check compared every app material body and question stem against the retrieved same-subject paper OCR/text: 8 text files, 12 consecutive alphabetic words, case/punctuation normalised. **No threshold-length exact match was found.** This can miss paraphrases, OCR errors, shorter copying, images and sources outside the sample. It is not proof of originality, permission or copyright clearance. Common grammar/number templates are not by themselves evidence of copying. Retain pending rights/independent review/owner sign-off until the project’s review gates are satisfied.
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-8).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-8).
 
 #### Disposition and next revision
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-9).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-9).
 
-[Shared audit method and limits](CONTENT_QA.md#audit-method-10).
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-10).
