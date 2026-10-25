@@ -55,6 +55,16 @@ async function syncNow(page: Page) {
 }
 
 test('online practice uploads; the parent sees saved-on-device and synced as separate facts', async ({ page, context, request }) => {
+  // Model WebKit #319640: after upload acknowledgements empty the outbox, a unique key cursor fails.
+  // This covers the full real-IndexedDB upload → acknowledge → download/apply path, not only store methods.
+  await context.addInitScript(() => {
+    const original = IDBIndex.prototype.openKeyCursor
+    IDBIndex.prototype.openKeyCursor = function (range, direction) {
+      if (this.name === 'keys' && (direction === 'nextunique' || direction === 'prevunique'))
+        throw new DOMException('Synthetic WebKit empty unique cursor failure', 'UnknownError')
+      return original.call(this, range, direction)
+    }
+  })
   await useSyncServer(context)
   await signIn(page, 'browser-1@example.invalid')
   await page.getByRole('button', { name: 'Start Chinese' }).click()

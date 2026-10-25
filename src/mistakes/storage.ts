@@ -157,7 +157,8 @@ export class DexiePrivateStore implements PrivateStore, PackSyncStore {
   async reoffer() {
     await this.db.outbox.filter((o) => o.state === 'rejected' && !o.code?.startsWith('local:')).modify({ state: 'pending', code: null })
   }
-  async pendingKeys() { return new Set(await this.db.outbox.orderBy('keys').uniqueKeys() as string[]) }
+  // As in DexieRecordStore, avoid WebKit's empty nextunique cursor failure; Set deduplicates the keys.
+  async pendingKeys() { return new Set(await this.db.outbox.orderBy('keys').keys() as string[]) }
   async hasLearningRecords() {
     return (await this.db.packs.count()) > 0 || (await this.db.production.count()) > 0 || (await this.crosswalk()).length > 0
   }
