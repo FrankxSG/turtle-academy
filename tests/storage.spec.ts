@@ -186,3 +186,14 @@ test('interrupted startup: a failed marker write leaves no partial marker, and t
   expect(r.marker).toEqual({ status: 'guest_sample', first_seen_at: '2027-03-02T00:00:00.000Z', migrated: false })
   expect(r.again).toEqual(r.marker)
 })
+
+for (const stream of ['records', 'pack'] as const) {
+  test(`${stream} pending keys survive WebKit empty unique-cursor errors and protect refused changes`, async ({ page }) => {
+    await open(page)
+    const result = await page.evaluate(async (stream) => {
+      const H = (globalThis as unknown as { TurtleStorageHarness: H }).TurtleStorageHarness
+      return H.checkPendingKeys(stream)
+    }, stream)
+    expect(result).toEqual({ empty: [], queued: ['presentation|one', 'target|held', 'task|one'], refused: ['target|held'], drained: [], uniqueCalls: 0 })
+  })
+}

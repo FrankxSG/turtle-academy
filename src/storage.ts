@@ -194,8 +194,10 @@ export class DexieRecordStore implements RecordStore, MarkerStore, RecordsSyncSt
     await this.pilot.outbox.filter((o) => o.state === 'rejected' && !o.code?.startsWith('local:')).modify({ state: 'pending', code: null })
   }
 
+  // WebKit can throw UnknownError for nextunique on an empty index (WebKit #319640).
+  // Use an ordinary key cursor and deduplicate in JS; no count/read race after acknowledgements.
   async pendingKeys(): Promise<Set<string>> {
-    return new Set(await this.pilot.outbox.orderBy('keys').uniqueKeys() as string[])
+    return new Set(await this.pilot.outbox.orderBy('keys').keys() as string[])
   }
 
   async hasLearningRecords(): Promise<boolean> {
