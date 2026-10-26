@@ -30,6 +30,12 @@ for (const b of [...batches, ...pack.corrective_batches])
       i.options.findIndex((o: any) => o.id === i.correct_option_id),
     )
 
+const pendingReview = new Set<string>(
+  [...batches, ...pack.corrective_batches]
+    .filter((b) => b.status !== 'approved')
+    .flatMap((b) => b.items.map((i: any) => i.id)),
+)
+
 const ZUO = 'zh.p2_higher_chinese.char.u5ea7'
 const caseOf: Record<string, string> = {
   [`case-target:${ZUO}`]: 'O901',
@@ -97,7 +103,11 @@ test('accepted mistakes import, are practised first the next day, and report and
   await page.clock.setSystemTime(new Date('2027-03-02T10:00:00+08:00'))
   await page.reload()
   await page.getByRole('button', { name: 'Start Chinese' }).click()
-  await expect(page.getByText('ORIGINAL PRACTICE · REVIEW IN PROGRESS')).toBeVisible()
+  // Each question is labelled by its own review state: the synthetic pack's corrective batch is pending review.
+  const shown = await current(page)
+  await expect(page.locator('.practice .eyebrow').first()).toHaveText(
+    `Chinese · ${pendingReview.has(shown.item_id) ? 'PRACTICE QUESTION · NOT YET REVIEWED' : 'REVIEWED PRACTICE'}`,
+  )
   await expect(page.locator('.shape-picture')).toHaveCount(0)
   const task = (await state(page)).records.find((r: any) => r.table === 'tasks').value
   const roles: string[] = task.plan.slots.map((s: any) => s.role)

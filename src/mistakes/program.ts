@@ -9,7 +9,7 @@ import type { CatalogueRegistry, CatalogueRelease } from '../catalogue/adapter.t
 import { buildChineseContent, type BuiltContent, type RawBatch, type TargetLists } from '../catalogue/chinese.ts'
 import type { LearningEngine } from '../engine/engine.ts'
 import type { Target } from '../engine/types.ts'
-import { registerExercise, registerMaterial } from '../ui/content.ts'
+import { registerExercise, registerMaterial, registerReviewState } from '../ui/content.ts'
 import { isImportedCase, planIntake, type CrosswalkRow, type IntakeResult } from './intake.ts'
 import { packTag, productionPlans, validatePack, type PrivatePack, type Register } from './pack.ts'
 import { deriveProduction, type ProductionEvent, type ProductionStage } from './production.ts'
@@ -236,6 +236,7 @@ export class MistakeProgram {
     this.built.set(b.release.version, b)
     for (const [id, e] of b.exercises) registerExercise(id, e, b.release.version)
     for (const [ref, m] of b.materials) registerMaterial(ref, m, b.release.version)
+    registerReviewState(b.release.version, b.itemBatch)
   }
 
   get register(): Register | null { return this.pack?.register ?? null }

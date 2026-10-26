@@ -391,8 +391,8 @@ export function App() {
       <main>
         <div className="preview-banner">
           {tr(
-            'Development preview · synthetic content only · no subject is released',
-            '开发预览 · 仅限模拟内容 · 所有科目均未发布',
+            'Development preview · synthetic learner records only · no subject is formally released',
+            '开发预览 · 仅限模拟学习记录 · 所有科目均未正式发布',
           )}
         </div>
         {error && (

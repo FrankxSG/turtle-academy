@@ -60,6 +60,49 @@ test('default (Chinese-only) build: finishing reviewed Chinese opens exploration
   await expect(page.locator('.speech')).toContainText('A quiet pond')
 })
 
+test('default build: Chinese paused, reloaded offline and finished gives one completion and one story credit', async ({ page, context }) => {
+  test.setTimeout(120_000)
+  await setup(page, context)
+  await page.waitForFunction(() => !!navigator.serviceWorker.controller)
+  await parent(page)
+  await page.getByLabel('Chinese X').selectOption('6')
+  await page.getByRole('button', { name: 'Exit and lock' }).click()
+  await page.getByRole('button', { name: 'Start Chinese' }).click()
+  await answer(page)
+  await page.getByRole('button', { name: 'Pause and return' }).click()
+  await context.setOffline(true)
+  await page.reload()
+  await page.getByRole('button', { name: 'Resume Chinese' }).click()
+  await finish(page)
+  await page.getByRole('button', { name: 'Return to the island' }).click()
+  await expect(page.getByRole('button', { name: 'Explore the island' })).toBeEnabled()
+  await page.reload()
+  await expect(page.getByRole('button', { name: 'Explore the island' })).toBeEnabled()
+  const records = (await state(page)).records
+  const tasks = records.filter((r: any) => r.table === 'tasks')
+  expect(tasks).toHaveLength(1)
+  expect(records.filter((r: any) => r.table === 'completions')).toHaveLength(1)
+  const story = records.find((r: any) => r.table === 'story').value
+  const mine = story.checkpoints.filter((c: any) => c.task_id === tasks[0].value.id)
+  expect(mine.filter((c: any) => c.kind === 'completion' || c.kind === 'combined')).toHaveLength(1)
+  expect(new Set(mine.map((c: any) => c.id)).size).toBe(mine.length)
+  await context.setOffline(false)
+})
+
+test('default build offers only Chinese, labels it reviewed and keeps other settings out of the parent area', async ({ page, context }) => {
+  await setup(page, context)
+  await expect(page.locator('.trail')).toHaveCount(1)
+  await expect(page.locator('.trail-chinese')).toContainText('Reviewed practice content')
+  await expect(page.getByText('Synthetic development content')).toHaveCount(0)
+  await expect(page.getByRole('button', { name: /Start (Science|Mathematics|English)/ })).toHaveCount(0)
+  await page.getByRole('button', { name: 'Start Chinese' }).click()
+  await expect(page.locator('.practice .eyebrow').first()).toHaveText('Chinese · REVIEWED PRACTICE')
+  await page.getByRole('button', { name: 'Pause and return' }).click()
+  await parent(page)
+  await expect(page.getByLabel('Chinese X')).toBeVisible()
+  for (const s of ['Science', 'Mathematics', 'English']) await expect(page.getByLabel(`${s} X`)).toHaveCount(0)
+})
+
 for (const viewport of [
   { width: 1024, height: 768 },
   { width: 844, height: 390 },
@@ -81,9 +124,10 @@ for (const viewport of [
         ),
       ).toBe(true)
       // Synthetic screens after setup/unlock only; never capture a credential or PIN entry screen.
-      if (viewport.width === 1024)
+      // Tablet and landscape phone, for visual review.
+      if (viewport.width === 1024 || viewport.width === 844)
         await page.screenshot({
-          path: `test-results/ui-review/${screen}.png`,
+          path: `test-results/ui-review/${screen}${viewport.width === 1024 ? '' : '-landscape-phone'}.png`,
           fullPage: true,
         })
     }

@@ -11,6 +11,7 @@ on:
       - 'src/catalogue/**'
       - 'src/engine/**'
       - 'src/storage.ts'
+      - 'src/practice-subjects.ts'
       - 'content/chinese/**'
       - 'tests/mistakes.spec.ts'
       - 'tests/public-packaging.spec.ts'
