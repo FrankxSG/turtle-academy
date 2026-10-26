@@ -1,23 +1,28 @@
 # Mathematics content pool (P2-P3)
 
-Independent public-source research and original findings: [research audit](#research-audit) (2026-10-16). The review disposition below records subsequent corrections; the historical audit remains evidence, not batch approval.
+**Current working state:** use the [canonical pool](../content/mathematics/pool-001.json) review log and [curriculum](../content/mathematics/curriculum.json) limitations for current status. Full item QA, owner disputed-item review/random 20% sample, rights and batch sign-off remain pending. A targeted preparation re-review is not a subject release. The [README](../README.md) distinguishes implemented app behavior from these authored pools.
 
-**Review disposition — 17 October 2026:** Independent re-review of `cba8714` closes the encoded-external-reference SVG finding. Decoded attribute checks reject the original decimal/hex-encoded URL, style, protocol, data-URI and CSS-escape probes; literal or encoded same-file references remain allowed. All six shared test methods and the subject validator pass. Questions and diagrams are unchanged from the prior content review. No open blocker from this correction remains for merging preparation work; this is not owner merge authorization or approved shipping content. MA3's source-complete inventory and known mental two-digit addition/subtraction gap remain pending, together with full item QA, owner disputed-item review/random 20% sample, batch sign-off and coverage approval. P3 Mathematics remains locked in the Pilot.
+## Current findings and next work
 
-**Review proposal · 16 October 2026 · generic/public content pool**
+| Finding | Disposition / remaining work | Retained evidence |
+| --- | --- | --- |
+| MA1 | Grade/time/money corrections authored; full item QA/sign-off remains pending. | [Correction response](#audit-response-revision--16-october-2026-batch-version-3) |
+| MA2 | Visual stimuli supplied; production/drawing capabilities stay partial/external. Independent diagram/item review remains required. | Same response and canonical leaf limitations |
+| MA3 | Source-complete leaf denominator and mental two-digit addition/subtraction gap remain open; authored targets are not the denominator. P3 stays locked. | [Re-review/open work](#re-review-corrections--17-october-2026) |
 
-Original P2 and P3 Mathematics questions for the public (generic) version of Turtle Academy, mapped to the Singapore primary syllabus with public sources cited. P2 content is open in the Pilot; **P3 content is authored now but stays locked in the Pilot app** until the post-Pilot Mathematics teaching flow exists (Functional Design §1). This document does not authorize implementation, release, merge or deployment.
+Historical research: [source audit](#research-audit). Shared review method: [Content QA](CONTENT_QA.md), [authoring skill](../skills/question-authoring/SKILL.md) and [review command](../README.md#content-preparation).
 
 ## 1. What is in this pool
 
-- `content/mathematics/curriculum.json`: 29 topic records with scope and Pilot status, 111 leaf records (assessed ability, representation, scope, MOE page reference) and cited sources.
-- `content/mathematics/pool-001.json` (batch version 3): 321 original questions (P2 165, P3 156), 0 materials, 107 three-stage repair sets (exact → similar → generic).
-- `content/mathematics/assets/`: 65 original SVG diagrams referenced by items or materials (no scripts, links, images or external references; titles and alt text describe the picture without giving the answer).
-- `scripts/validate_subject_content.py`: structural checks (IDs, keys, 4+ distinct options, topic/source/leaf references, complete repair sets with one leaf mapping, repair routes for every non-repair question when leaves are declared, diagrams present for visual leaves, knowledge-point links and acyclic prerequisites, SVG safety, hints that do not state the answer).
+- [Curriculum and source records](../content/mathematics/curriculum.json): topic/leaf mapping, source metadata, scope and limitations.
+- [Original content pool](../content/mathematics/pool-001.json) and [assets](../content/mathematics/assets/): canonical item/material versions, keys, repair routes and review state.
+- [Shared validator](../scripts/validate_subject_content.py): schema, IDs/keys/references, complete stage routes, visual assets, knowledge-point links/prerequisite cycles, SVG safety and non-answer-revealing hints.
 
-Every question is newly written for this project. No question, passage or figure was copied from any past paper, school document or commercial resource. Status: **author-checked, pending independent review and owner sign-off**; not a content release.
+Use the [content-review command](../README.md#content-preparation) for current counts, source records and complete rendered items. This is original authoring; no paper/school/commercial question, passage or figure is copied. The pool remains author-checked with full item QA, independent review and owner sign-off pending; authored mappings are not approved coverage.
 
 ## 2. Sources cited
+
+Historical authoring citations (16 October); the **direct-retrieval failures in their notes are author-stage results**. Later independent retrievals and file fingerprints are in the [research audit](#research-audit). Current machine-readable metadata is in the curriculum JSON; neither a later retrieval nor a count establishes complete leaf verification.
 
 | ID | Type | Source | Used for |
 | --- | --- | --- | --- |
@@ -58,9 +63,19 @@ Schools reference short daily practice and online platforms such as KooBits and 
 
 ## Topic coverage in this pool
 
-Generate the current topic/leaf/repair counts and complete item/material view with `python3 scripts/content_review.py`; open `reports/content/index.html`. The JSON's version, status, review log, sources and limitations are included in each report. Authored mappings are not approved coverage.
+Current inventory and review pages: [README content preparation](../README.md#content-preparation).
 
 ## Historical corrections
+
+## Historical authoring and review overview
+
+Independent public-source research and original findings: [research audit](#research-audit) (2026-10-16). The review disposition below records subsequent corrections; the historical audit remains evidence, not batch approval.
+
+**Review disposition — 17 October 2026:** Independent re-review of `cba8714` closes the encoded-external-reference SVG finding. Decoded attribute checks reject the original decimal/hex-encoded URL, style, protocol, data-URI and CSS-escape probes; literal or encoded same-file references remain allowed. All six shared test methods and the subject validator pass. Questions and diagrams are unchanged from the prior content review. No open blocker from this correction remains for merging preparation work; this is not owner merge authorization or approved shipping content. MA3's source-complete inventory and known mental two-digit addition/subtraction gap remain pending, together with full item QA, owner disputed-item review/random 20% sample, batch sign-off and coverage approval. P3 Mathematics remains locked in the Pilot.
+
+**Review proposal · 16 October 2026 · generic/public content pool**
+
+Original P2 and P3 Mathematics questions for the public (generic) version of Turtle Academy, mapped to the Singapore primary syllabus with public sources cited. P2 content is open in the Pilot; **P3 content is authored now but stays locked in the Pilot app** until the post-Pilot Mathematics teaching flow exists (Functional Design §1). This document does not authorize implementation, release, merge or deployment.
 
 The dated revisions below retain the defects, source interpretations and dispositions that inform authoring. Their old counts, pending states and implementation claims apply to those revisions, not current capabilities; use the current JSON and [README](../README.md). Shared human QA requirements are in [CONTENT_QA](CONTENT_QA.md).
 
@@ -110,9 +125,9 @@ Snapshot: 303 questions (153 P2 + 150 P3), 101 three-question target sets, all f
 
 #### Method and evidence limits
 
-The reviewer independently retrieved public official PDFs, navigated current public school sources, downloaded actual historical paper packets, and examined dated enrichment. This is additional research beyond the previous targeted key corrections and the PR author’s source list. Paper text/OCR was processed across the individual packets; representative question pages, headings and selected rendered pages were examined for skills, response demand and date/course identity. External answer schemes were not assumed correct. The work is a source/scope/coverage audit with targeted item findings, not a second human marking of every external question or signed educator approval of every app key.
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-1).
 
-The four audits together use **50 retrieved paper/bundle files**: 47 individual/combined packets and three second-host bundles. Files/hosts may overlap in underlying papers. Only eight pages of each large second-host bundle were examined; there is no claim to have manually audited the complete bundles. Public hosting is not a reuse licence or authentication of a school-issued paper. No source scans, passages, question text, images or answer sheets are added to the repository. No private worksheets or learner data were used.
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-2).
 
 #### Content findings
 
@@ -143,7 +158,7 @@ The prior numeric/semantic corrections remain useful; no new question edits or r
 
 #### Official and public-school sources
 
-Official sources define scope; school sources corroborate local sequence/assessment, and hosted past papers/enrichment describe practice. Lower-authority sources do not override current MOE requirements. All page numbers below are PDF pages unless explicitly called printed pages. All sources accessed 2026-10-16.
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-3).
 
 - [MOE Mathematics, updated October 2025](https://www.moe.gov.sg/api/media/92bff26d-b2b4-4535-b868-b8415c744b91/2021-Primary-Mathematics-Syllabus-P1-to-P6-Updated-October-2025.pdf). Actual PDF retrieved and inspected: P2 PDF/printed pp33–34; P3 pp35–36. SHA-256: `e8f77fe10d768e2ad5266dfc39a8821674be7eb1c81bc545ba4b841b12ae70e1`.
 
@@ -152,7 +167,7 @@ Official sources define scope; school sources corroborate local sequence/assessm
 | [ws-p2-2026-2](https://isomer-user-content.by.gov.sg/817/de41114b-6ca4-4934-bca0-b5657080dd85/03_2026_Curriculum_Briefing_Mathematics_P2.pdf); [school navigation](https://www.westspringpri.moe.edu.sg/curriculum-briefing-2026/cb2026p2/) | 4, 8: P2 yearly topics and concrete real-world measurement/fraction activities. Fine official limits must still come from MOE. | `13c980dab0708a1e0f9c08332c8514b85d7f57d6de7f72518d207c28a7b5b767` |
 | [ws-p3-2026-2](https://isomer-user-content.by.gov.sg/817/f9d67595-5d02-4a98-bbd1-f0a7ffa2e782/03_2026_Curriculum_Briefing_Mathematics_P3.pdf); [school navigation](https://www.westspringpri.moe.edu.sg/curriculum-briefing-2026/cb2026p3/) | 3–4: P3 topics and activity-based teaching. The slide’s truncated addition/subtraction range is not a substitute for MOE’s 10,000 limit. | `d356de25d1218465d41a0bd88731c96c7386b8139929bae246a0424fc824a88f` |
 
-The school PDFs were reached through current school navigation; moved legacy file links were not silently counted as retrieved. They are public curriculum documents, not any learner’s school/worksheet information.
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-4).
 
 #### Curriculum-to-bank inventory
 
@@ -192,16 +207,16 @@ This is a broad-strand cross-check, not a substitute for the finer leaf inventor
 
 #### Actual paper research, 2021–2026
 
-Citation revision (2026-10-16): third-party past papers are linked through public listing pages only. School/year/type, analysis pages and original file hashes still identify the copies examined; this citation format does not establish reuse rights.
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-5).
 
 | Course | 2021 | 2022 | 2023 | 2024 | 2025 | 2026 |
 | --- | --- | --- | --- | --- | --- | --- |
 | p2 maths | Retrieved | Retrieved | Retrieved | Retrieved¹ | Retrieved | Not retrieved |
 | p3 maths | Retrieved | Retrieved | Retrieved | Retrieved¹ | Retrieved | Not retrieved |
 
-“Retrieved” means a public PDF packet was downloaded and its content examined, not that a direct school release was authenticated. ¹ Catalogue year is not internally established for every packet; retain the per-file qualifications below. This was a bounded multi-host survey, not an exhaustive census. No verified 2026 paper was retrieved as of 2026-10-16; a website’s 2026 title/footer was not treated as the year printed on a paper.
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-6).
 
-SGExam/SGTestPaper/SmileTutor and public web searches were checked. The second-host bundle below was actually sampled, not counted from an index alone. Multiple hosts can contain the same underlying paper; downloads are not a count of independent schools.
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-7).
 
 ##### p2_maths-2021
 
@@ -311,13 +326,10 @@ Rejected as current-scope authority: [Gifted Questions P2 page](https://www.gift
 
 The app content is labelled original author draft. A bounded exact-overlap check compared every app material body and question stem against the retrieved same-subject paper OCR/text: 12 text files, 12 consecutive alphabetic words, case/punctuation normalised. **No threshold-length exact match was found.** This can miss paraphrases, OCR errors, shorter copying, images and sources outside the sample. It is not proof of originality, permission or copyright clearance. Common grammar/number templates are not by themselves evidence of copying. Retain pending rights/independent review/owner sign-off until the project’s review gates are satisfied.
 
-For past papers, start at the cited public listing, identify the recorded grade/course, year and assessment, and obtain the matching file under the host’s current access conditions. Compare its `sha256sum` with the recorded hash; a mismatch may mean the host replaced the file. Official and other source snapshots are likewise identified by their cited URLs and hashes. For paper structure, extract native PDF text and OCR scans (PyMuPDF + Tesseract English / Simplified Chinese), then inspect the stated PDF pages and course/year covers visually where OCR is ambiguous. HTML hashes identify the fetched snapshot, not an immutable future webpage. The documented overlaps used only stems/material bodies, not keys/explanations or character catalogues. Source retrieval and OCR happened outside the public repository; no signed download tokens or private files are required to follow these citations.
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-8).
 
 #### Disposition and next revision
 
-1. Resolve the numbered findings above and update the leaf-level map and affected content/metadata together. Keep the agreed Pilot exclusions and locks.
-2. Review original questions, distractors, keys, hints, explanations and any new assets as a coherent batch; increment affected content versions and preserve prior pinned attempts. The earlier correction commit is not approval of unchanged or newly added content.
-3. Re-run schema/content checks and the public-data guard. Validators check structure and references, not curriculum truth, unambiguous meaning, complete transfer pools or educational quality.
-4. Calculate release coverage only from the reviewed in-scope leaf denominator, with explicit omissions. Independent review and owner sign-off remain pending; no percentage or question count authorises implementation/merge.
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-9).
 
-Validation for this evidence-only revision: public-source link/hash and report consistency checks; subject content validator rerun without content/schema changes; privacy guard and whitespace diff check. The PR comment records the published evidence revision and exact results.
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-10).

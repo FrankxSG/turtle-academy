@@ -1,27 +1,29 @@
 # Chinese curriculum, contracts and first content batch
 
-**Current status — 18 October 2026:** the leaf curriculum list, `zh-starter-001` v10, `zh-starter-002` v3, `zh-starter-003` v2 and review-character list `zh-2024-p1-review.3` are approved in their canonical JSON records. Batch review, sampled/disputed item IDs and rights decisions remain there; pending states below describe earlier revisions. Use the generated [release inventory](content-review/CHINESE_RELEASE_INVENTORY.md) for coverage rather than historical counts. Review/textbook-extra targets do not add P2 outcomes; shared CL/HCL items show availability, not HCL depth. Content approval does not establish app-release or real-record readiness.
+**Current content state:** use the [canonical curriculum](../content/chinese/curriculum.json), [batch review logs](../content/chinese/batches/) and [generated release inventory](content-review/CHINESE_RELEASE_INVENTORY.md). They record approved Chinese content and the denominator; exact sampled/disputed versions and rights decisions remain in their review records. Approval does not establish subject-release or real-record readiness.
 
 Independent public-source research and original findings: [research audit](#research-audit) (2026-10-16). The review disposition below records subsequent corrections; the historical audit remains evidence, not batch approval.
 
-**Historical PR11 review disposition — 17 October 2026:** Independent re-review of `a02199b` closed the raw-outcome import, word/ability identity, repair-route compatibility and tracked-bytecode findings. The windmill retagging and empty compatibility list are accepted for this batch. The 25 contract tests and catalogue validator pass. The material counts below have been reconciled with the catalogue. No open blocker from that targeted revision remains for merging this preparation work; this is not owner merge authorization or approved content for shipping. The source-complete curriculum denominator, full item QA, owner disputed-item review/random 20% sample, batch sign-off and rights review remain pending. Ability reporting must not claim a specific word was repaired; unmatched word imports remain pending. Existing private-data and release gates are unchanged.
-
-**Review proposal · 15 October 2026 · Issue #10**
-
-This is one review entry point for curriculum preparation and authoring contracts. It does not authorize an app build, private-data processing feature, content release, merge or deployment. The functional authority remains [Pilot Functional Design](PILOT_FUNCTIONAL_DESIGN.md), with [engine rules](PILOT_LEARNING_ENGINE_SPEC.md) and [QA gates](CONTENT_QA.md). No confirmed product decision is changed here.
+Current behavior comes from [Functional Design](PILOT_FUNCTIONAL_DESIGN.md); implementation boundaries are in the [README](../README.md). [Content QA](CONTENT_QA.md) and the authoring skills define review requirements.
 
 ## 1. What is ready to inspect
 
-| Artifact | Purpose | Current state |
-| --- | --- | --- |
-| [Curriculum manifest](../content/chinese/curriculum.json) | Four course identities, official references, 132 course-specific outcome records (including language-use leaves), 46 word/language-point/reading-skill repair targets and 1,796 character records | Leaf list approved by the owner as the coverage denominator (2026-10-18); manifest name `draft.2` kept so existing batches and fixtures stay pinned. Approval does not authorize real-record imports; README describes current app/pack capabilities and the data-protection gates remain |
-| [Contract schema](../contracts/chinese/1.schema.json) | Curriculum, original catalogue, frozen synthetic task plan, minimal Chinese intake and answer-event shapes | Proposed engineering contract; no app integration |
-| [Starter batch](../content/chinese/batches/starter-001.json) | Version 10: 357 original items — 19 materials (95 questions), 12 declared repair groups (45 character pools and 23 skill pools; 204 questions), and 58 further general-practice items; every non-repair question declares a repair route | Batch and manifest denominator approved by the owner 2026-10-18; rights cleared |
-| [Second batch](../content/chinese/batches/starter-002.json) | Version 3: 38 original P2 items — 1 material (4 questions), 4 repair groups (5 character pools and 3 skill pools; 24 questions) and 10 further general-practice items | Approved by the owner 2026-10-18 (rights cleared): ChatGPT cross-reviewed v1, Claude re-reviewed the six corrections and edited three hints (v3; re-review waived by the owner), and the owner accepted the six corrections and the seven-item sample ([review pack](content-review/CHINESE_REVIEW_PACK_STARTER_002.md)) |
-| [Task fixtures](../content/chinese/fixtures/) | Complete P2 examples for X=6, 10, 12 and 19 | Synthetic, deterministic validation examples; no learner data |
-| [Validator](../scripts/validate_chinese_content.py) and [boundary checks](../scripts/test_chinese_content_contracts.py) | Structural integrity and cross-file rejection cases | Standard-library authoring tools; not learning-engine implementation |
+| Canonical artifact | Use it for |
+| --- | --- |
+| [Curriculum](../content/chinese/curriculum.json) and [review characters](../content/chinese/review-characters.json) | Version-pinned course/leaf/character records, source evidence and approval metadata |
+| [Batches](../content/chinese/batches/) and [generated release inventory](content-review/CHINESE_RELEASE_INVENTORY.md) | Current versions, counts, coverage, stock limits and per-batch review/rights state |
+| [Contract schema](../contracts/chinese/1.schema.json), [fixtures](../content/chinese/fixtures/) and [validator](../scripts/validate_chinese_content.py) | Authoring shapes and synthetic contract checks; not proof of runtime or educational correctness |
+| [Common](../skills/question-authoring/SKILL.md) and [Chinese](../skills/chinese-question-authoring/SKILL.md) skills | Current per-item authoring lessons and the linked PR23 case log |
 
-The starter contains ten P2 materials (five readings, three visual texts and two cloze passages) and nine P3 materials (six readings, one visual text and two cloze passages). Each grade's materials are shared by Chinese and Higher Chinese subject to course-specific QA. This is an authored inventory, not an approved daily-task supply or release bank. Shared course labels mean candidate applicability, not identical course coverage or an HCL-specific depth claim.
+## Current findings and next work
+
+| Finding | Disposition / invariant | Retained evidence |
+| --- | --- | --- |
+| ZH1–ZH2 | Leaf denominator has recorded approval; keep character coverage separate and shared CL/HCL availability distinct from HCL depth. Grade-chart dispositions remain binding. | [Version-10 decisions](#current-review--batch-version-10), manifest and generated inventory |
+| ZH3 | Non-character routes are authored; report ability-level progress accurately. A target without a concrete compatible reviewed pool stays pending_content. Thin stock and empty leaves remain visible in the inventory. | [Version-7 route fixes](#review-response--16-october-2026-batch-version-7) and canonical target/route records |
+| ZH4 | Windmill text was corrected, then its cloze was retagged with compatible routes. No closed finding becomes a new approval requirement. | [Audit response](#audit-response-revision--16-october-2026-batch-version-6) and version-7 response |
+
+Content approval is separate from usable daily supply, import/private-proceed gates, device acceptance and real-record readiness. Review/textbook-extra targets never add P2 outcomes. Current counters come from the generated inventory; historical snapshots below are fixed evidence.
 
 ## 2. Official source baseline
 
@@ -65,7 +67,7 @@ To reproduce, download the two character-list PDFs from the URLs above **outside
 python3 scripts/audit_chinese_character_sources.py --cl-pdf /path/outside-checkout/cl.pdf --hcl-pdf /path/outside-checkout/hcl.pdf --report /tmp/chinese-source-audit.json
 ```
 
-Compare that report with the checked-in report. Extraction is now reproducible; a reproducible extraction and author spot checks do not replace the independent source/grade audit still required.
+Compare that report with the checked-in report. Reproducible extraction and author spot checks do not replace independent source/grade review. The recorded grade-chart dispositions below apply to the current denominator.
 
 ### Six-domain mapping and boundaries
 
@@ -154,7 +156,19 @@ These are acceptance obligations for a later engine PR, not claims that the auth
 | `task-x12` | 12 | 3 | 15 | 8 | After question 10, when second material and corrections finish |
 | `task-x19` | 19 | 4 | 20 | 10 | After second five-question material and corrections |
 
-These general-practice fixtures test material/count contracts, not simulated learner progress. `halfway_safe_boundary_count` is the static expected question boundary for the synthetic fixture; the validator rejects 8 for X=12 and expects 10. It does not simulate completion of corrections or story delivery. Later engine tests must cover one target right in material A then wrong in B, success with a hint, reload before final aggregation, final-stage same-day rejection, duplicate event delivery and changed-key invalidation. Do not report the authoring tests as passing those unimplemented journeys.
+These authoring fixtures test material/count contracts, not simulated learner progress. `halfway_safe_boundary_count` is the static expected question boundary for the synthetic fixture; the validator rejects 8 for X=12 and expects 10. It does not simulate completion of corrections or story delivery. Later engine tests must cover one target right in material A then wrong in B, success with a hint, reload before final aggregation, final-stage same-day rejection, duplicate event delivery and changed-key invalidation. Do not report authoring tests as passing those runtime journeys; use current engine/UI evidence in the README and task/PR.
+
+## 5. Validation and next boundary
+
+Run `python3 scripts/content_review.py --check` for current schema/reference/key and inventory checks. The content workflow also runs the existing boundary/regression suites; the original PDF audit remains separate and requires its source files. Passing these mechanical checks does not establish educational quality or app/browser/backend acceptance.
+
+For current batch/leaf approvals use the canonical JSON and generated release inventory; the preparation PR's old draft status is not an ongoing task requirement. [Content QA](CONTENT_QA.md) and the [Pilot scope](PILOT_V0_1_SCOPE.md) retain the applicable release, private coverage/proceed and real-record protection requirements.
+
+## 6. Starter content review
+
+Run `python3 scripts/content_review.py` and open `reports/content/index.html` for all current Chinese batches, complete material context, every option/key/help field, blanks, pinyin and full versioned source records. This replaces the embedded starter-001 copy; the JSON questions are unchanged. Read the rendered questions under the common and Chinese authoring skills. This author review page does not establish app/device rendering acceptance.
+
+## Historical corrections and review evidence
 
 ## 4. Coverage and first-batch QA
 
@@ -172,13 +186,28 @@ Author review checked keys against each stimulus, plausible single-answer interp
 
 Review procedure and educator escalation are defined once in [CONTENT_QA](CONTENT_QA.md). Actual disputed/sample IDs and outcomes remain in the batch review log and review packs; target-device glyph/readability and offline app acceptance remain separate.
 
-## 5. Validation and next boundary
+### Historical PR11 review overview
 
-Run `python3 scripts/content_review.py --check` for current schema/reference/key and inventory checks. The content workflow also runs the existing boundary/regression suites; the original PDF audit remains separate and requires its source files. Passing these mechanical checks does not establish educational quality or app/browser/backend acceptance.
+**Historical PR11 review disposition — 17 October 2026:** Independent re-review of `a02199b` closed the raw-outcome import, word/ability identity, repair-route compatibility and tracked-bytecode findings. The windmill retagging and empty compatibility list are accepted for this batch. The 25 contract tests and catalogue validator pass. The material counts below have been reconciled with the catalogue. No open blocker from that targeted revision remains for merging this preparation work; this is not owner merge authorization or approved content for shipping. The source-complete curriculum denominator, full item QA, owner disputed-item review/random 20% sample, batch sign-off and rights review remain pending. Ability reporting must not claim a specific word was repaired; unmatched word imports remain pending. Existing private-data and release gates are unchanged.
 
-For current batch/leaf approvals use the canonical JSON and generated release inventory; the preparation PR's old draft status is not an ongoing task requirement. [Content QA](CONTENT_QA.md) and the [Pilot scope](PILOT_V0_1_SCOPE.md) retain the applicable release, private coverage/proceed and real-record protection requirements.
+**Review proposal · 15 October 2026 · Issue #10**
 
-## Historical corrections and review evidence
+This is one review entry point for curriculum preparation and authoring contracts. It does not authorize an app build, private-data processing feature, content release, merge or deployment. The functional authority remains [Pilot Functional Design](PILOT_FUNCTIONAL_DESIGN.md), with [engine rules](PILOT_LEARNING_ENGINE_SPEC.md) and [QA gates](CONTENT_QA.md). No confirmed product decision is changed here.
+
+### Historical inventory snapshot — starter-001 v10 / starter-002 v3
+
+**Current status — 18 October 2026:** the leaf curriculum list, `zh-starter-001` v10, `zh-starter-002` v3, `zh-starter-003` v2 and review-character list `zh-2024-p1-review.3` are approved in their canonical JSON records. Batch review, sampled/disputed item IDs and rights decisions remain there; pending states below describe earlier revisions. Use the generated [release inventory](content-review/CHINESE_RELEASE_INVENTORY.md) for coverage rather than historical counts. Review/textbook-extra targets do not add P2 outcomes; shared CL/HCL items show availability, not HCL depth. Content approval does not establish app-release or real-record readiness.
+
+| Artifact | Purpose | Current state |
+| --- | --- | --- |
+| [Curriculum manifest](../content/chinese/curriculum.json) | Four course identities, official references, 132 course-specific outcome records (including language-use leaves), 46 word/language-point/reading-skill repair targets and 1,796 character records | Leaf list approved by the owner as the coverage denominator (2026-10-18); manifest name `draft.2` kept so existing batches and fixtures stay pinned. Approval does not authorize real-record imports; README describes current app/pack capabilities and the data-protection gates remain |
+| [Contract schema](../contracts/chinese/1.schema.json) | Curriculum, original catalogue, frozen synthetic task plan, minimal Chinese intake and answer-event shapes | Proposed engineering contract; no app integration |
+| [Starter batch](../content/chinese/batches/starter-001.json) | Version 10: 357 original items — 19 materials (95 questions), 12 declared repair groups (45 character pools and 23 skill pools; 204 questions), and 58 further general-practice items; every non-repair question declares a repair route | Batch and manifest denominator approved by the owner 2026-10-18; rights cleared |
+| [Second batch](../content/chinese/batches/starter-002.json) | Version 3: 38 original P2 items — 1 material (4 questions), 4 repair groups (5 character pools and 3 skill pools; 24 questions) and 10 further general-practice items | Approved by the owner 2026-10-18 (rights cleared): ChatGPT cross-reviewed v1, Claude re-reviewed the six corrections and edited three hints (v3; re-review waived by the owner), and the owner accepted the six corrections and the seven-item sample ([review pack](content-review/CHINESE_REVIEW_PACK_STARTER_002.md)) |
+| [Task fixtures](../content/chinese/fixtures/) | Complete P2 examples for X=6, 10, 12 and 19 | Synthetic, deterministic validation examples; no learner data |
+| [Validator](../scripts/validate_chinese_content.py) and [boundary checks](../scripts/test_chinese_content_contracts.py) | Structural integrity and cross-file rejection cases | Standard-library authoring tools; not learning-engine implementation |
+
+The starter contains ten P2 materials (five readings, three visual texts and two cloze passages) and nine P3 materials (six readings, one visual text and two cloze passages). Each grade's materials are shared by Chinese and Higher Chinese subject to course-specific QA. This is an authored inventory, not an approved daily-task supply or release bank. Shared course labels mean candidate applicability, not identical course coverage or an HCL-specific depth claim.
 
 The dated revisions below retain source interpretations, defect fixes and exact review/owner dispositions. Their old versions, counts and pending states are historical. Current authority is the canonical JSON and generated release inventory; the [research audit](#research-audit), review packs and authoring case log remain intact.
 
@@ -262,11 +291,6 @@ Current records: review-character list `zh-2024-p1-review.3` is approved; `zh-st
 
 P2 school exercise formats and textbook vocabulary were reviewed privately to choose question types and the extras list. No worksheet, textbook or past-paper wording, answer or learner information is used. As with every public group, the targets are generic curriculum content and not a record of any learner's errors.
 
-## 6. Starter content review
-
-Run `python3 scripts/content_review.py` and open `reports/content/index.html` for all current Chinese batches, complete material context, every option/key/help field, blanks, pinyin and full versioned source records. This replaces the embedded starter-001 copy; the JSON questions are unchanged. Read the rendered questions under the common and Chinese authoring skills. This author review page does not establish app/device rendering acceptance.
-
-
 <a id="research-audit"></a>
 
 ## Research audit — 2026-10-16
@@ -283,9 +307,9 @@ Snapshot: 300 unique questions (150 P2 + 150 P3), shared across CL/HCL; 18 compl
 
 #### Method and evidence limits
 
-The reviewer independently retrieved public official PDFs, navigated current public school sources, downloaded actual historical paper packets, and examined dated enrichment. This is additional research beyond the previous targeted key corrections and the PR author’s source list. Paper text/OCR was processed across the individual packets; representative question pages, headings and selected rendered pages were examined for skills, response demand and date/course identity. External answer schemes were not assumed correct. The work is a source/scope/coverage audit with targeted item findings, not a second human marking of every external question or signed educator approval of every app key.
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-1).
 
-The four audits together use **50 retrieved paper/bundle files**: 47 individual/combined packets and three second-host bundles. Files/hosts may overlap in underlying papers. Only eight pages of each large second-host bundle were examined; there is no claim to have manually audited the complete bundles. Public hosting is not a reuse licence or authentication of a school-issued paper. No source scans, passages, question text, images or answer sheets are added to the repository. No private worksheets or learner data were used.
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-2).
 
 #### Content findings
 
@@ -322,7 +346,7 @@ The windmill cloze describes cutting the square into triangles and gluing all co
 
 #### Official and public-school sources
 
-Official sources define scope; school sources corroborate local sequence/assessment, and hosted past papers/enrichment describe practice. Lower-authority sources do not override current MOE requirements. All page numbers below are PDF pages unless explicitly called printed pages. All sources accessed 2026-10-16.
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-3).
 
 - [MOE Chinese syllabus 2024](https://www.moe.gov.sg/api/media/f41062a6-3a90-4ed1-bf93-2f1aaabeec43/CL-Syllabus-Pri-2024.pdf). Actual PDF retrieved and inspected: PDF pp28–32 (printed26–30), especially course/grade reading progression p29. SHA-256: `6c58e38740ca135fbd8b31c655fe9dcccdcd9b83a2ae430671f41ef7db757973`.
 - [MOE CL character list](https://www.moe.gov.sg/media/files/primary/syllabus/99b31d48-7f90-420a-a748-f64167c45746.pdf). Actual PDF retrieved and inspected: PDF pp3–4 P2; pp5–6 P3; pp1–2 earlier-grade comparison. SHA-256: `d833e9a4e4e632fb633a04b6471e9e6465a0097c7ea07a43e70913956942c145`.
@@ -334,7 +358,7 @@ Official sources define scope; school sources corroborate local sequence/assessm
 | [ws-p3-2026-1](https://isomer-user-content.by.gov.sg/817/92b8e3b0-02aa-456d-8182-5daef0fc0ead/02_2026_P3_MTL_Curriculum_Briefing.pdf); [school navigation](https://www.westspringpri.moe.edu.sg/curriculum-briefing-2026/cb2026p3/) | 6–9, 11: Integrated language skills; language paper plus composition/listening/oral in the school plan. App’s deliberate external/deferred components must remain explicit. | `a36d7b79285e5c802b30469c028be7773eab79f74306b256b6ed7be0968c26a1` |
 | [tn-p2-2026-2](https://isomer-user-content.by.gov.sg/884/36eef8c1-4166-45e2-9c67-c5de273bf42b/SOW_Outline_2026_P2_CL_MT.pdf); [school navigation](https://www.tampinesnorthpri.moe.edu.sg/for-parents/parents-portal/primary-2-2026/) | 1: P2 Chinese textbook unit sequence; thematic titles alone do not establish assessed-language skill coverage. | `fb5f94d025c8cb5231e4b26728bbdf07037144912738f4e28bc32ecb2cfd8b5d` |
 
-The school PDFs were reached through current school navigation; moved legacy file links were not silently counted as retrieved. They are public curriculum documents, not any learner’s school/worksheet information.
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-4).
 
 Additional public programme context: [Anderson Chinese programmes](https://www.andersonpri.moe.edu.sg/our-education/departments/chinese-language/programmes/) distinguishes the HCL programme from CL. It is programme evidence, not an exhaustive skill list. A Keming page labelled 2025 linked a slide deck with an October 2024 cover; that page label was not accepted as a 2025 content date.
 
@@ -366,7 +390,7 @@ No defensible “full P2/P3 CL/HCL coverage” percentage is established by this
 
 #### Actual paper research, 2021–2026
 
-Citation revision (2026-10-16): third-party past papers are linked through public listing pages only. School/year/type, analysis pages and original file hashes still identify the copies examined; this citation format does not establish reuse rights.
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-5).
 
 | Course | 2021 | 2022 | 2023 | 2024 | 2025 | 2026 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -375,7 +399,7 @@ Citation revision (2026-10-16): third-party past papers are linked through publi
 | p3 chinese | Retrieved | Retrieved¹ | Retrieved¹ | Retrieved¹ | Retrieved | Not retrieved |
 | p3 higher chinese | Retrieved | Retrieved¹ | Retrieved¹ | Retrieved¹ | Retrieved | Not retrieved |
 
-“Retrieved” means a public PDF packet was downloaded and its content examined, not that a direct school release was authenticated. ¹ Catalogue year is not internally established for every packet; retain the per-file qualifications below. This was a bounded multi-host survey, not an exhaustive census. No verified 2026 paper was retrieved as of 2026-10-16; a website’s 2026 title/footer was not treated as the year printed on a paper.
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-6).
 
 P2 HCL 2022 and P3 HCL 2022 were recovered from SGTestPaper after the first index had no listing. Targeted SGExam/SGTestPaper/Learning Space and public search checks did not yield verified P2 HCL 2023–2024 downloads; paid bundle listings are not counted. The mislabelled CL 2021 packet is excluded from CL availability and replaced by the Rosyth CL packet.
 
@@ -564,13 +588,10 @@ Actual P2 CL page9 has pinyin completion, character discrimination and vocabular
 
 The app content is labelled original author draft. A bounded exact-overlap check compared every app material body and question stem against the retrieved same-subject paper OCR/text: 19 text files, 24 consecutive Han characters. **No threshold-length exact match was found.** This can miss paraphrases, OCR errors, shorter copying, images and sources outside the sample. It is not proof of originality, permission or copyright clearance. Common grammar/number templates are not by themselves evidence of copying. Retain pending rights/independent review/owner sign-off until the project’s review gates are satisfied.
 
-For past papers, start at the cited public listing, identify the recorded grade/course, year and assessment, and obtain the matching file under the host’s current access conditions. Compare its `sha256sum` with the recorded hash; a mismatch may mean the host replaced the file. Official and other source snapshots are likewise identified by their cited URLs and hashes. For paper structure, extract native PDF text and OCR scans (PyMuPDF + Tesseract English / Simplified Chinese), then inspect the stated PDF pages and course/year covers visually where OCR is ambiguous. HTML hashes identify the fetched snapshot, not an immutable future webpage. The documented overlaps used only stems/material bodies, not keys/explanations or character catalogues. Source retrieval and OCR happened outside the public repository; no signed download tokens or private files are required to follow these citations.
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-8).
 
 #### Disposition and next revision
 
-1. Resolve the numbered findings above and update the leaf-level map and affected content/metadata together. Keep the agreed Pilot exclusions and locks.
-2. Review original questions, distractors, keys, hints, explanations and any new assets as a coherent batch; increment affected content versions and preserve prior pinned attempts. The earlier correction commit is not approval of unchanged or newly added content.
-3. Re-run schema/content checks and the public-data guard. Validators check structure and references, not curriculum truth, unambiguous meaning, complete transfer pools or educational quality.
-4. Calculate release coverage only from the reviewed in-scope leaf denominator, with explicit omissions. Independent review and owner sign-off remain pending; no percentage or question count authorises implementation/merge.
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-9).
 
-Validation for this evidence-only revision: public-source link/hash and report consistency checks; subject content validator rerun without content/schema changes; privacy guard and whitespace diff check. The PR comment records the published evidence revision and exact results.
+[Shared audit method and limits](RESEARCH_METHOD_2026-10-16.md#audit-method-10).

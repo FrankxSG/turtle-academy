@@ -77,20 +77,15 @@ Use original/rights-cleared generic curriculum groups, not learner-specific publ
 
 1. **Learning:** Each subject has usable instructions, a complete content loop, feedback and short review. A learner can complete and revisit each released subject loop; later subjects need not ship simultaneously.
 2. **Offline:** After initial online login, test cached app, refresh, answer/import, expired session, delayed review and return visit on real landscape phone/tablet; no network should block cached lessons.
-3. **Resilience:** Follow the live sync, conflict, snapshot, retention and deletion policy in §3. Handle IndexedDB denial/eviction; snapshots are rollback history, not independent provider disaster recovery. Before implementation acceptance, use synthetic data and at least two devices to test:
-   - Duplicate and interrupted uploads (including restart and a lost response after commit) neither duplicate records nor lose queued changes.
-   - Practice offline on two devices, then reconnect both: every answer from both is kept, derived stages/due dates match on both, and no daily completion or delivered story checkpoint is lost or duplicated.
-   - Two offline devices start the same day's task: both share one task, every answer from both counts, and the day is credited once.
-   - Same-field offline edits converge by server-accepted stamp, preserving replaced values in history; changes to different fields are both kept. Test an earlier fast-clock offline edit uploaded after a later normally timed edit: the earlier edit may win, but all devices converge and both values remain in history. Retrying an acknowledged edit cannot assign it a new stamp. Large clock differences show a warning.
-   - Target changes made on two devices are both kept as amendments, and evidence is recomputed.
-   - A deletion made on one device reaches a device that was offline when it happened.
-   - A reset or new device signs in and gets back all synced records and the pack (without wrong forms), and repair practice works from the correct targets. Guest or other-account records on a device are never uploaded.
-   - An expired session never blocks offline practice; changes queue and sync after sign-in.
-   - Snapshot restore requires password reauthentication and explicit confirmation, reaches every device and keeps all answer events. A parent invalidation of specific answers made on one device reaches every device and recalculates progress there. Pruning keeps the newest ten; clients cannot delete snapshots.
-   - Wrong forms, the pack's `observed`, `rationale` and `provenance` fields, free text outside the allow-list and the PIN/hash never appear in uploads, server tables, snapshots or logs.
-   - Anonymous, other-family and spoofed-child reads and writes are refused, and every write path rejects data outside the allow-list.
-   - Deleting the family or child removes its synced records, pack data, edit history and snapshots, and leaves other children untouched.
-   The first milestone (one signed-in device) is accepted on the duplicate/interrupted-upload, reset-device, expired-session, privacy and access tests above, run with one device; the two-device, conflict, snapshot, restore, pruning and deletion tests are accepted with the later increments in §3.
+3. **Resilience:** Follow §3. Handle IndexedDB denial/eviction; snapshots are rollback history, not independent provider disaster recovery. [Engine §7](PILOT_LEARNING_ENGINE_SPEC.md#7-behavioral-acceptance-cases) defines the synthetic scenarios once; acceptance follows the delivery sequence in §3:
+
+   | Milestone | Required resilience cases |
+   | --- | --- |
+   | First milestone, one signed-in device | F44 upload/restart/lost-acknowledgement portion; F45 reset-device and expired-session behavior; F46 privacy portion; F47 access/allow-list; F50 same-family first-sign-in boundary |
+   | Later increments, at least two devices | Complete F41–F46, F48–F49 and F51: offline reconciliation, shared tasks, clocks/conflicts, amendments, deletion propagation, snapshots/restore, pruning/audit and child/family deletion |
+
+   Earlier acceptance does not waive later increments or the real-device, privacy and data-protection gates. Use synthetic data throughout.
+
 4. **Accuracy:** Review every answer key, pedagogical explanation, source licence and syllabus claim. Pilot formal responses are objective only; external writing is not scored.
 5. **Privacy:** No real worksheets, names, school information, handwriting samples, personal history, credentials or production exports in repository files, bundles, CI artifacts, PR comments, screenshot fixtures or preview outputs.
 6. **Security (Pilot):** Independently verify dedicated staging and production account/project identities from service metadata **before any service write**. Verify identity, staging Auth and cross-family/child RLS, sync conflict/restore behavior, OAuth account linkage and key separation with synthetic data **before** transmitting any real learner data.

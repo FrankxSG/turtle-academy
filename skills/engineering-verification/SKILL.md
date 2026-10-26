@@ -5,7 +5,7 @@ description: Implement and review Turtle Academy code, bug fixes and tests using
 
 # Engineering verification
 
-Follow the existing [shared workflow](../../AGENTS.md). Keep evidence in the current task/PR; do not add approval rounds, permanent reports or tools merely to follow this skill. Apply checks relevant to the change and reuse valid evidence for unchanged behavior.
+Follow the existing [shared workflow](../../AGENTS.md). Keep evidence and handoffs in the current task/PR. Select checks for the changed behavior and material risks; reuse valid unchanged-code evidence. Expand verification when changes, failures or unresolved concerns justify it, not to repeat a ritual. Do not add approval rounds, permanent reports or tools merely to follow this skill.
 
 ## Implement and recheck
 
@@ -35,4 +35,4 @@ For each removed substantive requirement, source interpretation, authoring lesso
 - [PR9](https://github.com/FrankxSG/turtle-academy/pull/9#issuecomment-6194194000): timer tests depended on animation/effect timing.
 - [PR31](https://github.com/FrankxSG/turtle-academy/pull/31#issuecomment-6354330531): archived text did not keep audit results and open notes discoverable in current guides.
 
-Original project-specific guidance informed by the methods in obra/superpowers: [systematic-debugging](https://github.com/obra/superpowers/blob/main/skills/systematic-debugging/SKILL.md), [test-driven-development](https://github.com/obra/superpowers/blob/main/skills/test-driven-development/SKILL.md) and [verification-before-completion](https://github.com/obra/superpowers/blob/main/skills/verification-before-completion/SKILL.md), and Trail of Bits [differential-review](https://github.com/trailofbits/skills/blob/main/plugins/differential-review/skills/differential-review/SKILL.md). No upstream scripts, hooks or framework are installed.
+Methods adapted to this project: obra/superpowers [systematic-debugging](https://github.com/obra/superpowers/blob/main/skills/systematic-debugging/SKILL.md), [test-driven-development](https://github.com/obra/superpowers/blob/main/skills/test-driven-development/SKILL.md), [verification-before-completion](https://github.com/obra/superpowers/blob/main/skills/verification-before-completion/SKILL.md) and [requesting-code-review](https://github.com/obra/superpowers/blob/main/skills/requesting-code-review/SKILL.md); Trail of Bits [differential-review](https://github.com/trailofbits/skills/blob/main/plugins/differential-review/skills/differential-review/SKILL.md); official [Claude Code practices](https://code.claude.com/docs/en/best-practices) and [Codex practices](https://learn.chatgpt.com/guides/best-practices). These are references, not additional mandatory workflows. No upstream scripts, hooks or framework are installed.
