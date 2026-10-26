@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { setup, state, answer, parent } from './helpers/pilot'
+import { setup, state, answer, parent, finish } from './helpers/pilot'
 
 test('initialized practice survives expired-session offline reload and offline writes', async ({
   page,
@@ -43,6 +43,21 @@ test('initialized practice survives expired-session offline reload and offline w
   // Back online, sync may try to renew the session in the background; local records are unaffected.
   expect((await state(page)).events.length).toBe(2)
   expect(errors).toEqual([])
+})
+
+test('default (Chinese-only) build: finishing reviewed Chinese opens exploration', async ({ page, context }) => {
+  test.setTimeout(120_000)
+  await setup(page, context)
+  await parent(page)
+  await page.getByLabel('Chinese X').selectOption('6')
+  await page.getByRole('button', { name: 'Exit and lock' }).click()
+  await expect(page.getByRole('button', { name: 'Explore the island' })).toBeDisabled()
+  await page.getByRole('button', { name: 'Start Chinese' }).click()
+  await finish(page)
+  await page.getByRole('button', { name: 'Return to the island' }).click()
+  await expect(page.getByRole('button', { name: 'Explore the island' })).toBeEnabled()
+  await page.getByRole('button', { name: 'Walk to the pond' }).click()
+  await expect(page.locator('.speech')).toContainText('A quiet pond')
 })
 
 for (const viewport of [
