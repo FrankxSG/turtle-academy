@@ -1,7 +1,7 @@
 // Cache generic public content only. This store never receives packs, case crosswalks or learner records.
 import type { CatalogueRegistry, CatalogueRelease } from './adapter.ts'
 import { buildChineseContent, type RawBatch, type TargetLists } from './chinese.ts'
-import { registerExercise, registerMaterial, registerReviewState, type Exercise, type MaterialText } from '../ui/content.ts'
+import { registerExercise, registerMaterial, registerReviewState, registerTargetLabels, type Exercise, type MaterialText } from '../ui/content.ts'
 
 export interface CachedPublicBuild {
   version: string
@@ -35,4 +35,5 @@ export async function installPublicBuilds(registry: CatalogueRegistry, store: Pu
   }
   await store.put(current)
   install(current)
+  registerTargetLabels(built.targets)
 }

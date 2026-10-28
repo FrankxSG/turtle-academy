@@ -87,3 +87,15 @@ export const questionLabels: Record<ContentKind, { en: string; zh: string }> = {
   reviewed: { en: 'REVIEWED PRACTICE', zh: '已审核练习题' },
   unreviewed: { en: 'PRACTICE QUESTION · NOT YET REVIEWED', zh: '练习题 · 尚未审核' },
 }
+
+// Display labels of concrete targets (a character, a word or a skill name), by knowledge-point ref, for the parent
+// area. Labels describe generic content (or the device's own private pack), never a learner record.
+const targetLabels = new Map<string, string>()
+
+export function registerTargetLabels(entries: Iterable<[string, { label: string }]>) {
+  for (const [ref, info] of entries) targetLabels.set(ref, info.label)
+}
+
+export function targetLabel(ref: string | null): string | null {
+  return ref === null ? null : targetLabels.get(ref) ?? null
+}

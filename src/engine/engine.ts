@@ -1,15 +1,16 @@
 // The on-device learning engine (Issue #17). One instance per child profile.
 // Truth is the append-only answer events plus immutable records; progress is re-derived after every change.
 import { itemIn, judge, type CatalogueItem, type CatalogueRegistry, type CatalogueRelease } from '../catalogue/adapter.ts'
+import { AMENDMENT_REVISION, amendmentView, isActiveTarget, isImported, observationInvalid, type AmendReason, type InvalidateReason } from './amendments.ts'
 import { isValidTimezone, learningDate } from './calendar.ts'
 import { derive, type Derived } from './evidence.ts'
 import { compatibleItem, nothingEligible, planTask, resolveShortSlot, usableItem, usableVersion, type PlanContext } from './planner.ts'
 import type { Mutation, Put, RecordStore, SaveStatus, Table } from './persistence.ts'
 import { WriteQueue } from './persistence.ts'
-import { halfwayOf, IDLE_AFTER_SECONDS, isLanguage, isValidX, POLICY_VERSION, SUBJECTS, xMax } from './policy.ts'
+import { ERROR_TYPES, halfwayOf, IDLE_AFTER_SECONDS, isLanguage, isValidX, POLICY_VERSION, SUBJECTS, xMax } from './policy.ts'
 import { emptyState, fromRecords, toRecords } from './records.ts'
 import type {
-  ActivityState, Assistance, Checkpoint, Completion, EngineState, Flag, PlanSlot, Presentation, Response, Role, Subject, Target, Task,
+  ActivityState, Amendment, Assistance, Checkpoint, Completion, EngineState, Flag, PlanSlot, Presentation, Response, Role, Subject, Target, Task,
 } from './types.ts'
 
 export interface EngineDeps {
@@ -509,7 +510,8 @@ export class LearningEngine {
     const date = this.today()
     const chosen = response.option_ids.find((o) => !item.key.option_ids.includes(o))
     const errorType = (chosen && item.error_types?.[chosen]) || 'unknown_cause'
-    const existing = this.state.targets.find((t) => t.status === 'active' && t.subject === item.subject && t.course === item.course
+    const view = amendmentView(this.state)
+    const existing = this.state.targets.find((t) => isActiveTarget(t, view) && t.subject === item.subject && t.course === item.course
       && t.knowledge_point_ref === item.knowledge_point_ref && t.assessed_skill === item.assessed_skill && t.error_type === errorType)
     // Provenance: instance_ref is the task, batch_ref the presentation that produced the observation, so the
     // reducer can drop it when that question is flagged or suspended and restore it on a parent decision.
@@ -582,6 +584,95 @@ export class LearningEngine {
       refs: [itemId], replacement_ref: null, reason: 'question_problem', reducer_revision: 1,
     })
     this.changed()
+    return this.flush()
+  }
+
+  // ---------------------------------------------------------------- parent amendments (PIN gate is in the UI layer)
+  //
+  // Add-only corrections with provenance (Functional Design §8, F23/F51). The amended or invalidated records are
+  // left exactly as they were; the amendment says how replay treats them (src/engine/amendments.ts). Stages, due
+  // dates and unlocks are re-derived; completions and story checkpoints are separate records and never change.
+
+  private activeTarget(targetId: string): Target {
+    const t = this.state.targets.find((x) => x.id === targetId)
+    if (!t) throw new Error('unknown_target')
+    if (!isActiveTarget(t, amendmentView(this.state))) throw new Error('target_not_active')
+    return t
+  }
+
+  private addAmendment(kind: Amendment['kind'], refs: string[], reason: Amendment['reason'], replacement: string | null = null) {
+    this.state.amendments.push({ id: this.newId(), at: this.deps.now(), actor: 'parent', kind, refs, replacement_ref: replacement, reason, reducer_revision: AMENDMENT_REVISION })
+    this.changed()
+  }
+
+  /**
+   * Correct an imported target's knowledge point, assessed skill or error type. A new target replaces it, carrying
+   * the same observations (same ids and provenance) and none of the old target's answers, so the changed target
+   * inherits no success. It is practised from the day after the correction, like a new import.
+   */
+  async amendTarget(targetId: string, change: { knowledge_point_ref?: string; assessed_skill?: string | null; error_type?: string }, reason: AmendReason): Promise<{ id: string; saved: SaveStatus | null }> {
+    const old = this.activeTarget(targetId)
+    if (!isImported(old)) throw new Error('amend_requires_import')
+    const release = this.deps.registry.current(old.subject)
+    if (!release) throw new Error('no_content')
+    const kpRef = change.knowledge_point_ref ?? old.knowledge_point_ref
+    const kp = release.knowledge_points.find((k) => k.ref === kpRef && k.course === old.course)
+    if (!kpRef || !kp) throw new Error('unknown_knowledge_point')
+    const items = release.items.filter((i) => i.knowledge_point_ref === kpRef && i.course === old.course)
+    const skills = [...new Set(items.map((i) => i.assessed_skill))]
+    let skill: string | null
+    if (change.assessed_skill !== undefined) skill = change.assessed_skill
+    else if (kpRef === old.knowledge_point_ref) skill = old.assessed_skill
+    else if (skills.length === 1) skill = skills[0]
+    else throw new Error('assessed_skill_required')
+    if (skills.length > 0 && !skills.includes(skill)) throw new Error('unknown_assessed_skill')
+    const errorType = change.error_type ?? old.error_type
+    const known = new Set<string>(['unknown_cause', ...(ERROR_TYPES[old.subject] ?? []), ...items.flatMap((i) => Object.values(i.error_types ?? {}))])
+    if (!known.has(errorType)) throw new Error('unknown_error_type')
+    if (kpRef === old.knowledge_point_ref && skill === old.assessed_skill && errorType === old.error_type) throw new Error('no_change')
+    const view = amendmentView(this.state)
+    const date = this.today()
+    const pools = (p: string) => items.some((i) => i.material_ref === null && i.assessed_skill === skill && i.pools.includes(p as never))
+    const replacement: Target = {
+      id: this.newId(), subject: old.subject, course: old.course, target_kind: kp.target_kind, knowledge_point_ref: kpRef,
+      target_value: kpRef === old.knowledge_point_ref ? old.target_value : null, assessed_skill: skill, error_type: errorType,
+      mapping_status: ['exact', 'similar', 'generic'].every(pools) ? 'mapped' : 'pending_content', verification: 'verified',
+      status: 'active', verified_at: this.deps.now(), replaces: old.id,
+      observations: old.observations.filter((o) => !observationInvalid(old, o, view)).map((o) => ({ ...structuredClone(o), recorded_on: date })),
+    }
+    this.state.targets.push(replacement)
+    this.addAmendment('amend_target', [old.id], reason, replacement.id)
+    return { id: replacement.id, saved: await this.flush() }
+  }
+
+  /** A target that is not a real mistake (or duplicates another) is no longer planned. Its history is kept. */
+  async invalidateTarget(targetId: string, reason: InvalidateReason): Promise<SaveStatus | null> {
+    this.activeTarget(targetId)
+    this.addAmendment('invalidate_target', [targetId], reason)
+    return this.flush()
+  }
+
+  /** One observation of a target (for example a duplicated import) stops counting. */
+  async invalidateObservation(targetId: string, observationId: string, reason: InvalidateReason): Promise<SaveStatus | null> {
+    const t = this.activeTarget(targetId)
+    const o = t.observations.find((x) => x.id === observationId)
+    if (!o || observationInvalid(t, o, amendmentView(this.state))) throw new Error('unknown_observation')
+    this.addAmendment('invalidate_observation', [targetId, observationId], reason)
+    return this.flush()
+  }
+
+  /**
+   * An answered question in a finished task that should not count (recorded by mistake, or a faulty question): its
+   * evidence and any mistake it created stop counting. Unfinished tasks use the child's flag-and-replace instead,
+   * so a parent action never changes a task the child is in the middle of.
+   */
+  async invalidatePresentation(presentationId: string, reason: InvalidateReason): Promise<SaveStatus | null> {
+    const p = this.state.presentations.find((x) => x.id === presentationId)
+    if (!p) throw new Error('unknown_presentation')
+    if (this.task(p.task_id).status !== 'finalised') throw new Error('task_not_finished')
+    if (p.status === 'flagged_replaced' || p.status === 'invalidated' || !this.firstOf(p)) throw new Error('not_an_answer')
+    p.status = 'invalidated'
+    this.addAmendment('invalidate_presentation', [p.id], reason)
     return this.flush()
   }
 
