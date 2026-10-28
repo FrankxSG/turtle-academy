@@ -22,6 +22,7 @@ on:
       - 'vite.config.ts'
       - 'tests/foundation.spec.ts'
       - 'tests/pilot-ui.spec.ts'
+      - 'tests/parent-corrections.spec.ts'
       - 'tests/parent/**'
       - 'tests/helpers/**'
       - 'tests/browser/**'

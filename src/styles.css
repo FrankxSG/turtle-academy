@@ -653,3 +653,49 @@ footer p {
     margin-bottom: 6px;
   }
 }
+.review-card {
+  background: #fffdf7;
+  border: 1px solid #d2d9c9;
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin: 14px 0;
+}
+.review-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+}
+.review-stem {
+  font-size: 1.15rem;
+  margin: 6px 0;
+}
+.review-card .facts {
+  display: grid;
+  grid-template-columns: minmax(130px, max-content) 1fr;
+  gap: 4px 16px;
+  margin: 0 0 10px;
+  font-size: 0.9rem;
+}
+.review-card .facts dt {
+  font-weight: 700;
+}
+.review-card .facts dd {
+  margin: 0;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.amend-form {
+  max-width: 520px;
+  margin-top: 12px;
+}
+.amend-form label {
+  display: block;
+  margin-bottom: 10px;
+}
+@media (max-width: 520px) {
+  .review-card .facts {
+    grid-template-columns: 1fr;
+  }
+}

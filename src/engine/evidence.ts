@@ -51,6 +51,8 @@ export function excludedItemVersions(state: EngineState): Set<string> {
   return out
 }
 
+const NONE: ReadonlySet<string> = new Set()
+
 /**
  * Presentations that can carry independent evidence. `invalid` holds presentations a parent invalidated (by
  * amendment; the presentation record's own status may not have reached this device yet).
@@ -59,7 +61,6 @@ export function isEvidence(p: Presentation, excluded: Set<string>, invalid: Read
   return p.status !== 'flagged_replaced' && p.status !== 'invalidated' && p.first_response_eligible
     && p.target_ref !== null && p.stage !== null && !excluded.has(`${p.item_id}@${p.item_version}`) && !invalid.has(p.id)
 }
-const NONE: ReadonlySet<string> = new Set()
 
 export function initialStage(t: Target): Stage {
   return t.error_type === 'none' && t.subject === 'science' ? 'acquisition' : 'exact'
