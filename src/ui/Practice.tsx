@@ -134,6 +134,11 @@ export function Practice({
               ●　■　▲
             </p>
           )}
+          <p>
+            {zh
+              ? '全部首次作答完成后，才会显示反馈。'
+              : 'Feedback follows all first answers in this material.'}
+          </p>
         </article>
       )}
       {step.kind === 'teaching' && (
