@@ -304,7 +304,10 @@ test('a wrong repair answer gets a hint, a retry and a supported correction; it 
   await context.setOffline(true)
   await page.reload()
   await expect(page.getByRole('button', { name: 'Resume Chinese' })).toBeVisible()
-  const events = (await state(page)).events.filter((e: any) => e.presentation_id === p.id)
+  // The events store is keyed by event id; order by the device's write sequence.
+  const events = (await state(page)).events
+    .filter((e: any) => e.presentation_id === p.id)
+    .sort((a: any, b: any) => a.local_seq - b.local_seq)
   expect(events.map((e: any) => [e.phase, e.correct])).toEqual([['first', false], ['retry', false], ['correction', true]])
 
   await parent(page)
