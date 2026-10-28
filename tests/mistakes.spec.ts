@@ -260,3 +260,75 @@ test('a save that fails after the pack is stored says the new pack is in use and
   await parent(page)
   await expect(page.getByTestId('mistake-totals')).toContainText('Cases 7')
 })
+
+test('a wrong repair answer gets a hint, a retry and a supported correction; it is saved once, reported, exported and resumes offline', async ({
+  page,
+  context,
+}) => {
+  test.setTimeout(120_000)
+  await page.clock.install({ time: new Date('2027-03-01T10:00:00+08:00') })
+  await setup(page, context)
+  await page.waitForFunction(() => !!navigator.serviceWorker.controller)
+  await parent(page)
+  const file = (p: unknown) => ({ name: 'synthetic-pack.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(p)) })
+  await page.getByTestId('mistake-pack').setInputFiles(file(pack))
+  await expect(page.getByTestId('mistake-totals')).toContainText('Cases 6')
+  await page.getByRole('button', { name: 'Exit and lock' }).click()
+
+  await page.clock.setSystemTime(new Date('2027-03-02T10:00:00+08:00'))
+  await page.reload()
+  await page.getByRole('button', { name: 'Start Chinese' }).click()
+  const card = page.getByRole('article', { name: 'Current question' })
+  const p = await current(page)
+  expect(p.target_ref).toMatch(/^case-target:/)
+  expect(p.material_ref).toBeNull()
+  const key = keyIndex.get(p.item_id)!
+  const wrong = key === 0 ? 1 : 0
+  const submit = async (index: number) => {
+    const signature = await card.getAttribute('data-step')
+    await card.locator('.options button').nth(index).click()
+    await card.getByRole('button', { name: 'Submit answer' }).click()
+    await expect
+      .poll(async () => page.locator('[data-step]').evaluateAll((els) => els[0]?.getAttribute('data-step') ?? null))
+      .not.toBe(signature)
+  }
+  await submit(wrong)
+  await expect(card.getByText('Hint', { exact: true })).toBeVisible()
+  await submit(wrong)
+  await expect(card.getByText('Supported correction', { exact: true })).toBeVisible()
+  await submit(key)
+  await expect(page.getByRole('article', { name: 'Current question' })).toBeVisible()
+
+  // Saved: offline reload keeps the attempts and the task resumes.
+  await page.getByRole('button', { name: 'Pause and return' }).click()
+  await context.setOffline(true)
+  await page.reload()
+  await expect(page.getByRole('button', { name: 'Resume Chinese' })).toBeVisible()
+  const events = (await state(page)).events.filter((e: any) => e.presentation_id === p.id)
+  expect(events.map((e: any) => [e.phase, e.correct])).toEqual([['first', false], ['retry', false], ['correction', true]])
+
+  await parent(page)
+  const row = page.getByTestId(`case-${caseOf[p.target_ref]}`)
+  await expect(row).toContainText('0/1')
+  await expect(page.getByTestId('case-O905')).toContainText('Waiting for questions')
+  // Importing the same pack again (offline) duplicates nothing and keeps the recorded attempts.
+  await page.getByTestId('mistake-pack').setInputFiles(file(pack))
+  await expect(page.getByTestId('mistake-message')).toContainText('New practice targets: 0; new cases linked to existing targets: 0')
+  await expect(page.getByTestId('mistake-totals')).toContainText('Cases 6')
+  await expect(row).toContainText('0/1')
+
+  const download = page.waitForEvent('download')
+  await page.getByTestId('mistake-export').click()
+  const out = JSON.parse(readFileSync(await (await download).path(), 'utf8'))
+  const firsts = out.engine_events.filter((e: any) => e.phase === 'first')
+  expect(firsts).toHaveLength(1)
+  expect(firsts[0].correct).toBe(false)
+  expect(firsts[0].case_ids).toContain(caseOf[p.target_ref])
+  expect(out.engine_events.map((e: any) => e.phase).sort()).toEqual(['correction', 'first', 'retry'])
+
+  await page.getByRole('button', { name: 'Exit and lock' }).click()
+  await page.getByRole('button', { name: 'Resume Chinese' }).click()
+  await expect(page.getByRole('article', { name: 'Current question' })).toBeVisible()
+  expect((await current(page)).id).not.toBe(p.id)
+  await context.setOffline(false)
+})
