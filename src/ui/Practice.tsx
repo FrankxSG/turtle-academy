@@ -43,24 +43,6 @@ export function Practice({
   const zh = language === 'zh'
   const p = step.kind === 'question' ? step.presentation : null
   const releaseMaterial = p?.material_ref ? material(p.material_ref, task.content_version) : null
-  const slots = p?.material_ref
-    ? task.plan.slots.filter((s) => s.material_ref === p.material_ref)
-    : []
-  // No first-answer correctness is rendered while ANY answerable material question awaits its first response.
-  const materialFinishedFirst =
-    slots.length > 0 &&
-    slots.every((slot) =>
-      engine.state.presentations.some(
-        (row) =>
-          row.task_id === task.id &&
-          row.position === slot.position &&
-          row.status !== 'flagged_replaced' &&
-          row.status !== 'invalidated' &&
-          engine.state.events.some(
-            (ev) => ev.presentation_id === row.id && ev.phase === 'first',
-          ),
-      ),
-    )
   return (
     <section className="practice">
       <div className="section-top">
@@ -152,51 +134,6 @@ export function Practice({
               ●　■　▲
             </p>
           )}
-          <ol>
-            {slots.map((slot) => {
-              const row = engine.state.presentations.find(
-                (r) =>
-                  r.task_id === task.id &&
-                  r.position === slot.position &&
-                  r.status !== 'flagged_replaced' &&
-                  r.status !== 'invalidated',
-              )
-              const id = row?.item_id ?? slot.item_id
-              if (!id) return null
-              const first =
-                row &&
-                engine.state.events.find(
-                  (ev) => ev.presentation_id === row.id && ev.phase === 'first',
-                )
-              return (
-                <li
-                  key={slot.position}
-                  className={row?.id === p?.id ? 'current-question' : ''}
-                >
-                  <p className="academic">{exercise(id, task.content_version).stem}</p>
-                  {first && (
-                    <p>
-                      {zh ? '你的首次答案：' : 'Your first answer: '}
-                      {responseText(id, first.response, task.content_version)}
-                      {materialFinishedFirst && (
-                        <span className="material-feedback">
-                          {' '}
-                          ·{' '}
-                          {first.correct
-                            ? zh
-                              ? '正确'
-                              : 'Correct'
-                            : zh
-                              ? '一起再看看'
-                              : 'Let’s look again'}
-                        </span>
-                      )}
-                    </p>
-                  )}
-                </li>
-              )
-            })}
-          </ol>
           <p>
             {zh
               ? '全部首次作答完成后，才会显示反馈。'

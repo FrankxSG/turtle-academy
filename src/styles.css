@@ -374,19 +374,6 @@ header {
   background: #eef2e4;
   margin: 24px 0;
 }
-.material li {
-  padding: 8px 12px;
-}
-.material .current-question {
-  background: #ffffffe0;
-  border-radius: 10px;
-}
-.material li p {
-  font-size: 1rem;
-}
-.material li p.academic {
-  font-size: 1.15rem;
-}
 .shape-picture {
   font-size: 2rem;
   letter-spacing: 0.15em;
@@ -600,9 +587,6 @@ footer p {
   }
   .material {
     padding: 18px 12px;
-  }
-  .material ol {
-    padding-left: 22px;
   }
   .match-grid {
     grid-template-columns: 1fr;
