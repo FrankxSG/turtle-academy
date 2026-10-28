@@ -76,8 +76,13 @@ test('disabling a subject keeps its unfinished work untouched; re-enabling resum
   const h = harness({ subjects: ALL, enabled: ALL })
   for (const s of ALL) await h.engine.setX(s, 6)
   const english = await startTask(h.engine, 'english')
-  await runTask(h.engine, english.id, () => true, { stopAfter: 3 })
+  // Wrong first answers bank targets, so there are targets and due dates to preserve.
+  await runTask(h.engine, english.id, () => false, { stopAfter: 3 })
   await h.engine.pause(english.id)
+  const englishProgress = (e: LearningEngine) => JSON.stringify([...e.derived().progress.values()]
+    .filter((p) => p.target.subject === 'english').sort((a, b) => a.target.id.localeCompare(b.target.id)))
+  const progressBefore = englishProgress(h.engine)
+  assert.ok(h.engine.state.targets.some((t) => t.subject === 'english'), 'fixture: English targets banked')
   const before = structuredClone({
     task: h.engine.task(english.id),
     events: h.engine.state.events.filter((ev) => h.engine.state.presentations.some((p) => p.id === ev.presentation_id && p.task_id === english.id)),
@@ -96,8 +101,9 @@ test('disabling a subject keeps its unfinished work untouched; re-enabling resum
   assert.deepEqual(e.task(english.id), before.task, 'disabled task neither erased nor completed')
   assert.equal(creditsToday(e, 'english'), 0)
   assert.equal(e.xFor('english'), before.x, 'disabled subject keeps its X')
-  for (const t of before.targets) assert.ok(e.state.targets.some((x) => x.id === t.id), 'targets kept')
-  for (const c of before.checkpoints) assert.ok(e.state.story.checkpoints.some((x) => x.id === c.id), 'checkpoints kept')
+  assert.deepEqual(e.state.targets.filter((t) => t.subject === 'english'), before.targets.filter((t) => t.subject === 'english'), 'targets kept')
+  assert.equal(englishProgress(e), progressBefore, 'stages and due dates kept')
+  for (const c of before.checkpoints) assert.deepEqual(e.state.story.checkpoints.find((x) => x.id === c.id), c, 'checkpoints kept')
 
   // Re-enabled: the same task resumes from where it stopped and earns credit once.
   h.enabled = ALL
@@ -112,8 +118,7 @@ test('disabling a subject keeps its unfinished work untouched; re-enabling resum
   await runTask(e, english.id)
   assert.equal(creditsToday(e, 'english'), 1)
   const englishStory = e.state.story.checkpoints.filter((c) => c.task_id === english.id)
-  assert.equal(new Set(englishStory.map((c) => c.id)).size, englishStory.length, 'no duplicate story credit')
-  assert.ok(englishStory.some((c) => c.kind === 'completion' || c.kind === 'combined'))
+  assert.equal(englishStory.filter((c) => c.kind === 'completion' || c.kind === 'combined').length, 1, 'one story credit')
 })
 
 test('pause, reload and finish (as offline: local records only) give one completion and one story credit', async () => {

@@ -53,15 +53,14 @@ export function material(ref: string, version?: string): MaterialText {
 // Review state, recorded per content version as releases are installed: an item counts as reviewed only when the
 // batch that holds it is approved. Nothing unrecorded (an older cached build, a private batch pending review) is
 // ever presented as reviewed.
-const reviewed = new Set<string>()
+const reviewed = new Map<string, Set<string>>()
 
-export function registerReviewed(id: string, version: string) {
-  reviewed.add(`${version}/${id}`)
-}
-
-/** Record reviewed items from a build's item → batch review state map (`approved` only). */
+/** Record a build's reviewed items (batch `approved` only) from its item → batch review state map, replacing any
+ * earlier record for that version. */
 export function registerReviewState(version: string, itemBatch: Iterable<[string, { status: string }]>) {
-  for (const [id, b] of itemBatch) if (b.status === 'approved') registerReviewed(id, version)
+  const ids = new Set<string>()
+  for (const [id, b] of itemBatch) if (b.status === 'approved') ids.add(id)
+  reviewed.set(version, ids)
 }
 
 export type ContentKind = 'synthetic' | 'reviewed' | 'unreviewed'
@@ -73,7 +72,8 @@ export type ContentKind = 'synthetic' | 'reviewed' | 'unreviewed'
 export function contentKind(release: CatalogueRelease, itemId?: string): ContentKind {
   if (release.development_only) return 'synthetic'
   const ids = itemId !== undefined ? [itemId] : release.items.map((i) => i.id)
-  return ids.length > 0 && ids.every((id) => reviewed.has(`${release.version}/${id}`)) ? 'reviewed' : 'unreviewed'
+  const known = reviewed.get(release.version)
+  return known !== undefined && ids.length > 0 && ids.every((id) => known.has(id)) ? 'reviewed' : 'unreviewed'
 }
 
 /** Child-facing labels. A subject card describes its whole release; a question describes itself. */

@@ -220,6 +220,9 @@ export function Parent({
                   '每科 6–19 题（本次试用华文最多 20 题）。更改从下一次新任务生效。语言任务完成整份材料，题数可能更多。',
                 )}
               </p>
+              {!SUBJECTS.some((s) => engine.isEnabled(s)) && (
+                <p>{tr('No practice subjects are enabled in this version.', '这个版本没有开放的练习科目。')}</p>
+              )}
               {SUBJECTS.filter((s) => engine.isEnabled(s)).map((s) => (
                 <label key={s}>
                   {names[language][s]}

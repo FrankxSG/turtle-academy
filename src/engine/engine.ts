@@ -185,11 +185,6 @@ export class LearningEngine {
     return this.deps.registry.release(task.subject, task.content_version)
   }
 
-  /** Whether a task runs on synthetic development fixtures (labelled as such) rather than reviewed content. */
-  isDevelopmentContent(taskId: string): boolean {
-    return this.release(this.task(taskId)).development_only
-  }
-
   /** The release a task is pinned to. */
   taskRelease(taskId: string): CatalogueRelease {
     return this.release(this.task(taskId))

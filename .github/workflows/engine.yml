@@ -8,6 +8,9 @@ on:
       - 'src/snapshot/**'
       - 'tests/engine/**'
       - 'src/sync/**'
+      # Engine tests also import the presentation registry and development fixtures.
+      - 'src/ui/content.ts'
+      - 'src/ui/development.ts'
       - '.github/workflows/engine.yml'
   workflow_dispatch:
 permissions:
