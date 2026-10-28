@@ -379,3 +379,60 @@ test('pack selection previews every case; cancel and leaving parent mode save no
   await parent(page)
   await expect(page.getByTestId('mistake-totals')).toContainText('Cases 6')
 })
+
+test('the parent corrects an imported mistake and marks one not a mistake; cases sharing a target are one row', async ({ page, context }) => {
+  test.setTimeout(90_000)
+  await page.clock.install({ time: new Date('2027-03-01T10:00:00+08:00') })
+  await setup(page, context)
+  await parent(page)
+  await page.getByTestId('mistake-pack').setInputFiles({ name: 'pack.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(pack)) })
+  await page.getByTestId('mistake-confirm').click()
+  await expect(page.getByTestId('mistake-totals')).toContainText('Cases 6')
+  // Parent-observed writing on 座 is shown apart from app recognition answers.
+  await page.getByTestId(`plan-production-${ZUO}`).getByRole('button', { name: 'With help' }).click()
+  const zuo = page.getByTestId(`progress-case-target:${ZUO}`)
+  await expect(zuo).toContainText('2 imported case(s) share this target')
+  await expect(page.locator('article[data-testid^="progress-case-target:"]').filter({ hasText: '座' })).toHaveCount(1)
+  await expect(zuo.getByTestId('progress-production')).toContainText('1 supported')
+  await expect(zuo.getByTestId('progress-recognition')).toContainText('0 first answers')
+  await expect(page.getByTestId(`progress-case-target:${pendingRef}`).getByTestId('progress-state')).toHaveText('Waiting for reviewed questions')
+
+  // Correct the error type of 住: a replacement starts at stage 1 tomorrow; the original stays in the records.
+  const zhu = page.getByTestId('progress-case-target:zh.p2_higher_chinese.char.u4f4f')
+  await zhu.getByRole('button', { name: 'Correct this mistake' }).click()
+  await zhu.getByLabel('Error type').selectOption({ label: 'Similar-looking form' })
+  await zhu.getByRole('button', { name: 'Save correction' }).click()
+  await expect(zhu).toHaveCount(0)
+  const corrected = page.locator('article[data-testid^="progress-"]').filter({ hasText: '住' })
+  await expect(corrected).toHaveCount(1)
+  await expect(corrected).toContainText('Similar-looking form')
+  await expect(corrected.getByTestId('progress-state')).toHaveText('Repair 1/3 · original error')
+  await expect(corrected.getByTestId('progress-next')).toHaveText('From 2027-03-02')
+  await expect(page.getByTestId('case-O903')).toContainText('Not yet evidenced')
+
+  // 座 is not a mistake: both of its cases say so, its writing plan is no longer shown as progress.
+  await zuo.getByRole('button', { name: 'Not a mistake' }).click()
+  await zuo.getByRole('button', { name: 'Confirm: not a mistake' }).click()
+  await expect(zuo).toHaveCount(0)
+  await expect(page.getByTestId('case-O901')).toContainText('Marked not a mistake')
+  await expect(page.getByTestId('case-O902')).toContainText('Marked not a mistake')
+  await page.screenshot({ path: 'test-results/ui-review/parent-corrections-private.png', fullPage: true })
+  const records = (await state(page)).records
+  const amendments = records.filter((r: any) => r.table === 'amendments').map((r: any) => r.value)
+  expect(amendments.map((a: any) => [a.kind, a.reason]).sort()).toEqual([['amend_target', 'wrong_error_type'], ['invalidate_target', 'not_a_mistake']])
+  const original = records.find((r: any) => r.table === 'targets' && r.value.id === 'case-target:zh.p2_higher_chinese.char.u4f4f').value
+  expect(original.status).toBe('active')
+  expect(original.error_type).toBe('unknown_cause')
+
+  // Reload and re-import: the corrections stand and nothing is resurrected or duplicated.
+  await page.reload()
+  await parent(page)
+  await expect(page.getByTestId('case-O901')).toContainText('Marked not a mistake')
+  await expect(page.locator('article[data-testid^="progress-"]').filter({ hasText: '住' })).toContainText('Similar-looking form')
+  await page.getByTestId('mistake-pack').setInputFiles({ name: 'pack.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(pack)) })
+  await page.getByTestId('mistake-confirm').click()
+  await expect(page.getByTestId('mistake-message')).toContainText('New practice targets: 0; new cases linked to existing targets: 0')
+  await expect(page.getByTestId(`progress-case-target:${ZUO}`)).toHaveCount(0)
+  await page.getByRole('button', { name: 'Exit and lock' }).click()
+  await expect(page.getByRole('button', { name: 'Correct this mistake' })).toHaveCount(0)
+})

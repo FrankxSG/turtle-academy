@@ -677,3 +677,55 @@ for (const failure of [
     d.manager.dispose()
   })
 }
+
+test('F51: parent amendments made on two devices are both kept, reach every device and replay to the same progress', async () => {
+  const server = world()
+  const a = await practisedDevice(server)
+  const { d: b } = await device(server, { clock: new Clock(a.clock.now()) })
+  assert.equal((await b.sync()).state, 'idle')
+  const credit = (d: Device) => JSON.stringify({ completions: d.engine.state.completions, delivered: d.engine.state.story.checkpoints.filter((c) => c.state === 'delivered') })
+  const kept = credit(a)
+  assert.equal(credit(b), kept)
+  const amended = 'case-target:zh.p2_higher_chinese.char.u4f4f'
+  const invalid = 'case-target:zh.p2_higher_chinese.char.u5ea7'
+  const original = structuredClone(a.engine.state.targets.find((t) => t.id === amended))
+  assert.ok(original && b.engine.state.targets.some((t) => t.id === invalid))
+  // Both devices change targets while disconnected from each other.
+  const { id: replacement } = await a.engine.amendTarget(amended, { error_type: 'form_confusion' }, 'wrong_error_type')
+  await b.engine.invalidateTarget(invalid, 'not_a_mistake')
+  const answered = b.engine.state.presentations.find((p) => p.status !== 'invalidated' && p.status !== 'flagged_replaced'
+    && b.engine.state.tasks.find((t) => t.id === p.task_id)?.status === 'finalised' && b.engine.state.events.some((e) => e.presentation_id === p.id && e.phase === 'first'))
+  assert.ok(answered)
+  await b.engine.invalidatePresentation(answered.id, 'not_a_mistake')
+  for (const d of [a, b, a]) assert.equal((await d.sync()).state, 'idle')
+  // Every amendment reaches both devices; originals stay as they were on the server; progress converges.
+  const kinds = (d: Device) => d.engine.state.amendments.map((x) => `${x.kind}:${x.refs.join('+')}`).sort()
+  assert.deepEqual(kinds(a), kinds(b))
+  assert.equal(kinds(a).length, 3)
+  const serverTarget = server.records(CHILD).find((r) => r.kind === 'target' && r.key === amended)!.value
+  assert.deepEqual(serverTarget, original)
+  assert.ok(server.records(CHILD).some((r) => r.kind === 'target' && r.key === replacement))
+  assert.equal(server.records(CHILD).find((r) => r.kind === 'presentation' && r.key === answered.id)!.value.status, 'invalidated')
+  const progress = (d: Device) => JSON.stringify([...d.engine.derived().progress.entries()].map(([k, v]) => [k, v.stage, v.dueOn, v.notBefore, v.clearances]).sort())
+  assert.equal(progress(a), progress(b))
+  for (const d of [a, b]) {
+    const p = d.engine.derived().progress
+    assert.equal(p.has(amended), false)
+    assert.equal(p.has(invalid), false)
+    assert.equal(p.get(replacement)?.stage, 'exact')
+    assert.equal(credit(d), kept, 'past completions and delivered story are retained')
+    // The case report follows the amendment: the amended case lives on its replacement, the invalidated ones say so.
+    const rows = new Map(d.program.report()!.cases.map((r) => [r.case_id, r]))
+    assert.equal(rows.get('O903')!.status, 'not_yet_evidenced')
+    assert.equal(rows.get('O901')!.status, 'invalidated')
+    assert.equal(rows.get('O902')!.status, 'invalidated')
+  }
+  // Re-importing the register (as every open does) neither resurrects nor duplicates the corrected cases.
+  const before = JSON.stringify(b.engine.state.targets)
+  await b.program.importRegister()
+  assert.equal(JSON.stringify(b.engine.state.targets), before)
+  // A later pack with a new case on the amended point joins the replacement, not the superseded original.
+  await a.program.installPack(invented({ extraCase: true }))
+  assert.ok(a.engine.state.targets.find((t) => t.id === replacement)!.observations.some((o) => o.id === 'case:o907'))
+  assert.ok(!a.engine.state.targets.find((t) => t.id === amended)!.observations.some((o) => o.id === 'case:o907'))
+})
