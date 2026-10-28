@@ -16,6 +16,8 @@ test('whole-material first answers precede feedback; assistance/corrections and 
   await expect(page.locator('.material ol, .material li')).toHaveCount(0)
   const stem = (await page.getByRole('article', { name: 'Current question' }).locator('h2').textContent())!
   await expect(page.getByText(stem, { exact: true })).toHaveCount(1)
+  // The child is still told why no right/wrong appears until the whole material's first answers are in.
+  await expect(page.locator('.material').getByText('Feedback follows all first answers in this material.')).toBeVisible()
   await answer(page, true)
   await expect(page.locator('.hint, .material-feedback')).toHaveCount(0)
   await page.reload()
