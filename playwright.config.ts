@@ -45,6 +45,8 @@ export default defineConfig({
       timeout: 120000,
       env: {
         VITE_SYNTHETIC_CHINESE: '1',
+        // Every subject is enabled here, so multi-subject requirements and the shared adventure stay tested.
+        VITE_PRACTICE_SUBJECTS: 'all',
         // Public synthetic endpoint, intercepted by Playwright; never a hosted project or credential.
         VITE_SUPABASE_URL: 'http://127.0.0.1:4175',
         VITE_SUPABASE_ANON_KEY: 'synthetic-test-only',

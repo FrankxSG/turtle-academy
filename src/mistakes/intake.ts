@@ -4,7 +4,7 @@
 //   observations on one target, so one correct answer is never counted as several independent corrections.
 // - Idempotent: target and observation ids derive from the target ref and the case id. Re-importing the same
 //   register adds nothing; a new case on an existing target adds one observation and keeps the stage.
-// - Cases were accepted by the parent before export; intake does not ask for another review.
+// - Cases were accepted by the parent before export; the app previews them and asks for one confirmation before saving.
 // - A target is `mapped` only when the installed release has usable exact, similar and generic questions for
 //   it; otherwise it stays `pending_content` (never planned) and appears in the expansion queue.
 // - Writing and speaking cases have no engine target. Their evidence is parent-observed production (production.ts).

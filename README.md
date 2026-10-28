@@ -20,7 +20,7 @@ python3 scripts/privacy_guard.py
 
 Before browser tests, run `npx playwright install chromium` and build with the public synthetic Auth configuration described in [the UI guide](src/ui/README.md). Tests mock Auth or use a throwaway local PostgreSQL sync server (`supabase/tests/sync_server.py`, started by the browser test configuration); they contact no hosted service. Offline behavior is available in the production build, not the Vite development server.
 
-The default public build excludes private-pack handling. `npm run build:private` enables that runtime for deliberate local pack loading; it does not bundle this project's private records or authorize deployment.
+Builds offer **Chinese only** for daily practice by default; `VITE_PRACTICE_SUBJECTS` changes that ([UI guide](src/ui/README.md)). The default public build excludes private-pack handling. `npm run build:private` enables that runtime for deliberate local pack loading; it does not bundle this project's private records or authorize deployment.
 
 ## Content preparation
 

@@ -25,6 +25,7 @@ export function Mistakes({
   const tr = (en: string, cn: string) => (zh ? cn : en)
   const [, setTick] = useState(0)
   const [message, setMessage] = useState('')
+  const [preview, setPreview] = useState<Awaited<ReturnType<MistakeProgram['previewPack']>> | null>(null)
   const refresh = () => setTick((n) => n + 1)
   const report = program.report()
   const plans = program.plans()
@@ -48,19 +49,29 @@ export function Mistakes({
           delayed_review: tr('delayed check', '延时复查'),
         }[s] ?? s)
 
-  async function install(file: File) {
+  async function select(file: File) {
+    setPreview(null)
     setMessage('')
     await work(async () => {
       let raw: unknown
-      try {
-        raw = JSON.parse(await file.text())
-      } catch {
-        // An unreadable file is the file's problem, not a save failure on this device.
+      try { raw = JSON.parse(await file.text()) }
+      catch {
         setMessage(tr('This file could not be read as a mistake pack.', '无法把这个文件读成错题包。'))
         return
       }
+      try { setPreview(await program.previewPack(raw)) }
+      catch (e) { setMessage(tr('This file was not accepted: ', '文件未被接受：') + (e instanceof Error ? e.message : String(e))) }
+    })
+  }
+
+  async function install() {
+    setMessage('')
+    await work(async () => {
+      if (!preview) return
+      const candidate = preview.pack
+      setPreview(null)
       try {
-        const r = await program.installPack(raw)
+        const r = await program.installPack(candidate)
         const added = r.added_targets + r.added_observations > 0
         setMessage(
           tr(
@@ -130,10 +141,33 @@ export function Mistakes({
           onChange={(ev) => {
             const f = ev.target.files?.[0]
             ev.target.value = ''
-            if (f) void install(f)
+            if (f) void select(f)
           }}
         />
       </label>
+      {preview && (
+        <section aria-label={tr('Mistake pack preview', '错题包预览')} data-testid="mistake-preview">
+          <h3>{tr('Review before importing', '导入前确认')}</h3>
+          <p>{tr('Nothing has been imported yet. Confirm this pack once after checking every entry.', '尚未导入。请检查所有条目后确认一次。')}</p>
+          <p>{tr('New practice targets', '新增练习目标')}: {preview.result.added_targets}</p>
+          <div className="table-wrap">
+            <table>
+              <thead><tr><th>{tr('Case', '错例')}</th><th>{tr('Target', '目标')}</th><th>{tr('Observed', '原记录')}</th><th>{tr('Type', '类型')}</th><th>{tr('Status', '状态')}</th></tr></thead>
+              <tbody>{preview.pack.register.cases.map((c) => {
+                const pending = preview.result.pending.some((p) => p.cases.includes(c.id))
+                return <tr key={c.id}>
+                  <th>{c.id}</th><td lang="zh">{c.target}</td><td lang="zh">{c.observed ?? '—'}</td><td>{c.observation_type}</td>
+                  <td>{c.route.mode === 'external' ? tr('Parent-observed only', '仅家长观察') : pending ? tr('Waiting for questions', '题目待补充') : tr('Matched practice', '已匹配练习')}
+                    {c.source_interpretation_uncertain && <> · {tr('Source reading uncertain', '原始记录辨认不确定')}</>}
+                  </td>
+                </tr>
+              })}</tbody>
+            </table>
+          </div>
+          <button className="primary" data-testid="mistake-confirm" disabled={busy} onClick={() => void install()}>{tr('Confirm import', '确认导入')}</button>{' '}
+          <button disabled={busy} onClick={() => setPreview(null)}>{tr('Cancel import', '取消导入')}</button>
+        </section>
+      )}
       {program.openError && (
         <p role="alert" data-testid="mistake-open-error">
           {tr(

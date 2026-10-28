@@ -1,10 +1,10 @@
 import { lazy, Suspense, useState } from 'react'
 import type { AuthClient } from '../auth/client.ts'
 import type { Runtime } from '../ui/runtime.ts'
-import { names, subjects, type Language } from '../ui/development.ts'
+import { names, type Language } from '../ui/development.ts'
 import { responseText } from '../ui/Practice.tsx'
 import { resetPin, validPin, verifyPin } from './device.ts'
-import { xMax } from '../engine/policy.ts'
+import { SUBJECTS, xMax } from '../engine/policy.ts'
 import type { SaveStatus } from '../engine/persistence.ts'
 import type { SyncStatus } from '../sync/manager.ts'
 import { SyncPanel } from './Sync.tsx'
@@ -220,7 +220,10 @@ export function Parent({
                   '每科 6–19 题（本次试用华文最多 20 题）。更改从下一次新任务生效。语言任务完成整份材料，题数可能更多。',
                 )}
               </p>
-              {subjects.map((s) => (
+              {!SUBJECTS.some((s) => engine.isEnabled(s)) && (
+                <p>{tr('No practice subjects are enabled in this version.', '这个版本没有开放的练习科目。')}</p>
+              )}
+              {SUBJECTS.filter((s) => engine.isEnabled(s)).map((s) => (
                 <label key={s}>
                   {names[language][s]}
                   <select
@@ -308,7 +311,8 @@ export function Parent({
                   </tr>
                 </thead>
                 <tbody>
-                  {subjects.map((s) => {
+                  {/* Enabled subjects, plus any disabled one that has history: records stay readable. */}
+                  {SUBJECTS.filter((s) => engine.isEnabled(s) || engine.state.tasks.some((t) => t.subject === s)).map((s) => {
                     const tasks = engine.state.tasks.filter(
                       (t) => t.subject === s,
                     )

@@ -20,6 +20,12 @@ export interface EngineDeps {
   newId?: () => string
   /** Local persistence; omitted only in pure unit tests. */
   writer?: WriteQueue | null
+  /**
+   * Subjects this build offers for practice (src/practice-subjects.ts). Only these can be started or resumed and
+   * count toward the day's requirement; an installed catalogue alone never does. Records of other subjects are
+   * kept untouched. Omitted: every subject.
+   */
+  subjects?: readonly Subject[]
 }
 
 export type Step =
@@ -112,10 +118,17 @@ export class LearningEngine {
     return this.state.settings.subjects.find((s) => s.subject === subject)?.x ?? 10
   }
 
-  availableSubjects(): Subject[] {
-    return SUBJECTS.filter((s) => this.deps.registry.current(s) !== null)
+  /** Whether this build offers the subject for practice (its records are kept either way). */
+  isEnabled(subject: Subject): boolean {
+    return (this.deps.subjects ?? SUBJECTS).includes(subject)
   }
 
+  /** Enabled subjects with installed content: the ones that can be practised and are required each day. */
+  availableSubjects(): Subject[] {
+    return SUBJECTS.filter((s) => this.isEnabled(s) && this.deps.registry.current(s) !== null)
+  }
+
+  /** Exploration opens on a rest day or once every available subject is complete; never with nothing required. */
   dailyStatus() {
     const date = this.today()
     const rest = this.state.rest_days.includes(date)
@@ -124,6 +137,16 @@ export class LearningEngine {
       complete: this.state.completions.some((c) => c.subject === subject && c.local_date === date),
     }))
     return { date, rest, subjects, explorationUnlocked: rest || (subjects.length > 0 && subjects.every((s) => s.complete)) }
+  }
+
+  /** The release a subject's work shows now: its unfinished task's pinned version, else the current one. */
+  contentRelease(subject: Subject): CatalogueRelease | null {
+    const open = this.openTask(subject)
+    try {
+      return open ? this.release(open) : this.deps.registry.current(subject)
+    } catch {
+      return null // pinned content missing on this device; the task reports it when opened
+    }
   }
 
   // ---------------------------------------------------------------- parent settings (PIN gate is in the UI layer)
@@ -162,9 +185,9 @@ export class LearningEngine {
     return this.deps.registry.release(task.subject, task.content_version)
   }
 
-  /** Whether a task runs on synthetic development fixtures (labelled as such) rather than reviewed content. */
-  isDevelopmentContent(taskId: string): boolean {
-    return this.release(this.task(taskId)).development_only
+  /** The release a task is pinned to. */
+  taskRelease(taskId: string): CatalogueRelease {
+    return this.release(this.task(taskId))
   }
 
   private ctx(subject: Subject, release: CatalogueRelease, x: number): PlanContext {
@@ -192,6 +215,8 @@ export class LearningEngine {
    * satisfies today's requirement; no historical catch-up tasks are created).
    */
   async startOrResume(subject: Subject, opts: { optional?: boolean } = {}): Promise<StartResult> {
+    // A disabled subject's unfinished task stays exactly as it is until the subject is enabled again.
+    if (!this.isEnabled(subject)) throw new Error(`subject_disabled:${subject}`)
     const open = this.openTask(subject)
     if (open) {
       if (open.status === 'paused') await this.resume(open.id)

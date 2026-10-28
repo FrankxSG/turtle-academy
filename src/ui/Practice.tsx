@@ -2,7 +2,7 @@ import type { LearningEngine, Step } from '../engine/engine.ts'
 import type { Response } from '../engine/types.ts'
 import { Answer } from './Answer.tsx'
 import { names, type Language } from './development.ts'
-import { exercise, material } from './content.ts'
+import { contentKind, exercise, material, questionLabels } from './content.ts'
 
 export function responseText(itemId: string, response: Response, version?: string): string {
   const e = exercise(itemId, version)
@@ -38,10 +38,11 @@ export function Practice({
   flag: () => void
 }) {
   const task = engine.task(step.taskId)
-  // Reviewed original content is labelled as such; synthetic development fixtures keep their warning label.
-  const development = engine.isDevelopmentContent(task.id)
   const zh = language === 'zh'
   const p = step.kind === 'question' ? step.presentation : null
+  // Labelled by the content actually shown: the task's pinned release (synthetic stays synthetic after resume)
+  // and, for a question, that item's own review state; nothing unreviewed is labelled reviewed.
+  const kind = contentKind(engine.taskRelease(task.id), p?.item_id)
   const releaseMaterial = p?.material_ref ? material(p.material_ref, task.content_version) : null
   const slots = p?.material_ref
     ? task.plan.slots.filter((s) => s.material_ref === p.material_ref)
@@ -65,14 +66,7 @@ export function Practice({
     <section className="practice">
       <div className="section-top">
         <p className="eyebrow">
-          {names[language][task.subject]} ·{' '}
-          {development
-            ? zh
-              ? '开发用模拟内容'
-              : 'SYNTHETIC DEVELOPMENT CONTENT'
-            : zh
-              ? '原创练习题（审核中）'
-              : 'ORIGINAL PRACTICE · REVIEW IN PROGRESS'}
+          {names[language][task.subject]} · {questionLabels[kind][language]}
         </p>
         <button disabled={busy} onClick={pause}>
           {zh ? '暂停并返回' : 'Pause and return'}
@@ -147,7 +141,7 @@ export function Practice({
           <p className="academic" lang={task.subject === 'chinese' ? 'zh' : 'en'}>
             {releaseMaterial.text}
           </p>
-          {development && (
+          {kind === 'synthetic' && (
             <p className="shape-picture" aria-label="● ■ ▲">
               ●　■　▲
             </p>
@@ -229,7 +223,7 @@ export function Practice({
           >
             {exercise(step.item.id, task.content_version).stem}
           </h2>
-          {!releaseMaterial && development && (
+          {!releaseMaterial && kind === 'synthetic' && (
             <p className="shape-picture">●　■　▲</p>
           )}
           {step.awaiting === 'retry' && (

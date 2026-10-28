@@ -298,10 +298,14 @@ header {
   font-size: 0.85rem;
   margin-top: auto;
 }
-.dev-label {
+.dev-label,
+.content-label {
   color: #705c37;
   font-weight: 600;
   font-size: 0.72rem !important;
+}
+.content-label {
+  color: #2f5d3a;
 }
 .trail-science {
   background: #edf3e6;

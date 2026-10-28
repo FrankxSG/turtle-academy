@@ -30,6 +30,12 @@ for (const b of [...batches, ...pack.corrective_batches])
       i.options.findIndex((o: any) => o.id === i.correct_option_id),
     )
 
+const pendingReview = new Set<string>(
+  [...batches, ...pack.corrective_batches]
+    .filter((b) => b.status !== 'approved')
+    .flatMap((b) => b.items.map((i: any) => i.id)),
+)
+
 const ZUO = 'zh.p2_higher_chinese.char.u5ea7'
 const caseOf: Record<string, string> = {
   [`case-target:${ZUO}`]: 'O901',
@@ -77,6 +83,7 @@ test('accepted mistakes import, are practised first the next day, and report and
     buffer: Buffer.from(JSON.stringify(p)),
   })
   await upload.setInputFiles(file(pack))
+  await page.getByTestId('mistake-confirm').click()
   await expect(page.getByTestId('mistake-message')).toContainText('New practice targets: 4')
   await expect(page.getByTestId('mistake-totals')).toContainText('Cases 6')
   await expect(page.getByTestId('case-O905')).toContainText('Waiting for questions')
@@ -84,6 +91,7 @@ test('accepted mistakes import, are practised first the next day, and report and
   await expect(page.getByTestId('case-O906')).toContainText('Parent-observed only')
   // Re-importing the same pack changes nothing.
   await upload.setInputFiles(file(pack))
+  await page.getByTestId('mistake-confirm').click()
   await expect(page.getByTestId('mistake-message')).toContainText(
     'New practice targets: 0; new cases linked to existing targets: 0',
   )
@@ -97,7 +105,11 @@ test('accepted mistakes import, are practised first the next day, and report and
   await page.clock.setSystemTime(new Date('2027-03-02T10:00:00+08:00'))
   await page.reload()
   await page.getByRole('button', { name: 'Start Chinese' }).click()
-  await expect(page.getByText('ORIGINAL PRACTICE · REVIEW IN PROGRESS')).toBeVisible()
+  // Each question is labelled by its own review state: the synthetic pack's corrective batch is pending review.
+  const shown = await current(page)
+  await expect(page.locator('.practice .eyebrow').first()).toHaveText(
+    `Chinese · ${pendingReview.has(shown.item_id) ? 'PRACTICE QUESTION · NOT YET REVIEWED' : 'REVIEWED PRACTICE'}`,
+  )
   await expect(page.locator('.shape-picture')).toHaveCount(0)
   const task = (await state(page)).records.find((r: any) => r.table === 'tasks').value
   const roles: string[] = task.plan.slots.map((s: any) => s.role)
@@ -164,6 +176,7 @@ test('an unusable stored route is quarantined without exposing its report or los
   await parent(page)
   const file = { name: 'synthetic-pack.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(pack)) }
   await page.getByTestId('mistake-pack').setInputFiles(file)
+  await page.getByTestId('mistake-confirm').click()
   await expect(page.getByTestId('mistake-totals')).toContainText('Cases 6')
   await page.evaluate(async () => {
     const name = (await indexedDB.databases()).find((d) => d.name?.startsWith('turtle-academy-private-'))!.name!
@@ -189,6 +202,7 @@ test('an unusable stored route is quarantined without exposing its report or los
   await expect(page.locator('[data-testid^="plan-"]')).toHaveCount(0)
   await page.screenshot({ path: 'test-results/ui-review/private-pack-recovery.png', fullPage: true })
   await page.getByTestId('mistake-pack').setInputFiles(file)
+  await page.getByTestId('mistake-confirm').click()
   await expect(page.getByText(/intake_unknown_target/)).toHaveCount(0)
   await expect(page.getByTestId('mistake-totals')).toContainText('Cases 6')
 })
@@ -198,6 +212,7 @@ test('a failed save while installing a pack says so, keeps the earlier pack and 
   await parent(page)
   const file = (p: unknown) => ({ name: 'synthetic-pack.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(p)) })
   await page.getByTestId('mistake-pack').setInputFiles(file(pack))
+  await page.getByTestId('mistake-confirm').click()
   await expect(page.getByTestId('mistake-totals')).toContainText('Cases 6')
   // Fail only writes of the private pack store, as a full disk or blocked storage would.
   await page.evaluate(() => {
@@ -211,11 +226,13 @@ test('a failed save while installing a pack says so, keeps the earlier pack and 
   })
   const larger = syntheticPack({ pendingRef, extraCase: true })
   await page.getByTestId('mistake-pack').setInputFiles(file(larger))
+  await page.getByTestId('mistake-confirm').click()
   await expect(page.getByTestId('mistake-message')).toContainText('could not be saved on this device')
   await expect(page.getByTestId('mistake-message')).not.toContainText('not accepted')
   await expect(page.getByTestId('mistake-totals')).toContainText('Cases 6')
   await page.evaluate(() => (globalThis as any).restorePackWrites())
   await page.getByTestId('mistake-pack').setInputFiles(file(larger))
+  await page.getByTestId('mistake-confirm').click()
   await expect(page.getByTestId('mistake-totals')).toContainText('Cases 7')
 })
 
@@ -227,6 +244,7 @@ test('a save that fails after the pack is stored says the new pack is in use and
   await page.getByTestId('mistake-pack').setInputFiles({ name: 'broken.json', mimeType: 'application/json', buffer: Buffer.from('{not json') })
   await expect(page.getByTestId('mistake-message')).toContainText('could not be read as a mistake pack')
   await page.getByTestId('mistake-pack').setInputFiles(file(pack))
+  await page.getByTestId('mistake-confirm').click()
   await expect(page.getByTestId('mistake-totals')).toContainText('Cases 6')
   // Fail only the case-link write, which happens after the pack itself is saved.
   await page.evaluate(() => {
@@ -239,6 +257,7 @@ test('a save that fails after the pack is stored says the new pack is in use and
     }
   })
   await page.getByTestId('mistake-pack').setInputFiles(file(syntheticPack({ pendingRef, extraCase: true })))
+  await page.getByTestId('mistake-confirm').click()
   await expect(page.getByTestId('mistake-import-pending')).toContainText('saved and in use')
   await expect(page.getByTestId('mistake-totals')).toContainText('Cases 7')
   await expect(page.getByText('nothing new is in use')).toHaveCount(0)
@@ -249,4 +268,114 @@ test('a save that fails after the pack is stored says the new pack is in use and
   await page.reload()
   await parent(page)
   await expect(page.getByTestId('mistake-totals')).toContainText('Cases 7')
+})
+
+test('a wrong repair answer gets a hint, a retry and a supported correction; it is saved once, reported, exported and resumes offline', async ({
+  page,
+  context,
+}) => {
+  test.setTimeout(120_000)
+  await page.clock.install({ time: new Date('2027-03-01T10:00:00+08:00') })
+  await setup(page, context)
+  await page.waitForFunction(() => !!navigator.serviceWorker.controller)
+  await parent(page)
+  const file = (p: unknown) => ({ name: 'synthetic-pack.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(p)) })
+  await page.getByTestId('mistake-pack').setInputFiles(file(pack))
+  await page.getByTestId('mistake-confirm').click()
+  await expect(page.getByTestId('mistake-totals')).toContainText('Cases 6')
+  await page.getByRole('button', { name: 'Exit and lock' }).click()
+
+  await page.clock.setSystemTime(new Date('2027-03-02T10:00:00+08:00'))
+  await page.reload()
+  await page.getByRole('button', { name: 'Start Chinese' }).click()
+  const card = page.getByRole('article', { name: 'Current question' })
+  const p = await current(page)
+  expect(p.target_ref).toMatch(/^case-target:/)
+  expect(p.material_ref).toBeNull()
+  const key = keyIndex.get(p.item_id)!
+  const wrong = key === 0 ? 1 : 0
+  const submit = async (index: number) => {
+    const signature = await card.getAttribute('data-step')
+    await card.locator('.options button').nth(index).click()
+    await card.getByRole('button', { name: 'Submit answer' }).click()
+    await expect
+      .poll(async () => page.locator('[data-step]').evaluateAll((els) => els[0]?.getAttribute('data-step') ?? null))
+      .not.toBe(signature)
+  }
+  await submit(wrong)
+  await expect(card.getByText('Hint', { exact: true })).toBeVisible()
+  await submit(wrong)
+  await expect(card.getByText('Supported correction', { exact: true })).toBeVisible()
+  await submit(key)
+  await expect(page.getByRole('article', { name: 'Current question' })).toBeVisible()
+
+  // Saved: offline reload keeps the attempts and the task resumes.
+  await page.getByRole('button', { name: 'Pause and return' }).click()
+  await context.setOffline(true)
+  await page.reload()
+  await expect(page.getByRole('button', { name: 'Resume Chinese' })).toBeVisible()
+  // The events store is keyed by event id; order by the device's write sequence.
+  const events = (await state(page)).events
+    .filter((e: any) => e.presentation_id === p.id)
+    .sort((a: any, b: any) => a.local_seq - b.local_seq)
+  expect(events.map((e: any) => [e.phase, e.correct])).toEqual([['first', false], ['retry', false], ['correction', true]])
+
+  await parent(page)
+  const row = page.getByTestId(`case-${caseOf[p.target_ref]}`)
+  await expect(row).toContainText('0/1')
+  await expect(page.getByTestId('case-O905')).toContainText('Waiting for questions')
+  // Importing the same pack again (offline) duplicates nothing and keeps the recorded attempts.
+  await page.getByTestId('mistake-pack').setInputFiles(file(pack))
+  await page.getByTestId('mistake-confirm').click()
+  await expect(page.getByTestId('mistake-message')).toContainText('New practice targets: 0; new cases linked to existing targets: 0')
+  await expect(page.getByTestId('mistake-totals')).toContainText('Cases 6')
+  await expect(row).toContainText('0/1')
+
+  const download = page.waitForEvent('download')
+  await page.getByTestId('mistake-export').click()
+  const out = JSON.parse(readFileSync(await (await download).path(), 'utf8'))
+  const firsts = out.engine_events.filter((e: any) => e.phase === 'first')
+  expect(firsts).toHaveLength(1)
+  expect(firsts[0].correct).toBe(false)
+  expect(firsts[0].case_ids).toContain(caseOf[p.target_ref])
+  expect(out.engine_events.map((e: any) => e.phase).sort()).toEqual(['correction', 'first', 'retry'])
+
+  await page.getByRole('button', { name: 'Exit and lock' }).click()
+  await page.getByRole('button', { name: 'Resume Chinese' }).click()
+  await expect(page.getByRole('article', { name: 'Current question' })).toBeVisible()
+  expect((await current(page)).id).not.toBe(p.id)
+  await context.setOffline(false)
+})
+
+test('pack selection previews every case; cancel and leaving parent mode save nothing; one confirmation imports', async ({ page, context }) => {
+  await setup(page, context)
+  await parent(page)
+  const file = { name: 'synthetic-pack.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(pack)) }
+  const before = await state(page)
+  await page.getByTestId('mistake-pack').setInputFiles(file)
+  const preview = page.getByTestId('mistake-preview')
+  await expect(preview.locator('tbody tr')).toHaveCount(6)
+  await expect(preview).toContainText('Waiting for questions')
+  await expect(preview).toContainText('Parent-observed only')
+  await expect(page.getByTestId('mistake-totals')).toHaveCount(0)
+  expect(await state(page)).toEqual(before)
+  await page.screenshot({ path: 'test-results/ui-review/private-pack-preview.png', fullPage: true })
+  await page.getByRole('button', { name: 'Cancel import', exact: true }).click()
+  await expect(preview).toHaveCount(0)
+  expect(await state(page)).toEqual(before)
+  await page.getByTestId('mistake-pack').setInputFiles(file)
+  await expect(preview).toBeVisible()
+  await page.getByRole('button', { name: 'Exit and lock' }).click()
+  await page.reload()
+  await parent(page)
+  await expect(preview).toHaveCount(0)
+  await expect(page.getByTestId('mistake-totals')).toHaveCount(0)
+  expect((await state(page)).events).toEqual(before.events)
+  await page.getByTestId('mistake-pack').setInputFiles(file)
+  await page.getByTestId('mistake-confirm').click()
+  await expect(preview).toHaveCount(0)
+  await expect(page.getByTestId('mistake-totals')).toContainText('Cases 6')
+  await page.reload()
+  await parent(page)
+  await expect(page.getByTestId('mistake-totals')).toContainText('Cases 6')
 })

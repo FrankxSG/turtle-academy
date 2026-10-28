@@ -581,3 +581,19 @@ test('engine records that could not be saved keep the import incomplete until a 
   const zhu = re.engine.state.targets.find((t) => t.id === target(ZHU))!
   assert.equal(zhu.observations.length, 2, 'O903 and O907 share the 住 target')
 })
+
+test('pack preview validates and classifies every case without activating or saving it', async () => {
+  const s = await setup()
+  const before = structuredClone({ state: s.engine.state, packs: s.privateStore.packList, builds: [...s.privateStore.builds], release: s.program.currentRelease() })
+  const preview = await s.program.previewPack(syntheticPack({ pendingRef: s.pendingRef }))
+  assert.equal(preview.pack.register.cases.length, 6)
+  assert.equal(preview.result.added_targets, 4)
+  assert.deepEqual(preview.result.pending.map((p) => p.target_ref), [s.pendingRef])
+  assert.equal(preview.result.crosswalk.find((c) => c.case_id === 'O906')?.mode, 'external')
+  assert.deepEqual({ state: s.engine.state, packs: s.privateStore.packList, builds: [...s.privateStore.builds], release: s.program.currentRelease() }, before)
+  assert.equal(s.program.report(), null)
+  await assert.rejects(s.program.previewPack({ schema_version: 'nope' }), { name: 'PackRejected' })
+  assert.deepEqual(s.engine.state, before.state)
+  await s.program.installPack(preview.pack)
+  assert.equal(s.program.report()?.totals.cases, 6)
+})
