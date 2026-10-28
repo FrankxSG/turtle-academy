@@ -10,7 +10,12 @@ test('whole-material first answers precede feedback; assistance/corrections and 
   await page.getByLabel('Chinese X').selectOption('6')
   await page.getByRole('button', { name: 'Exit and lock' }).click()
   await page.getByRole('button', { name: 'Start Chinese' }).click()
-  await expect(page.locator('.material ol li')).toHaveCount(3)
+  // The passage is shown once, without its questions listed again: each question appears only in the current
+  // question card, with its options.
+  await expect(page.locator('.material')).toBeVisible()
+  await expect(page.locator('.material ol, .material li')).toHaveCount(0)
+  const stem = (await page.getByRole('article', { name: 'Current question' }).locator('h2').textContent())!
+  await expect(page.getByText(stem, { exact: true })).toHaveCount(1)
   await answer(page, true)
   await expect(page.locator('.hint, .material-feedback')).toHaveCount(0)
   await page.reload()
