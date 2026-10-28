@@ -27,3 +27,5 @@ python3 scripts/privacy_guard.py
 Playwright intercepts every Auth call in signed-in tests. No service or real account is used. A plain build with no Auth configuration shows the parent setup instructions and disables sign-in. It has no fake-login path. Tests and their browser harnesses are not app entry points and are never imported by the app.
 
 The PR must pass the new browser acceptance cases, existing storage/trial regressions, build and privacy checks, and receive independent review. No subject release, real-record readiness or deployment follows from a passing synthetic suite.
+
+**Private pack intake.** Selecting a pack validates and previews every case without saving it. Cancel or leaving parent mode discards the preview. One confirmation imports the pack through the existing idempotent save/recovery path; confirmation revalidates against current records. Invalid packs are rejected as a whole.

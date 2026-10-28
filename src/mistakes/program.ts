@@ -15,6 +15,7 @@ import { packTag, productionPlans, validatePack, type PrivatePack, type Register
 import { deriveProduction, type ProductionEvent, type ProductionStage } from './production.ts'
 import { buildExport, buildReport, normalizedEvents, type CaseReport, type PrivateExport } from './report.ts'
 import { syncablePack } from '../sync/pack.ts'
+import { learningDate } from '../engine/calendar.ts'
 
 export interface PrivateStore {
   /** At most one pack: the current one. */
@@ -253,24 +254,31 @@ export class MistakeProgram {
     return this.currentBuild()?.itemBatch.get(itemId)?.status ?? null
   }
 
+  /** Validate a candidate without changing active content, learning records or private storage. */
+  async previewPack(raw: unknown): Promise<{ pack: PrivatePack; result: IntakeResult }> {
+    const { pack, result } = await this.preparePack(raw)
+    return { pack, result }
+  }
+
+  private async preparePack(raw: unknown) {
+    try {
+      const pack = validatePack(structuredClone(raw))
+      const syncable = await syncablePack(pack)
+      if (!syncable.ok) throw new Error(syncable.code)
+      const build = this.buildFor(pack.course, pack)
+      const result = planIntake({ state: this.engine.state, register: pack.register, release: build.release,
+        targets: build.targets, today: learningDate(this.now(), this.engine.state.settings, this.engine.state.calendar_guards), now: this.now() })
+      return { pack, build, result }
+    } catch (error) { throw new PackRejected(error) }
+  }
+
   /**
    * Install a private pack from a file the parent chose, then import its accepted register. Idempotent: the
    * same pack again changes nothing; a newer pack adds new cases and content without touching evidence.
    */
   async installPack(raw: unknown): Promise<IntakeResult> {
-    let pack: PrivatePack
-    let b: BuiltContent
-    try {
-      pack = validatePack(raw)
-      // A pack must fit the sync allow-list (bounded practice text, short descriptive fields) before it is saved:
-      // nothing is stored on this device that could not reach the family's other devices.
-      const syncable = await syncablePack(pack)
-      if (!syncable.ok) throw new Error(syncable.code)
-      b = this.buildFor(pack.course, pack)
-      // Resolve every route before mutating the registry or persisting any part of an intake.
-      planIntake({ state: this.engine.state, register: pack.register, release: b.release, targets: b.targets,
-        today: this.engine.today(), now: this.now() })
-    } catch (error) { throw new PackRejected(error) }
+    // Revalidate on confirmation against current records; a preview never freezes stale intake decisions.
+    const { pack, build: b } = await this.preparePack(raw)
     const previous = this.registry.current('chinese')
     this.install(b)
     try {
