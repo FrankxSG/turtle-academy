@@ -320,3 +320,58 @@ test('two devices each marking the other case a duplicate keep one observation: 
     replacement_ref: null, reason: 'not_a_mistake', reducer_revision: 2 })
   assert.equal(derive(withTarget).progress.has('imp-1'), false)
 })
+
+test('an app-caught error on the original after a knowledge-point correction stays with its own point', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  await importTarget(h, 'imp-1', 'ma-kp1', [{ id: 'obs-1' }])
+  const moved = await h.engine.amendTarget('imp-1', { knowledge_point_ref: 'ma-kp2' }, 'wrong_target')
+  // A device that had not seen the correction banked an app-caught ma-kp1 error on the original.
+  const state = structuredClone(h.engine.state)
+  state.targets.find((t) => t.id === 'imp-1')!.observations.push({ id: 'app-late', source_type: 'app_practice', observed_on: '2027-03-05',
+    recorded_on: '2027-03-05', instance_ref: 'task-x', batch_ref: null, recurrence: 'independent', invalidated: false })
+  const view = amendmentView(state)
+  const head = state.targets.find((t) => t.id === moved.id)!
+  assert.deepEqual(validObservations(head, view, targetsById(state)).map((o) => o.id), ['obs-1'], 'a ma-kp1 error never schedules ma-kp2')
+  // An error-type-only correction keeps the same point, so such an error does belong to it.
+  const h2 = harness({ subjects: ['mathematics'] })
+  await importTarget(h2, 'imp-1', 'ma-kp1', [{ id: 'obs-1' }])
+  const typed = await h2.engine.amendTarget('imp-1', { error_type: 'confused_form' }, 'wrong_error_type')
+  const s2 = structuredClone(h2.engine.state)
+  s2.targets.find((t) => t.id === 'imp-1')!.observations.push({ id: 'app-late', source_type: 'app_practice', observed_on: '2027-03-05',
+    recorded_on: '2027-03-05', instance_ref: 'task-x', batch_ref: null, recurrence: 'independent', invalidated: false })
+  assert.deepEqual(validObservations(s2.targets.find((t) => t.id === typed.id)!, amendmentView(s2), targetsById(s2)).map((o) => o.id).sort(), ['app-late', 'obs-1'])
+})
+
+test('"not a mistake" outranks "duplicate" in either arrival order, also when marked on an ancestor before a correction', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  await importTarget(h, 'imp-1', 'ma-kp1', [{ id: 'obs-1' }, { id: 'obs-2' }])
+  const mark = (id: string, obs: string, reason: 'duplicate' | 'not_a_mistake', at: string) =>
+    ({ id, at, actor: 'parent' as const, kind: 'invalidate_observation' as const, refs: ['imp-1', obs], replacement_ref: null, reason, reducer_revision: 2 })
+  for (const order of [['a', 'b'], ['b', 'a']]) {
+    const state = structuredClone(h.engine.state)
+    const marks = { a: mark('m-a', 'obs-1', 'duplicate', '2027-03-01T02:00:00.000Z'), b: mark('m-b', 'obs-1', 'not_a_mistake', '2027-03-01T01:00:00.000Z') }
+    state.amendments.push(...order.map((k) => marks[k as 'a' | 'b']), mark('m-c', 'obs-2', 'duplicate', '2027-03-01T03:00:00.000Z'))
+    assert.equal(derive(state).progress.has('imp-1'), false, `order ${order.join('')}: obs-1 is not a mistake, so obs-2 duplicates nothing`)
+  }
+  // A duplicate marked on the original, then a correction: the mark still applies to the replacement.
+  await h.engine.invalidateObservation('imp-1', 'obs-2', 'duplicate')
+  const { id } = await h.engine.amendTarget('imp-1', { error_type: 'confused_form' }, 'wrong_error_type')
+  assert.deepEqual(validObservations(h.engine.state.targets.find((t) => t.id === id)!, amendmentView(h.engine.state), targetsById(h.engine.state)).map((o) => o.id), ['obs-1'])
+})
+
+test('a duplicate mark plus a flagged app-caught error does not make an imported mistake vanish', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  const t = await startTask(h.engine, 'mathematics')
+  const step = await h.engine.next(t.id)
+  if (step.kind !== 'question') throw new Error('expected a question')
+  await h.engine.answer(step.presentation.id, { kind: 'single', option_ids: ['b'], pairs: [] })
+  const banked = h.engine.state.targets.find((x) => x.observations.some((o) => o.source_type === 'app_practice'))!
+  // An import of the same mistake joins it; the parent marks the import a duplicate of the app-caught error.
+  const d = h.engine.today()
+  await h.engine.upsertTargets([{ ...structuredClone(banked), observations: [{ id: 'case-x', source_type: 'schoolwork', observed_on: d, recorded_on: d,
+    instance_ref: 'import:x', batch_ref: null, recurrence: 'independent', invalidated: false }] }])
+  await h.engine.invalidateObservation(banked.id, 'case-x', 'duplicate')
+  // The child then flags the question that produced the app-caught error.
+  await h.engine.flag(step.presentation.id, 'answer_looks_wrong')
+  assert.equal(h.engine.derived().progress.has(banked.id), true, 'the imported case still stands')
+})

@@ -94,7 +94,14 @@ type Observation = Target['observations'][number]
 export function chainObservations(t: Target, view: AmendmentView, byId: ReadonlyMap<string, Target>): Observation[] {
   const out = new Map<string, Observation>()
   for (let at: string | undefined = t.id, guard = 0; at !== undefined && guard < 10_000; at = view.replaces.get(at), guard++) {
-    for (const o of byId.get(at)?.observations ?? []) if (!out.has(o.id)) out.set(o.id, o)
+    const holder = byId.get(at)
+    // An app-caught error is about the question's own point: it follows a correction only when the knowledge point
+    // and skill are unchanged. (A parent-confirmed case is the mistake being corrected, so it always follows.)
+    const samePoint = holder !== undefined && holder.knowledge_point_ref === t.knowledge_point_ref && holder.assessed_skill === t.assessed_skill
+    for (const o of holder?.observations ?? []) {
+      if (out.has(o.id) || (o.source_type === 'app_practice' && !samePoint)) continue
+      out.set(o.id, o)
+    }
   }
   return [...out.values()]
 }
@@ -104,11 +111,15 @@ export function chainObservations(t: Target, view: AmendmentView, byId: Readonly
  * (two devices can each mark the other case before syncing): when every case is marked a duplicate, the lowest id
  * stays. "Not a mistake" on any of them, or on the target, removes the mistake.
  */
-export function validObservations(t: Target, view: AmendmentView, byId: ReadonlyMap<string, Target>): Observation[] {
-  const all = chainObservations(t, view, byId)
+export function validObservations(t: Target, view: AmendmentView, byId: ReadonlyMap<string, Target>,
+  counts: (o: Observation) => boolean = () => true): Observation[] {
+  // `counts` drops observations that stop counting for other reasons (an app-caught error whose question was
+  // flagged); the duplicate rule then looks only at the cases that remain.
+  const all = chainObservations(t, view, byId).filter(counts)
   const valid = all.filter((o) => !observationInvalid(t, o, view))
   if (valid.length > 0) return valid
   // Only when every case was marked a duplicate: a duplicate of a case that is "not a mistake" is not one either.
+  // An observation with the legacy `invalidated` flag (never set by this app) counts as not a mistake here.
   if (all.length === 0 || !all.every((o) => !o.invalidated && observationMark(t, o, view) === 'duplicate')) return []
   return [...all].sort((a, b) => a.id.localeCompare(b.id)).slice(0, 1)
 }

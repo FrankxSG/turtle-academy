@@ -639,8 +639,9 @@ export class LearningEngine {
     }
     const view = amendmentView(this.state)
     const date = this.today()
-    // The same pool rule as pack intake (missingStages), so a later import never flips the mapping back and forth.
-    const pools = (p: string) => release.items.some((i) => i.knowledge_point_ref === kpRef && i.material_ref === null && i.pools.includes(p as never))
+    // Questions for the target's own skill, as the planner selects them (src/engine/planner.ts compatibleItem). For
+    // Chinese each point has one skill, so this equals pack intake's rule (missingStages).
+    const pools = (p: string) => items.some((i) => i.material_ref === null && i.assessed_skill === skill && i.pools.includes(p as never))
     const replacement: Target = {
       id: this.newId(), subject: old.subject, course: old.course, target_kind: kp.target_kind, knowledge_point_ref: kpRef,
       target_value: kpRef === old.knowledge_point_ref ? old.target_value : null, assessed_skill: skill, error_type: errorType,

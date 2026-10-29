@@ -135,7 +135,7 @@ export function derive(state: EngineState): Derived {
     // A target that exists only because of errors is no mistake at all once none of those observations is valid
     // (its question was flagged, or the parent invalidated it). It stays as a record, never planned.
     // Observations follow the mistake through corrections (src/engine/amendments.ts).
-    const observations = validObservations(target, amended, byId).filter(effectiveObservation)
+    const observations = validObservations(target, amended, byId, effectiveObservation)
     if (chainObservations(target, amended, byId).length > 0 && observations.length === 0) continue
     const pr = fresh(target)
     progress.set(target.id, pr)
