@@ -144,5 +144,3 @@ export function currentTarget(state: Pick<EngineState, 'targets' | 'amendments'>
   }
 }
 
-/** Imported targets (at least one parent-confirmed observation) can be amended; app-caught ones are invalidated. */
-export const isImported = (t: Target) => t.observations.some((o) => o.source_type !== 'app_practice')

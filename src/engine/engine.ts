@@ -1,7 +1,7 @@
 // The on-device learning engine (Issue #17). One instance per child profile.
 // Truth is the append-only answer events plus immutable records; progress is re-derived after every change.
 import { itemIn, judge, type CatalogueItem, type CatalogueRegistry, type CatalogueRelease } from '../catalogue/adapter.ts'
-import { AMENDMENT_REVISION, amendmentView, isActiveTarget, isImported, targetsById, validObservations, type AmendReason, type InvalidateReason } from './amendments.ts'
+import { AMENDMENT_REVISION, amendmentView, isActiveTarget, targetsById, validObservations, type AmendReason, type InvalidateReason } from './amendments.ts'
 import { isValidTimezone, learningDate } from './calendar.ts'
 import { derive, observationCounter, type Derived } from './evidence.ts'
 import { compatibleItem, nothingEligible, planTask, resolveShortSlot, usableItem, usableVersion, type PlanContext } from './planner.ts'
@@ -612,7 +612,13 @@ export class LearningEngine {
    */
   async amendTarget(targetId: string, change: { knowledge_point_ref?: string; assessed_skill?: string | null; error_type?: string }, reason: AmendReason): Promise<{ id: string; saved: SaveStatus | null }> {
     const old = this.activeTarget(targetId)
-    if (!isImported(old)) throw new Error('amend_requires_import')
+    const view = amendmentView(this.state)
+    const byId = targetsById(this.state)
+    // Only a mistake that rests on a parent-confirmed case that still counts can be corrected; app-caught ones are
+    // marked "not a mistake" instead.
+    if (!validObservations(old, view, byId, observationCounter(this.state, view)).some((o) => o.source_type !== 'app_practice')) {
+      throw new Error('amend_requires_import')
+    }
     const release = this.deps.registry.current(old.subject)
     if (!release) throw new Error('no_content')
     const kpRef = change.knowledge_point_ref ?? old.knowledge_point_ref
@@ -637,7 +643,11 @@ export class LearningEngine {
       if (t.id !== old.id && t.subject === old.subject && t.course === old.course && t.knowledge_point_ref === kpRef
         && t.assessed_skill === skill && t.error_type === errorType) throw new Error('target_exists')
     }
-    const view = amendmentView(this.state)
+    // App-caught errors are about their question's own point: they stay behind when the point or skill changes.
+    const copy = validObservations(old, view, byId)
+      .filter((o) => o.source_type !== 'app_practice' || (kpRef === old.knowledge_point_ref && skill === old.assessed_skill))
+    // The replacement must hold a case it corrects, or it could never be corrected again.
+    if (!copy.some((o) => o.source_type !== 'app_practice')) throw new Error('amend_requires_import')
     const date = this.today()
     // Questions for the target's own skill, as the planner selects them (src/engine/planner.ts compatibleItem). For
     // Chinese each point has one skill, so this equals pack intake's rule (missingStages).
@@ -647,10 +657,7 @@ export class LearningEngine {
       target_value: kpRef === old.knowledge_point_ref ? old.target_value : null, assessed_skill: skill, error_type: errorType,
       mapping_status: ['exact', 'similar', 'generic'].every(pools) ? 'mapped' : 'pending_content', verification: 'verified',
       status: 'active', verified_at: this.deps.now(), replaces: old.id,
-      // App-caught errors are about their question's own point: they stay behind when the point or skill changes.
-      observations: validObservations(old, view, targetsById(this.state))
-        .filter((o) => o.source_type !== 'app_practice' || (kpRef === old.knowledge_point_ref && skill === old.assessed_skill))
-        .map((o) => ({ ...structuredClone(o), recorded_on: date })),
+      observations: copy.map((o) => ({ ...structuredClone(o), recorded_on: date })),
     }
     this.state.targets.push(replacement)
     this.addAmendment('amend_target', [old.id], reason, replacement.id)

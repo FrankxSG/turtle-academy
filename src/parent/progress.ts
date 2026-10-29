@@ -1,6 +1,6 @@
 // What the parent area shows about mistakes and flagged questions (Functional Design §8). Pure views over the engine
 // state and its replay: nothing here decides progress, and nothing is stored.
-import { amendmentView, chainObservations, isActiveTarget, isImported, targetsById, validObservations } from '../engine/amendments.ts'
+import { amendmentView, chainObservations, isActiveTarget, targetsById, validObservations } from '../engine/amendments.ts'
 import { addDays } from '../engine/calendar.ts'
 import { excludedItemVersions, isEligible, isEvidence, observationCounter, type Derived, type TargetProgress } from '../engine/evidence.ts'
 import { MAX_CLEARANCES_PER_TARGET_PER_DAY } from '../engine/policy.ts'
@@ -128,7 +128,7 @@ export function progressRows(opts: {
     rows.push({
       target: t, state: state_, stage: pr?.stage ?? null, repairStep: pr ? REPAIR_STEP[pr.stage] ?? null : null, next,
       appDays, importedCases: observations.filter((o) => o.source_type !== 'app_practice').length, recognition,
-      imported: isImported(t), observations: observations.filter((o) => o.source_type !== 'app_practice'),
+      imported: observations.some((o) => o.source_type !== 'app_practice'), observations: observations.filter((o) => o.source_type !== 'app_practice'),
     })
   }
   const order: Record<RowState, number> = { suspended: 0, repair: 1, learning: 1, delayed_review: 2, pending_content: 3, unverified: 4, held: 5 }

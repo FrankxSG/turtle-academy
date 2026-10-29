@@ -386,3 +386,17 @@ test('correcting the point of a mistake leaves its app-caught errors behind; an 
     assert.deepEqual(h.engine.state.targets.find((t) => t.id === id)!.observations.map((o) => o.id).sort(), [...expected])
   }
 })
+
+test('a correction that would carry no imported case is refused (cases marked duplicates on two devices, one app-caught error left)', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  await importTarget(h, 'imp-1', 'ma-kp1', [{ id: 'obs-1' }, { id: 'obs-2' }])
+  h.engine.state.targets[0].observations.push({ id: 'app-early', source_type: 'app_practice', observed_on: '2027-03-01', recorded_on: '2027-03-01',
+    instance_ref: 'task-x', batch_ref: null, recurrence: 'independent', invalidated: false })
+  // Device A marked obs-1 a duplicate, device B obs-2; both marks arrive.
+  for (const [id, obs] of [['m-a', 'obs-1'], ['m-b', 'obs-2']]) h.engine.state.amendments.push({ id, at: h.clock.now(), actor: 'parent', kind: 'invalidate_observation',
+    refs: ['imp-1', obs], replacement_ref: null, reason: 'duplicate', reducer_revision: 2 })
+  h.engine.state = structuredClone(h.engine.state)
+  const snapshot = JSON.stringify(h.engine.state)
+  await assert.rejects(() => h.engine.amendTarget('imp-1', { knowledge_point_ref: 'ma-kp2' }, 'wrong_target'), (e: Error) => e.message === 'amend_requires_import')
+  assert.equal(JSON.stringify(h.engine.state), snapshot)
+})
