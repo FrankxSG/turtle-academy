@@ -144,3 +144,24 @@ test('next practice applies every eligibility gate, never a date that has alread
   // Delayed checks use the due date.
   assert.deepEqual(nextPractice(pr({ target: mapped, stage: 'delayed_review', dueOn: '2027-03-12' }), '2027-03-05'), { kind: 'date', date: '2027-03-12' })
 })
+
+test('the progress view counts the same observations as the engine when a duplicate mark meets a disabled question', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  const t = await startTask(h.engine, 'mathematics')
+  const step = await h.engine.next(t.id)
+  if (step.kind !== 'question') throw new Error('expected a question')
+  await h.engine.answer(step.presentation.id, wrongResponse(step.item))
+  const banked = h.engine.state.targets.find((x) => x.observations.some((o) => o.source_type === 'app_practice'))!
+  const d = h.engine.today()
+  await h.engine.upsertTargets([{ ...structuredClone(banked), observations: [{ id: 'case:x1', source_type: 'schoolwork', observed_on: d, recorded_on: d,
+    instance_ref: 'import:x', batch_ref: null, recurrence: 'independent', invalidated: false }] }])
+  await h.engine.invalidateObservation(banked.id, 'case:x1', 'duplicate')
+  await h.engine.flag(step.presentation.id, 'answer_looks_wrong')
+  await h.engine.decideFlag(step.item.id, step.item.version, 'disabled')
+  assert.equal(h.engine.derived().progress.has(banked.id), true, 'the engine keeps the imported case')
+  const [row] = rows(h)
+  assert.equal(row.target.id, banked.id)
+  assert.equal(row.importedCases, 1, 'the case keeping the mistake is shown')
+  assert.equal(row.appDays, 0, 'the disabled question’s error is not')
+  assert.deepEqual(row.observations.map((o) => o.id), ['case:x1'])
+})

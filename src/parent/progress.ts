@@ -2,7 +2,7 @@
 // state and its replay: nothing here decides progress, and nothing is stored.
 import { amendmentView, chainObservations, isActiveTarget, isImported, targetsById, validObservations } from '../engine/amendments.ts'
 import { addDays } from '../engine/calendar.ts'
-import { excludedItemVersions, isEligible, isEvidence, type Derived, type TargetProgress } from '../engine/evidence.ts'
+import { excludedItemVersions, isEligible, isEvidence, observationCounter, type Derived, type TargetProgress } from '../engine/evidence.ts'
 import { MAX_CLEARANCES_PER_TARGET_PER_DAY } from '../engine/policy.ts'
 import type { EngineState, Flag, Presentation, Stage, Subject, Target } from '../engine/types.ts'
 
@@ -78,6 +78,7 @@ export function progressRows(opts: {
   const view = amendmentView(state)
   const byId = targetsById(state)
   const excluded = excludedItemVersions(state)
+  const counts = observationCounter(state, view, excluded)
   const presentationById = new Map(state.presentations.map((p) => [p.id, p]))
   const openFlag = new Set(state.flags.filter((f) => f.status === 'open').map((f) => `${f.item_id}@${f.item_version}`))
   const byTarget = new Map<string, Presentation[]>()
@@ -88,14 +89,15 @@ export function progressRows(opts: {
   for (const t of state.targets) {
     if (t.subject !== subject || !isActiveTarget(t, view)) continue
     if (t.error_type === 'none' && t.observations.length === 0) continue // Science acquisition records, not mistakes
-    const observations = validObservations(t, view, byId)
-    if (observations.length === 0 && chainObservations(t, view, byId).length > 0) continue
+    // The same observations the engine counts (src/engine/evidence.ts observationCounter).
+    const observations = validObservations(t, view, byId, counts)
     const pr = derived.progress.get(t.id)
     let state_: RowState
     if (!pr) {
-      // Only app-caught observations from flagged questions remain: suspended while a flag is open, otherwise the
-      // question was disabled or the answer invalidated, and there is no mistake left to show.
-      const waiting = observations.some((o) => {
+      // No counting observation is left. If app-caught errors wait on an open flag, the mistake is suspended until
+      // the parent decides; otherwise it was disabled, invalidated or marked not a mistake, and there is no row.
+      if (chainObservations(t, view, byId).length === 0) continue
+      const waiting = validObservations(t, view, byId).some((o) => {
         const p = o.batch_ref ? presentationById.get(o.batch_ref) : undefined
         return p !== undefined && !view.invalidPresentations.has(p.id) && p.status !== 'invalidated' && openFlag.has(`${p.item_id}@${p.item_version}`)
       })

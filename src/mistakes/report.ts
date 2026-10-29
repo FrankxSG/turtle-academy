@@ -5,7 +5,7 @@
 // they do not decide progress. Production progress comes from production.ts. No evidence → "not yet evidenced".
 import type { CatalogueRelease } from '../catalogue/adapter.ts'
 import { amendmentView, chainObservations, currentTarget, targetsById, validObservations } from '../engine/amendments.ts'
-import { excludedItemVersions, isEvidence, type Derived } from '../engine/evidence.ts'
+import { excludedItemVersions, isEvidence, observationCounter, type Derived } from '../engine/evidence.ts'
 import type { EngineState, Presentation, Stage } from '../engine/types.ts'
 import { caseObservationId, missingStages, type CrosswalkRow } from './intake.ts'
 import type { PlanStage, Register } from './pack.ts'
@@ -94,6 +94,7 @@ export function buildReport(opts: {
   const excluded = excludedItemVersions(state)
   const view = amendmentView(state)
   const byId = targetsById(state)
+  const counts = observationCounter(state, view, excluded)
   const cw = new Map(crosswalk.map((r) => [r.case_id, r]))
   const presentationsOf = new Map<string, Presentation[]>()
   for (const p of state.presentations) {
@@ -171,7 +172,7 @@ export function buildReport(opts: {
     // The case's observation follows its mistake through corrections; it is dropped only when marked so.
     const caseObs = caseObservationId(c.id)
     const dropped = current !== null && chainObservations(current, view, byId).some((o) => o.id === caseObs)
-      && !validObservations(current, view, byId).some((o) => o.id === caseObs)
+      && !validObservations(current, view, byId, counts).some((o) => o.id === caseObs)
     if ((linked && !current) || dropped) status = 'invalidated'
     else if (!target) status = 'not_imported'
     else if (target.mapping_status === 'pending_content') status = 'pending_content'

@@ -375,3 +375,14 @@ test('a duplicate mark plus a flagged app-caught error does not make an imported
   await h.engine.flag(step.presentation.id, 'answer_looks_wrong')
   assert.equal(h.engine.derived().progress.has(banked.id), true, 'the imported case still stands')
 })
+
+test('correcting the point of a mistake leaves its app-caught errors behind; an error-type-only correction keeps them', async () => {
+  for (const [change, expected] of [[{ knowledge_point_ref: 'ma-kp2' }, ['obs-1']], [{ error_type: 'confused_form' }, ['app-early', 'obs-1']]] as const) {
+    const h = harness({ subjects: ['mathematics'] })
+    await importTarget(h, 'imp-1', 'ma-kp1', [{ id: 'obs-1' }])
+    h.engine.state.targets[0].observations.push({ id: 'app-early', source_type: 'app_practice', observed_on: '2027-03-01', recorded_on: '2027-03-01',
+      instance_ref: 'task-x', batch_ref: null, recurrence: 'independent', invalidated: false })
+    const { id } = await h.engine.amendTarget('imp-1', change, 'knowledge_point_ref' in change ? 'wrong_target' : 'wrong_error_type')
+    assert.deepEqual(h.engine.state.targets.find((t) => t.id === id)!.observations.map((o) => o.id).sort(), [...expected])
+  }
+})

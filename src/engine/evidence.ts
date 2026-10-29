@@ -2,7 +2,7 @@
 // replaying the append-only answer events and immutable records; nothing here is stored as mutable truth.
 // Replaying after a flag decision therefore recalculates progress, while completions and delivered story
 // checkpoints (separate records) are never revoked.
-import { amendmentView, chainObservations, targetsById, targetStatus, validObservations } from './amendments.ts'
+import { amendmentView, chainObservations, targetsById, targetStatus, validObservations, type AmendmentView } from './amendments.ts'
 import { addDays, DateBook } from './calendar.ts'
 import { MAX_CLEARANCES_PER_TARGET_PER_DAY, REVIEW_INTERVALS } from './policy.ts'
 import type { AnswerEvent, Clearance, EngineState, Presentation, Stage, Target, TargetAggregate } from './types.ts'
@@ -52,6 +52,21 @@ export function excludedItemVersions(state: EngineState): Set<string> {
 }
 
 const NONE: ReadonlySet<string> = new Set()
+
+/**
+ * Whether an observation still counts apart from amendments: an app-caught observation counts only while the
+ * question that produced it is valid evidence (not flagged, disabled or invalidated). One rule for the engine,
+ * the parent's progress view, the case report and the parent's duplicate check, so they never disagree.
+ */
+export function observationCounter(state: EngineState, view: AmendmentView = amendmentView(state), excluded = excludedItemVersions(state)) {
+  const presentationById = new Map(state.presentations.map((p) => [p.id, p]))
+  return (o: Target['observations'][number]): boolean => {
+    if (o.source_type !== 'app_practice' || o.batch_ref === null) return true
+    const p = presentationById.get(o.batch_ref)
+    return p !== undefined && p.status !== 'flagged_replaced' && p.status !== 'invalidated' && !view.invalidPresentations.has(p.id)
+      && !excluded.has(`${p.item_id}@${p.item_version}`)
+  }
+}
 
 /**
  * Presentations that can carry independent evidence. `invalid` holds presentations a parent invalidated (by
@@ -119,15 +134,8 @@ export function derive(state: EngineState): Derived {
     aggregates.set(taskId, list)
   }
 
-  const presentationById = new Map(state.presentations.map((p) => [p.id, p]))
   const byId = targetsById(state)
-  /** An app-caught observation counts only while the question that produced it is valid evidence. */
-  const effectiveObservation = (o: Target['observations'][number]): boolean => {
-    if (o.source_type !== 'app_practice' || o.batch_ref === null) return true
-    const p = presentationById.get(o.batch_ref)
-    return p !== undefined && p.status !== 'flagged_replaced' && p.status !== 'invalidated' && !amended.invalidPresentations.has(p.id)
-      && !excluded.has(`${p.item_id}@${p.item_version}`)
-  }
+  const effectiveObservation = observationCounter(state, amended, excluded)
 
   for (const target of state.targets) {
     // Superseded and invalidated targets (parent amendments) keep their records and evidence but are not replayed.

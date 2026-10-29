@@ -3,7 +3,7 @@
 import { itemIn, judge, type CatalogueItem, type CatalogueRegistry, type CatalogueRelease } from '../catalogue/adapter.ts'
 import { AMENDMENT_REVISION, amendmentView, isActiveTarget, isImported, targetsById, validObservations, type AmendReason, type InvalidateReason } from './amendments.ts'
 import { isValidTimezone, learningDate } from './calendar.ts'
-import { derive, type Derived } from './evidence.ts'
+import { derive, observationCounter, type Derived } from './evidence.ts'
 import { compatibleItem, nothingEligible, planTask, resolveShortSlot, usableItem, usableVersion, type PlanContext } from './planner.ts'
 import type { Mutation, Put, RecordStore, SaveStatus, Table } from './persistence.ts'
 import { WriteQueue } from './persistence.ts'
@@ -647,7 +647,10 @@ export class LearningEngine {
       target_value: kpRef === old.knowledge_point_ref ? old.target_value : null, assessed_skill: skill, error_type: errorType,
       mapping_status: ['exact', 'similar', 'generic'].every(pools) ? 'mapped' : 'pending_content', verification: 'verified',
       status: 'active', verified_at: this.deps.now(), replaces: old.id,
-      observations: validObservations(old, view, targetsById(this.state)).map((o) => ({ ...structuredClone(o), recorded_on: date })),
+      // App-caught errors are about their question's own point: they stay behind when the point or skill changes.
+      observations: validObservations(old, view, targetsById(this.state))
+        .filter((o) => o.source_type !== 'app_practice' || (kpRef === old.knowledge_point_ref && skill === old.assessed_skill))
+        .map((o) => ({ ...structuredClone(o), recorded_on: date })),
     }
     this.state.targets.push(replacement)
     this.addAmendment('amend_target', [old.id], reason, replacement.id)
@@ -664,7 +667,8 @@ export class LearningEngine {
   /** One observation of a target (for example a duplicated import) stops counting. */
   async invalidateObservation(targetId: string, observationId: string, reason: InvalidateReason): Promise<SaveStatus | null> {
     const t = this.activeTarget(targetId)
-    const valid = validObservations(t, amendmentView(this.state), targetsById(this.state))
+    const view = amendmentView(this.state)
+    const valid = validObservations(t, view, targetsById(this.state), observationCounter(this.state, view))
     if (!valid.some((x) => x.id === observationId)) throw new Error('unknown_observation')
     // A duplicate of what? The last remaining case cannot be one; "not a mistake" is the choice for that.
     if (reason === 'duplicate' && valid.length === 1) throw new Error('last_observation')
