@@ -622,3 +622,41 @@ test('parent corrections in the case report and export: practice on a replacemen
   assert.equal(again.program.crosswalk.find((x) => x.case_id === 'O903')!.engine_target_id, replacement)
   assert.equal(new Map(again.program.report()!.cases.map((c) => [c.case_id, c])).get('O902')!.status, 'invalidated')
 })
+
+test('export retains every answer across successive corrections, re-import and invalidation', async () => {
+  const s = await setup()
+  const pack = syntheticPack({ pendingRef: s.pendingRef })
+  await s.program.installPack(pack)
+  const lineage = [target(ZHU)]
+  for (const [day, nextType] of [['2027-03-02', 'form_confusion'], ['2027-03-03', 'meaning_confusion'], ['2027-03-04', null]] as const) {
+    s.clock.sgt(day)
+    const started = await s.engine.startOrResume('chinese')
+    assert.equal(started.kind, 'task')
+    if (started.kind !== 'task') throw new Error('no task')
+    await run(s.engine, started.task.id, () => true)
+    assert.ok(s.engine.state.presentations.some((p) => p.target_ref === lineage.at(-1)), 'each corrected target has practice history')
+    if (nextType !== null) {
+      const corrected = await s.engine.amendTarget(lineage.at(-1)!, { error_type: nextType }, 'wrong_error_type')
+      lineage.push(corrected.id)
+    }
+  }
+  const ps = new Set(s.engine.state.presentations.filter((p) => p.target_ref !== null && lineage.includes(p.target_ref)).map((p) => p.id))
+  const expected = s.engine.state.events.filter((e) => ps.has(e.presentation_id)).map((e) => e.id).sort()
+  const check = (invalidated = false) => {
+    const events = s.program.exportFile()!.engine_events.filter((e) => e.case_ids.includes('O903'))
+    assert.deepEqual(events.map((e) => e.event_id).sort(), expected, 'all answers, including the intermediate correction, remain exported')
+    assert.ok(events.every((e) => e.case_ids.filter((id) => id === 'O903').length === 1), 'each answer links the case once')
+    for (const e of events) {
+      const p = s.engine.state.presentations.find((p) => p.id === e.presentation_id)!
+      assert.equal(e.counted_as_evidence, !invalidated && e.phase === 'first' && p.target_ref === lineage.at(-1), 'only current, non-invalidated practice may count')
+    }
+  }
+  check()
+  await s.program.installPack(pack) // refreshes the crosswalk from the original target to its current replacement
+  assert.equal(s.program.crosswalk.find((r) => r.case_id === 'O903')!.engine_target_id, lineage.at(-1))
+  check()
+  await s.engine.invalidateTarget(lineage.at(-1)!, 'not_a_mistake')
+  check(true)
+  await s.program.installPack(pack)
+  check(true)
+})

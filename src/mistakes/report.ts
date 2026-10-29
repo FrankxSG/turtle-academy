@@ -212,15 +212,24 @@ export function normalizedEvents(state: EngineState, derived: Derived, crosswalk
   const view = amendmentView(state)
   const casesOf = new Map<string, string[]>()
   const refOf = new Map<string, string>()
-  // The case's practice is on its linked target and, after a parent correction, on the current replacement
-  // (case links are refreshed only at the next import).
+  // Case links may point anywhere in the correction chain (they refresh on re-import). Every version's answers
+  // remain history, including intermediate replacements and invalidated mistakes; only the current active target
+  // can contribute evidence. Walk both directions rather than mapping only the link and its current leaf.
   const current = new Set<string>()
   for (const r of crosswalk) {
     if (!r.engine_target_id || !r.target_ref) continue
     const now = currentTarget(state, r.engine_target_id, view)?.id ?? null
     if (now) current.add(now)
-    for (const id of new Set([r.engine_target_id, ...(now ? [now] : [])])) {
-      casesOf.set(id, [...(casesOf.get(id) ?? []), r.case_id])
+    const lineage = new Set<string>([r.engine_target_id])
+    for (const direction of [view.replaces, view.replacedBy]) {
+      let at = direction.get(r.engine_target_id)
+      while (at !== undefined && !lineage.has(at)) {
+        lineage.add(at)
+        at = direction.get(at)
+      }
+    }
+    for (const id of lineage) {
+      casesOf.set(id, [...new Set([...(casesOf.get(id) ?? []), r.case_id])])
       refOf.set(id, r.target_ref)
     }
   }

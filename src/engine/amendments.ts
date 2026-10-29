@@ -26,13 +26,22 @@ const order = (a: Amendment, b: Amendment) => a.at.localeCompare(b.at) || a.id.l
 /**
  * Deterministic interpretation of the amendment log: the same result on every device, whatever order the records
  * arrived in. Two devices can amend the same target while disconnected; both amendments are kept and applied in
- * (time, id) order, so the later correction replaces the current one and one mistake never gets two schedules.
+ * causal order, using (time, id) for unrelated corrections, so the later correction replaces the current one and one mistake never gets two schedules.
  */
 export function amendmentView(state: Pick<EngineState, 'amendments'>): AmendmentView {
   const view: AmendmentView = {
     replacedBy: new Map(), replaces: new Map(), invalidTargets: new Set(), invalidObservations: new Map(), invalidPresentations: new Set(),
   }
-  for (const a of [...state.amendments].sort(order)) {
+  // A correction of a replacement depends on the amendment that created it, even when a device clock
+  // moves backwards. Timestamp/id only order unrelated ready amendments; they cannot reverse causality.
+  const pending = [...state.amendments].sort(order)
+  const creates = new Map(pending.filter((a) => a.kind === 'amend_target' && a.replacement_ref)
+    .map((a) => [a.replacement_ref!, a]))
+  while (pending.length > 0) {
+    const index = pending.findIndex((a) => a.kind !== 'amend_target' || !creates.has(a.refs[0]))
+    if (index < 0) break // malformed cyclic dependencies cannot affect replay
+    const [a] = pending.splice(index, 1)
+    if (a.kind === 'amend_target' && a.replacement_ref) creates.delete(a.replacement_ref)
     if (a.kind === 'amend_target' && a.refs.length === 1 && a.replacement_ref) {
       const to = a.replacement_ref
       if (view.replaces.has(to) || view.replacedBy.has(to)) continue // malformed or repeated: never a cycle

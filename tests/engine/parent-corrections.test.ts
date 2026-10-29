@@ -418,3 +418,15 @@ test('a mistake kept by an imported case marked duplicate of a disabled question
   assert.deepEqual(h.engine.state.targets.find((x) => x.id === id)!.observations.map((o) => o.id), ['case-x'])
   assert.ok(h.engine.derived().progress.has(id))
 })
+
+test('sequential corrections retain causality when the clock goes backwards', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  await importTarget(h)
+  h.clock.sgt('2027-03-03')
+  const first = await h.engine.amendTarget('imp-1', { knowledge_point_ref: 'ma-kp2' }, 'wrong_target')
+  h.clock.sgt('2027-03-02')
+  const last = await h.engine.amendTarget(first.id, { knowledge_point_ref: 'ma-kp1' }, 'wrong_target')
+  assert.deepEqual([...h.engine.derived().progress.keys()], [last.id])
+  h.engine.state.amendments.reverse()
+  assert.deepEqual([...h.engine.derived().progress.keys()], [last.id])
+})
