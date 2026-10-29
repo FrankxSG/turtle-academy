@@ -2,7 +2,7 @@
 // replaying the append-only answer events and immutable records; nothing here is stored as mutable truth.
 // Replaying after a flag decision therefore recalculates progress, while completions and delivered story
 // checkpoints (separate records) are never revoked.
-import { amendmentView, observationInvalid, targetStatus } from './amendments.ts'
+import { amendmentView, chainObservations, targetsById, targetStatus, validObservations } from './amendments.ts'
 import { addDays, DateBook } from './calendar.ts'
 import { MAX_CLEARANCES_PER_TARGET_PER_DAY, REVIEW_INTERVALS } from './policy.ts'
 import type { AnswerEvent, Clearance, EngineState, Presentation, Stage, Target, TargetAggregate } from './types.ts'
@@ -120,9 +120,9 @@ export function derive(state: EngineState): Derived {
   }
 
   const presentationById = new Map(state.presentations.map((p) => [p.id, p]))
+  const byId = targetsById(state)
   /** An app-caught observation counts only while the question that produced it is valid evidence. */
-  const effectiveObservation = (target: Target, o: Target['observations'][number]): boolean => {
-    if (observationInvalid(target, o, amended)) return false
+  const effectiveObservation = (o: Target['observations'][number]): boolean => {
     if (o.source_type !== 'app_practice' || o.batch_ref === null) return true
     const p = presentationById.get(o.batch_ref)
     return p !== undefined && p.status !== 'flagged_replaced' && p.status !== 'invalidated' && !amended.invalidPresentations.has(p.id)
@@ -134,8 +134,9 @@ export function derive(state: EngineState): Derived {
     if (targetStatus(target, amended) !== 'active') continue
     // A target that exists only because of errors is no mistake at all once none of those observations is valid
     // (its question was flagged, or the parent invalidated it). It stays as a record, never planned.
-    const observations = target.observations.filter((o) => effectiveObservation(target, o))
-    if (target.observations.length > 0 && observations.length === 0) continue
+    // Observations follow the mistake through corrections (src/engine/amendments.ts).
+    const observations = validObservations(target, amended, byId).filter(effectiveObservation)
+    if (chainObservations(target, amended, byId).length > 0 && observations.length === 0) continue
     const pr = fresh(target)
     progress.set(target.id, pr)
     // New imports start no earlier than the day after the app imported them (Functional Design §4). A later

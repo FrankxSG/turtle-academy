@@ -1,7 +1,7 @@
 // The on-device learning engine (Issue #17). One instance per child profile.
 // Truth is the append-only answer events plus immutable records; progress is re-derived after every change.
 import { itemIn, judge, type CatalogueItem, type CatalogueRegistry, type CatalogueRelease } from '../catalogue/adapter.ts'
-import { AMENDMENT_REVISION, amendmentView, isActiveTarget, isImported, observationInvalid, type AmendReason, type InvalidateReason } from './amendments.ts'
+import { AMENDMENT_REVISION, amendmentView, isActiveTarget, isImported, targetsById, validObservations, type AmendReason, type InvalidateReason } from './amendments.ts'
 import { isValidTimezone, learningDate } from './calendar.ts'
 import { derive, type Derived } from './evidence.ts'
 import { compatibleItem, nothingEligible, planTask, resolveShortSlot, usableItem, usableVersion, type PlanContext } from './planner.ts'
@@ -630,15 +630,23 @@ export class LearningEngine {
     const known = new Set<string>(['unknown_cause', ...(ERROR_TYPES[old.subject] ?? []), ...items.flatMap((i) => Object.values(i.error_types ?? {}))])
     if (!known.has(errorType)) throw new Error('unknown_error_type')
     if (kpRef === old.knowledge_point_ref && skill === old.assessed_skill && errorType === old.error_type) throw new Error('no_change')
+    // One mistake, one schedule: correcting this one into a mistake that is already being practised is refused
+    // (the parent marks this one "not a mistake" instead).
+    for (const pr of this.derived().progress.values()) {
+      const t = pr.target
+      if (t.id !== old.id && t.subject === old.subject && t.course === old.course && t.knowledge_point_ref === kpRef
+        && t.assessed_skill === skill && t.error_type === errorType) throw new Error('target_exists')
+    }
     const view = amendmentView(this.state)
     const date = this.today()
-    const pools = (p: string) => items.some((i) => i.material_ref === null && i.assessed_skill === skill && i.pools.includes(p as never))
+    // The same pool rule as pack intake (missingStages), so a later import never flips the mapping back and forth.
+    const pools = (p: string) => release.items.some((i) => i.knowledge_point_ref === kpRef && i.material_ref === null && i.pools.includes(p as never))
     const replacement: Target = {
       id: this.newId(), subject: old.subject, course: old.course, target_kind: kp.target_kind, knowledge_point_ref: kpRef,
       target_value: kpRef === old.knowledge_point_ref ? old.target_value : null, assessed_skill: skill, error_type: errorType,
       mapping_status: ['exact', 'similar', 'generic'].every(pools) ? 'mapped' : 'pending_content', verification: 'verified',
       status: 'active', verified_at: this.deps.now(), replaces: old.id,
-      observations: old.observations.filter((o) => !observationInvalid(old, o, view)).map((o) => ({ ...structuredClone(o), recorded_on: date })),
+      observations: validObservations(old, view, targetsById(this.state)).map((o) => ({ ...structuredClone(o), recorded_on: date })),
     }
     this.state.targets.push(replacement)
     this.addAmendment('amend_target', [old.id], reason, replacement.id)
@@ -655,8 +663,10 @@ export class LearningEngine {
   /** One observation of a target (for example a duplicated import) stops counting. */
   async invalidateObservation(targetId: string, observationId: string, reason: InvalidateReason): Promise<SaveStatus | null> {
     const t = this.activeTarget(targetId)
-    const o = t.observations.find((x) => x.id === observationId)
-    if (!o || observationInvalid(t, o, amendmentView(this.state))) throw new Error('unknown_observation')
+    const valid = validObservations(t, amendmentView(this.state), targetsById(this.state))
+    if (!valid.some((x) => x.id === observationId)) throw new Error('unknown_observation')
+    // A duplicate of what? The last remaining case cannot be one; "not a mistake" is the choice for that.
+    if (reason === 'duplicate' && valid.length === 1) throw new Error('last_observation')
     this.addAmendment('invalidate_observation', [targetId, observationId], reason)
     return this.flush()
   }

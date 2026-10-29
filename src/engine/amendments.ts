@@ -16,8 +16,8 @@ export interface AmendmentView {
   /** Replacement → the target it superseded (the inverse of `replacedBy`). */
   replaces: Map<string, string>
   invalidTargets: Set<string>
-  /** `${targetId}\u0000${observationId}`: observation ids are unique within a target. */
-  invalidObservations: Set<string>
+  /** `${targetId}\u0000${observationId}` → reason: observation ids are unique within a target. */
+  invalidObservations: Map<string, Amendment['reason']>
   invalidPresentations: Set<string>
 }
 
@@ -30,7 +30,7 @@ const order = (a: Amendment, b: Amendment) => a.at.localeCompare(b.at) || a.id.l
  */
 export function amendmentView(state: Pick<EngineState, 'amendments'>): AmendmentView {
   const view: AmendmentView = {
-    replacedBy: new Map(), replaces: new Map(), invalidTargets: new Set(), invalidObservations: new Set(), invalidPresentations: new Set(),
+    replacedBy: new Map(), replaces: new Map(), invalidTargets: new Set(), invalidObservations: new Map(), invalidPresentations: new Set(),
   }
   for (const a of [...state.amendments].sort(order)) {
     if (a.kind === 'amend_target' && a.refs.length === 1 && a.replacement_ref) {
@@ -42,7 +42,11 @@ export function amendmentView(state: Pick<EngineState, 'amendments'>): Amendment
       view.replacedBy.set(head, to)
       view.replaces.set(to, head)
     } else if (a.kind === 'invalidate_target') for (const r of a.refs) view.invalidTargets.add(r)
-    else if (a.kind === 'invalidate_observation' && a.refs.length === 2) view.invalidObservations.add(`${a.refs[0]}\u0000${a.refs[1]}`)
+    else if (a.kind === 'invalidate_observation' && a.refs.length === 2) {
+      const key = `${a.refs[0]}\u0000${a.refs[1]}`
+      // "Not a mistake" outranks "duplicate" whatever order they arrive in.
+      if (view.invalidObservations.get(key) !== 'not_a_mistake') view.invalidObservations.set(key, a.reason)
+    }
     else if (a.kind === 'invalidate_presentation') for (const r of a.refs) view.invalidPresentations.add(r)
   }
   return view
@@ -68,12 +72,48 @@ export const isActiveTarget = (t: Target, view: AmendmentView) => targetStatus(t
  * duplicate marked on one device still counts as a duplicate after another device corrected the target.
  */
 export function observationInvalid(t: Target, o: Target['observations'][number], view: AmendmentView): boolean {
-  if (o.invalidated) return true
-  for (let at: string | undefined = t.id, guard = 0; at !== undefined && guard < 10_000; at = view.replaces.get(at), guard++) {
-    if (view.invalidObservations.has(`${at}\u0000${o.id}`)) return true
-  }
-  return false
+  return o.invalidated || observationMark(t, o, view) !== null
 }
+
+function observationMark(t: Target, o: Target['observations'][number], view: AmendmentView): Amendment['reason'] | null {
+  let mark: Amendment['reason'] | null = null
+  for (let at: string | undefined = t.id, guard = 0; at !== undefined && guard < 10_000; at = view.replaces.get(at), guard++) {
+    const m = view.invalidObservations.get(`${at}\u0000${o.id}`)
+    if (m !== undefined && mark !== 'not_a_mistake') mark = m
+  }
+  return mark
+}
+
+type Observation = Target['observations'][number]
+
+/**
+ * Every observation of a mistake: the target's own and those of the targets it replaced (its own copy wins by id).
+ * A device that had not yet seen a correction may add an observation to the original; it still belongs to the
+ * mistake, so it counts on the replacement once both records meet.
+ */
+export function chainObservations(t: Target, view: AmendmentView, byId: ReadonlyMap<string, Target>): Observation[] {
+  const out = new Map<string, Observation>()
+  for (let at: string | undefined = t.id, guard = 0; at !== undefined && guard < 10_000; at = view.replaces.get(at), guard++) {
+    for (const o of byId.get(at)?.observations ?? []) if (!out.has(o.id)) out.set(o.id, o)
+  }
+  return [...out.values()]
+}
+
+/**
+ * The observations that count after amendments. Marking cases duplicates of each other never removes the last one
+ * (two devices can each mark the other case before syncing): when every case is marked a duplicate, the lowest id
+ * stays. "Not a mistake" on any of them, or on the target, removes the mistake.
+ */
+export function validObservations(t: Target, view: AmendmentView, byId: ReadonlyMap<string, Target>): Observation[] {
+  const all = chainObservations(t, view, byId)
+  const valid = all.filter((o) => !observationInvalid(t, o, view))
+  if (valid.length > 0) return valid
+  // Only when every case was marked a duplicate: a duplicate of a case that is "not a mistake" is not one either.
+  if (all.length === 0 || !all.every((o) => !o.invalidated && observationMark(t, o, view) === 'duplicate')) return []
+  return [...all].sort((a, b) => a.id.localeCompare(b.id)).slice(0, 1)
+}
+
+export const targetsById = (state: Pick<EngineState, 'targets'>) => new Map(state.targets.map((t) => [t.id, t]))
 
 /** The target that now holds a (possibly amended) target's mistake: follows replacements, null when invalidated. */
 export function currentTarget(state: Pick<EngineState, 'targets' | 'amendments'>, id: string, view = amendmentView(state)): Target | null {

@@ -15,6 +15,7 @@ import { flagGroups, progressRows, type ProgressRow } from './progress.ts'
 const REFUSALS = new Set([
   'no_change', 'unknown_knowledge_point', 'unknown_error_type', 'assessed_skill_required', 'unknown_assessed_skill',
   'target_not_active', 'amend_requires_import', 'unknown_observation', 'task_not_finished', 'not_an_answer', 'no_content',
+  'target_exists', 'last_observation',
 ])
 
 type Work = (fn: () => Promise<unknown>) => Promise<void>
@@ -30,7 +31,10 @@ function useRefusal(work: Work, zh: boolean) {
       if (!REFUSALS.has(code)) throw e
       setMessage(code === 'no_change'
         ? (zh ? '没有更改。' : 'Nothing was changed.')
-        : (zh ? `无法保存这项更正（${code}）。记录没有改变。` : `This correction cannot be made (${code}). Nothing was changed.`))
+        : code === 'target_exists'
+          ? (zh ? '这条错题已经在练习中。若这条记录与它是同一个错误，请把这条标为“不是错题”。记录没有改变。'
+            : 'That mistake is already being practised. If this record is the same mistake, mark this one “Not a mistake” instead. Nothing was changed.')
+          : (zh ? `无法保存这项更正（${code}）。记录没有改变。` : `This correction cannot be made (${code}). Nothing was changed.`))
     }
   })
   return { message, run }
@@ -294,7 +298,7 @@ function AmendForm({ engine, row, language, busy, run, done }: {
   }
   const kinds = [...new Set(points.map((k) => k.target_kind))]
   const types = [...new Set(['unknown_cause', ...(ERROR_TYPES[t.subject] ?? []),
-    ...(release?.items.filter((i) => i.knowledge_point_ref === kp).flatMap((i) => Object.values(i.error_types ?? {})) ?? [])])]
+    ...(release?.items.filter((i) => i.knowledge_point_ref === kp && i.course === t.course).flatMap((i) => Object.values(i.error_types ?? {})) ?? [])])]
   return (
     <form
       className="amend-form"

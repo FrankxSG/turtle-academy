@@ -232,7 +232,7 @@ test('parent amendments on two devices reach the real server as add-only records
   await b.engine.invalidatePresentation(answered.id, 'not_a_mistake')
   // An observation-level amendment refers to an observation id, not a record key; it must still sync.
   const sound = 'case-target:zh.p2_higher_chinese.skill.synthetic-sound'
-  await b.engine.invalidateObservation(sound, 'case:o904', 'duplicate')
+  await b.engine.invalidateObservation(sound, 'case:o904', 'not_a_mistake')
   for (const d of [a, b, a]) assert.equal((await d.sync()).state, 'idle')
   const rows = await sql(`select kind, key, value::text from public.sync_records where child_id = '${child}' and kind in ('target', 'amendment', 'presentation');`)
   const value = (kind: string, key: string) => JSON.parse(rows.find((r) => r[0] === kind && r[1] === key)![2])

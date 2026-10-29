@@ -3,7 +3,7 @@
 // or delivered story checkpoints. Synthetic fixtures only.
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { amendmentView, observationInvalid } from '../../src/engine/amendments.ts'
+import { amendmentView, observationInvalid, targetsById, validObservations } from '../../src/engine/amendments.ts'
 import { completedKnowledgePoints, derive } from '../../src/engine/evidence.ts'
 import type { Target } from '../../src/engine/types.ts'
 import { harness, progressOf, reload, runTask, startTask } from './helpers.ts'
@@ -269,4 +269,54 @@ test('a correction made on one device and "not a mistake" on another: the mistak
   const progress = derive(state).progress
   assert.equal(progress.has('imp-1'), false)
   assert.equal(progress.has(id), false)
+})
+
+test('a correction cannot give a mistake a second schedule: moving it onto an existing mistake is refused', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  await importTarget(h, 'imp-a', 'ma-kp1', [{ id: 'obs-a' }])
+  await importTarget(h, 'imp-b', 'ma-kp2', [{ id: 'obs-b' }])
+  const snapshot = JSON.stringify(h.engine.state)
+  await assert.rejects(() => h.engine.amendTarget('imp-a', { knowledge_point_ref: 'ma-kp2' }, 'wrong_target'), (e: Error) => e.message === 'target_exists')
+  assert.equal(JSON.stringify(h.engine.state), snapshot)
+  const kp2 = [...h.engine.derived().progress.values()].filter((p) => p.target.knowledge_point_ref === 'ma-kp2')
+  assert.equal(kp2.length, 1)
+})
+
+test('a mistake recorded on the original by a device that had not seen the correction joins the replacement', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  await importTarget(h, 'imp-1', 'ma-kp1', [{ id: 'obs-1' }])
+  const { id } = await h.engine.amendTarget('imp-1', { error_type: 'confused_form' }, 'wrong_error_type')
+  // Device B (not yet synced) added an independent import to the original on 5 March; its record arrives later.
+  h.clock.sgt('2027-03-05')
+  const original = h.engine.state.targets.find((t) => t.id === 'imp-1')!
+  original.observations.push({ id: 'obs-late', source_type: 'home_practice', observed_on: '2027-03-05', recorded_on: '2027-03-05',
+    instance_ref: 'import:other-device', batch_ref: null, recurrence: 'independent', invalidated: false })
+  const pr = derive(h.engine.state).progress.get(id)!
+  assert.equal(pr.notBefore, '2027-03-06', 'the late observation counts on the replacement (next-day eligibility)')
+  assert.equal(derive(h.engine.state).progress.has('imp-1'), false, 'still one schedule')
+  // It can also be marked a duplicate from the replacement, and the last observation is never removed as a duplicate.
+  await h.engine.invalidateObservation(id, 'obs-late', 'duplicate')
+  assert.equal(progressOf(h.engine, id).notBefore, '2027-03-02')
+  await assert.rejects(() => h.engine.invalidateObservation(id, 'obs-1', 'duplicate'), (e: Error) => e.message === 'last_observation')
+})
+
+test('two devices each marking the other case a duplicate keep one observation: the mistake does not vanish', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  await importTarget(h, 'imp-1', 'ma-kp1', [{ id: 'obs-1' }, { id: 'obs-2' }])
+  await h.engine.invalidateObservation('imp-1', 'obs-1', 'duplicate')
+  // The other device's mark (made before it saw this one) arrives.
+  h.engine.state.amendments.push({ id: 'zz-remote', at: h.clock.now(), actor: 'parent', kind: 'invalidate_observation', refs: ['imp-1', 'obs-2'],
+    replacement_ref: null, reason: 'duplicate', reducer_revision: 2 })
+  const kept = derive(h.engine.state).progress.get('imp-1')
+  assert.ok(kept, 'duplicates of each other are still one mistake')
+  assert.deepEqual(validObservations(kept.target, amendmentView(h.engine.state), targetsById(h.engine.state)).map((o) => o.id), ['obs-1'])
+  // "Not a mistake" on either case, or on the target, still removes it.
+  const withNotAMistake = structuredClone(h.engine.state)
+  withNotAMistake.amendments.push({ id: 'zz-remote-2', at: h.clock.now(), actor: 'parent', kind: 'invalidate_observation', refs: ['imp-1', 'obs-1'],
+    replacement_ref: null, reason: 'not_a_mistake', reducer_revision: 2 })
+  assert.equal(derive(withNotAMistake).progress.has('imp-1'), false)
+  const withTarget = structuredClone(h.engine.state)
+  withTarget.amendments.push({ id: 'zz-remote-3', at: h.clock.now(), actor: 'parent', kind: 'invalidate_target', refs: ['imp-1'],
+    replacement_ref: null, reason: 'not_a_mistake', reducer_revision: 2 })
+  assert.equal(derive(withTarget).progress.has('imp-1'), false)
 })

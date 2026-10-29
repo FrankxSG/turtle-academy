@@ -1,6 +1,6 @@
 // What the parent area shows about mistakes and flagged questions (Functional Design §8). Pure views over the engine
 // state and its replay: nothing here decides progress, and nothing is stored.
-import { amendmentView, isActiveTarget, isImported, observationInvalid, targetStatus } from '../engine/amendments.ts'
+import { amendmentView, chainObservations, isActiveTarget, isImported, targetsById, validObservations } from '../engine/amendments.ts'
 import { addDays } from '../engine/calendar.ts'
 import { excludedItemVersions, isEligible, isEvidence, type Derived, type TargetProgress } from '../engine/evidence.ts'
 import { MAX_CLEARANCES_PER_TARGET_PER_DAY } from '../engine/policy.ts'
@@ -76,6 +76,7 @@ export function progressRows(opts: {
 }): ProgressRow[] {
   const { state, derived, today, subject, held } = opts
   const view = amendmentView(state)
+  const byId = targetsById(state)
   const excluded = excludedItemVersions(state)
   const presentationById = new Map(state.presentations.map((p) => [p.id, p]))
   const openFlag = new Set(state.flags.filter((f) => f.status === 'open').map((f) => `${f.item_id}@${f.item_version}`))
@@ -87,8 +88,8 @@ export function progressRows(opts: {
   for (const t of state.targets) {
     if (t.subject !== subject || !isActiveTarget(t, view)) continue
     if (t.error_type === 'none' && t.observations.length === 0) continue // Science acquisition records, not mistakes
-    const observations = t.observations.filter((o) => !observationInvalid(t, o, view))
-    if (observations.length === 0 && t.observations.length > 0) continue
+    const observations = validObservations(t, view, byId)
+    if (observations.length === 0 && chainObservations(t, view, byId).length > 0) continue
     const pr = derived.progress.get(t.id)
     let state_: RowState
     if (!pr) {
@@ -170,5 +171,3 @@ export function canInvalidateAnswer(state: EngineState, p: Presentation): boolea
     && state.events.some((e) => e.presentation_id === p.id && e.phase === 'first')
 }
 
-/** Status of any target after amendments, for history views. */
-export const statusOf = (state: EngineState, t: Target) => targetStatus(t, amendmentView(state))

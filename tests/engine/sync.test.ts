@@ -3,6 +3,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { dailyTaskId } from '../../src/engine/engine.ts'
+import { amendmentView, targetsById, validObservations } from '../../src/engine/amendments.ts'
 import { PackRejected } from '../../src/mistakes/program.ts'
 import { stripPack, syncablePack, versionRef, withLocalWrongForms } from '../../src/sync/pack.ts'
 import { newMeta, observe, tick } from '../../src/sync/outbox.ts'
@@ -728,4 +729,33 @@ test('F51: parent amendments made on two devices are both kept, reach every devi
   await a.program.installPack(invented({ extraCase: true }))
   assert.ok(a.engine.state.targets.find((t) => t.id === replacement)!.observations.some((o) => o.id === 'case:o907'))
   assert.ok(!a.engine.state.targets.find((t) => t.id === amended)!.observations.some((o) => o.id === 'case:o907'))
+})
+
+test('F51: a case imported on a device that had not yet seen a correction joins the corrected mistake on every device', async () => {
+  const server = world()
+  const a = await practisedDevice(server)
+  const { d: b } = await device(server, { clock: new Clock(a.clock.now()) })
+  assert.equal((await b.sync()).state, 'idle')
+  const zhu = 'case-target:zh.p2_higher_chinese.char.u4f4f'
+  const { id: replacement } = await a.engine.amendTarget(zhu, { error_type: 'form_confusion' }, 'wrong_error_type')
+  // B is offline: a new pack adds O907 on 住, which on B still lands on the original target.
+  await b.program.installPack(invented({ extraCase: true }))
+  assert.ok(b.engine.state.targets.find((t) => t.id === zhu)!.observations.some((o) => o.id === 'case:o907'))
+  // Settles: a downloaded pack re-imports and re-links its cases once, then nothing more is queued.
+  const states: string[] = []
+  for (let round = 0; round < 4; round++) for (const d of [a, b]) states.push((await d.sync()).state)
+  assert.deepEqual(states.slice(-2), ['idle', 'idle'], states.join(','))
+  for (const d of [a, b]) {
+    const p = d.engine.derived().progress
+    assert.equal(p.has(zhu), false)
+    const kept = p.get(replacement)
+    assert.ok(kept, 'one schedule, on the replacement')
+    assert.ok(validObservations(kept.target, amendmentView(d.engine.state), targetsById(d.engine.state)).some((o) => o.id === 'case:o907'),
+      'the late case counts on the corrected mistake')
+    const rows = new Map(d.program.report()!.cases.map((r) => [r.case_id, r]))
+    assert.notEqual(rows.get('O907')!.status, 'invalidated', 'nobody marked it')
+    assert.notEqual(rows.get('O903')!.status, 'invalidated')
+  }
+  const progress = (d: Device) => JSON.stringify([...d.engine.derived().progress.entries()].map(([k, v]) => [k, v.stage, v.dueOn, v.notBefore]).sort())
+  assert.equal(progress(a), progress(b))
 })
