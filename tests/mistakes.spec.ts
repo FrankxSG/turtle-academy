@@ -393,7 +393,7 @@ test('the parent corrects an imported mistake and marks one not a mistake; cases
   const zuo = page.getByTestId(`progress-case-target:${ZUO}`)
   await expect(zuo).toContainText('2 imported case(s) share this target')
   await expect(page.locator('article[data-testid^="progress-case-target:"]').filter({ hasText: '座' })).toHaveCount(1)
-  await expect(zuo.getByTestId('progress-production')).toContainText('1 supported')
+  await expect(zuo.getByTestId('progress-production')).toContainText('1 with help')
   await expect(zuo.getByTestId('progress-recognition')).toContainText('0 first answers')
   await expect(page.getByTestId(`progress-case-target:${pendingRef}`).getByTestId('progress-state')).toHaveText('Waiting for reviewed questions')
 

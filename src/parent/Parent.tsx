@@ -377,6 +377,23 @@ export function Parent({
                               ? tr(' (excluded from evidence)', '（不计入证据）')
                               : ''}
                         </p>
+                        <ul>
+                          {engine.state.events
+                            .filter((e) => e.presentation_id === p.id)
+                            .map((e) => (
+                              <li key={e.id}>
+                                {e.phase === 'first'
+                                  ? tr('First answer', '首次答案')
+                                  : e.phase === 'retry'
+                                    ? tr('Hint-assisted retry', '提示后重试')
+                                    : tr('Supported correction', '辅助订正')}
+                                : {historyText(p.item_id, e.response, t.content_version)} ·{' '}
+                                {e.correct
+                                  ? tr('correct', '正确')
+                                  : tr('needs correction', '需订正')}{' '}
+                              </li>
+                            ))}
+                        </ul>
                         {canInvalidateAnswer(engine.state, p) &&
                           (excluding === p.id ? (
                             <p>
@@ -405,23 +422,6 @@ export function Parent({
                               )}
                             </button>
                           ))}
-                        <ul>
-                          {engine.state.events
-                            .filter((e) => e.presentation_id === p.id)
-                            .map((e) => (
-                              <li key={e.id}>
-                                {e.phase === 'first'
-                                  ? tr('First answer', '首次答案')
-                                  : e.phase === 'retry'
-                                    ? tr('Hint-assisted retry', '提示后重试')
-                                    : tr('Supported correction', '辅助订正')}
-                                : {historyText(p.item_id, e.response, t.content_version)} ·{' '}
-                                {e.correct
-                                  ? tr('correct', '正确')
-                                  : tr('needs correction', '需订正')}{' '}
-                              </li>
-                            ))}
-                        </ul>
                       </li>
                     ))}
                 </ol>

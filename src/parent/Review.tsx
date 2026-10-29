@@ -6,7 +6,7 @@ import type { LearningEngine } from '../engine/engine.ts'
 import { ERROR_TYPES } from '../engine/policy.ts'
 import type { Subject } from '../engine/types.ts'
 import type { ProductionProgress } from '../mistakes/production.ts'
-import { exercise, targetLabel } from '../ui/content.ts'
+import { exercise, material, targetLabel } from '../ui/content.ts'
 import { names, type Language } from '../ui/development.ts'
 import { responseText } from '../ui/Practice.tsx'
 import { flagGroups, progressRows, type ProgressRow } from './progress.ts'
@@ -48,6 +48,8 @@ export function FlagReview({ engine, language, work, busy }: { engine: LearningE
   const zh = language === 'zh'
   const tr = (en: string, cn: string) => (zh ? cn : en)
   const groups = flagGroups(engine.state)
+  const open = groups.filter((g) => g.status === 'open')
+  const decided = groups.filter((g) => g.status !== 'open')
   const reason: Record<string, string> = {
     answer_looks_wrong: tr('The answer looks wrong', '答案好像不对'),
     question_unclear: tr('The question is unclear', '题目不清楚'),
@@ -64,7 +66,18 @@ export function FlagReview({ engine, language, work, busy }: { engine: LearningE
         )}
       </p>
       {groups.length === 0 && <p>{tr('No questions have been flagged.', '还没有被标记的题目。')}</p>}
-      {groups.map((g) => {
+      {open.length === 0 && decided.length > 0 && <p>{tr('No flags are waiting for a decision.', '没有等待决定的标记。')}</p>}
+      {open.map(card)}
+      {decided.length > 0 && (
+        <details>
+          <summary>{tr(`Decided earlier (${decided.length})`, `已决定（${decided.length}）`)}</summary>
+          {decided.map(card)}
+        </details>
+      )}
+    </section>
+  )
+
+  function card(g: (typeof groups)[number]) {
         const shown = g.flags.find((f) => f.contentVersion) ?? g.flags[0]
         const version = shown.contentVersion ?? undefined
         const ex = safeText(() => exercise(g.item_id, version).stem)
@@ -80,6 +93,14 @@ export function FlagReview({ engine, language, work, busy }: { engine: LearningE
                   : tr('Disabled for this child', '已对这个孩子停用')}
               {' · '}{tr('version', '版本')} {g.item_version}
             </p>
+            {shown.presentation?.material_ref && (
+              <details>
+                <summary>{tr('Passage this question belongs to', '这道题所属的阅读材料')}</summary>
+                <p lang="zh" className="review-passage">
+                  {safeText(() => { const m = material(shown.presentation!.material_ref!, version); return `${m.title}\n${m.text}` })}
+                </p>
+              </details>
+            )}
             <p className="review-stem" lang="zh">{ex}</p>
             <p className="small">{tr('Options: ', '选项：')}<span lang="zh">{options}</span></p>
             <p className="small">{tr('Answer key: ', '参考答案：')}<span lang="zh">{key}</span></p>
@@ -105,10 +126,10 @@ export function FlagReview({ engine, language, work, busy }: { engine: LearningE
             )}
           </article>
         )
-      })}
-    </section>
-  )
+  }
 }
+
+const REPAIR_STEP_NUMBER: Record<string, number> = { exact: 1, similar: 2, generic: 3 }
 
 const ERROR_LABELS: Record<string, { en: string; zh: string }> = {
   form_confusion: { en: 'Similar-looking form', zh: '字形混淆' },
@@ -192,7 +213,10 @@ export function ProgressView({
                 <>
                   <dt>{tr('Writing/speaking you observed', '您观察的书写/口头')}</dt>
                   <dd data-testid="progress-production">
-                    {prod.map((p) => tr(`stage ${p.stage}, ${p.independent_correct} independent correct, ${p.supported} supported`, `阶段 ${p.stage}，独立正确 ${p.independent_correct} 次，辅助 ${p.supported} 次`)).join('; ')}
+                    {prod.map((p) => {
+                      const stage = p.stage === 'delayed_review' ? tr('delayed checks', '延时复查') : `${REPAIR_STEP_NUMBER[p.stage]}/3`
+                      return tr(`stage ${stage}, ${p.independent_correct} correct on own, ${p.supported} with help`, `阶段 ${stage}，独立正确 ${p.independent_correct} 次，有帮助 ${p.supported} 次`)
+                    }).join('; ')}
                   </dd>
                 </>
               )}
@@ -261,8 +285,14 @@ function AmendForm({ engine, row, language, busy, run, done }: {
   const [errorType, setErrorType] = useState(t.error_type)
   const release = engine.contentRelease(t.subject)
   const withQuestions = new Set(release?.items.filter((i) => i.course === t.course && i.material_ref === null).map((i) => i.knowledge_point_ref) ?? [])
-  const points = (release?.knowledge_points ?? []).filter((k) => k.course === t.course && k.target_kind === t.target_kind && (withQuestions.has(k.ref) || k.ref === t.knowledge_point_ref))
+  // Any point of the same course with reviewed short questions (a "word" mistake may really be a character one).
+  const points = (release?.knowledge_points ?? []).filter((k) => k.course === t.course && (withQuestions.has(k.ref) || k.ref === t.knowledge_point_ref))
   const label = (ref: string) => targetLabel(ref) ?? ref
+  const kindName: Record<string, string> = {
+    character: tr('Characters', '汉字'), word: tr('Words', '词语'), language_point: tr('Language points', '语文知识'),
+    reading_skill: tr('Reading skills', '阅读能力'),
+  }
+  const kinds = [...new Set(points.map((k) => k.target_kind))]
   const types = [...new Set(['unknown_cause', ...(ERROR_TYPES[t.subject] ?? []),
     ...(release?.items.filter((i) => i.knowledge_point_ref === kp).flatMap((i) => Object.values(i.error_types ?? {})) ?? [])])]
   return (
@@ -280,7 +310,12 @@ function AmendForm({ engine, row, language, busy, run, done }: {
       <label>
         {tr('Target', '目标')}
         <select value={kp} onChange={(ev) => setKp(ev.target.value)} disabled={busy}>
-          {points.sort((a, b) => label(a.ref).localeCompare(label(b.ref), 'zh')).map((k) => <option key={k.ref} value={k.ref}>{label(k.ref)}</option>)}
+          {kinds.map((kind) => (
+            <optgroup key={kind} label={kindName[kind] ?? kind}>
+              {points.filter((k) => k.target_kind === kind).sort((a, b) => label(a.ref).localeCompare(label(b.ref), 'zh'))
+                .map((k) => <option key={k.ref} value={k.ref}>{label(k.ref)}</option>)}
+            </optgroup>
+          ))}
         </select>
       </label>
       <label>

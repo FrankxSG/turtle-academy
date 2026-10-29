@@ -699,3 +699,8 @@ footer p {
     grid-template-columns: 1fr;
   }
 }
+.review-passage {
+  white-space: pre-line;
+  font-size: 1rem;
+  line-height: 1.8;
+}

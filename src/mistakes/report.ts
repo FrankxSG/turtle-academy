@@ -4,10 +4,10 @@
 // Attempt counts here describe what happened (first responses, hint retries, supported corrections, flags);
 // they do not decide progress. Production progress comes from production.ts. No evidence → "not yet evidenced".
 import type { CatalogueRelease } from '../catalogue/adapter.ts'
-import { amendmentView, currentTarget, isActiveTarget } from '../engine/amendments.ts'
+import { amendmentView, currentTarget, observationInvalid } from '../engine/amendments.ts'
 import { excludedItemVersions, isEvidence, type Derived } from '../engine/evidence.ts'
 import type { EngineState, Presentation, Stage } from '../engine/types.ts'
-import { missingStages, type CrosswalkRow } from './intake.ts'
+import { caseObservationId, missingStages, type CrosswalkRow } from './intake.ts'
 import type { PlanStage, Register } from './pack.ts'
 import { deriveProduction, type ProductionEvent, type ProductionProgress } from './production.ts'
 
@@ -18,7 +18,7 @@ export type CaseStatus =
   | 'in_repair'
   | 'in_delayed_review'
   | 'external_only'
-  /** The parent marked the case's mistake as not a mistake (or a duplicate). Its history is kept. */
+  /** The parent marked the case's mistake as not a mistake, or this case as a duplicate. Its history is kept. */
   | 'invalidated'
 
 export interface CaseRow {
@@ -167,7 +167,11 @@ export function buildReport(opts: {
       last_practised_on: last,
     }
     let status: CaseStatus
-    if (linked && !current) status = 'invalidated'
+    // A case marked duplicate stays so after a correction: the replacement never received its observation.
+    const caseObs = caseObservationId(c.id)
+    const own = current?.observations.find((o) => o.id === caseObs)
+    const dropped = current !== null && (own ? observationInvalid(current, own, view) : linked?.observations.some((o) => o.id === caseObs) === true)
+    if ((linked && !current) || dropped) status = 'invalidated'
     else if (!target) status = 'not_imported'
     else if (target.mapping_status === 'pending_content') status = 'pending_content'
     // Only counted first responses are evidence; a replaced or invalidated attempt leaves the case unevidenced.
@@ -204,13 +208,19 @@ function countPools(release: CatalogueRelease, ref: string) {
 export function normalizedEvents(state: EngineState, derived: Derived, crosswalk: CrosswalkRow[]): NormalizedEvent[] {
   const excluded = excludedItemVersions(state)
   const view = amendmentView(state)
-  const targetById = new Map(state.targets.map((t) => [t.id, t]))
   const casesOf = new Map<string, string[]>()
   const refOf = new Map<string, string>()
+  // The case's practice is on its linked target and, after a parent correction, on the current replacement
+  // (case links are refreshed only at the next import).
+  const current = new Set<string>()
   for (const r of crosswalk) {
     if (!r.engine_target_id || !r.target_ref) continue
-    casesOf.set(r.engine_target_id, [...(casesOf.get(r.engine_target_id) ?? []), r.case_id])
-    refOf.set(r.engine_target_id, r.target_ref)
+    const now = currentTarget(state, r.engine_target_id, view)?.id ?? null
+    if (now) current.add(now)
+    for (const id of new Set([r.engine_target_id, ...(now ? [now] : [])])) {
+      casesOf.set(id, [...(casesOf.get(id) ?? []), r.case_id])
+      refOf.set(id, r.target_ref)
+    }
   }
   const byId = new Map(state.presentations.map((p) => [p.id, p]))
   const finalised = new Set(state.tasks.filter((t) => t.status === 'finalised').map((t) => t.id))
@@ -223,8 +233,7 @@ export function normalizedEvents(state: EngineState, derived: Derived, crosswalk
       item_id: p.item_id, item_version: p.item_version, presentation_id: p.id, task_id: p.task_id, stage: p.stage,
       phase: e.phase, answered_on: derived.dates.of(e.at), correct: e.correct, assisted: e.assistance !== 'none',
       // Answers on a target the parent later corrected or invalidated stay in the history but no longer count.
-      counted_as_evidence: e.phase === 'first' && isEvidence(p, excluded, view.invalidPresentations)
-        && (targetById.get(p.target_ref) ? isActiveTarget(targetById.get(p.target_ref) as never, view) : false), task_finalised: finalised.has(p.task_id), source: 'engine',
+      counted_as_evidence: e.phase === 'first' && isEvidence(p, excluded, view.invalidPresentations) && current.has(p.target_ref), task_finalised: finalised.has(p.task_id), source: 'engine',
     })
   }
   return out

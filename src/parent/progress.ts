@@ -1,7 +1,9 @@
 // What the parent area shows about mistakes and flagged questions (Functional Design §8). Pure views over the engine
 // state and its replay: nothing here decides progress, and nothing is stored.
 import { amendmentView, isActiveTarget, isImported, observationInvalid, targetStatus } from '../engine/amendments.ts'
-import { excludedItemVersions, isEligible, isEvidence, type Derived } from '../engine/evidence.ts'
+import { addDays } from '../engine/calendar.ts'
+import { excludedItemVersions, isEligible, isEvidence, type Derived, type TargetProgress } from '../engine/evidence.ts'
+import { MAX_CLEARANCES_PER_TARGET_PER_DAY } from '../engine/policy.ts'
 import type { EngineState, Flag, Presentation, Stage, Subject, Target } from '../engine/types.ts'
 
 export type RowState =
@@ -45,6 +47,22 @@ export interface ProgressRow {
 const REPAIR_STEP: Partial<Record<Stage, number>> = { exact: 1, similar: 2, generic: 3 }
 
 /**
+ * When a target can next be practised, using every rule that isEligible applies: the task-finalisation block, the
+ * earliest-practice date, the review due date, the later-day final-stage gate and two clearances per day.
+ */
+export function nextPractice(pr: TargetProgress, today: string): ProgressRow['next'] {
+  if (pr.blockedByTask !== null) return { kind: 'after_task' }
+  if (isEligible(pr, today)) return { kind: 'now' }
+  if (pr.stage === 'delayed_review' && pr.dueOn === null) return { kind: 'none' }
+  const dates = [pr.notBefore, pr.stage === 'delayed_review' ? pr.dueOn : null,
+    pr.stage === 'generic' ? pr.finalStageNotBefore : null,
+    pr.clearances.filter((c) => c.cleared_on === today).length >= MAX_CLEARANCES_PER_TARGET_PER_DAY ? addDays(today, 1) : null]
+    .filter((d): d is string => d !== null)
+  const date = dates.sort().at(-1)
+  return date !== undefined && date > today ? { kind: 'date', date } : { kind: 'none' }
+}
+
+/**
  * One row per current target of a subject. Several private-pack cases that share a target are one row (with its
  * case count), so one practice answer never looks like several. Superseded and invalidated targets are history and
  * have no row; a target whose question awaits a flag decision is shown as suspended.
@@ -86,15 +104,8 @@ export function progressRows(opts: {
     else if (t.verification !== 'verified') state_ = 'unverified'
     else if (held.has(t.id)) state_ = 'held'
     else state_ = pr.stage === 'delayed_review' ? 'delayed_review' : pr.stage === 'acquisition' ? 'learning' : 'repair'
-    let next: ProgressRow['next'] = { kind: 'none' }
-    if (pr && (state_ === 'repair' || state_ === 'delayed_review' || state_ === 'learning')) {
-      if (pr.blockedByTask !== null) next = { kind: 'after_task' }
-      else if (isEligible(pr, today)) next = { kind: 'now' }
-      else {
-        const date = pr.stage === 'delayed_review' ? pr.dueOn : pr.notBefore
-        next = date ? { kind: 'date', date } : { kind: 'none' }
-      }
-    }
+    const next: ProgressRow['next'] = pr && (state_ === 'repair' || state_ === 'delayed_review' || state_ === 'learning')
+      ? nextPractice(pr, today) : { kind: 'none' }
     const recognition: ProgressRow['recognition'] = { firstAnswers: 0, independentCorrect: 0, firstWrong: 0, hintRetries: 0, corrections: 0, repeatedItems: 0, lastPractisedOn: null }
     for (const p of byTarget.get(t.id) ?? []) {
       const counted = isEvidence(p, excluded, view.invalidPresentations)
@@ -139,8 +150,13 @@ export function flagGroups(state: EngineState): FlagGroup[] {
     const firstAnswer = p ? state.events.find((e) => e.presentation_id === p.id && e.phase === 'first') ?? null : null
     const g = groups.get(key) ?? { item_id: f.item_id, item_version: f.item_version, status: f.status, flags: [] }
     g.flags.push({ ...f, presentation: p, contentVersion, firstAnswer })
-    if (f.status === 'open') g.status = 'open'
     groups.set(key, g)
+  }
+  // Open while any flag awaits a decision; otherwise disabled if any decision disabled it (its evidence stays
+  // excluded, src/engine/evidence.ts), else restored.
+  for (const g of groups.values()) {
+    const statuses = new Set(g.flags.map((f) => f.status))
+    g.status = statuses.has('open') ? 'open' : statuses.has('disabled') ? 'disabled' : 'restored'
   }
   return [...groups.values()].sort((a, b) => Number(b.status === 'open') - Number(a.status === 'open')
     || (b.flags.at(-1)?.flagged_at ?? '').localeCompare(a.flags.at(-1)?.flagged_at ?? ''))

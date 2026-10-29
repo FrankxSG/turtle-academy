@@ -2,7 +2,8 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import type { Target } from '../../src/engine/types.ts'
-import { canInvalidateAnswer, flagGroups, progressRows } from '../../src/parent/progress.ts'
+import type { TargetProgress } from '../../src/engine/evidence.ts'
+import { canInvalidateAnswer, flagGroups, nextPractice, progressRows } from '../../src/parent/progress.ts'
 import { harness, runTask, startTask, wrongResponse } from '../engine/helpers.ts'
 
 type H = ReturnType<typeof harness>
@@ -113,4 +114,33 @@ test('parent corrections remove superseded and invalidated targets from the view
   assert.equal(canInvalidateAnswer(h.engine.state, step.presentation), true)
   await h.engine.invalidatePresentation(step.presentation.id, 'not_a_mistake')
   assert.equal(canInvalidateAnswer(h.engine.state, h.engine.state.presentations.find((p) => p.id === step.presentation.id)!), false)
+})
+
+test('a version restored once and disabled after a later flag is shown as disabled (its evidence stays excluded)', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  const base = { presentation_id: null, item_id: 'ma-kp1-gen-1', item_version: 1, reason: 'too_hard' as const }
+  h.engine.state.flags.push({ ...base, flagged_at: '2027-03-01T01:00:00.000Z', status: 'restored', decided_at: '2027-03-01T02:00:00.000Z' })
+  h.engine.state.flags.push({ ...base, flagged_at: '2027-03-02T01:00:00.000Z', status: 'disabled', decided_at: '2027-03-02T02:00:00.000Z' })
+  assert.equal(flagGroups(h.engine.state)[0].status, 'disabled')
+  h.engine.state.flags.push({ ...base, flagged_at: '2027-03-03T01:00:00.000Z', status: 'open', decided_at: null })
+  assert.equal(flagGroups(h.engine.state)[0].status, 'open')
+})
+
+test('next practice applies every eligibility gate, never a date that has already passed', () => {
+  const pr = (o: Partial<TargetProgress>): TargetProgress => ({
+    target: {} as never, stage: 'exact', lowSuccessItems: [], acquisitionSuccessItems: [], notBefore: null, notBeforeReason: null,
+    blockedByTask: null, finalStageNotBefore: null, clearances: [], dueOn: null, reviewIndex: 0, everReachedDelayedReview: false,
+    lastIndependentObservationOn: null, wholeTaskRoutes: new Set(), ...o,
+  })
+  const mapped = { id: 't', mapping_status: 'mapped', verification: 'verified' } as never
+  assert.deepEqual(nextPractice(pr({ target: mapped }), '2027-03-05'), { kind: 'now' })
+  assert.deepEqual(nextPractice(pr({ target: mapped, blockedByTask: 'x' }), '2027-03-05'), { kind: 'after_task' })
+  assert.deepEqual(nextPractice(pr({ target: mapped, notBefore: '2027-03-07' }), '2027-03-05'), { kind: 'date', date: '2027-03-07' })
+  // Two clearances today: tomorrow, even though the earliest-practice date has passed.
+  const two = [{ stage: 'exact' as const, cleared_on: '2027-03-05' }, { stage: 'similar' as const, cleared_on: '2027-03-05' }]
+  assert.deepEqual(nextPractice(pr({ target: mapped, stage: 'generic', notBefore: '2027-03-01', clearances: two }), '2027-03-05'), { kind: 'date', date: '2027-03-06' })
+  // Final stage waits for its later-day gate.
+  assert.deepEqual(nextPractice(pr({ target: mapped, stage: 'generic', finalStageNotBefore: '2027-03-06' }), '2027-03-05'), { kind: 'date', date: '2027-03-06' })
+  // Delayed checks use the due date.
+  assert.deepEqual(nextPractice(pr({ target: mapped, stage: 'delayed_review', dueOn: '2027-03-12' }), '2027-03-05'), { kind: 'date', date: '2027-03-12' })
 })

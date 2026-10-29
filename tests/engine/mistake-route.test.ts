@@ -597,3 +597,28 @@ test('pack preview validates and classifies every case without activating or sav
   await s.program.installPack(preview.pack)
   assert.equal(s.program.report()?.totals.cases, 6)
 })
+
+test('parent corrections in the case report and export: practice on a replacement is exported, a duplicate case says so', async () => {
+  const s = await setup()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  // Correct 住 (O903) before any practice; mark O902 (shares 座 with O901) a duplicate.
+  const { id: replacement } = await s.engine.amendTarget(target(ZHU), { error_type: 'form_confusion' }, 'wrong_error_type')
+  await s.engine.invalidateObservation(target(ZUO), 'case:o902', 'duplicate')
+  // The case links still name the original target until the next import; the report and export follow the correction.
+  assert.equal(s.program.crosswalk.find((r) => r.case_id === 'O903')!.engine_target_id, target(ZHU))
+  s.clock.sgt('2027-03-02')
+  const r = await s.engine.startOrResume('chinese')
+  if (r.kind !== 'task') throw new Error('expected a task')
+  const { seen } = await run(s.engine, r.task.id, () => true)
+  assert.ok(seen.some((q) => q.presentation.target_ref === replacement), 'the replacement is practised the next day')
+  const rows = new Map(s.program.report()!.cases.map((c) => [c.case_id, c]))
+  assert.equal(rows.get('O902')!.status, 'invalidated')
+  assert.notEqual(rows.get('O901')!.status, 'invalidated')
+  assert.ok((rows.get('O903')!.recognition?.counted_first_responses ?? 0) > 0)
+  const exported = s.program.exportFile()!.engine_events.filter((e) => e.case_ids.includes('O903') && e.phase === 'first')
+  assert.ok(exported.length > 0 && exported.every((e) => e.counted_as_evidence), 'practice on the replacement is exported as evidence')
+  // The next open re-links the case to the replacement and nothing is re-imported.
+  const again = await reopen(s)
+  assert.equal(again.program.crosswalk.find((x) => x.case_id === 'O903')!.engine_target_id, replacement)
+  assert.equal(new Map(again.program.report()!.cases.map((c) => [c.case_id, c])).get('O902')!.status, 'invalidated')
+})

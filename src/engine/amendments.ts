@@ -63,8 +63,17 @@ export function targetStatus(t: Target, view: AmendmentView): Target['status'] {
 
 export const isActiveTarget = (t: Target, view: AmendmentView) => targetStatus(t, view) === 'active'
 
-export const observationInvalid = (t: Target, o: Target['observations'][number], view: AmendmentView) =>
-  o.invalidated || view.invalidObservations.has(`${t.id}\u0000${o.id}`)
+/**
+ * An observation stops counting when it was invalidated on this target or on any target this one replaced: a
+ * duplicate marked on one device still counts as a duplicate after another device corrected the target.
+ */
+export function observationInvalid(t: Target, o: Target['observations'][number], view: AmendmentView): boolean {
+  if (o.invalidated) return true
+  for (let at: string | undefined = t.id, guard = 0; at !== undefined && guard < 10_000; at = view.replaces.get(at), guard++) {
+    if (view.invalidObservations.has(`${at}\u0000${o.id}`)) return true
+  }
+  return false
+}
 
 /** The target that now holds a (possibly amended) target's mistake: follows replacements, null when invalidated. */
 export function currentTarget(state: Pick<EngineState, 'targets' | 'amendments'>, id: string, view = amendmentView(state)): Target | null {

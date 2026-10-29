@@ -57,11 +57,17 @@ test('flag review, mistake progress and answer exclusion work through the parent
   await page.clock.install({ time: new Date('2027-03-01T10:00:00+08:00') })
   await setup(page, context)
   await page.getByRole('button', { name: 'Start Chinese' }).click()
-  // The child reports a problem with the first question; it is replaced.
-  const flagged = await shownItem(page)
-  const before = await card(page).getAttribute('data-step')
-  await card(page).getByRole('button', { name: 'Report a problem and replace this question' }).click()
-  await advanced(page, before)
+  // The child reports a problem with the first two questions shown; each is replaced.
+  const flagAndReplace = async () => {
+    const item = await shownItem(page)
+    const before = await card(page).getAttribute('data-step')
+    await card(page).getByRole('button', { name: 'Report a problem and replace this question' }).click()
+    await advanced(page, before)
+    return item
+  }
+  const flagged = await flagAndReplace()
+  const restored = await flagAndReplace()
+  expect(restored).not.toBe(flagged)
   // One first answer is wrong (banked as an app-caught mistake); the task is finished.
   await finish(page, 2)
   await page.getByRole('button', { name: 'Return to the island' }).click()
@@ -71,6 +77,8 @@ test('flag review, mistake progress and answer exclusion work through the parent
   const flag = page.getByTestId(`flag-${flagged}`)
   await expect(flag).toContainText('Waiting for your decision')
   await expect(flag).toContainText('flagged before answering')
+  await expect(flag).toContainText('Answer key:')
+  await expect(page.getByTestId(`flag-${restored}`)).toContainText('Waiting for your decision')
   // Mistake progress: one row for the app-caught mistake, repair stage 1, practised from tomorrow.
   const rows = page.locator('article[data-testid^="progress-"]')
   await expect(rows).toHaveCount(1)
@@ -87,6 +95,10 @@ test('flag review, mistake progress and answer exclusion work through the parent
   await flag.getByRole('button', { name: 'Keep disabled for this child' }).click()
   await expect(flag).toContainText('Disabled for this child')
   await expect(flag.getByRole('button')).toHaveCount(0)
+  const back = page.getByTestId(`flag-${restored}`)
+  await back.getByRole('button', { name: 'Restore question' }).click()
+  await expect(back).toContainText('Restored')
+  await expect(back.getByRole('button')).toHaveCount(0)
   await page.getByText('Chinese · 2027-03-01 · Finished').click()
   expect(await page.getByRole('button', { name: 'This answer was recorded by mistake — exclude it' }).count()).toBeGreaterThan(0)
   // The wrong answer's row is the one whose first answer "needs correction".
@@ -99,7 +111,11 @@ test('flag review, mistake progress and answer exclusion work through the parent
   await expect(page.getByText('Completion reason: Full task completed')).toBeVisible()
   await page.screenshot({ path: 'test-results/ui-review/parent-flags-landscape.png', fullPage: true })
   const saved = (await state(page)).records.filter((r: any) => r.table === 'amendments').map((r: any) => r.value.kind).sort()
-  expect(saved).toEqual(['disable_item', 'invalidate_presentation'])
+  expect(saved).toEqual(['disable_item', 'invalidate_presentation', 'restore_item'])
+  // Restore lifts this child's suspension of that version; keep-disabled leaves it suspended.
+  const suspensions = (await state(page)).records.filter((r: any) => r.table === 'suspensions').map((r: any) => r.value)
+  expect(suspensions.find((x: any) => x.item_id === restored).restored_at).not.toBeNull()
+  expect(suspensions.find((x: any) => x.item_id === flagged).restored_at).toBeNull()
 
   // Exit locks the controls; a reload (still offline) keeps every decision.
   await page.getByRole('button', { name: 'Exit and lock' }).click()
@@ -108,6 +124,7 @@ test('flag review, mistake progress and answer exclusion work through the parent
   await page.reload()
   await parent(page)
   await expect(page.getByTestId(`flag-${flagged}`)).toContainText('Disabled for this child')
+  await expect(page.getByTestId(`flag-${restored}`)).toContainText('Restored')
   await expect(page.locator('article[data-testid^="progress-"]')).toHaveCount(0)
   await page.getByText('Chinese · 2027-03-01 · Finished').click()
   await expect(page.getByText('(excluded from evidence)')).toHaveCount(1)

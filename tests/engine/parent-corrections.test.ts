@@ -3,6 +3,8 @@
 // or delivered story checkpoints. Synthetic fixtures only.
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
+import { amendmentView, observationInvalid } from '../../src/engine/amendments.ts'
+import { completedKnowledgePoints, derive } from '../../src/engine/evidence.ts'
 import type { Target } from '../../src/engine/types.ts'
 import { harness, progressOf, reload, runTask, startTask } from './helpers.ts'
 
@@ -190,4 +192,81 @@ test('a changed knowledge point does not inherit success and is scheduled on the
   await runTask(h.engine, t.id)
   const shown = h.engine.state.presentations.filter((p) => p.task_id === t.id && p.target_ref === id)
   assert.ok(shown.length > 0 && shown.every((p) => h.registry.current('mathematics')?.items.find((i) => i.id === p.item_id)?.knowledge_point_ref === 'ma-kp2'))
+})
+
+test('replay changes only the corrected evidence: other targets keep their progress exactly', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  await importTarget(h, 'imp-1', 'ma-kp1', [{ id: 'obs-1' }])
+  await importTarget(h, 'imp-2', 'ma-kp2', [{ id: 'obs-2' }])
+  await practiseRepairCorrect(h, 'imp-1')
+  const other = (id: string) => JSON.stringify(progressOf(h.engine, id), (k, v) => (k === 'target' || v instanceof Set ? undefined : v))
+  const before = other('imp-2')
+  await h.engine.amendTarget('imp-1', { error_type: 'confused_form' }, 'wrong_error_type')
+  assert.equal(other('imp-2'), before)
+  const answered = h.engine.state.presentations.find((p) => p.target_ref === 'imp-1' && h.engine.state.events.some((e) => e.presentation_id === p.id))!
+  await h.engine.invalidatePresentation(answered.id, 'not_a_mistake')
+  assert.equal(other('imp-2'), before)
+})
+
+test('dependent unlocks are recomputed: excluding the answers that completed a prerequisite locks its dependants again', async () => {
+  const h = harness({ subjects: ['science'] })
+  await h.engine.setX('science', 6)
+  const t = await startTask(h.engine, 'science')
+  await runTask(h.engine, t.id)
+  const unlocked = () => completedKnowledgePoints(h.engine.derived().progress)
+  assert.ok(unlocked().has('sci-1'), 'sci-1 acquisition completed, so sci-2 may be learned')
+  const kept = credit(h)
+  const tests = h.engine.state.presentations.filter((p) => p.role === 'acquisition_test' && h.registry.current('science')?.items.find((i) => i.id === p.item_id)?.knowledge_point_ref === 'sci-1')
+  assert.equal(tests.length, 2)
+  await h.engine.invalidatePresentation(tests[0].id, 'not_a_mistake')
+  assert.equal(unlocked().has('sci-1'), false, 'one remaining test is not acquisition')
+  assert.equal(credit(h), kept)
+})
+
+test('concurrent corrections converge whatever order they arrive in; one mistake keeps one schedule', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  await importTarget(h, 'imp-1', 'ma-kp1', [{ id: 'obs-1' }, { id: 'obs-2' }])
+  const start = structuredClone(h.engine.state)
+  // Device A corrects the error type. Device B, from the same starting records, marks obs-2 a duplicate on the
+  // original and then (later) corrects the knowledge point. Records are add-only, so both sets meet in any order.
+  const a = await h.engine.amendTarget('imp-1', { error_type: 'confused_form' }, 'wrong_error_type')
+  const fromA = { targets: h.engine.state.targets.filter((t) => !start.targets.some((x) => x.id === t.id)), amendments: h.engine.state.amendments.slice(start.amendments.length) }
+  h.engine.state = structuredClone(start)
+  h.clock.advance(60)
+  await h.engine.invalidateObservation('imp-1', 'obs-2', 'duplicate')
+  const b = await h.engine.amendTarget('imp-1', { knowledge_point_ref: 'ma-kp2' }, 'wrong_target')
+  const fromB = { targets: h.engine.state.targets.filter((t) => !start.targets.some((x) => x.id === t.id)), amendments: h.engine.state.amendments.slice(start.amendments.length) }
+  const merged = (first: typeof fromA, second: typeof fromA) => {
+    const state = structuredClone(start)
+    state.targets.push(...structuredClone(first.targets), ...structuredClone(second.targets))
+    state.amendments.push(...structuredClone(first.amendments), ...structuredClone(second.amendments))
+    return state
+  }
+  const results = [merged(fromA, fromB), merged(fromB, fromA)].map((state) => {
+    const progress = [...derive(state).progress.values()]
+    return JSON.stringify(progress.map((p) => [p.target.id, p.stage, p.notBefore, p.target.knowledge_point_ref,
+      p.target.observations.filter((o) => !observationInvalid(p.target, o, amendmentView(state))).map((o) => o.id)]))
+  })
+  assert.equal(results[0], results[1], 'the same result in either arrival order')
+  const [only, ...rest] = JSON.parse(results[0]) as [string, string, string, string, string[]][]
+  assert.equal(rest.length, 0, 'one mistake has one schedule')
+  assert.equal(only[0], b.id, 'the later correction holds the mistake')
+  assert.notEqual(only[0], a.id)
+  // A's replacement was made without knowing about B's duplicate mark; the mark still applies to the mistake.
+  const view = amendmentView(merged(fromA, fromB))
+  const replacementA = fromA.targets[0]
+  assert.deepEqual(replacementA.observations.map((o) => o.id), ['obs-1', 'obs-2'])
+  assert.equal(observationInvalid(replacementA, replacementA.observations[1], view), true)
+  assert.deepEqual(only[4], ['obs-1'])
+})
+
+test('a correction made on one device and "not a mistake" on another: the mistake stays invalidated', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  await importTarget(h)
+  const { id } = await h.engine.amendTarget('imp-1', { error_type: 'confused_form' }, 'wrong_error_type')
+  const state = structuredClone(h.engine.state)
+  state.amendments.push({ id: 'zz-remote', at: '2027-03-01T00:00:00.000Z', actor: 'parent', kind: 'invalidate_target', refs: ['imp-1'], replacement_ref: null, reason: 'not_a_mistake', reducer_revision: 2 })
+  const progress = derive(state).progress
+  assert.equal(progress.has('imp-1'), false)
+  assert.equal(progress.has(id), false)
 })
