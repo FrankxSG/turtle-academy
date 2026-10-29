@@ -616,9 +616,8 @@ export class LearningEngine {
     const byId = targetsById(this.state)
     // Only a mistake that rests on a parent-confirmed case that still counts can be corrected; app-caught ones are
     // marked "not a mistake" instead.
-    if (!validObservations(old, view, byId, observationCounter(this.state, view)).some((o) => o.source_type !== 'app_practice')) {
-      throw new Error('amend_requires_import')
-    }
+    const counted = validObservations(old, view, byId, observationCounter(this.state, view))
+    if (!counted.some((o) => o.source_type !== 'app_practice')) throw new Error('amend_requires_import')
     const release = this.deps.registry.current(old.subject)
     if (!release) throw new Error('no_content')
     const kpRef = change.knowledge_point_ref ?? old.knowledge_point_ref
@@ -644,7 +643,8 @@ export class LearningEngine {
         && t.assessed_skill === skill && t.error_type === errorType) throw new Error('target_exists')
     }
     // App-caught errors are about their question's own point: they stay behind when the point or skill changes.
-    const copy = validObservations(old, view, byId)
+    // The replacement carries the observations that count now (the same rule replay uses).
+    const copy = counted
       .filter((o) => o.source_type !== 'app_practice' || (kpRef === old.knowledge_point_ref && skill === old.assessed_skill))
     // The replacement must hold a case it corrects, or it could never be corrected again.
     if (!copy.some((o) => o.source_type !== 'app_practice')) throw new Error('amend_requires_import')

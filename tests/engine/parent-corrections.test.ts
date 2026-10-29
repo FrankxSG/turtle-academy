@@ -400,3 +400,21 @@ test('a correction that would carry no imported case is refused (cases marked du
   await assert.rejects(() => h.engine.amendTarget('imp-1', { knowledge_point_ref: 'ma-kp2' }, 'wrong_target'), (e: Error) => e.message === 'amend_requires_import')
   assert.equal(JSON.stringify(h.engine.state), snapshot)
 })
+
+test('a mistake kept by an imported case marked duplicate of a disabled question’s error can still be corrected', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  const t = await startTask(h.engine, 'mathematics')
+  const step = await h.engine.next(t.id)
+  if (step.kind !== 'question') throw new Error('expected a question')
+  await h.engine.answer(step.presentation.id, { kind: 'single', option_ids: ['b'], pairs: [] })
+  const banked = h.engine.state.targets.find((x) => x.observations.some((o) => o.source_type === 'app_practice'))!
+  const d = h.engine.today()
+  await h.engine.upsertTargets([{ ...structuredClone(banked), observations: [{ id: 'case-x', source_type: 'schoolwork', observed_on: d, recorded_on: d,
+    instance_ref: 'import:x', batch_ref: null, recurrence: 'independent', invalidated: false }] }])
+  await h.engine.invalidateObservation(banked.id, 'case-x', 'duplicate')
+  await h.engine.flag(step.presentation.id, 'answer_looks_wrong')
+  await h.engine.decideFlag(step.item.id, step.item.version, 'disabled')
+  const { id } = await h.engine.amendTarget(banked.id, { error_type: 'unknown_cause' === banked.error_type ? 'confused_form' : 'unknown_cause' }, 'wrong_error_type')
+  assert.deepEqual(h.engine.state.targets.find((x) => x.id === id)!.observations.map((o) => o.id), ['case-x'])
+  assert.ok(h.engine.derived().progress.has(id))
+})
