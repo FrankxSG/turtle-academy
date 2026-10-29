@@ -1,6 +1,6 @@
 # Turtle Academy
 
-An original adventure-based learning PWA. The current development preview connects a small island hub, objective practice and local parent controls to the on-device learning engine. Chinese loads reviewed content; Science, Mathematics and English still use synthetic exercises. The private-pack build supports parent pack intake and progress export. These implementation facts do not establish subject-release or real-record readiness.
+An original adventure-based learning PWA. The current development preview connects a small island hub, objective practice and local parent controls to the on-device learning engine. Chinese loads reviewed content; Science, Mathematics and English still use synthetic exercises. The parent area reviews the child's flagged questions (restore, or keep disabled for this child), shows Chinese mistakes with their stage and next practice date, and corrects records as add-only amendments (correct an imported mistake, mark one not a mistake or a duplicate, exclude a mistaken answer); the private-pack build adds pack intake and progress export. These implementation facts do not establish subject-release or real-record readiness.
 
 ## Development
 
