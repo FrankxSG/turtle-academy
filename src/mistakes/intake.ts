@@ -10,7 +10,7 @@
 // - Writing and speaking cases have no engine target. Their evidence is parent-observed production (production.ts).
 import type { CatalogueRelease } from '../catalogue/adapter.ts'
 import { poolSizes, type TargetInfo } from '../catalogue/chinese.ts'
-import { amendmentView, isActiveTarget } from '../engine/amendments.ts'
+import { amendmentView, currentTarget, isActiveTarget, leaderOf, mistakeGroups } from '../engine/amendments.ts'
 import type { Course, EngineState, Observation, Target } from '../engine/types.ts'
 import type { PlanStage, Register } from './pack.ts'
 
@@ -69,8 +69,18 @@ export function planIntake(opts: {
   const view = amendmentView(state)
   // A case already imported stays where the parent's amendments left it: on its replacement, or invalidated.
   // Re-importing the register never resurrects or duplicates it (its observation id is kept by amendments).
-  const holderOf = new Map<string, Target>()
-  for (const t of state.targets) for (const o of t.observations) if (!holderOf.has(o.id) || isActiveTarget(t, view)) holderOf.set(o.id, t)
+  // The link for an imported case must not depend on the order of records on the device: two devices that hold the
+  // same records must compute the same link, or they overwrite each other's link on every sync. Holders are taken by
+  // id; the link is the current version of the first one still standing (its mistake group's leader), else the first.
+  const holders = new Map<string, string[]>()
+  for (const t of state.targets) for (const o of t.observations) holders.set(o.id, [...(holders.get(o.id) ?? []), t.id])
+  const groups = mistakeGroups(state, view)
+  const holderOf = new Map<string, { id: string }>()
+  for (const [obs, ids] of holders) {
+    ids.sort()
+    const standing = ids.map((id) => currentTarget(state, id, view)).find((t) => t !== null)
+    holderOf.set(obs, { id: standing ? leaderOf(groups, standing.id) : ids[0] })
+  }
   const byRef = new Map<string, string[]>()
   for (const c of register.cases) {
     if (c.route.mode !== 'objective') continue

@@ -8,6 +8,7 @@ import { poolSizes } from '../../src/catalogue/chinese.ts'
 import { LearningEngine, type Step } from '../../src/engine/engine.ts'
 import { MemoryRecordStore, WriteQueue } from '../../src/engine/persistence.ts'
 import { importTargetId } from '../../src/mistakes/intake.ts'
+import { currentTarget } from '../../src/engine/amendments.ts'
 import { MemoryPrivateStore, MistakeProgram } from '../../src/mistakes/program.ts'
 import { Clock, ids, ManualTimers, correctResponse, wrongResponse } from './helpers.ts'
 import { publicChinese } from './fixtures/public-chinese.ts'
@@ -619,7 +620,8 @@ test('parent corrections in the case report and export: practice on a replacemen
   assert.ok(exported.length > 0 && exported.every((e) => e.counted_as_evidence), 'practice on the replacement is exported as evidence')
   // The next open re-links the case to the replacement and nothing is re-imported.
   const again = await reopen(s)
-  assert.equal(again.program.crosswalk.find((x) => x.case_id === 'O903')!.engine_target_id, replacement)
+  // The stored link may keep naming the corrected original: it resolves to the replacement, which every reader follows.
+  assert.equal(currentTarget(again.engine.state, again.program.crosswalk.find((x) => x.case_id === 'O903')!.engine_target_id!)?.id, replacement)
   assert.equal(new Map(again.program.report()!.cases.map((c) => [c.case_id, c])).get('O902')!.status, 'invalidated')
 })
 
@@ -653,7 +655,7 @@ test('export retains every answer across successive corrections, re-import and i
   }
   check()
   await s.program.installPack(pack) // refreshes the crosswalk from the original target to its current replacement
-  assert.equal(s.program.crosswalk.find((r) => r.case_id === 'O903')!.engine_target_id, lineage.at(-1))
+  assert.equal(currentTarget(s.engine.state, s.program.crosswalk.find((r) => r.case_id === 'O903')!.engine_target_id!)?.id, lineage.at(-1))
   check()
   await s.engine.invalidateTarget(lineage.at(-1)!, 'not_a_mistake')
   check(true)
@@ -673,4 +675,18 @@ test('a pack case imported later on the day of a "not a mistake" decision is a n
   assert.notEqual(rows.get('O907')!.status, 'invalidated', 'the new case was not marked')
   const holder = s.program.crosswalk.find((r) => r.case_id === 'O907')!.engine_target_id!
   assert.ok(s.engine.derived().progress.has(holder), 'the new case is scheduled')
+})
+
+test('case links do not depend on the order of records on the device (two devices must agree, or they rewrite each other forever)', async () => {
+  const s = await setup()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  // Another device's record of the 住 mistake holding the same case (as after concurrent corrections and imports).
+  const zhu = s.engine.state.targets.find((t) => t.id === target(ZHU))!
+  s.engine.state.targets.push({ ...structuredClone(zhu), id: 'aa-other-device' })
+  await s.engine.flush()
+  await s.program.importRegister()
+  const links = JSON.stringify(s.program.crosswalk)
+  s.engine.state.targets.reverse()
+  await s.program.importRegister()
+  assert.equal(JSON.stringify(s.program.crosswalk), links)
 })

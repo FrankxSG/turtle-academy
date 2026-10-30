@@ -236,3 +236,24 @@ test('rule 6 / F43: two offline devices load different packs; the later accepted
   assert.deepEqual(a.program.report()!.cases.map((c) => [c.case_id, c.status]), b.program.report()!.cases.map((c) => [c.case_id, c.status]))
   assert.equal(progress(a), progress(b))
 })
+
+test('F51: case links settle after a correction meets another device’s pack load (no rewriting each other on every sync)', { timeout: 120_000 }, async () => {
+  const { syntheticPack } = await import('./fixtures/private-pack.ts')
+  const server = world()
+  const a = await device(server)
+  const b = await device(server)
+  const pendingRef = 'zh.p2_higher_chinese.char.u4e11'
+  await a.program.installPack(syntheticPack({ pendingRef }))
+  await settle(a, b)
+  // A corrects 住; B, whose clock is four minutes fast and which has not synced, loads a newer pack version. B's
+  // links still name the original 住 target, stamped later than anything A writes.
+  await a.engine.amendTarget('case-target:zh.p2_higher_chinese.char.u4f4f', { error_type: 'form_confusion' }, 'wrong_error_type')
+  b.clock.advance(240)
+  await b.program.installPack(syntheticPack({ pendingRef, extraCase: true }))
+  await settle(a, b)
+  for (const d of [a, b]) {
+    const rows = new Map(d.program.report()!.cases.map((r) => [r.case_id, r.status]))
+    assert.notEqual(rows.get('O903'), 'invalidated')
+  }
+  assert.equal(progress(a), progress(b))
+})

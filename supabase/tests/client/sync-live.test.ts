@@ -42,11 +42,11 @@ async function control(path: string, body: unknown) {
 const sql = async (q: string): Promise<string[][]> => control('sql', { sql: q })
 const health = async () => (await (await fetch(`${url}/__test/health`)).json()) as { users: Record<string, string>; children: Record<string, string> }
 
-async function device(email: string, clock?: Clock) {
+async function device(email: string, clock?: Clock, transport = createTransport(config)) {
   const auth = createAuthClient({ url, anonKey, googleEnabled: false }, { storage: memory() })
   const r = await auth.signInWithPassword(email, 'synthetic-password')
   assert.ok(r.ok)
-  const d = new Device({ transport: createTransport(config), auth, userId: r.ok ? r.session.userId : '', clock })
+  const d = new Device({ transport, auth, userId: r.ok ? r.session.userId : '', clock })
   await d.open()
   return { d, auth, userId: r.ok ? r.session.userId : '' }
 }
@@ -256,13 +256,33 @@ test('two offline devices against the real server: one schedule per mistake, con
   const { child } = await freshParent()
   const { d: a } = await device('parent-a@example.invalid', new Clock('2027-04-10T09:00:00+08:00'))
   assert.equal((await a.sync()).state, 'idle')
-  const { d: b } = await device('parent-a@example.invalid', new Clock('2027-04-10T09:00:00+08:00'))
+  // B's connection can be cut: requests then fail before they reach the server (a controlled disconnect).
+  const real = createTransport(config)
+  let down = false
+  const cut = <T,>(fn: () => Promise<T>) => (down ? Promise.reject(new TransportError('offline', 'network')) : fn())
+  const switchable: typeof real = {
+    whoami: (t, s) => cut(() => real.whoami(t, s)),
+    push: (t, c, ops, s) => cut(() => real.push(t, c, ops, s)),
+    pull: (t, c, cur, lim, s) => cut(() => real.pull(t, c, cur, lim, s)),
+  }
+  const { d: b } = await device('parent-a@example.invalid', new Clock('2027-04-10T09:00:00+08:00'), switchable)
   assert.equal((await b.sync()).state, 'idle')
-  // Offline on both: the same opening mistakes, and conflicting settings.
+  // Offline on both: the same opening mistakes, conflicting settings and different packs.
   await a.practise(2, () => false)
   await b.practise(2, () => false)
   await a.engine.setX('chinese', 12)
   await b.engine.setX('chinese', 16)
+  await a.program.installPack(invented())
+  b.clock.advance(60)
+  await b.program.installPack(syntheticPack({ pendingRef: PENDING_REF, extraCase: true }) as unknown as PrivatePack)
+  // B's connection drops before its upload reaches the server: nothing is lost, and nothing reaches the server.
+  down = true
+  const waiting = await b.outboxIds()
+  assert.equal((await b.sync()).state, 'offline')
+  assert.deepEqual(await b.outboxIds(), waiting)
+  const sent = await sql(`select count(*) from public.sync_receipts where child_id = '${child}' and op_id in (${waiting.map((id) => `'${id}'`).join(',')});`)
+  assert.equal(sent[0][0], '0')
+  down = false
   // A's upload commits on the server but the response is lost; A restarts before retrying.
   const queued = await a.outboxIds()
   await control('lose-next', { count: 1 })
@@ -288,6 +308,24 @@ test('two offline devices against the real server: one schedule per mistake, con
   assert.equal(progress(a), progress(b))
   const replaced = await sql(`select count(*) from public.sync_field_history where child_id = '${child}' and key = 'x:chinese';`)
   assert.ok(Number(replaced[0][0]) >= 1, 'the losing X is kept in server history')
+  // Both packs' loads converge on one active pack (rule 6).
+  assert.deepEqual((await a.pack.packs()).map((p) => p.pack_id), (await b.pack.packs()).map((p) => p.pack_id))
+  // Both finish the shared task offline: the day is credited once and delivered story is kept.
+  await a.practise()
+  await b.practise()
+  await a.deliverStory()
+  await b.deliverStory()
+  for (let round = 0, quiet = 0; quiet < 2; round++) {
+    assert.ok(round < 8, 'devices settle')
+    const s = [await a.sync(), await b.sync()]
+    quiet = s.every((x) => x.state === 'idle' && x.waiting === 0) ? quiet + 1 : 0
+  }
+  const shared = a.engine.state.tasks.find((t) => t.local_date === '2027-04-10' && t.id.endsWith(':0'))!
+  for (const d of [a, b]) assert.equal(d.engine.state.completions.filter((c) => c.task_id === shared.id).length, 1)
+  const credit = (d: Device) => JSON.stringify({ c: d.engine.state.completions.map((c) => JSON.stringify(c)).sort(),
+    s: d.engine.state.story.checkpoints.filter((c) => c.state === 'delivered').map((c) => c.id).sort() })
+  assert.equal(credit(a), credit(b))
+  assert.equal(progress(a), progress(b))
 })
 
 test('real server: "not a mistake" decided on one device before syncing ends the other device’s record of the same mistake', { skip }, async () => {
