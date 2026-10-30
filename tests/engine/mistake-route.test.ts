@@ -660,3 +660,17 @@ test('export retains every answer across successive corrections, re-import and i
   await s.program.installPack(pack)
   check(true)
 })
+
+test('a pack case imported later on the day of a "not a mistake" decision is a new mistake, not shown as marked', async () => {
+  const s = await setup()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  s.clock.advance(3600)
+  await s.engine.invalidateTarget(target(ZHU), 'not_a_mistake')
+  s.clock.advance(3600)
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef, extraCase: true }))
+  const rows = new Map(s.program.report()!.cases.map((c) => [c.case_id, c]))
+  assert.equal(rows.get('O903')!.status, 'invalidated')
+  assert.notEqual(rows.get('O907')!.status, 'invalidated', 'the new case was not marked')
+  const holder = s.program.crosswalk.find((r) => r.case_id === 'O907')!.engine_target_id!
+  assert.ok(s.engine.derived().progress.has(holder), 'the new case is scheduled')
+})

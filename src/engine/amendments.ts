@@ -206,7 +206,23 @@ export const leaderOf = (groups: MistakeGroups, id: string) => groups.leader.get
  * same mistake made before it, for example on a device that had not synced, are covered too; a new error after it
  * starts a new mistake.
  */
-export interface Dismissal { on: string; at: string }
+export interface Dismissal {
+  /** Learning date and instant of the decision. */
+  on: string
+  at: string
+  /**
+   * When an observation was made, if known (an app-caught error: its answer; an imported case: when its record was
+   * confirmed). On the decision's own day this decides; without it the whole day counts as covered.
+   */
+  instantOf?: (o: Observation, holder: Target) => string | null
+}
+
+/** Is an observation covered by a decision: made before it (by day; by instant on the decision's own day)? */
+function covered(d: Dismissal, o: Observation, holder: Target): boolean {
+  if (o.recorded_on !== d.on) return o.recorded_on < d.on
+  const at = d.instantOf?.(o, holder) ?? null
+  return at === null || Date.parse(at) <= Date.parse(d.at)
+}
 
 /**
  * Decisions by progress unit (mistakeKey): the latest one. `dateOf` gives the learning date of an instant (the
@@ -231,8 +247,8 @@ export function dismissals(state: Pick<EngineState, 'targets' | 'amendments'>, d
 /**
  * All counting observations of a mistake group: each member's own and its correction chain's, once by id. The
  * duplicate rule applies once across the whole group, so marking a case that is the only one on its record works.
- * `dismissal` drops observations recorded on or before a decision on this mistake (a member created by a
- * correction made after the decision keeps its own).
+ * `dismissal` drops observations made before a decision on this mistake (a member created by a correction made
+ * after the decision keeps its own).
  */
 export function groupObservations(ids: readonly string[], view: AmendmentView, byId: ReadonlyMap<string, Target>,
   counts: (o: Observation) => boolean = () => true, dismissal?: Dismissal): Observation[] {
@@ -243,7 +259,7 @@ export function groupObservations(ids: readonly string[], view: AmendmentView, b
     const exempt = dismissal !== undefined && (view.createdAt.get(id) ?? '') > dismissal.at
     for (const o of chainObservations(t, view, byId)) {
       if (all.has(o.id) || !counts(o)) continue
-      if (dismissal && !exempt && o.recorded_on <= dismissal.on) continue
+      if (dismissal && !exempt && covered(dismissal, o, t)) continue
       all.set(o.id, { o, holder: t })
     }
   }

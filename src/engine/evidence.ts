@@ -151,7 +151,14 @@ export function derive(state: EngineState): Derived {
   const effectiveObservation = observationCounter(state, amended, excluded)
 
   const groups = mistakeGroups(state, amended)
-  const dismissed = dismissals(state, (at) => dates.of(at))
+  // When an observation was made: an app-caught error at its first answer (or when shown), an imported case when
+  // its record was confirmed (a new pack case after a decision gets its own record).
+  const presentationAt = new Map(state.presentations.map((p) => [p.id, p.presented_at]))
+  const instantOf = (o: Target['observations'][number], holder: Target): string | null =>
+    o.source_type === 'app_practice'
+      ? (o.batch_ref ? firstEvent.get(o.batch_ref)?.at ?? presentationAt.get(o.batch_ref) ?? null : null)
+      : holder.verified_at
+  const dismissed = new Map([...dismissals(state, (at) => dates.of(at))].map(([k, v]) => [k, { ...v, instantOf }]))
   for (const target of state.targets) {
     // Superseded and invalidated targets (parent amendments) keep their records and evidence but are not replayed.
     if (targetStatus(target, amended) !== 'active') continue

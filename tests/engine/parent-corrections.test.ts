@@ -3,8 +3,8 @@
 // or delivered story checkpoints. Synthetic fixtures only.
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { amendmentView, observationInvalid, targetsById, validObservations } from '../../src/engine/amendments.ts'
-import { completedKnowledgePoints, derive } from '../../src/engine/evidence.ts'
+import { amendmentView, groupObservations, observationInvalid, targetsById, validObservations } from '../../src/engine/amendments.ts'
+import { completedKnowledgePoints, derive, dismissalFor } from '../../src/engine/evidence.ts'
 import type { Target } from '../../src/engine/types.ts'
 import { harness, progressOf, reload, runTask, startTask } from './helpers.ts'
 
@@ -460,4 +460,31 @@ test('a correction of a two-record mistake: a case added later to the retired re
   const pr = derive(state).progress
   assert.deepEqual([...pr.keys()], [id], 'one schedule, on the replacement')
   assert.equal(pr.get(id)!.notBefore, '2027-03-06', 'the late case counts')
+})
+
+test('"not a mistake" covers the same day only up to the decision: a new error later that day starts a new mistake', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  const t = await startTask(h.engine, 'mathematics')
+  const step = await h.engine.next(t.id)
+  if (step.kind !== 'question') throw new Error('expected a question')
+  await h.engine.answer(step.presentation.id, { kind: 'single', option_ids: ['b'], pairs: [] }) // 09:00, banked
+  const banked = h.engine.state.targets.find((x) => x.observations.some((o) => o.source_type === 'app_practice'))!
+  h.clock.advance(3600)
+  await h.engine.invalidateTarget(banked.id, 'not_a_mistake') // 10:00
+  // Two other records of the same mistake (another device), each caught by an answer: one at 09:30, one at 11:00.
+  const mk = (id: string, at: string) => {
+    const p = { ...structuredClone(h.engine.state.presentations.find((x) => x.id === step.presentation.id)!), id: `p-${id}`, presented_at: at }
+    h.engine.state.presentations.push(p)
+    h.engine.state.events.push({ ...structuredClone(h.engine.state.events.find((e) => e.presentation_id === step.presentation.id)!), id: `e-${id}`, presentation_id: p.id, at })
+    h.engine.state.targets.push({ ...structuredClone(banked), id, observations: [{ ...banked.observations[0], id: `o-${id}`, batch_ref: p.id }] })
+  }
+  mk('zz-before', '2027-03-01T01:30:00.000Z')
+  mk('zz-after', '2027-03-01T03:00:00.000Z')
+  const state = structuredClone(h.engine.state)
+  const d = derive(state)
+  assert.equal(d.progress.size, 1, 'one mistake: the error made after the decision')
+  const [only] = [...d.progress.values()]
+  const members = d.groups.members.get(only.target.id)!
+  const counted = groupObservations(members, amendmentView(state), targetsById(state), undefined, dismissalFor(d, only.target)).map((o) => o.id)
+  assert.deepEqual(counted, ['o-zz-after'], 'the 09:30 error is covered by the 10:00 decision; the 11:00 one is new')
 })
