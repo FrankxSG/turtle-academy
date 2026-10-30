@@ -4,10 +4,10 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { CatalogueRegistry } from '../../src/catalogue/adapter.ts'
-import { poolSizes } from '../../src/catalogue/chinese.ts'
+import { poolSizes, targetInfo, type RawSkillTarget } from '../../src/catalogue/chinese.ts'
 import { LearningEngine, type Step } from '../../src/engine/engine.ts'
 import { MemoryRecordStore, WriteQueue } from '../../src/engine/persistence.ts'
-import { importTargetId } from '../../src/mistakes/intake.ts'
+import { importTargetId, planIntake } from '../../src/mistakes/intake.ts'
 import { currentTarget } from '../../src/engine/amendments.ts'
 import { MemoryPrivateStore, MistakeProgram } from '../../src/mistakes/program.ts'
 import { Clock, ids, ManualTimers, correctResponse, wrongResponse } from './helpers.ts'
@@ -689,4 +689,21 @@ test('case links do not depend on the order of records on the device (two device
   s.engine.state.targets.reverse()
   await s.program.importRegister()
   assert.equal(JSON.stringify(s.program.crosswalk), links)
+})
+
+test('intake computes the same case links from the same records in any order (no stored links involved)', async () => {
+  const s = await setup()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  const zhu = s.engine.state.targets.find((t) => t.id === target(ZHU))!
+  // Another record of the 住 mistake holding the same case, with an id that sorts first.
+  s.engine.state.targets.push({ ...structuredClone(zhu), id: 'aa-other-device' })
+  const register = s.program.register!
+  const release = s.program.currentRelease()!
+  const pack = syntheticPack({ pendingRef: s.pendingRef }) as unknown as { private_targets: RawSkillTarget[] }
+  const targets = targetInfo(s.publicContent.lists, pack.private_targets)
+  const plan = () => JSON.stringify(planIntake({ state: s.engine.state, register, release, targets, today: '2027-03-01', now: s.clock.now() }).crosswalk)
+  const first = plan()
+  assert.ok(first.includes('aa-other-device') || first.includes(target(ZHU)))
+  s.engine.state.targets.reverse()
+  assert.equal(plan(), first)
 })

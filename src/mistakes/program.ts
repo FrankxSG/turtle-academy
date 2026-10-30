@@ -8,8 +8,7 @@
 import type { CatalogueRegistry, CatalogueRelease } from '../catalogue/adapter.ts'
 import { buildChineseContent, type BuiltContent, type RawBatch, type TargetLists } from '../catalogue/chinese.ts'
 import type { LearningEngine } from '../engine/engine.ts'
-import type { EngineState, Target } from '../engine/types.ts'
-import { amendmentView, currentTarget, leaderOf, mistakeGroups } from '../engine/amendments.ts'
+import type { Target } from '../engine/types.ts'
 import { registerExercise, registerMaterial, registerReviewState, registerTargetLabels } from '../ui/content.ts'
 import { isImportedCase, planIntake, type CrosswalkRow, type IntakeResult } from './intake.ts'
 import { packTag, productionPlans, validatePack, type PrivatePack, type Register } from './pack.ts'
@@ -336,10 +335,10 @@ export class MistakeProgram {
     })
     // With nothing new to add, still push any engine writes queued by an earlier failure.
     const saved = result.records.length > 0 ? await this.engine.upsertTargets(result.records) : await this.engine.retrySaves()
-    // A stored link that still names the same mistake (an earlier version a correction superseded, or another record
-    // of the same mistake) is kept: links sync by latest edit, so rewriting an equivalent link from every device that
-    // re-imports would make devices overwrite each other on every sync. Readers follow corrections and groups.
-    const crosswalk = keepEquivalentLinks(this.engine.state, await this.store.crosswalk(), result.crosswalk)
+    // A case's link is written once, when it is first imported, and never rewritten: links sync by latest edit, so
+    // devices that recomputed it on each import would overwrite each other's link on every sync. Readers resolve the
+    // case's current mistake from the records that hold its observation (caseResolver), not from the link.
+    const crosswalk = keepStoredLinks(await this.store.crosswalk(), result.crosswalk)
     this.rows = crosswalk
     await this.store.putCrosswalk(crosswalk)
     return { result: { ...result, crosswalk }, saved }
@@ -382,19 +381,8 @@ export class MistakeProgram {
   }
 }
 
-/** Keep each stored case link whose target resolves to the same current mistake as the newly computed one. */
-function keepEquivalentLinks(state: EngineState, stored: CrosswalkRow[], computed: CrosswalkRow[]): CrosswalkRow[] {
-  const view = amendmentView(state)
-  const groups = mistakeGroups(state, view)
-  const resolve = (id: string | null) => {
-    if (id === null) return null
-    const t = currentTarget(state, id, view)
-    return t ? leaderOf(groups, t.id) : `gone:${id}`
-  }
-  const before = new Map(stored.map((r) => [r.case_id, r]))
-  return computed.map((row) => {
-    const old = before.get(row.case_id)
-    if (!old || old.engine_target_id === row.engine_target_id || old.engine_target_id === null || row.engine_target_id === null) return row
-    return resolve(old.engine_target_id) === resolve(row.engine_target_id) ? { ...row, engine_target_id: old.engine_target_id } : row
-  })
+/** Keep each case's stored link; a computed one is used only for a case that has none yet. */
+function keepStoredLinks(stored: CrosswalkRow[], computed: CrosswalkRow[]): CrosswalkRow[] {
+  const before = new Map(stored.map((r) => [r.case_id, r.engine_target_id]))
+  return computed.map((row) => ({ ...row, engine_target_id: before.get(row.case_id) ?? row.engine_target_id }))
 }

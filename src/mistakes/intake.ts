@@ -52,6 +52,54 @@ export function missingStages(release: CatalogueRelease, ref: string): PlanStage
   return (['exact', 'similar', 'generic'] as const).filter((k) => s[k] === 0)
 }
 
+export interface CaseHolder {
+  /** Every record that holds the case's observation, by id (its import record and any replacements). */
+  holders: string[]
+  /** The case's current mistake: the group leader of the first holder still standing; null when none stands. */
+  current: string | null
+  /** `current`, else the first holder: the link a device computes for the case. */
+  link: string
+}
+
+/**
+ * Resolve imported cases to their records from the engine records alone. A stored case link is written once and
+ * never rewritten (links sync by latest edit, so devices that recomputed it on every import would overwrite each
+ * other); readers resolve the case's current mistake here instead. The result must not depend on the order of
+ * records on the device: holders are taken by id, and the mistake is that of the first one still standing.
+ *
+ * `storedLink` is a fallback for a case whose records have not arrived on this device yet: the link's current
+ * version, by its group leader. A case with neither is not imported (null).
+ */
+export function caseResolver(state: Pick<EngineState, 'targets' | 'amendments'>, view = amendmentView(state)):
+  (caseId: string, storedLink?: string | null) => CaseHolder | null {
+  const byObs = new Map<string, string[]>()
+  for (const t of state.targets) for (const o of t.observations) {
+    const ids = byObs.get(o.id)
+    if (ids) ids.push(t.id)
+    else byObs.set(o.id, [t.id])
+  }
+  const groups = mistakeGroups(state, view)
+  const leader = (id: string) => {
+    const t = currentTarget(state, id, view)
+    return t ? leaderOf(groups, t.id) : null
+  }
+  const memo = new Map<string, CaseHolder | null>()
+  return (caseId, storedLink = null) => {
+    const obs = caseObservationId(caseId)
+    const ids = byObs.get(obs)
+    if (ids) {
+      if (!memo.has(obs)) {
+        const holders = [...ids].sort()
+        const current = holders.map(leader).find((x) => x !== null) ?? null
+        memo.set(obs, { holders, current, link: current ?? holders[0] })
+      }
+      return memo.get(obs)!
+    }
+    if (!storedLink || !state.targets.some((t) => t.id === storedLink)) return null
+    return { holders: [], current: leader(storedLink), link: storedLink }
+  }
+}
+
 /**
  * Plan the import. Pure: returns the target records to upsert (new targets and existing targets with any new
  * observations or a changed mapping status) and the crosswalk. `today` is the learning date of the import.
@@ -69,18 +117,7 @@ export function planIntake(opts: {
   const view = amendmentView(state)
   // A case already imported stays where the parent's amendments left it: on its replacement, or invalidated.
   // Re-importing the register never resurrects or duplicates it (its observation id is kept by amendments).
-  // The link for an imported case must not depend on the order of records on the device: two devices that hold the
-  // same records must compute the same link, or they overwrite each other's link on every sync. Holders are taken by
-  // id; the link is the current version of the first one still standing (its mistake group's leader), else the first.
-  const holders = new Map<string, string[]>()
-  for (const t of state.targets) for (const o of t.observations) holders.set(o.id, [...(holders.get(o.id) ?? []), t.id])
-  const groups = mistakeGroups(state, view)
-  const holderOf = new Map<string, { id: string }>()
-  for (const [obs, ids] of holders) {
-    ids.sort()
-    const standing = ids.map((id) => currentTarget(state, id, view)).find((t) => t !== null)
-    holderOf.set(obs, { id: standing ? leaderOf(groups, standing.id) : ids[0] })
-  }
+  const holderOf = caseResolver(state, view)
   const byRef = new Map<string, string[]>()
   for (const c of register.cases) {
     if (c.route.mode !== 'objective') continue
@@ -100,7 +137,7 @@ export function planIntake(opts: {
     if (missing.length > 0) pending.push({ target_ref: ref, missing, cases })
     // Cases already imported stay on the record that holds them now (a parent's replacement, or an invalidated
     // record): re-importing the register never resurrects, moves or duplicates them.
-    const fresh = cases.filter((caseId) => !holderOf.has(caseObservationId(caseId)))
+    const fresh = cases.filter((caseId) => holderOf(caseId) === null)
     // Reuse an existing active target for the same concrete target (for example an app-caught one, or a parent's
     // corrected replacement), so the learner never has two schedules for one thing.
     const own = state.targets.find((t) => t.id === importTargetId(ref))
@@ -140,7 +177,7 @@ export function planIntake(opts: {
       const ref = c.route.progress_target_ref
       return {
         case_id: c.id, mode: 'objective', target_ref: ref,
-        engine_target_id: engineIdOf.get(c.id) ?? holderOf.get(caseObservationId(c.id))?.id ?? null,
+        engine_target_id: engineIdOf.get(c.id) ?? holderOf(c.id)?.link ?? null,
         plan_id: c.production_followup?.id ?? null, shared_with: (byRef.get(ref) ?? []).filter((x) => x !== c.id),
       }
     }

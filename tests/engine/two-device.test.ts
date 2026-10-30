@@ -257,3 +257,25 @@ test('F51: case links settle after a correction meets another device’s pack lo
   }
   assert.equal(progress(a), progress(b))
 })
+
+test('F51: case links settle even when the other device’s later-stamped link names a corrected and then dismissed record', { timeout: 120_000 }, async () => {
+  const { syntheticPack } = await import('./fixtures/private-pack.ts')
+  const server = world()
+  const a = await device(server)
+  const b = await device(server)
+  // Replacement ids that sort below the pack's own target ids (as random ids often do).
+  let n = 0
+  a.newId = () => `0a-${(++n).toString().padStart(5, '0')}`
+  await a.open()
+  const pendingRef = 'zh.p2_higher_chinese.char.u4e11'
+  await a.program.installPack(syntheticPack({ pendingRef }))
+  await settle(a, b)
+  const original = 'case-target:zh.p2_higher_chinese.char.u4f4f'
+  const { id } = await a.engine.amendTarget(original, { error_type: 'form_confusion' }, 'wrong_error_type')
+  await a.engine.invalidateTarget(id, 'not_a_mistake')
+  b.clock.advance(240)
+  await b.program.installPack(syntheticPack({ pendingRef, extraCase: true }))
+  await settle(a, b)
+  for (const d of [a, b]) assert.equal(new Map(d.program.report()!.cases.map((r) => [r.case_id, r.status])).get('O903'), 'invalidated')
+  assert.equal(JSON.stringify(a.program.report()!.cases.map((c) => [c.case_id, c.status])), JSON.stringify(b.program.report()!.cases.map((c) => [c.case_id, c.status])))
+})

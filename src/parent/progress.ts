@@ -5,6 +5,8 @@ import { addDays } from '../engine/calendar.ts'
 import { dismissalFor, excludedItemVersions, isEligible, isEvidence, observationCounter, type Derived, type TargetProgress } from '../engine/evidence.ts'
 import { MAX_CLEARANCES_PER_TARGET_PER_DAY } from '../engine/policy.ts'
 import type { EngineState, Flag, Presentation, Stage, Subject, Target } from '../engine/types.ts'
+import { caseResolver, type CrosswalkRow } from '../mistakes/intake.ts'
+import { deriveProduction, type ProductionEvent, type ProductionProgress } from '../mistakes/production.ts'
 
 export type RowState =
   | 'repair' | 'delayed_review' | 'learning'
@@ -176,3 +178,21 @@ export function canInvalidateAnswer(state: EngineState, p: Presentation): boolea
     && state.events.some((e) => e.presentation_id === p.id && e.phase === 'first')
 }
 
+/**
+ * Parent-observed writing/speaking per mistake (private pack only), keyed like progress rows: by the mistake's group
+ * leader. Each case resolves to its current mistake from the records holding it, as the case report does; a plan
+ * shared by several cases of one mistake is listed once.
+ */
+export function productionByMistake(state: EngineState, crosswalk: readonly CrosswalkRow[], events: ProductionEvent[]): Map<string, ProductionProgress[]> {
+  const resolve = caseResolver(state)
+  const out = new Map<string, ProductionProgress[]>()
+  const seen = new Set<string>()
+  for (const row of crosswalk) {
+    if (!row.plan_id) continue
+    const leader = resolve(row.case_id, row.engine_target_id)?.current ?? null
+    if (!leader || seen.has(`${leader}\u0000${row.plan_id}`)) continue
+    seen.add(`${leader}\u0000${row.plan_id}`)
+    out.set(leader, [...(out.get(leader) ?? []), deriveProduction(row.plan_id, events)])
+  }
+  return out
+}

@@ -4,10 +4,10 @@
 // Attempt counts here describe what happened (first responses, hint retries, supported corrections, flags);
 // they do not decide progress. Production progress comes from production.ts. No evidence → "not yet evidenced".
 import type { CatalogueRelease } from '../catalogue/adapter.ts'
-import { amendmentView, currentTarget, groupChainObservations, groupObservations, lineage as ancestry, targetsById } from '../engine/amendments.ts'
+import { amendmentView, groupChainObservations, groupObservations, lineage as ancestry, targetsById } from '../engine/amendments.ts'
 import { dismissalFor, excludedItemVersions, isEvidence, observationCounter, type Derived } from '../engine/evidence.ts'
 import type { EngineState, Presentation, Stage } from '../engine/types.ts'
-import { caseObservationId, missingStages, type CrosswalkRow } from './intake.ts'
+import { caseObservationId, caseResolver, missingStages, type CrosswalkRow } from './intake.ts'
 import type { PlanStage, Register } from './pack.ts'
 import { deriveProduction, type ProductionEvent, type ProductionProgress } from './production.ts'
 
@@ -96,6 +96,7 @@ export function buildReport(opts: {
   const byId = targetsById(state)
   const counts = observationCounter(state, view, excluded)
   const cw = new Map(crosswalk.map((r) => [r.case_id, r]))
+  const resolve = caseResolver(state, view)
   const presentationsOf = new Map<string, Presentation[]>()
   for (const p of state.presentations) {
     if (!p.target_ref) continue
@@ -126,12 +127,13 @@ export function buildReport(opts: {
       queue.set(ref, q)
     }
     // A parent's correction moves the case to the replacement target (which inherits no answers); an invalidated
-    // case has no current target.
-    const linked = x?.engine_target_id ? state.targets.find((t) => t.id === x.engine_target_id) : undefined
-    const now = linked ? currentTarget(state, linked.id, view) : null
+    // case has no current target. The case is resolved from the records holding its observation (the same on every
+    // device); the stored link is only a fallback for a case whose records have not arrived yet.
     // The same mistake recorded under several targets (two devices) is one: report on its group's leader.
-    const leaderId = now ? derived.groups.leader.get(now.id) ?? now.id : null
-    const current = leaderId ? state.targets.find((t) => t.id === leaderId) ?? now : null
+    const held = resolve(c.id, x?.engine_target_id)
+    const linked = held !== null
+    const leaderId = held?.current ?? null
+    const current = leaderId ? state.targets.find((t) => t.id === leaderId) ?? null : null
     const members = leaderId ? derived.groups.members.get(leaderId) ?? [leaderId] : []
     const engineId = current?.id ?? null
     const target = current ?? undefined
@@ -216,17 +218,21 @@ export function normalizedEvents(state: EngineState, derived: Derived, crosswalk
   const view = amendmentView(state)
   const casesOf = new Map<string, string[]>()
   const refOf = new Map<string, string>()
-  // Case links may point anywhere in the correction chain (they refresh on re-import). Every version's answers
-  // remain history, including intermediate replacements and invalidated mistakes; only the current active target
-  // can contribute evidence. Walk both directions rather than mapping only the link and its current leaf.
+  // A case is held by its import record and every correction of it; its link is written once and may name any of
+  // them. Every version's answers remain history, including intermediate replacements and invalidated mistakes; only
+  // the current active target can contribute evidence. Walk both directions from every holder and the link.
   const current = new Set<string>()
+  const resolve = caseResolver(state, view)
   for (const r of crosswalk) {
-    if (!r.engine_target_id || !r.target_ref) continue
-    const head = currentTarget(state, r.engine_target_id, view)?.id ?? null
+    if (!r.target_ref) continue
+    // Resolve the case from the records holding its observation; the stored link is a fallback (see buildReport).
+    const held = resolve(r.case_id, r.engine_target_id)
+    if (!held) continue
+    const head = held.current
     // The current mistake may be recorded under several targets (two devices): all of them are current.
-    const group = head ? derived.groups.members.get(derived.groups.leader.get(head) ?? head) ?? [head] : []
+    const group = head ? derived.groups.members.get(head) ?? [head] : []
     for (const id of group) current.add(id)
-    const lineage = new Set<string>([r.engine_target_id, ...group])
+    const lineage = new Set<string>([...held.holders, held.link, ...(r.engine_target_id ? [r.engine_target_id] : []), ...group])
     // Ancestors (every record a correction superseded) and descendants (later corrections).
     for (const start of [...lineage]) {
       for (const id of ancestry(start, view)) lineage.add(id)

@@ -9,9 +9,8 @@ import type { SaveStatus } from '../engine/persistence.ts'
 import type { SyncStatus } from '../sync/manager.ts'
 import { SyncPanel } from './Sync.tsx'
 import { FlagReview, ProgressView } from './Review.tsx'
-import { canInvalidateAnswer } from './progress.ts'
-import { amendmentView, currentTarget } from '../engine/amendments.ts'
-import { deriveProduction, type ProductionProgress } from '../mistakes/production.ts'
+import { canInvalidateAnswer, productionByMistake } from './progress.ts'
+import type { ProductionProgress } from '../mistakes/production.ts'
 const PrivateMistakes = __PRIVATE_PACK_ENABLED__
   ? lazy(() => import('./Mistakes.tsx').then((m) => ({ default: m.Mistakes })))
   : null
@@ -435,20 +434,9 @@ export function Parent({
   )
 }
 
-/** Parent-observed writing/speaking per current mistake target (private pack only), from the case links. */
+/** Parent-observed writing/speaking per mistake (private pack only); see productionByMistake. */
 function productionByTarget(runtime: Runtime): Map<string, ProductionProgress[]> | undefined {
   const program = runtime.program
   if (!program) return undefined
-  const state = runtime.engine.state
-  const view = amendmentView(state)
-  const out = new Map<string, ProductionProgress[]>()
-  const seen = new Set<string>()
-  for (const row of program.crosswalk) {
-    if (!row.plan_id || !row.engine_target_id) continue
-    const target = currentTarget(state, row.engine_target_id, view)
-    if (!target || seen.has(`${target.id}\u0000${row.plan_id}`)) continue
-    seen.add(`${target.id}\u0000${row.plan_id}`)
-    out.set(target.id, [...(out.get(target.id) ?? []), deriveProduction(row.plan_id, program.productionEvents)])
-  }
-  return out
+  return productionByMistake(runtime.engine.state, program.crosswalk, program.productionEvents)
 }
