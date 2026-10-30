@@ -69,3 +69,12 @@ export function courseAccess(course: AnyCourse): CourseAccess {
 }
 
 export const isPractisable = (course: AnyCourse): course is Course => courseAccess(course).practice
+
+/**
+ * Controlled error types a parent can choose when correcting an imported mistake (the Chinese import contract,
+ * contracts/chinese/1.schema.json). `unknown_cause` is always allowed; types the reviewed content assigns to
+ * wrong options of the same knowledge point are also accepted.
+ */
+export const ERROR_TYPES: Partial<Record<Subject, readonly string[]>> = {
+  chinese: ['form_confusion', 'meaning_confusion', 'information_selection', 'sentence_order', 'punctuation', 'unknown_cause'],
+}

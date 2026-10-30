@@ -10,6 +10,7 @@
 // - Writing and speaking cases have no engine target. Their evidence is parent-observed production (production.ts).
 import type { CatalogueRelease } from '../catalogue/adapter.ts'
 import { poolSizes, type TargetInfo } from '../catalogue/chinese.ts'
+import { amendmentView, isActiveTarget } from '../engine/amendments.ts'
 import type { Course, EngineState, Observation, Target } from '../engine/types.ts'
 import type { PlanStage, Register } from './pack.ts'
 
@@ -65,6 +66,11 @@ export function planIntake(opts: {
 }): IntakeResult {
   const { state, register, release, targets, today, now } = opts
   const course = register.course as Course
+  const view = amendmentView(state)
+  // A case already imported stays where the parent's amendments left it: on its replacement, or invalidated.
+  // Re-importing the register never resurrects or duplicates it (its observation id is kept by amendments).
+  const holderOf = new Map<string, Target>()
+  for (const t of state.targets) for (const o of t.observations) if (!holderOf.has(o.id) || isActiveTarget(t, view)) holderOf.set(o.id, t)
   const byRef = new Map<string, string[]>()
   for (const c of register.cases) {
     if (c.route.mode !== 'objective') continue
@@ -82,33 +88,39 @@ export function planIntake(opts: {
     const missing = missingStages(release, ref)
     const mapping: Target['mapping_status'] = missing.length === 0 ? 'mapped' : 'pending_content'
     if (missing.length > 0) pending.push({ target_ref: ref, missing, cases })
-    // Reuse an existing active target for the same concrete target (for example an app-caught one), so the
-    // learner never has two schedules for one thing.
-    const existing = state.targets.find((t) => t.id === importTargetId(ref))
-      ?? state.targets.find((t) => t.status === 'active' && t.subject === 'chinese' && t.course === course
+    // Cases already imported stay on the record that holds them now (a parent's replacement, or an invalidated
+    // record): re-importing the register never resurrects, moves or duplicates them.
+    const fresh = cases.filter((caseId) => !holderOf.has(caseObservationId(caseId)))
+    // Reuse an existing active target for the same concrete target (for example an app-caught one, or a parent's
+    // corrected replacement), so the learner never has two schedules for one thing.
+    const own = state.targets.find((t) => t.id === importTargetId(ref))
+    const existing = (own && isActiveTarget(own, view) ? own : undefined)
+      ?? state.targets.find((t) => isActiveTarget(t, view) && t.subject === 'chinese' && t.course === course
         && t.knowledge_point_ref === ref && t.assessed_skill === info.assessed_skill)
-    const observations: Observation[] = cases.map((caseId, i) => ({
+    const observations: Observation[] = fresh.map((caseId, i) => ({
       id: caseObservationId(caseId), source_type: 'schoolwork', observed_on: today, recorded_on: today,
       instance_ref: importInstanceRef(register.register_id), batch_ref: null,
       recurrence: i === 0 && !existing ? 'first' : 'independent', invalidated: false,
     }))
     if (existing) {
-      const fresh = observations.filter((o) => !existing.observations.some((x) => x.id === o.id))
-      if (fresh.length > 0 || existing.mapping_status !== mapping) {
-        records.push({ ...structuredClone(existing), mapping_status: mapping, observations: fresh })
-        addedObservations += fresh.length
+      if (observations.length > 0 || existing.mapping_status !== mapping) {
+        records.push({ ...structuredClone(existing), mapping_status: mapping, observations })
+        addedObservations += observations.length
       }
-      engineIdOf.set(ref, existing.id)
+      for (const caseId of fresh) engineIdOf.set(caseId, existing.id)
       continue
     }
+    if (observations.length === 0) continue
     const value = info.kind === 'character' || info.kind === 'word' ? info.label : null
+    // The usual id is taken by a record the parent amended or invalidated: new cases get a new target of their own.
+    const id = own ? `${importTargetId(ref)}:${fresh[0].toLowerCase()}` : importTargetId(ref)
     records.push({
-      id: importTargetId(ref), subject: 'chinese', course, target_kind: info.kind, knowledge_point_ref: ref,
+      id, subject: 'chinese', course, target_kind: info.kind, knowledge_point_ref: ref,
       target_value: value && TARGET_VALUE.test(value) ? value : null, assessed_skill: info.assessed_skill,
       error_type: 'unknown_cause', mapping_status: mapping, verification: 'verified', status: 'active',
       verified_at: now, replaces: null, observations,
     })
-    engineIdOf.set(ref, importTargetId(ref))
+    for (const caseId of fresh) engineIdOf.set(caseId, id)
     addedTargets += 1
     addedObservations += observations.length
   }
@@ -116,7 +128,8 @@ export function planIntake(opts: {
     if (c.route.mode === 'objective') {
       const ref = c.route.progress_target_ref
       return {
-        case_id: c.id, mode: 'objective', target_ref: ref, engine_target_id: engineIdOf.get(ref) ?? null,
+        case_id: c.id, mode: 'objective', target_ref: ref,
+        engine_target_id: engineIdOf.get(c.id) ?? holderOf.get(caseObservationId(c.id))?.id ?? null,
         plan_id: c.production_followup?.id ?? null, shared_with: (byRef.get(ref) ?? []).filter((x) => x !== c.id),
       }
     }

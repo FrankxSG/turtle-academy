@@ -37,6 +37,7 @@ export function Mistakes({
     in_repair: tr('In repair', '订正练习中'),
     in_delayed_review: tr('In delayed review', '延时复查中'),
     external_only: tr('Parent-observed only', '仅家长观察'),
+    invalidated: tr('Marked not a mistake or a duplicate', '已标为非错题或重复'),
   }
   const stageName = (s: string | null) =>
     s === null
