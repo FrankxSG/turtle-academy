@@ -3,7 +3,8 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import type { Target } from '../../src/engine/types.ts'
 import type { TargetProgress } from '../../src/engine/evidence.ts'
-import { canInvalidateAnswer, flagGroups, nextPractice, progressRows } from '../../src/parent/progress.ts'
+import { canInvalidateAnswer, flagGroups, nextPractice, productionByMistake, progressRows } from '../../src/parent/progress.ts'
+import type { CrosswalkRow } from '../../src/mistakes/intake.ts'
 import { harness, runTask, startTask, wrongResponse } from '../engine/helpers.ts'
 
 type H = ReturnType<typeof harness>
@@ -164,4 +165,44 @@ test('the progress view counts the same observations as the engine when a duplic
   assert.equal(row.importedCases, 1, 'the case keeping the mistake is shown')
   assert.equal(row.appDays, 0, 'the disabled question’s error is not')
   assert.deepEqual(row.observations.map((o) => o.id), ['case:x1'])
+})
+
+test('a mistake recorded under two targets (two devices) is one row with both records’ sources and answers', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  const t = await startTask(h.engine, 'mathematics')
+  const step = await h.engine.next(t.id)
+  if (step.kind !== 'question') throw new Error('expected a question')
+  await h.engine.answer(step.presentation.id, wrongResponse(step.item))
+  await runTask(h.engine, t.id)
+  const original = h.engine.state.targets.find((x) => x.observations.some((o) => o.source_type === 'app_practice'))!
+  // The other device's record of the same mistake, caught on the next day.
+  h.engine.state.targets.push({ ...structuredClone(original), id: 'zz-other-device', observations: [{ ...original.observations[0], id: 'obs-other',
+    observed_on: '2027-03-02', recorded_on: '2027-03-02', batch_ref: null, instance_ref: 'task-other' }] })
+  h.engine.state = structuredClone(h.engine.state)
+  const r = rows(h)
+  assert.equal(r.length, 1, 'one row per mistake')
+  assert.equal(r[0].target.id, [original.id, 'zz-other-device'].sort()[0])
+  assert.equal(r[0].appDays, 2, 'both devices’ observations')
+})
+
+test('writing/speaking plans show on the mistake’s row even when the case is held by another record of it, and once per plan', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  // Two devices' records of one mistake: the case is held by the record that does not lead the group.
+  const leader = imported(h, 'aa-app-caught', 'ma-kp1', [])
+  leader.observations = [{ id: 'obs-app', source_type: 'app_practice', observed_on: h.engine.today(), recorded_on: h.engine.today(),
+    instance_ref: 'task-1', batch_ref: null, recurrence: 'first', invalidated: false }]
+  await h.engine.upsertTargets([leader, imported(h, 'zz-import', 'ma-kp1', ['o901', 'o902'])])
+  const crosswalk: CrosswalkRow[] = [
+    { case_id: 'O901', mode: 'objective', target_ref: 'ma-kp1', engine_target_id: 'zz-import', plan_id: 'P1', shared_with: ['O902'] },
+    // A link stored by another device that names the leader: same mistake, same plan, listed once.
+    { case_id: 'O902', mode: 'objective', target_ref: 'ma-kp1', engine_target_id: 'aa-app-caught', plan_id: 'P1', shared_with: ['O901'] },
+  ]
+  const r = rows(h)
+  assert.deepEqual(r.map((x) => x.target.id), ['aa-app-caught'], 'one row, on the group leader')
+  const prod = productionByMistake(h.engine.state, h.engine.derived(), crosswalk, [])
+  assert.deepEqual([...prod.keys()], ['aa-app-caught'], 'keyed by the row’s target')
+  assert.equal(prod.get('aa-app-caught')!.length, 1, 'a plan shared by two cases is listed once')
+  // A stale link naming a record that no longer holds anything still resolves from the holders.
+  const stale = productionByMistake(h.engine.state, h.engine.derived(), [{ ...crosswalk[0], engine_target_id: 'gone-record' }], [])
+  assert.deepEqual([...stale.keys()], ['aa-app-caught'])
 })
