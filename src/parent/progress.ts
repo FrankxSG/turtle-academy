@@ -77,7 +77,7 @@ export function progressRows(opts: {
   held: ReadonlySet<string>
 }): ProgressRow[] {
   const { state, derived, today, subject, held } = opts
-  const view = amendmentView(state)
+  const view = derived.view
   const byId = targetsById(state)
   const excluded = excludedItemVersions(state)
   const counts = observationCounter(state, view, excluded)
@@ -115,7 +115,8 @@ export function progressRows(opts: {
     const next: ProgressRow['next'] = pr && (state_ === 'repair' || state_ === 'delayed_review' || state_ === 'learning')
       ? nextPractice(pr, today) : { kind: 'none' }
     const recognition: ProgressRow['recognition'] = { firstAnswers: 0, independentCorrect: 0, firstWrong: 0, hintRetries: 0, corrections: 0, repeatedItems: 0, lastPractisedOn: null }
-    for (const p of members.flatMap((id) => byTarget.get(id) ?? [])) {
+    // Answers given before a "not a mistake" decision belong to the dismissed mistake, not this one.
+    for (const p of members.flatMap((id) => byTarget.get(id) ?? []).filter((x) => !derived.beforeDecision.has(x.id))) {
       const counted = isEvidence(p, excluded, view.invalidPresentations)
       for (const e of eventsOf.get(p.id) ?? []) {
         const on = derived.dates.of(e.at)
@@ -183,8 +184,8 @@ export function canInvalidateAnswer(state: EngineState, p: Presentation): boolea
  * leader. Each case resolves to its current mistake from the records holding it, as the case report does; a plan
  * shared by several cases of one mistake is listed once.
  */
-export function productionByMistake(state: EngineState, crosswalk: readonly CrosswalkRow[], events: ProductionEvent[]): Map<string, ProductionProgress[]> {
-  const resolve = caseResolver(state)
+export function productionByMistake(state: EngineState, derived: Derived, crosswalk: readonly CrosswalkRow[], events: ProductionEvent[]): Map<string, ProductionProgress[]> {
+  const resolve = caseResolver(state, derived.view)
   const out = new Map<string, ProductionProgress[]>()
   const seen = new Set<string>()
   for (const row of crosswalk) {

@@ -5,7 +5,7 @@
 import type { Amendment, EngineState, Target } from './types.ts'
 
 /** Reducer revision that interprets the target/observation/answer amendments below. */
-export const AMENDMENT_REVISION = 3
+export const AMENDMENT_REVISION = 4
 
 export type AmendReason = 'wrong_target' | 'wrong_skill' | 'wrong_error_type'
 export type InvalidateReason = 'not_a_mistake' | 'duplicate' | 'question_problem'
@@ -19,6 +19,16 @@ export interface AmendmentView {
    */
   replaces: Map<string, string[]>
   invalidTargets: Set<string>
+  /** Invalidated target → the latest "not a mistake" (or faulty question) decision on it. */
+  dismissedAt: Map<string, string>
+  /** Targets invalidated as a duplicate: never revived. */
+  duplicateTargets: Set<string>
+  /**
+   * Dismissed records holding an observation made after the decision (another device added it before it saw the
+   * decision) → that decision. Such a record is active again, for what came after only. Empty from amendmentView;
+   * replay fills it (it needs learning dates): read statuses from `derive(...).view`.
+   */
+  revived: Map<string, Dismissal>
   /** `${targetId}\u0000${observationId}` → reason: observation ids are unique within a target. */
   invalidObservations: Map<string, Amendment['reason']>
   invalidPresentations: Set<string>
@@ -36,7 +46,7 @@ const order = (a: Amendment, b: Amendment) => a.at.localeCompare(b.at) || a.id.l
 export function amendmentView(state: Pick<EngineState, 'amendments'>): AmendmentView {
   const view: AmendmentView = {
     replacedBy: new Map(), replaces: new Map(), invalidTargets: new Set(), invalidObservations: new Map(), invalidPresentations: new Set(),
-    createdAt: new Map(),
+    createdAt: new Map(), dismissedAt: new Map(), duplicateTargets: new Set(), revived: new Map(),
   }
   // A correction of a replacement depends on the amendment that created it, even when a device clock
   // moves backwards. Timestamp/id only order unrelated ready amendments; they cannot reverse causality.
@@ -62,7 +72,11 @@ export function amendmentView(state: Pick<EngineState, 'amendments'>): Amendment
         supersedes.push(head)
       }
       if (supersedes.length > 0) { view.replaces.set(to, supersedes); view.createdAt.set(to, a.at) }
-    } else if (a.kind === 'invalidate_target') for (const r of a.refs) view.invalidTargets.add(r)
+    } else if (a.kind === 'invalidate_target') for (const r of a.refs) {
+      view.invalidTargets.add(r)
+      if (a.reason === 'duplicate') view.duplicateTargets.add(r)
+      else if (a.at > (view.dismissedAt.get(r) ?? '')) view.dismissedAt.set(r, a.at)
+    }
     else if (a.kind === 'invalidate_observation' && a.refs.length === 2) {
       const key = `${a.refs[0]}\u0000${a.refs[1]}`
       // "Not a mistake" outranks "duplicate" whatever order they arrive in.
@@ -84,11 +98,12 @@ export function lineage(id: string, view: AmendmentView): string[] {
 
 /**
  * A target's status after amendments (the stored record keeps the status it was created with). Invalidating any
- * version of a mistake invalidates the mistake: a correction made elsewhere does not bring it back.
+ * version of a mistake invalidates the mistake: a correction made elsewhere does not bring it back. A dismissed
+ * record that holds an observation made after the decision is active again (`revived`, filled by replay).
  */
 export function targetStatus(t: Target, view: AmendmentView): Target['status'] {
   if (t.status !== 'active') return t.status
-  for (const at of lineage(t.id, view)) if (view.invalidTargets.has(at)) return 'invalidated'
+  if (!view.revived.has(t.id)) for (const at of lineage(t.id, view)) if (view.invalidTargets.has(at)) return 'invalidated'
   if (view.replacedBy.has(t.id)) return 'superseded'
   return 'active'
 }
@@ -256,10 +271,19 @@ export function groupObservations(ids: readonly string[], view: AmendmentView, b
   for (const id of ids) {
     const t = byId.get(id)
     if (!t) continue
-    const exempt = dismissal !== undefined && (view.createdAt.get(id) ?? '') > dismissal.at
+    // A correction made after the decision starts afresh, unless it is a dismissed record's correction brought back by
+    // a later case (`revived`): then the decision still covers what it carried over.
+    const exempt = dismissal !== undefined && !view.revived.has(id) && (view.createdAt.get(id) ?? '') > dismissal.at
+    // A correction copies observations with its own date: an observation is covered when any copy of it in the
+    // correction chain was made before the decision (the original was).
+    const copies = new Map<string, { o: Observation; holder: Target }[]>()
+    if (dismissal && !exempt) for (const at of lineage(id, view)) for (const o of byId.get(at)?.observations ?? []) {
+      const holder = byId.get(at) as Target
+      copies.set(o.id, [...(copies.get(o.id) ?? []), { o, holder }])
+    }
     for (const o of chainObservations(t, view, byId)) {
       if (all.has(o.id) || !counts(o)) continue
-      if (dismissal && !exempt && covered(dismissal, o, t)) continue
+      if (dismissal && !exempt && (copies.get(o.id) ?? [{ o, holder: t }]).some((c) => covered(dismissal, c.o, c.holder))) continue
       all.set(o.id, { o, holder: t })
     }
   }
@@ -270,6 +294,44 @@ export function groupObservations(ids: readonly string[], view: AmendmentView, b
   // An observation with the legacy `invalidated` flag (never set by this app) counts as not a mistake here.
   if (list.length === 0 || !list.every(({ o, holder }) => !o.invalidated && observationMark(holder, o, view) === 'duplicate')) return []
   return list.map(({ o }) => o).sort((a, b) => a.id.localeCompare(b.id)).slice(0, 1)
+}
+
+/** The later of two decisions (by instant, then learning date). */
+export function laterDismissal(a: Dismissal | undefined, b: Dismissal | undefined): Dismissal | undefined {
+  if (!a) return b
+  if (!b) return a
+  return b.at > a.at ? b : a
+}
+
+/**
+ * Dismissed records that hold an observation made after the decision that dismissed them: another device, which had
+ * not yet seen the decision, added a new case or app-caught error to the record (the decision covers what came
+ * before it only, and anything after starts afresh). Only an observation recorded on a later learning day than the
+ * decision brings the record back: on the decision's own day the decision wins, because instants from two device
+ * clocks cannot safely order a record against a decision that already named it. Every copy of an observation is
+ * judged (a correction copies them with its own date), so a correction of a dismissed record never brings back what
+ * the decision covered. A record invalidated as a duplicate, or superseded, is never revived. `decision` gives a
+ * decision's learning date and instants (replay's DateBook).
+ */
+export function revivals(state: Pick<EngineState, 'targets'>, view: AmendmentView, byId: ReadonlyMap<string, Target>,
+  counts: (o: Observation) => boolean, decision: (at: string) => Dismissal): Map<string, Dismissal> {
+  const out = new Map<string, Dismissal>()
+  for (const t of state.targets) {
+    if (t.status !== 'active' || view.replacedBy.has(t.id)) continue
+    const line = lineage(t.id, view)
+    if (!line.some((id) => view.invalidTargets.has(id)) || line.some((id) => view.duplicateTargets.has(id))) continue
+    const at = line.reduce((max, id) => { const x = view.dismissedAt.get(id) ?? ''; return x > max ? x : max }, '')
+    if (!at) continue
+    const d = decision(at)
+    const copies = new Map<string, { o: Observation; holder: Target }[]>()
+    for (const id of line) for (const o of byId.get(id)?.observations ?? []) copies.set(o.id, [...(copies.get(o.id) ?? []), { o, holder: byId.get(id)! }])
+    const after = chainObservations(t, view, byId).some((o) => {
+      const all = copies.get(o.id) ?? []
+      return all.some((c) => counts(c.o) && !observationInvalid(c.holder, c.o, view)) && all.every((c) => c.o.recorded_on > d.on)
+    })
+    if (after) out.set(t.id, d)
+  }
+  return out
 }
 
 /** Every observation recorded on a mistake group, valid or not (whether it ever had any). */

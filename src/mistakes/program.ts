@@ -170,7 +170,7 @@ export class MistakeProgram {
         const build = p.buildFor(pack.course, pack)
         // Quarantine structural/content mismatches before activating or persisting the candidate release.
         planIntake({ state: opts.engine.state, register: pack.register, release: build.release,
-          targets: build.targets, today: opts.engine.today(), now: opts.now() })
+          targets: build.targets, today: opts.engine.today(), now: opts.now(), view: opts.engine.derived().view })
         builds.push(build)
         p.pack = pack
       } catch (error) { p.openError = errorText(error) }
@@ -268,7 +268,8 @@ export class MistakeProgram {
       if (!syncable.ok) throw new Error(syncable.code)
       const build = this.buildFor(pack.course, pack)
       const result = planIntake({ state: this.engine.state, register: pack.register, release: build.release,
-        targets: build.targets, today: learningDate(this.now(), this.engine.state.settings, this.engine.state.calendar_guards), now: this.now() })
+        targets: build.targets, today: learningDate(this.now(), this.engine.state.settings, this.engine.state.calendar_guards), now: this.now(),
+        view: this.engine.derived().view })
       return { pack, build, result }
     } catch (error) { throw new PackRejected(error) }
   }
@@ -331,7 +332,7 @@ export class MistakeProgram {
     if (!b) throw new Error('no_content')
     const result = planIntake({
       state: this.engine.state, register: this.pack.register, release: b.release, targets: b.targets,
-      today: this.engine.today(), now: this.now(),
+      today: this.engine.today(), now: this.now(), view: this.engine.derived().view,
     })
     // With nothing new to add, still push any engine writes queued by an earlier failure.
     const saved = result.records.length > 0 ? await this.engine.upsertTargets(result.records) : await this.engine.retrySaves()

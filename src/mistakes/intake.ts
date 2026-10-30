@@ -10,7 +10,7 @@
 // - Writing and speaking cases have no engine target. Their evidence is parent-observed production (production.ts).
 import type { CatalogueRelease } from '../catalogue/adapter.ts'
 import { poolSizes, type TargetInfo } from '../catalogue/chinese.ts'
-import { amendmentView, currentTarget, isActiveTarget, leaderOf, mistakeGroups } from '../engine/amendments.ts'
+import { amendmentView, currentTarget, isActiveTarget, leaderOf, mistakeGroups, type AmendmentView } from '../engine/amendments.ts'
 import type { Course, EngineState, Observation, Target } from '../engine/types.ts'
 import type { PlanStage, Register } from './pack.ts'
 
@@ -111,10 +111,12 @@ export function planIntake(opts: {
   targets: Map<string, TargetInfo>
   today: string
   now: string
+  /** Target statuses as replay sees them (`derive(...).view`); a plain amendment view misses revived records. */
+  view?: AmendmentView
 }): IntakeResult {
   const { state, register, release, targets, today, now } = opts
   const course = register.course as Course
-  const view = amendmentView(state)
+  const view = opts.view ?? amendmentView(state)
   // A case already imported stays where the parent's amendments left it: on its replacement, or invalidated.
   // Re-importing the register never resurrects or duplicates it (its observation id is kept by amendments).
   const holderOf = caseResolver(state, view)

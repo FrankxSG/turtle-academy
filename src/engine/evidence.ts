@@ -2,7 +2,7 @@
 // replaying the append-only answer events and immutable records; nothing here is stored as mutable truth.
 // Replaying after a flag decision therefore recalculates progress, while completions and delivered story
 // checkpoints (separate records) are never revoked.
-import { amendmentView, dismissals, groupChainObservations, groupObservations, mistakeGroups, mistakeKey, targetsById, targetStatus, type AmendmentView, type Dismissal, type MistakeGroups } from './amendments.ts'
+import { amendmentView, dismissals, groupChainObservations, groupObservations, laterDismissal, mistakeGroups, mistakeKey, revivals, targetsById, targetStatus, type AmendmentView, type Dismissal, type MistakeGroups } from './amendments.ts'
 import { addDays, DateBook } from './calendar.ts'
 import { MAX_CLEARANCES_PER_TARGET_PER_DAY, REVIEW_INTERVALS } from './policy.ts'
 import type { AnswerEvent, Clearance, EngineState, Presentation, Stage, Target, TargetAggregate } from './types.ts'
@@ -43,10 +43,20 @@ export interface Derived {
   groups: MistakeGroups
   /** "Not a mistake" decisions by progress unit (src/engine/amendments.ts dismissals). */
   dismissed: Map<string, Dismissal>
+  /**
+   * The amendment view replay used, including dismissed records that came back for observations made after the
+   * decision (`revived`). Read target statuses and groups from this view, not a fresh amendmentView.
+   */
+  view: AmendmentView
+  /** Group leader → the decision that applies to the group (its unit's, or the one a member was revived past). */
+  groupDismissal: Map<string, Dismissal>
+  /** Answers given at or before the decision that applies to their mistake: history only, never evidence. */
+  beforeDecision: Set<string>
 }
 
 /** The decision, if any, that covers a target's mistake. */
-export const dismissalFor = (d: Derived, t: Target): Dismissal | undefined => d.dismissed.get(mistakeKey(t))
+export const dismissalFor = (d: Derived, t: Target): Dismissal | undefined =>
+  d.groupDismissal.get(d.groups.leader.get(t.id) ?? t.id) ?? d.dismissed.get(mistakeKey(t))
 
 /** A target's progress, also when the id is another member of its mistake group (for example a frozen plan slot). */
 export function progressFor(d: Derived, id: string | null): TargetProgress | undefined {
@@ -150,7 +160,6 @@ export function derive(state: EngineState): Derived {
   const byId = targetsById(state)
   const effectiveObservation = observationCounter(state, amended, excluded)
 
-  const groups = mistakeGroups(state, amended)
   // When an observation was made: an app-caught error at its first answer (or when shown), an imported case when
   // its record was confirmed (a new pack case after a decision gets its own record).
   const presentationAt = new Map(state.presentations.map((p) => [p.id, p.presented_at]))
@@ -159,6 +168,12 @@ export function derive(state: EngineState): Derived {
       ? (o.batch_ref ? firstEvent.get(o.batch_ref)?.at ?? presentationAt.get(o.batch_ref) ?? null : null)
       : holder.verified_at
   const dismissed = new Map([...dismissals(state, (at) => dates.of(at))].map(([k, v]) => [k, { ...v, instantOf }]))
+  // A dismissed record that another device added a later case or error to comes back, for what came after only.
+  for (const [id, d] of revivals(state, amended, byId, effectiveObservation, (at) => ({ on: dates.of(at), at, instantOf }))) amended.revived.set(id, d)
+  const groups = mistakeGroups(state, amended)
+  const groupDismissal = new Map<string, Dismissal>()
+  const beforeDecision = new Set<string>()
+  const answeredAt = (p: Presentation) => firstEvent.get(p.id)?.at ?? p.presented_at
   for (const target of state.targets) {
     // Superseded and invalidated targets (parent amendments) keep their records and evidence but are not replayed.
     if (targetStatus(target, amended) !== 'active') continue
@@ -169,7 +184,10 @@ export function derive(state: EngineState): Derived {
     // A target that exists only because of errors is no mistake at all once none of those observations is valid
     // (its question was flagged, or the parent invalidated it). It stays as a record, never planned.
     // Observations follow the mistake through corrections (src/engine/amendments.ts).
-    const observations = groupObservations(members, amended, byId, effectiveObservation, dismissed.get(mistakeKey(target)))
+    // The decision on this mistake: its unit's latest, or a later one a member was revived past.
+    const dismissal = members.reduce<Dismissal | undefined>((d, id) => laterDismissal(d, amended.revived.get(id)), dismissed.get(mistakeKey(target)))
+    if (dismissal) groupDismissal.set(target.id, dismissal)
+    const observations = groupObservations(members, amended, byId, effectiveObservation, dismissal)
     if (groupChainObservations(members, amended, byId).length > 0 && observations.length === 0) continue
     const pr = fresh(target)
     progress.set(target.id, pr)
@@ -180,7 +198,12 @@ export function derive(state: EngineState): Derived {
       const nb = addDays(o.recorded_on, 1)
       if (pr.notBefore === null || nb > pr.notBefore) { pr.notBefore = nb; pr.notBeforeReason = 'import_next_day' }
     }
-    const ps = members.flatMap((id) => byTarget.get(id) ?? [])
+    // After a decision the mistake starts afresh: answers given up to it are history, not evidence.
+    const ps = members.flatMap((id) => byTarget.get(id) ?? []).filter((p) => {
+      if (!dismissal || Date.parse(answeredAt(p)) > Date.parse(dismissal.at)) return true
+      beforeDecision.add(p.id)
+      return false
+    })
     const steps: Step[] = []
     let seq = 0
     // Group by task to decide the route: any material presentation makes the whole task one aggregate.
@@ -361,7 +384,7 @@ export function derive(state: EngineState): Derived {
       pushAggregate(step.taskId, agg)
     }
   }
-  return { progress, aggregates, dates, firstEvent, finalisedOn, groups, dismissed }
+  return { progress, aggregates, dates, firstEvent, finalisedOn, groups, dismissed, view: amended, groupDismissal, beforeDecision }
 }
 
 /** Merge per-presentation short-route records into one aggregate per task and target. */

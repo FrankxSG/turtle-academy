@@ -438,5 +438,5 @@ export function Parent({
 function productionByTarget(runtime: Runtime): Map<string, ProductionProgress[]> | undefined {
   const program = runtime.program
   if (!program) return undefined
-  return productionByMistake(runtime.engine.state, program.crosswalk, program.productionEvents)
+  return productionByMistake(runtime.engine.state, runtime.engine.derived(), program.crosswalk, program.productionEvents)
 }

@@ -488,3 +488,66 @@ test('"not a mistake" covers the same day only up to the decision: a new error l
   const counted = groupObservations(members, amendmentView(state), targetsById(state), undefined, dismissalFor(d, only.target)).map((o) => o.id)
   assert.deepEqual(counted, ['o-zz-after'], 'the 09:30 error is covered by the 10:00 decision; the 11:00 one is new')
 })
+
+test('a record marked "not a mistake" comes back only for a case from a later day, never through a duplicate mark or a correction', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  const t = await importTarget(h)
+  const today = h.engine.today()
+  const tomorrow = new Date(Date.parse(`${today}T00:00:00Z`) + 86_400_000).toISOString().slice(0, 10)
+  await h.engine.invalidateTarget('imp-1', 'not_a_mistake')
+  // Another device, unaware of the decision, adds a case to the same record.
+  const withCase = (on: string) => {
+    const s = structuredClone(h.engine.state)
+    s.targets.find((x) => x.id === t.id)!.observations.push({ id: 'obs-new', source_type: 'schoolwork', observed_on: on, recorded_on: on,
+      instance_ref: 'import:test', batch_ref: null, recurrence: 'independent', invalidated: false })
+    return s
+  }
+  // Same day as the decision: the decision wins.
+  assert.equal(derive(withCase(today)).progress.has('imp-1'), false)
+  // A later day: the record is back, for the new case only.
+  const later = withCase(tomorrow)
+  const d = derive(later)
+  assert.ok(d.progress.has('imp-1'), 'a case after the decision starts afresh')
+  assert.ok(d.view.revived.has('imp-1'))
+  const obs = groupObservations(['imp-1'], d.view, targetsById(later), undefined, dismissalFor(d, later.targets[0]))
+  assert.deepEqual(obs.map((o) => o.id), ['obs-new'], 'the case the decision covered stays dismissed')
+  // A record invalidated as a duplicate is never revived.
+  const dup = withCase(tomorrow)
+  for (const a of dup.amendments) if (a.kind === 'invalidate_target') a.reason = 'duplicate'
+  assert.equal(derive(dup).progress.has('imp-1'), false)
+})
+
+test('a correction made on a later day by a device that had not seen "not a mistake" does not bring the mistake back', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  await importTarget(h)
+  const { id } = await h.engine.amendTarget('imp-1', { error_type: 'confused_form' }, 'wrong_error_type')
+  const state = structuredClone(h.engine.state)
+  // The replacement's copies carry a later recorded date; the original's do not.
+  const replacement = state.targets.find((x) => x.id === id)!
+  for (const o of replacement.observations) { o.recorded_on = '2099-01-01'; o.observed_on = '2099-01-01' }
+  state.amendments.push({ id: 'zz-remote', at: '2027-03-01T00:00:00.000Z', actor: 'parent', kind: 'invalidate_target', refs: ['imp-1'], replacement_ref: null, reason: 'not_a_mistake', reducer_revision: 4 })
+  const d = derive(state)
+  assert.equal(d.progress.has(id), false)
+  assert.equal(d.view.revived.size, 0)
+})
+
+test('a correction of a dismissed record that comes back for a later case counts that case only, not what the decision covered', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  const imported = await importTarget(h)
+  const today = h.engine.today()
+  const tomorrow = new Date(Date.parse(`${today}T00:00:00Z`) + 86_400_000).toISOString().slice(0, 10)
+  // An hour after the import, another device, unaware of the decision below, corrected the record; later it added a
+  // new case to the correction.
+  h.clock.advance(3600)
+  const { id } = await h.engine.amendTarget('imp-1', { error_type: 'confused_form' }, 'wrong_error_type')
+  const state = structuredClone(h.engine.state)
+  state.targets.find((x) => x.id === id)!.observations.push({ id: 'obs-new', source_type: 'schoolwork', observed_on: tomorrow, recorded_on: tomorrow,
+    instance_ref: 'import:test', batch_ref: null, recurrence: 'independent', invalidated: false })
+  // The decision on the original was made half an hour after the import, before the correction.
+  const before = new Date(Date.parse(imported.verified_at!) + 1_800_000).toISOString()
+  state.amendments.push({ id: 'zz-remote', at: before, actor: 'parent', kind: 'invalidate_target', refs: ['imp-1'], replacement_ref: null, reason: 'not_a_mistake', reducer_revision: 4 })
+  const d = derive(state)
+  assert.ok(d.view.revived.has(id))
+  const obs = groupObservations([id], d.view, targetsById(state), undefined, dismissalFor(d, state.targets.find((x) => x.id === id)!))
+  assert.deepEqual(obs.map((o) => o.id), ['obs-new'])
+})

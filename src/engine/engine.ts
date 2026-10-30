@@ -1,7 +1,7 @@
 // The on-device learning engine (Issue #17). One instance per child profile.
 // Truth is the append-only answer events plus immutable records; progress is re-derived after every change.
 import { itemIn, judge, type CatalogueItem, type CatalogueRegistry, type CatalogueRelease } from '../catalogue/adapter.ts'
-import { AMENDMENT_REVISION, amendmentView, chainObservations, groupObservations, isActiveTarget, leaderOf, mistakeGroups, targetsById, type AmendReason, type InvalidateReason } from './amendments.ts'
+import { AMENDMENT_REVISION, chainObservations, groupObservations, isActiveTarget, leaderOf, mistakeGroups, targetsById, type AmendmentView, type AmendReason, type InvalidateReason } from './amendments.ts'
 import { isValidTimezone, learningDate } from './calendar.ts'
 import { derive, dismissalFor, observationCounter, progressFor, type Derived } from './evidence.ts'
 import { compatibleItem, nothingEligible, planTask, resolveShortSlot, usableItem, usableVersion, type PlanContext } from './planner.ts'
@@ -105,6 +105,11 @@ export class LearningEngine {
 
   private changed() {
     this.cache = null
+  }
+
+  /** Target statuses after amendments, as replay sees them (including dismissed records revived by later evidence). */
+  private amended(): AmendmentView {
+    return this.derived().view
   }
 
   /** The current learning date; advances the never-backwards guard. */
@@ -512,7 +517,7 @@ export class LearningEngine {
     const date = this.today()
     const chosen = response.option_ids.find((o) => !item.key.option_ids.includes(o))
     const errorType = (chosen && item.error_types?.[chosen]) || 'unknown_cause'
-    const view = amendmentView(this.state)
+    const view = this.amended()
     // The group's leading target (lowest id), so every device attaches the error to the same record.
     const existing = this.state.targets.filter((t) => isActiveTarget(t, view) && t.subject === item.subject && t.course === item.course
       && t.knowledge_point_ref === item.knowledge_point_ref && t.assessed_skill === item.assessed_skill && t.error_type === errorType)
@@ -600,14 +605,14 @@ export class LearningEngine {
   private activeTarget(targetId: string): Target {
     const t = this.state.targets.find((x) => x.id === targetId)
     if (!t) throw new Error('unknown_target')
-    if (!isActiveTarget(t, amendmentView(this.state))) throw new Error('target_not_active')
+    if (!isActiveTarget(t, this.amended())) throw new Error('target_not_active')
     return t
   }
 
   /** The active targets that are this one mistake (src/engine/amendments.ts mistakeGroups), leader first. */
   private mistake(targetId: string): { leader: Target; ids: string[] } {
     this.activeTarget(targetId)
-    const groups = mistakeGroups(this.state, amendmentView(this.state))
+    const groups = mistakeGroups(this.state, this.amended())
     const leaderId = leaderOf(groups, targetId)
     return { leader: this.activeTarget(leaderId), ids: groups.members.get(leaderId) ?? [targetId] }
   }
@@ -626,7 +631,7 @@ export class LearningEngine {
     // A mistake recorded under several targets (two devices) is corrected as one: the leading target is replaced,
     // carrying every member's counting observations, and the other members are retired as duplicates.
     const { leader: old, ids: group } = this.mistake(targetId)
-    const view = amendmentView(this.state)
+    const view = this.amended()
     const byId = targetsById(this.state)
     // Only a mistake that rests on a parent-confirmed case that still counts can be corrected; app-caught ones are
     // marked "not a mistake" instead.
@@ -693,7 +698,7 @@ export class LearningEngine {
   /** One observation of a target (for example a duplicated import) stops counting. */
   async invalidateObservation(targetId: string, observationId: string, reason: InvalidateReason): Promise<SaveStatus | null> {
     const { ids, leader } = this.mistake(targetId)
-    const view = amendmentView(this.state)
+    const view = this.amended()
     const byId = targetsById(this.state)
     const counts = observationCounter(this.state, view)
     const valid = groupObservations(ids, view, byId, counts, dismissalFor(this.derived(), leader))

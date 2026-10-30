@@ -283,3 +283,67 @@ test('F51: case links settle even when the other device’s later-stamped link n
   for (const d of [a, b]) assert.equal(new Map(d.program.report()!.cases.map((r) => [r.case_id, r.status])).get('O903'), 'invalidated')
   assert.equal(JSON.stringify(a.program.report()!.cases.map((c) => [c.case_id, c.status])), JSON.stringify(b.program.report()!.cases.map((c) => [c.case_id, c.status])))
 })
+
+test('F51: a case added offline to a record the other device marked "not a mistake" earlier starts a new mistake', { timeout: 120_000 }, async () => {
+  const { syntheticPack } = await import('./fixtures/private-pack.ts')
+  const server = world()
+  const a = await device(server)
+  const b = await device(server)
+  const pendingRef = 'zh.p2_higher_chinese.char.u4e11'
+  await a.program.installPack(syntheticPack({ pendingRef }))
+  await settle(a, b)
+  const zhu = 'case-target:zh.p2_higher_chinese.char.u4f4f'
+  // Day 2: A practises 住, so the record has answers and progress; B syncs them.
+  for (const c of [a.clock, b.clock, real]) c.sgt('2027-03-02')
+  for (let i = 0; i < 4 && (a.engine.derived().progress.get(zhu)?.clearances.length ?? 0) === 0; i++) await a.practise(undefined, () => true)
+  assert.ok(a.engine.derived().progress.get(zhu)!.clearances.length > 0, 'progress before the decision')
+  await settle(a, b)
+  // A decides 住 is not a mistake. B has not synced since.
+  await a.engine.invalidateTarget(zhu, 'not_a_mistake')
+  // Day 3: B loads a newer pack with a new case for 住; B still holds the record as active, so the case joins it.
+  for (const c of [a.clock, b.clock, real]) c.sgt('2027-03-03')
+  await b.program.installPack(syntheticPack({ pendingRef, extraCase: true }))
+  assert.ok(b.engine.state.targets.find((t) => t.id === zhu)!.observations.some((o) => o.id === 'case:o907'))
+  await settle(a, b)
+  const status = (d: Device) => new Map(d.program.report()!.cases.map((r) => [r.case_id, r.status]))
+  const zhuRows = (d: Device) => [...d.engine.derived().progress.values()].filter((v) => v.target.knowledge_point_ref.endsWith('u4f4f'))
+  for (const d of [a, b]) {
+    assert.equal(status(d).get('O903'), 'invalidated', 'the decision still covers the case made before it')
+    assert.notEqual(status(d).get('O907'), 'invalidated', 'a case after the decision starts afresh')
+    assert.equal(zhuRows(d).length, 1, 'one schedule for the new mistake')
+    assert.deepEqual(zhuRows(d)[0].clearances, [], 'answers before the decision do not count for the new mistake')
+  }
+  assert.equal(progress(a), progress(b))
+  assert.equal(JSON.stringify([...status(a)]), JSON.stringify([...status(b)]))
+  // Re-importing on both devices changes nothing.
+  for (const d of [a, b]) await d.program.importRegister()
+  await settle(a, b)
+  for (const d of [a, b]) assert.notEqual(status(d).get('O907'), 'invalidated')
+})
+
+test('F51: an error made offline on a record the other device marked "not a mistake" earlier starts a new mistake', async () => {
+  const server = world()
+  const a = await device(server)
+  const b = await device(server)
+  // Day 1: A makes a mistake; B syncs, so B holds A's record.
+  await a.practise(1, () => false)
+  const [key] = mistakes(a)
+  assert.ok(key)
+  const record = [...a.engine.derived().progress.values()][0].target.id
+  await settle(a, b)
+  // A decides it is not a mistake; B has not synced since.
+  await a.engine.invalidateTarget(record, 'not_a_mistake')
+  // Day 3: B, still offline, makes the same error again; it joins the record B still holds as active.
+  for (const c of [a.clock, b.clock, real]) c.sgt('2027-03-03')
+  const before = b.engine.state.targets.find((t) => t.id === record)!.observations.length
+  await b.practise(1, () => false)
+  assert.ok(mistakes(b).includes(key), 'the error is the same mistake')
+  assert.ok(b.engine.state.targets.find((t) => t.id === record)!.observations.length > before, 'the new error joined the record A dismissed')
+  await settle(a, b)
+  for (const d of [a, b]) {
+    assert.ok(mistakes(d).includes(key), 'an error after the decision starts a new mistake')
+    const pr = [...d.engine.derived().progress.values()].find((v) => `${v.target.knowledge_point_ref}|${v.target.error_type}` === key)!
+    assert.equal(pr.lastIndependentObservationOn, '2027-03-03', 'only the error after the decision')
+  }
+  assert.equal(progress(a), progress(b))
+})

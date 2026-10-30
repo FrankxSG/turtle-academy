@@ -199,10 +199,10 @@ test('writing/speaking plans show on the mistake’s row even when the case is h
   ]
   const r = rows(h)
   assert.deepEqual(r.map((x) => x.target.id), ['aa-app-caught'], 'one row, on the group leader')
-  const prod = productionByMistake(h.engine.state, crosswalk, [])
+  const prod = productionByMistake(h.engine.state, h.engine.derived(), crosswalk, [])
   assert.deepEqual([...prod.keys()], ['aa-app-caught'], 'keyed by the row’s target')
   assert.equal(prod.get('aa-app-caught')!.length, 1, 'a plan shared by two cases is listed once')
   // A stale link naming a record that no longer holds anything still resolves from the holders.
-  const stale = productionByMistake(h.engine.state, [{ ...crosswalk[0], engine_target_id: 'gone-record' }], [])
+  const stale = productionByMistake(h.engine.state, h.engine.derived(), [{ ...crosswalk[0], engine_target_id: 'gone-record' }], [])
   assert.deepEqual([...stale.keys()], ['aa-app-caught'])
 })

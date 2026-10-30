@@ -4,7 +4,7 @@
 // Attempt counts here describe what happened (first responses, hint retries, supported corrections, flags);
 // they do not decide progress. Production progress comes from production.ts. No evidence → "not yet evidenced".
 import type { CatalogueRelease } from '../catalogue/adapter.ts'
-import { amendmentView, groupChainObservations, groupObservations, lineage as ancestry, targetsById } from '../engine/amendments.ts'
+import { groupChainObservations, groupObservations, lineage as ancestry, targetsById } from '../engine/amendments.ts'
 import { dismissalFor, excludedItemVersions, isEvidence, observationCounter, type Derived } from '../engine/evidence.ts'
 import type { EngineState, Presentation, Stage } from '../engine/types.ts'
 import { caseObservationId, caseResolver, missingStages, type CrosswalkRow } from './intake.ts'
@@ -92,7 +92,7 @@ export function buildReport(opts: {
 }): CaseReport {
   const { state, derived, register, crosswalk, release } = opts
   const excluded = excludedItemVersions(state)
-  const view = amendmentView(state)
+  const view = derived.view
   const byId = targetsById(state)
   const counts = observationCounter(state, view, excluded)
   const cw = new Map(crosswalk.map((r) => [r.case_id, r]))
@@ -143,7 +143,8 @@ export function buildReport(opts: {
     const delayed: { on: string; correct: boolean }[] = []
     let last: string | null = null
     for (const p of ps) {
-      const evidence = isEvidence(p, excluded, view.invalidPresentations)
+      // An answer given before a "not a mistake" decision on this mistake is history, not evidence (it starts afresh).
+      const evidence = isEvidence(p, excluded, view.invalidPresentations) && !derived.beforeDecision.has(p.id)
       if (!evidence) excludedCount += 1
       for (const e of eventsOf.get(p.id) ?? []) {
         const on = derived.dates.of(e.at)
@@ -215,7 +216,7 @@ function countPools(release: CatalogueRelease, ref: string) {
 /** Every recorded response on a register target, normalized for the private repository (no identities). */
 export function normalizedEvents(state: EngineState, derived: Derived, crosswalk: CrosswalkRow[]): NormalizedEvent[] {
   const excluded = excludedItemVersions(state)
-  const view = amendmentView(state)
+  const view = derived.view
   const casesOf = new Map<string, string[]>()
   const refOf = new Map<string, string>()
   // A case is held by its import record and every correction of it; its link is written once and may name any of
@@ -254,7 +255,8 @@ export function normalizedEvents(state: EngineState, derived: Derived, crosswalk
       item_id: p.item_id, item_version: p.item_version, presentation_id: p.id, task_id: p.task_id, stage: p.stage,
       phase: e.phase, answered_on: derived.dates.of(e.at), correct: e.correct, assisted: e.assistance !== 'none',
       // Answers on a target the parent later corrected or invalidated stay in the history but no longer count.
-      counted_as_evidence: e.phase === 'first' && isEvidence(p, excluded, view.invalidPresentations) && current.has(p.target_ref), task_finalised: finalised.has(p.task_id), source: 'engine',
+      counted_as_evidence: e.phase === 'first' && isEvidence(p, excluded, view.invalidPresentations) && !derived.beforeDecision.has(p.id)
+        && current.has(p.target_ref), task_finalised: finalised.has(p.task_id), source: 'engine',
     })
   }
   return out
