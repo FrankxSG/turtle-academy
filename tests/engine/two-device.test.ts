@@ -1,6 +1,6 @@
 // Pilot Scope §3 increment 2, two-device offline reconciliation (F41–F45, F51), with the client's own sync code and
 // the in-memory server. Synthetic records only. Real PostgreSQL runs: supabase/tests/client/sync-live.test.ts.
-import { test } from 'node:test'
+import { afterEach, test } from 'node:test'
 import assert from 'node:assert/strict'
 import { FakeSyncServer } from './fixtures/fake-sync-server.ts'
 import { Device, TestAuth, session } from './sync-harness.ts'
@@ -20,8 +20,12 @@ function world() {
   server.tokens.set('token-a', 'parent-a')
   return server
 }
+/** Devices opened by the current test; stopped after it, so a sync that never settles cannot outlive a failure. */
+const opened: Device[] = []
+afterEach(() => { for (const d of opened.splice(0)) d.manager?.dispose() })
 async function device(server: FakeSyncServer, iso = '2027-03-01T09:00:00+08:00') {
   const d = new Device({ transport: server.transport(), auth: new TestAuth(session('parent-a', 'token-a')), userId: 'parent-a', clock: new Clock(iso) })
+  opened.push(d)
   await d.open()
   assert.equal((await d.sync()).state, 'idle')
   return d
