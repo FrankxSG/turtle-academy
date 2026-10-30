@@ -6,6 +6,8 @@ import { test } from 'node:test'
 import { amendmentView, groupObservations, observationInvalid, targetsById, validObservations } from '../../src/engine/amendments.ts'
 import { completedKnowledgePoints, derive, dismissalFor } from '../../src/engine/evidence.ts'
 import type { Target } from '../../src/engine/types.ts'
+import { normalizedEvents } from '../../src/mistakes/report.ts'
+import type { CrosswalkRow } from '../../src/mistakes/intake.ts'
 import { harness, progressOf, reload, runTask, startTask } from './helpers.ts'
 
 type H = ReturnType<typeof harness>
@@ -511,9 +513,10 @@ test('a record marked "not a mistake" comes back only for a case from a later da
   assert.ok(d.view.revived.has('imp-1'))
   const obs = groupObservations(['imp-1'], d.view, targetsById(later), undefined, dismissalFor(d, later.targets[0]))
   assert.deepEqual(obs.map((o) => o.id), ['obs-new'], 'the case the decision covered stays dismissed')
-  // A record invalidated as a duplicate is never revived.
+  // A record also invalidated as a duplicate is never revived.
   const dup = withCase(tomorrow)
-  for (const a of dup.amendments) if (a.kind === 'invalidate_target') a.reason = 'duplicate'
+  const decision = dup.amendments.find((a) => a.kind === 'invalidate_target')!
+  dup.amendments.push({ ...structuredClone(decision), id: 'zz-dup', reason: 'duplicate' })
   assert.equal(derive(dup).progress.has('imp-1'), false)
 })
 
@@ -550,4 +553,82 @@ test('a correction of a dismissed record that comes back for a later case counts
   assert.ok(d.view.revived.has(id))
   const obs = groupObservations([id], d.view, targetsById(state), undefined, dismissalFor(d, state.targets.find((x) => x.id === id)!))
   assert.deepEqual(obs.map((o) => o.id), ['obs-new'])
+})
+
+test('a later decision on the same mistake keeps a dismissed record dismissed, and answers before a decision are never evidence', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  const mk = (id: string, obs: string[], on: string): Target => ({ id, subject: 'mathematics', course: 'p2_mathematics', target_kind: 'math_relationship',
+    knowledge_point_ref: 'ma-kp1', target_value: null, assessed_skill: null, error_type: 'unknown_cause', mapping_status: 'mapped', verification: 'verified',
+    status: 'active', verified_at: h.clock.now(), replaces: null,
+    observations: obs.map((o) => ({ id: o, source_type: 'schoolwork', observed_on: on, recorded_on: on, instance_ref: 'import:t', batch_ref: null, recurrence: 'first', invalidated: false })) })
+  await h.engine.upsertTargets([mk('X', ['case:c1'], '2027-03-01')])
+  const s0 = h.engine.state
+  // An answer on X on day 2, before the decision.
+  s0.tasks.push({ id: 'tk1', status: 'finalised', activity: [], created_at: '2027-03-02T00:59:00.000Z', finalised_at: '2027-03-02T01:05:00.000Z', subject: 'mathematics', plan: { slots: [] } } as never)
+  s0.presentations.push({ id: 'p1', task_id: 'tk1', position: 0, item_id: 'it', item_version: 1, role: 'repair', target_ref: 'X', stage: 'exact', status: 'answered',
+    first_response_eligible: true, presented_at: '2027-03-02T01:00:00.000Z', prior_exposures: 0, material_ref: null } as never)
+  s0.events.push({ id: 'e1', presentation_id: 'p1', local_seq: 999, phase: 'first', assistance: 'none', response: {}, correct: true, at: '2027-03-02T01:00:10.000Z' } as never)
+  h.clock.sgt('2027-03-02', '12:00:00')
+  await h.engine.invalidateTarget('X', 'not_a_mistake')
+  // Day 3: the same mistake recorded again as Y, then marked "not a mistake" again at 08:00.
+  h.clock.sgt('2027-03-03', '07:00:00')
+  await h.engine.upsertTargets([mk('Y', ['o2'], '2027-03-03')])
+  h.clock.sgt('2027-03-03', '08:00:00')
+  await h.engine.invalidateTarget('Y', 'not_a_mistake')
+  // A device that had seen neither decision added a day-3 case to X.
+  const s = structuredClone(h.engine.state)
+  s.targets.find((t) => t.id === 'X')!.observations.push({ id: 'case:c2', source_type: 'schoolwork', observed_on: '2027-03-03', recorded_on: '2027-03-03',
+    instance_ref: 'import:t', batch_ref: null, recurrence: 'independent', invalidated: false })
+  const cw: CrosswalkRow[] = [{ case_id: 'C1', mode: 'objective', target_ref: 'ma-kp1', engine_target_id: 'X', plan_id: null, shared_with: [] }]
+  const d = derive(s)
+  assert.deepEqual([...d.view.revived.keys()], [], 'the day-3 decision on the same mistake covers the day-3 case')
+  assert.deepEqual([...d.progress.keys()], [])
+  assert.deepEqual(normalizedEvents(s, d, cw).map((e) => [e.event_id, e.counted_as_evidence]), [['e1', false]])
+  // Without the second decision, X comes back for the day-3 case, and the day-2 answer is still not evidence.
+  const s2 = structuredClone(s)
+  s2.amendments = s2.amendments.filter((a) => !a.refs.includes('Y'))
+  const d2 = derive(s2)
+  assert.deepEqual([...d2.progress.keys()], ['X'])
+  assert.deepEqual(normalizedEvents(s2, d2, cw).map((e) => [e.event_id, e.counted_as_evidence]), [['e1', false]])
+})
+
+test('answers on another device’s record of a dismissed mistake, made before the decision, are not evidence in the export', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  const mk = (id: string): Target => ({ id, subject: 'mathematics', course: 'p2_mathematics', target_kind: 'math_relationship',
+    knowledge_point_ref: 'ma-kp1', target_value: null, assessed_skill: null, error_type: 'unknown_cause', mapping_status: 'mapped', verification: 'verified',
+    status: 'active', verified_at: h.clock.now(), replaces: null,
+    observations: [{ id: `case:${id.toLowerCase()}`, source_type: 'schoolwork', observed_on: '2027-03-01', recorded_on: '2027-03-01', instance_ref: 'import:t', batch_ref: null, recurrence: 'first', invalidated: false }] })
+  // Two devices' records of one mistake; the decision names only A's, and covers B's (made before it) too.
+  await h.engine.upsertTargets([mk('A-rec'), mk('B-rec')])
+  const s0 = h.engine.state
+  s0.tasks.push({ id: 'tk1', status: 'finalised', activity: [], created_at: '2027-03-02T00:59:00.000Z', finalised_at: '2027-03-02T01:05:00.000Z', subject: 'mathematics', plan: { slots: [] } } as never)
+  s0.presentations.push({ id: 'p1', task_id: 'tk1', position: 0, item_id: 'it', item_version: 1, role: 'repair', target_ref: 'B-rec', stage: 'exact', status: 'answered',
+    first_response_eligible: true, presented_at: '2027-03-02T01:00:00.000Z', prior_exposures: 0, material_ref: null } as never)
+  s0.events.push({ id: 'e1', presentation_id: 'p1', local_seq: 999, phase: 'first', assistance: 'none', response: {}, correct: true, at: '2027-03-02T01:00:10.000Z' } as never)
+  // Device A decided at noon on day 2, before it had seen B's record: the decision names A's record only.
+  const s = structuredClone(h.engine.state)
+  s.amendments.push({ id: 'zz-a', at: '2027-03-02T04:00:00.000Z', actor: 'parent', kind: 'invalidate_target', refs: ['A-rec'], replacement_ref: null, reason: 'not_a_mistake', reducer_revision: 4 })
+  const d = derive(s)
+  assert.deepEqual([...d.groups.members.keys()], ['B-rec'], 'B’s record is still an active record')
+  assert.deepEqual([...d.progress.keys()], [], 'no mistake is left')
+  const cw: CrosswalkRow[] = [{ case_id: 'B-REC', mode: 'objective', target_ref: 'ma-kp1', engine_target_id: 'B-rec', plan_id: null, shared_with: [] }]
+  assert.deepEqual(normalizedEvents(s, d, cw).map((e) => [e.event_id, e.counted_as_evidence]), [['e1', false]])
+})
+
+test('the export lists events in the same order on every device, also when two devices’ sequence numbers tie', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  await importTarget(h, 'X', 'ma-kp1', [{ id: 'case:c1' }])
+  const s = structuredClone(h.engine.state)
+  s.tasks.push({ id: 'tk1', status: 'finalised', activity: [], created_at: '2027-03-02T00:59:00.000Z', finalised_at: '2027-03-02T01:05:00.000Z', subject: 'mathematics', plan: { slots: [] } } as never)
+  for (const [p, e] of [['p1', 'e-from-b'], ['p2', 'e-from-a']]) {
+    s.presentations.push({ id: p, task_id: 'tk1', position: 0, item_id: 'it', item_version: 1, role: 'repair', target_ref: 'X', stage: 'exact', status: 'answered',
+      first_response_eligible: true, presented_at: '2027-03-02T01:00:00.000Z', prior_exposures: 0, material_ref: null } as never)
+    // Each device numbers its own events: both are number 7.
+    s.events.push({ id: e, presentation_id: p, local_seq: 7, phase: 'first', assistance: 'none', response: {}, correct: true, at: '2027-03-02T01:00:10.000Z' } as never)
+  }
+  const cw: CrosswalkRow[] = [{ case_id: 'C1', mode: 'objective', target_ref: 'ma-kp1', engine_target_id: 'X', plan_id: null, shared_with: [] }]
+  const order = (st: typeof s) => normalizedEvents(st, derive(st), cw).map((e) => e.event_id)
+  const reversed = structuredClone(s)
+  reversed.events.reverse()
+  assert.deepEqual(order(s), order(reversed))
 })

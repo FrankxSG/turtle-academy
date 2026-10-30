@@ -169,7 +169,8 @@ export function derive(state: EngineState): Derived {
       : holder.verified_at
   const dismissed = new Map([...dismissals(state, (at) => dates.of(at))].map(([k, v]) => [k, { ...v, instantOf }]))
   // A dismissed record that another device added a later case or error to comes back, for what came after only.
-  for (const [id, d] of revivals(state, amended, byId, effectiveObservation, (at) => ({ on: dates.of(at), at, instantOf }))) amended.revived.set(id, d)
+  for (const [id, d] of revivals(state, amended, byId, effectiveObservation, (at) => ({ on: dates.of(at), at, instantOf }),
+    (t) => dismissed.get(mistakeKey(t)))) amended.revived.set(id, d)
   const groups = mistakeGroups(state, amended)
   const groupDismissal = new Map<string, Dismissal>()
   const beforeDecision = new Set<string>()
@@ -187,6 +188,13 @@ export function derive(state: EngineState): Derived {
     // The decision on this mistake: its unit's latest, or a later one a member was revived past.
     const dismissal = members.reduce<Dismissal | undefined>((d, id) => laterDismissal(d, amended.revived.get(id)), dismissed.get(mistakeKey(target)))
     if (dismissal) groupDismissal.set(target.id, dismissal)
+    // After a decision the mistake starts afresh: answers given up to it are history, not evidence (also when nothing
+    // after the decision is left and the group is not replayed at all).
+    const ps = members.flatMap((id) => byTarget.get(id) ?? []).filter((p) => {
+      if (!dismissal || Date.parse(answeredAt(p)) > Date.parse(dismissal.at)) return true
+      beforeDecision.add(p.id)
+      return false
+    })
     const observations = groupObservations(members, amended, byId, effectiveObservation, dismissal)
     if (groupChainObservations(members, amended, byId).length > 0 && observations.length === 0) continue
     const pr = fresh(target)
@@ -198,12 +206,6 @@ export function derive(state: EngineState): Derived {
       const nb = addDays(o.recorded_on, 1)
       if (pr.notBefore === null || nb > pr.notBefore) { pr.notBefore = nb; pr.notBeforeReason = 'import_next_day' }
     }
-    // After a decision the mistake starts afresh: answers given up to it are history, not evidence.
-    const ps = members.flatMap((id) => byTarget.get(id) ?? []).filter((p) => {
-      if (!dismissal || Date.parse(answeredAt(p)) > Date.parse(dismissal.at)) return true
-      beforeDecision.add(p.id)
-      return false
-    })
     const steps: Step[] = []
     let seq = 0
     // Group by task to decide the route: any material presentation makes the whole task one aggregate.

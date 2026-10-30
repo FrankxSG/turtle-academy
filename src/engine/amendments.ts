@@ -311,10 +311,11 @@ export function laterDismissal(a: Dismissal | undefined, b: Dismissal | undefine
  * clocks cannot safely order a record against a decision that already named it. Every copy of an observation is
  * judged (a correction copies them with its own date), so a correction of a dismissed record never brings back what
  * the decision covered. A record invalidated as a duplicate, or superseded, is never revived. `decision` gives a
- * decision's learning date and instants (replay's DateBook).
+ * decision's learning date and instants (replay's DateBook); `unitDecision` the latest decision on the record's
+ * progress unit, which counts when it is later (another record of the same mistake marked "not a mistake" again).
  */
 export function revivals(state: Pick<EngineState, 'targets'>, view: AmendmentView, byId: ReadonlyMap<string, Target>,
-  counts: (o: Observation) => boolean, decision: (at: string) => Dismissal): Map<string, Dismissal> {
+  counts: (o: Observation) => boolean, decision: (at: string) => Dismissal, unitDecision: (t: Target) => Dismissal | undefined = () => undefined): Map<string, Dismissal> {
   const out = new Map<string, Dismissal>()
   for (const t of state.targets) {
     if (t.status !== 'active' || view.replacedBy.has(t.id)) continue
@@ -322,7 +323,8 @@ export function revivals(state: Pick<EngineState, 'targets'>, view: AmendmentVie
     if (!line.some((id) => view.invalidTargets.has(id)) || line.some((id) => view.duplicateTargets.has(id))) continue
     const at = line.reduce((max, id) => { const x = view.dismissedAt.get(id) ?? ''; return x > max ? x : max }, '')
     if (!at) continue
-    const d = decision(at)
+    // A later decision on the same mistake recorded elsewhere covers this record too (`dismissals` by progress unit).
+    const d = laterDismissal(decision(at), unitDecision(t)) as Dismissal
     const copies = new Map<string, { o: Observation; holder: Target }[]>()
     for (const id of line) for (const o of byId.get(id)?.observations ?? []) copies.set(o.id, [...(copies.get(o.id) ?? []), { o, holder: byId.get(id)! }])
     const after = chainObservations(t, view, byId).some((o) => {

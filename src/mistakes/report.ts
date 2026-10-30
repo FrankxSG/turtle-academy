@@ -247,7 +247,7 @@ export function normalizedEvents(state: EngineState, derived: Derived, crosswalk
   const byId = new Map(state.presentations.map((p) => [p.id, p]))
   const finalised = new Set(state.tasks.filter((t) => t.status === 'finalised').map((t) => t.id))
   const out: NormalizedEvent[] = []
-  for (const e of [...state.events].sort((a, b) => a.local_seq - b.local_seq)) {
+  for (const e of [...state.events].sort((a, b) => a.local_seq - b.local_seq || a.id.localeCompare(b.id))) {
     const p = byId.get(e.presentation_id)
     if (!p || !p.target_ref || !casesOf.has(p.target_ref) || p.stage === null) continue
     out.push({
