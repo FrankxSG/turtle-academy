@@ -95,8 +95,9 @@ export function planIntake(opts: {
     // corrected replacement), so the learner never has two schedules for one thing.
     const own = state.targets.find((t) => t.id === importTargetId(ref))
     const existing = (own && isActiveTarget(own, view) ? own : undefined)
-      ?? state.targets.find((t) => isActiveTarget(t, view) && t.subject === 'chinese' && t.course === course
-        && t.knowledge_point_ref === ref && t.assessed_skill === info.assessed_skill)
+      // Lowest id first, so every device attaches new cases to the same record of a mistake.
+      ?? state.targets.filter((t) => isActiveTarget(t, view) && t.subject === 'chinese' && t.course === course
+        && t.knowledge_point_ref === ref && t.assessed_skill === info.assessed_skill).sort((a, b) => a.id.localeCompare(b.id))[0]
     const observations: Observation[] = fresh.map((caseId, i) => ({
       id: caseObservationId(caseId), source_type: 'schoolwork', observed_on: today, recorded_on: today,
       instance_ref: importInstanceRef(register.register_id), batch_ref: null,

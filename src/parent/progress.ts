@@ -1,6 +1,6 @@
 // What the parent area shows about mistakes and flagged questions (Functional Design §8). Pure views over the engine
 // state and its replay: nothing here decides progress, and nothing is stored.
-import { amendmentView, chainObservations, isActiveTarget, targetsById, validObservations } from '../engine/amendments.ts'
+import { amendmentView, groupChainObservations, groupObservations, isActiveTarget, targetsById } from '../engine/amendments.ts'
 import { addDays } from '../engine/calendar.ts'
 import { excludedItemVersions, isEligible, isEvidence, observationCounter, type Derived, type TargetProgress } from '../engine/evidence.ts'
 import { MAX_CLEARANCES_PER_TARGET_PER_DAY } from '../engine/policy.ts'
@@ -89,15 +89,18 @@ export function progressRows(opts: {
   for (const t of state.targets) {
     if (t.subject !== subject || !isActiveTarget(t, view)) continue
     if (t.error_type === 'none' && t.observations.length === 0) continue // Science acquisition records, not mistakes
+    // One row per mistake: targets that are the same mistake (two devices) show once, on the group's leader.
+    const members = derived.groups.members.get(t.id)
+    if (!members) continue
     // The same observations the engine counts (src/engine/evidence.ts observationCounter).
-    const observations = validObservations(t, view, byId, counts)
+    const observations = groupObservations(members, view, byId, counts)
     const pr = derived.progress.get(t.id)
     let state_: RowState
     if (!pr) {
       // No counting observation is left. If app-caught errors wait on an open flag, the mistake is suspended until
       // the parent decides; otherwise it was disabled, invalidated or marked not a mistake, and there is no row.
-      if (chainObservations(t, view, byId).length === 0) continue
-      const waiting = validObservations(t, view, byId).some((o) => {
+      if (groupChainObservations(members, view, byId).length === 0) continue
+      const waiting = groupObservations(members, view, byId).some((o) => {
         const p = o.batch_ref ? presentationById.get(o.batch_ref) : undefined
         return p !== undefined && !view.invalidPresentations.has(p.id) && p.status !== 'invalidated' && openFlag.has(`${p.item_id}@${p.item_version}`)
       })
@@ -105,12 +108,12 @@ export function progressRows(opts: {
       state_ = 'suspended'
     } else if (t.mapping_status === 'pending_content') state_ = 'pending_content'
     else if (t.verification !== 'verified') state_ = 'unverified'
-    else if (held.has(t.id)) state_ = 'held'
+    else if (members.some((id) => held.has(id))) state_ = 'held'
     else state_ = pr.stage === 'delayed_review' ? 'delayed_review' : pr.stage === 'acquisition' ? 'learning' : 'repair'
     const next: ProgressRow['next'] = pr && (state_ === 'repair' || state_ === 'delayed_review' || state_ === 'learning')
       ? nextPractice(pr, today) : { kind: 'none' }
     const recognition: ProgressRow['recognition'] = { firstAnswers: 0, independentCorrect: 0, firstWrong: 0, hintRetries: 0, corrections: 0, repeatedItems: 0, lastPractisedOn: null }
-    for (const p of byTarget.get(t.id) ?? []) {
+    for (const p of members.flatMap((id) => byTarget.get(id) ?? [])) {
       const counted = isEvidence(p, excluded, view.invalidPresentations)
       for (const e of eventsOf.get(p.id) ?? []) {
         const on = derived.dates.of(e.at)

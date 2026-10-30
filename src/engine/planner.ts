@@ -4,7 +4,7 @@
 // within the same task; the item is frozen once presented.
 import type { CatalogueItem, CatalogueRelease, Pool } from '../catalogue/adapter.ts'
 import { daysBetween } from './calendar.ts'
-import { completedKnowledgePoints, isEligible, type Derived, type TargetProgress } from './evidence.ts'
+import { completedKnowledgePoints, isEligible, progressFor, type Derived, type TargetProgress } from './evidence.ts'
 import { isLanguage, isPractisable, languagePrescribedShortMax, minMaterials, SCIENCE_FILLER_EXCLUSION_DAYS } from './policy.ts'
 import type { EngineState, PlanMaterial, PlanSlot, Role, Stage, Subject, Target, Task } from './types.ts'
 
@@ -57,10 +57,21 @@ export function usableItem(state: EngineState, item: CatalogueItem): boolean {
 
 const isRepairStage = (s: Stage): boolean => s === 'exact' || s === 'similar' || s === 'generic'
 
+/** Held when any record of the mistake is held (a set-aside pack's target may be one member of a group). */
+function isHeld(ctx: PlanContext, id: string): boolean {
+  if (!ctx.held || ctx.held.size === 0) return false
+  const leader = ctx.derived.groups.leader.get(id) ?? id
+  return (ctx.derived.groups.members.get(leader) ?? [id]).some((m) => ctx.held?.has(m))
+}
+
+/** Target ids as their group's leading target, so ids from a frozen plan match progress keys. */
+const leaders = (ctx: PlanContext, ids: Iterable<string>) => new Set([...ids].map((id) => ctx.derived.groups.leader.get(id) ?? id))
+
 function eligibleTargets(ctx: PlanContext, excludeTargets: Set<string> = new Set()) {
+  const excluded = leaders(ctx, excludeTargets)
   const list = [...ctx.derived.progress.values()].filter((pr) =>
     pr.target.subject === ctx.subject && pr.target.knowledge_point_ref !== null && isPractisable(pr.target.course)
-    && !excludeTargets.has(pr.target.id) && !ctx.held?.has(pr.target.id) && pr.stage !== 'acquisition' && isEligible(pr, ctx.date))
+    && !excluded.has(pr.target.id) && !isHeld(ctx, pr.target.id) && pr.stage !== 'acquisition' && isEligible(pr, ctx.date))
   const reviews = list.filter((pr) => pr.stage === 'delayed_review').sort((a, b) => (a.dueOn ?? '').localeCompare(b.dueOn ?? ''))
   const repairs = list.filter((pr) => isRepairStage(pr.stage)).sort((a, b) =>
     (b.lastIndependentObservationOn ?? '').localeCompare(a.lastIndependentObservationOn ?? '') || a.target.id.localeCompare(b.target.id))
@@ -289,7 +300,7 @@ export function planTask(ctx: PlanContext): PlanResult {
 export function resolveShortSlot(ctx: PlanContext, task: Task, s: PlanSlot, wholeTaskTargets: Set<string>):
   { item: CatalogueItem; role: Role; target: TargetProgress | null } | null {
   if (s.role === 'acquisition_test' && s.item_id !== null && s.target_ref !== null) {
-    const pr = ctx.derived.progress.get(s.target_ref)
+    const pr = progressFor(ctx.derived, s.target_ref)
     const item = ctx.release.items.find((i) => i.id === s.item_id && i.version === s.item_version)
     // After a wrong first acquisition test, a same-day second test cannot be acquisition evidence.
     if (pr && pr.stage === 'acquisition' && pr.blockedByTask === null && item && usableItem(ctx.state, item)) return { item, role: 'acquisition_test', target: pr }
@@ -301,10 +312,10 @@ export function resolveShortSlot(ctx: PlanContext, task: Task, s: PlanSlot, whol
     }
   } else if (s.role === 'repair' || s.role === 'delayed_review' || s.role === 'replacement' || s.role === 'material_question') {
     const { reviews, repairs } = eligibleTargets(ctx, wholeTaskTargets)
-    const planned = s.target_ref && !ctx.held?.has(s.target_ref) ? ctx.derived.progress.get(s.target_ref) : undefined
+    const planned = s.target_ref && !isHeld(ctx, s.target_ref) ? progressFor(ctx.derived, s.target_ref) : undefined
     const order: TargetProgress[] = []
     // A replacement for a material question keeps its target; the whole-task aggregate still applies.
-    if (planned && (isEligible(planned, ctx.date) || (s.role === 'material_question' && wholeTaskTargets.has(planned.target.id)))) order.push(planned)
+    if (planned && (isEligible(planned, ctx.date) || (s.role === 'material_question' && leaders(ctx, wholeTaskTargets).has(planned.target.id)))) order.push(planned)
     for (const pr of [...reviews, ...repairs]) if (!order.includes(pr)) order.push(pr)
     for (const pr of order) {
       const item = itemsForStage(ctx, pr, task)[0]

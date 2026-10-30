@@ -1,9 +1,9 @@
 // The on-device learning engine (Issue #17). One instance per child profile.
 // Truth is the append-only answer events plus immutable records; progress is re-derived after every change.
 import { itemIn, judge, type CatalogueItem, type CatalogueRegistry, type CatalogueRelease } from '../catalogue/adapter.ts'
-import { AMENDMENT_REVISION, amendmentView, isActiveTarget, targetsById, validObservations, type AmendReason, type InvalidateReason } from './amendments.ts'
+import { AMENDMENT_REVISION, amendmentView, groupObservations, isActiveTarget, leaderOf, mistakeGroups, targetsById, validObservations, type AmendReason, type InvalidateReason } from './amendments.ts'
 import { isValidTimezone, learningDate } from './calendar.ts'
-import { derive, observationCounter, type Derived } from './evidence.ts'
+import { derive, observationCounter, progressFor, type Derived } from './evidence.ts'
 import { compatibleItem, nothingEligible, planTask, resolveShortSlot, usableItem, usableVersion, type PlanContext } from './planner.ts'
 import type { Mutation, Put, RecordStore, SaveStatus, Table } from './persistence.ts'
 import { WriteQueue } from './persistence.ts'
@@ -297,7 +297,7 @@ export class LearningEngine {
     const date = this.today()
     const d = this.derived()
     // Re-check compatibility when shown: an incompatible question is general practice for this target.
-    const candidate = targetRef ? d.progress.get(targetRef) : undefined
+    const candidate = progressFor(d, targetRef)
     const pr = candidate && compatibleItem(candidate.target, candidate.stage, item) ? candidate : undefined
     const exposure = this.state.exposure.find((e) => e.item_id === item.id)
     const release = this.release(task)
@@ -511,8 +511,10 @@ export class LearningEngine {
     const chosen = response.option_ids.find((o) => !item.key.option_ids.includes(o))
     const errorType = (chosen && item.error_types?.[chosen]) || 'unknown_cause'
     const view = amendmentView(this.state)
-    const existing = this.state.targets.find((t) => isActiveTarget(t, view) && t.subject === item.subject && t.course === item.course
+    // The group's leading target (lowest id), so every device attaches the error to the same record.
+    const existing = this.state.targets.filter((t) => isActiveTarget(t, view) && t.subject === item.subject && t.course === item.course
       && t.knowledge_point_ref === item.knowledge_point_ref && t.assessed_skill === item.assessed_skill && t.error_type === errorType)
+      .sort((a, b) => a.id.localeCompare(b.id))[0]
     // Provenance: instance_ref is the task, batch_ref the presentation that produced the observation, so the
     // reducer can drop it when that question is flagged or suspended and restore it on a parent decision.
     // Every app error is recorded; same-day repeats are labelled duplicates and collapse to one observation
@@ -600,6 +602,14 @@ export class LearningEngine {
     return t
   }
 
+  /** The active targets that are this one mistake (src/engine/amendments.ts mistakeGroups), leader first. */
+  private mistake(targetId: string): { leader: Target; ids: string[] } {
+    this.activeTarget(targetId)
+    const groups = mistakeGroups(this.state, amendmentView(this.state))
+    const leaderId = leaderOf(groups, targetId)
+    return { leader: this.activeTarget(leaderId), ids: groups.members.get(leaderId) ?? [targetId] }
+  }
+
   private addAmendment(kind: Amendment['kind'], refs: string[], reason: Amendment['reason'], replacement: string | null = null) {
     this.state.amendments.push({ id: this.newId(), at: this.deps.now(), actor: 'parent', kind, refs, replacement_ref: replacement, reason, reducer_revision: AMENDMENT_REVISION })
     this.changed()
@@ -611,12 +621,14 @@ export class LearningEngine {
    * inherits no success. It is practised from the day after the correction, like a new import.
    */
   async amendTarget(targetId: string, change: { knowledge_point_ref?: string; assessed_skill?: string | null; error_type?: string }, reason: AmendReason): Promise<{ id: string; saved: SaveStatus | null }> {
-    const old = this.activeTarget(targetId)
+    // A mistake recorded under several targets (two devices) is corrected as one: the leading target is replaced,
+    // carrying every member's counting observations, and the other members are retired as duplicates.
+    const { leader: old, ids: group } = this.mistake(targetId)
     const view = amendmentView(this.state)
     const byId = targetsById(this.state)
     // Only a mistake that rests on a parent-confirmed case that still counts can be corrected; app-caught ones are
     // marked "not a mistake" instead.
-    const counted = validObservations(old, view, byId, observationCounter(this.state, view))
+    const counted = groupObservations(group, view, byId, observationCounter(this.state, view))
     if (!counted.some((o) => o.source_type !== 'app_practice')) throw new Error('amend_requires_import')
     const release = this.deps.registry.current(old.subject)
     if (!release) throw new Error('no_content')
@@ -639,7 +651,7 @@ export class LearningEngine {
     // (the parent marks this one "not a mistake" instead).
     for (const pr of this.derived().progress.values()) {
       const t = pr.target
-      if (t.id !== old.id && t.subject === old.subject && t.course === old.course && t.knowledge_point_ref === kpRef
+      if (!group.includes(t.id) && t.subject === old.subject && t.course === old.course && t.knowledge_point_ref === kpRef
         && t.assessed_skill === skill && t.error_type === errorType) throw new Error('target_exists')
     }
     // App-caught errors are about their question's own point: they stay behind when the point or skill changes.
@@ -661,25 +673,31 @@ export class LearningEngine {
     }
     this.state.targets.push(replacement)
     this.addAmendment('amend_target', [old.id], reason, replacement.id)
+    const others = group.filter((id) => id !== old.id)
+    if (others.length > 0) this.addAmendment('invalidate_target', others, 'duplicate')
     return { id: replacement.id, saved: await this.flush() }
   }
 
   /** A target that is not a real mistake (or duplicates another) is no longer planned. Its history is kept. */
   async invalidateTarget(targetId: string, reason: InvalidateReason): Promise<SaveStatus | null> {
-    this.activeTarget(targetId)
-    this.addAmendment('invalidate_target', [targetId], reason)
+    // Every record of this mistake known on this device.
+    this.addAmendment('invalidate_target', this.mistake(targetId).ids.slice(0, 50), reason)
     return this.flush()
   }
 
   /** One observation of a target (for example a duplicated import) stops counting. */
   async invalidateObservation(targetId: string, observationId: string, reason: InvalidateReason): Promise<SaveStatus | null> {
-    const t = this.activeTarget(targetId)
+    const { ids } = this.mistake(targetId)
     const view = amendmentView(this.state)
-    const valid = validObservations(t, view, targetsById(this.state), observationCounter(this.state, view))
+    const byId = targetsById(this.state)
+    const counts = observationCounter(this.state, view)
+    const valid = groupObservations(ids, view, byId, counts)
     if (!valid.some((x) => x.id === observationId)) throw new Error('unknown_observation')
     // A duplicate of what? The last remaining case cannot be one; "not a mistake" is the choice for that.
     if (reason === 'duplicate' && valid.length === 1) throw new Error('last_observation')
-    this.addAmendment('invalidate_observation', [targetId, observationId], reason)
+    // Marked on the member that holds it, so the mark follows that record's correction chain.
+    const holder = ids.find((id) => validObservations(byId.get(id) as Target, view, byId, counts).some((o) => o.id === observationId)) as string
+    this.addAmendment('invalidate_observation', [holder, observationId], reason)
     return this.flush()
   }
 

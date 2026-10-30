@@ -164,10 +164,16 @@ export function toLocal(remote: RemoteRecord[], current: { settings: Settings; s
         break
       }
       case 'story_state': Object.assign(story, v); storyChanged = true; break
-      case 'timezone_change':
-        if (!settings.timezone_history.some((h) => h.changed_at === r.key)) settings.timezone_history.push(v as unknown as Settings['timezone_history'][number])
+      case 'timezone_change': {
+        // Add-only on the server: its first accepted entry for an instant is the one every replica keeps (two
+        // devices can change the timezone at the same instant; the history decides learning dates).
+        const entry = v as unknown as Settings['timezone_history'][number]
+        const i = settings.timezone_history.findIndex((h) => h.changed_at === r.key)
+        if (i >= 0) settings.timezone_history[i] = entry
+        else settings.timezone_history.push(entry)
         settingsChanged = true
         break
+      }
       case 'setting': {
         if (r.key === 'timezone') settings.timezone = String(v.timezone)
         else if (r.key === 'ui_language') settings.ui_language = v.ui_language as Settings['ui_language']

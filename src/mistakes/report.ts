@@ -4,7 +4,7 @@
 // Attempt counts here describe what happened (first responses, hint retries, supported corrections, flags);
 // they do not decide progress. Production progress comes from production.ts. No evidence → "not yet evidenced".
 import type { CatalogueRelease } from '../catalogue/adapter.ts'
-import { amendmentView, chainObservations, currentTarget, targetsById, validObservations } from '../engine/amendments.ts'
+import { amendmentView, currentTarget, groupChainObservations, groupObservations, targetsById } from '../engine/amendments.ts'
 import { excludedItemVersions, isEvidence, observationCounter, type Derived } from '../engine/evidence.ts'
 import type { EngineState, Presentation, Stage } from '../engine/types.ts'
 import { caseObservationId, missingStages, type CrosswalkRow } from './intake.ts'
@@ -128,11 +128,15 @@ export function buildReport(opts: {
     // A parent's correction moves the case to the replacement target (which inherits no answers); an invalidated
     // case has no current target.
     const linked = x?.engine_target_id ? state.targets.find((t) => t.id === x.engine_target_id) : undefined
-    const current = linked ? currentTarget(state, linked.id, view) : null
+    const now = linked ? currentTarget(state, linked.id, view) : null
+    // The same mistake recorded under several targets (two devices) is one: report on its group's leader.
+    const leaderId = now ? derived.groups.leader.get(now.id) ?? now.id : null
+    const current = leaderId ? state.targets.find((t) => t.id === leaderId) ?? now : null
+    const members = leaderId ? derived.groups.members.get(leaderId) ?? [leaderId] : []
     const engineId = current?.id ?? null
     const target = current ?? undefined
     const pr = engineId ? derived.progress.get(engineId) : undefined
-    const ps = engineId ? presentationsOf.get(engineId) ?? [] : []
+    const ps = members.flatMap((id) => presentationsOf.get(id) ?? [])
     let firstCorrect = 0, firstWrong = 0, counted = 0, indep = 0, retries = 0, corrections = 0, excludedCount = 0
     const delayed: { on: string; correct: boolean }[] = []
     let last: string | null = null
@@ -171,8 +175,8 @@ export function buildReport(opts: {
     let status: CaseStatus
     // The case's observation follows its mistake through corrections; it is dropped only when marked so.
     const caseObs = caseObservationId(c.id)
-    const dropped = current !== null && chainObservations(current, view, byId).some((o) => o.id === caseObs)
-      && !validObservations(current, view, byId, counts).some((o) => o.id === caseObs)
+    const dropped = current !== null && groupChainObservations(members, view, byId).some((o) => o.id === caseObs)
+      && !groupObservations(members, view, byId, counts).some((o) => o.id === caseObs)
     if ((linked && !current) || dropped) status = 'invalidated'
     else if (!target) status = 'not_imported'
     else if (target.mapping_status === 'pending_content') status = 'pending_content'
@@ -218,11 +222,13 @@ export function normalizedEvents(state: EngineState, derived: Derived, crosswalk
   const current = new Set<string>()
   for (const r of crosswalk) {
     if (!r.engine_target_id || !r.target_ref) continue
-    const now = currentTarget(state, r.engine_target_id, view)?.id ?? null
-    if (now) current.add(now)
-    const lineage = new Set<string>([r.engine_target_id])
-    for (const direction of [view.replaces, view.replacedBy]) {
-      let at = direction.get(r.engine_target_id)
+    const head = currentTarget(state, r.engine_target_id, view)?.id ?? null
+    // The current mistake may be recorded under several targets (two devices): all of them are current.
+    const group = head ? derived.groups.members.get(derived.groups.leader.get(head) ?? head) ?? [head] : []
+    for (const id of group) current.add(id)
+    const lineage = new Set<string>([r.engine_target_id, ...group])
+    for (const start of [...lineage]) for (const direction of [view.replaces, view.replacedBy]) {
+      let at = direction.get(start)
       while (at !== undefined && !lineage.has(at)) {
         lineage.add(at)
         at = direction.get(at)

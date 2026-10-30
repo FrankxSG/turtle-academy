@@ -153,3 +153,54 @@ export function currentTarget(state: Pick<EngineState, 'targets' | 'amendments'>
   }
 }
 
+
+/**
+ * The progress unit of a mistake (Functional Design §4): subject, course, knowledge point, assessed skill and error
+ * type. Two active targets with the same unit are the same mistake, for example when two devices each caught it
+ * offline under their own random target ids, or a correction on one device met a mistake recorded on another.
+ */
+export const mistakeKey = (t: Target) => [t.subject, t.course, t.knowledge_point_ref ?? '', t.assessed_skill ?? '', t.error_type].join('\u0000')
+
+export interface MistakeGroups {
+  /** Every active target → the target that leads its group (the lowest id: the same on every device). */
+  leader: Map<string, string>
+  /** Leading target → every active target of its group, leader first. */
+  members: Map<string, string[]>
+}
+
+/** Groups of active targets that are one mistake. Inactive (corrected or invalidated) targets are not grouped. */
+export function mistakeGroups(state: Pick<EngineState, 'targets'>, view: AmendmentView): MistakeGroups {
+  const byKey = new Map<string, string[]>()
+  for (const t of state.targets) {
+    if (!isActiveTarget(t, view)) continue
+    const k = mistakeKey(t)
+    byKey.set(k, [...(byKey.get(k) ?? []), t.id])
+  }
+  const leader = new Map<string, string>()
+  const members = new Map<string, string[]>()
+  for (const ids of byKey.values()) {
+    ids.sort()
+    members.set(ids[0], ids)
+    for (const id of ids) leader.set(id, ids[0])
+  }
+  return { leader, members }
+}
+
+/** The target that leads the group holding `id` (or `id` itself when it is not an active target). */
+export const leaderOf = (groups: MistakeGroups, id: string) => groups.leader.get(id) ?? id
+
+/** All counting observations of a mistake group: each member's own (and its correction chain's), once by id. */
+export function groupObservations(ids: readonly string[], view: AmendmentView, byId: ReadonlyMap<string, Target>,
+  counts?: (o: Observation) => boolean): Observation[] {
+  const out = new Map<string, Observation>()
+  for (const id of ids) {
+    const t = byId.get(id)
+    if (t) for (const o of validObservations(t, view, byId, counts)) if (!out.has(o.id)) out.set(o.id, o)
+  }
+  return [...out.values()]
+}
+
+/** Every observation recorded on a mistake group, valid or not (whether it ever had any). */
+export function groupChainObservations(ids: readonly string[], view: AmendmentView, byId: ReadonlyMap<string, Target>): Observation[] {
+  return ids.flatMap((id) => { const t = byId.get(id); return t ? chainObservations(t, view, byId) : [] })
+}
