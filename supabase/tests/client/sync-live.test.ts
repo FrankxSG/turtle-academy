@@ -251,3 +251,41 @@ test('parent amendments on two devices reach the real server as add-only records
     assert.equal(credit(d), kept)
   }
 })
+
+test('two offline devices against the real server: one schedule per mistake, concurrent edits, a lost acknowledgement and a restart converge', { skip }, async () => {
+  const { child } = await freshParent()
+  const { d: a } = await device('parent-a@example.invalid', new Clock('2027-04-10T09:00:00+08:00'))
+  assert.equal((await a.sync()).state, 'idle')
+  const { d: b } = await device('parent-a@example.invalid', new Clock('2027-04-10T09:00:00+08:00'))
+  assert.equal((await b.sync()).state, 'idle')
+  // Offline on both: the same opening mistakes, and conflicting settings.
+  await a.practise(2, () => false)
+  await b.practise(2, () => false)
+  await a.engine.setX('chinese', 12)
+  await b.engine.setX('chinese', 16)
+  // A's upload commits on the server but the response is lost; A restarts before retrying.
+  const queued = await a.outboxIds()
+  await control('lose-next', { count: 1 })
+  assert.notEqual((await a.sync()).state, 'idle')
+  assert.deepEqual(await a.outboxIds(), queued, 'nothing is dropped')
+  await a.open()
+  for (let round = 0, quiet = 0; quiet < 2; round++) {
+    assert.ok(round < 8, 'devices settle')
+    const s = [await a.sync(), await b.sync()]
+    quiet = s.every((x) => x.state === 'idle' && x.waiting === 0) ? quiet + 1 : 0
+  }
+  for (const id of queued) {
+    const rows = await sql(`select count(*) from public.sync_receipts where child_id = '${child}' and op_id = '${id}';`)
+    assert.equal(rows[0][0], '1', 'each operation applied once')
+  }
+  const sortById = <T extends { id: string }>(xs: T[]) => [...xs].sort((x, y) => x.id.localeCompare(y.id))
+  assert.deepEqual(sortById(a.engine.state.events), sortById(b.engine.state.events))
+  assert.equal(a.engine.xFor('chinese'), b.engine.xFor('chinese'))
+  const keys = (d: Device) => [...d.engine.derived().progress.values()].map((v) => `${v.target.knowledge_point_ref}|${v.target.error_type}`).sort()
+  assert.deepEqual(keys(a), [...new Set(keys(a))], 'one schedule per mistake')
+  assert.deepEqual(keys(a), keys(b))
+  const progress = (d: Device) => JSON.stringify([...d.engine.derived().progress.values()].map((v) => [v.target.id, v.stage, v.dueOn, v.notBefore]).sort())
+  assert.equal(progress(a), progress(b))
+  const replaced = await sql(`select count(*) from public.sync_field_history where child_id = '${child}' and key = 'x:chinese';`)
+  assert.ok(Number(replaced[0][0]) >= 1, 'the losing X is kept in server history')
+})
