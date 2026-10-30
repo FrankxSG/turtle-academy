@@ -3,8 +3,9 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { FakeSyncServer } from './fixtures/fake-sync-server.ts'
-import { Device, TestAuth, session, type Q } from './sync-harness.ts'
-import { Clock, correctResponse, wrongResponse } from './helpers.ts'
+import { Device, TestAuth, session } from './sync-harness.ts'
+import { Clock } from './helpers.ts'
+import { timezoneAt } from '../../src/engine/calendar.ts'
 
 const FAMILY = '11111111-1111-4111-8111-111111111111'
 const CHILD = '22222222-2222-4222-8222-222222222222'
@@ -58,7 +59,10 @@ test('F41: two devices practise offline and reconnect: every answer kept once, o
   assert.deepEqual(sortById(a.engine.state.events), sortById(b.engine.state.events))
   assert.deepEqual(new Set(a.engine.state.events.map((e) => e.id)), before, 'every answer from both devices, once')
   assert.equal(progress(a), progress(b))
+  assert.ok(mistakes(a).length > 0, 'the offline errors created mistakes')
   assert.deepEqual(mistakes(a), [...new Set(mistakes(a))], 'one schedule per mistake')
+  const records = (k: string) => a.engine.state.targets.filter((t) => `${t.knowledge_point_ref}|${t.error_type}` === k).length
+  assert.ok(mistakes(a).some((k) => records(k) === 2), 'the same mistake was recorded on both devices')
   // Next day both devices, offline, finish yesterday's shared unfinished task (it satisfies today's requirement).
   for (const c of [a.clock, b.clock, real]) c.sgt('2027-03-02')
   assert.equal((await a.practise())?.done, true)
@@ -152,6 +156,9 @@ test('F43: equal stamps resolve by device id, the same way on every replica', as
   // because the history decides learning dates.
   assert.deepEqual(a.engine.state.settings.timezone_history, b.engine.state.settings.timezone_history)
   assert.equal(progress(a), progress(b))
+  // Learning dates after the change use the timezone each device shows.
+  const later = new Date(a.clock.t + 3_600_000).toISOString()
+  for (const d of [a, b]) assert.equal(timezoneAt(later, d.engine.state.settings), d.engine.state.settings.timezone)
 })
 
 test('F44: a device offline for a while gets every change once, including deletions, after a lost acknowledgement and a restart', async () => {
@@ -189,4 +196,43 @@ test('F51: the same mistake caught on two devices gets one schedule; corrections
   await b.engine.invalidateTarget(shown.target.id, 'not_a_mistake')
   await settle(a, b)
   for (const d of [a, b]) assert.ok(!mistakes(d).includes(key))
+})
+
+test('F51: "not a mistake" decided on one device before syncing also ends the other device’s offline record of it', async () => {
+  const server = world()
+  const a = await device(server)
+  const b = await device(server)
+  await a.practise(1, () => false)
+  await b.practise(1, () => false)
+  const [key] = mistakes(a)
+  assert.ok(key)
+  // A decides before it has seen B's record of the same mistake.
+  await a.engine.invalidateTarget([...a.engine.derived().progress.values()][0].target.id, 'not_a_mistake')
+  await settle(a, b)
+  for (const d of [a, b]) assert.ok(!mistakes(d).includes(key), 'the decision covers every record made before it')
+  // A genuinely new error after the decision starts a new mistake.
+  for (const c of [a.clock, b.clock, real]) c.sgt('2027-03-03')
+  await settle(a, b)
+  await b.practise(1, () => false)
+  await settle(a, b)
+  assert.ok(mistakes(b).length > 0, 'a later error is a new mistake')
+  assert.equal(progress(a), progress(b))
+})
+
+test('rule 6 / F43: two offline devices load different packs; the later accepted load becomes active everywhere and progress converges', async () => {
+  const { syntheticPack } = await import('./fixtures/private-pack.ts')
+  const server = world()
+  const a = await device(server)
+  const b = await device(server)
+  const pendingRef = 'zh.p2_higher_chinese.char.u4e11'
+  await a.program.installPack(syntheticPack({ pendingRef }))
+  b.clock.advance(60)
+  real.advance(60)
+  await b.program.installPack(syntheticPack({ pendingRef, extraCase: true }))
+  await settle(a, b)
+  const active = async (d: Device) => (await d.pack.packs()).map((p) => p.pack_id)
+  assert.deepEqual(await active(a), ['test-pack-2'])
+  assert.deepEqual(await active(b), ['test-pack-2'])
+  assert.deepEqual(a.program.report()!.cases.map((c) => [c.case_id, c.status]), b.program.report()!.cases.map((c) => [c.case_id, c.status]))
+  assert.equal(progress(a), progress(b))
 })

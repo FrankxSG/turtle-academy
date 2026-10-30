@@ -2,7 +2,7 @@
 // state and its replay: nothing here decides progress, and nothing is stored.
 import { amendmentView, groupChainObservations, groupObservations, isActiveTarget, targetsById } from '../engine/amendments.ts'
 import { addDays } from '../engine/calendar.ts'
-import { excludedItemVersions, isEligible, isEvidence, observationCounter, type Derived, type TargetProgress } from '../engine/evidence.ts'
+import { dismissalFor, excludedItemVersions, isEligible, isEvidence, observationCounter, type Derived, type TargetProgress } from '../engine/evidence.ts'
 import { MAX_CLEARANCES_PER_TARGET_PER_DAY } from '../engine/policy.ts'
 import type { EngineState, Flag, Presentation, Stage, Subject, Target } from '../engine/types.ts'
 
@@ -93,14 +93,14 @@ export function progressRows(opts: {
     const members = derived.groups.members.get(t.id)
     if (!members) continue
     // The same observations the engine counts (src/engine/evidence.ts observationCounter).
-    const observations = groupObservations(members, view, byId, counts)
+    const observations = groupObservations(members, view, byId, counts, dismissalFor(derived, t))
     const pr = derived.progress.get(t.id)
     let state_: RowState
     if (!pr) {
       // No counting observation is left. If app-caught errors wait on an open flag, the mistake is suspended until
       // the parent decides; otherwise it was disabled, invalidated or marked not a mistake, and there is no row.
       if (groupChainObservations(members, view, byId).length === 0) continue
-      const waiting = groupObservations(members, view, byId).some((o) => {
+      const waiting = groupObservations(members, view, byId, undefined, dismissalFor(derived, t)).some((o) => {
         const p = o.batch_ref ? presentationById.get(o.batch_ref) : undefined
         return p !== undefined && !view.invalidPresentations.has(p.id) && p.status !== 'invalidated' && openFlag.has(`${p.item_id}@${p.item_version}`)
       })

@@ -44,14 +44,21 @@ export const maxDate = (a: string | null, b: string | null): string | null =>
 /** Hold-back window after a timezone change, during which the older zone's date also bounds the day. */
 const CHANGE_WINDOW_MS = 24 * 3600 * 1000
 
-/** The profile timezone in effect at an instant, from the recorded change history. */
+/**
+ * The profile timezone in effect at an instant, from the recorded change history. From the latest change on, it is
+ * the current setting: two devices can change the timezone at the same instant, and the setting's winner (by
+ * server-accepted stamp) and the history's entry for that instant (first accepted) need not agree. Dates must
+ * follow the timezone the parent sees.
+ */
 export function timezoneAt(at: string, settings: Settings): string {
   const t = Date.parse(at)
   const history = settings.timezone_history
   if (history.length === 0) return settings.timezone
-  let tz = history[0].from_timezone
-  for (const change of history) if (Date.parse(change.changed_at) <= t) tz = change.timezone
-  return tz
+  const sorted = [...history].sort((a, b) => Date.parse(a.changed_at) - Date.parse(b.changed_at))
+  let tz = sorted[0].from_timezone
+  for (const change of sorted) if (Date.parse(change.changed_at) <= t) tz = change.timezone
+  const latest = Math.max(...history.map((h) => Date.parse(h.changed_at)))
+  return t >= latest ? settings.timezone : tz
 }
 
 /**

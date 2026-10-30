@@ -289,3 +289,27 @@ test('two offline devices against the real server: one schedule per mistake, con
   const replaced = await sql(`select count(*) from public.sync_field_history where child_id = '${child}' and key = 'x:chinese';`)
   assert.ok(Number(replaced[0][0]) >= 1, 'the losing X is kept in server history')
 })
+
+test('real server: "not a mistake" decided on one device before syncing ends the other device’s record of the same mistake', { skip }, async () => {
+  const { d: a } = await device('parent-a@example.invalid', new Clock('2027-05-03T09:00:00+08:00'))
+  assert.equal((await a.sync()).state, 'idle')
+  const { d: b } = await device('parent-a@example.invalid', new Clock('2027-05-03T09:00:00+08:00'))
+  assert.equal((await b.sync()).state, 'idle')
+  // Several wrong answers: earlier tests left repair targets on this shared child, and repair answers are not banked.
+  await a.practise(6, () => false)
+  await b.practise(6, () => false)
+  const keyOf = (v: { target: { knowledge_point_ref: string | null; error_type: string } }) => `${v.target.knowledge_point_ref}|${v.target.error_type}`
+  // A mistake both devices caught today, each under its own record.
+  const today = (d: Device) => d.engine.state.targets.filter((t) => t.observations.some((o) => o.source_type === 'app_practice' && o.observed_on === '2027-05-03'))
+  const onB = new Map(today(b).map((t) => [keyOf({ target: t }), t.id]))
+  const shared = today(a).find((t) => onB.has(keyOf({ target: t })) && onB.get(keyOf({ target: t })) !== t.id)
+  assert.ok(shared, 'both devices recorded the same mistake under different records')
+  const first = { target: shared }
+  await a.engine.invalidateTarget(first.target.id, 'not_a_mistake')
+  for (let round = 0, quiet = 0; quiet < 2; round++) {
+    assert.ok(round < 8, 'devices settle')
+    const s = [await a.sync(), await b.sync()]
+    quiet = s.every((x) => x.state === 'idle' && x.waiting === 0) ? quiet + 1 : 0
+  }
+  for (const d of [a, b]) assert.ok(![...d.engine.derived().progress.values()].some((v) => keyOf(v) === keyOf(first)))
+})

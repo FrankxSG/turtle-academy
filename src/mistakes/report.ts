@@ -4,8 +4,8 @@
 // Attempt counts here describe what happened (first responses, hint retries, supported corrections, flags);
 // they do not decide progress. Production progress comes from production.ts. No evidence → "not yet evidenced".
 import type { CatalogueRelease } from '../catalogue/adapter.ts'
-import { amendmentView, currentTarget, groupChainObservations, groupObservations, targetsById } from '../engine/amendments.ts'
-import { excludedItemVersions, isEvidence, observationCounter, type Derived } from '../engine/evidence.ts'
+import { amendmentView, currentTarget, groupChainObservations, groupObservations, lineage as ancestry, targetsById } from '../engine/amendments.ts'
+import { dismissalFor, excludedItemVersions, isEvidence, observationCounter, type Derived } from '../engine/evidence.ts'
 import type { EngineState, Presentation, Stage } from '../engine/types.ts'
 import { caseObservationId, missingStages, type CrosswalkRow } from './intake.ts'
 import type { PlanStage, Register } from './pack.ts'
@@ -176,7 +176,7 @@ export function buildReport(opts: {
     // The case's observation follows its mistake through corrections; it is dropped only when marked so.
     const caseObs = caseObservationId(c.id)
     const dropped = current !== null && groupChainObservations(members, view, byId).some((o) => o.id === caseObs)
-      && !groupObservations(members, view, byId, counts).some((o) => o.id === caseObs)
+      && !groupObservations(members, view, byId, counts, dismissalFor(derived, current)).some((o) => o.id === caseObs)
     if ((linked && !current) || dropped) status = 'invalidated'
     else if (!target) status = 'not_imported'
     else if (target.mapping_status === 'pending_content') status = 'pending_content'
@@ -227,12 +227,10 @@ export function normalizedEvents(state: EngineState, derived: Derived, crosswalk
     const group = head ? derived.groups.members.get(derived.groups.leader.get(head) ?? head) ?? [head] : []
     for (const id of group) current.add(id)
     const lineage = new Set<string>([r.engine_target_id, ...group])
-    for (const start of [...lineage]) for (const direction of [view.replaces, view.replacedBy]) {
-      let at = direction.get(start)
-      while (at !== undefined && !lineage.has(at)) {
-        lineage.add(at)
-        at = direction.get(at)
-      }
+    // Ancestors (every record a correction superseded) and descendants (later corrections).
+    for (const start of [...lineage]) {
+      for (const id of ancestry(start, view)) lineage.add(id)
+      for (let at = view.replacedBy.get(start); at !== undefined && !lineage.has(at); at = view.replacedBy.get(at)) lineage.add(at)
     }
     for (const id of lineage) {
       casesOf.set(id, [...new Set([...(casesOf.get(id) ?? []), r.case_id])])

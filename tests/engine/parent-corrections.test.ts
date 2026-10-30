@@ -430,3 +430,34 @@ test('sequential corrections retain causality when the clock goes backwards', as
   h.engine.state.amendments.reverse()
   assert.deepEqual([...h.engine.derived().progress.keys()], [last.id])
 })
+
+test('two records of one mistake: a case marked duplicate stops counting even when its record holds nothing else', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  await importTarget(h, 'imp-1', 'ma-kp1', [{ id: 'obs-1' }])
+  // The other device's record of the same mistake, with one later case.
+  const other = structuredClone(h.engine.state.targets[0])
+  other.id = 'zz-other'
+  other.observations = [{ ...other.observations[0], id: 'obs-other', observed_on: '2027-03-04', recorded_on: '2027-03-04' }]
+  h.engine.state.targets.push(other)
+  h.engine.state = structuredClone(h.engine.state)
+  assert.equal(derive(h.engine.state).progress.get('imp-1')!.notBefore, '2027-03-05')
+  await h.engine.invalidateObservation('imp-1', 'obs-other', 'duplicate')
+  assert.equal(derive(h.engine.state).progress.get('imp-1')!.notBefore, '2027-03-02', 'the duplicate no longer counts')
+})
+
+test('a correction of a two-record mistake: a case added later to the retired record still follows the correction', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  await importTarget(h, 'imp-1', 'ma-kp1', [{ id: 'obs-1' }])
+  const other = structuredClone(h.engine.state.targets[0])
+  other.id = 'zz-other'
+  other.observations = [{ ...other.observations[0], id: 'obs-2' }]
+  h.engine.state.targets.push(other)
+  h.engine.state = structuredClone(h.engine.state)
+  const { id } = await h.engine.amendTarget('imp-1', { error_type: 'confused_form' }, 'wrong_error_type')
+  // A device that had not seen the correction adds a case to the retired record.
+  const state = structuredClone(h.engine.state)
+  state.targets.find((t) => t.id === 'zz-other')!.observations.push({ ...other.observations[0], id: 'obs-late', observed_on: '2027-03-05', recorded_on: '2027-03-05' })
+  const pr = derive(state).progress
+  assert.deepEqual([...pr.keys()], [id], 'one schedule, on the replacement')
+  assert.equal(pr.get(id)!.notBefore, '2027-03-06', 'the late case counts')
+})

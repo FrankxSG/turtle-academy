@@ -5,7 +5,7 @@
 import type { Amendment, EngineState, Target } from './types.ts'
 
 /** Reducer revision that interprets the target/observation/answer amendments below. */
-export const AMENDMENT_REVISION = 2
+export const AMENDMENT_REVISION = 3
 
 export type AmendReason = 'wrong_target' | 'wrong_skill' | 'wrong_error_type'
 export type InvalidateReason = 'not_a_mistake' | 'duplicate' | 'question_problem'
@@ -13,12 +13,17 @@ export type InvalidateReason = 'not_a_mistake' | 'duplicate' | 'question_problem
 export interface AmendmentView {
   /** Superseded target → its replacement. */
   replacedBy: Map<string, string>
-  /** Replacement → the target it superseded (the inverse of `replacedBy`). */
-  replaces: Map<string, string>
+  /**
+   * Replacement → the targets it superseded (the inverse of `replacedBy`): the corrected target, and any other
+   * records of the same mistake retired with it (two devices).
+   */
+  replaces: Map<string, string[]>
   invalidTargets: Set<string>
   /** `${targetId}\u0000${observationId}` → reason: observation ids are unique within a target. */
   invalidObservations: Map<string, Amendment['reason']>
   invalidPresentations: Set<string>
+  /** Replacement target → when the correction that created it was made. */
+  createdAt: Map<string, string>
 }
 
 const order = (a: Amendment, b: Amendment) => a.at.localeCompare(b.at) || a.id.localeCompare(b.id)
@@ -31,6 +36,7 @@ const order = (a: Amendment, b: Amendment) => a.at.localeCompare(b.at) || a.id.l
 export function amendmentView(state: Pick<EngineState, 'amendments'>): AmendmentView {
   const view: AmendmentView = {
     replacedBy: new Map(), replaces: new Map(), invalidTargets: new Set(), invalidObservations: new Map(), invalidPresentations: new Set(),
+    createdAt: new Map(),
   }
   // A correction of a replacement depends on the amendment that created it, even when a device clock
   // moves backwards. Timestamp/id only order unrelated ready amendments; they cannot reverse causality.
@@ -38,18 +44,24 @@ export function amendmentView(state: Pick<EngineState, 'amendments'>): Amendment
   const creates = new Map(pending.filter((a) => a.kind === 'amend_target' && a.replacement_ref)
     .map((a) => [a.replacement_ref!, a]))
   while (pending.length > 0) {
-    const index = pending.findIndex((a) => a.kind !== 'amend_target' || !creates.has(a.refs[0]))
+    const index = pending.findIndex((a) => a.kind !== 'amend_target' || !a.refs.some((r) => creates.has(r)))
     if (index < 0) break // malformed cyclic dependencies cannot affect replay
     const [a] = pending.splice(index, 1)
     if (a.kind === 'amend_target' && a.replacement_ref) creates.delete(a.replacement_ref)
-    if (a.kind === 'amend_target' && a.refs.length === 1 && a.replacement_ref) {
+    if (a.kind === 'amend_target' && a.refs.length >= 1 && a.replacement_ref) {
       const to = a.replacement_ref
       if (view.replaces.has(to) || view.replacedBy.has(to)) continue // malformed or repeated: never a cycle
-      let head = a.refs[0]
-      for (let guard = 0; view.replacedBy.has(head) && guard < 10_000; guard++) head = view.replacedBy.get(head) as string
-      if (head === to) continue
-      view.replacedBy.set(head, to)
-      view.replaces.set(to, head)
+      // refs[0] is the corrected target; further refs are other records of the same mistake retired with it.
+      // A record already corrected elsewhere is followed to its current head, so concurrent corrections chain.
+      const supersedes: string[] = []
+      for (const ref of a.refs) {
+        let head = ref
+        for (let guard = 0; view.replacedBy.has(head) && guard < 10_000; guard++) head = view.replacedBy.get(head) as string
+        if (head === to || supersedes.includes(head)) continue
+        view.replacedBy.set(head, to)
+        supersedes.push(head)
+      }
+      if (supersedes.length > 0) { view.replaces.set(to, supersedes); view.createdAt.set(to, a.at) }
     } else if (a.kind === 'invalidate_target') for (const r of a.refs) view.invalidTargets.add(r)
     else if (a.kind === 'invalidate_observation' && a.refs.length === 2) {
       const key = `${a.refs[0]}\u0000${a.refs[1]}`
@@ -61,20 +73,28 @@ export function amendmentView(state: Pick<EngineState, 'amendments'>): Amendment
   return view
 }
 
+/** A target and every target it (transitively) replaced, nearest first. */
+export function lineage(id: string, view: AmendmentView): string[] {
+  const out = [id]
+  for (let i = 0; i < out.length && out.length < 10_000; i++) {
+    for (const prev of view.replaces.get(out[i]) ?? []) if (!out.includes(prev)) out.push(prev)
+  }
+  return out
+}
+
 /**
  * A target's status after amendments (the stored record keeps the status it was created with). Invalidating any
  * version of a mistake invalidates the mistake: a correction made elsewhere does not bring it back.
  */
 export function targetStatus(t: Target, view: AmendmentView): Target['status'] {
   if (t.status !== 'active') return t.status
-  for (let at: string | undefined = t.id, guard = 0; at !== undefined && guard < 10_000; at = view.replaces.get(at), guard++) {
-    if (view.invalidTargets.has(at)) return 'invalidated'
-  }
+  for (const at of lineage(t.id, view)) if (view.invalidTargets.has(at)) return 'invalidated'
   if (view.replacedBy.has(t.id)) return 'superseded'
   return 'active'
 }
 
 export const isActiveTarget = (t: Target, view: AmendmentView) => targetStatus(t, view) === 'active'
+
 
 /**
  * An observation stops counting when it was invalidated on this target or on any target this one replaced: a
@@ -86,7 +106,7 @@ export function observationInvalid(t: Target, o: Target['observations'][number],
 
 function observationMark(t: Target, o: Target['observations'][number], view: AmendmentView): Amendment['reason'] | null {
   let mark: Amendment['reason'] | null = null
-  for (let at: string | undefined = t.id, guard = 0; at !== undefined && guard < 10_000; at = view.replaces.get(at), guard++) {
+  for (const at of lineage(t.id, view)) {
     const m = view.invalidObservations.get(`${at}\u0000${o.id}`)
     if (m !== undefined && mark !== 'not_a_mistake') mark = m
   }
@@ -102,7 +122,7 @@ type Observation = Target['observations'][number]
  */
 export function chainObservations(t: Target, view: AmendmentView, byId: ReadonlyMap<string, Target>): Observation[] {
   const out = new Map<string, Observation>()
-  for (let at: string | undefined = t.id, guard = 0; at !== undefined && guard < 10_000; at = view.replaces.get(at), guard++) {
+  for (const at of lineage(t.id, view)) {
     const holder = byId.get(at)
     // An app-caught error is about the question's own point: it follows a correction only when the knowledge point
     // and skill are unchanged. (A parent-confirmed case is the mistake being corrected, so it always follows.)
@@ -122,15 +142,7 @@ export function chainObservations(t: Target, view: AmendmentView, byId: Readonly
  */
 export function validObservations(t: Target, view: AmendmentView, byId: ReadonlyMap<string, Target>,
   counts: (o: Observation) => boolean = () => true): Observation[] {
-  // `counts` drops observations that stop counting for other reasons (an app-caught error whose question was
-  // flagged); the duplicate rule then looks only at the cases that remain.
-  const all = chainObservations(t, view, byId).filter(counts)
-  const valid = all.filter((o) => !observationInvalid(t, o, view))
-  if (valid.length > 0) return valid
-  // Only when every case was marked a duplicate: a duplicate of a case that is "not a mistake" is not one either.
-  // An observation with the legacy `invalidated` flag (never set by this app) counts as not a mistake here.
-  if (all.length === 0 || !all.every((o) => !o.invalidated && observationMark(t, o, view) === 'duplicate')) return []
-  return [...all].sort((a, b) => a.id.localeCompare(b.id)).slice(0, 1)
+  return groupObservations([t.id], view, byId, counts)
 }
 
 export const targetsById = (state: Pick<EngineState, 'targets'>) => new Map(state.targets.map((t) => [t.id, t]))
@@ -189,15 +201,59 @@ export function mistakeGroups(state: Pick<EngineState, 'targets'>, view: Amendme
 /** The target that leads the group holding `id` (or `id` itself when it is not an active target). */
 export const leaderOf = (groups: MistakeGroups, id: string) => groups.leader.get(id) ?? id
 
-/** All counting observations of a mistake group: each member's own (and its correction chain's), once by id. */
+/**
+ * A parent's "not a mistake" (or "faulty question") decision on a mistake, by progress unit. Other records of the
+ * same mistake made before it, for example on a device that had not synced, are covered too; a new error after it
+ * starts a new mistake.
+ */
+export interface Dismissal { on: string; at: string }
+
+/**
+ * Decisions by progress unit (mistakeKey): the latest one. `dateOf` gives the learning date of an instant (the
+ * engine's DateBook), so a decision covers observations recorded on or before its learning day.
+ */
+export function dismissals(state: Pick<EngineState, 'targets' | 'amendments'>, dateOf: (at: string) => string): Map<string, Dismissal> {
+  const byId = targetsById(state)
+  const out = new Map<string, Dismissal>()
+  for (const a of state.amendments) {
+    if (a.kind !== 'invalidate_target' || a.reason === 'duplicate') continue
+    for (const ref of a.refs) {
+      const t = byId.get(ref)
+      if (!t) continue
+      const k = mistakeKey(t)
+      const prev = out.get(k)
+      if (!prev || a.at > prev.at) out.set(k, { on: dateOf(a.at), at: a.at })
+    }
+  }
+  return out
+}
+
+/**
+ * All counting observations of a mistake group: each member's own and its correction chain's, once by id. The
+ * duplicate rule applies once across the whole group, so marking a case that is the only one on its record works.
+ * `dismissal` drops observations recorded on or before a decision on this mistake (a member created by a
+ * correction made after the decision keeps its own).
+ */
 export function groupObservations(ids: readonly string[], view: AmendmentView, byId: ReadonlyMap<string, Target>,
-  counts?: (o: Observation) => boolean): Observation[] {
-  const out = new Map<string, Observation>()
+  counts: (o: Observation) => boolean = () => true, dismissal?: Dismissal): Observation[] {
+  const all = new Map<string, { o: Observation; holder: Target }>()
   for (const id of ids) {
     const t = byId.get(id)
-    if (t) for (const o of validObservations(t, view, byId, counts)) if (!out.has(o.id)) out.set(o.id, o)
+    if (!t) continue
+    const exempt = dismissal !== undefined && (view.createdAt.get(id) ?? '') > dismissal.at
+    for (const o of chainObservations(t, view, byId)) {
+      if (all.has(o.id) || !counts(o)) continue
+      if (dismissal && !exempt && o.recorded_on <= dismissal.on) continue
+      all.set(o.id, { o, holder: t })
+    }
   }
-  return [...out.values()]
+  const list = [...all.values()]
+  const valid = list.filter(({ o, holder }) => !observationInvalid(holder, o, view)).map(({ o }) => o)
+  if (valid.length > 0) return valid
+  // Only when every case was marked a duplicate: a duplicate of a case that is "not a mistake" is not one either.
+  // An observation with the legacy `invalidated` flag (never set by this app) counts as not a mistake here.
+  if (list.length === 0 || !list.every(({ o, holder }) => !o.invalidated && observationMark(holder, o, view) === 'duplicate')) return []
+  return list.map(({ o }) => o).sort((a, b) => a.id.localeCompare(b.id)).slice(0, 1)
 }
 
 /** Every observation recorded on a mistake group, valid or not (whether it ever had any). */
