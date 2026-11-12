@@ -737,6 +737,8 @@ test('a new case joins its corrected mistake on every device, also on one that h
   a.targets.push(appCaught(zhu, '00-app-caught'))
   assert.equal(holderIn(intakeOf(s, b, newer), 'O907'), replacement)
   assert.equal(holderIn(intakeOf(s, a, newer), 'O907'), replacement, 'the same mistake as on the other device')
+  a.targets.reverse()
+  assert.equal(holderIn(intakeOf(s, a, newer), 'O907'), replacement, 'whatever the order of records on the device')
 })
 
 test('a device that never held the earlier import writes its cases to the import record, not to an app-caught record', async () => {
@@ -756,6 +758,10 @@ test('a device that never held the earlier import writes its cases to the import
   const before = JSON.stringify(fresh.engine.state.targets)
   await fresh.program.importRegister()
   assert.equal(JSON.stringify(fresh.engine.state.targets), before)
+  // The same after a restart: opening the app imports the stored pack again.
+  const again = await reopen(fresh)
+  assert.equal(JSON.stringify(again.engine.state.targets), before)
+  for (const id of ['O903', 'O907']) assert.equal(again.program.crosswalk.find((x) => x.case_id === id)!.engine_target_id, target(ZHU))
 })
 
 test('a new case never joins an unrelated mistake of another error type; it gets the import record, the same on every device', async () => {

@@ -2,7 +2,7 @@
 // replaying the append-only answer events and immutable records; nothing here is stored as mutable truth.
 // Replaying after a flag decision therefore recalculates progress, while completions and delivered story
 // checkpoints (separate records) are never revoked.
-import { amendmentView, dismissals, groupChainObservations, groupObservations, laterDismissal, mistakeGroups, mistakeKey, revivals, targetsById, targetStatus, type AmendmentView, type Dismissal, type MistakeGroups } from './amendments.ts'
+import { amendmentView, dismissals, groupChainObservations, groupObservations, groupPendingContent, laterDismissal, mistakeGroups, mistakeKey, revivals, targetsById, targetStatus, type AmendmentView, type Dismissal, type MistakeGroups } from './amendments.ts'
 import { addDays, DateBook } from './calendar.ts'
 import { MAX_CLEARANCES_PER_TARGET_PER_DAY, REVIEW_INTERVALS } from './policy.ts'
 import type { AnswerEvent, Clearance, EngineState, Presentation, Stage, Target, TargetAggregate } from './types.ts'
@@ -29,6 +29,8 @@ export interface TargetProgress {
   lastIndependentObservationOn: string | null
   /** Tasks in which this target is assessed through a material (whole-task aggregation). */
   wholeTaskRoutes: Set<string>
+  /** Any record of the mistake waits for questions (the leading record alone can say `mapped`). */
+  pendingContent: boolean
 }
 
 export interface Derived {
@@ -108,7 +110,7 @@ function fresh(target: Target): TargetProgress {
     target, stage: initialStage(target), lowSuccessItems: [], acquisitionSuccessItems: [],
     notBefore: null, notBeforeReason: null, blockedByTask: null, finalStageNotBefore: null, clearances: [],
     dueOn: null, reviewIndex: 0, everReachedDelayedReview: false, lastIndependentObservationOn: null,
-    wholeTaskRoutes: new Set(),
+    wholeTaskRoutes: new Set(), pendingContent: target.mapping_status === 'pending_content',
   }
 }
 
@@ -198,6 +200,7 @@ export function derive(state: EngineState): Derived {
     const observations = groupObservations(members, amended, byId, effectiveObservation, dismissal)
     if (groupChainObservations(members, amended, byId).length > 0 && observations.length === 0) continue
     const pr = fresh(target)
+    pr.pendingContent = groupPendingContent(members, byId)
     progress.set(target.id, pr)
     // New imports start no earlier than the day after the app imported them (Functional Design §4). A later
     // independent import of the same target keeps its stage and moves the earliest practice to the next day.
@@ -412,7 +415,7 @@ function mergeShortAggregate(aggregates: Map<string, TargetAggregate[]>, taskId:
 
 /** Is the target eligible for prescribed practice on a learning date (outside its own whole-task routes)? */
 export function isEligible(pr: TargetProgress, date: string): boolean {
-  if (pr.target.mapping_status !== 'mapped' || pr.target.verification !== 'verified') return false
+  if (pr.pendingContent || pr.target.mapping_status !== 'mapped' || pr.target.verification !== 'verified') return false
   if (pr.blockedByTask !== null) return false
   if (pr.notBefore !== null && date < pr.notBefore) return false
   if (pr.clearances.filter((c) => c.cleared_on === date).length >= MAX_CLEARANCES_PER_TARGET_PER_DAY) return false

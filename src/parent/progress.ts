@@ -1,6 +1,6 @@
 // What the parent area shows about mistakes and flagged questions (Functional Design §8). Pure views over the engine
 // state and its replay: nothing here decides progress, and nothing is stored.
-import { amendmentView, groupChainObservations, groupObservations, isActiveTarget, targetsById } from '../engine/amendments.ts'
+import { amendmentView, groupChainObservations, groupObservations, groupPendingContent, isActiveTarget, targetsById } from '../engine/amendments.ts'
 import { addDays } from '../engine/calendar.ts'
 import { dismissalFor, excludedItemVersions, isEligible, isEvidence, observationCounter, type Derived, type TargetProgress } from '../engine/evidence.ts'
 import { MAX_CLEARANCES_PER_TARGET_PER_DAY } from '../engine/policy.ts'
@@ -108,7 +108,7 @@ export function progressRows(opts: {
       })
       if (!waiting) continue
       state_ = 'suspended'
-    } else if (t.mapping_status === 'pending_content') state_ = 'pending_content'
+    } else if (groupPendingContent(members, byId)) state_ = 'pending_content'
     else if (t.verification !== 'verified') state_ = 'unverified'
     else if (members.some((id) => held.has(id))) state_ = 'held'
     else state_ = pr.stage === 'delayed_review' ? 'delayed_review' : pr.stage === 'acquisition' ? 'learning' : 'repair'

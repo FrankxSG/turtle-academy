@@ -188,6 +188,13 @@ export function currentTarget(state: Pick<EngineState, 'targets' | 'amendments'>
  */
 export const mistakeKey = (t: Target) => [t.subject, t.course, t.knowledge_point_ref ?? '', t.assessed_skill ?? '', t.error_type].join('\u0000')
 
+/**
+ * A mistake waits for questions when any of its records does. Records of one mistake can disagree: an app-caught
+ * record is always `mapped`, while the import record carries the pack's answer for the repair stages.
+ */
+export const groupPendingContent = (members: string[], byId: Map<string, Target>): boolean =>
+  members.some((id) => byId.get(id)?.mapping_status === 'pending_content')
+
 export interface MistakeGroups {
   /** Every active target → the target that leads its group (the lowest id: the same on every device). */
   leader: Map<string, string>
