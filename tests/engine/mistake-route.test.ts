@@ -10,6 +10,8 @@ import { MemoryRecordStore, WriteQueue } from '../../src/engine/persistence.ts'
 import { importTargetId, planIntake } from '../../src/mistakes/intake.ts'
 import { currentTarget } from '../../src/engine/amendments.ts'
 import { MemoryPrivateStore, MistakeProgram } from '../../src/mistakes/program.ts'
+import { validatePack } from '../../src/mistakes/pack.ts'
+import type { EngineState, Target } from '../../src/engine/types.ts'
 import { Clock, ids, ManualTimers, correctResponse, wrongResponse } from './helpers.ts'
 import { publicChinese } from './fixtures/public-chinese.ts'
 import { PRIVATE_REF, syntheticPack } from './fixtures/private-pack.ts'
@@ -706,4 +708,71 @@ test('intake computes the same case links from the same records in any order (no
   assert.ok(first.includes('aa-other-device') || first.includes(target(ZHU)))
   s.engine.state.targets.reverse()
   assert.equal(plan(), first)
+})
+
+// Where a new case lands must depend on the case and its own import history only, never on which other records a
+// device happens to hold: two offline devices importing the same pack must choose the same mistake.
+const appCaught = (like: Target, id: string, errorType = 'unknown_cause'): Target => ({
+  ...structuredClone(like), id, error_type: errorType, verified_at: null, replaces: null,
+  observations: [{ id: `${id}-obs`, source_type: 'app_practice', observed_on: '2027-03-01', recorded_on: '2027-03-01',
+    instance_ref: 't:chinese:2027-03-01:0', batch_ref: null, recurrence: 'first', invalidated: false }],
+})
+const intakeOf = (s: S, state: EngineState, pack: ReturnType<typeof syntheticPack>) => {
+  const valid = validatePack(pack)
+  const targets = targetInfo(s.publicContent.lists, (pack as unknown as { private_targets: RawSkillTarget[] }).private_targets)
+  return planIntake({ state, register: valid.register, release: s.program.currentRelease()!, targets, today: '2027-03-02', now: s.clock.now() })
+}
+const holderIn = (r: ReturnType<typeof intakeOf>, caseId: string) => r.crosswalk.find((x) => x.case_id === caseId)!.engine_target_id
+
+test('a new case joins its corrected mistake on every device, also on one that holds an app-caught record of the same character', async () => {
+  const s = await setup()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  const zhu = structuredClone(s.engine.state.targets.find((t) => t.id === target(ZHU))!)
+  const { id: replacement } = await s.engine.amendTarget(target(ZHU), { error_type: 'form_confusion' }, 'wrong_error_type')
+  const newer = syntheticPack({ pendingRef: s.pendingRef, extraCase: true })
+  // Device B holds the correction only. Device A also holds an app-caught 住 error (unknown cause) whose id sorts first.
+  const b = structuredClone(s.engine.state)
+  const a = structuredClone(s.engine.state)
+  a.targets.push(appCaught(zhu, '00-app-caught'))
+  assert.equal(holderIn(intakeOf(s, b, newer), 'O907'), replacement)
+  assert.equal(holderIn(intakeOf(s, a, newer), 'O907'), replacement, 'the same mistake as on the other device')
+})
+
+test('a device that never held the earlier import writes its cases to the import record, not to an app-caught record', async () => {
+  const s = await setup()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  const zhu = structuredClone(s.engine.state.targets.find((t) => t.id === target(ZHU))!)
+  // Device A never loaded the pack; it holds only an app-caught 住 error. Both devices then load the newer pack offline.
+  const fresh = await setup()
+  fresh.engine.state.targets.push(appCaught(zhu, '00-app-caught'))
+  await fresh.engine.flush()
+  await fresh.program.installPack(syntheticPack({ pendingRef: fresh.pendingRef, extraCase: true }))
+  for (const id of ['O903', 'O907']) assert.equal(fresh.program.crosswalk.find((x) => x.case_id === id)!.engine_target_id, target(ZHU))
+  // Same error type, so the two records are one mistake with one schedule (two-device rule), and the cases count once.
+  const rows = [...fresh.engine.derived().progress.values()].filter((v) => v.target.knowledge_point_ref === ZHU)
+  assert.equal(rows.length, 1, 'one schedule')
+  // Importing again adds nothing and moves nothing.
+  const before = JSON.stringify(fresh.engine.state.targets)
+  await fresh.program.importRegister()
+  assert.equal(JSON.stringify(fresh.engine.state.targets), before)
+})
+
+test('a new case never joins an unrelated mistake of another error type; it gets the import record, the same on every device', async () => {
+  const s = await setup()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  const zhu = structuredClone(s.engine.state.targets.find((t) => t.id === target(ZHU))!)
+  const fresh = await setup()
+  const newer = syntheticPack({ pendingRef: fresh.pendingRef, extraCase: true })
+  // Device A holds a 住 mistake of another error type that no import produced; device B holds nothing.
+  const a = structuredClone(fresh.engine.state)
+  a.targets.push(appCaught(zhu, '00-other-type', 'form_confusion'))
+  const b = structuredClone(fresh.engine.state)
+  const onA = intakeOf(fresh, a, newer)
+  const onB = intakeOf(fresh, b, newer)
+  for (const id of ['O903', 'O907']) {
+    assert.equal(holderIn(onB, id), target(ZHU))
+    assert.equal(holderIn(onA, id), target(ZHU), 'the same record as on the other device')
+  }
+  assert.equal(onA.records.find((t) => t.id === target(ZHU))!.error_type, 'unknown_cause')
+  assert.ok(!onA.records.some((t) => t.id === '00-other-type'), 'the unrelated mistake is left alone')
 })
