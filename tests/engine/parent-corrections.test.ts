@@ -643,9 +643,11 @@ test('F41: simultaneous offline repair answers replay identically in either repl
   assert.ok(correct, 'the fixture has a high-option short repair')
   const first = state.events.find((e) => e.presentation_id === correct.id && e.phase === 'first')
   assert.ok(first?.correct)
-  const other = { ...correct, id: 'other-device-presentation' }
-  state.presentations.push(other)
-  state.events.push({ ...first, id: 'other-device-answer', presentation_id: other.id, correct: false })
+  // Keep only the two competing repair answers; unrelated questions cannot mask replay ordering.
+  const eligible = { ...correct, first_response_eligible: true }
+  const other = { ...eligible, id: 'other-device-presentation' }
+  state.presentations = [eligible, other]
+  state.events = [first, { ...first, id: 'other-device-answer', presentation_id: other.id, correct: false }]
 
   const reverse = { ...state, presentations: [...state.presentations].reverse(), events: [...state.events].reverse() }
   assert.deepEqual(derive(state).progress.get(target.id), derive(reverse).progress.get(target.id))
