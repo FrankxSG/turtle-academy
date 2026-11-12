@@ -9,7 +9,8 @@ import { LearningEngine, type Step } from '../../src/engine/engine.ts'
 import { MemoryRecordStore, WriteQueue } from '../../src/engine/persistence.ts'
 import { importTargetId, planIntake } from '../../src/mistakes/intake.ts'
 import { currentTarget } from '../../src/engine/amendments.ts'
-import { isEligible } from '../../src/engine/evidence.ts'
+import { derive, isEligible } from '../../src/engine/evidence.ts'
+import { progressRows } from '../../src/parent/progress.ts'
 import { MemoryPrivateStore, MistakeProgram } from '../../src/mistakes/program.ts'
 import { validatePack } from '../../src/mistakes/pack.ts'
 import type { EngineState, Target } from '../../src/engine/types.ts'
@@ -713,10 +714,10 @@ test('intake computes the same case links from the same records in any order (no
 
 // Where a new case lands must depend on the case and its own import history only, never on which other records a
 // device happens to hold: two offline devices importing the same pack must choose the same mistake.
-const appCaught = (like: Target, id: string, errorType = 'unknown_cause'): Target => ({
+const appCaught = (like: Target, id: string, errorType = 'unknown_cause', taskId = 't:chinese:2027-03-01:0'): Target => ({
   ...structuredClone(like), id, error_type: errorType, verified_at: null, replaces: null,
   observations: [{ id: `${id}-obs`, source_type: 'app_practice', observed_on: '2027-03-01', recorded_on: '2027-03-01',
-    instance_ref: 't:chinese:2027-03-01:0', batch_ref: null, recurrence: 'first', invalidated: false }],
+    instance_ref: taskId, batch_ref: null, recurrence: 'first', invalidated: false }],
 })
 const intakeOf = (s: S, state: EngineState, pack: ReturnType<typeof syntheticPack>) => {
   const valid = validatePack(pack)
@@ -798,5 +799,36 @@ test('a mistake waits for questions when its import record does, also when an ap
   assert.equal(report.totals.pending_content, 1)
   const rows = [...s.engine.derived().progress.values()].filter((v) => v.target.knowledge_point_ref === s.pendingRef)
   assert.equal(rows.length, 1, 'one mistake')
-  for (const day of ['2027-03-02', '2027-03-09']) assert.equal(isEligible(rows[0], day), false, 'never planned while questions are missing')
+})
+
+test('replay and the parent view hold a mistake while any of its records waits for questions, and release it when they arrive', async () => {
+  const s0 = await setup()
+  await s0.program.installPack(syntheticPack({ pendingRef: s0.pendingRef }))
+  const like = structuredClone(s0.engine.state.targets.find((t) => t.id === target(s0.pendingRef))!)
+  const s = await setup()
+  // The app-caught error came from a task that has finished, so nothing but missing questions holds the mistake back.
+  const r = await s.engine.startOrResume('chinese')
+  if (r.kind !== 'task') throw new Error('expected a task')
+  await run(s.engine, r.task.id, () => true)
+  s.engine.state.targets.push({ ...appCaught(like, '00-app-caught', 'unknown_cause', r.task.id), mapping_status: 'mapped' })
+  await s.engine.flush()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  const view = (state: EngineState) => {
+    const derived = derive(state)
+    const prs = [...derived.progress.values()].filter((v) => v.target.knowledge_point_ref === s.pendingRef)
+    const row = progressRows({ state, derived, today: '2027-03-09', subject: 'chinese', held: new Set() }).filter((x) => x.target.knowledge_point_ref === s.pendingRef)
+    return { prs, row }
+  }
+  const waiting = view(structuredClone(s.engine.state))
+  assert.equal(waiting.prs.length, 1)
+  assert.equal(waiting.prs[0].target.id, '00-app-caught', 'the app-caught record leads the mistake')
+  assert.equal(waiting.prs[0].blockedByTask, null)
+  assert.equal(isEligible(waiting.prs[0], '2027-03-09'), false, 'not planned while questions are missing')
+  assert.deepEqual(waiting.row.map((x) => x.state), ['pending_content'])
+  // Questions arrive: the import record becomes mapped, and the mistake can be practised.
+  const arrived = structuredClone(s.engine.state)
+  arrived.targets.find((t) => t.id === target(s.pendingRef))!.mapping_status = 'mapped'
+  const ready = view(arrived)
+  assert.equal(isEligible(ready.prs[0], '2027-03-09'), true)
+  assert.deepEqual(ready.row.map((x) => x.state), ['repair'])
 })
