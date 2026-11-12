@@ -234,7 +234,10 @@ export function derive(state: EngineState): Derived {
       steps.push({ kind: 'observation', t: finalTime(o.instance_ref), seq: seq++, taskId: o.instance_ref, recurrence, on: o.observed_on })
       if (pr.lastIndependentObservationOn === null || o.observed_on > pr.lastIndependentObservationOn) pr.lastIndependentObservationOn = o.observed_on
     }
-    steps.sort((a, b) => a.t - b.t || a.seq - b.seq)
+    // Different offline devices can produce the same timestamp and local sequence.
+    // Use stable record IDs for ties so repair progress cannot depend on arrival order.
+    const stepId = (step: Step) => step.kind === 'short' ? step.e.id : step.taskId
+    steps.sort((a, b) => a.t - b.t || a.seq - b.seq || a.kind.localeCompare(b.kind) || stepId(a).localeCompare(stepId(b)))
 
     // A failure or creation in a task blocks the target until the day after that task finalises.
     const blockUntilAfter = (taskId: string, reason: 'failure_cooldown' | 'app_target_next_task') => {
