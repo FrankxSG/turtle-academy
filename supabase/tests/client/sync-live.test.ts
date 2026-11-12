@@ -209,3 +209,45 @@ test('a reset device restores records and the pack without wrong forms; the pinn
   assert.ok(b.engine.state.presentations.some((p) => p.role === 'repair' && p.target_ref?.startsWith('case-target:') && !a.engine.state.presentations.some((x) => x.id === p.id)))
   assert.equal((await b.sync()).state, 'idle')
 })
+
+test('parent amendments on two devices reach the real server as add-only records and both devices replay alike', { skip }, async () => {
+  const { child } = await freshParent()
+  const clock = new Clock('2027-03-01T09:00:00+08:00')
+  const { d: a } = await device('parent-a@example.invalid', clock)
+  await a.program.installPack(invented())
+  await a.practise(undefined, () => false)
+  await a.deliverStory()
+  assert.equal((await a.sync()).state, 'idle')
+  const { d: b } = await device('parent-a@example.invalid', new Clock(clock.now()))
+  assert.equal((await b.sync()).state, 'idle')
+  // Arrival order of records differs per device; the credit itself must not.
+  const byKey = <T,>(xs: T[]) => xs.map((x) => JSON.stringify(x)).sort()
+  const credit = (d: Device) => JSON.stringify({ c: byKey(d.engine.state.completions), s: byKey(d.engine.state.story.checkpoints.filter((x) => x.state === 'delivered')) })
+  const kept = credit(a)
+  const amended = 'case-target:zh.p2_higher_chinese.char.u4f4f'
+  const invalid = 'case-target:zh.p2_higher_chinese.char.u5ea7'
+  const { id: replacement } = await a.engine.amendTarget(amended, { error_type: 'form_confusion' }, 'wrong_error_type')
+  await b.engine.invalidateTarget(invalid, 'not_a_mistake')
+  const answered = b.engine.state.presentations.find((p) => p.status === 'corrected' || p.status === 'answered')!
+  await b.engine.invalidatePresentation(answered.id, 'not_a_mistake')
+  // An observation-level amendment refers to an observation id, not a record key; it must still sync.
+  const sound = 'case-target:zh.p2_higher_chinese.skill.synthetic-sound'
+  await b.engine.invalidateObservation(sound, 'case:o904', 'not_a_mistake')
+  for (const d of [a, b, a]) assert.equal((await d.sync()).state, 'idle')
+  const rows = await sql(`select kind, key, value::text from public.sync_records where child_id = '${child}' and kind in ('target', 'amendment', 'presentation');`)
+  const value = (kind: string, key: string) => JSON.parse(rows.find((r) => r[0] === kind && r[1] === key)![2])
+  assert.equal(value('target', amended).status, 'active', 'the corrected original is kept as it was')
+  assert.equal(value('target', amended).error_type, 'unknown_cause')
+  assert.equal(value('target', replacement).replaces, amended)
+  assert.equal(value('presentation', answered.id).status, 'invalidated')
+  assert.equal(rows.filter((r) => r[0] === 'amendment').length, 4)
+  const progress = (d: Device) => JSON.stringify([...d.engine.derived().progress.entries()].map(([k, v]) => [k, v.stage, v.dueOn, v.notBefore]).sort())
+  assert.equal(progress(a), progress(b))
+  for (const d of [a, b]) {
+    assert.equal(d.engine.derived().progress.has(amended), false)
+    assert.equal(d.engine.derived().progress.has(invalid), false)
+    assert.equal(d.engine.derived().progress.has(sound), false, 'its only observation no longer counts')
+    assert.equal(d.engine.derived().progress.get(replacement)?.stage, 'exact')
+    assert.equal(credit(d), kept)
+  }
+})

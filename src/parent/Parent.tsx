@@ -1,13 +1,17 @@
 import { lazy, Suspense, useState } from 'react'
 import type { AuthClient } from '../auth/client.ts'
 import type { Runtime } from '../ui/runtime.ts'
-import { names, subjects, type Language } from '../ui/development.ts'
+import { names, type Language } from '../ui/development.ts'
 import { responseText } from '../ui/Practice.tsx'
 import { resetPin, validPin, verifyPin } from './device.ts'
-import { xMax } from '../engine/policy.ts'
+import { SUBJECTS, xMax } from '../engine/policy.ts'
 import type { SaveStatus } from '../engine/persistence.ts'
 import type { SyncStatus } from '../sync/manager.ts'
 import { SyncPanel } from './Sync.tsx'
+import { FlagReview, ProgressView } from './Review.tsx'
+import { canInvalidateAnswer } from './progress.ts'
+import { amendmentView, currentTarget } from '../engine/amendments.ts'
+import { deriveProduction, type ProductionProgress } from '../mistakes/production.ts'
 const PrivateMistakes = __PRIVATE_PACK_ENABLED__
   ? lazy(() => import('./Mistakes.tsx').then((m) => ({ default: m.Mistakes })))
   : null
@@ -61,6 +65,7 @@ export function Parent({
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState('')
   const [zone, setZone] = useState(runtime.engine.state.settings.timezone)
+  const [excluding, setExcluding] = useState<string | null>(null)
   const zh = language === 'zh'
   const engine = runtime.engine
   const tr = (en: string, cn: string) => (zh ? cn : en)
@@ -220,7 +225,10 @@ export function Parent({
                   '每科 6–19 题（本次试用华文最多 20 题）。更改从下一次新任务生效。语言任务完成整份材料，题数可能更多。',
                 )}
               </p>
-              {subjects.map((s) => (
+              {!SUBJECTS.some((s) => engine.isEnabled(s)) && (
+                <p>{tr('No practice subjects are enabled in this version.', '这个版本没有开放的练习科目。')}</p>
+              )}
+              {SUBJECTS.filter((s) => engine.isEnabled(s)).map((s) => (
                 <label key={s}>
                   {names[language][s]}
                   <select
@@ -272,6 +280,10 @@ export function Parent({
               </button>
             </article>
           </div>
+          <FlagReview engine={engine} language={language} work={work} busy={busy || restoring} />
+          {(engine.isEnabled('chinese') || engine.state.targets.some((t) => t.subject === 'chinese')) && (
+            <ProgressView engine={engine} subject="chinese" language={language} work={work} busy={busy || restoring} production={__PRIVATE_PACK_ENABLED__ ? productionByTarget(runtime) : undefined} />
+          )}
           {__PRIVATE_PACK_ENABLED__ && runtime.program && PrivateMistakes && (
             <Suspense fallback={null}>
             <PrivateMistakes
@@ -308,7 +320,8 @@ export function Parent({
                   </tr>
                 </thead>
                 <tbody>
-                  {subjects.map((s) => {
+                  {/* Enabled subjects, plus any disabled one that has history: records stay readable. */}
+                  {SUBJECTS.filter((s) => engine.isEnabled(s) || engine.state.tasks.some((t) => t.subject === s)).map((s) => {
                     const tasks = engine.state.tasks.filter(
                       (t) => t.subject === s,
                     )
@@ -355,13 +368,14 @@ export function Parent({
                       <li key={p.id}>
                         <p>
                           {tr('Question', '问题')} {p.position + 1}
-                          {p.status === 'flagged_replaced' ||
-                          p.status === 'invalidated'
+                          {p.status === 'flagged_replaced'
                             ? tr(
                                 ' (replaced, excluded from evidence)',
                                 '（已替换，不计入证据）',
                               )
-                            : ''}
+                            : p.status === 'invalidated'
+                              ? tr(' (excluded from evidence)', '（不计入证据）')
+                              : ''}
                         </p>
                         <ul>
                           {engine.state.events
@@ -380,6 +394,34 @@ export function Parent({
                               </li>
                             ))}
                         </ul>
+                        {canInvalidateAnswer(engine.state, p) &&
+                          (excluding === p.id ? (
+                            <p>
+                              <button
+                                className="primary"
+                                disabled={busy || restoring}
+                                onClick={() =>
+                                  void work(() => engine.invalidatePresentation(p.id, 'not_a_mistake')).then(() => setExcluding(null))
+                                }
+                              >
+                                {tr('Confirm: exclude this answer', '确认：不计这次作答')}
+                              </button>{' '}
+                              <button disabled={busy} onClick={() => setExcluding(null)}>
+                                {tr('Cancel', '取消')}
+                              </button>
+                            </p>
+                          ) : (
+                            <button
+                              className="text-button"
+                              disabled={busy || restoring}
+                              onClick={() => setExcluding(p.id)}
+                            >
+                              {tr(
+                                'This answer was recorded by mistake — exclude it',
+                                '这次作答记录有误——不计入',
+                              )}
+                            </button>
+                          ))}
                       </li>
                     ))}
                 </ol>
@@ -391,4 +433,22 @@ export function Parent({
       {message && <p role="status">{message}</p>}
     </section>
   )
+}
+
+/** Parent-observed writing/speaking per current mistake target (private pack only), from the case links. */
+function productionByTarget(runtime: Runtime): Map<string, ProductionProgress[]> | undefined {
+  const program = runtime.program
+  if (!program) return undefined
+  const state = runtime.engine.state
+  const view = amendmentView(state)
+  const out = new Map<string, ProductionProgress[]>()
+  const seen = new Set<string>()
+  for (const row of program.crosswalk) {
+    if (!row.plan_id || !row.engine_target_id) continue
+    const target = currentTarget(state, row.engine_target_id, view)
+    if (!target || seen.has(`${target.id}\u0000${row.plan_id}`)) continue
+    seen.add(`${target.id}\u0000${row.plan_id}`)
+    out.set(target.id, [...(out.get(target.id) ?? []), deriveProduction(row.plan_id, program.productionEvents)])
+  }
+  return out
 }

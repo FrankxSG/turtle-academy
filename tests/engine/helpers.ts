@@ -36,6 +36,8 @@ export interface Harness {
   registry: CatalogueRegistry
   timers: ManualTimers
   newId: () => string
+  /** Enabled practice subjects passed to the engine (undefined: the engine default, every subject). */
+  enabled?: readonly Subject[]
 }
 
 export function registryWith(...releases: CatalogueRelease[]): CatalogueRegistry {
@@ -47,7 +49,7 @@ export function registryWith(...releases: CatalogueRelease[]): CatalogueRegistry
   return r
 }
 
-export function harness(opts: { start?: string; subjects?: Subject[]; registry?: CatalogueRegistry; timezone?: string } = {}): Harness {
+export function harness(opts: { start?: string; subjects?: Subject[]; registry?: CatalogueRegistry; timezone?: string; enabled?: readonly Subject[] } = {}): Harness {
   const clock = new Clock(opts.start ?? '2027-03-01T09:00:00+08:00')
   const all: Record<Subject, () => CatalogueRelease> = { chinese: chineseRelease, english: englishRelease, mathematics: mathematicsRelease, science: scienceRelease }
   const registry = opts.registry ?? registryWith(...(opts.subjects ?? ['chinese', 'english', 'mathematics', 'science']).map((s) => all[s]()))
@@ -55,15 +57,15 @@ export function harness(opts: { start?: string; subjects?: Subject[]; registry?:
   const timers = new ManualTimers()
   const writer = new WriteQueue(store, timers)
   const newId = ids()
-  const engine = LearningEngine.fresh(opts.timezone ?? 'Asia/Singapore', { registry, now: clock.now, newId, writer })
-  return { engine, clock, store, writer, registry, timers, newId }
+  const engine = LearningEngine.fresh(opts.timezone ?? 'Asia/Singapore', { registry, now: clock.now, newId, writer, subjects: opts.enabled })
+  return { engine, clock, store, writer, registry, timers, newId, enabled: opts.enabled }
 }
 
 /** Reload the engine from the local store, as after an app restart. */
 export async function reload(h: Harness): Promise<LearningEngine> {
   const writer = new WriteQueue(h.store, h.timers)
   h.writer = writer
-  h.engine = await LearningEngine.load(h.store, 'Asia/Singapore', { registry: h.registry, now: h.clock.now, newId: h.newId, writer })
+  h.engine = await LearningEngine.load(h.store, 'Asia/Singapore', { registry: h.registry, now: h.clock.now, newId: h.newId, writer, subjects: h.enabled })
   return h.engine
 }
 

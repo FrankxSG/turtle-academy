@@ -48,7 +48,9 @@ export async function openRuntime(id: string, timezone: string) {
         syntheticChinese ? subjects : ['science', 'mathematics', 'english'],
       )
       const now = () => new Date().toISOString()
-      const engine = await LearningEngine.load(storage.store, timezone, { registry, writer, now })
+      // Catalogues of every subject stay installed so history and pinned tasks remain readable; only the build's
+      // enabled practice subjects (src/practice-subjects.ts) can be started and are required each day.
+      const engine = await LearningEngine.load(storage.store, timezone, { registry, writer, now, subjects: __PRACTICE_SUBJECTS__ })
       let program: MistakeProgram | null = null
       if (!syntheticChinese) {
         // A Chinese task started on the earlier synthetic fixture still resumes and finishes on it (it stays

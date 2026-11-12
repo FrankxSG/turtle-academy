@@ -1,6 +1,6 @@
 # Turtle Academy
 
-An original adventure-based learning PWA. The current development preview connects a small island hub, objective practice and local parent controls to the on-device learning engine. Chinese loads reviewed content; Science, Mathematics and English still use synthetic exercises. The private-pack build supports parent pack intake and progress export. These implementation facts do not establish subject-release or real-record readiness.
+An original adventure-based learning PWA. The current development preview connects a small island hub, objective practice and local parent controls to the on-device learning engine. Chinese loads reviewed content; Science, Mathematics and English still use synthetic exercises. The parent area reviews the child's flagged questions (restore, or keep disabled for this child), shows Chinese mistakes with their stage and next practice date, and corrects records as add-only amendments (correct an imported mistake, mark one not a mistake or a duplicate, exclude a mistaken answer); the private-pack build adds pack intake and progress export. These implementation facts do not establish subject-release or real-record readiness.
 
 ## Development
 
@@ -20,7 +20,7 @@ python3 scripts/privacy_guard.py
 
 Before browser tests, run `npx playwright install chromium` and build with the public synthetic Auth configuration described in [the UI guide](src/ui/README.md). Tests mock Auth or use a throwaway local PostgreSQL sync server (`supabase/tests/sync_server.py`, started by the browser test configuration); they contact no hosted service. Offline behavior is available in the production build, not the Vite development server.
 
-The default public build excludes private-pack handling. `npm run build:private` enables that runtime for deliberate local pack loading; it does not bundle this project's private records or authorize deployment.
+Builds offer **Chinese only** for daily practice by default; `VITE_PRACTICE_SUBJECTS` changes that ([UI guide](src/ui/README.md)). The default public build excludes private-pack handling. `npm run build:private` enables that runtime for deliberate local pack loading; it does not bundle this project's private records or authorize deployment.
 
 ## Content preparation
 

@@ -2,6 +2,7 @@
 // replaying the append-only answer events and immutable records; nothing here is stored as mutable truth.
 // Replaying after a flag decision therefore recalculates progress, while completions and delivered story
 // checkpoints (separate records) are never revoked.
+import { amendmentView, chainObservations, targetsById, targetStatus, validObservations, type AmendmentView } from './amendments.ts'
 import { addDays, DateBook } from './calendar.ts'
 import { MAX_CLEARANCES_PER_TARGET_PER_DAY, REVIEW_INTERVALS } from './policy.ts'
 import type { AnswerEvent, Clearance, EngineState, Presentation, Stage, Target, TargetAggregate } from './types.ts'
@@ -50,10 +51,30 @@ export function excludedItemVersions(state: EngineState): Set<string> {
   return out
 }
 
-/** Presentations that can carry independent evidence. */
-export function isEvidence(p: Presentation, excluded: Set<string>): boolean {
+const NONE: ReadonlySet<string> = new Set()
+
+/**
+ * Whether an observation still counts apart from amendments: an app-caught observation counts only while the
+ * question that produced it is valid evidence (not flagged, disabled or invalidated). One rule for the engine,
+ * the parent's progress view, the case report and the parent's duplicate check, so they never disagree.
+ */
+export function observationCounter(state: EngineState, view: AmendmentView = amendmentView(state), excluded = excludedItemVersions(state)) {
+  const presentationById = new Map(state.presentations.map((p) => [p.id, p]))
+  return (o: Target['observations'][number]): boolean => {
+    if (o.source_type !== 'app_practice' || o.batch_ref === null) return true
+    const p = presentationById.get(o.batch_ref)
+    return p !== undefined && p.status !== 'flagged_replaced' && p.status !== 'invalidated' && !view.invalidPresentations.has(p.id)
+      && !excluded.has(`${p.item_id}@${p.item_version}`)
+  }
+}
+
+/**
+ * Presentations that can carry independent evidence. `invalid` holds presentations a parent invalidated (by
+ * amendment; the presentation record's own status may not have reached this device yet).
+ */
+export function isEvidence(p: Presentation, excluded: Set<string>, invalid: ReadonlySet<string> = NONE): boolean {
   return p.status !== 'flagged_replaced' && p.status !== 'invalidated' && p.first_response_eligible
-    && p.target_ref !== null && p.stage !== null && !excluded.has(`${p.item_id}@${p.item_version}`)
+    && p.target_ref !== null && p.stage !== null && !excluded.has(`${p.item_id}@${p.item_version}`) && !invalid.has(p.id)
 }
 
 export function initialStage(t: Target): Stage {
@@ -96,9 +117,10 @@ export function derive(state: EngineState): Derived {
   }
 
   const excluded = excludedItemVersions(state)
+  const amended = amendmentView(state)
   const byTarget = new Map<string, Presentation[]>()
   for (const p of state.presentations) {
-    if (!isEvidence(p, excluded)) continue
+    if (!isEvidence(p, excluded, amended.invalidPresentations)) continue
     const list = byTarget.get(p.target_ref as string) ?? []
     list.push(p)
     byTarget.set(p.target_ref as string, list)
@@ -112,21 +134,17 @@ export function derive(state: EngineState): Derived {
     aggregates.set(taskId, list)
   }
 
-  const presentationById = new Map(state.presentations.map((p) => [p.id, p]))
-  /** An app-caught observation counts only while the question that produced it is valid evidence. */
-  const effectiveObservation = (o: Target['observations'][number]): boolean => {
-    if (o.invalidated) return false
-    if (o.source_type !== 'app_practice' || o.batch_ref === null) return true
-    const p = presentationById.get(o.batch_ref)
-    return p !== undefined && p.status !== 'flagged_replaced' && p.status !== 'invalidated' && !excluded.has(`${p.item_id}@${p.item_version}`)
-  }
+  const byId = targetsById(state)
+  const effectiveObservation = observationCounter(state, amended, excluded)
 
   for (const target of state.targets) {
-    if (target.status !== 'active') continue
-    // A target that exists only because of app-caught errors is no mistake at all once none of those
-    // observations is valid (for example, its question was flagged). It stays as a record, never planned.
-    const observations = target.observations.filter(effectiveObservation)
-    if (target.observations.length > 0 && observations.length === 0) continue
+    // Superseded and invalidated targets (parent amendments) keep their records and evidence but are not replayed.
+    if (targetStatus(target, amended) !== 'active') continue
+    // A target that exists only because of errors is no mistake at all once none of those observations is valid
+    // (its question was flagged, or the parent invalidated it). It stays as a record, never planned.
+    // Observations follow the mistake through corrections (src/engine/amendments.ts).
+    const observations = validObservations(target, amended, byId, effectiveObservation)
+    if (chainObservations(target, amended, byId).length > 0 && observations.length === 0) continue
     const pr = fresh(target)
     progress.set(target.id, pr)
     // New imports start no earlier than the day after the app imported them (Functional Design §4). A later

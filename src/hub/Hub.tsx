@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import type { LearningEngine } from '../engine/engine.ts'
 import type { Subject } from '../engine/types.ts'
-import { names, subjects, type Language } from '../ui/development.ts'
+import { contentKind, contentLabels } from '../ui/content.ts'
+import { names, type Language } from '../ui/development.ts'
 
 export function Hub({
   engine,
@@ -18,6 +19,7 @@ export function Hub({
   const [dialogue, setDialogue] = useState('')
   const zh = language === 'zh'
   const status = engine.dailyStatus()
+  const subjects = status.subjects.map((row) => row.subject)
   const move = (x: number, y: number) =>
     setPosition({
       x: Math.min(90, Math.max(10, x)),
@@ -157,11 +159,20 @@ export function Hub({
         </p>
       )}
       <div className="trails">
+        {subjects.length === 0 && (
+          <p role="status">
+            {zh
+              ? '这个版本暂时没有开放练习科目。'
+              : 'No practice subjects are available in this version yet.'}
+          </p>
+        )}
         {subjects.map((s, i) => {
           const complete = status.subjects.find(
             (row) => row.subject === s,
           )?.complete
           const task = engine.openTask(s)
+          const release = engine.contentRelease(s)
+          const kind = release ? contentKind(release) : 'unreviewed'
           const remaining = task
             ? Math.max(0, task.planned_total - engine.answeredCount(task))
             : engine.xFor(s)
@@ -169,8 +180,8 @@ export function Hub({
             <article className={`trail trail-${s}`} key={s}>
               <span className="trail-number">0{i + 1}</span>
               <h2>{names[language][s]}</h2>
-              <p className="dev-label">
-                {zh ? '开发用模拟内容' : 'Synthetic development content'}
+              <p className={kind === 'reviewed' ? 'content-label' : 'dev-label'}>
+                {contentLabels[kind][language]}
               </p>
               <p>
                 {complete
@@ -216,9 +227,13 @@ export function Hub({
               ? zh
                 ? '今天的必修任务完成了，可以自由探索！'
                 : 'Today’s required trails are complete. Exploration is open!'
-              : zh
-                ? '完成所有开放科目的今日任务，即可自由探索。'
-                : 'Complete today’s work in every available subject to unlock exploration.'}
+              : subjects.length === 0
+                ? zh
+                  ? '今天没有开放的练习，自由探索暂未开放。'
+                  : 'No practice is available today, so exploration stays closed.'
+                : zh
+                  ? '完成所有开放科目的今日任务，即可自由探索。'
+                  : 'Complete today’s work in every available subject to unlock exploration.'}
         </p>
         <button
           disabled={!status.explorationUnlocked}
