@@ -2,7 +2,7 @@
 
 This folder holds the database migrations for the Pilot's server and their tests. Everything here is synthetic-only. Nothing in this folder creates a real record, a real account or a service key.
 
-Live sync follows [Pilot Scope §3](../docs/PILOT_V0_1_SCOPE.md#3-identity-live-sync-and-backup-policy). The current build is its **first milestone, one signed-in device**: changes are saved on the device, queued, uploaded, and recovered on a new or reset device. Two-device reconciliation, server snapshots, restore, pruning and deletion are later increments.
+Live sync follows [Pilot Scope §3](../docs/PILOT_V0_1_SCOPE.md#3-identity-live-sync-and-backup-policy). The current build covers its first two increments: **one signed-in device** (changes are saved on the device, queued, uploaded, and recovered on a new or reset device) and **two-device offline reconciliation** (every answer kept once, one shared daily task, per-field settings by server-accepted stamp with history, add-only amendments, and one schedule per mistake on every device; tested against these functions in `supabase/tests/client/sync-live.test.ts`). Server snapshots, restore, pruning and deletion are later increments.
 
 ## What the migrations create
 

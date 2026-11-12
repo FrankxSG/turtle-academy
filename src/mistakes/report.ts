@@ -4,10 +4,10 @@
 // Attempt counts here describe what happened (first responses, hint retries, supported corrections, flags);
 // they do not decide progress. Production progress comes from production.ts. No evidence → "not yet evidenced".
 import type { CatalogueRelease } from '../catalogue/adapter.ts'
-import { amendmentView, chainObservations, currentTarget, targetsById, validObservations } from '../engine/amendments.ts'
-import { excludedItemVersions, isEvidence, observationCounter, type Derived } from '../engine/evidence.ts'
+import { groupChainObservations, groupObservations, lineage as ancestry, targetsById } from '../engine/amendments.ts'
+import { dismissalFor, excludedItemVersions, isEvidence, observationCounter, type Derived } from '../engine/evidence.ts'
 import type { EngineState, Presentation, Stage } from '../engine/types.ts'
-import { caseObservationId, missingStages, type CrosswalkRow } from './intake.ts'
+import { caseObservationId, caseResolver, missingStages, type CrosswalkRow } from './intake.ts'
 import type { PlanStage, Register } from './pack.ts'
 import { deriveProduction, type ProductionEvent, type ProductionProgress } from './production.ts'
 
@@ -92,10 +92,11 @@ export function buildReport(opts: {
 }): CaseReport {
   const { state, derived, register, crosswalk, release } = opts
   const excluded = excludedItemVersions(state)
-  const view = amendmentView(state)
+  const view = derived.view
   const byId = targetsById(state)
   const counts = observationCounter(state, view, excluded)
   const cw = new Map(crosswalk.map((r) => [r.case_id, r]))
+  const resolve = caseResolver(state, view)
   const presentationsOf = new Map<string, Presentation[]>()
   for (const p of state.presentations) {
     if (!p.target_ref) continue
@@ -126,18 +127,24 @@ export function buildReport(opts: {
       queue.set(ref, q)
     }
     // A parent's correction moves the case to the replacement target (which inherits no answers); an invalidated
-    // case has no current target.
-    const linked = x?.engine_target_id ? state.targets.find((t) => t.id === x.engine_target_id) : undefined
-    const current = linked ? currentTarget(state, linked.id, view) : null
+    // case has no current target. The case is resolved from the records holding its observation (the same on every
+    // device); the stored link is only a fallback for a case whose records have not arrived yet.
+    // The same mistake recorded under several targets (two devices) is one: report on its group's leader.
+    const held = resolve(c.id, x?.engine_target_id)
+    const linked = held !== null
+    const leaderId = held?.current ?? null
+    const current = leaderId ? state.targets.find((t) => t.id === leaderId) ?? null : null
+    const members = leaderId ? derived.groups.members.get(leaderId) ?? [leaderId] : []
     const engineId = current?.id ?? null
     const target = current ?? undefined
     const pr = engineId ? derived.progress.get(engineId) : undefined
-    const ps = engineId ? presentationsOf.get(engineId) ?? [] : []
+    const ps = members.flatMap((id) => presentationsOf.get(id) ?? [])
     let firstCorrect = 0, firstWrong = 0, counted = 0, indep = 0, retries = 0, corrections = 0, excludedCount = 0
     const delayed: { on: string; correct: boolean }[] = []
     let last: string | null = null
     for (const p of ps) {
-      const evidence = isEvidence(p, excluded, view.invalidPresentations)
+      // An answer given before a "not a mistake" decision on this mistake is history, not evidence (it starts afresh).
+      const evidence = isEvidence(p, excluded, view.invalidPresentations) && !derived.beforeDecision.has(p.id)
       if (!evidence) excludedCount += 1
       for (const e of eventsOf.get(p.id) ?? []) {
         const on = derived.dates.of(e.at)
@@ -171,8 +178,8 @@ export function buildReport(opts: {
     let status: CaseStatus
     // The case's observation follows its mistake through corrections; it is dropped only when marked so.
     const caseObs = caseObservationId(c.id)
-    const dropped = current !== null && chainObservations(current, view, byId).some((o) => o.id === caseObs)
-      && !validObservations(current, view, byId, counts).some((o) => o.id === caseObs)
+    const dropped = current !== null && groupChainObservations(members, view, byId).some((o) => o.id === caseObs)
+      && !groupObservations(members, view, byId, counts, dismissalFor(derived, current)).some((o) => o.id === caseObs)
     if ((linked && !current) || dropped) status = 'invalidated'
     else if (!target) status = 'not_imported'
     else if (target.mapping_status === 'pending_content') status = 'pending_content'
@@ -209,24 +216,28 @@ function countPools(release: CatalogueRelease, ref: string) {
 /** Every recorded response on a register target, normalized for the private repository (no identities). */
 export function normalizedEvents(state: EngineState, derived: Derived, crosswalk: CrosswalkRow[]): NormalizedEvent[] {
   const excluded = excludedItemVersions(state)
-  const view = amendmentView(state)
+  const view = derived.view
   const casesOf = new Map<string, string[]>()
   const refOf = new Map<string, string>()
-  // Case links may point anywhere in the correction chain (they refresh on re-import). Every version's answers
-  // remain history, including intermediate replacements and invalidated mistakes; only the current active target
-  // can contribute evidence. Walk both directions rather than mapping only the link and its current leaf.
+  // A case is held by its import record and every correction of it; its link is written once and may name any of
+  // them. Every version's answers remain history, including intermediate replacements and invalidated mistakes; only
+  // the current active target can contribute evidence. Walk both directions from every holder and the link.
   const current = new Set<string>()
+  const resolve = caseResolver(state, view)
   for (const r of crosswalk) {
-    if (!r.engine_target_id || !r.target_ref) continue
-    const now = currentTarget(state, r.engine_target_id, view)?.id ?? null
-    if (now) current.add(now)
-    const lineage = new Set<string>([r.engine_target_id])
-    for (const direction of [view.replaces, view.replacedBy]) {
-      let at = direction.get(r.engine_target_id)
-      while (at !== undefined && !lineage.has(at)) {
-        lineage.add(at)
-        at = direction.get(at)
-      }
+    if (!r.target_ref) continue
+    // Resolve the case from the records holding its observation; the stored link is a fallback (see buildReport).
+    const held = resolve(r.case_id, r.engine_target_id)
+    if (!held) continue
+    const head = held.current
+    // The current mistake may be recorded under several targets (two devices): all of them are current.
+    const group = head ? derived.groups.members.get(head) ?? [head] : []
+    for (const id of group) current.add(id)
+    const lineage = new Set<string>([...held.holders, held.link, ...(r.engine_target_id ? [r.engine_target_id] : []), ...group])
+    // Ancestors (every record a correction superseded) and descendants (later corrections).
+    for (const start of [...lineage]) {
+      for (const id of ancestry(start, view)) lineage.add(id)
+      for (let at = view.replacedBy.get(start); at !== undefined && !lineage.has(at); at = view.replacedBy.get(at)) lineage.add(at)
     }
     for (const id of lineage) {
       casesOf.set(id, [...new Set([...(casesOf.get(id) ?? []), r.case_id])])
@@ -236,7 +247,7 @@ export function normalizedEvents(state: EngineState, derived: Derived, crosswalk
   const byId = new Map(state.presentations.map((p) => [p.id, p]))
   const finalised = new Set(state.tasks.filter((t) => t.status === 'finalised').map((t) => t.id))
   const out: NormalizedEvent[] = []
-  for (const e of [...state.events].sort((a, b) => a.local_seq - b.local_seq)) {
+  for (const e of [...state.events].sort((a, b) => a.local_seq - b.local_seq || a.id.localeCompare(b.id))) {
     const p = byId.get(e.presentation_id)
     if (!p || !p.target_ref || !casesOf.has(p.target_ref) || p.stage === null) continue
     out.push({
@@ -244,7 +255,8 @@ export function normalizedEvents(state: EngineState, derived: Derived, crosswalk
       item_id: p.item_id, item_version: p.item_version, presentation_id: p.id, task_id: p.task_id, stage: p.stage,
       phase: e.phase, answered_on: derived.dates.of(e.at), correct: e.correct, assisted: e.assistance !== 'none',
       // Answers on a target the parent later corrected or invalidated stay in the history but no longer count.
-      counted_as_evidence: e.phase === 'first' && isEvidence(p, excluded, view.invalidPresentations) && current.has(p.target_ref), task_finalised: finalised.has(p.task_id), source: 'engine',
+      counted_as_evidence: e.phase === 'first' && isEvidence(p, excluded, view.invalidPresentations) && !derived.beforeDecision.has(p.id)
+        && current.has(p.target_ref), task_finalised: finalised.has(p.task_id), source: 'engine',
     })
   }
   return out

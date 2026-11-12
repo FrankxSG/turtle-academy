@@ -170,7 +170,7 @@ export class MistakeProgram {
         const build = p.buildFor(pack.course, pack)
         // Quarantine structural/content mismatches before activating or persisting the candidate release.
         planIntake({ state: opts.engine.state, register: pack.register, release: build.release,
-          targets: build.targets, today: opts.engine.today(), now: opts.now() })
+          targets: build.targets, today: opts.engine.today(), now: opts.now(), view: opts.engine.derived().view })
         builds.push(build)
         p.pack = pack
       } catch (error) { p.openError = errorText(error) }
@@ -268,7 +268,8 @@ export class MistakeProgram {
       if (!syncable.ok) throw new Error(syncable.code)
       const build = this.buildFor(pack.course, pack)
       const result = planIntake({ state: this.engine.state, register: pack.register, release: build.release,
-        targets: build.targets, today: learningDate(this.now(), this.engine.state.settings, this.engine.state.calendar_guards), now: this.now() })
+        targets: build.targets, today: learningDate(this.now(), this.engine.state.settings, this.engine.state.calendar_guards), now: this.now(),
+        view: this.engine.derived().view })
       return { pack, build, result }
     } catch (error) { throw new PackRejected(error) }
   }
@@ -331,13 +332,17 @@ export class MistakeProgram {
     if (!b) throw new Error('no_content')
     const result = planIntake({
       state: this.engine.state, register: this.pack.register, release: b.release, targets: b.targets,
-      today: this.engine.today(), now: this.now(),
+      today: this.engine.today(), now: this.now(), view: this.engine.derived().view,
     })
     // With nothing new to add, still push any engine writes queued by an earlier failure.
     const saved = result.records.length > 0 ? await this.engine.upsertTargets(result.records) : await this.engine.retrySaves()
-    this.rows = result.crosswalk
-    await this.store.putCrosswalk(result.crosswalk)
-    return { result, saved }
+    // A case's link is written once, when it is first imported, and never rewritten: links sync by latest edit, so
+    // devices that recomputed it on each import would overwrite each other's link on every sync. Readers resolve the
+    // case's current mistake from the records that hold its observation (caseResolver), not from the link.
+    const crosswalk = keepStoredLinks(await this.store.crosswalk(), result.crosswalk)
+    this.rows = crosswalk
+    await this.store.putCrosswalk(crosswalk)
+    return { result: { ...result, crosswalk }, saved }
   }
 
   plans() {
@@ -375,4 +380,10 @@ export class MistakeProgram {
     if (!report) return null
     return buildExport(report, normalizedEvents(this.engine.state, this.engine.derived(), this.rows), this.events, this.now())
   }
+}
+
+/** Keep each case's stored link; a computed one is used only for a case that has none yet. */
+function keepStoredLinks(stored: CrosswalkRow[], computed: CrosswalkRow[]): CrosswalkRow[] {
+  const before = new Map(stored.map((r) => [r.case_id, r.engine_target_id]))
+  return computed.map((row) => ({ ...row, engine_target_id: before.get(row.case_id) ?? row.engine_target_id }))
 }

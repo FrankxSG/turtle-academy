@@ -1,10 +1,12 @@
 // What the parent area shows about mistakes and flagged questions (Functional Design §8). Pure views over the engine
 // state and its replay: nothing here decides progress, and nothing is stored.
-import { amendmentView, chainObservations, isActiveTarget, targetsById, validObservations } from '../engine/amendments.ts'
+import { amendmentView, groupChainObservations, groupObservations, isActiveTarget, targetsById } from '../engine/amendments.ts'
 import { addDays } from '../engine/calendar.ts'
-import { excludedItemVersions, isEligible, isEvidence, observationCounter, type Derived, type TargetProgress } from '../engine/evidence.ts'
+import { dismissalFor, excludedItemVersions, isEligible, isEvidence, observationCounter, type Derived, type TargetProgress } from '../engine/evidence.ts'
 import { MAX_CLEARANCES_PER_TARGET_PER_DAY } from '../engine/policy.ts'
 import type { EngineState, Flag, Presentation, Stage, Subject, Target } from '../engine/types.ts'
+import { caseResolver, type CrosswalkRow } from '../mistakes/intake.ts'
+import { deriveProduction, type ProductionEvent, type ProductionProgress } from '../mistakes/production.ts'
 
 export type RowState =
   | 'repair' | 'delayed_review' | 'learning'
@@ -75,7 +77,7 @@ export function progressRows(opts: {
   held: ReadonlySet<string>
 }): ProgressRow[] {
   const { state, derived, today, subject, held } = opts
-  const view = amendmentView(state)
+  const view = derived.view
   const byId = targetsById(state)
   const excluded = excludedItemVersions(state)
   const counts = observationCounter(state, view, excluded)
@@ -89,15 +91,18 @@ export function progressRows(opts: {
   for (const t of state.targets) {
     if (t.subject !== subject || !isActiveTarget(t, view)) continue
     if (t.error_type === 'none' && t.observations.length === 0) continue // Science acquisition records, not mistakes
+    // One row per mistake: targets that are the same mistake (two devices) show once, on the group's leader.
+    const members = derived.groups.members.get(t.id)
+    if (!members) continue
     // The same observations the engine counts (src/engine/evidence.ts observationCounter).
-    const observations = validObservations(t, view, byId, counts)
+    const observations = groupObservations(members, view, byId, counts, dismissalFor(derived, t))
     const pr = derived.progress.get(t.id)
     let state_: RowState
     if (!pr) {
       // No counting observation is left. If app-caught errors wait on an open flag, the mistake is suspended until
       // the parent decides; otherwise it was disabled, invalidated or marked not a mistake, and there is no row.
-      if (chainObservations(t, view, byId).length === 0) continue
-      const waiting = validObservations(t, view, byId).some((o) => {
+      if (groupChainObservations(members, view, byId).length === 0) continue
+      const waiting = groupObservations(members, view, byId, undefined, dismissalFor(derived, t)).some((o) => {
         const p = o.batch_ref ? presentationById.get(o.batch_ref) : undefined
         return p !== undefined && !view.invalidPresentations.has(p.id) && p.status !== 'invalidated' && openFlag.has(`${p.item_id}@${p.item_version}`)
       })
@@ -105,12 +110,13 @@ export function progressRows(opts: {
       state_ = 'suspended'
     } else if (t.mapping_status === 'pending_content') state_ = 'pending_content'
     else if (t.verification !== 'verified') state_ = 'unverified'
-    else if (held.has(t.id)) state_ = 'held'
+    else if (members.some((id) => held.has(id))) state_ = 'held'
     else state_ = pr.stage === 'delayed_review' ? 'delayed_review' : pr.stage === 'acquisition' ? 'learning' : 'repair'
     const next: ProgressRow['next'] = pr && (state_ === 'repair' || state_ === 'delayed_review' || state_ === 'learning')
       ? nextPractice(pr, today) : { kind: 'none' }
     const recognition: ProgressRow['recognition'] = { firstAnswers: 0, independentCorrect: 0, firstWrong: 0, hintRetries: 0, corrections: 0, repeatedItems: 0, lastPractisedOn: null }
-    for (const p of byTarget.get(t.id) ?? []) {
+    // Answers given before a "not a mistake" decision belong to the dismissed mistake, not this one.
+    for (const p of members.flatMap((id) => byTarget.get(id) ?? []).filter((x) => !derived.beforeDecision.has(x.id))) {
       const counted = isEvidence(p, excluded, view.invalidPresentations)
       for (const e of eventsOf.get(p.id) ?? []) {
         const on = derived.dates.of(e.at)
@@ -173,3 +179,21 @@ export function canInvalidateAnswer(state: EngineState, p: Presentation): boolea
     && state.events.some((e) => e.presentation_id === p.id && e.phase === 'first')
 }
 
+/**
+ * Parent-observed writing/speaking per mistake (private pack only), keyed like progress rows: by the mistake's group
+ * leader. Each case resolves to its current mistake from the records holding it, as the case report does; a plan
+ * shared by several cases of one mistake is listed once.
+ */
+export function productionByMistake(state: EngineState, derived: Derived, crosswalk: readonly CrosswalkRow[], events: ProductionEvent[]): Map<string, ProductionProgress[]> {
+  const resolve = caseResolver(state, derived.view)
+  const out = new Map<string, ProductionProgress[]>()
+  const seen = new Set<string>()
+  for (const row of crosswalk) {
+    if (!row.plan_id) continue
+    const leader = resolve(row.case_id, row.engine_target_id)?.current ?? null
+    if (!leader || seen.has(`${leader}\u0000${row.plan_id}`)) continue
+    seen.add(`${leader}\u0000${row.plan_id}`)
+    out.set(leader, [...(out.get(leader) ?? []), deriveProduction(row.plan_id, events)])
+  }
+  return out
+}

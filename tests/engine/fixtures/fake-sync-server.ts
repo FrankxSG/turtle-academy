@@ -148,7 +148,11 @@ export class FakeSyncServer {
     return { op_id: op.op_id, status: 'applied', stamp }
   }
 
-  private async wait() { if (this.gate) await this.gate }
+  /** Each request yields to the event loop, as a network round trip does, so timers (and test timeouts) still run. */
+  private async wait() {
+    await new Promise<void>((resolve) => setImmediate(resolve))
+    if (this.gate) await this.gate
+  }
 
   transport(): SyncTransport {
     return {
