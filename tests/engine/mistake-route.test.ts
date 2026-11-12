@@ -9,6 +9,7 @@ import { LearningEngine, type Step } from '../../src/engine/engine.ts'
 import { MemoryRecordStore, WriteQueue } from '../../src/engine/persistence.ts'
 import { importTargetId, planIntake } from '../../src/mistakes/intake.ts'
 import { currentTarget } from '../../src/engine/amendments.ts'
+import { isEligible } from '../../src/engine/evidence.ts'
 import { MemoryPrivateStore, MistakeProgram } from '../../src/mistakes/program.ts'
 import { validatePack } from '../../src/mistakes/pack.ts'
 import type { EngineState, Target } from '../../src/engine/types.ts'
@@ -775,4 +776,21 @@ test('a new case never joins an unrelated mistake of another error type; it gets
   }
   assert.equal(onA.records.find((t) => t.id === target(ZHU))!.error_type, 'unknown_cause')
   assert.ok(!onA.records.some((t) => t.id === '00-other-type'), 'the unrelated mistake is left alone')
+})
+
+test('a mistake waits for questions when its import record does, also when an app-caught record of it sorts first', async () => {
+  const s0 = await setup()
+  await s0.program.installPack(syntheticPack({ pendingRef: s0.pendingRef }))
+  const like = structuredClone(s0.engine.state.targets.find((t) => t.id === target(s0.pendingRef))!)
+  // The device already holds an app-caught record of the same mistake (always `mapped`); its id sorts first.
+  const s = await setup()
+  s.engine.state.targets.push({ ...appCaught(like, '00-app-caught'), mapping_status: 'mapped' })
+  await s.engine.flush()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  const report = s.program.report()!
+  assert.equal(new Map(report.cases.map((c) => [c.case_id, c.status])).get('O905'), 'pending_content')
+  assert.equal(report.totals.pending_content, 1)
+  const rows = [...s.engine.derived().progress.values()].filter((v) => v.target.knowledge_point_ref === s.pendingRef)
+  assert.equal(rows.length, 1, 'one mistake')
+  for (const day of ['2027-03-02', '2027-03-09']) assert.equal(isEligible(rows[0], day), false, 'never planned while questions are missing')
 })
