@@ -632,3 +632,21 @@ test('the export lists events in the same order on every device, also when two d
   reversed.events.reverse()
   assert.deepEqual(order(s), order(reversed))
 })
+
+test('F41: simultaneous offline repair answers replay identically in either replica order', async () => {
+  const h = harness({ subjects: ['mathematics'] })
+  const target = await importTarget(h)
+  const task = await practiseRepairCorrect(h, target.id)
+  const state = structuredClone(h.engine.state)
+  const correct = state.presentations.find((p) => p.task_id === task.id && p.target_ref === target.id
+    && p.stage === 'exact' && p.material_ref === null && p.format_class === 'high_option')
+  assert.ok(correct, 'the fixture has a high-option short repair')
+  const first = state.events.find((e) => e.presentation_id === correct.id && e.phase === 'first')
+  assert.ok(first?.correct)
+  const other = { ...correct, id: 'other-device-presentation' }
+  state.presentations.push(other)
+  state.events.push({ ...first, id: 'other-device-answer', presentation_id: other.id, correct: false })
+
+  const reverse = { ...state, presentations: [...state.presentations].reverse(), events: [...state.events].reverse() }
+  assert.deepEqual(derive(state).progress.get(target.id), derive(reverse).progress.get(target.id))
+})
