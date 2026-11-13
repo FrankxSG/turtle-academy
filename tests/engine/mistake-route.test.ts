@@ -711,6 +711,8 @@ test('a pack for another course is refused before anything is saved', async () =
 test('a stored pack for another course is set aside with the reason, and practice continues on the build course only', async () => {
   const s = await setup()
   await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  const links = JSON.stringify(s.program.crosswalk)
+  const records = JSON.stringify(s.engine.state.targets)
   // The same device opens a build set to the other course.
   const registry = new CatalogueRegistry()
   const engine = await LearningEngine.load(s.store, 'Asia/Singapore', { registry, now: s.clock.now, newId: s.newId, writer: new WriteQueue(s.store, s.timers) })
@@ -722,10 +724,12 @@ test('a stored pack for another course is set aside with the reason, and practic
   assert.equal((await s.privateStore.packs()).length, 1, 'the stored pack is kept, not deleted')
   const started = await engine.startOrResume('chinese')
   assert.equal(started.kind, 'task', 'practice continues')
-  // Back on the matching build the pack is in use again, with its progress.
+  // Back on the matching build the pack is in use again, with the same case links and records as before.
   const back = await reopen(s)
   assert.equal(back.program.openError, null)
   assert.ok(back.program.pack)
+  assert.equal(JSON.stringify(back.program.crosswalk), links)
+  assert.equal(JSON.stringify(back.engine.state.targets), records)
 })
 
 test('intake computes the same case links from the same records in any order (no stored links involved)', async () => {

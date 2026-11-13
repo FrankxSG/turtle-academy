@@ -32,10 +32,13 @@ const memoryStore = () => {
 
 test('the default install is unchanged for existing devices, and the other course installs its own content', async () => {
   const content = publicChinese()
-  const before = buildChineseContent({ courses: ['p2_higher_chinese', 'p3_higher_chinese'], ...content }).release.version
+  const pilot = buildChineseContent({ courses: ['p2_higher_chinese', 'p3_higher_chinese'], ...content }).release
+  const before = pilot.version
+  const ids = (r: { items: { id: string }[] }) => r.items.map((i) => i.id).sort()
   const byDefault = new CatalogueRegistry()
   await installPublicBuilds(byDefault, memoryStore(), new Set(), content)
   assert.equal(byDefault.current('chinese')!.version, before, 'same content version: nothing re-downloads or resets')
+  assert.deepEqual(ids(byDefault.current('chinese')!), ids(pilot), 'the same questions, P2 and P3')
   const higher = new CatalogueRegistry()
   await installPublicBuilds(higher, memoryStore(), new Set(), content, CHINESE_COURSES.higher_chinese.courses)
   assert.equal(higher.current('chinese')!.version, before)

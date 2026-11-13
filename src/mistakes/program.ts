@@ -183,10 +183,11 @@ export class MistakeProgram {
       if (pinned.has(sb.version)) { p.installStored(sb); installed.add(sb.version) }
       else await opts.store.deleteRelease(sb.version)
     }
-    // A restored device has no kept builds: rebuild a pinned task's content from the retained pack versions.
+    // A restored device has no kept builds: rebuild a pinned task's content from the retained pack versions. Like a
+    // kept build above, this is whatever the unfinished task was made from, so there is no course check here.
     for (const raw of await opts.store.packVersions()) {
       try {
-        const version = p.sameCourse(validatePack(raw))
+        const version = validatePack(raw)
         const build = p.buildFor(version.course, version)
         const v = build.release.version
         if (!pinned.has(v) || current.has(v) || installed.has(v)) continue
