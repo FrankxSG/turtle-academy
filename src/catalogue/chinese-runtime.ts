@@ -1,6 +1,7 @@
 // Generic public content can run without opening a private database or loading pack tooling.
 import Dexie, { type Table } from 'dexie'
 import type { CatalogueRegistry } from './adapter.ts'
+import { CHINESE_COURSES } from '../chinese-course.ts'
 import { publicChineseContent } from './chinese-public.ts'
 import { installPublicBuilds, type CachedPublicBuild } from './public-install.ts'
 
@@ -11,7 +12,7 @@ export async function openPublicChinese(registry: CatalogueRegistry, pinned: Set
     await db.open()
     await installPublicBuilds(registry, {
       all: () => db.builds.toArray(), put: async (b) => { await db.builds.put(b) },
-    }, pinned, publicChineseContent())
+    }, pinned, publicChineseContent(), CHINESE_COURSES[__CHINESE_COURSE__].courses)
     return { close: () => db.close() }
   } catch (error) { db.close(); throw error }
 }

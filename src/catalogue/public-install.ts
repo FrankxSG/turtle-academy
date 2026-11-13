@@ -1,6 +1,7 @@
 // Cache generic public content only. This store never receives packs, case crosswalks or learner records.
 import type { CatalogueRegistry, CatalogueRelease } from './adapter.ts'
 import { buildChineseContent, type RawBatch, type TargetLists } from './chinese.ts'
+import { CHINESE_COURSES, RELEASED_CHINESE_COURSE } from '../chinese-course.ts'
 import { registerExercise, registerMaterial, registerReviewState, registerTargetLabels, type Exercise, type MaterialText } from '../ui/content.ts'
 
 export interface CachedPublicBuild {
@@ -16,8 +17,9 @@ export interface PublicBuildStore {
   put(build: CachedPublicBuild): Promise<void>
 }
 export async function installPublicBuilds(registry: CatalogueRegistry, store: PublicBuildStore,
-  pinned: Set<string>, content: { lists: TargetLists; batches: RawBatch[] }) {
-  const built = buildChineseContent({ courses: ['p2_higher_chinese', 'p3_higher_chinese'], ...content })
+  pinned: Set<string>, content: { lists: TargetLists; batches: RawBatch[] },
+  courses: readonly string[] = CHINESE_COURSES[RELEASED_CHINESE_COURSE].courses) {
+  const built = buildChineseContent({ courses: [...courses], ...content })
   const current: CachedPublicBuild = { version: built.release.version, release: built.release,
     exercises: [...built.exercises], materials: [...built.materials], itemBatch: [...built.itemBatch] }
   const install = (b: CachedPublicBuild) => {
