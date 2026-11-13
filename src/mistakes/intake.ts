@@ -154,10 +154,9 @@ export function planIntake(opts: {
     // those a device holds differs between offline devices, so one case could land under two mistakes. An app-caught
     // record with the same progress unit is still the same mistake: replay groups it with the import record.
     const own = state.targets.find((t) => t.id === importTargetId(ref))
-    const existing = (own && isActiveTarget(own, view) ? own : undefined)
+    const existing = (own ? currentTarget(state, own.id, view) : null)
       // Lowest id first, so every device attaches new cases to the same record of a mistake.
       ?? state.targets.filter((t) => isActiveTarget(t, view) && t.subject === 'chinese' && t.course === course
-        && t.knowledge_point_ref === ref && t.assessed_skill === info.assessed_skill
         && lineage(t.id, view).some((id) => isImportRecord(id, ref))).sort((a, b) => a.id.localeCompare(b.id))[0]
     // Whether questions exist is the pack's answer for the target, and a mistake waits while any of its records
     // does: keep that answer on every active record of this target that an import produced or that holds an
@@ -173,8 +172,14 @@ export function planIntake(opts: {
       recurrence: i === 0 && !existing ? 'first' : 'independent', invalidated: false,
     }))
     if (existing) {
-      if (observations.length > 0 || existing.mapping_status !== mapping) {
-        records.push({ ...structuredClone(existing), mapping_status: mapping, observations })
+      // A device that has seen a correction must join the same replacement that replay will use for a
+      // device still writing to the original. The replacement's own point determines its question coverage.
+      const existingRef = existing.knowledge_point_ref
+      const existingMapping = existingRef && targets.get(existingRef)?.assessed_skill === existing.assessed_skill
+        ? (missingStages(release, existingRef).length === 0 ? 'mapped' : 'pending_content')
+        : existing.mapping_status
+      if (observations.length > 0 || existing.mapping_status !== existingMapping) {
+        records.push({ ...structuredClone(existing), mapping_status: existingMapping, observations })
         addedObservations += observations.length
       }
       for (const caseId of fresh) engineIdOf.set(caseId, existing.id)

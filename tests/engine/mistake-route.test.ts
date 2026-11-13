@@ -877,3 +877,33 @@ test('a record that already holds an imported case keeps following the pack, als
   assert.equal(zhuRows(s).length, 1)
   assert.equal(zhuRows(s)[0].pendingContent, false)
 })
+test('concurrent import dedupes across wrong-target amendment', async () => {
+  const s = await setup()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  const stale = structuredClone(s.engine.state)
+  const newer = syntheticPack({ pendingRef: s.pendingRef, extraCase: true })
+  const release = s.program.currentRelease()!
+  const correctRef = release.items.find((item) => item.course === 'p2_higher_chinese'
+    && !s.engine.state.targets.some((t) => t.knowledge_point_ref === item.knowledge_point_ref))!.knowledge_point_ref!
+  const skill = release.items.find((item) => item.knowledge_point_ref === correctRef)!.assessed_skill
+  const { id: replacement } = await s.engine.amendTarget(target(ZHU),
+    { knowledge_point_ref: correctRef, assessed_skill: skill }, 'wrong_target')
+  const stalePlan = intakeOf(s, stale, newer)
+  const awarePlan = intakeOf(s, s.engine.state, newer)
+  assert.equal(awarePlan.records.find((row) => row.id === replacement)?.mapping_status,
+    Object.values(poolSizes(release, correctRef)).every((n) => n > 0) ? 'mapped' : 'pending_content',
+    'question coverage follows the corrected point')
+  for (const row of [...stalePlan.records, ...awarePlan.records]) {
+    const old = s.engine.state.targets.find((t) => t.id === row.id)
+    if (old) {
+      for (const observation of row.observations) {
+        if (!old.observations.some((o) => o.id === observation.id)) old.observations.push(observation)
+      }
+      old.mapping_status = row.mapping_status
+    } else s.engine.state.targets.push(row)
+  }
+  assert.equal(currentTarget(s.engine.state, holderIn(stalePlan, 'O907')!)?.id, replacement)
+  assert.equal(currentTarget(s.engine.state, holderIn(awarePlan, 'O907')!)?.id, replacement)
+  assert.ok(![...derive(s.engine.state).progress.values()].some((p) => p.target.knowledge_point_ref === ZHU),
+    'the original point has no second schedule')
+})
