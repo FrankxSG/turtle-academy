@@ -131,7 +131,7 @@ test('next practice applies every eligibility gate, never a date that has alread
   const pr = (o: Partial<TargetProgress>): TargetProgress => ({
     target: {} as never, stage: 'exact', lowSuccessItems: [], acquisitionSuccessItems: [], notBefore: null, notBeforeReason: null,
     blockedByTask: null, finalStageNotBefore: null, clearances: [], dueOn: null, reviewIndex: 0, everReachedDelayedReview: false,
-    lastIndependentObservationOn: null, wholeTaskRoutes: new Set(), ...o,
+    lastIndependentObservationOn: null, wholeTaskRoutes: new Set(), pendingContent: false, ...o,
   })
   const mapped = { id: 't', mapping_status: 'mapped', verification: 'verified' } as never
   assert.deepEqual(nextPractice(pr({ target: mapped }), '2027-03-05'), { kind: 'now' })

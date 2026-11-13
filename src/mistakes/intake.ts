@@ -4,13 +4,15 @@
 //   observations on one target, so one correct answer is never counted as several independent corrections.
 // - Idempotent: target and observation ids derive from the target ref and the case id. Re-importing the same
 //   register adds nothing; a new case on an existing target adds one observation and keeps the stage.
+// - A case is written to an import record of its target (or the parent's correction of one), never to a record no
+//   import produced, so offline devices choose the same mistake. Replay joins records with the same progress unit.
 // - Cases were accepted by the parent before export; the app previews them and asks for one confirmation before saving.
 // - A target is `mapped` only when the installed release has usable exact, similar and generic questions for
 //   it; otherwise it stays `pending_content` (never planned) and appears in the expansion queue.
 // - Writing and speaking cases have no engine target. Their evidence is parent-observed production (production.ts).
 import type { CatalogueRelease } from '../catalogue/adapter.ts'
 import { poolSizes, type TargetInfo } from '../catalogue/chinese.ts'
-import { amendmentView, currentTarget, isActiveTarget, leaderOf, mistakeGroups, type AmendmentView } from '../engine/amendments.ts'
+import { amendmentView, currentTarget, isActiveTarget, leaderOf, lineage, mistakeGroups, type AmendmentView } from '../engine/amendments.ts'
 import type { Course, EngineState, Observation, Target } from '../engine/types.ts'
 import type { PlanStage, Register } from './pack.ts'
 
@@ -39,6 +41,8 @@ const TARGET_VALUE = /^[A-Za-z0-9㐀-䶿一-鿿' -]{1,24}$/
 
 export const caseObservationId = (caseId: string) => `case:${caseId.toLowerCase()}`
 export const importTargetId = (ref: string) => `case-target:${ref}`
+/** The import record of a target, or one created for later cases after the parent amended or invalidated it. */
+const isImportRecord = (id: string, ref: string) => id === importTargetId(ref) || id.startsWith(`${importTargetId(ref)}:`)
 const IMPORT_PREFIX = 'import:'
 const importInstanceRef = (registerId: string) => `${IMPORT_PREFIX}${registerId}`
 /**
@@ -128,6 +132,10 @@ export function planIntake(opts: {
   }
   const records: Target[] = []
   const pending: IntakeResult['pending'] = []
+  const targetById = new Map(state.targets.map((t) => [t.id, t]))
+  /** The record, or one it replaced, is an import record or holds an imported case. */
+  const importRelated = (t: Target) => lineage(t.id, view).some((id) =>
+    id.startsWith(importTargetId('')) || (targetById.get(id)?.observations.some(isImportedCase) ?? false))
   const engineIdOf = new Map<string, string>()
   let addedTargets = 0
   let addedObservations = 0
@@ -140,21 +148,38 @@ export function planIntake(opts: {
     // Cases already imported stay on the record that holds them now (a parent's replacement, or an invalidated
     // record): re-importing the register never resurrects, moves or duplicates them.
     const fresh = cases.filter((caseId) => holderOf(caseId) === null)
-    // Reuse an existing active target for the same concrete target (for example an app-caught one, or a parent's
-    // corrected replacement), so the learner never has two schedules for one thing.
+    // New cases go to an import record of this target only: the usual record, or the parent's correction of an
+    // earlier import (its lineage reaches an import record), whatever error type the correction gave it. Never to a
+    // record that no import produced (an app-caught error, or an unrelated mistake of another error type): which of
+    // those a device holds differs between offline devices, so one case could land under two mistakes. An app-caught
+    // record with the same progress unit is still the same mistake: replay groups it with the import record.
     const own = state.targets.find((t) => t.id === importTargetId(ref))
-    const existing = (own && isActiveTarget(own, view) ? own : undefined)
+    const existing = (own ? currentTarget(state, own.id, view) : null)
       // Lowest id first, so every device attaches new cases to the same record of a mistake.
       ?? state.targets.filter((t) => isActiveTarget(t, view) && t.subject === 'chinese' && t.course === course
-        && t.knowledge_point_ref === ref && t.assessed_skill === info.assessed_skill).sort((a, b) => a.id.localeCompare(b.id))[0]
+        && lineage(t.id, view).some((id) => isImportRecord(id, ref))).sort((a, b) => a.id.localeCompare(b.id))[0]
+    // Whether questions exist is the pack's answer for the target, and a mistake waits while any of its records
+    // does: keep that answer on every active record of this target that an import produced or that holds an
+    // imported case (a second import record, a correction, an app-caught record an earlier import wrote to).
+    for (const t of state.targets) {
+      if (t === existing || t.mapping_status === mapping || !isActiveTarget(t, view) || t.subject !== 'chinese'
+        || t.course !== course || t.knowledge_point_ref !== ref || t.assessed_skill !== info.assessed_skill) continue
+      if (importRelated(t)) records.push({ ...structuredClone(t), mapping_status: mapping, observations: [] })
+    }
     const observations: Observation[] = fresh.map((caseId, i) => ({
       id: caseObservationId(caseId), source_type: 'schoolwork', observed_on: today, recorded_on: today,
       instance_ref: importInstanceRef(register.register_id), batch_ref: null,
       recurrence: i === 0 && !existing ? 'first' : 'independent', invalidated: false,
     }))
     if (existing) {
-      if (observations.length > 0 || existing.mapping_status !== mapping) {
-        records.push({ ...structuredClone(existing), mapping_status: mapping, observations })
+      // A device that has seen a correction must join the same replacement that replay will use for a
+      // device still writing to the original. The replacement's own point determines its question coverage.
+      const existingRef = existing.knowledge_point_ref
+      const existingMapping = existingRef && targets.get(existingRef)?.assessed_skill === existing.assessed_skill
+        ? (missingStages(release, existingRef).length === 0 ? 'mapped' : 'pending_content')
+        : existing.mapping_status
+      if (observations.length > 0 || existing.mapping_status !== existingMapping) {
+        records.push({ ...structuredClone(existing), mapping_status: existingMapping, observations })
         addedObservations += observations.length
       }
       for (const caseId of fresh) engineIdOf.set(caseId, existing.id)

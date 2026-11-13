@@ -9,7 +9,11 @@ import { LearningEngine, type Step } from '../../src/engine/engine.ts'
 import { MemoryRecordStore, WriteQueue } from '../../src/engine/persistence.ts'
 import { importTargetId, planIntake } from '../../src/mistakes/intake.ts'
 import { currentTarget } from '../../src/engine/amendments.ts'
+import { derive, isEligible } from '../../src/engine/evidence.ts'
+import { progressRows } from '../../src/parent/progress.ts'
 import { MemoryPrivateStore, MistakeProgram } from '../../src/mistakes/program.ts'
+import { validatePack } from '../../src/mistakes/pack.ts'
+import type { EngineState, Target } from '../../src/engine/types.ts'
 import { Clock, ids, ManualTimers, correctResponse, wrongResponse } from './helpers.ts'
 import { publicChinese } from './fixtures/public-chinese.ts'
 import { PRIVATE_REF, syntheticPack } from './fixtures/private-pack.ts'
@@ -706,4 +710,200 @@ test('intake computes the same case links from the same records in any order (no
   assert.ok(first.includes('aa-other-device') || first.includes(target(ZHU)))
   s.engine.state.targets.reverse()
   assert.equal(plan(), first)
+})
+
+// Where a new case lands must depend on the case and its own import history only, never on which other records a
+// device happens to hold: two offline devices importing the same pack must choose the same mistake.
+const appCaught = (like: Target, id: string, errorType = 'unknown_cause', taskId = 't:chinese:2027-03-01:0'): Target => ({
+  ...structuredClone(like), id, error_type: errorType, verified_at: null, replaces: null,
+  observations: [{ id: `${id}-obs`, source_type: 'app_practice', observed_on: '2027-03-01', recorded_on: '2027-03-01',
+    instance_ref: taskId, batch_ref: null, recurrence: 'first', invalidated: false }],
+})
+const intakeOf = (s: S, state: EngineState, pack: ReturnType<typeof syntheticPack>) => {
+  const valid = validatePack(pack)
+  const targets = targetInfo(s.publicContent.lists, (pack as unknown as { private_targets: RawSkillTarget[] }).private_targets)
+  return planIntake({ state, register: valid.register, release: s.program.currentRelease()!, targets, today: '2027-03-02', now: s.clock.now() })
+}
+const holderIn = (r: ReturnType<typeof intakeOf>, caseId: string) => r.crosswalk.find((x) => x.case_id === caseId)!.engine_target_id
+
+test('a new case joins its corrected mistake on every device, also on one that holds an app-caught record of the same character', async () => {
+  const s = await setup()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  const zhu = structuredClone(s.engine.state.targets.find((t) => t.id === target(ZHU))!)
+  const { id: replacement } = await s.engine.amendTarget(target(ZHU), { error_type: 'form_confusion' }, 'wrong_error_type')
+  const newer = syntheticPack({ pendingRef: s.pendingRef, extraCase: true })
+  // Device B holds the correction only. Device A also holds an app-caught 住 error (unknown cause) whose id sorts first.
+  const b = structuredClone(s.engine.state)
+  const a = structuredClone(s.engine.state)
+  a.targets.push(appCaught(zhu, '00-app-caught'))
+  assert.equal(holderIn(intakeOf(s, b, newer), 'O907'), replacement)
+  assert.equal(holderIn(intakeOf(s, a, newer), 'O907'), replacement, 'the same mistake as on the other device')
+  a.targets.reverse()
+  assert.equal(holderIn(intakeOf(s, a, newer), 'O907'), replacement, 'whatever the order of records on the device')
+})
+
+test('a device that never held the earlier import writes its cases to the import record, not to an app-caught record', async () => {
+  const s = await setup()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  const zhu = structuredClone(s.engine.state.targets.find((t) => t.id === target(ZHU))!)
+  // Device A never loaded the pack; it holds only an app-caught 住 error. Both devices then load the newer pack offline.
+  const fresh = await setup()
+  fresh.engine.state.targets.push(appCaught(zhu, '00-app-caught'))
+  await fresh.engine.flush()
+  await fresh.program.installPack(syntheticPack({ pendingRef: fresh.pendingRef, extraCase: true }))
+  for (const id of ['O903', 'O907']) assert.equal(fresh.program.crosswalk.find((x) => x.case_id === id)!.engine_target_id, target(ZHU))
+  // Same error type, so the two records are one mistake with one schedule (two-device rule), and the cases count once.
+  const rows = [...fresh.engine.derived().progress.values()].filter((v) => v.target.knowledge_point_ref === ZHU)
+  assert.equal(rows.length, 1, 'one schedule')
+  // Importing again adds nothing and moves nothing.
+  const before = JSON.stringify(fresh.engine.state.targets)
+  await fresh.program.importRegister()
+  assert.equal(JSON.stringify(fresh.engine.state.targets), before)
+  // The same after a restart: opening the app imports the stored pack again.
+  const again = await reopen(fresh)
+  assert.equal(JSON.stringify(again.engine.state.targets), before)
+  for (const id of ['O903', 'O907']) assert.equal(again.program.crosswalk.find((x) => x.case_id === id)!.engine_target_id, target(ZHU))
+})
+
+test('a new case never joins an unrelated mistake of another error type; it gets the import record, the same on every device', async () => {
+  const s = await setup()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  const zhu = structuredClone(s.engine.state.targets.find((t) => t.id === target(ZHU))!)
+  const fresh = await setup()
+  const newer = syntheticPack({ pendingRef: fresh.pendingRef, extraCase: true })
+  // Device A holds a 住 mistake of another error type that no import produced; device B holds nothing.
+  const a = structuredClone(fresh.engine.state)
+  a.targets.push(appCaught(zhu, '00-other-type', 'form_confusion'))
+  const b = structuredClone(fresh.engine.state)
+  const onA = intakeOf(fresh, a, newer)
+  const onB = intakeOf(fresh, b, newer)
+  for (const id of ['O903', 'O907']) {
+    assert.equal(holderIn(onB, id), target(ZHU))
+    assert.equal(holderIn(onA, id), target(ZHU), 'the same record as on the other device')
+  }
+  assert.equal(onA.records.find((t) => t.id === target(ZHU))!.error_type, 'unknown_cause')
+  assert.ok(!onA.records.some((t) => t.id === '00-other-type'), 'the unrelated mistake is left alone')
+})
+
+test('a mistake waits for questions when its import record does, also when an app-caught record of it sorts first', async () => {
+  const s0 = await setup()
+  await s0.program.installPack(syntheticPack({ pendingRef: s0.pendingRef }))
+  const like = structuredClone(s0.engine.state.targets.find((t) => t.id === target(s0.pendingRef))!)
+  // The device already holds an app-caught record of the same mistake (always `mapped`); its id sorts first.
+  const s = await setup()
+  s.engine.state.targets.push({ ...appCaught(like, '00-app-caught'), mapping_status: 'mapped' })
+  await s.engine.flush()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  const report = s.program.report()!
+  assert.equal(new Map(report.cases.map((c) => [c.case_id, c.status])).get('O905'), 'pending_content')
+  assert.equal(report.totals.pending_content, 1)
+  const rows = [...s.engine.derived().progress.values()].filter((v) => v.target.knowledge_point_ref === s.pendingRef)
+  assert.equal(rows.length, 1, 'one mistake')
+})
+
+test('replay and the parent view hold a mistake while any of its records waits for questions, and release it when they arrive', async () => {
+  const s0 = await setup()
+  await s0.program.installPack(syntheticPack({ pendingRef: s0.pendingRef }))
+  const like = structuredClone(s0.engine.state.targets.find((t) => t.id === target(s0.pendingRef))!)
+  const s = await setup()
+  // The app-caught error came from a task that has finished, so nothing but missing questions holds the mistake back.
+  const r = await s.engine.startOrResume('chinese')
+  if (r.kind !== 'task') throw new Error('expected a task')
+  await run(s.engine, r.task.id, () => true)
+  s.engine.state.targets.push({ ...appCaught(like, '00-app-caught', 'unknown_cause', r.task.id), mapping_status: 'mapped' })
+  await s.engine.flush()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  const view = (state: EngineState) => {
+    const derived = derive(state)
+    const prs = [...derived.progress.values()].filter((v) => v.target.knowledge_point_ref === s.pendingRef)
+    const row = progressRows({ state, derived, today: '2027-03-09', subject: 'chinese', held: new Set() }).filter((x) => x.target.knowledge_point_ref === s.pendingRef)
+    return { prs, row }
+  }
+  const waiting = view(structuredClone(s.engine.state))
+  assert.equal(waiting.prs.length, 1)
+  assert.equal(waiting.prs[0].target.id, '00-app-caught', 'the app-caught record leads the mistake')
+  assert.equal(waiting.prs[0].blockedByTask, null)
+  assert.equal(isEligible(waiting.prs[0], '2027-03-09'), false, 'not planned while questions are missing')
+  assert.deepEqual(waiting.row.map((x) => x.state), ['pending_content'])
+  // Questions arrive: the import record becomes mapped, and the mistake can be practised.
+  const arrived = structuredClone(s.engine.state)
+  arrived.targets.find((t) => t.id === target(s.pendingRef))!.mapping_status = 'mapped'
+  const ready = view(arrived)
+  assert.equal(isEligible(ready.prs[0], '2027-03-09'), true)
+  assert.deepEqual(ready.row.map((x) => x.state), ['repair'])
+})
+
+// Every record of a target that an import produced, or that holds imported cases, carries the pack's answer on
+// whether questions exist: a mistake waits while any of its records does, so none may be left behind.
+const importedCase = (caseId: string) => ({ id: `case:${caseId.toLowerCase()}`, source_type: 'schoolwork' as const,
+  observed_on: '2027-03-01', recorded_on: '2027-03-01', instance_ref: 'import:synthetic-1', batch_ref: null,
+  recurrence: 'independent' as const, invalidated: false })
+const zhuRows = (s: S) => [...s.engine.derived().progress.values()].filter((v) => v.target.knowledge_point_ref === ZHU)
+
+test('when questions arrive, every import record of the mistake is released, not only the first', async () => {
+  const s = await setup()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  // An earlier pack version left two import records of 住 waiting for questions (as after an invalidation on one
+  // device and a revival through sync). This pack has the questions.
+  const own = s.engine.state.targets.find((t) => t.id === target(ZHU))!
+  own.mapping_status = 'pending_content'
+  s.engine.state.targets.push({ ...structuredClone(own), id: `${target(ZHU)}:o907`, observations: [importedCase('O907')] })
+  await s.engine.flush()
+  assert.equal(zhuRows(s)[0].pendingContent, true)
+  await s.program.importRegister()
+  for (const t of s.engine.state.targets.filter((x) => x.knowledge_point_ref === ZHU)) assert.equal(t.mapping_status, 'mapped', t.id)
+  assert.equal(zhuRows(s).length, 1)
+  assert.equal(zhuRows(s)[0].pendingContent, false)
+  // Importing again changes nothing.
+  const before = JSON.stringify(s.engine.state.targets)
+  await s.program.importRegister()
+  assert.equal(JSON.stringify(s.engine.state.targets), before)
+})
+
+test('a record that already holds an imported case keeps following the pack, also an app-caught one from an earlier import', async () => {
+  const s0 = await setup()
+  await s0.program.installPack(syntheticPack({ pendingRef: s0.pendingRef }))
+  const like = structuredClone(s0.engine.state.targets.find((t) => t.id === target(ZHU))!)
+  // Earlier versions attached a case to an app-caught record and stamped it as waiting. The pack now has questions.
+  const s = await setup()
+  const legacy = appCaught(like, '00-app-caught')
+  s.engine.state.targets.push({ ...legacy, mapping_status: 'pending_content', observations: [...legacy.observations, importedCase('O903')] })
+  await s.engine.flush()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  const held = s.engine.state.targets.find((t) => t.id === '00-app-caught')!
+  assert.equal(held.mapping_status, 'mapped')
+  assert.equal(s.program.crosswalk.find((x) => x.case_id === 'O903')!.engine_target_id, '00-app-caught', 'the case stays where it was')
+  assert.ok(!s.engine.state.targets.some((t) => t.id === target(ZHU)), 'no second record for a case already held')
+  assert.equal(zhuRows(s).length, 1)
+  assert.equal(zhuRows(s)[0].pendingContent, false)
+})
+test('concurrent import dedupes across wrong-target amendment', async () => {
+  const s = await setup()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  const stale = structuredClone(s.engine.state)
+  const newer = syntheticPack({ pendingRef: s.pendingRef, extraCase: true })
+  const release = s.program.currentRelease()!
+  const correctRef = release.items.find((item) => item.course === 'p2_higher_chinese'
+    && !s.engine.state.targets.some((t) => t.knowledge_point_ref === item.knowledge_point_ref))!.knowledge_point_ref!
+  const skill = release.items.find((item) => item.knowledge_point_ref === correctRef)!.assessed_skill
+  const { id: replacement } = await s.engine.amendTarget(target(ZHU),
+    { knowledge_point_ref: correctRef, assessed_skill: skill }, 'wrong_target')
+  const stalePlan = intakeOf(s, stale, newer)
+  const awarePlan = intakeOf(s, s.engine.state, newer)
+  assert.equal(awarePlan.records.find((row) => row.id === replacement)?.mapping_status,
+    Object.values(poolSizes(release, correctRef)).every((n) => n > 0) ? 'mapped' : 'pending_content',
+    'question coverage follows the corrected point')
+  for (const row of [...stalePlan.records, ...awarePlan.records]) {
+    const old = s.engine.state.targets.find((t) => t.id === row.id)
+    if (old) {
+      for (const observation of row.observations) {
+        if (!old.observations.some((o) => o.id === observation.id)) old.observations.push(observation)
+      }
+      old.mapping_status = row.mapping_status
+    } else s.engine.state.targets.push(row)
+  }
+  assert.equal(currentTarget(s.engine.state, holderIn(stalePlan, 'O907')!)?.id, replacement)
+  assert.equal(currentTarget(s.engine.state, holderIn(awarePlan, 'O907')!)?.id, replacement)
+  assert.ok(![...derive(s.engine.state).progress.values()].some((p) => p.target.knowledge_point_ref === ZHU),
+    'the original point has no second schedule')
 })
