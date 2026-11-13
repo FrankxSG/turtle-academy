@@ -190,9 +190,9 @@ export const mistakeKey = (t: Target) => [t.subject, t.course, t.knowledge_point
 
 /**
  * A mistake waits for questions when any of its records does. Records of one mistake can disagree: an app-caught
- * record is always `mapped`, while the import record carries the pack's answer for the repair stages.
+ * record starts `mapped`, while import records carry the pack's answer for the repair stages.
  */
-export const groupPendingContent = (members: string[], byId: Map<string, Target>): boolean =>
+export const groupPendingContent = (members: readonly string[], byId: ReadonlyMap<string, Target>): boolean =>
   members.some((id) => byId.get(id)?.mapping_status === 'pending_content')
 
 export interface MistakeGroups {

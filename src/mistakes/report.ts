@@ -182,7 +182,7 @@ export function buildReport(opts: {
       && !groupObservations(members, view, byId, counts, dismissalFor(derived, current)).some((o) => o.id === caseObs)
     if ((linked && !current) || dropped) status = 'invalidated'
     else if (!target) status = 'not_imported'
-    else if (target.mapping_status === 'pending_content' || groupPendingContent(members, byId)) status = 'pending_content'
+    else if (groupPendingContent(members, byId)) status = 'pending_content'
     // Only counted first responses are evidence; a replaced or invalidated attempt leaves the case unevidenced.
     else if (counted === 0) status = 'not_yet_evidenced'
     else if (pr?.stage === 'delayed_review') status = 'in_delayed_review'

@@ -132,6 +132,10 @@ export function planIntake(opts: {
   }
   const records: Target[] = []
   const pending: IntakeResult['pending'] = []
+  const targetById = new Map(state.targets.map((t) => [t.id, t]))
+  /** The record, or one it replaced, is an import record or holds an imported case. */
+  const importRelated = (t: Target) => lineage(t.id, view).some((id) =>
+    id.startsWith(importTargetId('')) || (targetById.get(id)?.observations.some(isImportedCase) ?? false))
   const engineIdOf = new Map<string, string>()
   let addedTargets = 0
   let addedObservations = 0
@@ -155,6 +159,14 @@ export function planIntake(opts: {
       ?? state.targets.filter((t) => isActiveTarget(t, view) && t.subject === 'chinese' && t.course === course
         && t.knowledge_point_ref === ref && t.assessed_skill === info.assessed_skill
         && lineage(t.id, view).some((id) => isImportRecord(id, ref))).sort((a, b) => a.id.localeCompare(b.id))[0]
+    // Whether questions exist is the pack's answer for the target, and a mistake waits while any of its records
+    // does: keep that answer on every active record of this target that an import produced or that holds an
+    // imported case (a second import record, a correction, an app-caught record an earlier import wrote to).
+    for (const t of state.targets) {
+      if (t === existing || t.mapping_status === mapping || !isActiveTarget(t, view) || t.subject !== 'chinese'
+        || t.course !== course || t.knowledge_point_ref !== ref || t.assessed_skill !== info.assessed_skill) continue
+      if (importRelated(t)) records.push({ ...structuredClone(t), mapping_status: mapping, observations: [] })
+    }
     const observations: Observation[] = fresh.map((caseId, i) => ({
       id: caseObservationId(caseId), source_type: 'schoolwork', observed_on: today, recorded_on: today,
       instance_ref: importInstanceRef(register.register_id), batch_ref: null,
