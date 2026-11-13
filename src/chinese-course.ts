@@ -1,6 +1,5 @@
 // Which Chinese course a build serves: the one release setting read by the public content installer and by the
-// private mistake-pack code, so they cannot disagree. The Pilot is one family on Higher Chinese (owner decision
-// 2026-11-12); there is no in-app course picker.
+// private mistake-pack code. The build defaults to Higher Chinese.
 //
 // Set at build time with VITE_CHINESE_COURSE (validated in vite.config.ts; no runtime or URL override):
 //   unset or empty   → higher_chinese

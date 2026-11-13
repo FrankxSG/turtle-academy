@@ -48,3 +48,12 @@ test('the default install is unchanged for existing devices, and the other cours
   assert.ok(release.items.length > 0)
   assert.ok(release.items.every((i) => i.course === 'p2_chinese' || i.course === 'p3_chinese'), 'only the chosen course is served')
 })
+
+test('a fresh public cache restores a pinned task from the other course without making it current', async () => {
+  const content = publicChinese()
+  const higher = buildChineseContent({ courses: [...CHINESE_COURSES.higher_chinese.courses], ...content }).release
+  const registry = new CatalogueRegistry()
+  await installPublicBuilds(registry, memoryStore(), new Set(), content, CHINESE_COURSES.chinese.courses)
+  assert.deepEqual(registry.release('chinese', higher.version).items, higher.items)
+  assert.ok(registry.current('chinese')!.items.every((item) => item.course === 'p2_chinese' || item.course === 'p3_chinese'))
+})

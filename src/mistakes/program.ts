@@ -196,6 +196,11 @@ export class MistakeProgram {
         await opts.store.putRelease(toStored(build))
       } catch { /* a version this app cannot build stays unused; tasks pinned to it report missing content */ }
     }
+    // Generic tasks may arrive from sync after startup, even when there is no pack to trigger a reload.
+    // Their bundled release is available by version; the selected course and pack are installed last.
+    for (const other of Object.values(CHINESE_COURSES)) {
+      if (other.pack !== this.course) p.install(p.buildFor(other.pack, null))
+    }
     for (const b of builds) { p.install(b); await opts.store.putRelease(toStored(b)) }
     p.rows = await opts.store.crosswalk()
     p.events = await opts.store.production()

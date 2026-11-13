@@ -748,3 +748,17 @@ test('intake computes the same case links from the same records in any order (no
   s.engine.state.targets.reverse()
   assert.equal(plan(), first)
 })
+test('restored device can resume a generic task pinned to another course', async () => {
+  const s = await setup()
+  const original = await s.engine.startOrResume('chinese')
+  assert.ok(original.kind === 'task')
+  const registry = new CatalogueRegistry()
+  const engine = await LearningEngine.load(s.store, 'Asia/Singapore', {
+    registry, now: s.clock.now, newId: s.newId, writer: new WriteQueue(s.store, s.timers)
+  })
+  await MistakeProgram.open({ engine, registry, publicContent: s.publicContent, store: new MemoryPrivateStore(),
+    now: s.clock.now, course: 'p2_chinese' })
+  assert.equal(engine.taskRelease(original.task.id).version, original.task.content_version)
+  assert.equal((await engine.next(original.task.id)).kind, 'question')
+  assert.ok(registry.current('chinese')!.items.every((item) => item.course === 'p2_chinese' || item.course === 'p3_chinese'))
+})
