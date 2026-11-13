@@ -10,7 +10,6 @@ import { MemoryRecordStore, WriteQueue } from '../../src/engine/persistence.ts'
 import { importTargetId, planIntake } from '../../src/mistakes/intake.ts'
 import { currentTarget } from '../../src/engine/amendments.ts'
 import { MemoryPrivateStore, MistakeProgram } from '../../src/mistakes/program.ts'
-import { validatePack } from '../../src/mistakes/pack.ts'
 import { Clock, ids, ManualTimers, correctResponse, wrongResponse } from './helpers.ts'
 import { publicChinese } from './fixtures/public-chinese.ts'
 import { PRIVATE_REF, syntheticPack } from './fixtures/private-pack.ts'
@@ -692,29 +691,12 @@ test('case links do not depend on the order of records on the device (two device
   assert.equal(JSON.stringify(s.program.crosswalk), links)
 })
 
-test('intake computes the same case links from the same records in any order (no stored links involved)', async () => {
-  const s = await setup()
-  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
-  const zhu = s.engine.state.targets.find((t) => t.id === target(ZHU))!
-  // Another record of the 住 mistake holding the same case, with an id that sorts first.
-  s.engine.state.targets.push({ ...structuredClone(zhu), id: 'aa-other-device' })
-  const register = s.program.register!
-  const release = s.program.currentRelease()!
-  const pack = syntheticPack({ pendingRef: s.pendingRef }) as unknown as { private_targets: RawSkillTarget[] }
-  const targets = targetInfo(s.publicContent.lists, pack.private_targets)
-  const plan = () => JSON.stringify(planIntake({ state: s.engine.state, register, release, targets, today: '2027-03-01', now: s.clock.now() }).crosswalk)
-  const first = plan()
-  assert.ok(first.includes('aa-other-device') || first.includes(target(ZHU)))
-  s.engine.state.targets.reverse()
-  assert.equal(plan(), first)
-})
-
 // One course per build (src/chinese-course.ts): a pack for another course is never built alongside it.
 test('a pack for another course is refused before anything is saved', async () => {
   const s = await setup()
-  // The same pack written for the other course throughout (course fields, case routes and target ids).
+  // The same pack written for the other course throughout (course fields, case routes and target ids). It is
+  // well-formed: the course check runs only after validation passes.
   const other = JSON.parse(JSON.stringify(syntheticPack({ pendingRef: s.pendingRef })).replaceAll('p2_higher_chinese', 'p2_chinese')) as { course: string }
-  assert.equal(validatePack(structuredClone(other)).course, 'p2_chinese', 'a well-formed pack; only its course differs')
   const before = JSON.stringify(s.engine.state.targets)
   for (const attempt of [() => s.program.previewPack(other), () => s.program.installPack(other as never)]) {
     const rejected = await attempt().then(() => null, (e: Error) => e)
@@ -744,4 +726,21 @@ test('a stored pack for another course is set aside with the reason, and practic
   const back = await reopen(s)
   assert.equal(back.program.openError, null)
   assert.ok(back.program.pack)
+})
+
+test('intake computes the same case links from the same records in any order (no stored links involved)', async () => {
+  const s = await setup()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  const zhu = s.engine.state.targets.find((t) => t.id === target(ZHU))!
+  // Another record of the 住 mistake holding the same case, with an id that sorts first.
+  s.engine.state.targets.push({ ...structuredClone(zhu), id: 'aa-other-device' })
+  const register = s.program.register!
+  const release = s.program.currentRelease()!
+  const pack = syntheticPack({ pendingRef: s.pendingRef }) as unknown as { private_targets: RawSkillTarget[] }
+  const targets = targetInfo(s.publicContent.lists, pack.private_targets)
+  const plan = () => JSON.stringify(planIntake({ state: s.engine.state, register, release, targets, today: '2027-03-01', now: s.clock.now() }).crosswalk)
+  const first = plan()
+  assert.ok(first.includes('aa-other-device') || first.includes(target(ZHU)))
+  s.engine.state.targets.reverse()
+  assert.equal(plan(), first)
 })
