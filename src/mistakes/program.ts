@@ -68,7 +68,6 @@ export class MemoryPrivateStore implements PrivateStore {
 
 export interface PublicChinese { lists: TargetLists; batches: RawBatch[] }
 
-
 /**
  * Engine targets a set-aside pack's cases live on: those in its saved case links, plus every target holding
  * imported case evidence. The second part matters because engine targets are saved before the case links, so an

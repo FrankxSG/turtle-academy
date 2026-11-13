@@ -738,6 +738,8 @@ test('a stored pack for another course is set aside with the reason, and practic
   const release = registry.current('chinese')!
   assert.ok(release.items.every((i) => i.course === 'p2_chinese' || i.course === 'p3_chinese'), 'no second course is built')
   assert.equal((await s.privateStore.packs()).length, 1, 'the stored pack is kept, not deleted')
+  const started = await engine.startOrResume('chinese')
+  assert.equal(started.kind, 'task', 'practice continues')
   // Back on the matching build the pack is in use again, with its progress.
   const back = await reopen(s)
   assert.equal(back.program.openError, null)
