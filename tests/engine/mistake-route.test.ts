@@ -691,6 +691,21 @@ test('case links do not depend on the order of records on the device (two device
   assert.equal(JSON.stringify(s.program.crosswalk), links)
 })
 
+test('restored device can resume a generic task pinned to another course', async () => {
+  const s = await setup()
+  const original = await s.engine.startOrResume('chinese')
+  assert.ok(original.kind === 'task')
+  const registry = new CatalogueRegistry()
+  const engine = await LearningEngine.load(s.store, 'Asia/Singapore', {
+    registry, now: s.clock.now, newId: s.newId, writer: new WriteQueue(s.store, s.timers)
+  })
+  await MistakeProgram.open({ engine, registry, publicContent: s.publicContent, store: new MemoryPrivateStore(),
+    now: s.clock.now, course: 'p2_chinese' })
+  assert.equal(engine.taskRelease(original.task.id).version, original.task.content_version)
+  assert.equal((await engine.next(original.task.id)).kind, 'question')
+  assert.ok(registry.current('chinese')!.items.every((item) => item.course === 'p2_chinese' || item.course === 'p3_chinese'))
+})
+
 // One course per build (src/chinese-course.ts): a pack for another course is never built alongside it.
 test('a pack for another course is refused before anything is saved', async () => {
   const s = await setup()
@@ -747,18 +762,4 @@ test('intake computes the same case links from the same records in any order (no
   assert.ok(first.includes('aa-other-device') || first.includes(target(ZHU)))
   s.engine.state.targets.reverse()
   assert.equal(plan(), first)
-})
-test('restored device can resume a generic task pinned to another course', async () => {
-  const s = await setup()
-  const original = await s.engine.startOrResume('chinese')
-  assert.ok(original.kind === 'task')
-  const registry = new CatalogueRegistry()
-  const engine = await LearningEngine.load(s.store, 'Asia/Singapore', {
-    registry, now: s.clock.now, newId: s.newId, writer: new WriteQueue(s.store, s.timers)
-  })
-  await MistakeProgram.open({ engine, registry, publicContent: s.publicContent, store: new MemoryPrivateStore(),
-    now: s.clock.now, course: 'p2_chinese' })
-  assert.equal(engine.taskRelease(original.task.id).version, original.task.content_version)
-  assert.equal((await engine.next(original.task.id)).kind, 'question')
-  assert.ok(registry.current('chinese')!.items.every((item) => item.course === 'p2_chinese' || item.course === 'p3_chinese'))
 })
