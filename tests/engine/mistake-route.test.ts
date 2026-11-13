@@ -832,3 +832,48 @@ test('replay and the parent view hold a mistake while any of its records waits f
   assert.equal(isEligible(ready.prs[0], '2027-03-09'), true)
   assert.deepEqual(ready.row.map((x) => x.state), ['repair'])
 })
+
+// Every record of a target that an import produced, or that holds imported cases, carries the pack's answer on
+// whether questions exist: a mistake waits while any of its records does, so none may be left behind.
+const importedCase = (caseId: string) => ({ id: `case:${caseId.toLowerCase()}`, source_type: 'schoolwork' as const,
+  observed_on: '2027-03-01', recorded_on: '2027-03-01', instance_ref: 'import:synthetic-1', batch_ref: null,
+  recurrence: 'independent' as const, invalidated: false })
+const zhuRows = (s: S) => [...s.engine.derived().progress.values()].filter((v) => v.target.knowledge_point_ref === ZHU)
+
+test('when questions arrive, every import record of the mistake is released, not only the first', async () => {
+  const s = await setup()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  // An earlier pack version left two import records of 住 waiting for questions (as after an invalidation on one
+  // device and a revival through sync). This pack has the questions.
+  const own = s.engine.state.targets.find((t) => t.id === target(ZHU))!
+  own.mapping_status = 'pending_content'
+  s.engine.state.targets.push({ ...structuredClone(own), id: `${target(ZHU)}:o907`, observations: [importedCase('O907')] })
+  await s.engine.flush()
+  assert.equal(zhuRows(s)[0].pendingContent, true)
+  await s.program.importRegister()
+  for (const t of s.engine.state.targets.filter((x) => x.knowledge_point_ref === ZHU)) assert.equal(t.mapping_status, 'mapped', t.id)
+  assert.equal(zhuRows(s).length, 1)
+  assert.equal(zhuRows(s)[0].pendingContent, false)
+  // Importing again changes nothing.
+  const before = JSON.stringify(s.engine.state.targets)
+  await s.program.importRegister()
+  assert.equal(JSON.stringify(s.engine.state.targets), before)
+})
+
+test('a record that already holds an imported case keeps following the pack, also an app-caught one from an earlier import', async () => {
+  const s0 = await setup()
+  await s0.program.installPack(syntheticPack({ pendingRef: s0.pendingRef }))
+  const like = structuredClone(s0.engine.state.targets.find((t) => t.id === target(ZHU))!)
+  // Earlier versions attached a case to an app-caught record and stamped it as waiting. The pack now has questions.
+  const s = await setup()
+  const legacy = appCaught(like, '00-app-caught')
+  s.engine.state.targets.push({ ...legacy, mapping_status: 'pending_content', observations: [...legacy.observations, importedCase('O903')] })
+  await s.engine.flush()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  const held = s.engine.state.targets.find((t) => t.id === '00-app-caught')!
+  assert.equal(held.mapping_status, 'mapped')
+  assert.equal(s.program.crosswalk.find((x) => x.case_id === 'O903')!.engine_target_id, '00-app-caught', 'the case stays where it was')
+  assert.ok(!s.engine.state.targets.some((t) => t.id === target(ZHU)), 'no second record for a case already held')
+  assert.equal(zhuRows(s).length, 1)
+  assert.equal(zhuRows(s)[0].pendingContent, false)
+})
