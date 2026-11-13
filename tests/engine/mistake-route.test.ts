@@ -707,3 +707,38 @@ test('intake computes the same case links from the same records in any order (no
   s.engine.state.targets.reverse()
   assert.equal(plan(), first)
 })
+
+// One course per build (src/chinese-course.ts): a pack for another course is never built alongside it.
+test('a pack for another course is refused before anything is saved', async () => {
+  const s = await setup()
+  const other = syntheticPack({ pendingRef: s.pendingRef }) as unknown as { course: string; register: { course: string } }
+  other.course = 'p2_chinese'
+  other.register.course = 'p2_chinese'
+  const before = JSON.stringify(s.engine.state.targets)
+  for (const attempt of [() => s.program.previewPack(other), () => s.program.installPack(other as never)]) {
+    const rejected = await attempt().then(() => null, (e: Error) => e)
+    assert.equal(rejected?.name, 'PackRejected')
+    assert.equal(rejected?.message, 'pack_course_mismatch')
+  }
+  assert.equal(s.program.pack, null)
+  assert.equal((await s.privateStore.packs()).length, 0)
+  assert.equal(JSON.stringify(s.engine.state.targets), before)
+})
+
+test('a stored pack for another course is set aside with the reason, and practice continues on the build course only', async () => {
+  const s = await setup()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  // The same device opens a build set to the other course.
+  const registry = new CatalogueRegistry()
+  const engine = await LearningEngine.load(s.store, 'Asia/Singapore', { registry, now: s.clock.now, newId: s.newId, writer: new WriteQueue(s.store, s.timers) })
+  const program = await MistakeProgram.open({ engine, registry, publicContent: s.publicContent, store: s.privateStore, now: s.clock.now, newId: s.newId, course: 'p2_chinese' })
+  assert.equal(program.openError, 'pack_course_mismatch')
+  assert.equal(program.pack, null)
+  const release = registry.current('chinese')!
+  assert.ok(release.items.every((i) => i.course === 'p2_chinese' || i.course === 'p3_chinese'), 'no second course is built')
+  assert.equal((await s.privateStore.packs()).length, 1, 'the stored pack is kept, not deleted')
+  // Back on the matching build the pack is in use again, with its progress.
+  const back = await reopen(s)
+  assert.equal(back.program.openError, null)
+  assert.ok(back.program.pack)
+})
