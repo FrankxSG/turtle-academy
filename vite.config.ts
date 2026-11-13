@@ -1,6 +1,7 @@
 import { defineConfig, loadEnv } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import { parsePracticeSubjects } from './src/practice-subjects.ts'
+import { parseChineseCourse } from './src/chinese-course.ts'
 
 export default defineConfig(({ mode }) => {
   const env = { ...loadEnv(mode, process.cwd(), ''), ...process.env }
@@ -13,6 +14,8 @@ export default defineConfig(({ mode }) => {
     __PRIVATE_PACK_ENABLED__: JSON.stringify(requested && mode === 'private'),
     // Throws on an unknown subject name, so a misconfigured release fails to build instead of dropping a subject.
     __PRACTICE_SUBJECTS__: JSON.stringify(parsePracticeSubjects(env.VITE_PRACTICE_SUBJECTS)),
+    // Throws on an unknown course name (src/chinese-course.ts).
+    __CHINESE_COURSE__: JSON.stringify(parseChineseCourse(env.VITE_CHINESE_COURSE)),
   },
   plugins: [
     ...(mode === 'private' ? [] : [{

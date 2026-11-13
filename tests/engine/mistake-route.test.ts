@@ -691,6 +691,62 @@ test('case links do not depend on the order of records on the device (two device
   assert.equal(JSON.stringify(s.program.crosswalk), links)
 })
 
+test('restored device can resume a generic task pinned to another course', async () => {
+  const s = await setup()
+  const original = await s.engine.startOrResume('chinese')
+  assert.ok(original.kind === 'task')
+  const registry = new CatalogueRegistry()
+  const engine = await LearningEngine.load(s.store, 'Asia/Singapore', {
+    registry, now: s.clock.now, newId: s.newId, writer: new WriteQueue(s.store, s.timers)
+  })
+  await MistakeProgram.open({ engine, registry, publicContent: s.publicContent, store: new MemoryPrivateStore(),
+    now: s.clock.now, course: 'p2_chinese' })
+  assert.equal(engine.taskRelease(original.task.id).version, original.task.content_version)
+  assert.equal((await engine.next(original.task.id)).kind, 'question')
+  assert.ok(registry.current('chinese')!.items.every((item) => item.course === 'p2_chinese' || item.course === 'p3_chinese'))
+})
+
+// One course per build (src/chinese-course.ts): a pack for another course is never built alongside it.
+test('a pack for another course is refused before anything is saved', async () => {
+  const s = await setup()
+  // The same pack written for the other course throughout (course fields, case routes and target ids). It is
+  // well-formed: the course check runs only after validation passes.
+  const other = JSON.parse(JSON.stringify(syntheticPack({ pendingRef: s.pendingRef })).replaceAll('p2_higher_chinese', 'p2_chinese')) as { course: string }
+  const before = JSON.stringify(s.engine.state.targets)
+  for (const attempt of [() => s.program.previewPack(other), () => s.program.installPack(other as never)]) {
+    const rejected = await attempt().then(() => null, (e: Error) => e)
+    assert.equal(rejected?.name, 'PackRejected')
+    assert.equal(rejected?.message, 'pack_course_mismatch')
+  }
+  assert.equal(s.program.pack, null)
+  assert.equal((await s.privateStore.packs()).length, 0)
+  assert.equal(JSON.stringify(s.engine.state.targets), before)
+})
+
+test('a stored pack for another course is set aside with the reason, and practice continues on the build course only', async () => {
+  const s = await setup()
+  await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))
+  const links = JSON.stringify(s.program.crosswalk)
+  const records = JSON.stringify(s.engine.state.targets)
+  // The same device opens a build set to the other course.
+  const registry = new CatalogueRegistry()
+  const engine = await LearningEngine.load(s.store, 'Asia/Singapore', { registry, now: s.clock.now, newId: s.newId, writer: new WriteQueue(s.store, s.timers) })
+  const program = await MistakeProgram.open({ engine, registry, publicContent: s.publicContent, store: s.privateStore, now: s.clock.now, newId: s.newId, course: 'p2_chinese' })
+  assert.equal(program.openError, 'pack_course_mismatch')
+  assert.equal(program.pack, null)
+  const release = registry.current('chinese')!
+  assert.ok(release.items.every((i) => i.course === 'p2_chinese' || i.course === 'p3_chinese'), 'no second course is built')
+  assert.equal((await s.privateStore.packs()).length, 1, 'the stored pack is kept, not deleted')
+  const started = await engine.startOrResume('chinese')
+  assert.equal(started.kind, 'task', 'practice continues')
+  // Back on the matching build the pack is in use again, with the same case links and records as before.
+  const back = await reopen(s)
+  assert.equal(back.program.openError, null)
+  assert.ok(back.program.pack)
+  assert.equal(JSON.stringify(back.program.crosswalk), links)
+  assert.equal(JSON.stringify(back.engine.state.targets), records)
+})
+
 test('intake computes the same case links from the same records in any order (no stored links involved)', async () => {
   const s = await setup()
   await s.program.installPack(syntheticPack({ pendingRef: s.pendingRef }))

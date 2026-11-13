@@ -5,6 +5,7 @@
 // Private records (packs, crosswalk, production events) live in a separate device-local store keyed by the
 // signed-in identity. They are not engine records, never enter the pilot snapshot and never leave the device
 // except in the export file the parent saves on purpose.
+import { CHINESE_COURSES, RELEASED_CHINESE_COURSE, learnerCourses } from '../chinese-course.ts'
 import type { CatalogueRegistry, CatalogueRelease } from '../catalogue/adapter.ts'
 import { buildChineseContent, type BuiltContent, type RawBatch, type TargetLists } from '../catalogue/chinese.ts'
 import type { LearningEngine } from '../engine/engine.ts'
@@ -66,11 +67,6 @@ export class MemoryPrivateStore implements PrivateStore {
 }
 
 export interface PublicChinese { lists: TargetLists; batches: RawBatch[] }
-
-export const LEARNER_COURSES: Record<string, string[]> = {
-  p2_higher_chinese: ['p2_higher_chinese', 'p3_higher_chinese'],
-  p2_chinese: ['p2_chinese', 'p3_chinese'],
-}
 
 /**
  * Engine targets a set-aside pack's cases live on: those in its saved case links, plus every target holding
@@ -137,12 +133,17 @@ export class MistakeProgram {
   /** Install public content (and every stored pack, oldest first, so pinned tasks keep working). */
   static async open(opts: { engine: LearningEngine; registry: CatalogueRegistry; publicContent: PublicChinese; store: PrivateStore; now: () => string; newId?: () => string; course?: string }): Promise<MistakeProgram> {
     const p = new MistakeProgram(opts)
-    p.course = opts.course ?? 'p2_higher_chinese'
+    p.course = opts.course ?? CHINESE_COURSES[RELEASED_CHINESE_COURSE].pack
     await p.load()
     return p
   }
 
-  private course = 'p2_higher_chinese'
+  /** The build's course (src/chinese-course.ts). A pack for another course is never built alongside it. */
+  private course: string = CHINESE_COURSES[RELEASED_CHINESE_COURSE].pack
+  private sameCourse(pack: PrivatePack): PrivatePack {
+    if (pack.course !== this.course) throw new Error('pack_course_mismatch')
+    return pack
+  }
 
   /**
    * (Re)load from the private store: current pack, kept builds for pinned tasks, case links and production events.
@@ -166,7 +167,7 @@ export class MistakeProgram {
     // child from practising: it is set aside and reported in the parent area until an updated pack is loaded.
     for (const rawPack of await opts.store.packs()) {
       try {
-        const pack = validatePack(rawPack)
+        const pack = p.sameCourse(validatePack(rawPack))
         const build = p.buildFor(pack.course, pack)
         // Quarantine structural/content mismatches before activating or persisting the candidate release.
         planIntake({ state: opts.engine.state, register: pack.register, release: build.release,
@@ -182,7 +183,8 @@ export class MistakeProgram {
       if (pinned.has(sb.version)) { p.installStored(sb); installed.add(sb.version) }
       else await opts.store.deleteRelease(sb.version)
     }
-    // A restored device has no kept builds: rebuild a pinned task's content from the retained pack versions.
+    // A restored device has no kept builds: rebuild a pinned task's content from the retained pack versions. Like a
+    // kept build above, this is whatever the unfinished task was made from, so there is no course check here.
     for (const raw of await opts.store.packVersions()) {
       try {
         const version = validatePack(raw)
@@ -193,6 +195,11 @@ export class MistakeProgram {
         installed.add(v)
         await opts.store.putRelease(toStored(build))
       } catch { /* a version this app cannot build stays unused; tasks pinned to it report missing content */ }
+    }
+    // Generic tasks may arrive from sync after startup, even when there is no pack to trigger a reload.
+    // Their bundled release is available by version; the selected course and pack are installed last.
+    for (const other of Object.values(CHINESE_COURSES)) {
+      if (other.pack !== this.course) p.install(p.buildFor(other.pack, null))
     }
     for (const b of builds) { p.install(b); await opts.store.putRelease(toStored(b)) }
     p.rows = await opts.store.crosswalk()
@@ -207,7 +214,7 @@ export class MistakeProgram {
   }
 
   private buildFor(course: string, pack: PrivatePack | null): BuiltContent {
-    const courses = LEARNER_COURSES[course] ?? [course]
+    const courses = learnerCourses(course)
     const stagePins = new Map<string, Map<string, Set<string>>>()
     for (const c of pack?.register.cases ?? []) {
       if (c.route.mode !== 'objective') continue
@@ -263,7 +270,7 @@ export class MistakeProgram {
 
   private async preparePack(raw: unknown) {
     try {
-      const pack = validatePack(structuredClone(raw))
+      const pack = this.sameCourse(validatePack(structuredClone(raw)))
       const syncable = await syncablePack(pack)
       if (!syncable.ok) throw new Error(syncable.code)
       const build = this.buildFor(pack.course, pack)

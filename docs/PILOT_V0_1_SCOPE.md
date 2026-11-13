@@ -16,7 +16,7 @@ Scope, [Functional Design](PILOT_FUNCTIONAL_DESIGN.md) and [Learning Engine and 
 
 ## 2. Delivery boundary
 
-Chinese first, then Science, Mathematics and English is delivery sequencing, not compulsory child subject order. Each subject releases separately; all available subjects have daily tasks. Each subject has persistent X=6–19, default 10. Owner decision 2026-10-18: in the first pilot Chinese may go up to 20 (other subjects stay 6–19).
+Chinese first, then Science, Mathematics and English is delivery sequencing, not compulsory child subject order. Each subject releases separately; all available subjects have daily tasks. Each subject has persistent X=6–19, default 10. Owner decision 2026-10-18: in the first pilot Chinese may go up to 20 (other subjects stay 6–19). The build defaults to Higher Chinese and selects one Chinese course at build time. Mistake pack imports must match the build course.
 
 | Included in Pilot | Excluded or later |
 | --- | --- |
